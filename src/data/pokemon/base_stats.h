@@ -9224,13 +9224,13 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_TRAPINCH] =
     {
-        .baseHP        = 45,
+        .baseHP        = 55,
         .baseAttack    = 100,
         .baseDefense   = 45,
         .baseSpeed     = 10,
         .baseSpAttack  = 45,
         .baseSpDefense = 45,
-        .type1 = TYPE_GROUND,
+        .type1 = TYPE_BUG,
         .type2 = TYPE_GROUND,
         .catchRate = 255,
         .expYield = 58,
@@ -9253,13 +9253,13 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_VIBRAVA] =
     {
-        .baseHP        = 50,
-        .baseAttack    = 70,
-        .baseDefense   = 50,
-        .baseSpeed     = 70,
+        .baseHP        = 60,
+        .baseAttack    = 80,
+        .baseDefense   = 55,
+        .baseSpeed     = 90,
         .baseSpAttack  = 50,
-        .baseSpDefense = 50,
-        .type1 = TYPE_GROUND,
+        .baseSpDefense = 55,
+        .type1 = TYPE_BUG,
         .type2 = TYPE_DRAGON,
         .catchRate = 120,
         .expYield = 119,
@@ -9275,7 +9275,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .eggGroup2 = EGG_GROUP_BUG,
         #endif
-        .abilities = {ABILITY_LEVITATE, ABILITY_LEVITATE, ABILITY_LEVITATE},
+        .abilities = {ABILITY_LEVITATE, ABILITY_LEVITATE, ABILITY_COMPOUND_EYES},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
@@ -9304,7 +9304,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .eggGroup2 = EGG_GROUP_BUG,
         #endif
-        .abilities = {ABILITY_LEVITATE, ABILITY_LEVITATE, ABILITY_LEVITATE},
+        .abilities = {ABILITY_LEVITATE, ABILITY_LEVITATE, ABILITY_COMPOUND_EYES},
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
@@ -9810,7 +9810,7 @@ const struct BaseStats gBaseStats[] =
         .baseSpAttack  = 100,
         .baseSpDefense = 125,
         .type1 = TYPE_WATER,
-        .type2 = TYPE_WATER,
+        .type2 = TYPE_FAIRY,
         .catchRate = 60,
         .expYield = 189,
         .evYield_SpDefense = 2,
