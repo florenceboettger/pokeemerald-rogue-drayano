@@ -1,0 +1,22 @@
+{
+    "Bulbasaur": {
+        "movesets": {
+            "gen8lc": {
+                "sets": {
+                    "moves": [
+                        "Energy Ball",
+                        "Sludge Bomb",
+                        "Sleep Powder",
+                        "Leech Seed"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Overgrow"
+                }
+            }
+        },
+        "extra_moves": [
+            "Judgment",
+            "Precipice Blades"
+        ]
+    }
+}

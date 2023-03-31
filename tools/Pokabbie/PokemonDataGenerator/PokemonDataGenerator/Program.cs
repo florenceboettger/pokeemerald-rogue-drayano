@@ -9,12 +9,14 @@ namespace PokemonDataGenerator
 	class Program
 	{
 		private static readonly string c_OutputPath = "..\\..\\..\\..\\..\\..\\src\\data\\rogue_presetmons.h";
+		private static readonly string c_ExtraPath = "..\\..\\..\\..\\..\\..\\src\\data\\additional_sets.json";
 
 		static void Main(string[] args)
 		{
 			//MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen3.json", true);
 			MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen7.json", false);
 			MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen8.json", false);
+			MonPresetGenerator.AdditionalSetsFromPath(c_ExtraPath, false);
 
 			MonPresetGenerator.ExportToHeader(c_OutputPath);
 		}

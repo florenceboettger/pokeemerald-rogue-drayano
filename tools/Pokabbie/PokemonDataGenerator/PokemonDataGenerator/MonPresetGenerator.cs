@@ -38,6 +38,7 @@ namespace PokemonDataGenerator
 		{
 			public string PokemonName;
 			public List<PokemonPreset> Presets = new List<PokemonPreset>();
+			public HashSet<string> ContainedMoves = new HashSet<string>();
 
 			public void AppendPreset(string category, PokemonPreset preset)
 			{
@@ -53,6 +54,11 @@ namespace PokemonDataGenerator
 				preset.CategorySources.Add(category);
 				Presets.Add(preset);
 			}
+
+			public void AppendMove(string move)
+            {
+				ContainedMoves.Add(move);
+            }
 		}
 
 		private static Dictionary<string, PokemonData> s_PerPokemonData = new Dictionary<string, PokemonData>();
@@ -86,6 +92,144 @@ namespace PokemonDataGenerator
 				.ToUpper();
 		}
 
+		private static void AddSets(string pokemonName, string categoryName, JObject sets, bool useGen3Format)
+        {
+			if (pokemonName.Equals("Eevee-starter", StringComparison.CurrentCultureIgnoreCase))
+				return;
+
+			if (pokemonName.StartsWith("Deoxys", StringComparison.CurrentCultureIgnoreCase))
+			{
+				// Only use the normal form, as others don't exist in emerald for AI
+				if (pokemonName.Equals("Deoxys", StringComparison.CurrentCultureIgnoreCase))
+					pokemonName = "Deoxys";
+				else
+					return;
+			}
+
+			if (pokemonName.StartsWith("Darmanitan-Zen", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName = "Darmanitan-Zen-Mode" + pokemonName.Substring("Darmanitan Zen".Length);
+
+			if (pokemonName.Equals("Darmanitan-Galar-Zen", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName = "Darmanitan-Zen-Mode-Galar";
+
+			if (pokemonName.Equals("Meowstic-f", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName = "Meowstic-female";
+
+			if (pokemonName.Equals("Indeedee-f", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName = "Indeedee-female";
+
+			if (pokemonName.StartsWith("Calyrex-", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "-rider";
+
+			if (pokemonName.EndsWith("Urshifu-rapid-strike", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "-style";
+
+			if (pokemonName.EndsWith("Wormadam-Sandy", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "-cloak";
+			if (pokemonName.EndsWith("Wormadam-Trash", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "-cloak";
+
+			if (pokemonName.EndsWith("Alola", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "n";
+			if (pokemonName.EndsWith("Galar", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "ian";
+
+			var pokemonData = FindOrCreate(pokemonName);
+
+			foreach (var setKvp in sets)
+			{
+				PokemonPreset preset = new PokemonPreset();
+				var set = (JObject)setKvp.Value;
+
+				foreach (var move in set["moves"])
+				{
+					string moveString = move.ToString();
+					if (moveString.StartsWith("Hidden Power", StringComparison.CurrentCultureIgnoreCase)) // Not tracking the Hidden power type
+					{
+						preset.HiddenPowerType = moveString.Substring("Hidden Power".Length).Trim().ToUpper();
+						moveString = "Hidden Power";
+					}
+					else if (useGen3Format)
+					{
+						if (moveString.Equals("High Jump Kick", StringComparison.CurrentCultureIgnoreCase))
+						{
+							moveString = "Hi Jump Kick";
+						}
+						else if (moveString.Equals("Feint Attack", StringComparison.CurrentCultureIgnoreCase))
+						{
+							moveString = "Faint Attack";
+						}
+					}
+					else
+					{
+					}
+
+					preset.Moves.Add(moveString);
+					pokemonData.AppendMove(moveString);
+				}
+
+				preset.Ability = null;
+				if (set.ContainsKey("ability"))
+				{
+					preset.Ability = set["ability"].ToString();
+
+					if (preset.Ability.Equals("As One (GLASTRIER)", StringComparison.CurrentCultureIgnoreCase))
+						preset.Ability = null;
+					else if (preset.Ability.Equals("As One (SPECTRIER)", StringComparison.CurrentCultureIgnoreCase))
+						preset.Ability = null;
+				}
+
+				preset.Item = null;
+				if (set.ContainsKey("item"))
+				{
+					preset.Item = set["item"].ToString();
+
+					if (!useGen3Format)
+					{
+						if (preset.Item.Equals("Stick", StringComparison.CurrentCultureIgnoreCase))
+							preset.Item = "Leek";
+					}
+				}
+
+				pokemonData.AppendPreset(categoryName, preset);
+			}
+		}
+
+		public static void AdditionalSetsFromPath(string path, bool useGen3Format)
+        {
+			using (StreamReader r = new StreamReader(path))
+			{
+				 AdditionalSetsFromJson(r.ReadToEnd(), useGen3Format);
+			}
+		}
+
+		public static void AdditionalSetsFromJson(string jsonStr, bool useGen3Format)
+        {
+			JObject library = JObject.Parse(jsonStr);
+
+			foreach (var pokemonKvp in library)
+            {
+				string pokemonName = pokemonKvp.Key;
+				var pokemonSets = (JObject)pokemonKvp.Value;
+				var movesets = (JObject)pokemonSets["movesets"];
+				foreach (var categoryKvp in movesets)
+                {
+					string categoryName = categoryKvp.Key;
+					var sets = (JObject)categoryKvp.Value;
+
+					AddSets(pokemonName, categoryName, sets, useGen3Format);
+                }
+
+				var pokemonData = FindOrCreate(pokemonName);
+
+				foreach (var move in pokemonSets["extra_moves"])
+                {
+					pokemonData.AppendMove(move.ToString());
+                }
+            }
+
+        }
+
 		public static void GenerateFromURL(string url, bool useGen3Format)
 		{
 			using (HttpClient web = new HttpClient())
@@ -117,8 +261,11 @@ namespace PokemonDataGenerator
 				foreach (var pokemonKvp in entries)
 				{
 					string pokemonName = pokemonKvp.Key;
+					var sets = (JObject)pokemonKvp.Value;
 
-					if (pokemonName.Equals("Eevee-starter", StringComparison.CurrentCultureIgnoreCase))
+					AddSets(pokemonName, categoryName, sets, useGen3Format);
+
+					/*if (pokemonName.Equals("Eevee-starter", StringComparison.CurrentCultureIgnoreCase))
 						continue;
 
 					if (pokemonName.StartsWith("Deoxys", StringComparison.CurrentCultureIgnoreCase))
@@ -217,7 +364,7 @@ namespace PokemonDataGenerator
 						}
 
 						pokemonData.AppendPreset(categoryName, preset);
-					}
+					}*/
 				}
 			}
 		}
@@ -248,14 +395,14 @@ namespace PokemonDataGenerator
 				//}
 
 				HashSet<string> containedCategories = new HashSet<string>();
-				HashSet<string> containedMoves = new HashSet<string>();
+				//HashSet<string> containedMoves = new HashSet<string>();
 
 				foreach (var preset in pokemon.Presets)
 				{
 					foreach (var c in preset.CategorySources)
 						containedCategories.Add(c);
-					foreach (var m in preset.Moves)
-						containedMoves.Add(m);
+					/*foreach (var m in preset.Moves)
+						containedMoves.Add(m);*/
 
 					upperBlock.AppendLine("\t{");
 
@@ -296,7 +443,8 @@ namespace PokemonDataGenerator
 				// Moveset
 				upperBlock.AppendLine($"static const u16 sRoguePresets_{FormatKeyword(pokemon.PokemonName)}_Moveset[] = ");
 				upperBlock.AppendLine("{");
-				foreach(var move in containedMoves)
+				//foreach(var move in containedMoves)
+				foreach (var move in pokemon.ContainedMoves)
 					upperBlock.AppendLine($"\tMOVE_{FormatKeyword(move)},");
 
 				upperBlock.AppendLine("};");
