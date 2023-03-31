@@ -222,10 +222,9 @@ namespace PokemonDataGenerator
 
 				var pokemonData = FindOrCreate(pokemonName);
 
-				foreach (var move in pokemonSets["extra_moves"])
-                {
-					pokemonData.AppendMove(move.ToString());
-                }
+				if (pokemonSets.ContainsKey("extra_moves"))
+					foreach (var move in pokemonSets["extra_moves"])
+						pokemonData.AppendMove(move.ToString());
             }
 
         }

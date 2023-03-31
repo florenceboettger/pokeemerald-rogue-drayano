@@ -868,6 +868,13 @@ static const struct RogueMonPreset sRoguePresets_VENUSAUR[] =
 		.heldItem = ITEM_LIFE_ORB,
 		.moves = { MOVE_WEATHER_BALL, MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_GROWTH}
 	},
+	{
+		.flags = MON_FLAGS_GEN7OU,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_THICK_FAT,
+		.heldItem = ITEM_LEFTOVERS,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_EARTH_POWER, MOVE_HIDDEN_POWER}
+	},
 };
 
 static const u16 sRoguePresets_VENUSAUR_Moveset[] = 
@@ -10711,6 +10718,13 @@ static const struct RogueMonPreset sRoguePresets_CHARIZARD[] =
 		.heldItem = ITEM_CHOICE_SCARF,
 		.moves = { MOVE_FLAMETHROWER, MOVE_FIRE_BLAST, MOVE_DRAGON_PULSE, MOVE_FOCUS_BLAST}
 	},
+	{
+		.flags = MON_FLAGS_GEN8PU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_MOLD_BREAKER,
+		.heldItem = ITEM_HEAVY_DUTY_BOOTS,
+		.moves = { MOVE_DRAGON_DANCE, MOVE_FLARE_BLITZ, MOVE_EARTHQUAKE, MOVE_ROOST}
+	},
 };
 
 static const u16 sRoguePresets_CHARIZARD_Moveset[] = 
@@ -10741,6 +10755,7 @@ static const u16 sRoguePresets_CHARIZARD_Moveset[] =
 	MOVE_HURRICANE,
 	MOVE_TOXIC,
 	MOVE_DEFOG,
+	MOVE_DUAL_WINGBEAT,
 };
 
 static const struct RogueMonPreset sRoguePresets_CHARIZARD_MEGA_X[] = 
@@ -19700,6 +19715,20 @@ static const struct RogueMonPreset sRoguePresets_BLASTOISE[] =
 		.heldItem = ITEM_WACAN_BERRY,
 		.moves = { MOVE_YAWN, MOVE_ENDURE, MOVE_SHELL_SMASH, MOVE_HYDRO_CANNON}
 	},
+	{
+		.flags = MON_FLAGS_GEN8OU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_DRIZZLE,
+		.heldItem = ITEM_DAMP_ROCK,
+		.moves = { MOVE_SCALD, MOVE_RAPID_SPIN, MOVE_ICE_BEAM, MOVE_FLIP_TURN}
+	},
+	{
+		.flags = MON_FLAGS_GEN8DOUBLES,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_DRIZZLE,
+		.heldItem = ITEM_DAMP_ROCK,
+		.moves = { MOVE_SCALD, MOVE_YAWN, MOVE_ICE_BEAM, MOVE_PROTECT}
+	},
 };
 
 static const u16 sRoguePresets_BLASTOISE_Moveset[] = 
@@ -19725,6 +19754,7 @@ static const u16 sRoguePresets_BLASTOISE_Moveset[] =
 	MOVE_SUBSTITUTE,
 	MOVE_YAWN,
 	MOVE_ENDURE,
+	MOVE_PROTECT,
 };
 
 static const struct RogueMonPreset sRoguePresets_BLASTOISE_MEGA[] = 
@@ -38904,13 +38934,6 @@ static const struct RogueMonPreset sRoguePresets_BULBASAUR[] =
 		.heldItem = ITEM_NORMALIUM_Z,
 		.moves = { MOVE_CELEBRATE, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_HIDDEN_POWER}
 	},
-	{
-		.flags = MON_FLAGS_GEN8LC,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_OVERGROW,
-		.heldItem = ITEM_EVIOLITE,
-		.moves = { MOVE_ENERGY_BALL, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_LEECH_SEED}
-	},
 };
 
 static const u16 sRoguePresets_BULBASAUR_Moveset[] = 
@@ -38919,11 +38942,6 @@ static const u16 sRoguePresets_BULBASAUR_Moveset[] =
 	MOVE_SLUDGE_BOMB,
 	MOVE_GIGA_DRAIN,
 	MOVE_HIDDEN_POWER,
-	MOVE_ENERGY_BALL,
-	MOVE_SLEEP_POWDER,
-	MOVE_LEECH_SEED,
-	MOVE_JUDGMENT,
-	MOVE_PRECIPICE_BLADES,
 };
 
 static const struct RogueMonPreset sRoguePresets_CHARMANDER[] = 
@@ -49695,7 +49713,7 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 	},
 
 	[SPECIES_BLASTOISE] = {
-		.flags = MON_FLAGS_GEN7UU | MON_FLAGS_GEN7RU | MON_FLAGS_GEN7NU | MON_FLAGS_GEN7BATTLESPOTSINGLES | MON_FLAGS_GEN71V1 | MON_FLAGS_GEN8DOUBLESOU | MON_FLAGS_GEN8VGC2020 | MON_FLAGS_GEN81V1,
+		.flags = MON_FLAGS_GEN7UU | MON_FLAGS_GEN7RU | MON_FLAGS_GEN7NU | MON_FLAGS_GEN7BATTLESPOTSINGLES | MON_FLAGS_GEN71V1 | MON_FLAGS_GEN8DOUBLESOU | MON_FLAGS_GEN8VGC2020 | MON_FLAGS_GEN81V1 | MON_FLAGS_GEN8OU | MON_FLAGS_GEN8DOUBLES,
 		.presetCount = ARRAY_COUNT(sRoguePresets_BLASTOISE),
 		.presets = sRoguePresets_BLASTOISE,
 		.movesCount = ARRAY_COUNT(sRoguePresets_BLASTOISE_Moveset),
@@ -52951,7 +52969,7 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 	},
 
 	[SPECIES_BULBASAUR] = {
-		.flags = MON_FLAGS_GEN7LC | MON_FLAGS_GEN8LC,
+		.flags = MON_FLAGS_GEN7LC,
 		.presetCount = ARRAY_COUNT(sRoguePresets_BULBASAUR),
 		.presets = sRoguePresets_BULBASAUR,
 		.movesCount = ARRAY_COUNT(sRoguePresets_BULBASAUR_Moveset),

@@ -1,22 +1,65 @@
 {
-    "Bulbasaur": {
+    "Venusaur": {
         "movesets": {
-            "gen8lc": {
+            "gen7ou": {
                 "sets": {
                     "moves": [
-                        "Energy Ball",
                         "Sludge Bomb",
-                        "Sleep Powder",
-                        "Leech Seed"
+                        "Synthesis",
+                        "Earth Power",
+                        "Hidden Power Fire"
                     ],
-                    "item": "Eviolite",
-                    "ability": "Overgrow"
+                    "item": "Leftovers",
+                    "ability": "Thick Fat"
+                }
+            }
+        }
+    },
+    "Charizard": {
+        "movesets": {
+            "gen8pu": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Flare Blitz",
+                        "Earthquake",
+                        "Roost"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Mold Breaker"
                 }
             }
         },
         "extra_moves": [
-            "Judgment",
-            "Precipice Blades"
+            "Dual Wingbeat"
         ]
+    },
+    "Blastoise": {
+        "movesets": {
+            "gen8ou": {
+                "Defensive": {
+                    "moves": [
+                        "Scald",
+                        "Rapid Spin",
+                        "Ice Beam",
+                        "Flip Turn"
+                    ],
+                    "item": "Damp Rock",
+                    "ability": "Drizzle"
+                }
+            },
+            "gen8doubles": {
+                "Rain Setter": {
+                    "moves": [
+                        "Scald",
+                        "Yawn",
+                        "Ice Beam",
+                        "Protect"
+                    ],
+                    "item": "Damp Rock",
+                    "ability": "Drizzle"
+                }
+            }
+        }
     }
 }
