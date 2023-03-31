@@ -6664,6 +6664,7 @@ void Rogue_ModifyTutorMoves(struct Pokemon* mon, u8 tutorType, u8* count, u8* hi
                 capacity += 5;
         }
 
+        capacity = 0;
         if(capacity != 0)
         {
             ApplyTutorMoveCapacity(count, moves, capacity);
