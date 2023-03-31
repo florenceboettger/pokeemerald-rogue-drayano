@@ -16,7 +16,7 @@ namespace PokemonDataGenerator
 			//MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen3.json", true);
 			MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen7.json", false);
 			MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen8.json", false);
-			//MonPresetGenerator.AdditionalSetsFromPath(c_ExtraPath, false);
+			MonPresetGenerator.AdditionalSetsFromPath(c_ExtraPath, false);
 
 			MonPresetGenerator.ExportToHeader(c_OutputPath);
 		}

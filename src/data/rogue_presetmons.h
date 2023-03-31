@@ -38904,6 +38904,13 @@ static const struct RogueMonPreset sRoguePresets_BULBASAUR[] =
 		.heldItem = ITEM_NORMALIUM_Z,
 		.moves = { MOVE_CELEBRATE, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_HIDDEN_POWER}
 	},
+	{
+		.flags = MON_FLAGS_GEN8LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_OVERGROW,
+		.heldItem = ITEM_EVIOLITE,
+		.moves = { MOVE_ENERGY_BALL, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_LEECH_SEED}
+	},
 };
 
 static const u16 sRoguePresets_BULBASAUR_Moveset[] = 
@@ -38912,6 +38919,11 @@ static const u16 sRoguePresets_BULBASAUR_Moveset[] =
 	MOVE_SLUDGE_BOMB,
 	MOVE_GIGA_DRAIN,
 	MOVE_HIDDEN_POWER,
+	MOVE_ENERGY_BALL,
+	MOVE_SLEEP_POWDER,
+	MOVE_LEECH_SEED,
+	MOVE_JUDGMENT,
+	MOVE_PRECIPICE_BLADES,
 };
 
 static const struct RogueMonPreset sRoguePresets_CHARMANDER[] = 
@@ -52939,7 +52951,7 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 	},
 
 	[SPECIES_BULBASAUR] = {
-		.flags = MON_FLAGS_GEN7LC,
+		.flags = MON_FLAGS_GEN7LC | MON_FLAGS_GEN8LC,
 		.presetCount = ARRAY_COUNT(sRoguePresets_BULBASAUR),
 		.presets = sRoguePresets_BULBASAUR,
 		.movesCount = ARRAY_COUNT(sRoguePresets_BULBASAUR_Moveset),
