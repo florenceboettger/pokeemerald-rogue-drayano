@@ -6156,7 +6156,7 @@ static const struct LevelUpMove sMiloticLevelUpLearnset[] = {
     LEVEL_UP_MOVE(41, MOVE_COIL),
     LEVEL_UP_MOVE(44, MOVE_HYDRO_PUMP),
     LEVEL_UP_MOVE(47, MOVE_RAIN_DANCE),
-    LEVEL_UP_MOVE(50, MOVE_MOONBLAST)
+    LEVEL_UP_MOVE(50, MOVE_MOONBLAST),
     LEVEL_UP_END
 };
 

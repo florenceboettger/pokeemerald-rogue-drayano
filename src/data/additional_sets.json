@@ -1,8 +1,24 @@
 {
+    "Bulbasaur": {
+        "movesets": {
+            "gen7lc": {
+                "Z-Celebrate Sweeper": {
+                    "moves": [
+                        "Celebrate",
+                        "Sludge Bomb",
+                        "Giga Drain",
+                        "Judgment"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Thick Fat"
+                }
+            }
+        }
+    },
     "Venusaur": {
         "movesets": {
             "gen7ou": {
-                "sets": {
+                "Defensive": {
                     "moves": [
                         "Sludge Bomb",
                         "Synthesis",
@@ -48,7 +64,7 @@
                     "ability": "Drizzle"
                 }
             },
-            "gen8doubles": {
+            "gen8doublesou": {
                 "Rain Setter": {
                     "moves": [
                         "Scald",

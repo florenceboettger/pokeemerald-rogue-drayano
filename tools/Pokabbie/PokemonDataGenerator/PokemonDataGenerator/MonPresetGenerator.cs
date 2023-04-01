@@ -19,6 +19,7 @@ namespace PokemonDataGenerator
 			public string HiddenPowerType = "NONE";
 			public string Ability;
 			public string Item;
+			public string Name;
 
 			public bool ContainsHiddenPower
 			{
@@ -38,27 +39,20 @@ namespace PokemonDataGenerator
 		{
 			public string PokemonName;
 			public List<PokemonPreset> Presets = new List<PokemonPreset>();
+			public List<PokemonPreset> AdditionalPresets = new List<PokemonPreset>();
+			public List<PokemonPreset> ObsoletePresets = new List<PokemonPreset>();
 			public HashSet<string> ContainedMoves = new HashSet<string>();
-
-			public void AppendPreset(string category, PokemonPreset preset)
-			{
-				foreach (var otherPreset in Presets)
-				{ 
-					if(otherPreset.IsCompatible(preset))
-					{
-						otherPreset.CategorySources.Add(category);
-						return;
-					}
-				}
-
-				preset.CategorySources.Add(category);
-				Presets.Add(preset);
-			}
+			public HashSet<string> AdditionalContainedMoves = new HashSet<string>();
 
 			public void AppendMove(string move)
             {
 				ContainedMoves.Add(move);
-            }
+			}
+
+			public void AppendAdditionalMove(string move)
+			{
+				AdditionalContainedMoves.Add(move);
+			}
 		}
 
 		private static Dictionary<string, PokemonData> s_PerPokemonData = new Dictionary<string, PokemonData>();
@@ -92,7 +86,36 @@ namespace PokemonDataGenerator
 				.ToUpper();
 		}
 
-		private static void AddSets(string pokemonName, string categoryName, JObject sets, bool useGen3Format)
+		private static void AppendPreset(PokemonPreset preset, List<PokemonPreset> presetList, string category)
+		{
+			foreach (var otherPreset in presetList)
+			{
+				if (otherPreset.IsCompatible(preset))
+				{
+					otherPreset.CategorySources.Add(category);
+					return;
+				}
+			}
+
+			preset.CategorySources.Add(category);
+			presetList.Add(preset);
+		}
+
+		private static void ReplacePreset(PokemonData pokemonData, PokemonPreset newPreset)
+        {
+			for (int i = pokemonData.Presets.Count - 1; i >= 0; i--)
+            {
+				var preset = pokemonData.Presets[i];
+				var sourceOverlap = preset.CategorySources.Intersect(newPreset.CategorySources);
+				if (preset.Name == newPreset.Name && sourceOverlap.Count() > 0)
+                {
+					pokemonData.ObsoletePresets.Add(preset);
+					pokemonData.Presets.RemoveAt(i);
+                }
+            }
+        }
+
+		private static void AddSets(string pokemonName, string categoryName, JObject sets, bool useGen3Format, bool additionalSets)
         {
 			if (pokemonName.Equals("Eevee-starter", StringComparison.CurrentCultureIgnoreCase))
 				return;
@@ -140,6 +163,8 @@ namespace PokemonDataGenerator
 			{
 				PokemonPreset preset = new PokemonPreset();
 				var set = (JObject)setKvp.Value;
+				string setName = setKvp.Key;
+				preset.Name = setName;
 
 				foreach (var move in set["moves"])
 				{
@@ -165,7 +190,10 @@ namespace PokemonDataGenerator
 					}
 
 					preset.Moves.Add(moveString);
-					pokemonData.AppendMove(moveString);
+					if (additionalSets && !pokemonData.ContainedMoves.Contains(moveString))
+						pokemonData.AppendAdditionalMove(moveString);
+					else
+						pokemonData.AppendMove(moveString);
 				}
 
 				preset.Ability = null;
@@ -191,7 +219,13 @@ namespace PokemonDataGenerator
 					}
 				}
 
-				pokemonData.AppendPreset(categoryName, preset);
+				if (additionalSets)
+				{
+					AppendPreset(preset, pokemonData.AdditionalPresets, categoryName);
+					ReplacePreset(pokemonData, preset);
+				}
+				else
+					AppendPreset(preset, pokemonData.Presets, categoryName);
 			}
 		}
 
@@ -217,14 +251,15 @@ namespace PokemonDataGenerator
 					string categoryName = categoryKvp.Key;
 					var sets = (JObject)categoryKvp.Value;
 
-					AddSets(pokemonName, categoryName, sets, useGen3Format);
+					AddSets(pokemonName, categoryName, sets, useGen3Format, true);
                 }
 
 				var pokemonData = FindOrCreate(pokemonName);
 
 				if (pokemonSets.ContainsKey("extra_moves"))
 					foreach (var move in pokemonSets["extra_moves"])
-						pokemonData.AppendMove(move.ToString());
+						if (!pokemonData.ContainedMoves.Contains(move.ToString()))
+							pokemonData.AppendAdditionalMove(move.ToString());
             }
 
         }
@@ -262,110 +297,49 @@ namespace PokemonDataGenerator
 					string pokemonName = pokemonKvp.Key;
 					var sets = (JObject)pokemonKvp.Value;
 
-					AddSets(pokemonName, categoryName, sets, useGen3Format);
-
-					/*if (pokemonName.Equals("Eevee-starter", StringComparison.CurrentCultureIgnoreCase))
-						continue;
-
-					if (pokemonName.StartsWith("Deoxys", StringComparison.CurrentCultureIgnoreCase))
-					{
-						// Only use the normal form, as others don't exist in emerald for AI
-						if (pokemonName.Equals("Deoxys", StringComparison.CurrentCultureIgnoreCase))
-							pokemonName = "Deoxys";
-						else
-							continue;
-					}
-
-					if (pokemonName.StartsWith("Darmanitan-Zen", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName = "Darmanitan-Zen-Mode" + pokemonName.Substring("Darmanitan Zen".Length);
-
-					if (pokemonName.Equals("Darmanitan-Galar-Zen", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName = "Darmanitan-Zen-Mode-Galar";
-
-					if (pokemonName.Equals("Meowstic-f", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName = "Meowstic-female";
-
-					if (pokemonName.Equals("Indeedee-f", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName = "Indeedee-female";
-
-					if (pokemonName.StartsWith("Calyrex-", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName += "-rider";
-
-					if (pokemonName.EndsWith("Urshifu-rapid-strike", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName += "-style";
-
-					if (pokemonName.EndsWith("Wormadam-Sandy", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName += "-cloak";
-					if (pokemonName.EndsWith("Wormadam-Trash", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName += "-cloak";
-
-					if (pokemonName.EndsWith("Alola", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName += "n";
-					if (pokemonName.EndsWith("Galar", StringComparison.CurrentCultureIgnoreCase))
-						pokemonName += "ian";
-
-					var sets = (JObject)pokemonKvp.Value;
-
-					var pokemonData = FindOrCreate(pokemonName);
-
-					foreach (var setKvp in sets)
-					{
-						PokemonPreset preset = new PokemonPreset();
-						var set = (JObject)setKvp.Value;
-
-						foreach (var move in set["moves"])
-						{
-							string moveString = move.ToString();
-							if (moveString.StartsWith("Hidden Power", StringComparison.CurrentCultureIgnoreCase)) // Not tracking the Hidden power type
-							{
-								preset.HiddenPowerType = moveString.Substring("Hidden Power".Length).Trim().ToUpper();
-								moveString = "Hidden Power";
-							}
-							else if (useGen3Format)
-							{
-								if (moveString.Equals("High Jump Kick", StringComparison.CurrentCultureIgnoreCase))
-								{
-									moveString = "Hi Jump Kick";
-								}
-								else if (moveString.Equals("Feint Attack", StringComparison.CurrentCultureIgnoreCase))
-								{
-									moveString = "Faint Attack";
-								}
-							}
-							else
-							{
-							}
-
-							preset.Moves.Add(moveString);
-						}
-
-						preset.Ability = null;
-						if (set.ContainsKey("ability"))
-						{
-							preset.Ability = set["ability"].ToString();
-
-							if (preset.Ability.Equals("As One (GLASTRIER)", StringComparison.CurrentCultureIgnoreCase))
-								preset.Ability = null;
-							else if (preset.Ability.Equals("As One (SPECTRIER)", StringComparison.CurrentCultureIgnoreCase))
-								preset.Ability = null;
-						}
-
-						preset.Item = null;
-						if (set.ContainsKey("item"))
-						{
-							preset.Item = set["item"].ToString();
-
-							if (!useGen3Format)
-							{
-								if (preset.Item.Equals("Stick", StringComparison.CurrentCultureIgnoreCase))
-									preset.Item = "Leek";
-							}
-						}
-
-						pokemonData.AppendPreset(categoryName, preset);
-					}*/
+					AddSets(pokemonName, categoryName, sets, useGen3Format, false);
 				}
 			}
+		}
+
+		private static void AppendPresetString(PokemonPreset preset, HashSet<string> containedCategories, StringBuilder upperBlock)
+        {
+			foreach (var c in preset.CategorySources)
+				containedCategories.Add(c);
+			/*foreach (var m in preset.Moves)
+				containedMoves.Add(m);*/
+
+			upperBlock.AppendLine("\t{");
+
+			upperBlock.AppendLine($"\t\t.flags = {string.Join(" | ", preset.CategorySources.Select(str => FormatKeyword("MON_FLAGS_" + str)))},");
+
+			upperBlock.AppendLine($"\t\t.hiddenPowerType = TYPE_{FormatKeyword(preset.HiddenPowerType)},");
+
+			if (preset.Ability == null || preset.Ability.Equals("No Ability", StringComparison.CurrentCultureIgnoreCase))
+				upperBlock.AppendLine($"\t\t.abilityNum = ABILITY_NONE,");
+			else
+				upperBlock.AppendLine($"\t\t.abilityNum = ABILITY_{FormatKeyword(preset.Ability)},");
+			if (preset.Item == null)
+				upperBlock.AppendLine($"\t\t.heldItem = ITEM_NONE,");
+			else
+				upperBlock.AppendLine($"\t\t.heldItem = ITEM_{FormatKeyword(preset.Item)},");
+
+			upperBlock.Append($"\t\t.moves = {{ ");
+
+			for (int i = 0; i < 4; ++i)
+			{
+				if (i != 0)
+					upperBlock.Append($", ");
+
+				if (i < preset.Moves.Count)
+					upperBlock.Append($"MOVE_{FormatKeyword(preset.Moves[i])}");
+				else
+					upperBlock.Append($"MOVE_NONE");
+			}
+
+			upperBlock.AppendLine($"}}");
+
+			upperBlock.AppendLine("\t},");
 		}
 
 		public static void ExportToHeader(string filePath)
@@ -398,43 +372,28 @@ namespace PokemonDataGenerator
 
 				foreach (var preset in pokemon.Presets)
 				{
-					foreach (var c in preset.CategorySources)
-						containedCategories.Add(c);
-					/*foreach (var m in preset.Moves)
-						containedMoves.Add(m);*/
-
-					upperBlock.AppendLine("\t{");
-
-					upperBlock.AppendLine($"\t\t.flags = {string.Join(" | ", preset.CategorySources.Select(str => FormatKeyword("MON_FLAGS_" + str)))},");
-					
-					upperBlock.AppendLine($"\t\t.hiddenPowerType = TYPE_{FormatKeyword(preset.HiddenPowerType)},");
-
-					if (preset.Ability == null || preset.Ability.Equals("No Ability", StringComparison.CurrentCultureIgnoreCase))
-						upperBlock.AppendLine($"\t\t.abilityNum = ABILITY_NONE,");
-					else
-						upperBlock.AppendLine($"\t\t.abilityNum = ABILITY_{FormatKeyword(preset.Ability)},");
-										if (preset.Item == null)
-						upperBlock.AppendLine($"\t\t.heldItem = ITEM_NONE,");
-					else
-						upperBlock.AppendLine($"\t\t.heldItem = ITEM_{FormatKeyword(preset.Item)},");
-
-					upperBlock.Append($"\t\t.moves = {{ ");
-
-					for (int i = 0; i < 4; ++i)
-					{
-						if (i != 0)
-							upperBlock.Append($", ");
-
-						if (i < preset.Moves.Count)
-							upperBlock.Append($"MOVE_{FormatKeyword(preset.Moves[i])}");
-						else
-							upperBlock.Append($"MOVE_NONE");
-					}
-
-					upperBlock.AppendLine($"}}");
-
-					upperBlock.AppendLine("\t},");
+					AppendPresetString(preset, containedCategories, upperBlock);
 				}
+
+				if (pokemon.ObsoletePresets.Count > 0)
+                {
+					upperBlock.AppendLine("#ifndef ROGUE_DRAYANO");
+					foreach (var preset in pokemon.ObsoletePresets)
+					{
+						AppendPresetString(preset, containedCategories, upperBlock);
+					}
+					upperBlock.AppendLine("#endif");
+				}
+
+				if (pokemon.AdditionalPresets.Count > 0)
+                {
+					upperBlock.AppendLine("#ifdef ROGUE_DRAYANO");
+					foreach (var preset in pokemon.AdditionalPresets)
+                    {
+						AppendPresetString(preset, containedCategories, upperBlock);
+                    }
+					upperBlock.AppendLine("#endif");
+                }
 
 				upperBlock.AppendLine("};");
 				upperBlock.AppendLine("");
@@ -445,6 +404,14 @@ namespace PokemonDataGenerator
 				//foreach(var move in containedMoves)
 				foreach (var move in pokemon.ContainedMoves)
 					upperBlock.AppendLine($"\tMOVE_{FormatKeyword(move)},");
+
+				if (pokemon.AdditionalContainedMoves.Count > 0)
+                {
+					upperBlock.AppendLine("#ifdef ROGUE_DRAYANO");
+					foreach (var move in pokemon.AdditionalContainedMoves)
+						upperBlock.AppendLine($"\tMOVE_{FormatKeyword(move)},");
+					upperBlock.AppendLine("#endif");
+				}
 
 				upperBlock.AppendLine("};");
 				upperBlock.AppendLine("");
