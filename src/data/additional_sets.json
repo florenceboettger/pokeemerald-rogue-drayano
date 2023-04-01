@@ -52,13 +52,25 @@
     },
     "Blastoise": {
         "movesets": {
-            "gen8ou": {
+            "gen8uu": {
                 "Defensive": {
                     "moves": [
                         "Scald",
                         "Rapid Spin",
                         "Ice Beam",
                         "Flip Turn"
+                    ],
+                    "item": "Damp Rock",
+                    "ability": "Drizzle"
+                }
+            },
+            "gen7nu": {
+                "Defensive": {
+                    "moves": [
+                        "Scald",
+                        "Toxic",
+                        "Rapid Spin",
+                        "Ice Beam"
                     ],
                     "item": "Damp Rock",
                     "ability": "Drizzle"

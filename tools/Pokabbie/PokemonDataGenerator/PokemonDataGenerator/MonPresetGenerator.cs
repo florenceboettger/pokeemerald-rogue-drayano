@@ -101,13 +101,12 @@ namespace PokemonDataGenerator
 			presetList.Add(preset);
 		}
 
-		private static void ReplacePreset(PokemonData pokemonData, PokemonPreset newPreset)
+		private static void ReplacePreset(PokemonData pokemonData, PokemonPreset newPreset, string categoryName)
         {
 			for (int i = pokemonData.Presets.Count - 1; i >= 0; i--)
             {
 				var preset = pokemonData.Presets[i];
-				var sourceOverlap = preset.CategorySources.Intersect(newPreset.CategorySources);
-				if (preset.Name == newPreset.Name && sourceOverlap.Count() > 0)
+				if (preset.Name == newPreset.Name && preset.CategorySources.Contains(categoryName))
                 {
 					pokemonData.ObsoletePresets.Add(preset);
 					pokemonData.Presets.RemoveAt(i);
@@ -222,7 +221,7 @@ namespace PokemonDataGenerator
 				if (additionalSets)
 				{
 					AppendPreset(preset, pokemonData.AdditionalPresets, categoryName);
-					ReplacePreset(pokemonData, preset);
+					ReplacePreset(pokemonData, preset, categoryName);
 				}
 				else
 					AppendPreset(preset, pokemonData.Presets, categoryName);

@@ -19677,13 +19677,6 @@ static const struct RogueMonPreset sRoguePresets_BLASTOISE[] =
 		.moves = { MOVE_RAPID_SPIN, MOVE_DARK_PULSE, MOVE_AURA_SPHERE, MOVE_ICE_BEAM}
 	},
 	{
-		.flags = MON_FLAGS_GEN7NU,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_TORRENT,
-		.heldItem = ITEM_LEFTOVERS,
-		.moves = { MOVE_SCALD, MOVE_TOXIC, MOVE_RAPID_SPIN, MOVE_REFRESH}
-	},
-	{
 		.flags = MON_FLAGS_GEN7BATTLESPOTSINGLES,
 		.hiddenPowerType = TYPE_NONE,
 		.abilityNum = ABILITY_TORRENT,
@@ -19725,13 +19718,29 @@ static const struct RogueMonPreset sRoguePresets_BLASTOISE[] =
 		.heldItem = ITEM_WACAN_BERRY,
 		.moves = { MOVE_YAWN, MOVE_ENDURE, MOVE_SHELL_SMASH, MOVE_HYDRO_CANNON}
 	},
+#ifndef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7NU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_TORRENT,
+		.heldItem = ITEM_LEFTOVERS,
+		.moves = { MOVE_SCALD, MOVE_TOXIC, MOVE_RAPID_SPIN, MOVE_REFRESH}
+	},
+#endif
 #ifdef ROGUE_DRAYANO
 	{
-		.flags = MON_FLAGS_GEN8OU,
+		.flags = MON_FLAGS_GEN8UU,
 		.hiddenPowerType = TYPE_NONE,
 		.abilityNum = ABILITY_DRIZZLE,
 		.heldItem = ITEM_DAMP_ROCK,
 		.moves = { MOVE_SCALD, MOVE_RAPID_SPIN, MOVE_ICE_BEAM, MOVE_FLIP_TURN}
+	},
+	{
+		.flags = MON_FLAGS_GEN7NU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_DRIZZLE,
+		.heldItem = ITEM_DAMP_ROCK,
+		.moves = { MOVE_SCALD, MOVE_TOXIC, MOVE_RAPID_SPIN, MOVE_ICE_BEAM}
 	},
 	{
 		.flags = MON_FLAGS_GEN8DOUBLESOU,
@@ -49758,7 +49767,7 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 	},
 
 	[SPECIES_BLASTOISE] = {
-		.flags = MON_FLAGS_GEN7UU | MON_FLAGS_GEN7RU | MON_FLAGS_GEN7NU | MON_FLAGS_GEN7BATTLESPOTSINGLES | MON_FLAGS_GEN71V1 | MON_FLAGS_GEN8DOUBLESOU | MON_FLAGS_GEN8VGC2020 | MON_FLAGS_GEN81V1 | MON_FLAGS_GEN8OU,
+		.flags = MON_FLAGS_GEN7UU | MON_FLAGS_GEN7RU | MON_FLAGS_GEN7BATTLESPOTSINGLES | MON_FLAGS_GEN71V1 | MON_FLAGS_GEN8DOUBLESOU | MON_FLAGS_GEN8VGC2020 | MON_FLAGS_GEN81V1 | MON_FLAGS_GEN7NU | MON_FLAGS_GEN8UU,
 		.presetCount = ARRAY_COUNT(sRoguePresets_BLASTOISE),
 		.presets = sRoguePresets_BLASTOISE,
 		.movesCount = ARRAY_COUNT(sRoguePresets_BLASTOISE_Moveset),
