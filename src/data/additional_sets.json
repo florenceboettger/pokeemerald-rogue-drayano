@@ -18,5 +18,65 @@
             "Judgment",
             "Precipice Blades"
         ]
+    },
+
+    "Flygon": {
+        "extra moves": [
+            "Hurricane"
+        ]
+    },
+
+    "Milotic": {
+        "movesets": {
+            "gen8uu": {
+                "Scald Set": {
+                    "moves": [
+                        "Scald",
+                        "Recover",
+                        "Toxic",
+                        "Moonblast"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Marvel Scale"
+                },
+                "Flip Turn Set": {
+                    "moves": [
+                        "Moonblast",
+                        "Recover",
+                        "Flip Turn",
+                        "Toxic"
+                    ],
+                    "item": "Flame Orb",
+                    "ability": "Marvel Scale"
+                }
+            },
+            "gen7doublesou": {
+                "Dazzling Gleam Set": {
+                    "moves": [
+                        "Scald",
+                        "Dazzling Gleam",
+                        "Recover",
+                        "Protect"
+                    ],
+                    "item": "Psychic Seed",
+                    "ability": "Competitive"
+                }
+            },
+            "gen8vgc2020": {
+                "Moonblast Set": {
+                    "moves": [
+                        "Recover",
+                        "Muddy Water",
+                        "Hypnosis",
+                        "Moonblast"
+                    ],
+                    "item": "Flame Orb",
+                    "ability": "Competitive"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam"
+        ]
     }
 }

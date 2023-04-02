@@ -56,7 +56,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_TENTACOOL]             = {{EVO_LEVEL, 30, SPECIES_TENTACRUEL}},
     [SPECIES_GEODUDE]               = {{EVO_LEVEL, 25, SPECIES_GRAVELER}},
     [SPECIES_GRAVELER]              = {{EVO_TRADE, 0, SPECIES_GOLEM}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_PONYTA]                = {{EVO_LEVEL, 35, SPECIES_RAPIDASH}},
+#else
     [SPECIES_PONYTA]                = {{EVO_LEVEL, 40, SPECIES_RAPIDASH}},
+#endif
     [SPECIES_SLOWPOKE]              = {{EVO_LEVEL, 37, SPECIES_SLOWBRO},
                                        {EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}},
     [SPECIES_SLOWBRO]               = {{EVO_MEGA_EVOLUTION, ITEM_SLOWBRONITE, SPECIES_SLOWBRO_MEGA}},
@@ -204,7 +208,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
                                        {EVO_TRADE_ITEM, ITEM_PRISM_SCALE, SPECIES_MILOTIC}},
     [SPECIES_CARVANHA]              = {{EVO_LEVEL, 30, SPECIES_SHARPEDO}},
     [SPECIES_SHARPEDO]              = {{EVO_MEGA_EVOLUTION, ITEM_SHARPEDONITE, SPECIES_SHARPEDO_MEGA}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_TRAPINCH]              = {{EVO_LEVEL, 30, SPECIES_VIBRAVA}},
+#else
     [SPECIES_TRAPINCH]              = {{EVO_LEVEL, 35, SPECIES_VIBRAVA}},
+#endif
     [SPECIES_VIBRAVA]               = {{EVO_LEVEL, 45, SPECIES_FLYGON}},
     [SPECIES_MAKUHITA]              = {{EVO_LEVEL, 24, SPECIES_HARIYAMA}},
     [SPECIES_ELECTRIKE]             = {{EVO_LEVEL, 26, SPECIES_MANECTRIC}},
