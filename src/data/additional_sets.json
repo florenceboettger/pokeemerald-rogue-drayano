@@ -1,23 +1,303 @@
 {
-    "Bulbasaur": {
+    "Venusaur": {
         "movesets": {
-            "gen8lc": {
-                "sets": {
+            "gen7ubers": {
+                "Defensive": {
                     "moves": [
-                        "Energy Ball",
+                        "Leech Seed",
+                        "Toxic",
+                        "Synthesis",
+                        "Grass Knot"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7ou": {
+                "Defensive": {
+                    "moves": [
+                        "Leech Seed",
                         "Sludge Bomb",
-                        "Sleep Powder",
+                        "Hidden Power Fire",
+                        "Synthesis"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7monotype": {
+                "Defensive (Poison)": {
+                    "moves": [
+                        "Giga Drain",
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                },
+                "Defensive (Grass)": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Hidden Power Fire",
                         "Leech Seed"
                     ],
-                    "item": "Eviolite",
-                    "ability": "Overgrow"
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7doublesou": {
+                "Bulky Attacker": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Giga Drain",
+                        "Leech Seed",
+                        "Protect"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Bulky Offense": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Giga Drain",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                },
+                "Defensive": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Leech Seed",
+                        "Giga Drain"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7vgc2018": {
+                "Venusaurite": {
+                    "moves": [
+                        "Giga Drain",
+                        "Sludge Bomb",
+                        "Leech Seed",
+                        "Protect"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen71v1": {
+                "Sleeping Beasty (Offensive)": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Giga Drain",
+                        "Sleep Powder",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                },
+                "Prince Charming (Stall)": {
+                    "moves": [
+                        "Synthesis",
+                        "Charm",
+                        "Leech Seed",
+                        "Amnesia"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen8nationaldex": {
+                "Defensive": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Earth Power",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen8vgc2022": {
+                "Chlorophyll Attacker": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Weather Ball",
+                        "Earth Power",
+                        "Sleep Powder"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                }
+            },
+            "gen81v1": {
+                "Substitute + Leech Seed": {
+                    "moves": [
+                        "Sleep Powder",
+                        "Leech Seed",
+                        "Substitute",
+                        "Sludge Bomb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sweet Veil"
+                }
+            }
+        }
+    },
+    "Charizard": {
+        "movesets": {
+            "gen8pu": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Flare Blitz",
+                        "Earthquake",
+                        "Roost"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Defiant"
                 }
             }
         },
         "extra_moves": [
-            "Judgment",
-            "Precipice Blades"
+            "Dual Wingbeat"
         ]
+    },
+
+    "Squirtle": {
+        "movesets": {
+            "gen7lc": {
+                "Rapid Spin": {
+                    "moves": [
+                        "Rapid Spin",
+                        "Fake Out",
+                        "Waterfall",
+                        "Aqua Jet"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Shell Armor"
+                }
+            }
+        }
+    },
+    "Blastoise": {
+        "movesets": {
+            "gen7ru": {
+                "Offensive Spinner": {
+                    "moves": [
+                        "Rapid Spin",
+                        "Dark Pulse",
+                        "Aura Sphere",
+                        "Ice Beam"
+                    ],
+                    "item": "Blastoisinite",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen7nu": {
+                "Defensive": {
+                    "moves": [
+                        "Scald",
+                        "Toxic",
+                        "Rapid Spin",
+                        "Ice Beam"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen7uu": {
+                "Offensive Wallbreaker": {
+                    "moves": [
+                        "Water Pulse",
+                        "Dark Pulse",
+                        "Aura Sphere",
+                        "Ice Beam"
+                    ],
+                    "item": "Blastoisinite",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Mega Tank": {
+                    "moves": [
+                        "Water Pulse",
+                        "Ice Beam",
+                        "Aura Sphere",
+                        "Aqua Jet"
+                    ],
+                    "item": "Blastoisinite",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen71v1": {
+                "Bulky Special Attacker": {
+                    "moves": [
+                        "Fake Out",
+                        "Hydro Cannon",
+                        "Rock Tomb",
+                        "Dragon Pulse"
+                    ],
+                    "item": "Blastoisinite",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen8doublesou": {
+                "Follow Me Support": {
+                    "moves": [
+                        "Fake Out",
+                        "Follow Me",
+                        "Flip Turn",
+                        "Toxic"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen81v1": {
+                "Life Orb": {
+                    "moves": [
+                        "Shell Smash",
+                        "Hydro Cannon",
+                        "Ice Beam",
+                        "Substitute"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Shell Armor"
+                },
+                "Wacan Berry": {
+                    "moves": [
+                        "Yawn",
+                        "Endure",
+                        "Shell Smash",
+                        "Hydro Cannon"
+                    ],
+                    "item": "Wacan Berry",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen8vgc2020": {
+                "Showdown Usage": {
+                    "moves": [
+                        "Shell Smash",
+                        "Water Spout",
+                        "Blizzard",
+                        "Ice Beam"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Shell Armor"
+                }
+            }
+        }
     },
 
     "Flygon": {

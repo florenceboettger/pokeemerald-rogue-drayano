@@ -5564,6 +5564,13 @@ bool8 SelectNextPreset(u16 species, u16 trainerNum, u8 monIdx, u16 randFlag, str
             }
 #endif
 
+#ifdef ROGUE_DRAYANO
+            if ((currPreset->flags & MON_FLAG_DOUBLES) ^ FlagGet(FLAG_ROGUE_DOUBLE_BATTLES))
+            {
+                isPresetValid = FALSE;
+            }
+#endif
+
             if(isPresetValid)
             {
                 break;
@@ -6664,7 +6671,9 @@ void Rogue_ModifyTutorMoves(struct Pokemon* mon, u8 tutorType, u8* count, u8* hi
                 capacity += 5;
         }
 
+#ifdef ROGUE_DEBUG
         capacity = 0;
+#endif
         if(capacity != 0)
         {
             ApplyTutorMoveCapacity(count, moves, capacity);
