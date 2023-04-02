@@ -1,23 +1,121 @@
 {
-    "Bulbasaur": {
-        "movesets": {
-            "gen7lc": {
-                "Z-Celebrate Sweeper": {
-                    "moves": [
-                        "Celebrate",
-                        "Sludge Bomb",
-                        "Giga Drain",
-                        "Judgment"
-                    ],
-                    "item": "Normalium Z",
-                    "ability": "Thick Fat"
-                }
-            }
-        }
-    },
     "Venusaur": {
         "movesets": {
+            "gen7ubers": {
+                "Defensive": {
+                    "moves": [
+                        "Leech Seed",
+                        "Toxic",
+                        "Synthesis",
+                        "Grass Knot"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
             "gen7ou": {
+                "Defensive": {
+                    "moves": [
+                        "Leech Seed",
+                        "Sludge Bomb",
+                        "Hidden Power Fire",
+                        "Synthesis"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7monotype": {
+                "Defensive (Poison)": {
+                    "moves": [
+                        "Giga Drain",
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                },
+                "Defensive (Grass)": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Hidden Power Fire",
+                        "Leech Seed"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7doublesou": {
+                "Bulky Attacker": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Giga Drain",
+                        "Leech Seed",
+                        "Protect"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Bulky Offense": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Giga Drain",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                },
+                "Defensive": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Synthesis",
+                        "Leech Seed",
+                        "Giga Drain"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen7vgc2018": {
+                "Venusaurite": {
+                    "moves": [
+                        "Giga Drain",
+                        "Sludge Bomb",
+                        "Leech Seed",
+                        "Protect"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen71v1": {
+                "Sleeping Beasty (Offensive)": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Giga Drain",
+                        "Sleep Powder",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                },
+                "Prince Charming (Stall)": {
+                    "moves": [
+                        "Synthesis",
+                        "Charm",
+                        "Leech Seed",
+                        "Amnesia"
+                    ],
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen8nationaldex": {
                 "Defensive": {
                     "moves": [
                         "Sludge Bomb",
@@ -25,8 +123,32 @@
                         "Earth Power",
                         "Hidden Power Fire"
                     ],
-                    "item": "Leftovers",
-                    "ability": "Thick Fat"
+                    "item": "Venusaurite",
+                    "ability": "Sweet Veil"
+                }
+            },
+            "gen8vgc2022": {
+                "Chlorophyll Attacker": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Weather Ball",
+                        "Earth Power",
+                        "Sleep Powder"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                }
+            },
+            "gen81v1": {
+                "Substitute + Leech Seed": {
+                    "moves": [
+                        "Sleep Powder",
+                        "Leech Seed",
+                        "Substitute",
+                        "Sludge Bomb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sweet Veil"
                 }
             }
         }

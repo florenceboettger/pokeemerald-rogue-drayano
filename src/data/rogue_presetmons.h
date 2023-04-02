@@ -722,6 +722,70 @@ static const u16 sRoguePresets_GIRATINA_ORIGIN_Moveset[] =
 static const struct RogueMonPreset sRoguePresets_VENUSAUR[] = 
 {
 	{
+		.flags = MON_FLAGS_GEN7RU,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_GROWTH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_HIDDEN_POWER}
+	},
+	{
+		.flags = MON_FLAGS_GEN7VGC2018,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_GRASSIUM_Z,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_GRASS_PLEDGE, MOVE_SLEEP_POWDER, MOVE_PROTECT}
+	},
+	{
+		.flags = MON_FLAGS_GEN7LETSGOOU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_NONE,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_MEGA_DRAIN, MOVE_LEECH_SEED, MOVE_SLEEP_POWDER, MOVE_SLUDGE_BOMB}
+	},
+	{
+		.flags = MON_FLAGS_GEN8OU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_GROWTH, MOVE_GIGA_DRAIN, MOVE_WEATHER_BALL, MOVE_EARTH_POWER}
+	},
+	{
+		.flags = MON_FLAGS_GEN8UU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_GROWTH, MOVE_GIGA_DRAIN, MOVE_WEATHER_BALL, MOVE_SLUDGE_BOMB}
+	},
+	{
+		.flags = MON_FLAGS_GEN8NATIONALDEX,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_GROWTH, MOVE_GIGA_DRAIN, MOVE_EARTH_POWER, MOVE_WEATHER_BALL}
+	},
+	{
+		.flags = MON_FLAGS_GEN8VGC2020,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_EARTH_POWER, MOVE_SLEEP_POWDER, MOVE_LEAF_STORM}
+	},
+	{
+		.flags = MON_FLAGS_GEN81V1,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_OVERGROW,
+		.heldItem = ITEM_CUSTAP_BERRY,
+		.moves = { MOVE_FRENZY_PLANT, MOVE_SLUDGE_BOMB, MOVE_EARTHQUAKE, MOVE_ENDURE}
+	},
+	{
+		.flags = MON_FLAGS_GEN8MONOTYPE,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_WEATHER_BALL, MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_GROWTH}
+	},
+#ifndef ROGUE_DRAYANO
+	{
 		.flags = MON_FLAGS_GEN7UBERS,
 		.hiddenPowerType = TYPE_NONE,
 		.abilityNum = ABILITY_CHLOROPHYLL,
@@ -729,11 +793,25 @@ static const struct RogueMonPreset sRoguePresets_VENUSAUR[] =
 		.moves = { MOVE_LEECH_SEED, MOVE_TOXIC, MOVE_SYNTHESIS, MOVE_GRASS_KNOT}
 	},
 	{
-		.flags = MON_FLAGS_GEN7RU,
+		.flags = MON_FLAGS_GEN7OU,
 		.hiddenPowerType = TYPE_FIRE,
 		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_LIFE_ORB,
-		.moves = { MOVE_GROWTH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_HIDDEN_POWER}
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_LEECH_SEED, MOVE_SLUDGE_BOMB, MOVE_HIDDEN_POWER, MOVE_SYNTHESIS}
+	},
+	{
+		.flags = MON_FLAGS_GEN7MONOTYPE,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_HIDDEN_POWER}
+	},
+	{
+		.flags = MON_FLAGS_GEN7MONOTYPE,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_HIDDEN_POWER, MOVE_GIGA_DRAIN}
 	},
 	{
 		.flags = MON_FLAGS_GEN7DOUBLESOU,
@@ -764,13 +842,6 @@ static const struct RogueMonPreset sRoguePresets_VENUSAUR[] =
 		.moves = { MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_LEECH_SEED, MOVE_PROTECT}
 	},
 	{
-		.flags = MON_FLAGS_GEN7VGC2018,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_GRASSIUM_Z,
-		.moves = { MOVE_SLUDGE_BOMB, MOVE_GRASS_PLEDGE, MOVE_SLEEP_POWDER, MOVE_PROTECT}
-	},
-	{
 		.flags = MON_FLAGS_GEN71V1,
 		.hiddenPowerType = TYPE_FIRE,
 		.abilityNum = ABILITY_CHLOROPHYLL,
@@ -785,60 +856,11 @@ static const struct RogueMonPreset sRoguePresets_VENUSAUR[] =
 		.moves = { MOVE_SYNTHESIS, MOVE_CHARM, MOVE_LEECH_SEED, MOVE_AMNESIA}
 	},
 	{
-		.flags = MON_FLAGS_GEN7LETSGOOU,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_NONE,
-		.heldItem = ITEM_VENUSAURITE,
-		.moves = { MOVE_MEGA_DRAIN, MOVE_LEECH_SEED, MOVE_SLEEP_POWDER, MOVE_SLUDGE_BOMB}
-	},
-	{
-		.flags = MON_FLAGS_GEN7MONOTYPE,
-		.hiddenPowerType = TYPE_FIRE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_VENUSAURITE,
-		.moves = { MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_HIDDEN_POWER}
-	},
-	{
-		.flags = MON_FLAGS_GEN7MONOTYPE,
-		.hiddenPowerType = TYPE_FIRE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_VENUSAURITE,
-		.moves = { MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_HIDDEN_POWER, MOVE_GIGA_DRAIN}
-	},
-	{
-		.flags = MON_FLAGS_GEN8OU,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_LIFE_ORB,
-		.moves = { MOVE_GROWTH, MOVE_GIGA_DRAIN, MOVE_WEATHER_BALL, MOVE_EARTH_POWER}
-	},
-	{
-		.flags = MON_FLAGS_GEN8UU,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_LIFE_ORB,
-		.moves = { MOVE_GROWTH, MOVE_GIGA_DRAIN, MOVE_WEATHER_BALL, MOVE_SLUDGE_BOMB}
-	},
-	{
 		.flags = MON_FLAGS_GEN8NATIONALDEX,
 		.hiddenPowerType = TYPE_FIRE,
 		.abilityNum = ABILITY_CHLOROPHYLL,
 		.heldItem = ITEM_VENUSAURITE,
 		.moves = { MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_EARTH_POWER, MOVE_HIDDEN_POWER}
-	},
-	{
-		.flags = MON_FLAGS_GEN8NATIONALDEX,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_LIFE_ORB,
-		.moves = { MOVE_GROWTH, MOVE_GIGA_DRAIN, MOVE_EARTH_POWER, MOVE_WEATHER_BALL}
-	},
-	{
-		.flags = MON_FLAGS_GEN8VGC2020,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_LIFE_ORB,
-		.moves = { MOVE_SLUDGE_BOMB, MOVE_EARTH_POWER, MOVE_SLEEP_POWDER, MOVE_LEAF_STORM}
 	},
 	{
 		.flags = MON_FLAGS_GEN81V1,
@@ -847,36 +869,98 @@ static const struct RogueMonPreset sRoguePresets_VENUSAUR[] =
 		.heldItem = ITEM_WIDE_LENS,
 		.moves = { MOVE_SLEEP_POWDER, MOVE_LEECH_SEED, MOVE_SUBSTITUTE, MOVE_SLUDGE_BOMB}
 	},
-	{
-		.flags = MON_FLAGS_GEN81V1,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_OVERGROW,
-		.heldItem = ITEM_CUSTAP_BERRY,
-		.moves = { MOVE_FRENZY_PLANT, MOVE_SLUDGE_BOMB, MOVE_EARTHQUAKE, MOVE_ENDURE}
-	},
-	{
-		.flags = MON_FLAGS_GEN8MONOTYPE,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_LIFE_ORB,
-		.moves = { MOVE_WEATHER_BALL, MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_GROWTH}
-	},
-#ifndef ROGUE_DRAYANO
-	{
-		.flags = MON_FLAGS_GEN7OU,
-		.hiddenPowerType = TYPE_FIRE,
-		.abilityNum = ABILITY_CHLOROPHYLL,
-		.heldItem = ITEM_VENUSAURITE,
-		.moves = { MOVE_LEECH_SEED, MOVE_SLUDGE_BOMB, MOVE_HIDDEN_POWER, MOVE_SYNTHESIS}
-	},
 #endif
 #ifdef ROGUE_DRAYANO
 	{
+		.flags = MON_FLAGS_GEN7UBERS,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_LEECH_SEED, MOVE_TOXIC, MOVE_SYNTHESIS, MOVE_GRASS_KNOT}
+	},
+	{
 		.flags = MON_FLAGS_GEN7OU,
 		.hiddenPowerType = TYPE_FIRE,
-		.abilityNum = ABILITY_THICK_FAT,
-		.heldItem = ITEM_LEFTOVERS,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_LEECH_SEED, MOVE_SLUDGE_BOMB, MOVE_HIDDEN_POWER, MOVE_SYNTHESIS}
+	},
+	{
+		.flags = MON_FLAGS_GEN7MONOTYPE,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_HIDDEN_POWER}
+	},
+	{
+		.flags = MON_FLAGS_GEN7MONOTYPE,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_HIDDEN_POWER, MOVE_LEECH_SEED}
+	},
+	{
+		.flags = MON_FLAGS_GEN7DOUBLESOU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_LEECH_SEED, MOVE_PROTECT}
+	},
+	{
+		.flags = MON_FLAGS_GEN7BATTLESPOTSINGLES,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_GIGA_DRAIN, MOVE_HIDDEN_POWER}
+	},
+	{
+		.flags = MON_FLAGS_GEN7BATTLESPOTSINGLES,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_LEECH_SEED, MOVE_GIGA_DRAIN}
+	},
+	{
+		.flags = MON_FLAGS_GEN7VGC2018,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_LEECH_SEED, MOVE_PROTECT}
+	},
+	{
+		.flags = MON_FLAGS_GEN71V1,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_SLEEP_POWDER, MOVE_HIDDEN_POWER}
+	},
+	{
+		.flags = MON_FLAGS_GEN71V1,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
+		.moves = { MOVE_SYNTHESIS, MOVE_CHARM, MOVE_LEECH_SEED, MOVE_AMNESIA}
+	},
+	{
+		.flags = MON_FLAGS_GEN8NATIONALDEX,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_VENUSAURITE,
 		.moves = { MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS, MOVE_EARTH_POWER, MOVE_HIDDEN_POWER}
+	},
+	{
+		.flags = MON_FLAGS_GEN8VGC2022,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_CHLOROPHYLL,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_LEAF_STORM, MOVE_WEATHER_BALL, MOVE_EARTH_POWER, MOVE_SLEEP_POWDER}
+	},
+	{
+		.flags = MON_FLAGS_GEN81V1,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SWEET_VEIL,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_SLEEP_POWDER, MOVE_LEECH_SEED, MOVE_SUBSTITUTE, MOVE_SLUDGE_BOMB}
 	},
 #endif
 };
@@ -39006,7 +39090,6 @@ static const u16 sRoguePresets_NOIBAT_Moveset[] =
 
 static const struct RogueMonPreset sRoguePresets_BULBASAUR[] = 
 {
-#ifndef ROGUE_DRAYANO
 	{
 		.flags = MON_FLAGS_GEN7LC,
 		.hiddenPowerType = TYPE_FIRE,
@@ -39014,16 +39097,6 @@ static const struct RogueMonPreset sRoguePresets_BULBASAUR[] =
 		.heldItem = ITEM_NORMALIUM_Z,
 		.moves = { MOVE_CELEBRATE, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_HIDDEN_POWER}
 	},
-#endif
-#ifdef ROGUE_DRAYANO
-	{
-		.flags = MON_FLAGS_GEN7LC,
-		.hiddenPowerType = TYPE_NONE,
-		.abilityNum = ABILITY_THICK_FAT,
-		.heldItem = ITEM_NORMALIUM_Z,
-		.moves = { MOVE_CELEBRATE, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_JUDGMENT}
-	},
-#endif
 };
 
 static const u16 sRoguePresets_BULBASAUR_Moveset[] = 
@@ -39032,9 +39105,6 @@ static const u16 sRoguePresets_BULBASAUR_Moveset[] =
 	MOVE_SLUDGE_BOMB,
 	MOVE_GIGA_DRAIN,
 	MOVE_HIDDEN_POWER,
-#ifdef ROGUE_DRAYANO
-	MOVE_JUDGMENT,
-#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_CHARMANDER[] = 
@@ -48265,7 +48335,7 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 	},
 
 	[SPECIES_VENUSAUR] = {
-		.flags = MON_FLAGS_GEN7UBERS | MON_FLAGS_GEN7RU | MON_FLAGS_GEN7DOUBLESOU | MON_FLAGS_GEN7BATTLESPOTSINGLES | MON_FLAGS_GEN7VGC2018 | MON_FLAGS_GEN71V1 | MON_FLAGS_GEN7LETSGOOU | MON_FLAGS_GEN7MONOTYPE | MON_FLAGS_GEN8OU | MON_FLAGS_GEN8UU | MON_FLAGS_GEN8NATIONALDEX | MON_FLAGS_GEN8VGC2020 | MON_FLAGS_GEN81V1 | MON_FLAGS_GEN8MONOTYPE | MON_FLAGS_GEN7OU,
+		.flags = MON_FLAGS_GEN7RU | MON_FLAGS_GEN7VGC2018 | MON_FLAGS_GEN7LETSGOOU | MON_FLAGS_GEN8OU | MON_FLAGS_GEN8UU | MON_FLAGS_GEN8NATIONALDEX | MON_FLAGS_GEN8VGC2020 | MON_FLAGS_GEN81V1 | MON_FLAGS_GEN8MONOTYPE | MON_FLAGS_GEN7UBERS | MON_FLAGS_GEN7OU | MON_FLAGS_GEN7MONOTYPE | MON_FLAGS_GEN7DOUBLESOU | MON_FLAGS_GEN7BATTLESPOTSINGLES | MON_FLAGS_GEN71V1 | MON_FLAGS_GEN8VGC2022,
 		.presetCount = ARRAY_COUNT(sRoguePresets_VENUSAUR),
 		.presets = sRoguePresets_VENUSAUR,
 		.movesCount = ARRAY_COUNT(sRoguePresets_VENUSAUR_Moveset),
