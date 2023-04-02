@@ -933,7 +933,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_GRASS,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_OVERGROW, ABILITY_CHLOROPHYLL, ABILITY_THICK_FAT},
+            .abilities = {ABILITY_OVERGROW, ABILITY_CHLOROPHYLL, ABILITY_SWEET_VEIL},
         #else
             .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL},
         #endif
@@ -962,7 +962,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_GRASS,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_OVERGROW, ABILITY_CHLOROPHYLL, ABILITY_THICK_FAT},
+            .abilities = {ABILITY_OVERGROW, ABILITY_CHLOROPHYLL, ABILITY_SWEET_VEIL},
         #else
             .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL},
         #endif
@@ -995,7 +995,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_GRASS,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_OVERGROW, ABILITY_CHLOROPHYLL, ABILITY_THICK_FAT},
+            .abilities = {ABILITY_OVERGROW, ABILITY_CHLOROPHYLL, ABILITY_SWEET_VEIL},
         #else
             .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL},
         #endif
