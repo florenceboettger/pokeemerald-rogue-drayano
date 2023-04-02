@@ -42,7 +42,7 @@
                         "Roost"
                     ],
                     "item": "Heavy-Duty Boots",
-                    "ability": "Mold Breaker"
+                    "ability": "Defiant"
                 }
             }
         },
@@ -50,18 +50,34 @@
             "Dual Wingbeat"
         ]
     },
+    "Squirtle": {
+        "movesets": {
+            "gen7lc": {
+                "Rapid Spin": {
+                    "moves": [
+                        "Rapid Spin",
+                        "Fake Out",
+                        "Waterfall",
+                        "Aqua Jet"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Shell Armor"
+                }
+            }
+        }
+    },
     "Blastoise": {
         "movesets": {
-            "gen8uu": {
-                "Defensive": {
+            "gen7ru": {
+                "Offensive Spinner": {
                     "moves": [
-                        "Scald",
                         "Rapid Spin",
-                        "Ice Beam",
-                        "Flip Turn"
+                        "Dark Pulse",
+                        "Aura Sphere",
+                        "Ice Beam"
                     ],
-                    "item": "Damp Rock",
-                    "ability": "Drizzle"
+                    "item": "Blastoisinite",
+                    "ability": "Shell Armor"
                 }
             },
             "gen7nu": {
@@ -72,20 +88,90 @@
                         "Rapid Spin",
                         "Ice Beam"
                     ],
-                    "item": "Damp Rock",
-                    "ability": "Drizzle"
+                    "item": "Leftovers",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen7uu": {
+                "Offensive Wallbreaker": {
+                    "moves": [
+                        "Water Pulse",
+                        "Dark Pulse",
+                        "Aura Sphere",
+                        "Ice Beam"
+                    ],
+                    "item": "Blastoisinite",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Mega Tank": {
+                    "moves": [
+                        "Water Pulse",
+                        "Ice Beam",
+                        "Aura Sphere",
+                        "Aqua Jet"
+                    ],
+                    "item": "Blastoisinite",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen71v1": {
+                "Bulky Special Attacker": {
+                    "moves": [
+                        "Fake Out",
+                        "Hydro Cannon",
+                        "Rock Tomb",
+                        "Dragon Pulse"
+                    ],
+                    "item": "Blastoisinite",
+                    "ability": "Shell Armor"
                 }
             },
             "gen8doublesou": {
-                "Rain Setter": {
+                "Follow Me Support": {
                     "moves": [
-                        "Scald",
-                        "Yawn",
-                        "Ice Beam",
-                        "Protect"
+                        "Fake Out",
+                        "Follow Me",
+                        "Flip Turn",
+                        "Toxic"
                     ],
-                    "item": "Damp Rock",
-                    "ability": "Drizzle"
+                    "item": "Sitrus Berry",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen81v1": {
+                "Life Orb": {
+                    "moves": [
+                        "Shell Smash",
+                        "Hydro Cannon",
+                        "Ice Beam",
+                        "Substitute"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Shell Armor"
+                },
+                "Wacan Berry": {
+                    "moves": [
+                        "Yawn",
+                        "Endure",
+                        "Shell Smash",
+                        "Hydro Cannon"
+                    ],
+                    "item": "Wacan Berry",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen8vgc2020": {
+                "Showdown Usage": {
+                    "moves": [
+                        "Shell Smash",
+                        "Water Spout",
+                        "Blizzard",
+                        "Ice Beam"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Shell Armor"
                 }
             }
         }

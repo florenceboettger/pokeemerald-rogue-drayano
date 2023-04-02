@@ -1023,7 +1023,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_DRAGON,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_BLAZE, ABILITY_SOLAR_POWER, ABILITY_MOLD_BREAKER},
+            .abilities = {ABILITY_BLAZE, ABILITY_SOLAR_POWER, ABILITY_DEFIANT},
         #else
             .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER},
         #endif
@@ -1052,7 +1052,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_DRAGON,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_BLAZE, ABILITY_SOLAR_POWER, ABILITY_MOLD_BREAKER},
+            .abilities = {ABILITY_BLAZE, ABILITY_SOLAR_POWER, ABILITY_DEFIANT},
         #else
             .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER},
         #endif
@@ -1084,7 +1084,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_DRAGON,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_BLAZE, ABILITY_SOLAR_POWER, ABILITY_MOLD_BREAKER},
+            .abilities = {ABILITY_BLAZE, ABILITY_SOLAR_POWER, ABILITY_DEFIANT},
         #else
             .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER},
         #endif
@@ -1112,7 +1112,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_WATER_1,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_DRIZZLE},
+            .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR},
         #else
             .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH},
         #endif
@@ -1141,7 +1141,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_WATER_1,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_DRIZZLE},
+            .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR},
         #else
             .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH},
         #endif
@@ -1173,7 +1173,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_WATER_1,
         #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_DRIZZLE},
+            .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR},
         #else
             .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH},
         #endif
