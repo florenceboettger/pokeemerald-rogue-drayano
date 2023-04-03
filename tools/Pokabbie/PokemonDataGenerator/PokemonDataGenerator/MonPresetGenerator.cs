@@ -244,14 +244,17 @@ namespace PokemonDataGenerator
             {
 				string pokemonName = pokemonKvp.Key;
 				var pokemonSets = (JObject)pokemonKvp.Value;
-				var movesets = (JObject)pokemonSets["movesets"];
-				foreach (var categoryKvp in movesets)
-                {
-					string categoryName = categoryKvp.Key;
-					var sets = (JObject)categoryKvp.Value;
+				if (pokemonSets.ContainsKey("movesets"))
+				{
+					var movesets = (JObject)pokemonSets["movesets"];
+					foreach (var categoryKvp in movesets)
+					{
+						string categoryName = categoryKvp.Key;
+						var sets = (JObject)categoryKvp.Value;
 
-					AddSets(pokemonName, categoryName, sets, useGen3Format, true);
-                }
+						AddSets(pokemonName, categoryName, sets, useGen3Format, true);
+					}
+				}
 
 				var pokemonData = FindOrCreate(pokemonName);
 

@@ -153,8 +153,102 @@
             }
         }
     },
+    "Charmander": {
+        "movesets": {
+            "gen7lc": {
+                "Life Orb": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Flare Blitz",
+                        "Hidden Power Grass",
+                        "Thunder Punch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Defiant"
+                }
+            }
+        }
+    },
     "Charizard": {
         "movesets": {
+            "gen7ou": {
+                "Dragon Dance X": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Flare Blitz",
+                        "Earthquake",
+                        "Roost"
+                    ],
+                    "item": "Charizardite X",
+                    "ability": "Defiant"
+                },
+                "3 Attacks": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Outrage",
+                        "Earthquake",
+                        "Roost"
+                    ],
+                    "item": "Charizardite X",
+                    "ability": "Defiant"
+                }
+            },
+            "gen7monotype": {
+                "Dragon Dance (Fire)": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Flare Blitz",
+                        "Outrage",
+                        "Roost"
+                    ],
+                    "item": "Charizardite X",
+                    "ability": "Defiant"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Flare Blitz",
+                        "Outrage",
+                        "Earthquake"
+                    ],
+                    "item": "Charizardite X",
+                    "ability": "Defiant"
+                },
+                "Versatile Sweeper": {
+                    "moves": [
+                        "Swords Dance",
+                        "Flame Charge",
+                        "Outrage",
+                        "Flare Blitz"
+                    ],
+                    "item": "Charizardite X",
+                    "ability": "Defiant"
+                },
+                "Defensive": {
+                    "moves": [
+                        "Will-O-Wisp",
+                        "Roost",
+                        "Dragon Claw",
+                        "Earthquake"
+                    ],
+                    "item": "Charizardite X",
+                    "ability": "Defiant"
+                }
+            },
+            "gen71v1": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Flame Charge",
+                        "Outrage",
+                        "Flare Blitz",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Charizardite X",
+                    "ability": "Defiant"
+                }
+            },
             "gen8pu": {
                 "Dragon Dance": {
                     "moves": [
@@ -164,6 +258,30 @@
                         "Roost"
                     ],
                     "item": "Heavy-Duty Boots",
+                    "ability": "Defiant"
+                }
+            },
+            "gen8nationaldex": {
+                "Dragon Dance Sweeper": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Flare Blitz",
+                        "Dragon Claw",
+                        "Roost"
+                    ],
+                    "item": "Charizardite X",
+                    "ability": "Defiant"
+                }
+            },
+            "gen8nationaldexmonotype": {
+                "Dragon Dance (Fire)": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Flare Blitz",
+                        "Outrage",
+                        "Roost"
+                    ],
+                    "item": "Charizardite X",
                     "ability": "Defiant"
                 }
             }

@@ -9373,7 +9373,7 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 85,
         .baseSpeed     = 100,
         .baseSpAttack  = 130,
-        .baseSpDefense = 85
+        .baseSpDefense = 85,
     #else
         .baseHP        = 80,
         .baseAttack    = 100,
@@ -9382,7 +9382,6 @@ const struct BaseStats gBaseStats[] =
         .baseSpAttack  = 80,
         .baseSpDefense = 80,
     #endif
-    #ifdef
         .type1 = TYPE_GROUND,
         .type2 = TYPE_DRAGON,
         .catchRate = 45,
