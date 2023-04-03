@@ -482,13 +482,13 @@
     },
 
     "Magnemite": {
-        "extra moves": [
+        "extra_moves": [
             "Bug Buzz"
         ]
     },
 
     "Magneton": {
-        "extra moves": [
+        "extra_moves": [
             "Bug Buzz"
         ]
     },
@@ -532,7 +532,7 @@
                 }
             }
         },
-        "extra moves": [
+        "extra_moves": [
             "Focus Blast",
             "Hurricane"
         ]
@@ -588,25 +588,39 @@
     },
 
     "Krabby": {
-        "extra moves": [
+        "extra_moves": [
             "Shadow Claw"
         ]
     },
 
     "Kingler": {
-        "extra moves": [
+        "extra_moves": [
             "Shadow Claw"
         ]
     },
 
     "Voltorb": {
-        "extra moves":[
+        "extra_moves":[
             "Bug Buzz"
         ]
     },
 
     "Electrode": {
-        "extra moves":[
+        "movesets": {
+            "gen7zu": {
+                "Special Attacker": {
+                    "moves": [
+                        "Volt Switch",
+                        "Thunderbolt",
+                        "Hidden Power Water",
+                        "Bug Buzz"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Soundproof"
+                }
+            }
+        },
+        "extra_moves":[
             "Bug Buzz",
             "Energy Ball"
         ]
@@ -619,19 +633,19 @@
     },
 
     "Vaporeon": {
-        "extra moves":[
+        "extra_moves":[
             "Grass Knot"
         ]
     },
 
     "Jolteon": {
-        "extra moves":[
+        "extra_moves":[
             "Grass Knot"
         ]
     },
 
     "Flareon": {
-        "extra moves":[
+        "extra_moves":[
             "Close Combat",
             "Flame Wheel",
             "Grass Knot",
@@ -641,26 +655,26 @@
     },
 
     "Aerodactyl": {
-        "extra moves":[
+        "extra_moves":[
             "Hurricane"
         ]
     },
 
     "Zapdos": {
-        "extra moves":[
+        "extra_moves":[
             "Hurricane"
         ]
     },
 
     "Mew": {
-        "extra moves":[
+        "extra_moves":[
             "Bug Buzz",
             "Hurricane"
         ]
     },
 
     "Flygon": {
-        "extra moves": [
+        "extra_moves": [
             "Hurricane"
         ]
     },
