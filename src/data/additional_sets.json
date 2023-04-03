@@ -672,10 +672,134 @@
     },
 
     "Electrode": {
+        "movesets": {
+            "gen7zu": {
+                "Special Attacker": {
+                    "moves": [
+                        "Volt Switch",
+                        "Thunderbolt",
+                        "Hidden Power Water",
+                        "Bug Buzz"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Soundproof"
+                }
+            }
+        },
         "extra_moves":[
             "Bug Buzz",
             "Energy Ball"
         ]
+    },
+
+    "Jynx": {
+        "movesets": {
+            "gen8zu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Ice Beam",
+                        "Psycho Boost",
+                        "Focus Blast",
+                        "Trick"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Dry Skin"
+                },
+                "Lovely Kiss": {
+                    "moves": [
+                        "Lovely Kiss",
+                        "Ice Beam",
+                        "Focus Blast",
+                        "Psycho Boost"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Dry Skin"
+                }
+            }
+        }
+    },
+
+    "Pinsir": {
+        "movesets": {
+            "gen7pu": {
+                "Z-Me First": {
+                    "moves": [
+                        "Me First",
+                        "Megahorn",
+                        "Earthquake",
+                        "Stone Edge"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Moxie"
+                },
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Megahorn",
+                        "Earthquake",
+                        "Knock Off"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Mold Breaker"
+                }
+            },
+            "gen7letsgoou": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Megahorn",
+                        "Earthquake",
+                        "Rock Slide"
+                    ],
+                    "item": "Pinsirite",
+                    "ability": "Mold Breaker"
+                }
+            },
+            "gen7zu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Megahorn",
+                        "Earthquake",
+                        "Stone Edge"
+                    ],
+                    "item": "Buginium Z",
+                    "ability": "Mold Breaker"
+                },
+                "Z-Me First": {
+                    "moves": [
+                        "Me First",
+                        "Megahorn",
+                        "Earthquake",
+                        "Stone Edge"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Moxie"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Megahorn",
+                        "Close Combat",
+                        "Stone Edge",
+                        "Knock Off"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Moxie"
+                }
+            },
+            "gen8zu": {
+                "All-Out Attacker": {
+                    "moves": [
+                        "Megahorn",
+                        "Close Combat",
+                        "Stone Edge",
+                        "Knock Off"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Hyper Cutter"
+                }
+            }
+        }
     },
 
     "Eevee": {
@@ -691,12 +815,102 @@
     },
 
     "Jolteon": {
+        "movesets": {
+            "gen8pu": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Shadow Ball",
+                        "Volt Switch",
+                        "Extrasensory"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Volt Absorb"
+                },
+                "Offensive Pivot (Grass Knot)": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Shadow Ball",
+                        "Volt Switch",
+                        "Grass Knot"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Volt Absorb"
+                }
+            }
+        },
         "extra_moves":[
             "Grass Knot"
         ]
     },
 
     "Flareon": {
+        "movesets": {
+            "gen7ou": {
+                "Choice Scarf (Rock Slide)": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Close Combat",
+                        "Wild Charge",
+                        "Rock Slide"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Flash Fire"
+                },
+                "Choice Scarf (Play Rough)": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Close Combat",
+                        "Wild Charge",
+                        "Play Rough"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Flash Fire"
+                },
+                "Choice Band (Rock Slide)": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Close Combat",
+                        "Wild Charge",
+                        "Rock Slide"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Flash Fire"
+                },
+                "Choice Band (Play Rough)": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Close Combat",
+                        "Wild Charge",
+                        "Play Rough"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen7uu": {
+                "Guts Wallbreaker (Rock Slide)": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Close Combat",
+                        "Wild Charge",
+                        "Rock Slide"
+                    ],
+                    "item": "Toxic Orb",
+                    "ability": "Guts"
+                },
+                "Guts Wallbreaker (Play Rough)": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Close Combat",
+                        "Wild Charge",
+                        "Play Rough"
+                    ],
+                    "item": "Toxic Orb",
+                    "ability": "Guts"
+                }
+            }
+        },
         "extra_moves":[
             "Close Combat",
             "Flame Wheel",
