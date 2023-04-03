@@ -1576,6 +1576,9 @@ static const struct LevelUpMove sMagnetonLevelUpLearnset[] = {
 
 static const struct LevelUpMove sFarfetchdLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_BRAVE_BIRD),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_CLOSE_COMBAT),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_POISON_JAB),
     LEVEL_UP_MOVE( 1, MOVE_PECK),
     LEVEL_UP_MOVE( 1, MOVE_SAND_ATTACK),
@@ -1594,8 +1597,8 @@ static const struct LevelUpMove sFarfetchdLevelUpLearnset[] = {
     LEVEL_UP_MOVE(45, MOVE_FALSE_SWIPE),
     LEVEL_UP_MOVE(49, MOVE_AIR_SLASH),
     LEVEL_UP_MOVE(55, MOVE_BRAVE_BIRD),
-#ifdef
-    LEVEL_UP_MOVE(60, MOVE_CLOSE_COMBAT),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(60, MOVE_SACRED_SWORD),
 #endif
     LEVEL_UP_END
 };
@@ -1625,9 +1628,6 @@ static const struct LevelUpMove sDodrioLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TRI_ATTACK),
     LEVEL_UP_MOVE( 1, MOVE_PECK),
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
-#ifdef ROGUE_DRAYANO
-    LEVEL_UP_MOVE( 1, MOVE_HIGH_JUMP_KICK),
-#endif
     LEVEL_UP_MOVE( 1, MOVE_QUICK_ATTACK),
     LEVEL_UP_MOVE( 1, MOVE_RAGE),
     LEVEL_UP_MOVE( 5, MOVE_QUICK_ATTACK),
@@ -1644,6 +1644,9 @@ static const struct LevelUpMove sDodrioLevelUpLearnset[] = {
     LEVEL_UP_MOVE(47, MOVE_DRILL_PECK),
     LEVEL_UP_MOVE(52, MOVE_ENDEAVOR),
     LEVEL_UP_MOVE(56, MOVE_THRASH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(60, MOVE_HIGH_JUMP_KICK),
+#endif
     LEVEL_UP_END
 };
 

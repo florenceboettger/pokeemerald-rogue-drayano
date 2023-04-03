@@ -418,6 +418,69 @@
         }
     },
 
+    "Rapidash": {
+        "movesets": {
+            "gen7pu": {
+                "Offensive Utility": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Play Rough",
+                        "Will-O-Wisp",
+                        "Morning Sun"
+                    ],
+                    "item": "Firium Z",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen7zu": {
+                "Offensive": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Play Rough",
+                        "High Horsepower",
+                        "Morning Sun"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Flash Fire"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Play Rough",
+                        "High Horsepower",
+                        "Wild Charge"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen8pu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Flare Blitz",
+                        "Wild Charge",
+                        "Play Rough"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen8zu": {
+                "Sun Wallbreaker": {
+                    "moves": [
+                        "Swords Dance",
+                        "Flare Blitz",
+                        "Solar Blade",
+                        "Play Rough"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Flash Fire"
+                }
+            }
+        }
+    },
+
     "Magnemite": {
         "extra moves": [
             "Bug Buzz"
@@ -431,10 +494,97 @@
     },
 
     "Farfetch'd": {
+        "movesets": {
+            "gen7pu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "First Impression",
+                        "Brave Bird",
+                        "Leaf Blade",
+                        "Sacred Sword"
+                    ],
+                    "item": "Leek",
+                    "ability": "Super Luck"
+                }
+            },
+            "gen8pu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Sacred Sword",
+                        "Brave Bird",
+                        "Knock Off"
+                    ],
+                    "item": "Leek",
+                    "ability": "Super Luck"
+                }
+            },
+            "gen8zu": {
+                "All-Out Attacker": {
+                    "moves": [
+                        "Brave Bird",
+                        "Close Combat",
+                        "Knock Off",
+                        "First Impression"
+                    ],
+                    "item": "Leek",
+                    "ability": "Defiant"
+                }
+            }
+        },
         "extra moves": [
             "Focus Blast",
             "Hurricane"
         ]
+    },
+
+    "Dodrio": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Brave Bird",
+                        "High Jump Kick",
+                        "Return",
+                        "Knock Off"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Early Bird"
+                },
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Brave Bird",
+                        "High Jump Kick",
+                        "Return"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Early Bird"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Brave Bird",
+                        "Return",
+                        "High Jump Kick",
+                        "Pursuit"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Early Bird"
+                }
+            },
+            "gen7letsgoou": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Drill Peck",
+                        "High Jump Kick",
+                        "Quick Attack"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Early Bird"
+                }
+            }
+        }
     },
 
     "Krabby": {

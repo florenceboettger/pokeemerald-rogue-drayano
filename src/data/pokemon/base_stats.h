@@ -2938,7 +2938,7 @@ const struct BaseStats gBaseStats[] =
         .type2 = TYPE_FAIRY,
     #else
         .type1 = TYPE_FIRE
-        .type2 = TYPE_FAIRY,
+        .type2 = TYPE_FIRE,
     #endif
         .catchRate = 60,
         .expYield = 175,
@@ -3061,9 +3061,9 @@ const struct BaseStats gBaseStats[] =
     #ifdef ROGUE_DRAYANO
         .baseHP        = 55,
         .baseAttack    = 110,
-        .baseDefense   = 60,
+        .baseDefense   = 65,
         .baseSpeed     = 110,
-        .baseSpAttack  = 55,
+        .baseSpAttack  = 75,
         .baseSpDefense = 60,
     #else
         .baseHP        = 52,
