@@ -6394,7 +6394,7 @@ static const struct LevelUpMove sFlygonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(43, MOVE_HYPER_BEAM),
     LEVEL_UP_MOVE(47, MOVE_DRAGON_RUSH),
 #ifdef ROGUE_DRAYANO
-    LEVEL_UP_MOVE(51, MOVE_DRAGON_PULSE)
+    LEVEL_UP_MOVE(51, MOVE_DRAGON_PULSE),
 #endif    
     LEVEL_UP_END
 };
