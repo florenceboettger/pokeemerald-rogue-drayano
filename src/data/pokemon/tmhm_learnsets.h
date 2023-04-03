@@ -1941,6 +1941,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(HM03_SURF)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_SLOWBRO]     = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
@@ -1979,6 +1982,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(HM03_SURF)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_MAGNEMITE]   = TMHM_LEARNSET(TMHM(TM32_DOUBLE_TEAM)
@@ -2020,6 +2026,9 @@ const u8 gTMHMLearnsets[][64] =
 
     [SPECIES_FARFETCHD]   = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                           TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM31_BRICK_BREAK)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
@@ -2196,6 +2205,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(HM03_SURF)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_CLOYSTER]    = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
@@ -2217,6 +2229,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM03_SURF)
                                           TMHM(TM41_TORMENT)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_GASTLY]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
@@ -2396,6 +2411,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM03_SURF)
                                           TMHM(TM46_THIEF)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_KINGLER]     = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
@@ -2422,6 +2440,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM03_SURF)
                                           TMHM(TM46_THIEF)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_VOLTORB]     = TMHM_LEARNSET(TMHM(TM32_DOUBLE_TEAM)
@@ -3647,6 +3668,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
                                           TMHM(TM35_FLAMETHROWER)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM07_HAIL)
                                           TMHM(TM10_HIDDEN_POWER)

@@ -300,6 +300,97 @@
         }
     },
 
+    "Magnemite": {
+        "extra moves": [
+            "Bug Buzz"
+        ]
+    },
+
+    "Magneton": {
+        "extra moves": [
+            "Bug Buzz"
+        ]
+    },
+
+    "Farfetch'd": {
+        "extra moves": [
+            "Focus Blast",
+            "Hurricane"
+        ]
+    },
+
+    "Krabby": {
+        "extra moves": [
+            "Shadow Claw"
+        ]
+    },
+
+    "Kingler": {
+        "extra moves": [
+            "Shadow Claw"
+        ]
+    },
+
+    "Voltorb": {
+        "extra moves":[
+            "Bug Buzz"
+        ]
+    },
+
+    "Electrode": {
+        "extra moves":[
+            "Bug Buzz",
+            "Energy Ball"
+        ]
+    },
+
+    "Eevee": {
+        "extra moves":[
+            "Grass Knot"
+        ]
+    },
+
+    "Vaporeon": {
+        "extra moves":[
+            "Grass Knot"
+        ]
+    },
+
+    "Jolteon": {
+        "extra moves":[
+            "Grass Knot"
+        ]
+    },
+
+    "Flareon": {
+        "extra moves":[
+            "Close Combat",
+            "Flame Wheel",
+            "Grass Knot",
+            "Rock Slide",
+            "Wild Charge"
+        ]
+    },
+
+    "Aerodactyl": {
+        "extra moves":[
+            "Hurricane"
+        ]
+    },
+
+    "Zapdos": {
+        "extra moves":[
+            "Hurricane"
+        ]
+    },
+
+    "Mew": {
+        "extra moves":[
+            "Bug Buzz",
+            "Hurricane"
+        ]
+    },
+
     "Flygon": {
         "extra moves": [
             "Hurricane"
