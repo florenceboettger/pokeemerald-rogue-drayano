@@ -2205,7 +2205,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(HM03_SURF)
                                           TMHM(TM06_TOXIC)
-                                        #ifdef
+                                        #ifdef ROGUE_DRAYANO
                                           TMHM(HM07_WATERFALL)
                                         #endif
                                           TMHM(TM03_WATER_PULSE)),
@@ -2229,7 +2229,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM03_SURF)
                                           TMHM(TM41_TORMENT)
                                           TMHM(TM06_TOXIC)
-                                        #ifdef
+                                        #ifdef ROGUE_DRAYANO
                                           TMHM(HM07_WATERFALL)
                                         #endif
                                           TMHM(TM03_WATER_PULSE)),

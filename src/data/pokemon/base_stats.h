@@ -1231,15 +1231,24 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BUTTERFREE] =
     {
-        .baseHP        = 60,
-        .baseAttack    = 45,
-        .baseDefense   = 50,
-        .baseSpeed     = 70,
-        .baseSpDefense = 80,
-        #if P_UPDATED_STATS >= GEN_6
-            .baseSpAttack  = 90,
+        #ifdef ROGUE_DRAYANO
+            .baseHP        = 65,
+            .baseAttack    = 45,
+            .baseDefense   = 60,
+            .baseSpeed     = 90,
+            .baseSpAttack  = 100,
+            .baseSpDefense = 90,
         #else
-            .baseSpAttack  = 80,
+            .baseHP        = 60,
+            .baseAttack    = 45,
+            .baseDefense   = 50,
+            .baseSpeed     = 70,
+            .baseSpDefense = 80,
+            #if P_UPDATED_STATS >= GEN_6
+                .baseSpAttack  = 90,
+            #else
+                .baseSpAttack  = 80,
+            #endif
         #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_FLYING,
@@ -1309,15 +1318,24 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BEEDRILL] =
     {
-        .baseHP        = 65,
-        .baseDefense   = 40,
-        .baseSpeed     = 75,
-        .baseSpAttack  = 45,
-        .baseSpDefense = 80,
-        #if P_UPDATED_STATS >= GEN_6
-            .baseAttack    = 90,
+        #ifdef ROGUE_DRAYANO
+            .baseHP        = 65,
+            .baseAttack    = 115,
+            .baseDefense   = 40,
+            .baseSpeed     = 95,
+            .baseSpAttack  = 40,
+            .baseSpDefense = 95,
         #else
-            .baseAttack    = 80,
+            .baseHP        = 65,
+            .baseDefense   = 40,
+            .baseSpeed     = 75,
+            .baseSpAttack  = 45,
+            .baseSpDefense = 80,
+            #if P_UPDATED_STATS >= GEN_6
+                .baseAttack    = 90,
+            #else
+                .baseAttack    = 80,
+            #endif
         #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_POISON,
@@ -1339,12 +1357,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PIDGEY] =
     {
-        .baseHP        = 40,
-        .baseAttack    = 45,
-        .baseDefense   = 40,
-        .baseSpeed     = 56,
-        .baseSpAttack  = 35,
-        .baseSpDefense = 35,
+        #ifdef ROGUE_DRAYANO
+            .baseHP        = 40,
+            .baseAttack    = 35,
+            .baseDefense   = 35,
+            .baseSpeed     = 56,
+            .baseSpAttack  = 50,
+            .baseSpDefense = 35,
+        #else
+            .baseHP        = 40,
+            .baseAttack    = 45,
+            .baseDefense   = 40,
+            .baseSpeed     = 56,
+            .baseSpAttack  = 35,
+            .baseSpDefense = 35,
+        #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
         .catchRate = 255,
@@ -1363,12 +1390,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PIDGEOTTO] =
     {
-        .baseHP        = 63,
-        .baseAttack    = 60,
-        .baseDefense   = 55,
-        .baseSpeed     = 71,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 50,
+        #ifdef ROGUE_DRAYANO
+            .baseHP        = 63,
+            .baseAttack    = 50,
+            .baseDefense   = 50,
+            .baseSpeed     = 71,
+            .baseSpAttack  = 65,
+            .baseSpDefense = 50,
+        #else
+            .baseHP        = 63,
+            .baseAttack    = 60,
+            .baseDefense   = 55,
+            .baseSpeed     = 71,
+            .baseSpAttack  = 50,
+            .baseSpDefense = 50,
+        #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
         .catchRate = 120,
@@ -1387,15 +1423,24 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PIDGEOT] =
     {
-        .baseHP        = 83,
-        .baseAttack    = 80,
-        .baseDefense   = 75,
-        .baseSpAttack  = 70,
-        .baseSpDefense = 70,
-        #if P_UPDATED_STATS >= GEN_6
+        #ifdef ROGUE_DRAYANO
+            .baseHP        = 83,
+            .baseAttack    = 60,
+            .baseDefense   = 70,
             .baseSpeed     = 101,
+            .baseSpAttack  = 115,
+            .baseSpDefense = 70,
         #else
-            .baseSpeed     = 91,
+            .baseHP        = 83,
+            .baseAttack    = 80,
+            .baseDefense   = 75,
+            .baseSpAttack  = 70,
+            .baseSpDefense = 70,
+            #if P_UPDATED_STATS >= GEN_6
+                .baseSpeed     = 101,
+            #else
+                .baseSpeed     = 91,
+            #endif
         #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,

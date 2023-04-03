@@ -381,6 +381,18 @@
                     "ability": "Shell Armor"
                 }
             },
+            "gen8vgc2021": {
+                "Gigantamax": {
+                    "moves": [
+                        "Hydro Cannon",
+                        "Blizzard",
+                        "Yawn",
+                        "Protect"
+                    ],
+                    "item": "Wacan Berry",
+                    "ability": "Shell Armor"
+                }
+            },
             "gen81v1": {
                 "Life Orb": {
                     "moves": [
@@ -413,6 +425,60 @@
                     ],
                     "item": "White Herb",
                     "ability": "Shell Armor"
+                }
+            },
+            "gen82v2doubles": {
+                "Follow Me Support": {
+                    "moves": [
+                        "Protect",
+                        "Scald",
+                        "Fake Out",
+                        "Follow Me"
+                    ],
+                    "item": "Wacan Berry",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen8bdspou": {
+                "Shell Smash Sweeper": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Ice Beam",
+                        "Dark Pulse",
+                        "Shell Smash"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Shell Armor"
+                }
+            }
+        }
+    },
+    "Butterfree": {},
+    "Beedrill": {},
+    "Pidgeot": {
+        "movesets": {
+            "gen7pu": {
+                "Defog": {
+                    "moves": [
+                        "Defog",
+                        "Roost",
+                        "Air Slash",
+                        "U-Turn"
+                    ],
+                    "item": "Sky Plate",
+                    "ability": "Big Pecks"
+                }
+            },
+            "gen7battlespotdoubles": {
+                "Showdown Usage": {
+                    "moves": [
+                        "Hurricane",
+                        "Heat Wave",
+                        "Tailwind",
+                        "Roost"
+                    ],
+                    "item": "Pidgeotite",
+                    "ability": "Big Pecks"
                 }
             }
         }
@@ -482,21 +548,21 @@
     },
 
     "Magnemite": {
-        "extra moves": [
+        "extra_moves": [
             "Bug Buzz"
         ]
     },
 
     "Magneton": {
-        "extra moves": [
+        "extra_moves": [
             "Bug Buzz"
         ]
     },
 
-    "Farfetch'd": {
+    "Farfetch’d": {
         "movesets": {
             "gen7pu": {
-                "All-out Attacker": {
+                "All-Out Attacker": {
                     "moves": [
                         "First Impression",
                         "Brave Bird",
@@ -532,7 +598,7 @@
                 }
             }
         },
-        "extra moves": [
+        "extra_moves": [
             "Focus Blast",
             "Hurricane"
         ]
@@ -588,50 +654,50 @@
     },
 
     "Krabby": {
-        "extra moves": [
+        "extra_moves": [
             "Shadow Claw"
         ]
     },
 
     "Kingler": {
-        "extra moves": [
+        "extra_moves": [
             "Shadow Claw"
         ]
     },
 
     "Voltorb": {
-        "extra moves":[
+        "extra_moves":[
             "Bug Buzz"
         ]
     },
 
     "Electrode": {
-        "extra moves":[
+        "extra_moves":[
             "Bug Buzz",
             "Energy Ball"
         ]
     },
 
     "Eevee": {
-        "extra moves":[
+        "extra_moves":[
             "Grass Knot"
         ]
     },
 
     "Vaporeon": {
-        "extra moves":[
+        "extra_moves":[
             "Grass Knot"
         ]
     },
 
     "Jolteon": {
-        "extra moves":[
+        "extra_moves":[
             "Grass Knot"
         ]
     },
 
     "Flareon": {
-        "extra moves":[
+        "extra_moves":[
             "Close Combat",
             "Flame Wheel",
             "Grass Knot",
@@ -641,26 +707,26 @@
     },
 
     "Aerodactyl": {
-        "extra moves":[
+        "extra_moves":[
             "Hurricane"
         ]
     },
 
     "Zapdos": {
-        "extra moves":[
+        "extra_moves":[
             "Hurricane"
         ]
     },
 
     "Mew": {
-        "extra moves":[
+        "extra_moves":[
             "Bug Buzz",
             "Hurricane"
         ]
     },
 
     "Flygon": {
-        "extra moves": [
+        "extra_moves": [
             "Hurricane"
         ]
     },
