@@ -463,7 +463,7 @@
                         "Defog",
                         "Roost",
                         "Air Slash",
-                        "U-Turn"
+                        "U-turn"
                     ],
                     "item": "Sky Plate",
                     "ability": "Big Pecks"
@@ -544,7 +544,10 @@
                     "ability": "Flash Fire"
                 }
             }
-        }
+        },
+        "extra moves": [
+            "Dazzling Gleam"
+        ]
     },
 
     "Magnemite": {
@@ -636,6 +639,16 @@
                     ],
                     "item": "Choice Band",
                     "ability": "Early Bird"
+                },
+                "Offensive Pivot": {
+                    "moves": [
+                        "Brave Bird",
+                        "Return",
+                        "High Jump Kick",
+                        "U-turn"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Early Bird"
                 }
             },
             "gen7letsgoou": {
@@ -655,18 +668,21 @@
 
     "Krabby": {
         "extra_moves": [
+            "Rock Climb",
             "Shadow Claw"
         ]
     },
 
     "Kingler": {
         "extra_moves": [
+            "Low Sweep",
+            "Rock Climb",
             "Shadow Claw"
         ]
     },
 
     "Voltorb": {
-        "extra_moves":[
+        "extra_moves": [
             "Bug Buzz"
         ]
     },
@@ -686,7 +702,7 @@
                 }
             }
         },
-        "extra_moves":[
+        "extra_moves": [
             "Bug Buzz",
             "Energy Ball"
         ]
@@ -803,13 +819,13 @@
     },
 
     "Eevee": {
-        "extra_moves":[
+        "extra_moves": [
             "Grass Knot"
         ]
     },
 
     "Vaporeon": {
-        "extra_moves":[
+        "extra_moves": [
             "Grass Knot"
         ]
     },
@@ -839,7 +855,7 @@
                 }
             }
         },
-        "extra_moves":[
+        "extra_moves": [
             "Grass Knot"
         ]
     },
@@ -911,7 +927,7 @@
                 }
             }
         },
-        "extra_moves":[
+        "extra_moves": [
             "Close Combat",
             "Flame Wheel",
             "Grass Knot",
@@ -1027,7 +1043,7 @@
                 }
             }
         },
-        "extra_moves":[
+        "extra_moves": [
             "Hurricane"
         ]
     },
@@ -1074,15 +1090,318 @@
     },
 
     "Zapdos": {
-        "extra_moves":[
+        "extra_moves": [
             "Hurricane"
         ]
     },
 
     "Mew": {
-        "extra_moves":[
+        "extra_moves": [
             "Bug Buzz",
             "Hurricane"
+        ]
+    },
+
+    "Chikorita": {
+        "movesets": {
+            "gen7lc": {
+                "Defensive": {
+                    "moves": [
+                        "Giga Drain",
+                        "Hidden Power Fire",
+                        "Synthesis",
+                        "Aromatherapy"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Filter"
+                },
+                "Triage": {
+                    "moves": [
+                        "Giga Drain",
+                        "Draining Kiss",
+                        "Synthesis",
+                        "Aromatherapy"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Triage"
+                },
+                "Dual Screens": {
+                    "moves": [
+                        "Giga Drain",
+                        "Aromatherapy",
+                        "Reflect",
+                        "Light Screen"
+                    ],
+                    "item": "Light Clay",
+                    "ability": "Filter"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Play Rough"
+        ]
+    },
+
+    "Bayleef": {
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Play Rough"
+        ]
+    },
+
+    "Meganium": {
+        "movesets": {
+            "gen7pu": {
+                "Cleric": {
+                    "moves": [
+                        "Aromatherapy",
+                        "Giga Drain",
+                        "Synthesis",
+                        "Dragon Tail"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Filter"
+                },
+                "Cleric (Moonblast)": {
+                    "moves": [
+                        "Aromatherapy",
+                        "Giga Drain",
+                        "Synthesis",
+                        "Moonblast"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Filter"
+                }
+            },
+            "gen7nu": {
+                "Triage (Leftovers)": {
+                    "moves": [
+                        "Giga Drain",
+                        "Draining Kiss",
+                        "Aromatherapy",
+                        "Synthesis"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Triage"
+                },
+                "Triage (Assault Vest)": {
+                    "moves": [
+                        "Giga Drain",
+                        "Draining Kiss",
+                        "Moonblast",
+                        "Earth Power"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Triage"
+                },
+                "Triage (Dual Screens)": {
+                    "moves": [
+                        "Giga Drain",
+                        "Draining Kiss",
+                        "Reflect",
+                        "Light Screen"
+                    ],
+                    "item": "Light Clay",
+                    "ability": "Triage"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Play Rough"
+        ]
+    },
+
+    "Cyndaquil": {
+        "extra_moves": [
+            "Mystical Fire"
+        ]
+    },
+
+    "Quilava": {
+        "extra_moves": [
+            "Mystical Fire"
+        ]
+    },
+
+    "Typhlosion": {
+        "movesets": {
+            "gen7nu": {
+                "Typhlosion": {
+                    "moves": [
+                        "Eruption",
+                        "Flamethrower",
+                        "Focus Blast",
+                        "Earth Power"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen7uu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Eruption",
+                        "Flamethrower",
+                        "Focus Blast",
+                        "Earth Power"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Adaptability"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Eruption",
+                        "Fire Blast",
+                        "Focus Blast",
+                        "Earth Power"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Adaptability"
+                }
+            }
+        },
+        "extra_moves": [
+            "Mystical Fire"
+        ]
+    },
+
+    "Totodile": {
+        "movesets": {
+            "gen7lc": {
+                "Dragon Dance (Strong Jaw)": {
+                    "moves": [
+                        "Aqua Jet",
+                        "Crunch",
+                        "Ice Fang",
+                        "Dragon Dance"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Strong Jaw"
+                }
+            }
+        },
+        "extra_moves": [
+            "Avalanche",
+            "Dragon Rush",
+            "Metal Claw",
+            "Thrash"
+        ]
+    },
+
+    "Croconaw": {
+        "extra_moves": [
+            "Avalanche",
+            "Dragon Rush",
+            "Metal Claw",
+            "Thrash"
+        ]
+    },
+
+    "Feraligatr": {
+        "movesets": {
+            "gen7uu": {
+                "Dragon Dance (Strong Jaw)": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Crunch",
+                        "Ice Fang",
+                        "Psychic Fangs"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Strong Jaw"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Aqua Jet",
+                        "Jaw Lock",
+                        "Ice Fang",
+                        "Psychic Fangs"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Strong Jaw"
+                }
+            }
+        },
+        "extra_moves": [
+            "Avalanche",
+            "Dragon Rush",
+            "Metal Claw",
+            "Thrash"
+        ]
+    },
+
+    "Sentret": {
+        "extra_moves": [
+            "Quash"
+        ]
+    },
+
+    "Furret": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Band + Trick (Hustle)": {
+                    "moves": [
+                        "Trick",
+                        "Return",
+                        "U-turn",
+                        "Knock Off"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Hustle"
+                },
+                "Choice Band + Trick (Scrappy)": {
+                    "moves": [
+                        "Trick",
+                        "Return",
+                        "U-turn",
+                        "Brick Break"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Scrappy"
+                },
+                "Choice Band + Extreme Speed": {
+                    "moves": [
+                        "Extreme Speed",
+                        "Play Rough",
+                        "U-turn",
+                        "Flame Wheel"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Scrappy"
+                }
+            }
+        },
+        "extra_moves": [
+            "Quash"
+        ]
+    },
+
+    "Hoothoot": {
+        "extra_moves": [
+            "Flash"
+        ]
+    },
+
+    "Noctowl": {
+        "movesets": {
+            "gen7pu": {
+                "Double Dance": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Psychic",
+                        "Hurricane",
+                        "Roost"
+                    ],
+                    "item": "Flyinium Z",
+                    "ability": "Tinted Lens"
+                }
+            }
+        },
+        "extra_moves": [
+            "Flash",
+            "Mystical Fire"
         ]
     },
 
