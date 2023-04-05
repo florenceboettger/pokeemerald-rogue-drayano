@@ -920,10 +920,157 @@
         ]
     },
 
+    "Omanyte": {
+        "movesets": {
+            "gen8lc": {
+                "Shell Smash (Power Gem)": {
+                    "moves": [
+                        "Shell Smash",
+                        "Hydro Pump",
+                        "Ice Beam",
+                        "Power Gem"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Shell Armor"
+                }
+            }
+        }
+    },
+
+    "Omastar": {
+        "movesets": {
+            "gen7letsgoou": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Surf",
+                        "Ice Beam",
+                        "Power Gem"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Weak Armor"
+                }
+            }
+        }
+    },
+
     "Aerodactyl": {
+        "movesets": {
+            "gen7nu": {
+                "Choice Band": {
+                    "moves": [
+                        "Stone Edge",
+                        "Brave Bird",
+                        "Earthquake",
+                        "Pursuit"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Unnerve"
+                },
+                "Flyinium Z": {
+                    "moves": [
+                        "Stone Edge",
+                        "Brave Bird",
+                        "Earthquake",
+                        "Roost"
+                    ],
+                    "item": "Flyinium Z",
+                    "ability": "Unnerve"
+                }
+            },
+            "gen7vgc2019": {
+                "Offensive Support": {
+                    "moves": [
+                        "Rock Slide",
+                        "Iron Head",
+                        "Tailwind",
+                        "Wide Guard"
+                    ],
+                    "item": "Aerodactylite",
+                    "ability": "Pressure"
+                }
+            },
+            "gen71v1": {
+                "All-Out Attacker": {
+                    "moves": [
+                        "Rock Tomb",
+                        "Brave Bird",
+                        "Giga Impact",
+                        "Crunch"
+                    ],
+                    "item": "Aerodactylite",
+                    "ability": "Unnerve"
+                }
+            },
+            "gen7letsgoou": {
+                "Mega Attacker": {
+                    "moves": [
+                        "Rock Slide",
+                        "Earthquake",
+                        "Crunch",
+                        "Brave Bird"
+                    ],
+                    "item": "Aerodactylite",
+                    "ability": "Pressure"
+                }
+            },
+            "gen8ru": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Stone Edge",
+                        "Brave Bird",
+                        "Earthquake"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Unnerve"
+                }
+            }
+        },
         "extra_moves":[
             "Hurricane"
         ]
+    },
+
+    "Snorlax": {
+        "movesets": {
+            "gen7ru": {
+                "Standard CurseLax": {
+                    "moves": [
+                        "Curse",
+                        "Return",
+                        "Slack Off",
+                        "Earthquake"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Thick Fat"
+                }
+            },
+            "gen8nu": {
+                "CurseLax": {
+                    "moves": [
+                        "Curse",
+                        "Body Slam",
+                        "Fire Punch",
+                        "Slack Off"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Immunity"
+                }
+            },
+            "gen8nationaldexru": {
+                "CurseLax": {
+                    "moves": [
+                        "Slack Off",
+                        "Earthquake",
+                        "Curse",
+                        "Body Slam"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Thick Fat"
+                }
+            }
+        }
     },
 
     "Zapdos": {
