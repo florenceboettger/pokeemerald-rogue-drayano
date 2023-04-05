@@ -2625,6 +2625,7 @@ static const struct LevelUpMove sTaurosLevelUpLearnset[] = {
 #ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE(71, MOVE_MEGAHORN),
     LEVEL_UP_MOVE(78, MOVE_GIGA_IMPACT),
+    LEVEL_UP_MOVE(85, MOVE_HEAD_CHARGE),
 #else
     LEVEL_UP_MOVE(71, MOVE_GIGA_IMPACT),
 #endif

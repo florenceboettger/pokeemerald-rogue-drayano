@@ -818,6 +818,23 @@
         }
     },
 
+    "Tauros": {
+        "movesets": {
+            "gen7nu": {
+                "Choice Band": {
+                    "moves": [
+                        "Head Charge",
+                        "Megahorn",
+                        "Earthquake",
+                        "Close Combat"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Intimidate"
+                }
+            }
+        }
+    },
+
     "Eevee": {
         "extra_moves": [
             "Grass Knot"
