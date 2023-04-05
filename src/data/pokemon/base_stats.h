@@ -5252,7 +5252,7 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
-    #ifdef
+    #ifdef ROGUE_DRAYANO
         .abilities = {ABILITY_FRISK, ABILITY_SCRAPPY, ABILITY_HUSTLE},
     #else
         .abilities = {ABILITY_RUN_AWAY, ABILITY_KEEN_EYE, ABILITY_FRISK},
@@ -5289,7 +5289,7 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
-    #ifdef
+    #ifdef ROGUE_DRAYANO
         .abilities = {ABILITY_FRISK, ABILITY_SCRAPPY, ABILITY_HUSTLE},
     #else
         .abilities = {ABILITY_RUN_AWAY, ABILITY_KEEN_EYE, ABILITY_FRISK},

@@ -1160,13 +1160,6 @@
         ]
     },
 
-    "Bayleef": {
-        "extra_moves": [
-            "Dazzling Gleam",
-            "Play Rough"
-        ]
-    },
-
     "Meganium": {
         "movesets": {
             "gen7pu": {
@@ -1231,12 +1224,6 @@
     },
 
     "Cyndaquil": {
-        "extra_moves": [
-            "Mystical Fire"
-        ]
-    },
-
-    "Quilava": {
         "extra_moves": [
             "Mystical Fire"
         ]
@@ -1307,15 +1294,6 @@
         ]
     },
 
-    "Croconaw": {
-        "extra_moves": [
-            "Avalanche",
-            "Dragon Rush",
-            "Metal Claw",
-            "Thrash"
-        ]
-    },
-
     "Feraligatr": {
         "movesets": {
             "gen7uu": {
@@ -1350,6 +1328,20 @@
     },
 
     "Sentret": {
+        "movesets": {
+            "gen7lc":{
+                "Offensive Pivot": {
+                    "moves": [
+                        "U-turn",
+                        "Return",
+                        "Play Rough",
+                        "Knock Off"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Scrappy"
+                }
+            }
+        },
         "extra_moves": [
             "Quash"
         ]

@@ -1162,7 +1162,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .type = TYPE_ICE,
         .accuracy = 100,
     #ifdef ROGUE_DRAYANO
-        .pp = 15
+        .pp = 15,
     #else
         .pp = 20,
     #endif
@@ -5562,8 +5562,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_NEEDLE_ARM] =
     {
     #ifdef ROGUE_DRAYANO
-       #if B_UPDATED_MOVE_DATA >= GEN_4
-            .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_IRON_FIST_BOOST,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_IRON_FIST_BOOST,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_4
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
@@ -5573,7 +5572,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     #endif
         .effect = EFFECT_FLINCH_HIT,
     #ifdef ROGUE_DRAYANO
-        .power = 90
+        .power = 90,
     #else
         .power = 60,
     #endif
@@ -8132,7 +8131,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .type = TYPE_POISON,
         .accuracy = 100,
     #ifdef ROGUE_DRAYANO
-        .pp = 15
+        .pp = 15,
     #else
         .pp = 20,
     #endif
