@@ -1963,7 +1963,9 @@ static const struct LevelUpMove sKinglerLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_HAMMER_ARM),
 #endif
     LEVEL_UP_MOVE( 1, MOVE_WIDE_GUARD),
+#ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE( 1, MOVE_AQUA_JET),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_MUD_SPORT),
     LEVEL_UP_MOVE( 1, MOVE_BUBBLE),
     LEVEL_UP_MOVE( 1, MOVE_VISE_GRIP),
@@ -1981,7 +1983,9 @@ static const struct LevelUpMove sKinglerLevelUpLearnset[] = {
     LEVEL_UP_MOVE(51, MOVE_BRINE),
     LEVEL_UP_MOVE(56, MOVE_CRABHAMMER),
     LEVEL_UP_MOVE(63, MOVE_FLAIL),
+#ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE(70, MOVE_ICE_HAMMER),
+#endif
     LEVEL_UP_END
 };
 
