@@ -3070,7 +3070,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_TRIPLE_KICK] =
     {
         .effect = EFFECT_TRIPLE_KICK,
+    #ifdef ROGUE_DRAYANO
+        .power = 20,
+    #else
         .power = 10,
+    #endif
         .type = TYPE_FIGHTING,
         .accuracy = 90,
         .pp = 10,
@@ -5925,7 +5929,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .effect = EFFECT_SLEEP,
         .power = 0,
         .type = TYPE_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .accuracy = 65,
+    #else
         .accuracy = 55,
+    #endif
         .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
@@ -10385,6 +10393,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_PARABOLIC_CHARGE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 75,
+        .zMovePower = 140,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 65,
             .zMovePower = 120,
@@ -10392,10 +10404,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .power = 50,
             .zMovePower = 100,
         #endif
+    #endif
         .effect = EFFECT_ABSORB,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .pp = 15,
+    #else
         .pp = 20,
+    #endif
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_FOES_AND_ALLY,
         .priority = 0,

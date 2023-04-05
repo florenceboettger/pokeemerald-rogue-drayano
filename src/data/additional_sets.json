@@ -1422,6 +1422,80 @@
         ]
     },
 
+    "Ledyba": {
+        "movesets": {
+            "gen7lc": {
+                "Swords Dance (Technician)": {
+                    "moves": [
+                        "Swords Dance",
+                        "Dual Wingbeat",
+                        "Mach Punch",
+                        "Bug Bite"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Technician"
+                },
+                "Iron Fist Pivot": {
+                    "moves": [
+                        "U-turn",
+                        "Mach Punch",
+                        "Meteor Mash",
+                        "Ice Punch"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Lunge",
+            "Mega Punch",
+            "Smart Strike"
+        ]
+    },
+
+    "Ledian": {
+        "movesets": {
+            "gen7pu": {
+                "Swords Dance (Technician)": {
+                    "moves": [
+                        "Swords Dance",
+                        "Dual Wingbeat",
+                        "Mach Punch",
+                        "Bug Bite"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Technician"
+                },
+                "Iron Fist Pivot": {
+                    "moves": [
+                        "U-turn",
+                        "Mach Punch",
+                        "Meteor Mash",
+                        "Ice Punch"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Iron Fist"
+                },
+                "Flying Gem + Acrobatics": {
+                    "moves": [
+                        "Swords Dance",
+                        "Acrobatics",
+                        "Lunge",
+                        "Drain Punch"
+                    ],
+                    "item": "Flying Gem",
+                    "ability": "Rattled"
+                }
+            }
+        },
+        "extra_moves": [
+            "Knock Off",
+            "Mega Punch",
+            "Smart Strike"
+        ]
+    },
+
     "Flygon": {
         "extra_moves": [
             "Hurricane"
