@@ -557,6 +557,59 @@
             "Draining Kiss"
         ]
     },
+    "Ninetales": {
+        "movesets": {
+            "gen7ru": {
+                "Nasty Plot Wallbreaker": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Fire Blast",
+                        "Solar Beam",
+                        "Moonblast"
+                    ],
+                    "item": "Firium Z",
+                    "ability": "Drought"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Overheat",
+                        "Fire Blast",
+                        "Solar Beam",
+                        "Moonblast"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Drought"
+                }
+            },
+            "gen7battlespotdoubles": {
+                "Showdown Usage": {
+                    "moves": [
+                        "Solar Beam",
+                        "Heat Wave",
+                        "Protect",
+                        "Moonblast"
+                    ],
+                    "item": "Heat Rock",
+                    "ability": "Drought"
+                }
+            },
+            "gen8monotype": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Fire Blast",
+                        "Psychic",
+                        "Solar Beam"
+                    ],
+                    "item": "Heat Rock",
+                    "ability": "Drought"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam"
+        ]
+    },
 
     "Rapidash": {
         "movesets": {

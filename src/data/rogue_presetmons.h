@@ -26495,20 +26495,6 @@ static const u16 sRoguePresets_VIKAVOLT_Moveset[] =
 static const struct RogueMonPreset sRoguePresets_NINETALES[] = 
 {
 	{
-		.flags = MON_FLAGS_GEN7RU,
-		.hiddenPowerType = TYPE_ICE,
-		.abilityNum = ABILITY_DROUGHT,
-		.heldItem = ITEM_FIRIUM_Z,
-		.moves = { MOVE_NASTY_PLOT, MOVE_FIRE_BLAST, MOVE_SOLAR_BEAM, MOVE_HIDDEN_POWER}
-	},
-	{
-		.flags = MON_FLAGS_GEN7RU,
-		.hiddenPowerType = TYPE_ICE,
-		.abilityNum = ABILITY_DROUGHT,
-		.heldItem = ITEM_CHOICE_SPECS,
-		.moves = { MOVE_OVERHEAT, MOVE_FIRE_BLAST, MOVE_SOLAR_BEAM, MOVE_HIDDEN_POWER}
-	},
-	{
 		.flags = MON_FLAGS_GEN8RU,
 		.hiddenPowerType = TYPE_NONE,
 		.abilityNum = ABILITY_DROUGHT,
@@ -26543,6 +26529,21 @@ static const struct RogueMonPreset sRoguePresets_NINETALES[] =
 		.heldItem = ITEM_CHOICE_SPECS,
 		.moves = { MOVE_OVERHEAT, MOVE_MYSTICAL_FIRE, MOVE_SOLAR_BEAM, MOVE_SCORCHING_SANDS}
 	},
+#ifndef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7RU,
+		.hiddenPowerType = TYPE_ICE,
+		.abilityNum = ABILITY_DROUGHT,
+		.heldItem = ITEM_FIRIUM_Z,
+		.moves = { MOVE_NASTY_PLOT, MOVE_FIRE_BLAST, MOVE_SOLAR_BEAM, MOVE_HIDDEN_POWER}
+	},
+	{
+		.flags = MON_FLAGS_GEN7RU,
+		.hiddenPowerType = TYPE_ICE,
+		.abilityNum = ABILITY_DROUGHT,
+		.heldItem = ITEM_CHOICE_SPECS,
+		.moves = { MOVE_OVERHEAT, MOVE_FIRE_BLAST, MOVE_SOLAR_BEAM, MOVE_HIDDEN_POWER}
+	},
 	{
 		.flags = MON_FLAGS_GEN8MONOTYPE,
 		.hiddenPowerType = TYPE_NONE,
@@ -26550,6 +26551,37 @@ static const struct RogueMonPreset sRoguePresets_NINETALES[] =
 		.heldItem = ITEM_HEAT_ROCK,
 		.moves = { MOVE_NASTY_PLOT, MOVE_FIRE_BLAST, MOVE_EXTRASENSORY, MOVE_SOLAR_BEAM}
 	},
+#endif
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7RU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_DROUGHT,
+		.heldItem = ITEM_FIRIUM_Z,
+		.moves = { MOVE_NASTY_PLOT, MOVE_FIRE_BLAST, MOVE_SOLAR_BEAM, MOVE_MOONBLAST}
+	},
+	{
+		.flags = MON_FLAGS_GEN7RU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_DROUGHT,
+		.heldItem = ITEM_CHOICE_SPECS,
+		.moves = { MOVE_OVERHEAT, MOVE_FIRE_BLAST, MOVE_SOLAR_BEAM, MOVE_MOONBLAST}
+	},
+	{
+		.flags = MON_FLAGS_GEN7BATTLESPOTDOUBLES,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_DROUGHT,
+		.heldItem = ITEM_HEAT_ROCK,
+		.moves = { MOVE_SOLAR_BEAM, MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_MOONBLAST}
+	},
+	{
+		.flags = MON_FLAGS_GEN8MONOTYPE,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_DROUGHT,
+		.heldItem = ITEM_HEAT_ROCK,
+		.moves = { MOVE_NASTY_PLOT, MOVE_FIRE_BLAST, MOVE_PSYCHIC, MOVE_SOLAR_BEAM}
+	},
+#endif
 };
 
 static const u16 sRoguePresets_NINETALES_Moveset[] = 
@@ -26568,6 +26600,11 @@ static const u16 sRoguePresets_NINETALES_Moveset[] =
 	MOVE_ENCORE,
 	MOVE_MYSTICAL_FIRE,
 	MOVE_EXTRASENSORY,
+#ifdef ROGUE_DRAYANO
+	MOVE_MOONBLAST,
+	MOVE_PSYCHIC,
+	MOVE_DAZZLING_GLEAM,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_GOLBAT[] = 
@@ -51680,7 +51717,7 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 	},
 
 	[SPECIES_NINETALES] = {
-		.flags = MON_FLAGS_GEN7RU | MON_FLAGS_GEN8RU | MON_FLAGS_GEN8PU | MON_FLAGS_GEN8ZU | MON_FLAGS_GEN8VGC2020 | MON_FLAGS_GEN81V1 | MON_FLAGS_GEN8MONOTYPE,
+		.flags = MON_FLAGS_GEN8RU | MON_FLAGS_GEN8PU | MON_FLAGS_GEN8ZU | MON_FLAGS_GEN8VGC2020 | MON_FLAGS_GEN81V1 | MON_FLAGS_GEN7RU | MON_FLAGS_GEN8MONOTYPE | MON_FLAGS_GEN7BATTLESPOTDOUBLES,
 		.presetCount = ARRAY_COUNT(sRoguePresets_NINETALES),
 		.presets = sRoguePresets_NINETALES,
 		.movesCount = ARRAY_COUNT(sRoguePresets_NINETALES_Moveset),

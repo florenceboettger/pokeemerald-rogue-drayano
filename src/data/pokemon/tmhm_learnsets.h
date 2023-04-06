@@ -915,12 +915,18 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM23_IRON_TAIL)
                                           TMHM(TM50_OVERHEAT)
                                           TMHM(TM17_PROTECT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM29_PSYCHIC)
+                                        #endif
                                           TMHM(TM33_REFLECT)
                                           TMHM(TM44_REST)
                                           TMHM(TM27_RETURN)
                                           TMHM(TM05_ROAR)
                                           TMHM(TM20_SAFEGUARD)
                                           TMHM(TM43_SECRET_POWER)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM30_SHADOW_BALL)
+                                        #endif
                                           TMHM(TM22_SOLAR_BEAM)
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM06_TOXIC)),
