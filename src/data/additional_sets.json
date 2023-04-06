@@ -1488,6 +1488,166 @@
         ]
     },
 
+    "Spinarak": {
+        "movesets": {
+            "gen7lc": {
+                "Hazard Setter": {
+                    "moves": [
+                        "Sticky Web",
+                        "Poison Fang",
+                        "Toxic Spikes",
+                        "Megahorn"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Swarm"
+                },
+                "Swords Dance Sniper": {
+                    "moves": [
+                        "Swords Dance",
+                        "Cross Poison",
+                        "X-Scissor",
+                        "Night Slash"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Sniper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Electroweb",
+            "Leech Life",
+            "Lunge",
+            "Psybeam",
+            "Pursuit",
+            "Rage Powder",
+            "Smart Strike",
+            "Twineedle",
+            "Venoshock"
+        ]
+    },
+
+    "Ariados": {
+        "movesets": {
+            "gen7lc": {
+                "Hazard Setter": {
+                    "moves": [
+                        "Sticky Web",
+                        "Poison Fang",
+                        "Toxic Spikes",
+                        "Megahorn"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Swarm"
+                },
+                "Swords Dance Sniper": {
+                    "moves": [
+                        "Swords Dance",
+                        "Cross Poison",
+                        "X-Scissor",
+                        "Night Slash"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Sniper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Electroweb",
+            "Leech Life",
+            "Lunge",
+            "Psybeam",
+            "Pursuit",
+            "Rage Powder",
+            "Smart Strike",
+            "Twineedle",
+            "Venoshock"
+        ]
+    },
+
+    "Lanturn": {
+        "movesets": {
+            "gen7pu": {
+                "Assault Vest": {
+                    "moves": [
+                        "Volt Switch",
+                        "Parabolic Charge",
+                        "Scald",
+                        "Ice Beam"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Volt Absorb"
+                },
+                "Tail Glow": {
+                    "moves": [
+                        "Tail Glow",
+                        "Parabolic Charge",
+                        "Scald",
+                        "Ice Beam"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Volt Absorb"
+                }
+            }
+        }
+    },
+
+    "Togepi": {
+        "movesets": {
+            "gen7lc": {
+                "Tank": {
+                    "moves": [
+                        "Moonblast",
+                        "Fire Blast",
+                        "Soft-Boiled",
+                        "Nasty Plot"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Serene Grace"
+                },
+                "Alternate Tank": {
+                    "moves": [
+                        "Moonblast",
+                        "Fire Blast",
+                        "Morning Sun",
+                        "Heal Bell"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Serene Grace"
+                }
+            }
+        },
+        "extra_moves": [
+            "Disarming Voice",
+            "Dazzling Gleam",
+            "Extrasensory",
+            "Mystical Fire"
+        ]
+    },
+
+    "Togetic": {
+        "movesets": {
+            "gen7nu": {
+                "Support": {
+                    "moves": [
+                        "Roost",
+                        "Thunder Wave",
+                        "Moonblast",
+                        "Heal Bell"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Serene Grace"
+                }
+            }
+        },
+        "extra_moves": [
+            "Disarming Voice",
+            "Dazzling Gleam",
+            "Extrasensory",
+            "Mystical Fire",
+            "Hurricane"
+        ]
+    },
+
     "Flygon": {
         "extra_moves": [
             "Hurricane"

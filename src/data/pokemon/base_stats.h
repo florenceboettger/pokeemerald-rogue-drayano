@@ -5559,12 +5559,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LANTURN] =
     {
+    #ifdef
+        .baseHP        = 125,
+        .baseAttack    = 58,
+        .baseDefense   = 58,
+        .baseSpeed     = 67,
+        .baseSpAttack  = 91,
+        .baseSpDefense = 86,
+    #else
         .baseHP        = 125,
         .baseAttack    = 58,
         .baseDefense   = 58,
         .baseSpeed     = 67,
         .baseSpAttack  = 76,
         .baseSpDefense = 76,
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_ELECTRIC,
         .catchRate = 75,
