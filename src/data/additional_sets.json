@@ -481,7 +481,81 @@
                     "ability": "Big Pecks"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+    "Raticate": {},
+    "Spearow": {
+        "movesets": {
+            "gen7lc": {
+                "Life Orb Attacker": {
+                    "moves": [
+                        "Dual Wingbeat",
+                        "Brave Bird",
+                        "Drill Run",
+                        "U-turn"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sniper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+    "Fearow": {
+        "movesets": {
+            "gen7pu": {
+                "Critical Hit": {
+                    "moves": [
+                        "Return",
+                        "Brave Bird",
+                        "Drill Run",
+                        "U-turn"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Sniper"
+                },
+                "Intimidate Pivot": {
+                    "moves": [
+                        "Return",
+                        "Brave Bird",
+                        "Drill Run",
+                        "U-turn"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Intimidate"
+                }
+            },
+            "gen7vgc2018": {
+                "Defog Support": {
+                    "moves": [
+                        "Snarl",
+                        "Defog",
+                        "Protect",
+                        "Heat Wave"
+                    ],
+                    "item": "Wacan Berry",
+                    "ability": "Intimidate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+    "Arbok": {},
+    "Raichu": {},
+    "Sandslash": {},
+    "Nidoqueen": {},
+    "Nidoking": {},
+    "Clefable": {
+        "extra_moves": [
+            "Draining Kiss"
+        ]
     },
 
     "Rapidash": {

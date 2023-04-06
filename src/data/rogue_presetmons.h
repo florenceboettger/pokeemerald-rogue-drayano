@@ -11315,6 +11315,9 @@ static const u16 sRoguePresets_CLEFABLE_Moveset[] =
 	MOVE_HELPING_HAND,
 	MOVE_COUNTER,
 	MOVE_ENCORE,
+#ifdef ROGUE_DRAYANO
+	MOVE_DRAINING_KISS,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_NINETALES_ALOLAN[] = 
@@ -20211,6 +20214,7 @@ static const u16 sRoguePresets_PIDGEOT_Moveset[] =
 #ifdef ROGUE_DRAYANO
 	MOVE_AIR_SLASH,
 	MOVE_TAILWIND,
+	MOVE_DUAL_WINGBEAT,
 #endif
 };
 
@@ -31777,6 +31781,7 @@ static const u16 sRoguePresets_RATICATE_ALOLAN_Moveset[] =
 
 static const struct RogueMonPreset sRoguePresets_FEAROW[] = 
 {
+#ifndef ROGUE_DRAYANO
 	{
 		.flags = MON_FLAGS_GEN7PU,
 		.hiddenPowerType = TYPE_NONE,
@@ -31784,6 +31789,30 @@ static const struct RogueMonPreset sRoguePresets_FEAROW[] =
 		.heldItem = ITEM_SCOPE_LENS,
 		.moves = { MOVE_FRUSTRATION, MOVE_DRILL_PECK, MOVE_DRILL_RUN, MOVE_U_TURN}
 	},
+#endif
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7PU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SNIPER,
+		.heldItem = ITEM_SCOPE_LENS,
+		.moves = { MOVE_RETURN, MOVE_BRAVE_BIRD, MOVE_DRILL_RUN, MOVE_U_TURN}
+	},
+	{
+		.flags = MON_FLAGS_GEN7PU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_INTIMIDATE,
+		.heldItem = ITEM_CHOICE_SCARF,
+		.moves = { MOVE_RETURN, MOVE_BRAVE_BIRD, MOVE_DRILL_RUN, MOVE_U_TURN}
+	},
+	{
+		.flags = MON_FLAGS_GEN7VGC2018,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_INTIMIDATE,
+		.heldItem = ITEM_WACAN_BERRY,
+		.moves = { MOVE_SNARL, MOVE_DEFOG, MOVE_PROTECT, MOVE_HEAT_WAVE}
+	},
+#endif
 };
 
 static const u16 sRoguePresets_FEAROW_Moveset[] = 
@@ -31792,6 +31821,15 @@ static const u16 sRoguePresets_FEAROW_Moveset[] =
 	MOVE_DRILL_PECK,
 	MOVE_DRILL_RUN,
 	MOVE_U_TURN,
+#ifdef ROGUE_DRAYANO
+	MOVE_RETURN,
+	MOVE_BRAVE_BIRD,
+	MOVE_SNARL,
+	MOVE_DEFOG,
+	MOVE_PROTECT,
+	MOVE_HEAT_WAVE,
+	MOVE_DUAL_WINGBEAT,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_ARBOK[] = 
@@ -33697,6 +33735,29 @@ static const struct RogueMonPreset sRoguePresets_LEDIAN[] =
 		.heldItem = ITEM_LIFE_ORB,
 		.moves = { MOVE_POWER_UP_PUNCH, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_THUNDER_PUNCH}
 	},
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7PU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_TECHNICIAN,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_SWORDS_DANCE, MOVE_DUAL_WINGBEAT, MOVE_MACH_PUNCH, MOVE_BUG_BITE}
+	},
+	{
+		.flags = MON_FLAGS_GEN7PU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_IRON_FIST,
+		.heldItem = ITEM_HEAVY_DUTY_BOOTS,
+		.moves = { MOVE_U_TURN, MOVE_MACH_PUNCH, MOVE_METEOR_MASH, MOVE_ICE_PUNCH}
+	},
+	{
+		.flags = MON_FLAGS_GEN7PU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_RATTLED,
+		.heldItem = ITEM_FLYING_GEM,
+		.moves = { MOVE_SWORDS_DANCE, MOVE_ACROBATICS, MOVE_LUNGE, MOVE_DRAIN_PUNCH}
+	},
+#endif
 };
 
 static const u16 sRoguePresets_LEDIAN_Moveset[] = 
@@ -33705,6 +33766,19 @@ static const u16 sRoguePresets_LEDIAN_Moveset[] =
 	MOVE_DRAIN_PUNCH,
 	MOVE_ICE_PUNCH,
 	MOVE_THUNDER_PUNCH,
+#ifdef ROGUE_DRAYANO
+	MOVE_SWORDS_DANCE,
+	MOVE_DUAL_WINGBEAT,
+	MOVE_MACH_PUNCH,
+	MOVE_BUG_BITE,
+	MOVE_U_TURN,
+	MOVE_METEOR_MASH,
+	MOVE_ACROBATICS,
+	MOVE_LUNGE,
+	MOVE_KNOCK_OFF,
+	MOVE_MEGA_PUNCH,
+	MOVE_SMART_STRIKE,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_ARIADOS[] = 
@@ -33716,6 +33790,22 @@ static const struct RogueMonPreset sRoguePresets_ARIADOS[] =
 		.heldItem = ITEM_FOCUS_SASH,
 		.moves = { MOVE_STICKY_WEB, MOVE_TOXIC_SPIKES, MOVE_MEGAHORN, MOVE_TOXIC_THREAD}
 	},
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SWARM,
+		.heldItem = ITEM_FOCUS_SASH,
+		.moves = { MOVE_STICKY_WEB, MOVE_POISON_FANG, MOVE_TOXIC_SPIKES, MOVE_MEGAHORN}
+	},
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SNIPER,
+		.heldItem = ITEM_SCOPE_LENS,
+		.moves = { MOVE_SWORDS_DANCE, MOVE_CROSS_POISON, MOVE_X_SCISSOR, MOVE_NIGHT_SLASH}
+	},
+#endif
 };
 
 static const u16 sRoguePresets_ARIADOS_Moveset[] = 
@@ -33724,17 +33814,26 @@ static const u16 sRoguePresets_ARIADOS_Moveset[] =
 	MOVE_TOXIC_SPIKES,
 	MOVE_MEGAHORN,
 	MOVE_TOXIC_THREAD,
+#ifdef ROGUE_DRAYANO
+	MOVE_POISON_FANG,
+	MOVE_SWORDS_DANCE,
+	MOVE_CROSS_POISON,
+	MOVE_X_SCISSOR,
+	MOVE_NIGHT_SLASH,
+	MOVE_ELECTROWEB,
+	MOVE_LEECH_LIFE,
+	MOVE_LUNGE,
+	MOVE_PSYBEAM,
+	MOVE_PURSUIT,
+	MOVE_RAGE_POWDER,
+	MOVE_SMART_STRIKE,
+	MOVE_TWINEEDLE,
+	MOVE_VENOSHOCK,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_LANTURN[] = 
 {
-	{
-		.flags = MON_FLAGS_GEN7PU,
-		.hiddenPowerType = TYPE_FIRE,
-		.abilityNum = ABILITY_VOLT_ABSORB,
-		.heldItem = ITEM_ASSAULT_VEST,
-		.moves = { MOVE_SCALD, MOVE_VOLT_SWITCH, MOVE_ICE_BEAM, MOVE_HIDDEN_POWER}
-	},
 	{
 		.flags = MON_FLAGS_GEN7PU,
 		.hiddenPowerType = TYPE_NONE,
@@ -33763,6 +33862,31 @@ static const struct RogueMonPreset sRoguePresets_LANTURN[] =
 		.heldItem = ITEM_LEFTOVERS,
 		.moves = { MOVE_SCALD, MOVE_VOLT_SWITCH, MOVE_TOXIC, MOVE_PROTECT}
 	},
+#ifndef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7PU,
+		.hiddenPowerType = TYPE_FIRE,
+		.abilityNum = ABILITY_VOLT_ABSORB,
+		.heldItem = ITEM_ASSAULT_VEST,
+		.moves = { MOVE_SCALD, MOVE_VOLT_SWITCH, MOVE_ICE_BEAM, MOVE_HIDDEN_POWER}
+	},
+#endif
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7PU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_VOLT_ABSORB,
+		.heldItem = ITEM_ASSAULT_VEST,
+		.moves = { MOVE_VOLT_SWITCH, MOVE_PARABOLIC_CHARGE, MOVE_SCALD, MOVE_ICE_BEAM}
+	},
+	{
+		.flags = MON_FLAGS_GEN7PU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_VOLT_ABSORB,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_TAIL_GLOW, MOVE_PARABOLIC_CHARGE, MOVE_SCALD, MOVE_ICE_BEAM}
+	},
+#endif
 };
 
 static const u16 sRoguePresets_LANTURN_Moveset[] = 
@@ -33775,6 +33899,10 @@ static const u16 sRoguePresets_LANTURN_Moveset[] =
 	MOVE_HEAL_BELL,
 	MOVE_HYDRO_PUMP,
 	MOVE_PROTECT,
+#ifdef ROGUE_DRAYANO
+	MOVE_PARABOLIC_CHARGE,
+	MOVE_TAIL_GLOW,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_NATU[] = 
@@ -39927,6 +40055,7 @@ static const u16 sRoguePresets_RATTATA_ALOLAN_Moveset[] =
 
 static const struct RogueMonPreset sRoguePresets_SPEAROW[] = 
 {
+#ifndef ROGUE_DRAYANO
 	{
 		.flags = MON_FLAGS_GEN7LC,
 		.hiddenPowerType = TYPE_NONE,
@@ -39934,6 +40063,16 @@ static const struct RogueMonPreset sRoguePresets_SPEAROW[] =
 		.heldItem = ITEM_LIFE_ORB,
 		.moves = { MOVE_DOUBLE_EDGE, MOVE_DRILL_PECK, MOVE_DRILL_RUN, MOVE_U_TURN}
 	},
+#endif
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SNIPER,
+		.heldItem = ITEM_LIFE_ORB,
+		.moves = { MOVE_DUAL_WINGBEAT, MOVE_BRAVE_BIRD, MOVE_DRILL_RUN, MOVE_U_TURN}
+	},
+#endif
 };
 
 static const u16 sRoguePresets_SPEAROW_Moveset[] = 
@@ -39942,6 +40081,10 @@ static const u16 sRoguePresets_SPEAROW_Moveset[] =
 	MOVE_DRILL_PECK,
 	MOVE_DRILL_RUN,
 	MOVE_U_TURN,
+#ifdef ROGUE_DRAYANO
+	MOVE_DUAL_WINGBEAT,
+	MOVE_BRAVE_BIRD,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_EKANS[] = 
@@ -41345,6 +41488,22 @@ static const struct RogueMonPreset sRoguePresets_LEDYBA[] =
 		.heldItem = ITEM_BERRY_JUICE,
 		.moves = { MOVE_SWORDS_DANCE, MOVE_ACROBATICS, MOVE_KNOCK_OFF, MOVE_DRAIN_PUNCH}
 	},
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_TECHNICIAN,
+		.heldItem = ITEM_EVIOLITE,
+		.moves = { MOVE_SWORDS_DANCE, MOVE_DUAL_WINGBEAT, MOVE_MACH_PUNCH, MOVE_BUG_BITE}
+	},
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_IRON_FIST,
+		.heldItem = ITEM_HEAVY_DUTY_BOOTS,
+		.moves = { MOVE_U_TURN, MOVE_MACH_PUNCH, MOVE_METEOR_MASH, MOVE_ICE_PUNCH}
+	},
+#endif
 };
 
 static const u16 sRoguePresets_LEDYBA_Moveset[] = 
@@ -41353,6 +41512,17 @@ static const u16 sRoguePresets_LEDYBA_Moveset[] =
 	MOVE_ACROBATICS,
 	MOVE_KNOCK_OFF,
 	MOVE_DRAIN_PUNCH,
+#ifdef ROGUE_DRAYANO
+	MOVE_DUAL_WINGBEAT,
+	MOVE_MACH_PUNCH,
+	MOVE_BUG_BITE,
+	MOVE_U_TURN,
+	MOVE_METEOR_MASH,
+	MOVE_ICE_PUNCH,
+	MOVE_LUNGE,
+	MOVE_MEGA_PUNCH,
+	MOVE_SMART_STRIKE,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_CHINCHOU[] = 
@@ -41449,6 +41619,7 @@ static const u16 sRoguePresets_IGGLYBUFF_Moveset[] =
 
 static const struct RogueMonPreset sRoguePresets_TOGEPI[] = 
 {
+#ifndef ROGUE_DRAYANO
 	{
 		.flags = MON_FLAGS_GEN7LC,
 		.hiddenPowerType = TYPE_NONE,
@@ -41456,6 +41627,23 @@ static const struct RogueMonPreset sRoguePresets_TOGEPI[] =
 		.heldItem = ITEM_EVIOLITE,
 		.moves = { MOVE_DAZZLING_GLEAM, MOVE_FIRE_BLAST, MOVE_MORNING_SUN, MOVE_NASTY_PLOT}
 	},
+#endif
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SERENE_GRACE,
+		.heldItem = ITEM_EVIOLITE,
+		.moves = { MOVE_MOONBLAST, MOVE_FIRE_BLAST, MOVE_SOFT_BOILED, MOVE_NASTY_PLOT}
+	},
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SERENE_GRACE,
+		.heldItem = ITEM_EVIOLITE,
+		.moves = { MOVE_MOONBLAST, MOVE_FIRE_BLAST, MOVE_MORNING_SUN, MOVE_HEAL_BELL}
+	},
+#endif
 };
 
 static const u16 sRoguePresets_TOGEPI_Moveset[] = 
@@ -41464,6 +41652,14 @@ static const u16 sRoguePresets_TOGEPI_Moveset[] =
 	MOVE_FIRE_BLAST,
 	MOVE_MORNING_SUN,
 	MOVE_NASTY_PLOT,
+#ifdef ROGUE_DRAYANO
+	MOVE_MOONBLAST,
+	MOVE_SOFT_BOILED,
+	MOVE_HEAL_BELL,
+	MOVE_DISARMING_VOICE,
+	MOVE_EXTRASENSORY,
+	MOVE_MYSTICAL_FIRE,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_MAREEP[] = 
@@ -49105,6 +49301,77 @@ static const u16 sRoguePresets_SENTRET_Moveset[] =
 #endif
 };
 
+static const struct RogueMonPreset sRoguePresets_SPINARAK[] = 
+{
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SWARM,
+		.heldItem = ITEM_FOCUS_SASH,
+		.moves = { MOVE_STICKY_WEB, MOVE_POISON_FANG, MOVE_TOXIC_SPIKES, MOVE_MEGAHORN}
+	},
+	{
+		.flags = MON_FLAGS_GEN7LC,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SNIPER,
+		.heldItem = ITEM_SCOPE_LENS,
+		.moves = { MOVE_SWORDS_DANCE, MOVE_CROSS_POISON, MOVE_X_SCISSOR, MOVE_NIGHT_SLASH}
+	},
+#endif
+};
+
+static const u16 sRoguePresets_SPINARAK_Moveset[] = 
+{
+#ifdef ROGUE_DRAYANO
+	MOVE_STICKY_WEB,
+	MOVE_POISON_FANG,
+	MOVE_TOXIC_SPIKES,
+	MOVE_MEGAHORN,
+	MOVE_SWORDS_DANCE,
+	MOVE_CROSS_POISON,
+	MOVE_X_SCISSOR,
+	MOVE_NIGHT_SLASH,
+	MOVE_ELECTROWEB,
+	MOVE_LEECH_LIFE,
+	MOVE_LUNGE,
+	MOVE_PSYBEAM,
+	MOVE_PURSUIT,
+	MOVE_RAGE_POWDER,
+	MOVE_SMART_STRIKE,
+	MOVE_TWINEEDLE,
+	MOVE_VENOSHOCK,
+#endif
+};
+
+static const struct RogueMonPreset sRoguePresets_TOGETIC[] = 
+{
+#ifdef ROGUE_DRAYANO
+	{
+		.flags = MON_FLAGS_GEN7NU,
+		.hiddenPowerType = TYPE_NONE,
+		.abilityNum = ABILITY_SERENE_GRACE,
+		.heldItem = ITEM_EVIOLITE,
+		.moves = { MOVE_ROOST, MOVE_THUNDER_WAVE, MOVE_MOONBLAST, MOVE_HEAL_BELL}
+	},
+#endif
+};
+
+static const u16 sRoguePresets_TOGETIC_Moveset[] = 
+{
+#ifdef ROGUE_DRAYANO
+	MOVE_ROOST,
+	MOVE_THUNDER_WAVE,
+	MOVE_MOONBLAST,
+	MOVE_HEAL_BELL,
+	MOVE_DISARMING_VOICE,
+	MOVE_DAZZLING_GLEAM,
+	MOVE_EXTRASENSORY,
+	MOVE_MYSTICAL_FIRE,
+	MOVE_HURRICANE,
+#endif
+};
+
 
 const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 {
@@ -52237,7 +52504,7 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 	},
 
 	[SPECIES_FEAROW] = {
-		.flags = MON_FLAGS_GEN7PU,
+		.flags = MON_FLAGS_GEN7PU | MON_FLAGS_GEN7VGC2018,
 		.presetCount = ARRAY_COUNT(sRoguePresets_FEAROW),
 		.presets = sRoguePresets_FEAROW,
 		.movesCount = ARRAY_COUNT(sRoguePresets_FEAROW_Moveset),
@@ -52541,7 +52808,7 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 	},
 
 	[SPECIES_ARIADOS] = {
-		.flags = MON_FLAGS_GEN7PU,
+		.flags = MON_FLAGS_GEN7PU | MON_FLAGS_GEN7LC,
 		.presetCount = ARRAY_COUNT(sRoguePresets_ARIADOS),
 		.presets = sRoguePresets_ARIADOS,
 		.movesCount = ARRAY_COUNT(sRoguePresets_ARIADOS_Moveset),
@@ -56442,6 +56709,22 @@ const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES] =
 		.presets = sRoguePresets_SENTRET,
 		.movesCount = ARRAY_COUNT(sRoguePresets_SENTRET_Moveset),
 		.moves = sRoguePresets_SENTRET_Moveset,
+	},
+
+	[SPECIES_SPINARAK] = {
+		.flags = MON_FLAGS_GEN7LC,
+		.presetCount = ARRAY_COUNT(sRoguePresets_SPINARAK),
+		.presets = sRoguePresets_SPINARAK,
+		.movesCount = ARRAY_COUNT(sRoguePresets_SPINARAK_Moveset),
+		.moves = sRoguePresets_SPINARAK_Moveset,
+	},
+
+	[SPECIES_TOGETIC] = {
+		.flags = MON_FLAGS_GEN7NU,
+		.presetCount = ARRAY_COUNT(sRoguePresets_TOGETIC),
+		.presets = sRoguePresets_TOGETIC,
+		.movesCount = ARRAY_COUNT(sRoguePresets_TOGETIC_Moveset),
+		.moves = sRoguePresets_TOGETIC_Moveset,
 	},
 
 };
