@@ -481,7 +481,134 @@
                     "ability": "Big Pecks"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+    "Raticate": {},
+    "Spearow": {
+        "movesets": {
+            "gen7lc": {
+                "Life Orb Attacker": {
+                    "moves": [
+                        "Dual Wingbeat",
+                        "Brave Bird",
+                        "Drill Run",
+                        "U-turn"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sniper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+    "Fearow": {
+        "movesets": {
+            "gen7pu": {
+                "Critical Hit": {
+                    "moves": [
+                        "Return",
+                        "Brave Bird",
+                        "Drill Run",
+                        "U-turn"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Sniper"
+                },
+                "Intimidate Pivot": {
+                    "moves": [
+                        "Return",
+                        "Brave Bird",
+                        "Drill Run",
+                        "U-turn"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Intimidate"
+                }
+            },
+            "gen7vgc2018": {
+                "Defog Support": {
+                    "moves": [
+                        "Snarl",
+                        "Defog",
+                        "Protect",
+                        "Heat Wave"
+                    ],
+                    "item": "Wacan Berry",
+                    "ability": "Intimidate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+    "Arbok": {},
+    "Raichu": {},
+    "Sandslash": {},
+    "Nidoqueen": {},
+    "Nidoking": {},
+    "Clefable": {
+        "extra_moves": [
+            "Draining Kiss"
+        ]
+    },
+    "Ninetales": {
+        "movesets": {
+            "gen7ru": {
+                "Nasty Plot Wallbreaker": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Fire Blast",
+                        "Solar Beam",
+                        "Moonblast"
+                    ],
+                    "item": "Firium Z",
+                    "ability": "Drought"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Overheat",
+                        "Fire Blast",
+                        "Solar Beam",
+                        "Moonblast"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Drought"
+                }
+            },
+            "gen7battlespotdoubles": {
+                "Showdown Usage": {
+                    "moves": [
+                        "Solar Beam",
+                        "Heat Wave",
+                        "Protect",
+                        "Moonblast"
+                    ],
+                    "item": "Heat Rock",
+                    "ability": "Drought"
+                }
+            },
+            "gen8monotype": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Fire Blast",
+                        "Psychic",
+                        "Solar Beam"
+                    ],
+                    "item": "Heat Rock",
+                    "ability": "Drought"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam"
+        ]
     },
 
     "Rapidash": {

@@ -538,6 +538,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
+                                        #ifdef ROGUE_DRAYANO                                        
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM01_FOCUS_PUNCH)
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
@@ -545,6 +548,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM23_IRON_TAIL)
                                           TMHM(TM16_LIGHT_SCREEN)
                                           TMHM(TM17_PROTECT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM29_PSYCHIC)
+                                        #endif
                                           TMHM(TM18_RAIN_DANCE)
                                           TMHM(TM33_REFLECT)
                                           TMHM(TM44_REST)
@@ -553,6 +559,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(TM34_SHOCK_WAVE)
                                           TMHM(HM04_STRENGTH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM03_SURF)
+                                        #endif
                                           TMHM(TM46_THIEF)
                                           TMHM(TM25_THUNDER)
                                           TMHM(TM24_THUNDERBOLT)
@@ -906,12 +915,18 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM23_IRON_TAIL)
                                           TMHM(TM50_OVERHEAT)
                                           TMHM(TM17_PROTECT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM29_PSYCHIC)
+                                        #endif
                                           TMHM(TM33_REFLECT)
                                           TMHM(TM44_REST)
                                           TMHM(TM27_RETURN)
                                           TMHM(TM05_ROAR)
                                           TMHM(TM20_SAFEGUARD)
                                           TMHM(TM43_SECRET_POWER)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM30_SHADOW_BALL)
+                                        #endif
                                           TMHM(TM22_SOLAR_BEAM)
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM06_TOXIC)),
