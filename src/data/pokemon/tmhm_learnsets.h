@@ -4761,6 +4761,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM19_GIGA_DRAIN)
                                           TMHM(TM10_HIDDEN_POWER)

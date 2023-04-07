@@ -1857,6 +1857,47 @@
         ]
     },
 
+    "Hoppip": {
+        "movesets": {
+            "gen7lc": {
+                "Aerilate Support": {
+                    "moves": [
+                        "Strength Sap",
+                        "Toxic",
+                        "Hyper Voice",
+                        "U-turn"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Aerilate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Round"
+        ]
+    },
+
+    "Jumpluff": {
+        "movesets": {
+            "gen7lc": {
+                "Aerilate Support": {
+                    "moves": [
+                        "Strength Sap",
+                        "Encore",
+                        "Hyper Voice",
+                        "U-turn"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Aerilate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Round",
+            "Hurricane"
+        ]
+    },
+
     "Flygon": {
         "extra_moves": [
             "Hurricane"
