@@ -1648,6 +1648,88 @@
         ]
     },
 
+    "Natu": {
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
+    "Xatu": {
+        "extra_moves": [
+            "Aura Sphere",
+            "Dual Wingbeat",
+            "Mystical Fire"
+        ]
+    },
+
+    "Ampharos": {
+        "movesets": {
+            "gen7uu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Draco Meteor",
+                        "Focus Blast",
+                        "Volt Switch"
+                    ],
+                    "item": "Ampharosite",
+                    "ability": "Overcoat"
+                },
+                "Mega Tail Glow Wallbreaker (Flash Cannon)": {
+                    "moves": [
+                        "Tail Glow",
+                        "Thunderbolt",
+                        "Draco Meteor",
+                        "Flash Cannon"
+                    ],
+                    "item": "Ampharosite",
+                    "ability": "Overcoat"
+                },
+                "Mega Tail Glow Wallbreaker (Dazzling Gleam)": {
+                    "moves": [
+                        "Tail Glow",
+                        "Thunderbolt",
+                        "Draco Meteor",
+                        "Dazzling Gleam"
+                    ],
+                    "item": "Ampharosite",
+                    "ability": "Overcoat"
+                }
+            },
+            "gen7pu": {
+                "Tail Glow (Flash Cannon)": {
+                    "moves": [
+                        "Tail Glow",
+                        "Thunderbolt",
+                        "Draco Meteor",
+                        "Flash Cannon"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Overcoat"
+                },
+                "Tail Glow (Dazzling Gleam)": {
+                    "moves": [
+                        "Tail Glow",
+                        "Thunderbolt",
+                        "Draco Meteor",
+                        "Dazzling Gleam"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Overcoat"
+                }
+            }
+        },
+        "extra_moves": [
+            "Energy Ball"
+        ]
+    },
+
+    "Azumarill": {
+        "extra_moves": [
+            "Drain Punch"
+        ]
+    },
+
     "Flygon": {
         "extra_moves": [
             "Hurricane"
