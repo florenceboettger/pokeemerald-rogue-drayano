@@ -2021,12 +2021,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_JIGGLYPUFF] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 115,
+        .baseAttack    = 35,
+        .baseDefense   = 20,
+        .baseSpeed     = 20,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 25,
+    #else
         .baseHP        = 115,
         .baseAttack    = 45,
         .baseDefense   = 20,
         .baseSpeed     = 20,
         .baseSpAttack  = 45,
         .baseSpDefense = 25,
+    #endif
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_NORMAL,
             .type2 = TYPE_FAIRY,
@@ -2044,13 +2053,25 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_FAST,
         .eggGroup1 = EGG_GROUP_FAIRY,
         .eggGroup2 = EGG_GROUP_FAIRY,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER},
+    #else
         .abilities = {ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRIEND_GUARD},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
     },
 
     [SPECIES_WIGGLYTUFF] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 140,
+        .baseAttack    = 60,
+        .baseDefense   = 45,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 50,
+    #else
         .baseHP        = 140,
         .baseAttack    = 70,
         .baseDefense   = 45,
@@ -2061,6 +2082,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseSpAttack  = 75,
         #endif
+    #endif
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_NORMAL,
             .type2 = TYPE_FAIRY,
@@ -2078,7 +2100,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_FAST,
         .eggGroup1 = EGG_GROUP_FAIRY,
         .eggGroup2 = EGG_GROUP_FAIRY,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER},
+    #else
         .abilities = {ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRISK},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
     },

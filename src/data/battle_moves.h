@@ -10528,7 +10528,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_DRAINING_KISS] =
     {
         .effect = EFFECT_ABSORB,
+    #ifdef ROGUE_DRAYANO
+        .power = 60,
+    #else
         .power = 50,
+    #endif
         .type = TYPE_FAIRY,
         .accuracy = 100,
         .pp = 10,
