@@ -98,6 +98,7 @@ Rogue_Debug_AddMoney::
 	giveitem ITEM_STAR_PIECE, 999
 	giveitem ITEM_RARE_CANDY, 999
 	giveitem ITEM_ESCAPE_ROPE, 999
+	giveitem ITEM_MASTER_BALL, 999
 	release
 	return
 

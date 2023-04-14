@@ -557,6 +557,11 @@
             "Draining Kiss"
         ]
     },
+    "Vulpix": {
+        "extra_moves": [
+            "Dazzling Gleam"
+        ]
+    },
     "Ninetales": {
         "movesets": {
             "gen7ru": {
@@ -609,6 +614,58 @@
         "extra_moves": [
             "Dazzling Gleam"
         ]
+    },
+    "Wigglytuff": {
+        "movesets": {
+            "gen7pu": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Boomburst",
+                        "Moonblast",
+                        "Fire Blast"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Competitive"
+                }
+            },
+            "gen8zu": {
+                "WishPort": {
+                    "moves": [
+                        "Wish",
+                        "Teleport",
+                        "Knock Off",
+                        "Protect"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Huge Power"
+                }
+            },
+            "gen8ru": {
+                "Curse Tank": {
+                    "moves": [
+                        "Return",
+                        "Play Rough",
+                        "Curse",
+                        "Drain Punch"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Huge Power"
+                }
+            },
+            "gen7battlespotdoubles": {
+                "Friend Guard Support": {
+                    "moves": [
+                        "Icy Wind",
+                        "Draining Kiss",
+                        "Helping Hand",
+                        "Lovely Kiss"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Friend Guard"
+                }
+            }
+        }
     },
 
     "Rapidash": {

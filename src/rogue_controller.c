@@ -5566,7 +5566,7 @@ bool8 SelectNextPreset(u16 species, u16 trainerNum, u8 monIdx, u16 randFlag, str
 
 #ifdef ROGUE_DRAYANO
             // If the mon has doubles sets, then prefer singles sets for singles and doubles sets for doubles
-            if (CheckPresetMonFlags(species, MON_FLAG_DOUBLES) && ((currPreset->flags & MON_FLAG_DOUBLES) ^ FlagGet(FLAG_ROGUE_DOUBLE_BATTLES)))
+            if (CheckPresetMonFlags(species, MON_FLAG_DOUBLES) && (((currPreset->flags & MON_FLAG_DOUBLES) != 0) ^ FlagGet(FLAG_ROGUE_DOUBLE_BATTLES)))
             {
                 isPresetValid = FALSE;
             }
