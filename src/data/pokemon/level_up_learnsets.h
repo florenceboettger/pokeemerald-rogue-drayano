@@ -4235,6 +4235,9 @@ static const struct LevelUpMove sJumpluffLevelUpLearnset[] = {
 
 static const struct LevelUpMove sAipomLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_QUICK_ATTACK),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE( 4, MOVE_SAND_ATTACK),
     LEVEL_UP_MOVE( 8, MOVE_ASTONISH),
@@ -4272,6 +4275,10 @@ static const struct LevelUpMove sSunkernLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sSunfloraLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_FLAME_BURST),
+    LEVEL_UP_MOVE( 1, MOVE_FLAME_BURST),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_FLOWER_SHIELD),
     LEVEL_UP_MOVE( 1, MOVE_ABSORB),
     LEVEL_UP_MOVE( 1, MOVE_POUND),
@@ -4290,7 +4297,13 @@ static const struct LevelUpMove sSunfloraLevelUpLearnset[] = {
     LEVEL_UP_MOVE(37, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(40, MOVE_SUNNY_DAY),
     LEVEL_UP_MOVE(43, MOVE_LEAF_STORM),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(47, MOVE_HEAT_WAVE),
+#endif
     LEVEL_UP_MOVE(50, MOVE_PETAL_BLIZZARD),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(57, MOVE_FIERY_DANCE),
+#endif
     LEVEL_UP_END
 };
 

@@ -1904,6 +1904,36 @@
         ]
     },
 
+    "Sunflora": {
+        "movesets": {
+            "gen7pu": {
+                "Sun Wallbreaker": {
+                    "moves": [
+                        "Solar Beam",
+                        "Earth Power",
+                        "Flamethrower",
+                        "Giga Drain"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Solar Power"
+                },
+                "Chlorophyll": {
+                    "moves": [
+                        "Solar Beam",
+                        "Earth Power",
+                        "Fire Blast",
+                        "Giga Drain"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                }
+            }
+        },
+        "extra_moves": [
+            "Mystical Fire"
+        ]
+    },
+
     "Milotic": {
         "movesets": {
             "gen8uu": {
