@@ -2270,12 +2270,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PARASECT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 115,
+        .baseDefense   = 100,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 60,
         .baseAttack    = 95,
         .baseDefense   = 80,
         .baseSpeed     = 30,
         .baseSpAttack  = 60,
         .baseSpDefense = 80,
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_GRASS,
         .catchRate = 75,

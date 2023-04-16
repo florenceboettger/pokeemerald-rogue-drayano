@@ -824,6 +824,9 @@ static const struct LevelUpMove sOddishLevelUpLearnset[] = {
     LEVEL_UP_MOVE(15, MOVE_SLEEP_POWDER),
     LEVEL_UP_MOVE(19, MOVE_MEGA_DRAIN),
     LEVEL_UP_MOVE(23, MOVE_LUCKY_CHANT),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(25, MOVE_SLUDGE),
+#endif
     LEVEL_UP_MOVE(27, MOVE_MOONLIGHT),
     LEVEL_UP_MOVE(31, MOVE_GIGA_DRAIN),
     LEVEL_UP_MOVE(35, MOVE_TOXIC),
@@ -846,6 +849,9 @@ static const struct LevelUpMove sGloomLevelUpLearnset[] = {
     LEVEL_UP_MOVE(15, MOVE_SLEEP_POWDER),
     LEVEL_UP_MOVE(19, MOVE_MEGA_DRAIN),
     LEVEL_UP_MOVE(24, MOVE_LUCKY_CHANT),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(25, MOVE_SLUDGE),
+#endif
     LEVEL_UP_MOVE(29, MOVE_MOONLIGHT),
     LEVEL_UP_MOVE(34, MOVE_GIGA_DRAIN),
     LEVEL_UP_MOVE(39, MOVE_TOXIC),
@@ -861,6 +867,9 @@ static const struct LevelUpMove sVileplumeLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_AROMATHERAPY),
     LEVEL_UP_MOVE( 1, MOVE_POISON_POWDER),
     LEVEL_UP_MOVE( 1, MOVE_STUN_SPORE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(39, MOVE_EARTH_POWER),
+#endif
     LEVEL_UP_MOVE(49, MOVE_PETAL_BLIZZARD),
     LEVEL_UP_MOVE(59, MOVE_PETAL_DANCE),
     LEVEL_UP_MOVE(69, MOVE_SOLAR_BEAM),
@@ -884,6 +893,9 @@ static const struct LevelUpMove sParasLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sParasectLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_LUNGE),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_CROSS_POISON),
     LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
     LEVEL_UP_MOVE( 1, MOVE_STUN_SPORE),
