@@ -6293,12 +6293,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SUNKERN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 30,
+        .baseDefense   = 50,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 50,
+    #else
         .baseHP        = 30,
         .baseAttack    = 30,
         .baseDefense   = 30,
         .baseSpeed     = 30,
         .baseSpAttack  = 30,
         .baseSpDefense = 30,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
         .catchRate = 235,
@@ -6317,14 +6326,28 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SUNFLORA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 85,
+        .baseAttack    = 55,
+        .baseDefense   = 85,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 125,
+        .baseSpDefense = 95,
+    #else
         .baseHP        = 75,
         .baseAttack    = 75,
         .baseDefense   = 55,
         .baseSpeed     = 30,
         .baseSpAttack  = 105,
         .baseSpDefense = 85,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GRASS,
+        .type2 = TYPE_FIRE,
+    #else
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
+    #endif
         .catchRate = 120,
         .expYield = 149,
         .evYield_SpAttack  = 2,
@@ -6368,12 +6391,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_WOOPER] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 55,
+        .baseAttack    = 55,
+        .baseDefense   = 55,
+        .baseSpeed     = 15,
+        .baseSpAttack  = 25,
+        .baseSpDefense = 25,
+    #else
         .baseHP        = 55,
         .baseAttack    = 45,
         .baseDefense   = 45,
         .baseSpeed     = 15,
         .baseSpAttack  = 25,
         .baseSpDefense = 25,
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_GROUND,
         .catchRate = 255,
@@ -6392,12 +6424,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_QUAGSIRE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 95,
+        .baseAttack    = 95,
+        .baseDefense   = 95,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 95,
         .baseAttack    = 85,
         .baseDefense   = 85,
         .baseSpeed     = 35,
         .baseSpAttack  = 65,
         .baseSpDefense = 65,
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_GROUND,
         .catchRate = 90,

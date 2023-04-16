@@ -4832,6 +4832,10 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM38_FIRE_BLAST)
+                                          TMHM(TM35_FLAMETHROWER)
+                                        #endif
                                           TMHM(HM05_FLASH)
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM19_GIGA_DRAIN)
@@ -4841,6 +4845,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM17_PROTECT)
                                           TMHM(TM44_REST)
                                           TMHM(TM27_RETURN)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM50_OVERHEAT)
+                                        #endif
                                           TMHM(TM20_SAFEGUARD)
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(TM36_SLUDGE_BOMB)
