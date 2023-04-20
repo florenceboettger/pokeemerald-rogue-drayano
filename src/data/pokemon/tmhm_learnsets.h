@@ -8348,6 +8348,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
                                           TMHM(TM31_BRICK_BREAK)
+                                          TMHM(HM01_CUT)
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
