@@ -916,7 +916,23 @@
                     "ability": "Dry Skin"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Power Gem"
+        ]
+    },
+
+    "Electabuzz": {
+        "extra_moves": [
+            "Follow Me"
+        ]
+    },
+
+    "Magmar": {
+        "extra_moves": [
+            "Follow Me",
+            "Scorching Sands"
+        ]
     },
 
     "Pinsir": {
@@ -1129,10 +1145,10 @@
             }
         },
         "extra_moves": [
-            "Close Combat",
-            "Flame Wheel",
+            "Blaze Kick",
             "Grass Knot",
             "Rock Slide",
+            "Scorching Sands",
             "Wild Charge"
         ]
     },
@@ -1290,9 +1306,26 @@
         }
     },
 
+    "Articuno": {
+        "extra_moves": [
+            "Extrasensory",
+            "Hurricane"
+        ]
+    },
+
     "Zapdos": {
         "extra_moves": [
-            "Hurricane"
+            "Extrasensory",
+            "Hurricane",
+            "Thunder Shock"
+        ]
+    },
+
+    "Moltres": {
+        "extra_moves": [
+            "Extrasensory",
+            "Scorching Sands",
+            "Sky Attack"
         ]
     },
 
@@ -1955,9 +1988,67 @@
         ]
     },
 
-    "Flygon": {
+    "Espeon": {
+        "extra_moves": [
+            "Growth",
+            "Mystical Fire",
+            "Quash"
+        ]
+    },
+    
+    "Umbreon": {
+        "extra_moves": [
+            "Crunch",
+            "Grass Knot",
+            "Gunk Shot",
+            "Mystical Fire",
+            "Power Gem",
+            "Quash"
+        ]
+    },
+
+    "Murkrow": {
         "extra_moves": [
             "Hurricane"
+        ]
+    },
+
+    "Slowking": {
+        "extra_moves": [
+            "Aura Sphere"
+        ]
+    },
+
+    "Misdreavus": {
+        "movesets": {
+            "gen7zu": {
+                "Alternate": {
+                    "moves": [
+                        "Foul Play",
+                        "Will-O-Wisp",
+                        "Hypnosis",
+                        "Draining Kiss"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Nasty Plot"
+        ]
+    },
+
+    "Trapinch": {
+        "extra_moves": [
+            "Scorching Sands"
+        ]
+    },
+
+    "Flygon": {
+        "extra_moves": [
+            "Hurricane",
+            "Scorching Sands"
         ]
     },
 

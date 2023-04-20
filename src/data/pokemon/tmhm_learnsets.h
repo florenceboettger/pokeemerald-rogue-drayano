@@ -5039,6 +5039,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(HM03_SURF)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_MISDREAVUS]  = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)

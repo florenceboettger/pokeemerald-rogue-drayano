@@ -7467,7 +7467,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_X_SCISSOR] =
     {
         .effect = EFFECT_HIT,
+    #ifdef ROGUE_DRAYANO
+        .power = 90,
+    #else
         .power = 80,
+    #endif
         .type = TYPE_BUG,
         .accuracy = 100,
         .pp = 15,

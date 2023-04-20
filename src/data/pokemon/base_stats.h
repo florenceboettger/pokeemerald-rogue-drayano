@@ -67,30 +67,57 @@
         .noFlip = flip,                                                    \
     }
 
-#define UNOWN_BASE_STATS(flip)                        \
-    {                                                 \
-        .baseHP        = 48,                          \
-        .baseAttack    = 72,                          \
-        .baseDefense   = 48,                          \
-        .baseSpeed     = 48,                          \
-        .baseSpAttack  = 72,                          \
-        .baseSpDefense = 48,                          \
-        .type1 = TYPE_PSYCHIC,                        \
-        .type2 = TYPE_PSYCHIC,                        \
-        .catchRate = 225,                             \
-        .expYield = 118,                              \
-        .evYield_Attack    = 1,                       \
-        .evYield_SpAttack  = 1,                       \
-        .genderRatio = MON_GENDERLESS,                \
-        .eggCycles = 40,                              \
-        .friendship = 70,                             \
-        .growthRate = GROWTH_MEDIUM_FAST,             \
-        .eggGroup1 = EGG_GROUP_UNDISCOVERED,          \
-        .eggGroup2 = EGG_GROUP_UNDISCOVERED,          \
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},\
-        .bodyColor = BODY_COLOR_BLACK,                \
-        .noFlip = flip,                               \
-    }
+#ifdef ROGUE_DRAYANO
+    #define UNOWN_BASE_STATS(flip)                        \
+        {                                                 \
+            .baseHP        = 54,                          \
+            .baseAttack    = 108,                         \
+            .baseDefense   = 54,                          \
+            .baseSpeed     = 54,                          \
+            .baseSpAttack  = 108,                         \
+            .baseSpDefense = 54,                          \
+            .type1 = TYPE_PSYCHIC,                        \
+            .type2 = TYPE_PSYCHIC,                        \
+            .catchRate = 255,                             \
+            .expYield = 118,                              \
+            .evYield_Attack    = 1,                       \
+            .evYield_SpAttack  = 1,                       \
+            .genderRatio = MON_GENDERLESS,                \
+            .eggCycles = 40,                              \
+            .friendship = 70,                             \
+            .growthRate = GROWTH_MEDIUM_FAST,             \
+            .eggGroup1 = EGG_GROUP_UNDISCOVERED,          \
+            .eggGroup2 = EGG_GROUP_UNDISCOVERED,          \
+            .abilities = {ABILITY_LEVITATE, ABILITY_NONE},\
+            .bodyColor = BODY_COLOR_BLACK,                \
+            .noFlip = flip,                               \
+        }
+#else
+    #define UNOWN_BASE_STATS(flip)                        \
+        {                                                 \
+            .baseHP        = 48,                          \
+            .baseAttack    = 72,                          \
+            .baseDefense   = 48,                          \
+            .baseSpeed     = 48,                          \
+            .baseSpAttack  = 72,                          \
+            .baseSpDefense = 48,                          \
+            .type1 = TYPE_PSYCHIC,                        \
+            .type2 = TYPE_PSYCHIC,                        \
+            .catchRate = 225,                             \
+            .expYield = 118,                              \
+            .evYield_Attack    = 1,                       \
+            .evYield_SpAttack  = 1,                       \
+            .genderRatio = MON_GENDERLESS,                \
+            .eggCycles = 40,                              \
+            .friendship = 70,                             \
+            .growthRate = GROWTH_MEDIUM_FAST,             \
+            .eggGroup1 = EGG_GROUP_UNDISCOVERED,          \
+            .eggGroup2 = EGG_GROUP_UNDISCOVERED,          \
+            .abilities = {ABILITY_LEVITATE, ABILITY_NONE},\
+            .bodyColor = BODY_COLOR_BLACK,                \
+            .noFlip = flip,                               \
+        }
+#endif
 
 #define CASTFORM_BASE_STATS(type, color)              \
     {                                                 \
@@ -6551,8 +6578,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 85,
         .baseSpAttack  = 85,
         .baseSpDefense = 85,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GHOST,
+        .type2 = TYPE_FAIRY,
+    #else
         .type1 = TYPE_GHOST,
         .type2 = TYPE_GHOST,
+    #endif
         .catchRate = 45,
         .expYield = 87,
         .evYield_SpDefense = 1,
