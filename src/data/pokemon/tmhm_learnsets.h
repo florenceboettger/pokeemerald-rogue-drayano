@@ -1363,6 +1363,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM08_BULK_UP)
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT),
+                                        #endif
                                           TMHM(TM26_EARTHQUAKE)
                                           TMHM(TM42_FACADE)
                                           TMHM(TM01_FOCUS_PUNCH)
@@ -1391,6 +1394,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM08_BULK_UP)
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT),
+                                        #endif
                                           TMHM(TM26_EARTHQUAKE)
                                           TMHM(TM42_FACADE)
                                           TMHM(TM01_FOCUS_PUNCH)
