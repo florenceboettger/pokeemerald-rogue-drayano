@@ -2009,6 +2009,36 @@
         ]
     },
 
+    "Sunflora": {
+        "movesets": {
+            "gen7pu": {
+                "Sun Wallbreaker": {
+                    "moves": [
+                        "Solar Beam",
+                        "Earth Power",
+                        "Flamethrower",
+                        "Giga Drain"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Solar Power"
+                },
+                "Chlorophyll": {
+                    "moves": [
+                        "Solar Beam",
+                        "Earth Power",
+                        "Fire Blast",
+                        "Giga Drain"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                }
+            }
+        },
+        "extra_moves": [
+            "Mystical Fire"
+        ]
+    },
+
     "Espeon": {
         "extra_moves": [
             "Growth",
@@ -2029,6 +2059,30 @@
     },
 
     "Murkrow": {
+        "movesets": {
+            "gen7doublesou": {
+                "Lead Supporter": {
+                    "moves": [
+                        "Brave Bird",
+                        "Tailwind",
+                        "Haze",
+                        "Protect"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Prankster"
+                },
+                "Bulky Supporter": {
+                    "moves": [
+                        "Foul Play",
+                        "Tailwind",
+                        "Taunt",
+                        "Protect"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Prankster"
+                }
+            }
+        },
         "extra_moves": [
             "Hurricane"
         ]
@@ -2133,34 +2187,141 @@
         ]
     },
 
-    "Sunflora": {
+    "Cacnea": {
         "movesets": {
-            "gen7pu": {
-                "Sun Wallbreaker": {
+            "gen7lc": {
+                "Swords Dance": {
                     "moves": [
-                        "Solar Beam",
-                        "Earth Power",
-                        "Flamethrower",
-                        "Giga Drain"
+                        "Swords Dance",
+                        "Sucker Punch",
+                        "Needle Arm",
+                        "Drain Punch"
                     ],
-                    "item": "Life Orb",
-                    "ability": "Solar Power"
+                    "item": "Eviolite",
+                    "ability": "Water Absorb"
                 },
-                "Chlorophyll": {
+                "Swords Dance (Thunder Punch)": {
                     "moves": [
-                        "Solar Beam",
-                        "Earth Power",
-                        "Fire Blast",
-                        "Giga Drain"
+                        "Swords Dance",
+                        "Sucker Punch",
+                        "Needle Arm",
+                        "Thunder Punch"
                     ],
-                    "item": "Life Orb",
-                    "ability": "Chlorophyll"
+                    "item": "Eviolite",
+                    "ability": "Water Absorb"
                 }
             }
         },
         "extra_moves": [
-            "Mystical Fire"
+            "Rock Climb",
+            "Scorching Sands"
         ]
+    },
+
+    "Cacturne": {
+        "movesets": {
+            "gen7zu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Needle Arm",
+                        "Sucker Punch",
+                        "Superpower"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Water Absorb"
+                }
+            }
+        },
+        "extra_moves": [
+            "Rock Climb",
+            "Scorching Sands"
+        ]
+    },
+
+    "Swablu": {
+        "movesets": {
+            "gen7lc": {
+                "Cotton Guard": {
+                    "moves": [
+                        "Brave Bird",
+                        "Roost",
+                        "Cotton Guard",
+                        "Agility"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Natural Cure"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat",
+            "Hurricane",
+            "Play Rough"
+        ]
+    },
+
+    "Altaria": {
+        "movesets": {
+            "gen7zu": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Outrage",
+                        "Brave Bird",
+                        "Play Rough"
+                    ]
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
+    "Zangoose": {
+        "extra_moves": [
+            "Acrobatics",
+            "Cut",
+            "Low Sweep"
+        ]
+    },
+
+    "Seviper": {
+        "movesets": {
+            "gen7pu": {
+                "Mixed Attacker": {
+                    "moves": [
+                        "Gunk Shot",
+                        "Power Whip",
+                        "Earthquake",
+                        "Sucker Punch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Shed Skin"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Poison Tail",
+                        "Power Whip",
+                        "Earthquake",
+                        "Crunch"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Shed Skin"
+                },
+                "Coil Utility": {
+                    "moves": [
+                        "Coil",
+                        "Poison Tail",
+                        "Crunch",
+                        "Glare"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Shed Skin"
+                }
+            }
+        }
     },
 
     "Milotic": {
