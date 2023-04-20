@@ -2067,6 +2067,66 @@
     },
 
     "Flygon": {
+        "movesets": {
+            "gen7ou": {
+                "Quiver Dance": {
+                    "moves": [
+                        "Quiver Dance",
+                        "Bug Buzz",
+                        "Earth Power",
+                        "Dragon Pulse"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Levitate"
+                },
+                "Specs": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Bug Buzz",
+                        "Boomburst",
+                        "Earth Power"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7uu": {
+                "Compound Eyes + Scarf": {
+                    "moves": [
+                        "Dragon Rush",
+                        "Earthquake",
+                        "Stone Edge",
+                        "U-turn"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Compound Eyes"
+                }
+            },
+            "gen7ru": {
+                "Choice Scarf": {
+                    "moves": [
+                        "U-turn",
+                        "Earthquake",
+                        "Outrage",
+                        "Dual Wingbeat"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8ru": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Earth Power",
+                        "U-turn",
+                        "Stone Edge",
+                        "Draco Meteor"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            }
+        },
         "extra_moves": [
             "Hurricane",
             "Scorching Sands"
