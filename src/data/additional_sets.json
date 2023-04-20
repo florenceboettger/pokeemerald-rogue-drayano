@@ -1025,12 +1025,40 @@
     },
 
     "Electabuzz": {
+        "movesets": {
+            "gen8zu": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Volt Switch",
+                        "Psychic",
+                        "Focus Blast"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Static"
+                }
+            }
+        },
         "extra_moves": [
             "Follow Me"
         ]
     },
 
     "Magmar": {
+        "movesets": {
+            "gen8zu": {
+                "Life Orb Attacker": {
+                    "moves": [
+                        "Fire Blast",
+                        "Focus Blast",
+                        "Hidden Power Grass",
+                        "Mach Punch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Vital Spirit"
+                }
+            }
+        },
         "extra_moves": [
             "Follow Me",
             "Scorching Sands"
