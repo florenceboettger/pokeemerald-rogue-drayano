@@ -2324,6 +2324,107 @@
         }
     },
 
+    "Lunatone": {
+        "movesets": {
+            "gen8pu": {
+                "Lunar Dance": {
+                    "moves": [
+                        "Power Gem",
+                        "Moonlight",
+                        "Lunar Dance",
+                        "Toxic"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Levitate"
+                }
+            }
+        }
+    },
+
+    "Barboach": {
+        "movesets": {
+            "gen7lc": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Liquidation",
+                        "Earthquake",
+                        "Bounce"
+                    ],
+                    "item": "Flyinium Z",
+                    "ability": "Simple"
+                }
+            }
+        },
+        "extra_moves": [
+            "Breaking Swipe",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Whiscash": {
+        "movesets": {
+            "gen7pu": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Liquidation",
+                        "Earthquake",
+                        "Bounce"
+                    ],
+                    "item": "Flyinium Z",
+                    "ability": "Simple"
+                }
+            }
+        },
+        "extra_moves": [
+            "Breaking Swipe"
+        ]
+    },
+
+    "Baltoy": {
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Nasty Plot",
+            "Power Gem",
+            "Scorching Sands",
+            "Solar Beam"
+        ]
+    },
+
+    "Claydol": {
+        "movesets": {
+            "gen7pu": {
+                "Calm Mind + Recover": {
+                    "moves": [
+                        "Calm Mind",
+                        "Recover",
+                        "Earth Power",
+                        "Psychic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                },
+                "Scorching Sands Pivot": {
+                    "moves": [
+                        "Teleport",
+                        "Scorching Sands",
+                        "Recover",
+                        "Power Gem"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Nasty Plot",
+            "Solar Beam",
+            "Tri Attack"
+        ]
+    },
+
     "Milotic": {
         "movesets": {
             "gen8uu": {
