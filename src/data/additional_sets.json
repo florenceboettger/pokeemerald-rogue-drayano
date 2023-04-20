@@ -667,6 +667,27 @@
             }
         }
     },
+    "Vileplume": {
+        "movesets": {
+            "gen7ru": {
+                "Defensive Earth Power": {
+                    "moves": [
+                        "Moonblast",
+                        "Earth Power",
+                        "Giga Drain",
+                        "Strength Sap"
+                    ],
+                    "item": "Black Sludge",
+                    "ability": "Effect Spore"
+                }
+            }
+        }
+    },
+    "Parasect": {
+        "extra_moves": [
+            "Bug Buzz"
+        ]
+    },
 
     "Rapidash": {
         "movesets": {
