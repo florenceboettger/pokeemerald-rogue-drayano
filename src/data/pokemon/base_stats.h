@@ -2333,12 +2333,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_VENONAT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 55,
+        .baseDefense   = 55,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 60,
         .baseAttack    = 55,
         .baseDefense   = 50,
         .baseSpeed     = 45,
         .baseSpAttack  = 40,
         .baseSpDefense = 55,
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_POISON,
         .catchRate = 190,
@@ -2358,10 +2367,18 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_VENOMOTH] =
     {
         .baseHP        = 70,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 55,
+    #else
         .baseAttack    = 65,
+    #endif
         .baseDefense   = 60,
         .baseSpeed     = 90,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 100,
+    #else
         .baseSpAttack  = 90,
+    #endif
         .baseSpDefense = 75,
         .type1 = TYPE_BUG,
         .type2 = TYPE_POISON,
@@ -2439,12 +2456,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MEOWTH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 45,
+        .baseAttack    = 60,
+        .baseDefense   = 35,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 40,
+    #else
         .baseHP        = 40,
         .baseAttack    = 45,
         .baseDefense   = 35,
         .baseSpeed     = 90,
         .baseSpAttack  = 40,
         .baseSpDefense = 40,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 255,
@@ -2465,10 +2491,18 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_PERSIAN] =
     {
         .baseHP        = 65,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 90,
+    #else
         .baseAttack    = 70,
+    #endif
         .baseDefense   = 60,
         .baseSpeed     = 115,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 80,
+    #else
         .baseSpAttack  = 65,
+    #endif
         .baseSpDefense = 65,
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
@@ -2520,7 +2554,11 @@ const struct BaseStats gBaseStats[] =
         .baseSpAttack  = 95,
         .baseSpDefense = 80,
         .type1 = TYPE_WATER,
+    #ifdef ROGUE_DRAYANO
         .type2 = TYPE_WATER,
+    #else
+        .type2 = TYPE_PSYCHIC,
+    #endif
         .catchRate = 75,
         .expYield = 175,
         .evYield_SpAttack  = 2,

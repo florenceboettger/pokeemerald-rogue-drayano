@@ -998,6 +998,10 @@ static const struct LevelUpMove sDugtrioLevelUpLearnset[] = {
     LEVEL_UP_MOVE(41, MOVE_SLASH),
     LEVEL_UP_MOVE(47, MOVE_EARTHQUAKE),
     LEVEL_UP_MOVE(53, MOVE_FISSURE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(57, MOVE_FINAL_GAMBIT),
+    LEVEL_UP_MOVE(62, MOVE_SWORDS_DANCE),
+#endif
     LEVEL_UP_END
 };
 
@@ -1066,6 +1070,9 @@ static const struct LevelUpMove sPsyduckLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sGolduckLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_EXTRASENSORY),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ME_FIRST),
     LEVEL_UP_MOVE( 1, MOVE_AQUA_JET),
     LEVEL_UP_MOVE( 1, MOVE_WATER_SPORT),
@@ -1082,10 +1089,19 @@ static const struct LevelUpMove sGolduckLevelUpLearnset[] = {
     LEVEL_UP_MOVE(25, MOVE_ZEN_HEADBUTT),
     LEVEL_UP_MOVE(28, MOVE_AQUA_TAIL),
     LEVEL_UP_MOVE(31, MOVE_SOAK),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(36, MOVE_POWER_GEM),
+    LEVEL_UP_MOVE(41, MOVE_PSYCH_UP),
+    LEVEL_UP_MOVE(46, MOVE_PSYCHIC),
+    LEVEL_UP_MOVE(51, MOVE_AMNESIA),
+    LEVEL_UP_MOVE(56, MOVE_HYDRO_PUMP),
+    LEVEL_UP_MOVE(61, MOVE_WONDER_ROOM),
+#else
     LEVEL_UP_MOVE(36, MOVE_PSYCH_UP),
     LEVEL_UP_MOVE(41, MOVE_AMNESIA),
     LEVEL_UP_MOVE(46, MOVE_HYDRO_PUMP),
     LEVEL_UP_MOVE(51, MOVE_WONDER_ROOM),
+#endif
     LEVEL_UP_END
 };
 
@@ -1135,6 +1151,7 @@ static const struct LevelUpMove sPrimeapeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(48, MOVE_STOMPING_TANTRUM),
     LEVEL_UP_MOVE(53, MOVE_OUTRAGE),
     LEVEL_UP_MOVE(57, MOVE_FINAL_GAMBIT),
+    // add headlong rush?
     LEVEL_UP_END
 };
 
@@ -1263,6 +1280,9 @@ static const struct LevelUpMove sAlakazamLevelUpLearnset[] = {
     LEVEL_UP_MOVE(41, MOVE_CALM_MIND),
     LEVEL_UP_MOVE(43, MOVE_FUTURE_SIGHT),
     LEVEL_UP_MOVE(46, MOVE_TRICK),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(49, MOVE_AURA_SPHERE),
+#endif
     LEVEL_UP_END
 };
 
@@ -1499,6 +1519,7 @@ static const struct LevelUpMove sGolemLevelUpLearnset[] = {
     LEVEL_UP_MOVE(50, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(54, MOVE_STONE_EDGE),
     LEVEL_UP_MOVE(60, MOVE_HEAVY_SLAM),
+    // headlong rush?
     LEVEL_UP_END
 };
 
@@ -4427,6 +4448,7 @@ static const struct LevelUpMove sEspeonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(37, MOVE_PSYCHIC),
     LEVEL_UP_MOVE(41, MOVE_LAST_RESORT),
     LEVEL_UP_MOVE(45, MOVE_POWER_SWAP),
+#endif
     LEVEL_UP_END
 };
 

@@ -688,6 +688,87 @@
             "Bug Buzz"
         ]
     },
+    "Venomoth": {
+        "extra_moves": [
+            "Hurricane",
+            "Morning Sun",
+            "Baton Pass"
+        ]
+    },
+    "Dugtrio": {
+        "movesets": {
+            "gen7zu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Earthquake",
+                        "Stone Edge",
+                        "Sucker Punch"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Arena Trap"
+                }
+            }
+        }
+    },
+    "Persian": {
+        "movesets": {
+            "gen8zu": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Fake Out",
+                        "Return",
+                        "Knock Off",
+                        "U-turn"
+                    ],
+                    "item": "Silk Scarf",
+                    "ability": "Technician"
+                }
+            }
+        },
+        "extra_moves": [
+            "Quash"
+        ]
+    },
+    "Golduck": {
+        "movesets": {
+            "gen7vgc2017": {
+                "Swift Swim Attacker": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Psychic",
+                        "Ice Beam",
+                        "Protect"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Swift Swim"
+                }
+            },
+            "gen7zu": {
+                "Rain Sweeper": {
+                    "moves": [
+                        "Rain Dance",
+                        "Hydro Pump",
+                        "Ice Beam",
+                        "Psychic"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Swift Swim"
+                }
+            }
+        }
+    },
+    "Poliwrath": {
+        "extra_moves": [
+            "Drain Punch",
+            "High Horsepower"
+        ]
+    },
+    "Machamp": {
+        "extra_moves": [
+            "High Horsepower"
+        ]
+    },
 
     "Rapidash": {
         "movesets": {
