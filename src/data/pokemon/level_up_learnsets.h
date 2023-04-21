@@ -2561,6 +2561,9 @@ static const struct LevelUpMove sMrMimeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(43, MOVE_ROLE_PLAY),
     LEVEL_UP_MOVE(46, MOVE_BATON_PASS),
     LEVEL_UP_MOVE(50, MOVE_SAFEGUARD),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(53, MOVE_SPARKLY_SWIRL),
+#endif
     LEVEL_UP_END
 };
 
@@ -8125,6 +8128,11 @@ static const struct LevelUpMove sLileepLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sCradilyLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_POWER_WHIP),
+    LEVEL_UP_MOVE( 1, MOVE_POWER_WHIP),
+    LEVEL_UP_MOVE( 1, MOVE_PAIN_SPLIT),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_WRING_OUT),
     LEVEL_UP_MOVE( 1, MOVE_ASTONISH),
     LEVEL_UP_MOVE( 1, MOVE_CONSTRICT),
@@ -8143,6 +8151,8 @@ static const struct LevelUpMove sCradilyLevelUpLearnset[] = {
     LEVEL_UP_MOVE(52, MOVE_SPIT_UP),
     LEVEL_UP_MOVE(52, MOVE_SWALLOW),
     LEVEL_UP_MOVE(61, MOVE_WRING_OUT),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(69, MOVE_SAPPY_SEED),
     LEVEL_UP_END
 };
 

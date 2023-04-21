@@ -253,7 +253,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_ARON]                  = {{EVO_LEVEL, 32, SPECIES_LAIRON}},
     [SPECIES_LAIRON]                = {{EVO_LEVEL, 42, SPECIES_AGGRON}},
     [SPECIES_AGGRON]                = {{EVO_MEGA_EVOLUTION, ITEM_AGGRONITE, SPECIES_AGGRON_MEGA}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_LILEEP]                = {{EVO_LEVEL, 30, SPECIES_CRADILY}},
+#else
     [SPECIES_LILEEP]                = {{EVO_LEVEL, 40, SPECIES_CRADILY}},
+#endif
     [SPECIES_ANORITH]               = {{EVO_LEVEL, 40, SPECIES_ARMALDO}},
     [SPECIES_RALTS]                 = {{EVO_LEVEL, 20, SPECIES_KIRLIA}},
     [SPECIES_KIRLIA]                = {{EVO_LEVEL, 30, SPECIES_GARDEVOIR},

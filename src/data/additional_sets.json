@@ -994,6 +994,55 @@
         ]
     },
 
+    "Mr. Mime": {
+        "movesets": {
+            "gen7pu": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Sparkly Swirl",
+                        "Focus Blast",
+                        "Psyshock"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Soundproof"
+                }
+            },
+            "gen7zu": {
+                "Nasty Plot Sweeper": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Sparkly Swirl",
+                        "Psychic",
+                        "Encore"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Soundproof"
+                }
+            },
+            "gen8zu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Psychic",
+                        "Sparkly Swirl",
+                        "Trick",
+                        "Aura Sphere"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Filter"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Disarming Voice",
+            "Mystical Fire",
+            "Power Gem",
+            "Quash",
+            "Tri Attack"
+        ]
+    },
+
     "Jynx": {
         "movesets": {
             "gen8zu": {
@@ -2501,8 +2550,57 @@
         "extra_moves": [
             "Dazzling Gleam",
             "Nasty Plot",
-            "Solar Beam",
             "Tri Attack"
+        ]
+    },
+
+    "Lileep": {
+        "movesets": {
+            "gen7lc": {
+                "Tank": {
+                    "moves": [
+                        "Recover",
+                        "Giga Drain",
+                        "Stealth Rock",
+                        "Power Gem"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Storm Drain"
+                }
+            }
+        },
+        "extra_moves": [
+            "Earth Power"
+        ]
+    },
+
+    "Cradily": {
+        "movesets": {
+            "gen7zu": {
+                "Sappy Seed + Rock Blast": {
+                    "moves": [
+                        "Sappy Seed",
+                        "Rock Blast",
+                        "Recover",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Storm Drain"
+                },
+                "Giga Drain + Power Gem": {
+                    "moves": [
+                        "Giga Drain",
+                        "Power Gem",
+                        "Recover",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Storm Drain"
+                }
+            }
+        },
+        "extra_moves": [
+            "Earth Power"
         ]
     },
 
