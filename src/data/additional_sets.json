@@ -2604,6 +2604,35 @@
         ]
     },
 
+    "Anorith": {
+        "extra_moves": [
+            "Bug Buzz",
+            "Lunge",
+            "Rock Climb"
+        ]
+    },
+
+    "Armaldo": {
+        "movesets": {
+            "gen7zu": {
+                "First Impression": {
+                    "moves": [
+                        "First Impression",
+                        "Rock Climb",
+                        "Knock Off",
+                        "Rapid Spin"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Battle Armor"
+                }
+            }
+        },
+        "extra_moves": [
+            "Bug Buzz",
+            "Lunge"
+        ]
+    },
+
     "Milotic": {
         "movesets": {
             "gen8uu": {

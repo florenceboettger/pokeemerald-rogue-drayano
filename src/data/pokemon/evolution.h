@@ -258,7 +258,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 #else
     [SPECIES_LILEEP]                = {{EVO_LEVEL, 40, SPECIES_CRADILY}},
 #endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_ANORITH]               = {{EVO_LEVEL, 30, SPECIES_ARMALDO}},
+#else
     [SPECIES_ANORITH]               = {{EVO_LEVEL, 40, SPECIES_ARMALDO}},
+#endif
     [SPECIES_RALTS]                 = {{EVO_LEVEL, 20, SPECIES_KIRLIA}},
     [SPECIES_KIRLIA]                = {{EVO_LEVEL, 30, SPECIES_GARDEVOIR},
                                        {EVO_ITEM_MALE, ITEM_DAWN_STONE, SPECIES_GALLADE}},

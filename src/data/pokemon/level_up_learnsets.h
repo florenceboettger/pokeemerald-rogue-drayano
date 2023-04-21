@@ -8193,6 +8193,9 @@ static const struct LevelUpMove sArmaldoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(46, MOVE_X_SCISSOR),
     LEVEL_UP_MOVE(53, MOVE_PROTECT),
     LEVEL_UP_MOVE(61, MOVE_ROCK_BLAST),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(69, MOVE_FIRST_IMPRESSION),
+#endif
     LEVEL_UP_END
 };
 
