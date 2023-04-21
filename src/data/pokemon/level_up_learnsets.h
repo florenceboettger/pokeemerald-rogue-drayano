@@ -7158,7 +7158,12 @@ static const struct LevelUpMove sSnoruntLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sGlalieLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_ROCK_SLIDE),
+    LEVEL_UP_MOVE( 1, MOVE_ROCK_SLIDE),
+#else
     LEVEL_UP_MOVE( 0, MOVE_FREEZE_DRY),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_FREEZE_DRY),
     LEVEL_UP_MOVE( 1, MOVE_SHEER_COLD),
     LEVEL_UP_MOVE( 1, MOVE_POWDER_SNOW),
@@ -7174,9 +7179,17 @@ static const struct LevelUpMove sGlalieLevelUpLearnset[] = {
     LEVEL_UP_MOVE(32, MOVE_PROTECT),
     LEVEL_UP_MOVE(37, MOVE_FROST_BREATH),
     LEVEL_UP_MOVE(41, MOVE_CRUNCH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(46, MOVE_ICICLE_CRASH),
+    LEVEL_UP_MOVE(50, MOVE_BLIZZARD),
+    LEVEL_UP_MOVE(55, MOVE_HAIL),
+    LEVEL_UP_MOVE(61, MOVE_SHEER_COLD),
+    LEVEL_UP_MOVE(67, MOVE_HEAD_SMASH),
+#else
     LEVEL_UP_MOVE(48, MOVE_BLIZZARD),
     LEVEL_UP_MOVE(54, MOVE_HAIL),
     LEVEL_UP_MOVE(61, MOVE_SHEER_COLD),
+#endif
     LEVEL_UP_END
 };
 
@@ -7676,8 +7689,14 @@ static const struct LevelUpMove sTropiusLevelUpLearnset[] = {
     LEVEL_UP_MOVE(41, MOVE_BODY_SLAM),
     LEVEL_UP_MOVE(46, MOVE_BESTOW),
     LEVEL_UP_MOVE(50, MOVE_SYNTHESIS),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(55, MOVE_HURRICANE),
+    LEVEL_UP_MOVE(60, MOVE_SOLAR_BEAM),
+    LEVEL_UP_MOVE(65, MOVE_LEAF_STORM),
+#else
     LEVEL_UP_MOVE(56, MOVE_SOLAR_BEAM),
     LEVEL_UP_MOVE(61, MOVE_LEAF_STORM),
+#endif
     LEVEL_UP_END
 };
 
@@ -7843,6 +7862,10 @@ static const struct LevelUpMove sShuppetLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sBanetteLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_SLASH),
+    LEVEL_UP_MOVE( 1, MOVE_SLASH),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_PHANTOM_FORCE),
     LEVEL_UP_MOVE( 1, MOVE_KNOCK_OFF),
     LEVEL_UP_MOVE( 1, MOVE_SCREECH),
@@ -7863,6 +7886,8 @@ static const struct LevelUpMove sBanetteLevelUpLearnset[] = {
     LEVEL_UP_MOVE(52, MOVE_GRUDGE),
     LEVEL_UP_MOVE(58, MOVE_TRICK),
     LEVEL_UP_MOVE(64, MOVE_PHANTOM_FORCE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(70, MOVE_CRUSH_CLAW),
     LEVEL_UP_END
 };
 

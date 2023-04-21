@@ -226,8 +226,13 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SPHEAL]                = {{EVO_LEVEL, 32, SPECIES_SEALEO}},
     [SPECIES_SEALEO]                = {{EVO_LEVEL, 44, SPECIES_WALREIN}},
     [SPECIES_CACNEA]                = {{EVO_LEVEL, 32, SPECIES_CACTURNE}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_SNORUNT]               = {{EVO_LEVEL, 32, SPECIES_GLALIE},
+                                       {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}},
+#else
     [SPECIES_SNORUNT]               = {{EVO_LEVEL, 42, SPECIES_GLALIE},
                                        {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}},
+#endif
     [SPECIES_GLALIE]                = {{EVO_MEGA_EVOLUTION, ITEM_GLALITITE, SPECIES_GLALIE_MEGA}},
     [SPECIES_AZURILL]               = {{EVO_FRIENDSHIP, 0, SPECIES_MARILL}},
     [SPECIES_SPOINK]                = {{EVO_LEVEL, 32, SPECIES_GRUMPIG}},
@@ -237,7 +242,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SWABLU]                = {{EVO_LEVEL, 35, SPECIES_ALTARIA}},
     [SPECIES_ALTARIA]               = {{EVO_MEGA_EVOLUTION, ITEM_ALTARIANITE, SPECIES_ALTARIA_MEGA}},
     [SPECIES_WYNAUT]                = {{EVO_LEVEL, 15, SPECIES_WOBBUFFET}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_DUSKULL]               = {{EVO_LEVEL, 32, SPECIES_DUSCLOPS}},
+#else
     [SPECIES_DUSKULL]               = {{EVO_LEVEL, 37, SPECIES_DUSCLOPS}},
+#endif
     [SPECIES_DUSCLOPS]              = {{EVO_TRADE_ITEM, ITEM_REAPER_CLOTH, SPECIES_DUSKNOIR}},
     [SPECIES_ROSELIA]               = {{EVO_ITEM, ITEM_SHINY_STONE, SPECIES_ROSERADE}},
     [SPECIES_SLAKOTH]               = {{EVO_LEVEL, 18, SPECIES_VIGOROTH}},
@@ -248,7 +257,12 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_CLAMPERL]              = {{EVO_TRADE_ITEM, ITEM_DEEP_SEA_TOOTH, SPECIES_HUNTAIL},
                                        {EVO_TRADE_ITEM, ITEM_DEEP_SEA_SCALE, SPECIES_GOREBYSS}},
     [SPECIES_ABSOL]                 = {{EVO_MEGA_EVOLUTION, ITEM_ABSOLITE, SPECIES_ABSOL_MEGA}},
+#ifdef ROGUE_DRAYANO
+#else
+    [SPECIES_SHUPPET]               = {{EVO_LEVEL, 32, SPECIES_BANETTE}},
+#else
     [SPECIES_SHUPPET]               = {{EVO_LEVEL, 37, SPECIES_BANETTE}},
+#endif
     [SPECIES_BANETTE]               = {{EVO_MEGA_EVOLUTION, ITEM_BANETTITE, SPECIES_BANETTE_MEGA}},
     [SPECIES_ARON]                  = {{EVO_LEVEL, 32, SPECIES_LAIRON}},
     [SPECIES_LAIRON]                = {{EVO_LEVEL, 42, SPECIES_AGGRON}},
