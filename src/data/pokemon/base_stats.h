@@ -11710,7 +11710,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_ROCK_HEAD, ABILITY_SHELL_ARMOR},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
@@ -11735,19 +11739,32 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_ROCK_HEAD, ABILITY_SHELL_ARMOR},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
     [SPECIES_TORTERRA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 105,
+        .baseAttack    = 109,
+        .baseDefense   = 110,
+        .baseSpeed     = 61,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 85,
+    #else
         .baseHP        = 95,
         .baseAttack    = 109,
         .baseDefense   = 105,
         .baseSpeed     = 56,
         .baseSpAttack  = 75,
         .baseSpDefense = 85,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GROUND,
         .catchRate = 45,
@@ -11760,7 +11777,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_ROCK_HEAD, ABILITY_SHELL_ARMOR},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = TRUE,
     },

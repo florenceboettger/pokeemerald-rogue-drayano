@@ -3575,5 +3575,115 @@
                 }
             }
         }
+    },
+
+    "Turtwig": {
+        "movesets": {
+            "gen7lc": {
+                "Stealth Rock (Sleep Powder)": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Leaf Blade",
+                        "Superpower",
+                        "Sleep Powder"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Overgrow"
+                }
+            }
+        }
+    },
+    
+    "Torterra": {
+        "movesets": {
+            "gen7ru": {
+                "Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Wood Hammer",
+                        "Earthquake",
+                        "Synthesis"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Rock Head"
+                }
+            },
+            "gen7nu": {
+                "Offensive": {
+                    "moves": [
+                        "Wood Hammer",
+                        "Earthquake",
+                        "Head Smash",
+                        "Rock Polish"
+                    ],
+                    "item": "Rockium Z",
+                    "ability": "Rock Head"
+                }
+            },
+            "gen7pu": {
+                "Rock Polish": {
+                    "moves": [
+                        "Rock Polish",
+                        "Swords Dance",
+                        "Earthquake",
+                        "Wood Hammer"
+                    ],
+                    "item": "Grassium Z",
+                    "ability": "Rock Head"
+                },
+                "Bulky Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Leaf Blade",
+                        "Earthquake",
+                        "Synthesis"
+                    ],
+                    "item": "Grassium Z",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen7zu": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Synthesis",
+                        "Wood Hammer",
+                        "Earthquake"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Rock Head"
+                },
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Head Smash",
+                        "Wood Hammer",
+                        "Earthquake"
+                    ],
+                    "item": "Rockium Z",
+                    "ability": "Rock Head"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Wood Hammer",
+                        "Earthquake",
+                        "Head Smash",
+                        "Crunch"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Rock Head"
+                },
+                "Rock Polish": {
+                    "moves": [
+                        "Rock Polish",
+                        "Head Smash",
+                        "Wood Hammer",
+                        "Earthquake"
+                    ],
+                    "item": "Grassium Z",
+                    "ability": "Rock Head"
+                }
+            }
+        }
     }
 }
