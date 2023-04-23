@@ -2376,6 +2376,9 @@ const u16 gEggMoves[] = {
         MOVE_ENTRAINMENT),
 
     egg_moves(BAGON,
+    #ifdef ROGUE_DRAYANO
+        MOVE_WISH,
+    #endif
         MOVE_HYDRO_PUMP,
         MOVE_THRASH,
         MOVE_DRAGON_RAGE,

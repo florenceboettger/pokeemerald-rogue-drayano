@@ -11110,7 +11110,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SHELL_ARMOR, ABILITY_BATTLE_ARMOR, ABILITY_RATTLED},
+    #else
         .abilities = {ABILITY_SHELL_ARMOR, ABILITY_NONE, ABILITY_RATTLED},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11123,8 +11127,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 52,
         .baseSpAttack  = 94,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_DARK,
+    #else
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
+    #endif
         .catchRate = 60,
         .expYield = 170,
         .evYield_Attack    = 1,
@@ -11136,7 +11145,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_INTIMIDATE},
+    #else
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_WATER_VEIL},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11149,8 +11162,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 52,
         .baseSpAttack  = 114,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_PSYCHIC,
+    #else
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
+    #endif
         .catchRate = 60,
         .expYield = 170,
         .evYield_SpAttack  = 2,
@@ -11161,7 +11179,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_HYDRATION, ABILITY_REGENERATOR},
+    #else
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_HYDRATION},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },
@@ -11194,14 +11216,28 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LUVDISC] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 30,
+        .baseDefense   = 75,
+        .baseSpeed     = 125,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 43,
         .baseAttack    = 30,
         .baseDefense   = 55,
         .baseSpeed     = 97,
         .baseSpAttack  = 40,
         .baseSpDefense = 65,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_FAIRY,
+    #else
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
+    #endif
         .catchRate = 225,
         .expYield = 116,
         .evYield_Speed     = 1,
@@ -11212,7 +11248,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_FAST,
         .eggGroup1 = EGG_GROUP_WATER_2,
         .eggGroup2 = EGG_GROUP_WATER_2,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_HYDRATION, ABILITY_SOUL_HEART},
+    #else
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_HYDRATION},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },
@@ -11312,7 +11352,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_ROCK_HEAD, ABILITY_LIGHT_METAL},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11337,7 +11381,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_IRON_FIST, ABILITY_LIGHT_METAL},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11362,7 +11410,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_IRON_FIST, ABILITY_LIGHT_METAL},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },

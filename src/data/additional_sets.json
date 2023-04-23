@@ -2914,5 +2914,192 @@
             "Rock Polish",
             "Work Up"
         ]
+    },
+
+    "Spheal": {
+        "extra_moves": [
+            "Scald"
+        ]
+    },
+
+    "Walrein": {
+        "movesets": {
+            "gen7pu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Roar",
+                        "Toxic",
+                        "Scald",
+                        "Slack Off"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Oblivious"
+                }
+            }
+        }
+    },
+
+    "Huntail": {
+        "movesets": {
+            "gen7pu": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Liquidation",
+                        "Ice Beam",
+                        "Sucker Punch"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Intimidate"
+                }
+            },
+            "gen7zu": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Liquidation",
+                        "Ice Fang",
+                        "Crunch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Intimidate"
+                }
+            }
+        }
+    },
+
+    "Gorebyss": {
+        "movesets": {
+            "gen7pu": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Hydro Pump",
+                        "Ice Beam",
+                        "Psychic"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Regenerator"
+                }
+            }
+        },
+        "extra_moves": [
+            "Psyshock"
+        ]
+    },
+
+    "Luvdisc": {
+        "movesets": {
+            "gen7ru": {
+                "Specs": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Moonblast",
+                        "Ice Beam",
+                        "Draining Kiss"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Soul-Heart"
+                },
+                "Scarf": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Moonblast",
+                        "Ice Beam",
+                        "Draining Kiss"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Soul-Heart"
+                }
+            },
+            "gen7pu": {
+                "Rain Sweeper": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Ice Beam",
+                        "Moonblast",
+                        "Lovely Kiss"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Swift Swim"
+                }
+            }
+        }
+    },
+
+    "Bagon": {
+        "extra_moves": [
+            "Work Up"
+        ]
+    },
+
+    "Salamence": {
+        "extra_moves": [
+            "Hurricane",
+            "Refresh",
+            "Work Up"
+        ]
+    },
+
+    "Beldum": {
+        "movesets": {
+            "gen7lc": {
+                "Beldum": {
+                    "moves": [
+                        "Iron Defense",
+                        "Zen Headbutt",
+                        "Iron Head",
+                        "Headbutt"
+                    ]
+                }
+            }
+        },
+        "extra_moves": [
+            "Steel Beam",
+            "Tackle"
+        ]
+    },
+    
+    "Metang": {
+        "movesets": {
+            "gen7zu": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Meteor Mash",
+                        "Thunder Punch",
+                        "Bullet Punch"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Iron Head",
+            "Steel Beam",
+            "Tackle"
+        ]
+    },
+
+    "Metagross": {
+        "movesets": {
+            "gen7monotype": {
+                "Choice Band (Psychic)": {
+                    "moves": [
+                        "Bullet Punch",
+                        "Meteor Mash",
+                        "Thunder Punch",
+                        "Ice Punch"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Steel Beam",
+            "Tackle"
+        ]
     }
 }

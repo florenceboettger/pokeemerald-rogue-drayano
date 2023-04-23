@@ -223,8 +223,16 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_MANECTRIC]             = {{EVO_MEGA_EVOLUTION, ITEM_MANECTITE, SPECIES_MANECTRIC_MEGA}},
     [SPECIES_NUMEL]                 = {{EVO_LEVEL, 33, SPECIES_CAMERUPT}},
     [SPECIES_CAMERUPT]              = {{EVO_MEGA_EVOLUTION, ITEM_CAMERUPTITE, SPECIES_CAMERUPT_MEGA}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_SPHEAL]                = {{EVO_LEVEL, 24, SPECIES_SEALEO}},
+#else
     [SPECIES_SPHEAL]                = {{EVO_LEVEL, 32, SPECIES_SEALEO}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_SEALEO]                = {{EVO_LEVEL, 40, SPECIES_WALREIN}},
+#else
     [SPECIES_SEALEO]                = {{EVO_LEVEL, 44, SPECIES_WALREIN}},
+#endif
     [SPECIES_CACNEA]                = {{EVO_LEVEL, 32, SPECIES_CACTURNE}},
 #ifdef ROGUE_DRAYANO
     [SPECIES_SNORUNT]               = {{EVO_LEVEL, 32, SPECIES_GLALIE},
