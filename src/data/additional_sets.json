@@ -3243,5 +3243,309 @@
                 }
             }
         }
+    },
+
+    "Latias": {
+        "movesets": {
+            "gen7uu": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Roost"
+                    ],
+                    "item": "Dragonium Z",
+                    "ability": "Levitate"
+                },
+                "3 Attacks + Roost": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Hidden Power Fire",
+                        "Roost"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Levitate"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Trick",
+                        "Healing Wish"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7monotype": {
+                "Choice Scarf (Dragon)": {
+                    "moves": [
+                        "Mist Ball",
+                        "Draco Meteor",
+                        "Defog",
+                        "Healing Wish"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                },
+                "Choice Scarf (Psychic)": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Defog",
+                        "Trick"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8monotype": {
+                "Choice Scarf (Dragon)": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Healing Wish",
+                        "Defog"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                },
+                "Choice Scarf (Psychic)": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Psyshock",
+                        "Defog",
+                        "Healing Wish"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8nationaldexmonotype": {
+                "Choice Scarf (Psychic)": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Defog",
+                        "Healing Wish"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                },
+                "Choice Scarf (Dragon)": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Defog",
+                        "Healing Wish"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8bdspou": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Roost",
+                        "Mist Ball",
+                        "Draco Meteor"
+                    ],
+                    "item": "Soul Dew",
+                    "ability": "Levitate"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Surf",
+                        "Thunderbolt"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                },
+                "Defensive": {
+                    "moves": [
+                        "Thunder Wave",
+                        "Roost",
+                        "Thunderbolt",
+                        "Ice Beam"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Mist Ball",
+                        "Surf",
+                        "Thunder Wave"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Breaking Swipe",
+            "Dual Wingbeat"
+        ]
+    },
+
+    "Latios": {
+        "movesets": {
+            "gen7ou": {
+                "Mega Mixed Attacker": {
+                    "moves": [
+                        "Luster Purge",
+                        "Earthquake",
+                        "Ice Beam",
+                        "Roost"
+                    ],
+                    "item": "Latiosite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7monotype": {
+                "Mega All-out Attacker": {
+                    "moves": [
+                        "Luster Purge",
+                        "Earthquake",
+                        "Hidden Power Fire",
+                        "Recover"
+                    ],
+                    "item": "Latiosite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Offensive": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Luster Purge",
+                        "Shadow Ball",
+                        "Thunderbolt"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                },
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Psyshock",
+                        "Draco Meteor",
+                        "Shadow Ball"
+                    ],
+                    "item": "Latiosite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen71v1": {
+                "Choice Specs": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Thunderbolt",
+                        "Luster Purge",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8nationaldex": {
+                "3 Attacks": {
+                    "moves": [
+                        "Luster Purge",
+                        "Aura Sphere",
+                        "Ice Beam",
+                        "Roost"
+                    ],
+                    "item": "Latiosite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8ou": {
+                "Choice Specs": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Luster Purge",
+                        "Trick",
+                        "Mystical Fire"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                },
+                "Life Orb": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Luster Purge",
+                        "Roost",
+                        "Mystical Fire"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Levitate"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Draco Meteor",
+                        "Psychic",
+                        "Trick",
+                        "Aura Sphere"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat",
+            "Breaking Swipe"
+        ]
+    },
+    
+    "Kyogre": {
+        "extra_moves": [
+            "Frost Breath",
+            "Work Up"
+        ]
+    },
+
+    "Groudon": {
+        "extra_moves": [
+            "Low Sweep",
+            "Work Up"
+        ]
+    },
+
+    "Rayquaza": {
+        "extra_moves": [
+            "Work Up"
+        ]
+    },
+    
+    "Jirachi": {
+        "extra_moves": [
+            "Draco Meteor",
+            "Meteor Mash"
+        ]
+    },
+
+    "Deoxys": {
+        "movesets": {
+            "gen7ubers": {
+                "Moody": {
+                    "moves": [
+                        "Protect",
+                        "Psychic",
+                        "Ice Beam",
+                        "Recover"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Moody"
+                }
+            }
+        }
     }
 }

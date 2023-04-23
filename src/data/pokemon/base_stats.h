@@ -11681,7 +11681,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PRESSURE, ABILITY_NONE, ABILITY_MOODY},
+    #else
         .abilities = {ABILITY_PRESSURE, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
         .flags = FLAG_MYTHICAL,
@@ -26143,7 +26147,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PRESSURE, ABILITY_NONE, ABILITY_SHEER_FORCE},
+    #else
         .abilities = {ABILITY_PRESSURE, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
@@ -26168,7 +26176,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PRESSURE, ABILITY_NONE, ABILITY_REGENERATOR},
+    #else
         .abilities = {ABILITY_PRESSURE, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
@@ -26192,7 +26204,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PRESSURE, ABILITY_NONE, ABILITY_INNER FOCUS},
+    #else
         .abilities = {ABILITY_PRESSURE, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
     },
