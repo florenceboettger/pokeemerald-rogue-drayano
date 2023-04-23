@@ -3101,5 +3101,147 @@
             "Steel Beam",
             "Tackle"
         ]
+    },
+
+    "Regice": {
+        "movesets": {
+            "gen7pu": {
+                "Rock Polish": {
+                    "moves": [
+                        "Rock Polish",
+                        "Freezy Frost",
+                        "Focus Blast",
+                        "Freeze-Dry"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Filter"
+                }
+            },
+            "gen71v1": {
+                "Icium Z": {
+                    "moves": [
+                        "Amnesia",
+                        "Rest",
+                        "Freezy Frost",
+                        "Icy Wind"
+                    ],
+                    "item": "Icium Z",
+                    "ability": "Filter"
+                }
+            },
+            "gen7zu": {
+                "Rock Polish + 3 Attacks": {
+                    "moves": [
+                        "Rock Polish",
+                        "Freezy Frost",
+                        "Freeze-Dry",
+                        "Focus Blast"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Filter"
+                }
+            },
+            "gen8zu": {
+                "Rock Polish": {
+                    "moves": [
+                        "Rock Polish",
+                        "Freezy Frost",
+                        "Freeze-Dry",
+                        "Focus Blast"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Filter"
+                }
+            }
+        }
+    },
+
+    "Registeel": {
+        "movesets": {
+            "gen7ru": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Double Iron Bash",
+                        "Toxic",
+                        "Stealth Rock",
+                        "Protect"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen7uu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Toxic",
+                        "Double Iron Bash",
+                        "Counter"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Clear Body"
+                }
+            },
+            "gen71v1": {
+                "Mon of Steel (Stall)": {
+                    "moves": [
+                        "Amnesia",
+                        "Iron Defense",
+                        "Rest",
+                        "Seismic Toss"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen8ru": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Toxic",
+                        "Seismic Toss",
+                        "Heavy Slam"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen8uu": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Seismic Toss",
+                        "Thunder Wave",
+                        "Earthquake",
+                        "Stealth Rock"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen81v1": {
+                "Assault Vest": {
+                    "moves": [
+                        "Double Iron Bash",
+                        "Seismic Toss",
+                        "Earthquake",
+                        "Counter"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen8nationaldexru": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Toxic",
+                        "Body Press",
+                        "Double Iron Bash"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            }
+        }
     }
 }

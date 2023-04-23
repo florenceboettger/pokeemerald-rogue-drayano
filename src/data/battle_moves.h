@@ -5438,32 +5438,56 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_LUSTER_PURGE] =
     {
         .effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
+    #ifdef ROGUE_DRAYANO
+        .power = 85,
+    #else
         .power = 70,
+    #endif
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 5,
+    #endif
         .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_SPECIAL,
+    #ifdef ROGUE_DRAYANO
+        .zMovePower = 160,
+    #else
         .zMovePower = 140,
+    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
     [MOVE_MIST_BALL] =
     {
         .effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
+    #ifdef ROGUE_DRAYANO
+        .power = 85,
+    #else
         .power = 70,
+    #endif
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 5,
+    #endif
         .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_BALLISTIC | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_SPECIAL,
+    #ifdef ROGUE_DRAYANO
+        .zMovePower = 160,
+    #else
         .zMovePower = 140,
+    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 

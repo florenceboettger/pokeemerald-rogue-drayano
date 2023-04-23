@@ -11438,7 +11438,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_SOLID_ROCK, ABILITY_STURDY},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_STURDY},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
         .flags = FLAG_LEGENDARY,
@@ -11463,7 +11467,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_FILTER, ABILITY_ICE_BODY},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_ICE_BODY},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
         .flags = FLAG_LEGENDARY,
@@ -11489,7 +11497,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_HEATPROOF, ABILITY_LIGHT_METAL},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
         .flags = FLAG_LEGENDARY,
