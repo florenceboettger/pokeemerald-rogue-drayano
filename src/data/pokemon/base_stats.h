@@ -119,31 +119,59 @@
         }
 #endif
 
-#define CASTFORM_BASE_STATS(type, color)              \
-    {                                                 \
-        .baseHP        = 70,                          \
-        .baseAttack    = 70,                          \
-        .baseDefense   = 70,                          \
-        .baseSpeed     = 70,                          \
-        .baseSpAttack  = 70,                          \
-        .baseSpDefense = 70,                          \
-        .type1 = type,                                \
-        .type2 = type,                                \
-        .catchRate = 45,                              \
-        .expYield = 147,                              \
-        .evYield_HP        = 1,                       \
-        .itemCommon = ITEM_MYSTIC_WATER,                   \
-        .itemRare = ITEM_MYSTIC_WATER,                   \
-        .genderRatio = PERCENT_FEMALE(50),            \
-        .eggCycles = 25,                              \
-        .friendship = 70,                             \
-        .growthRate = GROWTH_MEDIUM_FAST,             \
-        .eggGroup1 = EGG_GROUP_FAIRY,                 \
-        .eggGroup2 = EGG_GROUP_AMORPHOUS,             \
-        .abilities = {ABILITY_FORECAST, ABILITY_NONE},\
-        .bodyColor = color,                           \
-        .noFlip = FALSE,                              \
-    }
+#ifdef ROGUE_DRAYANO
+    #define CASTFORM_BASE_STATS(type, color)              \
+        {                                                 \
+            .baseHP        = 60,                          \
+            .baseAttack    = 60,                          \
+            .baseDefense   = 60,                          \
+            .baseSpeed     = 95,                          \
+            .baseSpAttack  = 105,                          \
+            .baseSpDefense = 70,                          \
+            .type1 = type,                                \
+            .type2 = type,                                \
+            .catchRate = 45,                              \
+            .expYield = 147,                              \
+            .evYield_HP        = 1,                       \
+            .itemCommon = ITEM_MYSTIC_WATER,                   \
+            .itemRare = ITEM_MYSTIC_WATER,                   \
+            .genderRatio = PERCENT_FEMALE(50),            \
+            .eggCycles = 25,                              \
+            .friendship = 70,                             \
+            .growthRate = GROWTH_MEDIUM_FAST,             \
+            .eggGroup1 = EGG_GROUP_FAIRY,                 \
+            .eggGroup2 = EGG_GROUP_AMORPHOUS,             \
+            .abilities = {ABILITY_FORECAST, ABILITY_NONE},\
+            .bodyColor = color,                           \
+            .noFlip = FALSE,                              \
+        }
+#else
+    #define CASTFORM_BASE_STATS(type, color)              \
+        {                                                 \
+            .baseHP        = 70,                          \
+            .baseAttack    = 70,                          \
+            .baseDefense   = 70,                          \
+            .baseSpeed     = 70,                          \
+            .baseSpAttack  = 70,                          \
+            .baseSpDefense = 70,                          \
+            .type1 = type,                                \
+            .type2 = type,                                \
+            .catchRate = 45,                              \
+            .expYield = 147,                              \
+            .evYield_HP        = 1,                       \
+            .itemCommon = ITEM_MYSTIC_WATER,                   \
+            .itemRare = ITEM_MYSTIC_WATER,                   \
+            .genderRatio = PERCENT_FEMALE(50),            \
+            .eggCycles = 25,                              \
+            .friendship = 70,                             \
+            .growthRate = GROWTH_MEDIUM_FAST,             \
+            .eggGroup1 = EGG_GROUP_FAIRY,                 \
+            .eggGroup2 = EGG_GROUP_AMORPHOUS,             \
+            .abilities = {ABILITY_FORECAST, ABILITY_NONE},\
+            .bodyColor = color,                           \
+            .noFlip = FALSE,                              \
+        }
+#endif
 
 #define BURMY_BASE_STATS(color)                                          \
     {                                                                    \
@@ -10238,6 +10266,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LUNATONE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 55,
+        .baseDefense   = 65,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 115,
+        .baseSpDefense = 85,
+    #else
         .baseAttack    = 55,
         .baseDefense   = 65,
         .baseSpeed     = 70,
@@ -10248,6 +10284,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseHP        = 70,
         #endif
+    #endif
         .type1 = TYPE_ROCK,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 45,
@@ -10268,6 +10305,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SOLROCK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 115,
+        .baseDefense   = 85,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 65,
+    #else
         .baseAttack    = 95,
         .baseDefense   = 85,
         .baseSpeed     = 70,
@@ -10278,6 +10323,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseHP        = 70,
         #endif
+    #endif
         .type1 = TYPE_ROCK,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 45,
@@ -10315,19 +10361,26 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_WATER_2,
         .eggGroup2 = EGG_GROUP_WATER_2,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SIMPLE, ABILITY_ANTICIPATION, ABILITY_HYDRATION},
+    #else
         .abilities = {ABILITY_OBLIVIOUS, ABILITY_ANTICIPATION, ABILITY_HYDRATION},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
     },
 
     [SPECIES_WHISCASH] =
     {
+    #ifdef ROGUE_DRAYANO
+    #else
         .baseHP        = 110,
-        .baseAttack    = 78,
-        .baseDefense   = 73,
+        .baseAttack    = 93,
+        .baseDefense   = 88,
         .baseSpeed     = 60,
         .baseSpAttack  = 76,
-        .baseSpDefense = 71,
+        .baseSpDefense = 73,
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_GROUND,
         .catchRate = 75,
@@ -10339,7 +10392,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_WATER_2,
         .eggGroup2 = EGG_GROUP_WATER_2,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SIMPLE, ABILITY_ANTICIPATION, ABILITY_HYDRATION},
+    #else
         .abilities = {ABILITY_OBLIVIOUS, ABILITY_ANTICIPATION, ABILITY_HYDRATION},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -10421,12 +10478,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CLAYDOL] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 70,
+        .baseDefense   = 105,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 120,
+    #else
         .baseHP        = 60,
         .baseAttack    = 70,
         .baseDefense   = 105,
         .baseSpeed     = 75,
         .baseSpAttack  = 70,
         .baseSpDefense = 120,
+    #endif
         .type1 = TYPE_GROUND,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 90,
@@ -10605,12 +10671,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_KECLEON] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 85,
+        .baseAttack    = 100,
+        .baseDefense   = 70,
+        .baseSpeed     = 40,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 120,
+    #else
         .baseHP        = 60,
         .baseAttack    = 90,
         .baseDefense   = 70,
         .baseSpeed     = 40,
         .baseSpAttack  = 60,
         .baseSpDefense = 120,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 200,
@@ -10654,14 +10729,28 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BANETTE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 64,
+        .baseAttack    = 125,
+        .baseDefense   = 65,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 93,
+        .baseSpDefense = 63,
+    #else
         .baseHP        = 64,
         .baseAttack    = 115,
         .baseDefense   = 65,
         .baseSpeed     = 65,
         .baseSpAttack  = 83,
         .baseSpDefense = 63,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GHOST,
+        .type2 = TYPE_NORMAL,
+    #else
         .type1 = TYPE_GHOST,
         .type2 = TYPE_GHOST,
+    #endif
         .catchRate = 45,
         .expYield = 159,
         .evYield_Attack    = 2,
@@ -10730,12 +10819,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_TROPIUS] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 100,
+        .baseAttack    = 95,
+        .baseDefense   = 95,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 95,
+    #else
         .baseHP        = 99,
         .baseAttack    = 68,
         .baseDefense   = 83,
         .baseSpeed     = 51,
         .baseSpAttack  = 72,
         .baseSpDefense = 87,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_FLYING,
         .catchRate = 200,
@@ -10754,6 +10852,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CHIMECHO] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 40,
+        .baseDefense   = 80,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 100,
+    #else
         .baseAttack    = 50,
         .baseSpeed     = 65,
         .baseSpAttack  = 95,
@@ -10766,6 +10872,7 @@ const struct BaseStats gBaseStats[] =
             .baseDefense   = 70,
             .baseSpDefense = 80,
         #endif
+    #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 45,
@@ -10786,12 +10893,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_ABSOL] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 130,
+        .baseDefense   = 60,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 65,
         .baseAttack    = 130,
         .baseDefense   = 60,
         .baseSpeed     = 75,
         .baseSpAttack  = 75,
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_DARK,
         .type2 = TYPE_DARK,
         .catchRate = 30,
@@ -10861,14 +10977,28 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GLALIE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 80,
+        .baseAttack    = 110,
+        .baseDefense   = 110,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 80,
         .baseAttack    = 80,
         .baseDefense   = 80,
         .baseSpeed     = 80,
         .baseSpAttack  = 80,
         .baseSpDefense = 80,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_ICE,
+        .type2 = TYPE_ROCK,
+    #else
         .type1 = TYPE_ICE,
         .type2 = TYPE_ICE,
+    #endif
         .catchRate = 75,
         .expYield = 168,
         .evYield_HP        = 2,
@@ -10878,7 +11008,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FAIRY,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_LEVITATE, ABILITY_ICE_BODY, ABILITY_MOODY},
+    #else
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_ICE_BODY, ABILITY_MOODY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
     },
@@ -10976,7 +11110,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SHELL_ARMOR, ABILITY_BATTLE_ARMOR, ABILITY_RATTLED},
+    #else
         .abilities = {ABILITY_SHELL_ARMOR, ABILITY_NONE, ABILITY_RATTLED},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -10989,8 +11127,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 52,
         .baseSpAttack  = 94,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_DARK,
+    #else
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
+    #endif
         .catchRate = 60,
         .expYield = 170,
         .evYield_Attack    = 1,
@@ -11002,7 +11145,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_INTIMIDATE},
+    #else
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_WATER_VEIL},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11015,8 +11162,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 52,
         .baseSpAttack  = 114,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_PSYCHIC,
+    #else
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
+    #endif
         .catchRate = 60,
         .expYield = 170,
         .evYield_SpAttack  = 2,
@@ -11027,7 +11179,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_HYDRATION, ABILITY_REGENERATOR},
+    #else
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_HYDRATION},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },
@@ -11060,14 +11216,28 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LUVDISC] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 30,
+        .baseDefense   = 75,
+        .baseSpeed     = 125,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 43,
         .baseAttack    = 30,
         .baseDefense   = 55,
         .baseSpeed     = 97,
         .baseSpAttack  = 40,
         .baseSpDefense = 65,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_FAIRY,
+    #else
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
+    #endif
         .catchRate = 225,
         .expYield = 116,
         .evYield_Speed     = 1,
@@ -11078,7 +11248,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_FAST,
         .eggGroup1 = EGG_GROUP_WATER_2,
         .eggGroup2 = EGG_GROUP_WATER_2,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_HYDRATION, ABILITY_SOUL_HEART},
+    #else
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_HYDRATION},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },
@@ -11178,7 +11352,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_ROCK_HEAD, ABILITY_LIGHT_METAL},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11203,7 +11381,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_IRON_FIST, ABILITY_LIGHT_METAL},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11228,7 +11410,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_IRON_FIST, ABILITY_LIGHT_METAL},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11252,7 +11438,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_SOLID_ROCK, ABILITY_STURDY},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_STURDY},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
         .flags = FLAG_LEGENDARY,
@@ -11277,7 +11467,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_FILTER, ABILITY_ICE_BODY},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_ICE_BODY},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
         .flags = FLAG_LEGENDARY,
@@ -11303,7 +11497,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_HEATPROOF, ABILITY_LIGHT_METAL},
+    #else
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
         .flags = FLAG_LEGENDARY,
@@ -24478,14 +24676,28 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BANETTE_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 64,
+        .baseAttack    = 175,
+        .baseDefense   = 75,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 103,
+        .baseSpDefense = 83,
+    #else
         .baseHP        = 64,
         .baseAttack    = 165,
         .baseDefense   = 75,
         .baseSpeed     = 75,
         .baseSpAttack  = 93,
         .baseSpDefense = 83,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GHOST,
+        .type2 = TYPE_NORMAL,
+    #else
         .type1 = TYPE_GHOST,
         .type2 = TYPE_GHOST,
+    #endif
         .catchRate = 45,
         .expYield = 194,
         .evYield_Attack    = 2,
@@ -24527,12 +24739,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GLALIE_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 80,
+        .baseAttack    = 130,
+        .baseDefense   = 130,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 80,
         .baseAttack    = 120,
         .baseDefense   = 80,
         .baseSpeed     = 100,
         .baseSpAttack  = 120,
         .baseSpDefense = 80,
+    #endif
         .type1 = TYPE_ICE,
         .type2 = TYPE_ICE,
         .catchRate = 75,

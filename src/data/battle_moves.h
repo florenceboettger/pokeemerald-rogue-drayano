@@ -5438,32 +5438,56 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_LUSTER_PURGE] =
     {
         .effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
+    #ifdef ROGUE_DRAYANO
+        .power = 85,
+    #else
         .power = 70,
+    #endif
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 5,
+    #endif
         .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_SPECIAL,
+    #ifdef ROGUE_DRAYANO
+        .zMovePower = 160,
+    #else
         .zMovePower = 140,
+    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
     [MOVE_MIST_BALL] =
     {
         .effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
+    #ifdef ROGUE_DRAYANO
+        .power = 85,
+    #else
         .power = 70,
+    #endif
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 5,
+    #endif
         .secondaryEffectChance = 50,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_BALLISTIC | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_SPECIAL,
+    #ifdef ROGUE_DRAYANO
+        .zMovePower = 160,
+    #else
         .zMovePower = 140,
+    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
@@ -8567,11 +8591,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DARK_VOID] =
     {
+    #ifdef ROGUE_DRAYANO
+        .accuracy = 80,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_7
             .accuracy = 50,
         #else
             .accuracy = 80,
         #endif
+    #endif
         .effect = EFFECT_SLEEP,
         .power = 0,
         .type = TYPE_DARK,
@@ -9242,7 +9270,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #else
             .effect = EFFECT_BURN_HIT,
         #endif
+    #ifdef ROGUE_DRAYANO
+        .power = 70,
+    #else
         .power = 80,
+    #endif
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 15,
@@ -12342,6 +12374,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SAPPY_SEED] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 95,
+        .accuracy = 100,
+        .pp = 5,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .zMovePower = 175,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 100,
             .accuracy = 90,
@@ -12355,6 +12394,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
             .zMovePower = 175,
         #endif
+    #endif
         .effect = EFFECT_SAPPY_SEED,
         .type = TYPE_GRASS,
         .secondaryEffectChance = 0,
@@ -12390,6 +12430,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SPARKLY_SWIRL] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 95,
+        .accuracy = 100,
+        .pp = 5,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .zMovePower = 175,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 120,
             .accuracy = 85,
@@ -12403,6 +12450,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
             .zMovePower = 175,
         #endif
+    #endif
         .effect = EFFECT_SPARKLY_SWIRL,
         .type = TYPE_FAIRY,
         .secondaryEffectChance = 0,

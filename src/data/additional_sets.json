@@ -994,6 +994,55 @@
         ]
     },
 
+    "Mr. Mime": {
+        "movesets": {
+            "gen7pu": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Sparkly Swirl",
+                        "Focus Blast",
+                        "Psyshock"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Soundproof"
+                }
+            },
+            "gen7zu": {
+                "Nasty Plot Sweeper": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Sparkly Swirl",
+                        "Psychic",
+                        "Encore"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Soundproof"
+                }
+            },
+            "gen8zu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Psychic",
+                        "Sparkly Swirl",
+                        "Trick",
+                        "Aura Sphere"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Filter"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Disarming Voice",
+            "Mystical Fire",
+            "Power Gem",
+            "Quash",
+            "Tri Attack"
+        ]
+    },
+
     "Jynx": {
         "movesets": {
             "gen8zu": {
@@ -1277,7 +1326,6 @@
         "extra_moves": [
             "Blaze Kick",
             "Grass Knot",
-            "Rock Slide",
             "Scorching Sands",
             "Wild Charge"
         ]
@@ -2433,10 +2481,189 @@
         }
     },
 
+    "Lunatone": {
+        "movesets": {
+            "gen8pu": {
+                "Lunar Dance": {
+                    "moves": [
+                        "Power Gem",
+                        "Moonlight",
+                        "Lunar Dance",
+                        "Toxic"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Levitate"
+                }
+            }
+        }
+    },
+
+    "Barboach": {
+        "movesets": {
+            "gen7lc": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Liquidation",
+                        "Earthquake",
+                        "Bounce"
+                    ],
+                    "item": "Flyinium Z",
+                    "ability": "Simple"
+                }
+            }
+        },
+        "extra_moves": [
+            "Breaking Swipe",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Whiscash": {
+        "movesets": {
+            "gen7pu": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Liquidation",
+                        "Earthquake",
+                        "Bounce"
+                    ],
+                    "item": "Flyinium Z",
+                    "ability": "Simple"
+                }
+            }
+        },
+        "extra_moves": [
+            "Breaking Swipe"
+        ]
+    },
+
+    "Baltoy": {
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Nasty Plot",
+            "Power Gem",
+            "Scorching Sands",
+            "Solar Beam"
+        ]
+    },
+
+    "Claydol": {
+        "movesets": {
+            "gen7pu": {
+                "Calm Mind + Recover": {
+                    "moves": [
+                        "Calm Mind",
+                        "Recover",
+                        "Earth Power",
+                        "Psychic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                },
+                "Scorching Sands Pivot": {
+                    "moves": [
+                        "Teleport",
+                        "Scorching Sands",
+                        "Recover",
+                        "Power Gem"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Nasty Plot",
+            "Tri Attack"
+        ]
+    },
+
+    "Lileep": {
+        "movesets": {
+            "gen7lc": {
+                "Tank": {
+                    "moves": [
+                        "Recover",
+                        "Giga Drain",
+                        "Stealth Rock",
+                        "Power Gem"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Storm Drain"
+                }
+            }
+        },
+        "extra_moves": [
+            "Earth Power"
+        ]
+    },
+
+    "Cradily": {
+        "movesets": {
+            "gen7zu": {
+                "Sappy Seed + Rock Blast": {
+                    "moves": [
+                        "Sappy Seed",
+                        "Rock Blast",
+                        "Recover",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Storm Drain"
+                },
+                "Giga Drain + Power Gem": {
+                    "moves": [
+                        "Giga Drain",
+                        "Power Gem",
+                        "Recover",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Storm Drain"
+                }
+            }
+        },
+        "extra_moves": [
+            "Earth Power"
+        ]
+    },
+
+    "Anorith": {
+        "extra_moves": [
+            "Bug Buzz",
+            "Lunge",
+            "Rock Climb"
+        ]
+    },
+
+    "Armaldo": {
+        "movesets": {
+            "gen7zu": {
+                "First Impression": {
+                    "moves": [
+                        "First Impression",
+                        "Rock Climb",
+                        "Knock Off",
+                        "Rapid Spin"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Battle Armor"
+                }
+            }
+        },
+        "extra_moves": [
+            "Bug Buzz",
+            "Lunge"
+        ]
+    },
+
     "Milotic": {
         "movesets": {
-            "gen8uu": {
-                "Scald Set": {
+            "gen7ru": {
+                "Defensive": {
                     "moves": [
                         "Scald",
                         "Recover",
@@ -2445,20 +2672,34 @@
                     ],
                     "item": "Leftovers",
                     "ability": "Marvel Scale"
-                },
-                "Flip Turn Set": {
+                }
+            },
+            "gen71v1": {
+                "Normalium Z": {
                     "moves": [
-                        "Moonblast",
+                        "Scald",
                         "Recover",
-                        "Flip Turn",
-                        "Toxic"
+                        "Moonblast",
+                        "Hyper Beam"
                     ],
-                    "item": "Flame Orb",
+                    "item": "Normalium Z",
+                    "ability": "Competitive"
+                }
+            },
+            "gen8bdspou": {
+                "Physically Defensive": {
+                    "moves": [
+                        "Scald",
+                        "Ice Beam",
+                        "Moonblast",
+                        "Recover"
+                    ],
+                    "item": "Leftovers",
                     "ability": "Marvel Scale"
                 }
             },
             "gen7doublesou": {
-                "Dazzling Gleam Set": {
+                "Defensive": {
                     "moves": [
                         "Scald",
                         "Dazzling Gleam",
@@ -2481,9 +2722,554 @@
                     "ability": "Competitive"
                 }
             }
+        }
+    },
+
+    "Kecleon": {
+        "extra_moves": [
+            "Acrobatics"
+        ]
+    },
+
+    "Shuppet": {
+        "movesets": {
+            "gen7lc": {
+                "Poltergeist Wallbreaker": {
+                    "moves": [
+                        "Poltergeist",
+                        "Shadow Sneak",
+                        "Knock Off",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Frisk"
+                }
+            }
         },
         "extra_moves": [
-            "Dazzling Gleam"
+            "Work Up"
         ]
+    },
+
+    "Banette": {
+        "movesets": {
+            "gen7ru": {
+                "Mega Return": {
+                    "moves": [
+                        "Poltergeist",
+                        "Return",
+                        "Destiny Bond",
+                        "Knock Off"
+                    ],
+                    "item": "Banettite",
+                    "ability": "Frisk"
+                }
+            },
+            "gen7pu": {
+                "Poltergeist + Return": {
+                    "moves": [
+                        "Poltergeist",
+                        "Return",
+                        "Will-O-Wisp",
+                        "Shadow Sneak"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Insomnia"
+                }
+            }
+        }
+    },
+
+    "Duskull": {
+        "extra_moves": [
+            "Leech Life",
+            "Poltergeist",
+            "Skitter Smack"
+        ]
+    },
+
+    "Dusclops": {
+        "extra_moves": [
+            "Leech Life",
+            "Poltergeist",
+            "Skitter Smack"
+        ]
+    },
+
+    "Tropius": {
+        "movesets": {
+            "gen7pu": {
+                "Offensive Chlorophyll": {
+                    "moves": [
+                        "Solar Beam",
+                        "Weather Ball",
+                        "Air Slash",
+                        "Synthesis"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                },
+                "Offensive Solar Power": {
+                    "moves": [
+                        "Solar Beam",
+                        "Weather Ball",
+                        "Air Slash",
+                        "Giga Drain"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Solar Power"
+                },
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Dual Wingbeat",
+                        "Leaf Blade",
+                        "Earthquake"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Harvest"
+                }
+            }
+        },
+        "extra_moves": [
+            "Breaking Swipe",
+            "Bulldoze",
+            "Dragon Hammer",
+            "Dragon Pulse"
+        ]
+    },
+
+    "Chimecho": {
+        "extra_moves": [
+            "Power Gem",
+            "Weather Ball"
+        ]
+    },
+    
+    "Absol": {
+        "extra_moves": [
+            "Aura Sphere",
+            "Low Sweep",
+            "Quash",
+            "Rock Climb"
+        ]
+    },
+    
+    "Wynaut": {
+        "extra_moves": [
+            "Amnesia"
+        ]
+    },
+    
+    "Glalie": {
+        "movesets": {
+            "gen7pu": {
+                "Suicide Lead": {
+                    "moves": [
+                        "Spikes",
+                        "Taunt",
+                        "Ice Shard",
+                        "Head Smash"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Moody Sweeper": {
+                    "moves": [
+                        "Protect",
+                        "Substitute",
+                        "Rock Climb",
+                        "Sheer Cold"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Moody"
+                }
+            },
+            "gen7uu": {
+                "Offensive Spiker": {
+                    "moves": [
+                        "Spikes",
+                        "Return",
+                        "Quick Attack",
+                        "Earthquake"
+                    ],
+                    "item": "Glalitite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7ru": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Double-Edge",
+                        "Quick Attack",
+                        "Earthquake",
+                        "Explosion"
+                    ],
+                    "item": "Glalitite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8zu": {
+                "Suicide Lead": {
+                    "moves": [
+                        "Spikes",
+                        "Taunt",
+                        "Icicle Crash",
+                        "Head Smash"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8nationaldexru": {
+                "Offensive Spikes": {
+                    "moves": [
+                        "Spikes",
+                        "Double-Edge",
+                        "Earthquake",
+                        "Stone Edge"
+                    ],
+                    "item": "Glalitite",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Smack Down",
+            "Power Gem",
+            "Rock Polish",
+            "Work Up"
+        ]
+    },
+
+    "Spheal": {
+        "extra_moves": [
+            "Scald"
+        ]
+    },
+
+    "Walrein": {
+        "movesets": {
+            "gen7pu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Roar",
+                        "Toxic",
+                        "Scald",
+                        "Slack Off"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Oblivious"
+                }
+            }
+        }
+    },
+
+    "Huntail": {
+        "movesets": {
+            "gen7pu": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Liquidation",
+                        "Ice Beam",
+                        "Sucker Punch"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Intimidate"
+                }
+            },
+            "gen7zu": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Liquidation",
+                        "Ice Fang",
+                        "Crunch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Intimidate"
+                }
+            }
+        }
+    },
+
+    "Gorebyss": {
+        "movesets": {
+            "gen7pu": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Hydro Pump",
+                        "Ice Beam",
+                        "Psychic"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Regenerator"
+                }
+            }
+        },
+        "extra_moves": [
+            "Psyshock"
+        ]
+    },
+
+    "Luvdisc": {
+        "movesets": {
+            "gen7ru": {
+                "Specs": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Moonblast",
+                        "Ice Beam",
+                        "Draining Kiss"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Soul-Heart"
+                },
+                "Scarf": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Moonblast",
+                        "Ice Beam",
+                        "Draining Kiss"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Soul-Heart"
+                }
+            },
+            "gen7pu": {
+                "Rain Sweeper": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Ice Beam",
+                        "Moonblast",
+                        "Lovely Kiss"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Swift Swim"
+                }
+            }
+        }
+    },
+
+    "Bagon": {
+        "extra_moves": [
+            "Work Up"
+        ]
+    },
+
+    "Salamence": {
+        "extra_moves": [
+            "Hurricane",
+            "Refresh",
+            "Work Up"
+        ]
+    },
+
+    "Beldum": {
+        "movesets": {
+            "gen7lc": {
+                "Beldum": {
+                    "moves": [
+                        "Iron Defense",
+                        "Zen Headbutt",
+                        "Iron Head",
+                        "Headbutt"
+                    ]
+                }
+            }
+        },
+        "extra_moves": [
+            "Steel Beam",
+            "Tackle"
+        ]
+    },
+    
+    "Metang": {
+        "movesets": {
+            "gen7zu": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Meteor Mash",
+                        "Thunder Punch",
+                        "Bullet Punch"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Iron Head",
+            "Steel Beam",
+            "Tackle"
+        ]
+    },
+
+    "Metagross": {
+        "movesets": {
+            "gen7monotype": {
+                "Choice Band (Psychic)": {
+                    "moves": [
+                        "Bullet Punch",
+                        "Meteor Mash",
+                        "Thunder Punch",
+                        "Ice Punch"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Steel Beam",
+            "Tackle"
+        ]
+    },
+
+    "Regice": {
+        "movesets": {
+            "gen7pu": {
+                "Rock Polish": {
+                    "moves": [
+                        "Rock Polish",
+                        "Freezy Frost",
+                        "Focus Blast",
+                        "Freeze-Dry"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Filter"
+                }
+            },
+            "gen71v1": {
+                "Icium Z": {
+                    "moves": [
+                        "Amnesia",
+                        "Rest",
+                        "Freezy Frost",
+                        "Icy Wind"
+                    ],
+                    "item": "Icium Z",
+                    "ability": "Filter"
+                }
+            },
+            "gen7zu": {
+                "Rock Polish + 3 Attacks": {
+                    "moves": [
+                        "Rock Polish",
+                        "Freezy Frost",
+                        "Freeze-Dry",
+                        "Focus Blast"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Filter"
+                }
+            },
+            "gen8zu": {
+                "Rock Polish": {
+                    "moves": [
+                        "Rock Polish",
+                        "Freezy Frost",
+                        "Freeze-Dry",
+                        "Focus Blast"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Filter"
+                }
+            }
+        }
+    },
+
+    "Registeel": {
+        "movesets": {
+            "gen7ru": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Double Iron Bash",
+                        "Toxic",
+                        "Stealth Rock",
+                        "Protect"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen7uu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Toxic",
+                        "Double Iron Bash",
+                        "Counter"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Clear Body"
+                }
+            },
+            "gen71v1": {
+                "Mon of Steel (Stall)": {
+                    "moves": [
+                        "Amnesia",
+                        "Iron Defense",
+                        "Rest",
+                        "Seismic Toss"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen8ru": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Toxic",
+                        "Seismic Toss",
+                        "Heavy Slam"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen8uu": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Seismic Toss",
+                        "Thunder Wave",
+                        "Earthquake",
+                        "Stealth Rock"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen81v1": {
+                "Assault Vest": {
+                    "moves": [
+                        "Double Iron Bash",
+                        "Seismic Toss",
+                        "Earthquake",
+                        "Counter"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Heatproof"
+                }
+            },
+            "gen8nationaldexru": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Toxic",
+                        "Body Press",
+                        "Double Iron Bash"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Heatproof"
+                }
+            }
+        }
     }
 }

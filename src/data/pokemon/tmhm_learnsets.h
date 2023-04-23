@@ -8591,6 +8591,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM26_EARTHQUAKE)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM15_HYPER_BEAM)
@@ -8834,6 +8837,9 @@ const u8 gTMHMLearnsets[][64] =
 
     [SPECIES_BANETTE]     = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM04_CALM_MIND)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
@@ -9039,6 +9045,10 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM18_RAIN_DANCE)
                                           TMHM(TM44_REST)
                                           TMHM(TM27_RETURN)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM06_ROCK_SMASH)
+                                          TMHM(TM39_ROCK_TOMB)
+                                        #endif
                                           TMHM(TM20_SAFEGUARD)
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(TM30_SHADOW_BALL)
@@ -9315,6 +9325,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM26_EARTHQUAKE)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM15_HYPER_BEAM)
@@ -9342,6 +9355,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM26_EARTHQUAKE)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM15_HYPER_BEAM)
