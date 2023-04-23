@@ -7062,7 +7062,7 @@ static const struct LevelUpMove sSealeoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(36, MOVE_SLACK_OFF),
     LEVEL_UP_MOVE(41, MOVE_HAIL),
     LEVEL_UP_MOVE(46, MOVE_BLIZZARD),
-    LEVEL_UP_MOVE(51, MOVE_SHEER_COLD)
+    LEVEL_UP_MOVE(51, MOVE_SHEER_COLD),
 #else
     LEVEL_UP_MOVE(38, MOVE_HAIL),
     LEVEL_UP_MOVE(45, MOVE_BLIZZARD),
@@ -7940,6 +7940,7 @@ static const struct LevelUpMove sBanetteLevelUpLearnset[] = {
     LEVEL_UP_MOVE(64, MOVE_PHANTOM_FORCE),
 #ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE(70, MOVE_CRUSH_CLAW),
+#endif
     LEVEL_UP_END
 };
 
@@ -8230,6 +8231,7 @@ static const struct LevelUpMove sCradilyLevelUpLearnset[] = {
     LEVEL_UP_MOVE(61, MOVE_WRING_OUT),
 #ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE(69, MOVE_SAPPY_SEED),
+#endif
     LEVEL_UP_END
 };
 
@@ -8481,6 +8483,7 @@ static const struct LevelUpMove sRegirockLevelUpLearnset[] = {
 #ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE(73, MOVE_EARTHQUAKE),
     LEVEL_UP_MOVE(80, MOVE_ROCK_WRECKER),
+#endif
     LEVEL_UP_END
 };
 

@@ -1364,7 +1364,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
                                         #ifdef ROGUE_DRAYANO
-                                          TMHM(HM01_CUT),
+                                          TMHM(HM01_CUT)
                                         #endif
                                           TMHM(TM26_EARTHQUAKE)
                                           TMHM(TM42_FACADE)
@@ -1395,7 +1395,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
                                         #ifdef ROGUE_DRAYANO
-                                          TMHM(HM01_CUT),
+                                          TMHM(HM01_CUT)
                                         #endif
                                           TMHM(TM26_EARTHQUAKE)
                                           TMHM(TM42_FACADE)
