@@ -9856,6 +9856,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
                                           TMHM(TM31_BRICK_BREAK)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM04_CALM_MIND)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM28_DIG)
                                           TMHM(HM08_DIVE)
@@ -9880,6 +9883,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
                                           TMHM(TM31_BRICK_BREAK)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM04_CALM_MIND)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM28_DIG)
                                           TMHM(HM08_DIVE)
@@ -9906,6 +9912,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
                                           TMHM(TM31_BRICK_BREAK)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM04_CALM_MIND)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM28_DIG)
                                           TMHM(HM08_DIVE)

@@ -11805,7 +11805,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_HUMAN_LIKE,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_FLAME_BODY, ABILITY_IRON_FIST},
+    #else
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_IRON_FIST},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
     },
@@ -11830,7 +11834,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_HUMAN_LIKE,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_FLAME_BODY, ABILITY_IRON_FIST},
+    #else
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_IRON_FIST},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
     },
@@ -11840,7 +11848,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 76,
         .baseAttack    = 104,
         .baseDefense   = 71,
+    #ifdef ROGUE_DRAYANO
+        .baseSpeed     = 109,
+    #else
         .baseSpeed     = 108,
+    #endif
         .baseSpAttack  = 104,
         .baseSpDefense = 71,
         .type1 = TYPE_FIRE,
@@ -11856,7 +11868,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_HUMAN_LIKE,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_FLAME_BODY, ABILITY_IRON_FIST},
+    #else
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_IRON_FIST},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -11880,7 +11896,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_VITAL_SPIRIT, ABILITY_COMPETITIVE},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11904,7 +11924,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_VITAL_SPIRIT, ABILITY_COMPETITIVE},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -11915,7 +11939,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 86,
         .baseDefense   = 88,
         .baseSpeed     = 60,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 116,
+    #else
         .baseSpAttack  = 111,
+    #endif
         .baseSpDefense = 101,
         .type1 = TYPE_WATER,
         .type2 = TYPE_STEEL,
@@ -11928,7 +11956,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_VITAL_SPIRIT, ABILITY_COMPETITIVE},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DEFIANT},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },

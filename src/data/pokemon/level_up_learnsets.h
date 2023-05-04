@@ -8847,6 +8847,9 @@ static const struct LevelUpMove sInfernapeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(52, MOVE_ACROBATICS),
     LEVEL_UP_MOVE(58, MOVE_CALM_MIND),
     LEVEL_UP_MOVE(68, MOVE_FLARE_BLITZ),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(78, MOVE_PYRO_BALL),
+#endif
     LEVEL_UP_END
 };
 
@@ -8907,6 +8910,10 @@ static const struct LevelUpMove sEmpoleonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(46, MOVE_MIST),
     LEVEL_UP_MOVE(52, MOVE_DRILL_PECK),
     LEVEL_UP_MOVE(59, MOVE_HYDRO_PUMP),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(66, MOVE_FLASH_CANNON),
+    LEVEL_UP_MOVE(73, MOVE_BRAVE_BIRD),
+#endif
     LEVEL_UP_END
 };
 
