@@ -10055,6 +10055,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_KRICKETUNE]  = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
@@ -10067,6 +10070,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM44_REST)
                                           TMHM(TM27_RETURN)
                                           TMHM(HM06_ROCK_SMASH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM39_ROCK_TOMB)
+                                        #endif
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(HM04_STRENGTH)
                                           TMHM(TM11_SUNNY_DAY)

@@ -3887,5 +3887,42 @@
             "Dual Wingbeat",
             "Sing"
         ]
+    },
+
+    "Kricketune": {
+        "movesets": {
+            "gen7pu": {
+                "Suicide Lead": {
+                    "moves": [
+                        "Sticky Web",
+                        "Endeavor",
+                        "Taunt",
+                        "X-Scissor"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Soundproof"
+                },
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Pin Missile",
+                        "Bulldoze",
+                        "Rock Tomb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Technician"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Fell Stinger",
+                        "Bulldoze",
+                        "Rock Tomb",
+                        "Bullet Seed"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Technician"
+                }
+            }
+        }
     }
 }
