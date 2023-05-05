@@ -3685,5 +3685,244 @@
                 }
             }
         }
+    },
+
+    "Monferno": {
+        "extra_moves": [
+            "Drain Punch"
+        ]
+    },
+
+    "Infernape": {
+        "movesets": {
+            "gen7uu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Pyro Ball",
+                        "U-turn",
+                        "Close Combat",
+                        "Gunk Shot"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Flame Body"
+                },
+                "Mixed Attacker": {
+                    "moves": [
+                        "Overheat",
+                        "Close Combat",
+                        "Drain Punch",
+                        "Grass Knot"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Iron Fist"
+                },
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Close Combat",
+                        "Pyro Ball",
+                        "Thunder Punch"
+                    ],
+                    "item": "Electrium Z",
+                    "ability": "Iron Fist"
+                }
+            },
+            "gen7monotype": {
+                "Suicide Lead (Fighting)": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Fire Blast",
+                        "Vacuum Wave",
+                        "Endeavor"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Flame Body"
+                },
+                "Choice Band (Fire)": {
+                    "moves": [
+                        "Pyro Ball",
+                        "Close Combat",
+                        "U-turn",
+                        "Mach Punch"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Iron Fist"
+                }
+            },
+            "gen71v1": {
+                "Firium Z": {
+                    "moves": [
+                        "Fake Out",
+                        "Substitute",
+                        "Close Combat",
+                        "Blast Burn"
+                    ],
+                    "item": "Firium Z",
+                    "ability": "Flame Body"
+                }
+            }
+        },
+        "extra_moves": [
+            "Aura Sphere"
+        ]
+    },
+
+    "Piplup": {
+        "movesets": {
+            "gen7lc": {
+                "Utility": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Defog",
+                        "Scald",
+                        "Ice Beam"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Competitive"
+                },
+                "Calm Mind + Roost": {
+                    "moves": [
+                        "Roost",
+                        "Calm Mind",
+                        "Scald",
+                        "Ice Beam"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Competitive"
+                }
+            }
+        },
+        "extra_moves": [
+            "Baby-Doll Eyes",
+            "Dual Wingbeat",
+            "Sing"
+        ]
+    },
+    
+    "Empoleon": {
+        "movesets": {
+            "gen7uu": {
+                "Utility": {
+                    "moves": [
+                        "Scald",
+                        "Stealth Rock",
+                        "Toxic",
+                        "Roost"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Competitive"
+                },
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Roost",
+                        "Hydro Pump",
+                        "Ice Beam"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Competitive"
+                }
+            },
+            "gen7monotype": {
+                "Utility (Water)": {
+                    "moves": [
+                        "Scald",
+                        "Roar",
+                        "Stealth Rock",
+                        "Roost"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Competitive"
+                }
+            },
+            "gen71v1": {
+                "Yawn + Waterium Z": {
+                    "moves": [
+                        "Hydro Cannon",
+                        "Laser Focus",
+                        "Yawn",
+                        "Substitute"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Vital Spirit"
+                },
+                "Laser Focus + 3 Attacks": {
+                    "moves": [
+                        "Hydro Cannon",
+                        "Laser Focus",
+                        "Icy Wind",
+                        "Steel Beam"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Torrent"
+                }
+            },
+            "gen8nationaldexru": {
+                "Defensive Utility": {
+                    "moves": [
+                        "Scald",
+                        "Toxic",
+                        "Knock Off",
+                        "Stealth Rock"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Competitive"
+                }
+            },
+            "gen8bdspou": {
+                "Entry Hazard Control": {
+                    "moves": [
+                        "Scald",
+                        "Ice Beam",
+                        "Defog",
+                        "Roar"
+                    ],
+                    "item": "Shuca Berry",
+                    "ability": "Competitive"
+                }
+            }
+        },
+        "extra_moves": [
+            "Baby-Doll Eyes",
+            "Dual Wingbeat",
+            "Sing"
+        ]
+    },
+
+    "Kricketune": {
+        "movesets": {
+            "gen7pu": {
+                "Suicide Lead": {
+                    "moves": [
+                        "Sticky Web",
+                        "Endeavor",
+                        "Taunt",
+                        "X-Scissor"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Soundproof"
+                },
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Pin Missile",
+                        "Bulldoze",
+                        "Rock Tomb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Technician"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Fell Stinger",
+                        "Bulldoze",
+                        "Rock Tomb",
+                        "Bullet Seed"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Technician"
+                }
+            }
+        }
     }
 }
