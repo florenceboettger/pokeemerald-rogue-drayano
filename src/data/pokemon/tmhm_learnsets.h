@@ -3161,6 +3161,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM27_RETURN)
                                           TMHM(HM06_ROCK_SMASH)
                                           TMHM(TM43_SECRET_POWER)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM36_SLUDGE_BOMB)
+                                        #endif
                                           TMHM(HM04_STRENGTH)
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM46_THIEF)
@@ -6002,6 +6005,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM27_RETURN)
                                           TMHM(HM06_ROCK_SMASH)
                                           TMHM(TM43_SECRET_POWER)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM36_SLUDGE_BOMB)
+                                        #endif
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM46_THIEF)
                                           TMHM(TM06_TOXIC)),
@@ -11683,6 +11689,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM06_ROCK_SMASH)
                                           TMHM(TM39_ROCK_TOMB)
                                           TMHM(TM43_SECRET_POWER)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM36_SLUDGE_BOMB)
+                                        #endif
                                           TMHM(TM22_SOLAR_BEAM)
                                           TMHM(HM04_STRENGTH)
                                           TMHM(TM11_SUNNY_DAY)

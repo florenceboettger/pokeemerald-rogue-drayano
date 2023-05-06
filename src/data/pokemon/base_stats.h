@@ -12339,7 +12339,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_MONSTER,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MOLD_BREAKER, ABILITY_ROCK_HEAD, ABILITY_SHEER_FORCE},
+    #else
         .abilities = {ABILITY_MOLD_BREAKER, ABILITY_NONE, ABILITY_SHEER_FORCE},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -12363,7 +12367,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_MONSTER,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MOLD_BREAKER, ABILITY_ROCK_HEAD, ABILITY_SHEER_FORCE},
+    #else
         .abilities = {ABILITY_MOLD_BREAKER, ABILITY_NONE, ABILITY_SHEER_FORCE},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },

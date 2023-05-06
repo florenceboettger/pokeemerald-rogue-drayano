@@ -4000,5 +4000,20 @@
                 }
             }
         }
+    },
+
+    "Rampardos": {
+        "movesets": {
+            "Choice Scarf": {
+                "moves": [
+                    "Head Smash",
+                    "Accelerock",
+                    "Superpower",
+                    "Zen Headbutt"
+                ],
+                "item": "Choice Scarf",
+                "ability": "Rock Head"
+            }
+        }
     }
 }
