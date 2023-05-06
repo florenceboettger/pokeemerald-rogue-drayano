@@ -6401,7 +6401,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .zMovePower = 100,
         #endif
         .effect = EFFECT_THIEF,
+    #ifdef ROGUE_DRAYANO
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 100,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,

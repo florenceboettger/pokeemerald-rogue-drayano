@@ -3924,5 +3924,81 @@
                 }
             }
         }
+    },
+
+    "Shinx": {
+        "movesets": {
+            "gen7lc": {
+                "Pivot": {
+                    "moves": [
+                        "Volt Switch",
+                        "Volt Tackle",
+                        "Thief",
+                        "Fire Fang"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Intimidate"
+                },
+                "Pivot (Nuzzle + Ice Fang)": {
+                    "moves": [
+                        "Volt Switch",
+                        "Volt Tackle",
+                        "Nuzzle",
+                        "Ice Fang"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Intimidate"
+                }
+            }
+        }
+    },
+
+    "Luxray": {
+        "movesets": {
+            "gen7pu": {
+                "All-Out Attacker": {
+                    "moves": [
+                        "Volt Tackle",
+                        "Crunch",
+                        "Superpower",
+                        "Volt Switch"
+                    ],
+                    "item": "Flame Orb",
+                    "ability": "Guts"
+                },
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Thunderbolt",
+                        "Dark Pulse",
+                        "Volt Switch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Intimidate"
+                },
+                "Nuzzle Utility": {
+                    "moves": [
+                        "Crunch",
+                        "Nuzzle",
+                        "Volt Switch",
+                        "Volt Tackle"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Intimidate"
+                }
+            },
+            "gen8zu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Volt Tackle",
+                        "Facade",
+                        "Play Rough",
+                        "Sucker Punch"
+                    ],
+                    "item": "Flame Orb",
+                    "ability": "Guts"
+                }
+            }
+        }
     }
 }
