@@ -173,29 +173,55 @@
         }
 #endif
 
-#define BURMY_BASE_STATS(color)                                          \
-    {                                                                    \
-        .baseHP        = 40,                                             \
-        .baseAttack    = 29,                                             \
-        .baseDefense   = 45,                                             \
-        .baseSpeed     = 36,                                             \
-        .baseSpAttack  = 29,                                             \
-        .baseSpDefense = 45,                                             \
-        .type1 = TYPE_BUG,                                               \
-        .type2 = TYPE_BUG,                                               \
-        .catchRate = 120,                                                \
-        .expYield = 45,                                                  \
-        .evYield_SpDefense = 1,                                          \
-        .genderRatio = PERCENT_FEMALE(50),                               \
-        .eggCycles = 15,                                                 \
-        .friendship = 70,                                                \
-        .growthRate = GROWTH_MEDIUM_FAST,                                \
-        .eggGroup1 = EGG_GROUP_BUG,                                      \
-        .eggGroup2 = EGG_GROUP_BUG,                                      \
-        .abilities = {ABILITY_SHED_SKIN, ABILITY_NONE, ABILITY_OVERCOAT},\
-        .bodyColor = color,                                              \
-        .noFlip = FALSE,                                                 \
-    }
+#ifdef ROGUE_DRAYANO
+    #define BURMY_BASE_STATS(color)                                          \
+        {                                                                    \
+            .baseHP        = 40,                                             \
+            .baseAttack    = 20,                                             \
+            .baseDefense   = 45,                                             \
+            .baseSpeed     = 30,                                             \
+            .baseSpAttack  = 45,                                             \
+            .baseSpDefense = 45,                                             \
+            .type1 = TYPE_BUG,                                               \
+            .type2 = TYPE_BUG,                                               \
+            .catchRate = 120,                                                \
+            .expYield = 45,                                                  \
+            .evYield_SpDefense = 1,                                          \
+            .genderRatio = PERCENT_FEMALE(50),                               \
+            .eggCycles = 15,                                                 \
+            .friendship = 70,                                                \
+            .growthRate = GROWTH_MEDIUM_FAST,                                \
+            .eggGroup1 = EGG_GROUP_BUG,                                      \
+            .eggGroup2 = EGG_GROUP_BUG,                                      \
+            .abilities = {ABILITY_SHED_SKIN, ABILITY_BATTLE_ARMOR, ABILITY_OVERCOAT},\
+            .bodyColor = color,                                              \
+            .noFlip = FALSE,                                                 \
+        }
+#else
+    #define BURMY_BASE_STATS(color)                                          \
+        {                                                                    \
+            .baseHP        = 40,                                             \
+            .baseAttack    = 29,                                             \
+            .baseDefense   = 45,                                             \
+            .baseSpeed     = 36,                                             \
+            .baseSpAttack  = 29,                                             \
+            .baseSpDefense = 45,                                             \
+            .type1 = TYPE_BUG,                                               \
+            .type2 = TYPE_BUG,                                               \
+            .catchRate = 120,                                                \
+            .expYield = 45,                                                  \
+            .evYield_SpDefense = 1,                                          \
+            .genderRatio = PERCENT_FEMALE(50),                               \
+            .eggCycles = 15,                                                 \
+            .friendship = 70,                                                \
+            .growthRate = GROWTH_MEDIUM_FAST,                                \
+            .eggGroup1 = EGG_GROUP_BUG,                                      \
+            .eggGroup2 = EGG_GROUP_BUG,                                      \
+            .abilities = {ABILITY_SHED_SKIN, ABILITY_NONE, ABILITY_OVERCOAT},\
+            .bodyColor = color,                                              \
+            .noFlip = FALSE,                                                 \
+        }
+#endif
 
 #define CHERRIM_BASE_STATS(color)                        \
     {                                                    \
@@ -12454,12 +12480,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_WORMADAM] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 50,
+        .baseDefense   = 90,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 110,
+    #else
         .baseHP        = 60,
         .baseAttack    = 59,
         .baseDefense   = 85,
         .baseSpeed     = 36,
         .baseSpAttack  = 79,
         .baseSpDefense = 105,
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_GRASS,
         .catchRate = 45,
@@ -12472,19 +12507,32 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_ANTICIPATION, ABILITY_SHIELD_DUST, ABILITY_OVERCOAT},
+    #else
         .abilities = {ABILITY_ANTICIPATION, ABILITY_NONE, ABILITY_OVERCOAT},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
     [SPECIES_MOTHIM] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 70,
+        .baseDefense   = 50,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 50,
+    #else
         .baseHP        = 70,
         .baseAttack    = 94,
         .baseDefense   = 50,
         .baseSpeed     = 66,
         .baseSpAttack  = 94,
         .baseSpDefense = 50,
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_FLYING,
         .catchRate = 45,
@@ -12498,7 +12546,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWARM, ABILITY_COMPOUND_EYES, ABILITY_TINTED_LENS},
+    #else
         .abilities = {ABILITY_SWARM, ABILITY_NONE, ABILITY_TINTED_LENS},
+    #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
     },
@@ -12517,13 +12569,21 @@ const struct BaseStats gBaseStats[] =
         .expYield = 49,
         .evYield_Speed     = 1,
         .itemRare = ITEM_HONEY,
+    #ifdef ROGUE_DRAYANO
+        .genderRatio = PERCENT_FEMALE(50),
+    #else
         .genderRatio = PERCENT_FEMALE(12.5),
+    #endif
         .eggCycles = 15,
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_HONEY_GATHER, ABILITY_HUSTLE, ABILITY_SWEET_VEIL},
+    #else
         .abilities = {ABILITY_HONEY_GATHER, ABILITY_NONE, ABILITY_HUSTLE},
+    #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
         .flags = FLAG_GENDER_DIFFERENCE,
@@ -12550,19 +12610,32 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PRESSURE, ABILITY_UNNERVE, ABILITY_QUEENLY_MAJESTY},
+    #else
         .abilities = {ABILITY_PRESSURE, ABILITY_NONE, ABILITY_UNNERVE},
+    #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
     },
 
     [SPECIES_PACHIRISU] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 45,
+        .baseDefense   = 80,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 60,
         .baseAttack    = 45,
         .baseDefense   = 70,
         .baseSpeed     = 95,
         .baseSpAttack  = 45,
         .baseSpDefense = 90,
+    #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_ELECTRIC,
         .catchRate = 200,
@@ -12574,7 +12647,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FAIRY,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PRANKSTER, ABILITY_PICKUP, ABILITY_VOLT_ABSORB},
+    #else
         .abilities = {ABILITY_RUN_AWAY, ABILITY_PICKUP, ABILITY_VOLT_ABSORB},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
     },
@@ -12598,7 +12675,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_TECHNICIAN},
+    #else
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_WATER_VEIL},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -12622,7 +12703,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_TECHNICIAN},
+    #else
         .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_WATER_VEIL},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -26350,12 +26435,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_WORMADAM_SANDY_CLOAK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 50,
+        .baseDefense   = 110,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 60,
         .baseAttack    = 79,
         .baseDefense   = 105,
         .baseSpeed     = 36,
         .baseSpAttack  = 59,
         .baseSpDefense = 85,
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_GROUND,
         .catchRate = 45,
@@ -26368,19 +26462,32 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_ANTICIPATION, ABILITY_ROUGH_SKIN, ABILITY_OVERCOAT},
+    #else
         .abilities = {ABILITY_ANTICIPATION, ABILITY_NONE, ABILITY_OVERCOAT},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
 
     [SPECIES_WORMADAM_TRASH_CLOAK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 50,
+        .baseDefense   = 100,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 100,
+    #else
         .baseHP        = 60,
         .baseAttack    = 69,
         .baseDefense   = 95,
         .baseSpeed     = 36,
         .baseSpAttack  = 69,
         .baseSpDefense = 95,
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_STEEL,
         .catchRate = 45,
@@ -26394,7 +26501,12 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_ANTICIPATION, ABILITY_WONDER_SKIN,
+        ABILITY_OVERCOAT},
+    #else
         .abilities = {ABILITY_ANTICIPATION, ABILITY_NONE, ABILITY_OVERCOAT},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },

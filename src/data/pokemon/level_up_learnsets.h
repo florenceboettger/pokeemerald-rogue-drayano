@@ -9407,6 +9407,9 @@ static const struct LevelUpMove sPachirisuLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sBuizelLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_BITE),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_SONIC_BOOM),
     LEVEL_UP_MOVE( 4, MOVE_GROWL),
     LEVEL_UP_MOVE( 7, MOVE_WATER_SPORT),
@@ -9425,6 +9428,11 @@ static const struct LevelUpMove sBuizelLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sFloatzelLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_FAKE_OUT),
+    LEVEL_UP_MOVE( 1, MOVE_FAKE_OUT),
+    LEVEL_UP_MOVE( 1, MOVE_BITE),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ICE_FANG),
     LEVEL_UP_MOVE( 1, MOVE_CRUNCH),
     LEVEL_UP_MOVE( 1, MOVE_SONIC_BOOM),

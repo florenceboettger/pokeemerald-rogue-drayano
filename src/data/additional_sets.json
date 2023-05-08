@@ -4058,5 +4058,118 @@
                 }
             }
         }
+    },
+
+    "Mothim": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Bug Buzz",
+                        "Hurricane",
+                        "U-turn",
+                        "Energy Ball"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Compound Eyes"
+                }
+            }
+        }
+    },
+
+    "Vespiquen": {
+        "movesets": {
+            "gen7pu": {
+                "Pressure Stall": {
+                    "moves": [
+                        "Substitute",
+                        "Toxic",
+                        "Roost",
+                        "Attack Order"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Queenly Majesty"
+                }
+            }
+        },
+        "extra_moves": [
+            "Hurricane"
+        ]
+    },
+
+    "Pachirisu": {
+        "movesets": {
+            "gen7pu": {
+                "Dual Screens": {
+                    "moves": [
+                        "Reflect",
+                        "Light Screen",
+                        "Thunder Wave",
+                        "U-turn"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Prankster"
+                }
+            }
+        },
+        "extra_moves": [
+            "Play Rough"
+        ]
+    },
+
+    "Buizel": {
+        "movesets": {
+            "gen7lc": {
+                "Icium Z": {
+                    "moves": [
+                        "Blizzard",
+                        "Scald",
+                        "Hidden Power Fire",
+                        "Aqua Jet"
+                    ],
+                    "item": "Icium Z",
+                    "ability": "Technician"
+                },
+                "Technician Offense": {
+                    "moves": [
+                        "Aqua Jet",
+                        "Power-Up Punch",
+                        "Ice Punch",
+                        "Rock Tomb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Technician"
+                }
+            }
+        }
+    },
+
+    "Floatzel": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Band": {
+                    "moves": [
+                        "Power-Up Punch",
+                        "Ice Punch",
+                        "Pursuit",
+                        "Aqua Jet"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Technician"
+                }
+            },
+            "gen7zu": {
+                "Mixed Attacker": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Ice Beam",
+                        "Hidden Power Electric",
+                        "Aqua Jet"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Technician"
+                }
+            }
+        }
     }
 }

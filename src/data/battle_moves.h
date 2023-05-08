@@ -8422,7 +8422,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_ATTACK_ORDER] =
     {
         .effect = EFFECT_HIT,
+    #ifdef ROGUE_DRAYANO
+        .power = 120,
+    #else
         .power = 90,
+    #endif
         .type = TYPE_BUG,
         .accuracy = 100,
         .pp = 15,

@@ -10371,6 +10371,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM15_HYPER_BEAM)
@@ -10396,6 +10399,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM16_LIGHT_SCREEN)
                                           TMHM(TM17_PROTECT)
                                           TMHM(TM18_RAIN_DANCE)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM33_REFLECT)
+                                        #endif
                                           TMHM(TM44_REST)
                                           TMHM(TM27_RETURN)
                                           TMHM(TM43_SECRET_POWER)
@@ -10408,6 +10414,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM14_BLIZZARD)
                                           TMHM(TM31_BRICK_BREAK)
                                           TMHM(TM08_BULK_UP)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT)
+                                        #endif
                                           TMHM(TM28_DIG)
                                           TMHM(HM08_DIVE)
                                           TMHM(TM32_DOUBLE_TEAM)
@@ -10435,6 +10444,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM14_BLIZZARD)
                                           TMHM(TM31_BRICK_BREAK)
                                           TMHM(TM08_BULK_UP)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT)
+                                        #endif
                                           TMHM(TM28_DIG)
                                           TMHM(HM08_DIVE)
                                           TMHM(TM32_DOUBLE_TEAM)
