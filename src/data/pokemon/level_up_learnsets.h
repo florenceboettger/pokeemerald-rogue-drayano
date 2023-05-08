@@ -9267,11 +9267,19 @@ static const struct LevelUpMove sShieldonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(37, MOVE_METAL_BURST),
     LEVEL_UP_MOVE(42, MOVE_IRON_HEAD),
     LEVEL_UP_MOVE(46, MOVE_HEAVY_SLAM),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(51, MOVE_HEAD_SMASH),
+#endif
     LEVEL_UP_END
 };
 
 static const struct LevelUpMove sBastiodonLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_SLACK_OFF),
+    LEVEL_UP_MOVE( 1, MOVE_SLACK_OFF),
+#else
     LEVEL_UP_MOVE( 0, MOVE_BLOCK),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_BLOCK),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_PROTECT),
@@ -9287,6 +9295,9 @@ static const struct LevelUpMove sBastiodonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(43, MOVE_METAL_BURST),
     LEVEL_UP_MOVE(51, MOVE_IRON_HEAD),
     LEVEL_UP_MOVE(58, MOVE_HEAVY_SLAM),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(66, MOVE_HEAD_SMASH),
+#endif
     LEVEL_UP_END
 };
 

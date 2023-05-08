@@ -2271,6 +2271,12 @@
         ]
     },
 
+    "Magby": {
+        "extra_moves": [
+            "Scorching Sands"
+        ]
+    },
+
     "Trapinch": {
         "extra_moves": [
             "Scorching Sands"
@@ -4013,6 +4019,43 @@
                 ],
                 "item": "Choice Scarf",
                 "ability": "Rock Head"
+            }
+        }
+    },
+
+    "Bastiodon": {
+        "movesets": {
+            "gen7pu": {
+                "Special Wall": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Metal Burst",
+                        "Slack Off",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Sturdy"
+                },
+                "Special Wall (alternate)": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Rock Slide",
+                        "Slack Off",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Solid Rock"
+                },
+                "Soundproof": {
+                    "moves": [
+                        "Slack Off",
+                        "Roar",
+                        "Rock Slide",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Soundproof"
+                }
             }
         }
     }
