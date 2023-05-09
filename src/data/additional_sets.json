@@ -4279,5 +4279,50 @@
                 }
             }
         }
+    },
+
+    "Mismagius": {
+        "movesets": {
+            "gen7nu": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Shadow Ball",
+                        "Moonblast",
+                        "Taunt"
+                    ],
+                    "item": "Fairium Z",
+                    "ability": "Levitate"
+                },
+                "3 Attacks + Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Shadow Ball",
+                        "Draining Kiss",
+                        "Power Gem"
+                    ],
+                    "item": "Rockium Z",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8bdspou": {
+                "Setup Sweeper": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Moonblast",
+                        "Mystical Fire",
+                        "Substitute"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                }
+            }
+        }
+    },
+
+    "Honchkrow": {
+        "extra_moves": [
+            "Hurricane"
+        ]
     }
 }

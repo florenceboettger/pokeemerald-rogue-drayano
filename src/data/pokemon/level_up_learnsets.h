@@ -9716,6 +9716,9 @@ static const struct LevelUpMove sMismagiusLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_PSYWAVE),
     LEVEL_UP_MOVE( 1, MOVE_SPITE),
     LEVEL_UP_MOVE( 1, MOVE_ASTONISH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_FAIRY_WIND),
+#endif
     LEVEL_UP_END
 };
 
