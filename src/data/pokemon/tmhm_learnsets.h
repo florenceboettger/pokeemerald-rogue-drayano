@@ -10614,6 +10614,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM35_FLAMETHROWER)
+                                        #endif
                                           TMHM(HM05_FLASH)
                                           TMHM(HM02_FLY)
                                           TMHM(TM21_FRUSTRATION)
@@ -10660,6 +10663,9 @@ const u8 gTMHMLearnsets[][64] =
 
     [SPECIES_LOPUNNY]     = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM31_BRICK_BREAK)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)

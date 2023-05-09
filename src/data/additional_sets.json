@@ -4225,5 +4225,59 @@
         "extra_moves": [
             "Spikes"
         ]
+    },
+
+    "Ambipom": {
+        "movesets": {
+            "gen7nu": {
+                "Icium Z": {
+                    "moves": [
+                        "Fake Out",
+                        "Tail Slap",
+                        "Ice Punch",
+                        "Pursuit"
+                    ],
+                    "item": "Icium Z",
+                    "ability": "Technician"
+                },
+                "Covet": {
+                    "moves": [
+                        "Fake Out",
+                        "Quick Attack",
+                        "Covet",
+                        "U-turn"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Technician"
+                },
+                "Skill Link Life Orb": {
+                    "moves": [
+                        "Tail Slap",
+                        "Arm Thrust",
+                        "U-turn",
+                        "Seed Bomb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Skill Link"
+                }
+            }
+        }
+    },
+
+    "Drifblim": {
+        "movesets": {
+            "gen7pu": {
+                "Flare Boost": {
+                    "moves": [
+                        "Strength Sap",
+                        "Shadow Ball",
+                        "Air Slash",
+                        "Flamethrower"
+                    ],
+                    "item": "Flame Orb",
+                    "ability": "Flare Boost"
+                }
+            }
+        }
     }
 }

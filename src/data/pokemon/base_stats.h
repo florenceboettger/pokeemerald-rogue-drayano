@@ -12781,12 +12781,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_AMBIPOM] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 105,
+        .baseDefense   = 66,
+        .baseSpeed     = 115,
+        .baseSpAttack  = 68,
+        .baseSpDefense = 66,
+    #else
         .baseHP        = 75,
         .baseAttack    = 100,
         .baseDefense   = 66,
         .baseSpeed     = 115,
         .baseSpAttack  = 60,
         .baseSpDefense = 66,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 45,
@@ -12883,8 +12892,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 105,
         .baseSpAttack  = 54,
         .baseSpDefense = 96,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_FIGHTING,
+    #else
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
+    #endif
         .catchRate = 60,
         .expYield = 168,
         .evYield_Speed     = 2,
