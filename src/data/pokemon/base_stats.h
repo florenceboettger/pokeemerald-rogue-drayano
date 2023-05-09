@@ -12969,12 +12969,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GLAMEOW] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 65,
+        .baseDefense   = 45,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 40,
+    #else
         .baseHP        = 49,
         .baseAttack    = 55,
         .baseDefense   = 42,
         .baseSpeed     = 85,
         .baseSpAttack  = 42,
         .baseSpDefense = 37,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 190,
@@ -12993,12 +13002,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PURUGLY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 95,
+        .baseDefense   = 70,
+        .baseSpeed     = 115,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 71,
         .baseAttack    = 82,
         .baseDefense   = 64,
         .baseSpeed     = 112,
         .baseSpAttack  = 64,
         .baseSpDefense = 59,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 75,
@@ -13017,12 +13035,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CHINGLING] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 45,
+        .baseAttack    = 30,
+        .baseDefense   = 50,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 45,
         .baseAttack    = 30,
         .baseDefense   = 50,
         .baseSpeed     = 45,
         .baseSpAttack  = 65,
         .baseSpDefense = 50,
+    #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 120,

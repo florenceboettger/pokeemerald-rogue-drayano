@@ -2847,6 +2847,7 @@
 
     "Chimecho": {
         "extra_moves": [
+            "Disarming Voice",
             "Power Gem",
             "Weather Ball"
         ]
@@ -4323,6 +4324,51 @@
     "Honchkrow": {
         "extra_moves": [
             "Hurricane"
+        ]
+    },
+
+    "Glameow": {
+        "extra_moves": [
+            "Covet",
+            "Crunch"
+        ]
+    },
+
+    "Purugly": {
+        "movesets": {
+            "gen7pu": {
+                "A More Tanky Sort of Bitch": {
+                    "moves": [
+                        "Toxic",
+                        "Body Slam",
+                        "Knock Off",
+                        "Slack Off"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Thick Fat"
+                },
+                "All-out Attacker": {
+                    "moves": [
+                        "Fake Out",
+                        "Return",
+                        "Sucker Punch",
+                        "U-turn"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Defiant"
+                }
+            }
+        },
+        "extra_moves": [
+            "Covet",
+            "Crunch",
+            "Play Rough"
+        ]
+    },
+
+    "Chingling": {
+        "extra_moves": [
+            "Weather Ball"
         ]
     }
 }
