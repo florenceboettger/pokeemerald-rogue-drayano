@@ -13069,12 +13069,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_STUNKY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 65,
+        .baseDefense   = 50,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 40,
+    #else
         .baseHP        = 63,
         .baseAttack    = 63,
         .baseDefense   = 47,
         .baseSpeed     = 74,
         .baseSpAttack  = 41,
         .baseSpDefense = 41,
+    #endif
         .type1 = TYPE_POISON,
         .type2 = TYPE_DARK,
         .catchRate = 225,
@@ -13093,12 +13102,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SKUNTANK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 115,
+        .baseAttack    = 95,
+        .baseDefense   = 70,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 103,
         .baseAttack    = 93,
         .baseDefense   = 67,
         .baseSpeed     = 84,
         .baseSpAttack  = 71,
         .baseSpDefense = 61,
+    #endif
         .type1 = TYPE_POISON,
         .type2 = TYPE_DARK,
         .catchRate = 60,
@@ -13168,12 +13186,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BONSLY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 85,
+        .baseDefense   = 95,
+        .baseSpeed     = 10,
+        .baseSpAttack  = 10,
+        .baseSpDefense = 55,
+    #else
         .baseHP        = 50,
         .baseAttack    = 80,
         .baseDefense   = 95,
         .baseSpeed     = 10,
         .baseSpAttack  = 10,
         .baseSpDefense = 45,
+    #endif
         .type1 = TYPE_ROCK,
         .type2 = TYPE_ROCK,
         .catchRate = 255,
@@ -13192,12 +13219,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MIME_JR] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 20,
+        .baseAttack    = 15,
+        .baseDefense   = 45,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 20,
         .baseAttack    = 25,
         .baseDefense   = 45,
         .baseSpeed     = 60,
         .baseSpAttack  = 70,
         .baseSpDefense = 90,
+    #endif
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_PSYCHIC,
             .type2 = TYPE_FAIRY,

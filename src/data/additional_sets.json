@@ -4370,5 +4370,29 @@
         "extra_moves": [
             "Weather Ball"
         ]
+    },
+
+    "Bronzor": {
+        "extra_moves": [
+            "Teleport"
+        ]
+    },
+
+    "Bronzong": {
+        "extra_moves": [
+            "Teleport",
+            "Weather Ball"
+        ]
+    },
+
+    "Mime Jr.": {
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Disarming Voice",
+            "Mystical Fire",
+            "Power Gem",
+            "Quash",
+            "Tri Attack"
+        ]
     }
 }
