@@ -4141,7 +4141,11 @@
                     "ability": "Technician"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Lunge",
+            "Tail Slap"
+        ]
     },
 
     "Floatzel": {
@@ -4170,6 +4174,56 @@
                     "ability": "Technician"
                 }
             }
+        },
+        "extra_moves": [
+            "Low Sweep",
+            "Lunge",
+            "Tail Slap"
+        ]
+    },
+
+    "Cherubi": {
+        "extra_moves": [
+            "Play Rough"
+        ]
+    },
+
+    "Cherrim": {
+        "movesets": {
+            "gen7pu": {
+                "Z-Sunny Day": {
+                    "moves": [
+                        "Sunny Day",
+                        "Swords Dance",
+                        "Solar Blade",
+                        "X-Scissor"
+                    ],
+                    "item": "Firium Z",
+                    "ability": "Flower Gift"
+                },
+                "Sleep Powder": {
+                    "moves": [
+                        "Sleep Powder",
+                        "Swords Dance",
+                        "Solar Blade",
+                        "Play Rough"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Flower Gift"
+                }
+            }
         }
+    },
+
+    "Shellos": {
+        "extra_moves": [
+            "Spikes"
+        ]
+    },
+
+    "Gastrodon": {
+        "extra_moves": [
+            "Spikes"
+        ]
     }
 }

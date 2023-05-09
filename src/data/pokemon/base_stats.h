@@ -223,30 +223,57 @@
         }
 #endif
 
-#define CHERRIM_BASE_STATS(color)                        \
-    {                                                    \
-        .baseHP        = 70,                             \
-        .baseAttack    = 60,                             \
-        .baseDefense   = 70,                             \
-        .baseSpeed     = 85,                             \
-        .baseSpAttack  = 87,                             \
-        .baseSpDefense = 78,                             \
-        .type1 = TYPE_GRASS,                             \
-        .type2 = TYPE_GRASS,                             \
-        .catchRate = 75,                                 \
-        .expYield = 158,                                 \
-        .evYield_SpAttack  = 2,                          \
-        .itemRare = ITEM_MIRACLE_SEED,                      \
-        .genderRatio = PERCENT_FEMALE(50),               \
-        .eggCycles = 20,                                 \
-        .friendship = 70,                                \
-        .growthRate = GROWTH_MEDIUM_FAST,                \
-        .eggGroup1 = EGG_GROUP_FAIRY,                    \
-        .eggGroup2 = EGG_GROUP_GRASS,                    \
-        .abilities = {ABILITY_FLOWER_GIFT, ABILITY_NONE},\
-        .bodyColor = color,                              \
-        .noFlip = FALSE,                                 \
-    }
+#ifdef ROGUE_DRAYANO
+    #define CHERRIM_BASE_STATS(color)                        \
+        {                                                    \
+            .baseHP        = 70,                             \
+            .baseAttack    = 100,                             \
+            .baseDefense   = 70,                             \
+            .baseSpeed     = 90,                             \
+            .baseSpAttack  = 87,                             \
+            .baseSpDefense = 83,                             \
+            .type1 = TYPE_GRASS,                             \
+            .type2 = TYPE_GRASS,                             \
+            .catchRate = 75,                                 \
+            .expYield = 158,                                 \
+            .evYield_SpAttack  = 2,                          \
+            .itemRare = ITEM_MIRACLE_SEED,                      \
+            .genderRatio = PERCENT_FEMALE(50),               \
+            .eggCycles = 20,                                 \
+            .friendship = 70,                                \
+            .growthRate = GROWTH_MEDIUM_FAST,                \
+            .eggGroup1 = EGG_GROUP_FAIRY,                    \
+            .eggGroup2 = EGG_GROUP_GRASS,                    \
+            .abilities = {ABILITY_FLOWER_GIFT, ABILITY_NONE},\
+            .bodyColor = color,                              \
+            .noFlip = FALSE,                                 \
+        }
+#else
+    #define CHERRIM_BASE_STATS(color)                        \
+        {                                                    \
+            .baseHP        = 70,                             \
+            .baseAttack    = 60,                             \
+            .baseDefense   = 70,                             \
+            .baseSpeed     = 85,                             \
+            .baseSpAttack  = 87,                             \
+            .baseSpDefense = 78,                             \
+            .type1 = TYPE_GRASS,                             \
+            .type2 = TYPE_GRASS,                             \
+            .catchRate = 75,                                 \
+            .expYield = 158,                                 \
+            .evYield_SpAttack  = 2,                          \
+            .itemRare = ITEM_MIRACLE_SEED,                      \
+            .genderRatio = PERCENT_FEMALE(50),               \
+            .eggCycles = 20,                                 \
+            .friendship = 70,                                \
+            .growthRate = GROWTH_MEDIUM_FAST,                \
+            .eggGroup1 = EGG_GROUP_FAIRY,                    \
+            .eggGroup2 = EGG_GROUP_GRASS,                    \
+            .abilities = {ABILITY_FLOWER_GIFT, ABILITY_NONE},\
+            .bodyColor = color,                              \
+            .noFlip = FALSE,                                 \
+        }
+#endif
 
 #define SHELLOS_BASE_STATS(color)                                                   \
     {                                                                               \
@@ -12714,12 +12741,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CHERUBI] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 55,
+        .baseAttack    = 35,
+        .baseDefense   = 60,
+        .baseSpeed     = 40,
+        .baseSpAttack  = 62,
+        .baseSpDefense = 53,
+    #else
         .baseHP        = 45,
         .baseAttack    = 35,
         .baseDefense   = 45,
         .baseSpeed     = 35,
         .baseSpAttack  = 62,
         .baseSpDefense = 53,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
         .catchRate = 190,
