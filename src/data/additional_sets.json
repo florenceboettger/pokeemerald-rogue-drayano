@@ -4689,5 +4689,167 @@
             "Ice Shard",
             "Tri Attack"
         ]
+    },
+    
+    "Probopass": {
+        "movesets": {
+            "gen7pu": {
+                "Offensive Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Power Gem",
+                        "Hidden Power Fire",
+                        "Volt Switch"
+                    ],
+                    "item": "Air Balloon",
+                    "ability": "Magnet Pull"
+                }
+            }        
+        }
+    },
+
+    "Dusknoir": {
+        "movesets": {
+            "gen7pu": {
+                "Assault Vest": {
+                    "moves": [
+                        "Shadow Punch",
+                        "Ice Punch",
+                        "Thunder Punch",
+                        "Earthquake"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Iron Fist"
+                }
+            },
+            "gen8zu": {
+                "Substitute + 3 Attacks": {
+                    "moves": [
+                        "Substitute",
+                        "Poltergeist",
+                        "Shadow Sneak",
+                        "Focus Punch"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Frisk"
+                }
+            }
+        }
+    },
+
+    "Froslass": {
+        "movesets": {
+            "gen7uu": {
+                "Suicide Lead": {
+                    "moves": [
+                        "Spikes",
+                        "Taunt",
+                        "Icy Wind",
+                        "Destiny Bond"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8ubers": {
+                "Suicide Lead": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Spikes",
+                        "Taunt",
+                        "Destiny Bond"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8uu": {
+                "Suicide Lead": {
+                    "moves": [
+                        "Spikes",
+                        "Ice Beam",
+                        "Taunt",
+                        "Destiny Bond"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Cursed Body"
+                }
+            },
+            "gen8nu": {
+                "Dedicated Lead": {
+                    "moves": [
+                        "Spikes",
+                        "Taunt",
+                        "Thunder Wave",
+                        "Icy Wind"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8pu": {
+                "Choice Band": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Ice Beam",
+                        "Thunderbolt",
+                        "Spikes"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                },
+                "Spikes": {
+                    "moves": [
+                        "Spikes",
+                        "Taunt",
+                        "Shadow Ball",
+                        "Ice Beam"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8monotype": {
+                "Suicide Lead (Ghost)": {
+                    "moves": [
+                        "Spikes",
+                        "Taunt",
+                        "Icy Wind",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Levitate"
+                },
+                "Suicide Lead (Ice)": {
+                    "moves": [
+                        "Spikes",
+                        "Taunt",
+                        "Destiny Bond",
+                        "Shadow Ball"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8zu": {
+                "Choice Band": {
+                    "moves": [
+                        "Ice Beam",
+                        "Shadow Ball",
+                        "Switcheroo",
+                        "Mystical Fire"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Ice Shard",
+            "Icicle Crash",
+            "Poltergeist",
+            "Trick",
+            "Triple Axel"
+        ]
     }
 }

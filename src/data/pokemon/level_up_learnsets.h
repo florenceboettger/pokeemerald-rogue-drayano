@@ -10802,6 +10802,9 @@ static const struct LevelUpMove sProbopassLevelUpLearnset[] = {
     LEVEL_UP_MOVE(40, MOVE_STONE_EDGE),
     LEVEL_UP_MOVE(43, MOVE_LOCK_ON),
     LEVEL_UP_MOVE(43, MOVE_ZAP_CANNON),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(46, MOVE_HEAD_SMASH),
+#endif
     LEVEL_UP_END
 };
 
