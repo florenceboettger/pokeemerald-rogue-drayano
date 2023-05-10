@@ -4429,6 +4429,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_TOGEPI]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM04_CALM_MIND)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
@@ -4456,6 +4459,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_TOGETIC]     = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM04_CALM_MIND)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
@@ -10912,7 +10918,7 @@ const u8 gTMHMLearnsets[][64] =
                                         #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
-                                          TMHM(TM15_HYPER_BEAM)
+                                          TMHM(TM15_HYPER_BfEAM)
                                           TMHM(TM16_LIGHT_SCREEN)
                                           TMHM(TM17_PROTECT)
                                           TMHM(TM29_PSYCHIC)
@@ -11725,6 +11731,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_TOGEKISS]    = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM04_CALM_MIND)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
@@ -11758,6 +11767,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM19_GIGA_DRAIN)
                                           TMHM(TM10_HIDDEN_POWER)
@@ -11777,6 +11789,10 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_LEAFEON]     = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM09_BULLET_SEED)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM04_CALM_MIND)
+                                          TMHM(HM01_CUT)
+                                        #endif
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)

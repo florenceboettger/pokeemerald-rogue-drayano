@@ -2035,6 +2035,7 @@
             }
         },
         "extra_moves": [
+            "Brave Bird",
             "Disarming Voice",
             "Dazzling Gleam",
             "Extrasensory",
@@ -4463,5 +4464,230 @@
                 }
             }
         }
+    },
+
+    "Togekiss": {
+        "movesets": {
+            "gen7uu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Air Slash",
+                        "Thunder Wave",
+                        "Trick",
+                        "Moonblast"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Serene Grace"
+                },
+                "Calm Mind + Roost": {
+                    "moves": [
+                        "Calm Mind",
+                        "Air Slash",
+                        "Moonblast",
+                        "Roost"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Serene Grace"
+                },
+                "Calm Mind + 3 Attacks": {
+                    "moves": [
+                        "Calm Mind",
+                        "Air Slash",
+                        "Moonblast",
+                        "Flamethrower"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Serene Grace"
+                }
+            },
+            "gen7monotype": {
+                "Choice Scarf (Flying)": {
+                    "moves": [
+                        "Air Slash",
+                        "Moonblast",
+                        "Trick",
+                        "Aura Sphere"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Serene Grace"
+                }
+            },
+            "gen71v1": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Air Slash",
+                        "Fire Blast",
+                        "Trick",
+                        "Moonblast"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Serene Grace"
+                }
+            },
+            "gen8vgc2020": {
+                "Scope Lens": {
+                    "moves": [
+                        "Hurricane",
+                        "Moonblast",
+                        "Follow Me",
+                        "Heat Wave"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Super Luck"
+                },
+                "Utility": {
+                    "moves": [
+                        "Moonblast",
+                        "Follow Me",
+                        "Yawn",
+                        "Helping Hand"
+                    ],
+                    "item": "Safety Goggles",
+                    "ability": "Serene Grace"
+                }
+            },
+            "gen8bdspou": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Air Slash",
+                        "Flamethrower",
+                        "Moonblast",
+                        "Aura Sphere"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Serene Grace"
+                }
+            }
+        }
+    },
+
+    "Yanmega": {
+        "extra_moves": [
+            "Hurricane",
+            "Hypnosis"
+        ]
+    },
+
+    "Leafeon": {
+        "movesets": {
+            "gen7pu": {
+                "Z-Celebrate": {
+                    "moves": [
+                        "Celebrate",
+                        "Power Whip",
+                        "Knock Off",
+                        "Synthesis"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Super Luck"
+                },
+                "Scope Lens": {
+                    "moves": [
+                        "Swords Dance",
+                        "Leaf Blade",
+                        "Psycho Cut",
+                        "X-Scissor"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Super Luck"
+                },
+                "Grass Whistle": {
+                    "moves": [
+                        "Swords Dance",
+                        "Grass Whistle",
+                        "Power Whip",
+                        "Knock Off"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                }
+            },
+            "gen7zu": {
+                "Z-Celebrate": {
+                    "moves": [
+                        "Celebrate",
+                        "Swords Dance",
+                        "Leaf Blade",
+                        "Knock Off"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Super Luck"
+                }
+            },
+            "gen8zu": {
+                "Sun Sweeper": {
+                    "moves": [
+                        "Swords Dance",
+                        "Solar Blade",
+                        "Knock Off",
+                        "Stomping Tantrum"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                }
+            }
+        },
+        "extra_moves": [
+            "Grass Knot",
+            "Jump Kick",
+            "Play Rough"
+        ]
+    },
+
+    "Glaceon": {
+        "movesets": {
+            "gen7pu": {
+                "Z-Celebrate": {
+                    "moves": [
+                        "Celebrate",
+                        "Ice Beam",
+                        "Earth Power",
+                        "Dazzling Gleam"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Serene Grace"
+                }
+            },
+            "gen7zu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Freeze-Dry",
+                        "Shadow Ball",
+                        "Earth Power",
+                        "Blizzard"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Snow Cloak"
+                },
+                "Z-Celebrate": {
+                    "moves": [
+                        "Celebrate",
+                        "Ice Beam",
+                        "Grass Knot",
+                        "Earth Power"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Serene Grace"
+                }
+            },
+            "gen8zu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Ice Beam",
+                        "Freeze-Dry",
+                        "Shadow Ball",
+                        "Water Pulse"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Serene Grace"
+                }
+            }
+        },
+        "extra_moves": [
+            "Growth",
+            "Ice Fang",
+            "Ice Shard",
+            "Tri Attack"
+        ]
     }
 }
