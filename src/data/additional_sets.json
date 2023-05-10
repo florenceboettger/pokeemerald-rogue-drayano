@@ -4394,5 +4394,74 @@
             "Quash",
             "Tri Attack"
         ]
+    },
+
+    "Electivire": {
+        "movesets": {
+            "gen7zu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Volt Switch",
+                        "Plasma Fists",
+                        "Close Combat",
+                        "Ice Punch"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Motor Drive"
+                },
+                "Mixed Attacker": {
+                    "moves": [
+                        "Plasma Fists",
+                        "Flamethrower",
+                        "Ice Punch",
+                        "Close Combat"
+                    ],
+                    "item": "Expert Belt",
+                    "ability": "Motor Drive"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Mach Punch",
+                        "Plasma Fists",
+                        "Ice Punch",
+                        "Earthquake"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Drain Punch"
+        ]
+    },
+
+    "Magmortar": {
+        "movesets": {
+            "gen7nu": {
+                "Z-Move": {
+                    "moves": [
+                        "Fire Blast",
+                        "Focus Blast",
+                        "Thunderbolt",
+                        "Taunt"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen8pu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Fire Blast",
+                        "Thunderbolt",
+                        "Focus Blast",
+                        "Scorching Sands"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Quick Draw"
+                }
+            }
+        }
     }
 }
