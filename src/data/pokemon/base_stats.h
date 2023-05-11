@@ -17235,7 +17235,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_WATER_BUBBLE},
+    #else
         .abilities = {ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_DAMP},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
         .flags = FLAG_GENDER_DIFFERENCE,
@@ -17260,7 +17264,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_WATER_BUBBLE},
+    #else
         .abilities = {ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_DAMP},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
         .flags = FLAG_GENDER_DIFFERENCE,

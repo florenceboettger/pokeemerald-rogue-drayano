@@ -5031,5 +5031,243 @@
             "Poison Jab",
             "Razor Shell"
         ]
+    },
+
+    "Frillish": {
+        "movesets": {
+            "gen7lc": {
+                "Choice Scarf + Water Spout": {
+                    "moves": [
+                        "Water Spout",
+                        "Shadow Ball",
+                        "Energy Ball",
+                        "Trick"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Water Bubble"
+                }
+            },
+            "gen8lc": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Water Spout",
+                        "Hydro Pump",
+                        "Shadow Ball",
+                        "Ice Beam"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Water Bubble"
+                }
+            }
+        },
+        "extra_moves": [
+            "Giga Drain"
+        ]
+    },
+
+    "Jellicent": {
+        "movesets": {
+            "gen7pu": {
+                "Offensive Taunt": {
+                    "moves": [
+                        "Taunt",
+                        "Recover",
+                        "Water Spout",
+                        "Shadow Ball"
+                    ],
+                    "item": "Ghostium Z",
+                    "ability": "Water Bubble"
+                },
+                "Offensive Trick Room": {
+                    "moves": [
+                        "Trick Room",
+                        "Hydro Pump",
+                        "Shadow Ball",
+                        "Ice Beam"
+                    ],
+                    "item": "Ghostium Z",
+                    "ability": "Water Bubble"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Water Spout",
+                        "Shadow Ball",
+                        "Hydro Pump",
+                        "Ice Beam"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Water Bubble"
+                }
+            },
+            "gen7uu": {
+                "Physically Defensive": {
+                    "moves": [
+                        "Scald",
+                        "Taunt",
+                        "Will-O-Wisp",
+                        "Recover"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Bubble"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Wall": {
+                    "moves": [
+                        "Scald",
+                        "Recover",
+                        "Will-O-Wisp",
+                        "Taunt"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Water Bubble"
+                }
+            },
+            "gen8pu": {
+                "Defensive Utility": {
+                    "moves": [
+                        "Recover",
+                        "Taunt",
+                        "Toxic",
+                        "Hex"
+                    ],
+                    "item": "Colbur Berry",
+                    "ability": "Water Absorb"
+                },
+                "Special Wallbreaker": {
+                    "moves": [
+                        "Water Spout",
+                        "Shadow Ball",
+                        "Surf",
+                        "Trick"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Water Bubble"
+                }
+            },
+            "gen8uu": {
+                "Defensive Utility": {
+                    "moves": [
+                        "Night Shade",
+                        "Taunt",
+                        "Will-O-Wisp",
+                        "Recover"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen8nu": {
+                "Defensive": {
+                    "moves": [
+                        "Recover",
+                        "Taunt",
+                        "Scald",
+                        "Toxic"
+                    ],
+                    "item": "Colbur Berry",
+                    "ability": "Water Bubble"
+                }
+            },
+            "gen8monotype": {
+                "Physically Defensive Wall (Ghost)": {
+                    "moves": [
+                        "Scald",
+                        "Taunt",
+                        "Strength Sap",
+                        "Hex"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Bubble"
+                }
+            },
+            "gen81v1": {
+                "Maranga Berry": {
+                    "moves": [
+                        "Scald",
+                        "Strength Sap",
+                        "Taunt",
+                        "Night Shade"
+                    ],
+                    "item": "Maranga Berry",
+                    "ability": "Cursed Body"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Trick",
+                        "Recover",
+                        "Hydro Pump",
+                        "Shadow Ball"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Water Bubble"
+                }
+            },
+            "gen8nationaldexru": {
+                "Mixed Wall": {
+                    "moves": [
+                        "Recover",
+                        "Scald",
+                        "Will-O-Wisp",
+                        "Hex"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Water Bubble"
+                }
+            }
+        }
+    },
+
+    "Alomomola": {
+        "movesets": {
+            "gen7uu": {
+                "Defensive": {
+                    "moves": [
+                        "Wish",
+                        "Protect",
+                        "Knock Off",
+                        "Scald"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Regenerator"
+                }
+            },
+            "gen7monotype": {
+                "Defensive Utility": {
+                    "moves": [
+                        "Wish",
+                        "Scald",
+                        "Protect",
+                        "Flip Turn"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Regenerator"
+                }
+            },
+            "gen8nationaldex": {
+                "Wish Support": {
+                    "moves": [
+                        "Scald",
+                        "Wish",
+                        "Flip Turn",
+                        "Toxic"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Regenerator"
+                }
+            },
+            "gen8nationaldexru": {
+                "Defensive": {
+                    "moves": [
+                        "Knock Off",
+                        "Toxic",
+                        "Wish",
+                        "Flip Turn"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Regenerator"
+                }
+            }
+        }
     }
 }
