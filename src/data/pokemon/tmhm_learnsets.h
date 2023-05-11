@@ -14551,6 +14551,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_DEERLING]    = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
@@ -14569,7 +14572,14 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM06_TOXIC)),
 
-    [SPECIES_SAWSBUCK]    = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+    [SPECIES_SAWSBUCK]    = TMHM_LEARNSET(
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM40_AERIAL_ACE)
+                                        #endif
+                                          TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
@@ -14588,6 +14598,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(TM30_SHADOW_BALL)
                                           TMHM(TM22_SOLAR_BEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM04_STRENGTH)
+                                        #endif
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM06_TOXIC)),
 
@@ -22527,6 +22540,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM07_WATERFALL)),
 
     [SPECIES_DEERLING_SUMMER]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
@@ -22546,6 +22562,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM06_TOXIC)),
 
     [SPECIES_DEERLING_AUTUMN]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
@@ -22565,6 +22584,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM06_TOXIC)),
 
     [SPECIES_DEERLING_WINTER]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
@@ -22583,7 +22605,14 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM06_TOXIC)),
 
-    [SPECIES_SAWSBUCK_SUMMER]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+    [SPECIES_SAWSBUCK_SUMMER]  = TMHM_LEARNSET(
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM40_AERIAL_ACE)
+                                        #endif
+                                          TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
@@ -22602,10 +22631,20 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(TM30_SHADOW_BALL)
                                           TMHM(TM22_SOLAR_BEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM04_STRENGTH)
+                                        #endif
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM06_TOXIC)),
 
-    [SPECIES_SAWSBUCK_AUTUMN]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+    [SPECIES_SAWSBUCK_AUTUMN]  = TMHM_LEARNSET(
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM40_AERIAL_ACE)
+                                        #endif
+                                          TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
@@ -22624,10 +22663,20 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(TM30_SHADOW_BALL)
                                           TMHM(TM22_SOLAR_BEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM04_STRENGTH)
+                                        #endif
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM06_TOXIC)),
 
-    [SPECIES_SAWSBUCK_WINTER]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+    [SPECIES_SAWSBUCK_WINTER]  = TMHM_LEARNSET(
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM40_AERIAL_ACE)
+                                        #endif
+                                          TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
@@ -22646,6 +22695,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(TM30_SHADOW_BALL)
                                           TMHM(TM22_SOLAR_BEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM04_STRENGTH)
+                                        #endif
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM06_TOXIC)),
 

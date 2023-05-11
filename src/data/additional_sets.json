@@ -4883,7 +4883,11 @@
                     "ability": "Competitive"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Focus Blast",
+            "Will-O-Wisp"
+        ]
     },
 
     "Vanilluxe": {
@@ -4929,6 +4933,103 @@
             "Dazzling Gleam",
             "Extrasensory",
             "Power Gem"
+        ]
+    },
+
+    "Sawsbuck": {
+        "movesets": {
+            "gen7pu": {
+                "Swords Dance (new moves)": {
+                    "moves": [
+                        "Swords Dance",
+                        "Horn Leech",
+                        "High Horsepower",
+                        "Rock Climb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sap Sipper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Last Resort",
+            "Low Sweep",
+            "Stomping Tantrum",
+            "Wild Charge"
+        ]
+    },
+
+    "Emolga": {
+        "movesets": {
+            "gen7pu": {
+                "Flying Gem + Acrobatics": {
+                    "moves": [
+                        "Acrobatics",
+                        "Wild Charge",
+                        "U-turn",
+                        "Nuzzle"
+                    ],
+                    "item": "Flying Gem",
+                    "ability": "Motor Drive"
+                }
+            },
+            "gen8zu": {
+                "Offensive Utility": {
+                    "moves": [
+                        "Acrobatics",
+                        "Knock Off",
+                        "U-turn",
+                        "Roost"
+                    ],
+                    "item": "Flying Gem",
+                    "ability": "Motor Drive"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
+    "Karrablast": {
+        "extra_moves": [
+            "Night Slash"
+        ]
+    },
+
+    "Escavalier": {
+        "movesets": {
+            "gen7ru": {
+                "Tank": {
+                    "moves": [
+                        "X-Scissor",
+                        "Gyro Ball",
+                        "Protect",
+                        "Pursuit"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Overcoat"
+                }
+            },
+            "gen8nu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Gyro Ball",
+                        "Knock Off",
+                        "Toxic",
+                        "Protect"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Shell Armor"
+                }
+            }
+        },
+        "extra_moves": [
+            "Acid Spray",
+            "Brutal Swing",
+            "Night Slash",
+            "Poison Jab",
+            "Razor Shell"
         ]
     }
 }

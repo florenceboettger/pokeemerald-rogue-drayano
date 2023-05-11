@@ -3383,7 +3383,10 @@ const u16 gEggMoves[] = {
         MOVE_BUG_BITE,
         MOVE_SCREECH,
         MOVE_KNOCK_OFF,
-        MOVE_DRILL_RUN),
+        MOVE_DRILL_RUN
+    #ifdef ROGUE_DRAYANO
+        MOVE_NIGHT_SLASH
+    #endif),
 
     egg_moves(FOONGUS,
         MOVE_GASTRO_ACID,

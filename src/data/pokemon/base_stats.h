@@ -397,29 +397,55 @@
         .noFlip = FALSE,                                                             \
     }
 
-#define SAWSBUCK_BASE_STATS                                                          \
-    {                                                                                \
-        .baseHP        = 80,                                                         \
-        .baseAttack    = 100,                                                        \
-        .baseDefense   = 70,                                                         \
-        .baseSpeed     = 95,                                                         \
-        .baseSpAttack  = 60,                                                         \
-        .baseSpDefense = 70,                                                         \
-        .type1 = TYPE_NORMAL,                                                        \
-        .type2 = TYPE_GRASS,                                                         \
-        .catchRate = 75,                                                             \
-        .expYield = 166,                                                             \
-        .evYield_Attack    = 2,                                                      \
-        .genderRatio = PERCENT_FEMALE(50),                                           \
-        .eggCycles = 20,                                                             \
-        .friendship = 70,                                                            \
-        .growthRate = GROWTH_MEDIUM_FAST,                                            \
-        .eggGroup1 = EGG_GROUP_FIELD,                                                \
-        .eggGroup2 = EGG_GROUP_FIELD,                                                \
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_SAP_SIPPER, ABILITY_SERENE_GRACE},\
-        .bodyColor = BODY_COLOR_BROWN,                                               \
-        .noFlip = FALSE,                                                             \
-    }
+#ifdef ROGUE_DRAYANO
+    #define SAWSBUCK_BASE_STATS                                                          \
+        {                                                                                \
+            .baseHP        = 85,                                                         \
+            .baseAttack    = 110,                                                        \
+            .baseDefense   = 70,                                                         \
+            .baseSpeed     = 95,                                                         \
+            .baseSpAttack  = 60,                                                         \
+            .baseSpDefense = 70,                                                         \
+            .type1 = TYPE_NORMAL,                                                        \
+            .type2 = TYPE_GRASS,                                                         \
+            .catchRate = 75,                                                             \
+            .expYield = 166,                                                             \
+            .evYield_Attack    = 2,                                                      \
+            .genderRatio = PERCENT_FEMALE(50),                                           \
+            .eggCycles = 20,                                                             \
+            .friendship = 70,                                                            \
+            .growthRate = GROWTH_MEDIUM_FAST,                                            \
+            .eggGroup1 = EGG_GROUP_FIELD,                                                \
+            .eggGroup2 = EGG_GROUP_FIELD,                                                \
+            .abilities = {ABILITY_CHLOROPHYLL, ABILITY_SAP_SIPPER, ABILITY_SERENE_GRACE},\
+            .bodyColor = BODY_COLOR_BROWN,                                               \
+            .noFlip = FALSE,                                                             \
+        }
+#else
+    #define SAWSBUCK_BASE_STATS                                                          \
+        {                                                                                \
+            .baseHP        = 80,                                                         \
+            .baseAttack    = 100,                                                        \
+            .baseDefense   = 70,                                                         \
+            .baseSpeed     = 95,                                                         \
+            .baseSpAttack  = 60,                                                         \
+            .baseSpDefense = 70,                                                         \
+            .type1 = TYPE_NORMAL,                                                        \
+            .type2 = TYPE_GRASS,                                                         \
+            .catchRate = 75,                                                             \
+            .expYield = 166,                                                             \
+            .evYield_Attack    = 2,                                                      \
+            .genderRatio = PERCENT_FEMALE(50),                                           \
+            .eggCycles = 20,                                                             \
+            .friendship = 70,                                                            \
+            .growthRate = GROWTH_MEDIUM_FAST,                                            \
+            .eggGroup1 = EGG_GROUP_FIELD,                                                \
+            .eggGroup2 = EGG_GROUP_FIELD,                                                \
+            .abilities = {ABILITY_CHLOROPHYLL, ABILITY_SAP_SIPPER, ABILITY_SERENE_GRACE},\
+            .bodyColor = BODY_COLOR_BROWN,                                               \
+            .noFlip = FALSE,                                                             \
+        }
+#endif
 
 #define GENESECT_BASE_STATS                           \
     {                                                 \
@@ -17051,12 +17077,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_EMOLGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 90,
+        .baseDefense   = 60,
+        .baseSpeed     = 103,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 55,
         .baseAttack    = 75,
         .baseDefense   = 60,
         .baseSpeed     = 103,
         .baseSpAttack  = 75,
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_FLYING,
         .catchRate = 200,
@@ -17092,7 +17127,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_NO_GUARD, ABILITY_SHED_SKIN, ABILITY_SWARM},
+    #else
         .abilities = {ABILITY_SWARM, ABILITY_SHED_SKIN, ABILITY_NO_GUARD},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -17116,7 +17155,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_NO_GUARD, ABILITY_SHELL_ARMOR, ABILITY_OVERCOAT},
+    #else
         .abilities = {ABILITY_SWARM, ABILITY_SHELL_ARMOR, ABILITY_OVERCOAT},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
     },
