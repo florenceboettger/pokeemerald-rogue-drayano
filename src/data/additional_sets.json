@@ -4851,5 +4851,84 @@
             "Trick",
             "Triple Axel"
         ]
+    },
+
+    "Mincinno": {
+        "extra_moves": [
+            "Gunk Shot",
+            "Play Rough",
+            "Triple Axel"
+        ]
+    },
+
+    "Cincinno": {
+        "extra_moves": [
+            "Gunk Shot",
+            "Play Rough",
+            "Triple Axel"
+        ]
+    },
+
+    "Gothitelle": {
+        "movesets": {
+            "gen7pu": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Psychic",
+                        "Thunderbolt",
+                        "Night Daze"
+                    ],
+                    "item": "Colbur Berry",
+                    "ability": "Competitive"
+                }
+            }
+        }
+    },
+
+    "Vanilluxe": {
+        "movesets": {
+            "gen7ru": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Blizzard",
+                        "Freeze-Dry",
+                        "Moonblast",
+                        "Taunt"
+                    ],
+                    "item": "Icicle Plate",
+                    "ability": "Snow Warning"
+                }
+            },
+            "gen7vgc2017": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Blizzard",
+                        "Freeze-Dry",
+                        "Hidden Power Fire",
+                        "Icy Wind"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Snow Warning"
+                }
+            },
+            "gen8ru": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Blizzard",
+                        "Freeze-Dry",
+                        "Ice Shard",
+                        "Moonblast"
+                    ],
+                    "item": "Icy Rock",
+                    "ability": "Snow Warning"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Extrasensory",
+            "Power Gem"
+        ]
     }
 }
