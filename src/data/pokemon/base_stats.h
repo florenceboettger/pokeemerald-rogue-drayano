@@ -17324,12 +17324,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GALVANTULA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 92,
+        .baseDefense   = 60,
+        .baseSpeed     = 108,
+        .baseSpAttack  = 103,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 70,
         .baseAttack    = 77,
         .baseDefense   = 60,
         .baseSpeed     = 108,
         .baseSpAttack  = 97,
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_ELECTRIC,
         .catchRate = 75,
@@ -17419,7 +17428,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_LEVITATE},
+    #else
         .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
     },
@@ -17443,7 +17456,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_LEVITATE},
+    #else
         .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
     },
@@ -17467,7 +17484,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_LEVITATE},
+    #else
         .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
     },

@@ -422,8 +422,16 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_KLANG]                 = {{EVO_LEVEL, 49, SPECIES_KLINKLANG}},
     [SPECIES_TYNAMO]                = {{EVO_LEVEL, 39, SPECIES_EELEKTRIK}},
     [SPECIES_EELEKTRIK]             = {{EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_EELEKTROSS}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_ELGYEM]                = {{EVO_LEVEL, 37, SPECIES_BEHEEYEM}},
+#else
     [SPECIES_ELGYEM]                = {{EVO_LEVEL, 42, SPECIES_BEHEEYEM}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_LITWICK]               = {{EVO_LEVEL, 27, SPECIES_LAMPENT}},
+#else
     [SPECIES_LITWICK]               = {{EVO_LEVEL, 41, SPECIES_LAMPENT}},
+#endif
     [SPECIES_LAMPENT]               = {{EVO_ITEM, ITEM_DUSK_STONE, SPECIES_CHANDELURE}},
     [SPECIES_AXEW]                  = {{EVO_LEVEL, 38, SPECIES_FRAXURE}},
     [SPECIES_FRAXURE]               = {{EVO_LEVEL, 48, SPECIES_HAXORUS}},

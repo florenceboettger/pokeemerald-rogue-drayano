@@ -5269,5 +5269,198 @@
                 }
             }
         }
+    },
+
+    "Joltik": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Galvantula": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Ferroseed": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Ferrothorn": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Klink": {
+        "movesets": {
+            "gen7lc": {
+                "Shift Gear": {
+                    "moves": [
+                        "Shift Gear",
+                        "Gear Grind",
+                        "Wild Charge",
+                        "High Horsepower"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Superpower"
+        ]
+    },
+
+    "Klinklang": {
+        "movesets": {
+            "gen7nu": {
+                "Shift Gear": {
+                    "moves": [
+                        "Shift Gear",
+                        "Gear Grind",
+                        "Wild Charge",
+                        "High Horsepower"
+                    ],
+                    "item": "Steelium Z",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7ru": {
+                "Shift Gear": {
+                    "moves": [
+                        "Shift Gear",
+                        "Gear Grind",
+                        "Wild Charge",
+                        "High Horsepower"
+                    ],
+                    "item": "Electrium Z",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8zu": {
+                "Shift Gear Sweeper": {
+                    "moves": [
+                        "Shift Gear",
+                        "Gear Grind",
+                        "Substitute",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Gear Grind",
+                        "Flame Wheel",
+                        "Volt Switch",
+                        "High Horsepower"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Power Gem",
+            "Superpower",
+            "Tri Attack"
+        ]
+    },
+
+    "Eelektross": {
+        "movesets": {
+            "gen7pu": {
+                "Physical Vest": {
+                    "moves": [
+                        "U-turn",
+                        "Wild Charge",
+                        "Close Combat",
+                        "Nuzzle"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Levitate"
+                },
+                "Coil": {
+                    "moves": [
+                        "Thunder Punch",
+                        "Knock Off",
+                        "Coil",
+                        "Drain Punch"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Crunch",
+            "Draining Kiss",
+            "Leech Life",
+            "Psychic Fangs"
+        ]
+    },
+
+    "Elgyem": {
+        "extra_moves": [
+            "Bug Buzz",
+            "Dazzling Gleam",
+            "Meteor Beam",
+            "Power Gem",
+            "Psyshock",
+            "Signal Beam",
+            "Tri Attack",
+            "Work Up"
+        ]
+    },
+
+    "Beheeyem": {
+        "movesets": {
+            "gen7pu": {
+                "Offensive Trick Room": {
+                    "moves": [
+                        "Trick Room",
+                        "Psycho Boost",
+                        "Nasty Plot",
+                        "Bug Buzz"
+                    ],
+                    "item": "Colbur Berry",
+                    "ability": "Analytic"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Meteor Beam",
+            "Power Gem",
+            "Psyshock",
+            "Signal Beam",
+            "Tri Attack",
+            "Work Up"
+        ]
+    },
+
+    "Litwick": {
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Mystical Fire"
+        ]
+    },
+
+    "Lampent": {
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Mystical Fire"
+        ]
+    },
+
+    "Chandelure": {
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Mystical Fire"
+        ]
     }
 }
