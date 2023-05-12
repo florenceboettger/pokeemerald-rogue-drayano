@@ -730,6 +730,7 @@
             "Quash"
         ]
     },
+
     "Golduck": {
         "movesets": {
             "gen7vgc2017": {
@@ -758,12 +759,41 @@
             }
         }
     },
+
+    "Primeape": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Close Combat",
+                        "U-turn",
+                        "Ice Punch",
+                        "Gunk Shot"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Gorilla Tactics"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Close Combat",
+                        "U-turn",
+                        "Stone Edge",
+                        "Gunk Shot"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Gorilla Tactics"
+                }
+            }
+        }
+    },
+
     "Poliwrath": {
         "extra_moves": [
             "Drain Punch",
             "High Horsepower"
         ]
     },
+
     "Machamp": {
         "extra_moves": [
             "High Horsepower"
@@ -5462,5 +5492,173 @@
             "Dazzling Gleam",
             "Mystical Fire"
         ]
+    },
+    
+    "Axew": {
+        "extra_moves": [
+            "Breaking Swipe",
+            "Poison Jab",
+            "Rock Climb",
+            "Scale Shot",
+            "Work Up",
+            "X-Scissor"
+        ]
+    },
+    
+    "Fraxure": {
+        "extra_moves": [
+            "Breaking Swipe",
+            "Rock Climb",
+            "Scale Shot",
+            "Shadow Claw",
+            "Work Up",
+            "X-Scissor"
+        ]
+    },
+
+    "Haxorus": {
+        "extra_moves": [
+            "Aqua Tail",
+            "Breaking Swipe",
+            "Psycho Cut",
+            "Rock Climb",
+            "Shadow Claw",
+            "Work Up",
+            "X-Scissor"
+        ]
+    },
+
+    "Beartic": {
+        "movesets": {
+            "gen7pu": {
+                "Assault Vest": {
+                    "moves": [
+                        "Icicle Crash",
+                        "Ice Shard",
+                        "Close Combat",
+                        "Liquidation"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Sheer Force"
+                },
+                "Slush Rush 2.0": {
+                    "moves": [
+                        "Triple Axel",
+                        "Close Combat",
+                        "Earthquake",
+                        "Stone Edge"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Slush Rush"
+                },
+                "Weather Sweeper": {
+                    "moves": [
+                        "Triple Axel",
+                        "Close Combat",
+                        "Throat Chop",
+                        "Swords Dance"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Slush Rush"
+                }
+            },
+            "gen7zu": {
+                "Weather Abuser": {
+                    "moves": [
+                        "Triple Axel",
+                        "Close Combat",
+                        "Substitute",
+                        "Swords Dance"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Slush Rush"
+                }
+            },
+            "gen8zu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Triple Axel",
+                        "Close Combat",
+                        "Aqua Jet",
+                        "Stone Edge"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Slush Rush"
+                }
+            }
+        },
+        "extra_moves": [
+            "Heavy Slam",
+            "Low Sweep",
+            "Work Up"
+        ]
+    },
+    
+    "Cryogonal": {
+        "movesets": {
+            "gen7pu": {
+                "Defensive": {
+                    "moves": [
+                        "Rapid Spin",
+                        "Recover",
+                        "Freezy Frost",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Levitate"
+                }
+            }
+        }
+    },
+
+    "Accelgor": {
+        "movesets": {
+            "gen7nu": {
+                "Fightinium Z": {
+                    "moves": [
+                        "Spikes",
+                        "Dark Pulse",
+                        "Focus Blast",
+                        "Recover"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Infiltrator"
+                }
+            },
+            "gen8pu": {
+                "Spikes": {
+                    "moves": [
+                        "Spikes",
+                        "Bug Buzz",
+                        "Dark Pulse",
+                        "U-turn"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Sticky Hold"
+                },
+                "Throat Spray": {
+                    "moves": [
+                        "Bug Buzz",
+                        "Focus Blast",
+                        "Dark Pulse",
+                        "Sludge Bomb"
+                    ],
+                    "item": "Throat Spray",
+                    "ability": "Unburden"
+                }
+            },
+            "gen8zu": {
+                "Throat Spray": {
+                    "moves": [
+                        "Bug Buzz",
+                        "Dark Pulse",
+                        "Sludge Bomb",
+                        "Giga Drain"
+                    ],
+                    "item": "Throat Spray",
+                    "ability": "Unburden"
+                }
+            }
+        }
     }
 }

@@ -3468,7 +3468,10 @@ const u16 gEggMoves[] = {
         MOVE_ENDEAVOR,
         MOVE_IRON_TAIL,
         MOVE_DRAGON_PULSE,
-        MOVE_HARDEN),
+        MOVE_HARDEN
+    #ifdef ROGUE_DRAYANO
+        MOVE_FIRST_IMPRESSION
+    #endif),
 
     egg_moves(CUBCHOO,
         MOVE_YAWN,

@@ -15181,6 +15181,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM28_DIG)
                                           TMHM(HM08_DIVE)
                                           TMHM(TM32_DOUBLE_TEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM26_EARTHQUAKE)
+                                        #endif
                                           TMHM(TM42_FACADE)
                                           TMHM(TM01_FOCUS_PUNCH)
                                           TMHM(TM21_FRUSTRATION)
@@ -15200,7 +15203,10 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM03_SURF)
                                           TMHM(TM12_TAUNT)
                                           TMHM(TM06_TOXIC)
-                                          TMHM(TM03_WATER_PULSE)),
+                                          TMHM(TM03_WATER_PULSE)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM07_WATERFALL)
+                                        #endif),
 
     [SPECIES_CRYOGONAL]   = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
