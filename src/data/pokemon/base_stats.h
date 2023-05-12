@@ -17949,7 +17949,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 66,
         .baseDefense   = 84,
         .baseSpeed     = 32,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 90,
+    #else
         .baseSpAttack  = 81,
+    #endif
         .baseSpDefense = 99,
         .type1 = TYPE_GROUND,
         .type2 = TYPE_ELECTRIC,
@@ -17963,7 +17967,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_STATIC, ABILITY_WATER_ABSORB, ABILITY_SAND_VEIL},
+    #else
         .abilities = {ABILITY_STATIC, ABILITY_LIMBER, ABILITY_SAND_VEIL},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -18018,12 +18026,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_DRUDDIGON] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 120,
+        .baseDefense   = 90,
+        .baseSpeed     = 41,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 77,
         .baseAttack    = 120,
         .baseDefense   = 90,
         .baseSpeed     = 48,
         .baseSpAttack  = 60,
         .baseSpDefense = 90,
+    #endif
         .type1 = TYPE_DRAGON,
         .type2 = TYPE_DRAGON,
         .catchRate = 45,
@@ -18070,12 +18087,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GOLURK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 115,
+        .baseAttack    = 125,
+        .baseDefense   = 85,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 85,
+    #else
         .baseHP        = 89,
         .baseAttack    = 124,
         .baseDefense   = 80,
         .baseSpeed     = 55,
         .baseSpAttack  = 55,
         .baseSpDefense = 80,
+    #endif
         .type1 = TYPE_GROUND,
         .type2 = TYPE_GHOST,
         .catchRate = 90,

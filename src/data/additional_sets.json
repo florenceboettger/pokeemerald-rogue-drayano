@@ -5660,5 +5660,154 @@
                 }
             }
         }
+    },
+
+    "Stunfisk": {
+        "movesets": {
+            "gen7pu": {
+                "Defensive Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Discharge",
+                        "Earth Power",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen8zu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Toxic",
+                        "Earth Power",
+                        "Foul Play"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Absorb"
+                }
+            }
+        },
+        "extra_moves": [
+            "Electroweb",
+            "Infestation",
+            "Rock Slide",
+            "Scald",
+            "Sludge Wave",
+            "Stone Edge"
+        ]
+    },
+    
+    "Mienfoo": {
+        "extra_moves": [
+            "Acrobatics",
+            "Poison Jab",
+            "Rock Climb",
+            "Rock Slide",
+            "Stone Edge"
+        ]
+    },
+
+    "Mienshao": {
+        "extra_moves": [
+            "Acrobatics",
+            "Blaze Kick",
+            "Poison Jab",
+            "Rock Climb",
+            "Rock Slide"
+        ]
+    },
+
+    "Druddigon": {
+        "movesets": {
+            "gen8pu": {
+                "Defensive": {
+                    "moves": [
+                        "Dragon Hammer",
+                        "Stealth Rock",
+                        "Glare",
+                        "Earthquake"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Rough Skin"
+                },
+                "Roost": {
+                    "moves": [
+                        "Roost",
+                        "Toxic",
+                        "Dragon Tail",
+                        "Earthquake"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Rough Skin"
+                },
+                "Hazard Setter": {
+                    "moves": [
+                        "Roost",
+                        "Spikes",
+                        "Stealth Rock",
+                        "Dragon Tail"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Rough Skin"
+                }
+            }
+        },
+        "extra_moves": [
+            "Aqua Tail",
+            "Dragon Rush",
+            "Dual Wingbeat",
+            "Iron Head",
+            "Quash",
+            "Work Up"
+        ]
+    },
+
+    "Golett": {
+        "movesets": {
+            "gen7lc": {
+                "Tank": {
+                    "moves": [
+                        "Drain Punch",
+                        "Earthquake",
+                        "Stealth Rock",
+                        "Shadow Punch"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Bulldoze",
+            "Scorching Sands",
+            "Stone Edge",
+            "Rock Slide"
+        ]
+    },
+
+    "Golurk": {
+        "movesets": {
+            "gen7pu": {
+                "Power-Up Punch": {
+                    "moves": [
+                        "Power-Up Punch",
+                        "Shadow Sneak",
+                        "Earthquake",
+                        "Ice Punch"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Bulldoze",
+            "Scorching Sands",
+            "Stone Edge",
+            "Rock Slide",
+            "Zen Headbutt"
+        ]
     }
 }

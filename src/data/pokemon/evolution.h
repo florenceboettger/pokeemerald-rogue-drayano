@@ -442,7 +442,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SHELMET]               = {{EVO_TRADE_SPECIFIC_MON, SPECIES_KARRABLAST, SPECIES_ACCELGOR}},
 #endif
     [SPECIES_MIENFOO]               = {{EVO_LEVEL, 50, SPECIES_MIENSHAO}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_GOLETT]                = {{EVO_LEVEL, 40, SPECIES_GOLURK}},
+#else
     [SPECIES_GOLETT]                = {{EVO_LEVEL, 43, SPECIES_GOLURK}},
+#endif
     [SPECIES_PAWNIARD]              = {{EVO_LEVEL, 52, SPECIES_BISHARP}},
     [SPECIES_RUFFLET]               = {{EVO_LEVEL, 54, SPECIES_BRAVIARY}},
     [SPECIES_VULLABY]               = {{EVO_LEVEL, 54, SPECIES_MANDIBUZZ}},
