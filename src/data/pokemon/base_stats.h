@@ -474,31 +474,59 @@
         .flags = FLAG_MYTHICAL,                       \
     }
 
-#define VIVILLON_BASE_STATS(color)                                                      \
-    {                                                                                   \
-        .baseHP        = 80,                                                            \
-        .baseAttack    = 52,                                                            \
-        .baseDefense   = 50,                                                            \
-        .baseSpeed     = 89,                                                            \
-        .baseSpAttack  = 90,                                                            \
-        .baseSpDefense = 50,                                                            \
-        .type1 = TYPE_BUG,                                                              \
-        .type2 = TYPE_FLYING,                                                           \
-        .catchRate = 45,                                                                \
-        .expYield = 185,                                                                \
-        .evYield_HP        = 1,                                                         \
-        .evYield_Speed     = 1,                                                         \
-        .evYield_SpAttack  = 1,                                                         \
-        .genderRatio = PERCENT_FEMALE(50),                                              \
-        .eggCycles = 15,                                                                \
-        .friendship = 70,                                                               \
-        .growthRate = GROWTH_MEDIUM_FAST,                                               \
-        .eggGroup1 = EGG_GROUP_BUG,                                                     \
-        .eggGroup2 = EGG_GROUP_BUG,                                                     \
-        .abilities = {ABILITY_SHIELD_DUST, ABILITY_COMPOUND_EYES, ABILITY_FRIEND_GUARD},\
-        .bodyColor = color,                                                             \
-        .noFlip = FALSE,                                                                \
-    }
+#ifdef ROGUE_DRAYANO
+    #define VIVILLON_BASE_STATS(color)                                                      \
+        {                                                                                   \
+            .baseHP        = 90,                                                            \
+            .baseAttack    = 50,                                                            \
+            .baseDefense   = 55,                                                            \
+            .baseSpeed     = 110,                                                            \
+            .baseSpAttack  = 115,                                                            \
+            .baseSpDefense = 55,                                                            \
+            .type1 = TYPE_BUG,                                                              \
+            .type2 = TYPE_FLYING,                                                           \
+            .catchRate = 45,                                                                \
+            .expYield = 185,                                                                \
+            .evYield_HP        = 1,                                                         \
+            .evYield_Speed     = 1,                                                         \
+            .evYield_SpAttack  = 1,                                                         \
+            .genderRatio = PERCENT_FEMALE(50),                                              \
+            .eggCycles = 15,                                                                \
+            .friendship = 70,                                                               \
+            .growthRate = GROWTH_MEDIUM_FAST,                                               \
+            .eggGroup1 = EGG_GROUP_BUG,                                                     \
+            .eggGroup2 = EGG_GROUP_BUG,                                                     \
+            .abilities = {ABILITY_SHIELD_DUST, ABILITY_COMPOUND_EYES, ABILITY_FRIEND_GUARD},\
+            .bodyColor = color,                                                             \
+            .noFlip = FALSE,                                                                \
+        }
+#else
+    #define VIVILLON_BASE_STATS(color)                                                      \
+        {                                                                                   \
+            .baseHP        = 80,                                                            \
+            .baseAttack    = 52,                                                            \
+            .baseDefense   = 50,                                                            \
+            .baseSpeed     = 89,                                                            \
+            .baseSpAttack  = 90,                                                            \
+            .baseSpDefense = 50,                                                            \
+            .type1 = TYPE_BUG,                                                              \
+            .type2 = TYPE_FLYING,                                                           \
+            .catchRate = 45,                                                                \
+            .expYield = 185,                                                                \
+            .evYield_HP        = 1,                                                         \
+            .evYield_Speed     = 1,                                                         \
+            .evYield_SpAttack  = 1,                                                         \
+            .genderRatio = PERCENT_FEMALE(50),                                              \
+            .eggCycles = 15,                                                                \
+            .friendship = 70,                                                               \
+            .growthRate = GROWTH_MEDIUM_FAST,                                               \
+            .eggGroup1 = EGG_GROUP_BUG,                                                     \
+            .eggGroup2 = EGG_GROUP_BUG,                                                     \
+            .abilities = {ABILITY_SHIELD_DUST, ABILITY_COMPOUND_EYES, ABILITY_FRIEND_GUARD},\
+            .bodyColor = color,                                                             \
+            .noFlip = FALSE,                                                                \
+        }
+#endif
 
 #define FLABEBE_BASE_STATS                                                  \
     {                                                                       \
@@ -19135,7 +19163,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_TALONFLAME] =
     {
         .baseHP        = 78,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 91,
+    #else
         .baseAttack    = 81,
+    #endif
         .baseDefense   = 71,
         .baseSpeed     = 126,
         .baseSpAttack  = 74,
@@ -19209,7 +19241,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_LITLEO] =
     {
         .baseHP        = 62,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 70,
+    #else
         .baseAttack    = 50,
+    #endif
         .baseDefense   = 58,
         .baseSpeed     = 72,
         .baseSpAttack  = 73,
@@ -19233,7 +19269,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_PYROAR] =
     {
         .baseHP        = 86,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 103,
+    #else
         .baseAttack    = 68,
+    #endif
         .baseDefense   = 72,
         .baseSpeed     = 106,
         .baseSpAttack  = 109,

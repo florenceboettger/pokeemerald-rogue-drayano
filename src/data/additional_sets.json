@@ -6295,5 +6295,59 @@
                 }
             }
         }
+    },
+
+    "Vivillon": {
+        "extra_moves": [
+            "Air Cutter",
+            "Air Slash",
+            "Pollen Puff"
+        ]
+    },
+
+    "Litleo": {
+        "extra_moves": [
+            "Acrobatics",
+            "Bulldoze",
+            "Thunder Fang",
+            "Dark Pulse",
+            "Iron Tail",
+            "Will-O-Wisp"
+        ]
+    },
+
+    "Pyroar": {
+        "movesets": {
+            "gen7nu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Return",
+                        "Wild Charge",
+                        "Psychic Fangs"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Moxie"
+                },
+                "Assault Vest": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Return",
+                        "Wild Charge",
+                        "Flame Charge"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Moxie"
+                }
+            }
+        },
+        "extra_moves": [
+            "Acrobatics",
+            "Bulldoze",
+            "Thunder Fang",
+            "Dark Pulse",
+            "Iron Tail",
+            "Will-O-Wisp"
+        ]
     }
 }

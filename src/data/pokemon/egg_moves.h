@@ -3665,7 +3665,12 @@ const u16 gEggMoves[] = {
         MOVE_YAWN,
         MOVE_SNATCH,
         MOVE_FIRE_SPIN,
-        MOVE_FLARE_BLITZ),
+    #ifdef ROGUE_DRAYANO
+        MOVE_INCINERATE,
+    #else
+        MOVE_FLARE_BLITZ,
+    #endif
+    ),
 
     egg_moves(FLABEBE,
         MOVE_COPYCAT,
