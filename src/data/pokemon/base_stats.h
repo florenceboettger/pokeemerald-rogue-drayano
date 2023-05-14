@@ -528,77 +528,155 @@
         }
 #endif
 
-#define FLABEBE_BASE_STATS                                                  \
-    {                                                                       \
-        .baseHP        = 44,                                                \
-        .baseAttack    = 38,                                                \
-        .baseDefense   = 39,                                                \
-        .baseSpeed     = 42,                                                \
-        .baseSpAttack  = 61,                                                \
-        .baseSpDefense = 79,                                                \
-        .type1 = TYPE_FAIRY,                                                \
-        .type2 = TYPE_FAIRY,                                                \
-        .catchRate = 225,                                                   \
-        .expYield = 61,                                                     \
-        .evYield_SpDefense = 1,                                             \
-        .genderRatio = MON_FEMALE,                                          \
-        .eggCycles = 20,                                                    \
-        .friendship = 70,                                                   \
-        .growthRate = GROWTH_MEDIUM_FAST,                                   \
-        .eggGroup1 = EGG_GROUP_FAIRY,                                       \
-        .eggGroup2 = EGG_GROUP_FAIRY,                                       \
-        .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NONE, ABILITY_SYMBIOSIS},\
-        .bodyColor = BODY_COLOR_WHITE,                                      \
-        .noFlip = FALSE,                                                    \
-    }
+#ifdef ROGUE_DRAYANO
+    #define FLABEBE_BASE_STATS                                                  \
+        {                                                                       \
+            .baseHP        = 44,                                                \
+            .baseAttack    = 38,                                                \
+            .baseDefense   = 39,                                                \
+            .baseSpeed     = 42,                                                \
+            .baseSpAttack  = 61,                                                \
+            .baseSpDefense = 79,                                                \
+            .type1 = TYPE_FAIRY,                                                \
+            .type2 = TYPE_FAIRY,                                                \
+            .catchRate = 225,                                                   \
+            .expYield = 61,                                                     \
+            .evYield_SpDefense = 1,                                             \
+            .genderRatio = MON_FEMALE,                                          \
+            .eggCycles = 20,                                                    \
+            .friendship = 70,                                                   \
+            .growthRate = GROWTH_MEDIUM_FAST,                                   \
+            .eggGroup1 = EGG_GROUP_FAIRY,                                       \
+            .eggGroup2 = EGG_GROUP_FAIRY,                                       \
+            .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NATURAL_CURE, ABILITY_SYMBIOSIS},\
+            .bodyColor = BODY_COLOR_WHITE,                                      \
+            .noFlip = FALSE,                                                    \
+        }
+#else
+    #define FLABEBE_BASE_STATS                                                  \
+        {                                                                       \
+            .baseHP        = 44,                                                \
+            .baseAttack    = 38,                                                \
+            .baseDefense   = 39,                                                \
+            .baseSpeed     = 42,                                                \
+            .baseSpAttack  = 61,                                                \
+            .baseSpDefense = 79,                                                \
+            .type1 = TYPE_FAIRY,                                                \
+            .type2 = TYPE_FAIRY,                                                \
+            .catchRate = 225,                                                   \
+            .expYield = 61,                                                     \
+            .evYield_SpDefense = 1,                                             \
+            .genderRatio = MON_FEMALE,                                          \
+            .eggCycles = 20,                                                    \
+            .friendship = 70,                                                   \
+            .growthRate = GROWTH_MEDIUM_FAST,                                   \
+            .eggGroup1 = EGG_GROUP_FAIRY,                                       \
+            .eggGroup2 = EGG_GROUP_FAIRY,                                       \
+            .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NONE, ABILITY_SYMBIOSIS},\
+            .bodyColor = BODY_COLOR_WHITE,                                      \
+            .noFlip = FALSE,                                                    \
+        }
+#endif
 
-#define FLOETTE_BASE_STATS                                                  \
-    {                                                                       \
-        .baseHP        = 54,                                                \
-        .baseAttack    = 45,                                                \
-        .baseDefense   = 47,                                                \
-        .baseSpeed     = 52,                                                \
-        .baseSpAttack  = 75,                                                \
-        .baseSpDefense = 98,                                                \
-        .type1 = TYPE_FAIRY,                                                \
-        .type2 = TYPE_FAIRY,                                                \
-        .catchRate = 120,                                                   \
-        .expYield = 130,                                                    \
-        .evYield_SpDefense = 2,                                             \
-        .genderRatio = MON_FEMALE,                                          \
-        .eggCycles = 20,                                                    \
-        .friendship = 70,                                                   \
-        .growthRate = GROWTH_MEDIUM_FAST,                                   \
-        .eggGroup1 = EGG_GROUP_FAIRY,                                       \
-        .eggGroup2 = EGG_GROUP_FAIRY,                                       \
-        .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NONE, ABILITY_SYMBIOSIS},\
-        .bodyColor = BODY_COLOR_WHITE,                                      \
-        .noFlip = FALSE,                                                    \
-    }
+#ifdef ROGUE_DRAYANO
+    #define FLOETTE_BASE_STATS                                                  \
+        {                                                                       \
+            .baseHP        = 54,                                                \
+            .baseAttack    = 45,                                                \
+            .baseDefense   = 47,                                                \
+            .baseSpeed     = 52,                                                \
+            .baseSpAttack  = 75,                                                \
+            .baseSpDefense = 98,                                                \
+            .type1 = TYPE_FAIRY,                                                \
+            .type2 = TYPE_FAIRY,                                                \
+            .catchRate = 120,                                                   \
+            .expYield = 130,                                                    \
+            .evYield_SpDefense = 2,                                             \
+            .genderRatio = MON_FEMALE,                                          \
+            .eggCycles = 20,                                                    \
+            .friendship = 70,                                                   \
+            .growthRate = GROWTH_MEDIUM_FAST,                                   \
+            .eggGroup1 = EGG_GROUP_FAIRY,                                       \
+            .eggGroup2 = EGG_GROUP_FAIRY,                                       \
+            .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NATURAL_CURE, ABILITY_SYMBIOSIS},\
+            .bodyColor = BODY_COLOR_WHITE,                                      \
+            .noFlip = FALSE,                                                    \
+        }
+#else
+    #define FLOETTE_BASE_STATS                                                  \
+        {                                                                       \
+            .baseHP        = 54,                                                \
+            .baseAttack    = 45,                                                \
+            .baseDefense   = 47,                                                \
+            .baseSpeed     = 52,                                                \
+            .baseSpAttack  = 75,                                                \
+            .baseSpDefense = 98,                                                \
+            .type1 = TYPE_FAIRY,                                                \
+            .type2 = TYPE_FAIRY,                                                \
+            .catchRate = 120,                                                   \
+            .expYield = 130,                                                    \
+            .evYield_SpDefense = 2,                                             \
+            .genderRatio = MON_FEMALE,                                          \
+            .eggCycles = 20,                                                    \
+            .friendship = 70,                                                   \
+            .growthRate = GROWTH_MEDIUM_FAST,                                   \
+            .eggGroup1 = EGG_GROUP_FAIRY,                                       \
+            .eggGroup2 = EGG_GROUP_FAIRY,                                       \
+            .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NONE, ABILITY_SYMBIOSIS},\
+            .bodyColor = BODY_COLOR_WHITE,                                      \
+            .noFlip = FALSE,                                                    \
+        }
+#endif
 
-#define FLORGES_BASE_STATS                                                  \
-    {                                                                       \
-        .baseHP        = 78,                                                \
-        .baseAttack    = 65,                                                \
-        .baseDefense   = 68,                                                \
-        .baseSpeed     = 75,                                                \
-        .baseSpAttack  = 112,                                               \
-        .baseSpDefense = 154,                                               \
-        .type1 = TYPE_FAIRY,                                                \
-        .type2 = TYPE_FAIRY,                                                \
-        .catchRate = 45,                                                    \
-        .expYield = 248,                                                    \
-        .evYield_SpDefense = 3,                                             \
-        .genderRatio = MON_FEMALE,                                          \
-        .eggCycles = 20,                                                    \
-        .friendship = 70,                                                   \
-        .growthRate = GROWTH_MEDIUM_FAST,                                   \
-        .eggGroup1 = EGG_GROUP_FAIRY,                                       \
-        .eggGroup2 = EGG_GROUP_FAIRY,                                       \
-        .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NONE, ABILITY_SYMBIOSIS},\
-        .bodyColor = BODY_COLOR_WHITE,                                      \
-        .noFlip = FALSE,                                                    \
-    }
+#ifdef ROGUE_DRAYANO
+    #define FLORGES_BASE_STATS                                                  \
+        {                                                                       \
+            .baseHP        = 78,                                                \
+            .baseAttack    = 65,                                                \
+            .baseDefense   = 68,                                                \
+            .baseSpeed     = 75,                                                \
+            .baseSpAttack  = 112,                                               \
+            .baseSpDefense = 154,                                               \
+            .type1 = TYPE_FAIRY,                                                \
+            .type2 = TYPE_FAIRY,                                                \
+            .catchRate = 45,                                                    \
+            .expYield = 248,                                                    \
+            .evYield_SpDefense = 3,                                             \
+            .genderRatio = MON_FEMALE,                                          \
+            .eggCycles = 20,                                                    \
+            .friendship = 70,                                                   \
+            .growthRate = GROWTH_MEDIUM_FAST,                                   \
+            .eggGroup1 = EGG_GROUP_FAIRY,                                       \
+            .eggGroup2 = EGG_GROUP_FAIRY,                                       \
+            .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NATURAL_CURE, ABILITY_SYMBIOSIS},\
+            .bodyColor = BODY_COLOR_WHITE,                                      \
+            .noFlip = FALSE,                                                    \
+        }
+#else
+    #define FLORGES_BASE_STATS                                                  \
+        {                                                                       \
+            .baseHP        = 78,                                                \
+            .baseAttack    = 65,                                                \
+            .baseDefense   = 68,                                                \
+            .baseSpeed     = 75,                                                \
+            .baseSpAttack  = 112,                                               \
+            .baseSpDefense = 154,                                               \
+            .type1 = TYPE_FAIRY,                                                \
+            .type2 = TYPE_FAIRY,                                                \
+            .catchRate = 45,                                                    \
+            .expYield = 248,                                                    \
+            .evYield_SpDefense = 3,                                             \
+            .genderRatio = MON_FEMALE,                                          \
+            .eggCycles = 20,                                                    \
+            .friendship = 70,                                                   \
+            .growthRate = GROWTH_MEDIUM_FAST,                                   \
+            .eggGroup1 = EGG_GROUP_FAIRY,                                       \
+            .eggGroup2 = EGG_GROUP_FAIRY,                                       \
+            .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NONE, ABILITY_SYMBIOSIS},\
+            .bodyColor = BODY_COLOR_WHITE,                                      \
+            .noFlip = FALSE,                                                    \
+        }
+#endif
 
 #define FURFROU_BASE_STATS(flip)                      \
     {                                                 \
@@ -18987,7 +19065,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+        .abilities = {ABILITY_TORRENT, ABILITY_PROTEAN, ABILITY_INFILTRATOR},
     #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
     #endif
@@ -19015,7 +19093,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+        .abilities = {ABILITY_TORRENT, ABILITY_PROTEAN, ABILITY_INFILTRATOR},
     #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
     #endif
@@ -19047,7 +19125,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+        .abilities = {ABILITY_TORRENT, ABILITY_PROTEAN, ABILITY_BATTLE_BOND},
     #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
     #endif
@@ -19309,8 +19387,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 52,
         .baseSpAttack  = 62,
         .baseSpDefense = 57,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GRASS,
+        .type2 = TYPE_NORMAL,
+    #else
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
+    #endif
         .catchRate = 200,
         .expYield = 70,
         .evYield_HP        = 1,
@@ -19327,14 +19410,28 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GOGOAT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 123,
+        .baseAttack    = 108,
+        .baseDefense   = 72,
+        .baseSpeed     = 74,
+        .baseSpAttack  = 67,
+        .baseSpDefense = 87,
+    #else
         .baseHP        = 123,
         .baseAttack    = 100,
         .baseDefense   = 62,
         .baseSpeed     = 68,
         .baseSpAttack  = 97,
         .baseSpDefense = 81,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GRASS,
+        .type2 = TYPE_NORMAL,
+    #else
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
+    #endif
         .catchRate = 45,
         .expYield = 186,
         .evYield_HP        = 2,
@@ -27468,7 +27565,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NATURAL_CURE, ABILITY_SYMBIOSIS},
+    #else
         .abilities = {ABILITY_FLOWER_VEIL, ABILITY_NONE, ABILITY_SYMBIOSIS},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
     },

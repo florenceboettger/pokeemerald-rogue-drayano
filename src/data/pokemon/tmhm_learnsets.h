@@ -16554,6 +16554,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_SKIDDO]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)
                                           TMHM(TM08_BULK_UP)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
@@ -16578,6 +16581,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)
                                           TMHM(TM08_BULK_UP)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM09_BULLET_SEED)
+                                        #endif
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM26_EARTHQUAKE)

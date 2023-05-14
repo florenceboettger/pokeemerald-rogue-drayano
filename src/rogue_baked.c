@@ -279,7 +279,13 @@ void Rogue_ModifyEvolution(u16 species, u8 evoIdx, struct Evolution* outEvo)
                 outEvo->method = EVO_ITEM;
                 outEvo->param = ITEM_SUN_STONE;
                 break;
-            case(EVO_LEVEL_DUSK):
+            #ifdef ROGUE_DRAYANO
+                case(EVO_LEVEL_DUSK):
+                    outEvo->method = EVO_ITEM;
+                    outEvo->param = ITEM_DUSK_STONE
+            #else
+                case(EVO_LEVEL_DUSK):
+            #endif
             case(EVO_LEVEL_NIGHT):
                 outEvo->method = EVO_ITEM;
                 outEvo->param = ITEM_MOON_STONE;

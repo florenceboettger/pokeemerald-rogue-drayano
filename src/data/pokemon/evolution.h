@@ -524,7 +524,12 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_CRABRAWLER]            = {{EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_CRABOMINABLE}},
     [SPECIES_CUTIEFLY]              = {{EVO_LEVEL, 25, SPECIES_RIBOMBEE}},
     [SPECIES_ROCKRUFF]              = {{EVO_LEVEL_DAY, 25, SPECIES_LYCANROC},
-                                       {EVO_LEVEL_NIGHT, 25, SPECIES_LYCANROC_MIDNIGHT}},
+                                       {EVO_LEVEL_NIGHT, 25, SPECIES_LYCANROC_MIDNIGHT}
+                                       #ifdef ROGUE_DRAYANO
+                                            ,
+                                            {EVO_LEVEL_DUSK, 25, SPECIES_LYCANROC_DUSK}
+                                       #endif
+                                       },
     [SPECIES_MAREANIE]              = {{EVO_LEVEL, 38, SPECIES_TOXAPEX}},
     [SPECIES_MUDBRAY]               = {{EVO_LEVEL, 30, SPECIES_MUDSDALE}},
     [SPECIES_DEWPIDER]              = {{EVO_LEVEL, 22, SPECIES_ARAQUANID}},

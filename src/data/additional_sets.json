@@ -982,6 +982,12 @@
         }
     },
 
+    "Onix": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
     "Krabby": {
         "extra_moves": [
             "Rock Climb",
@@ -1021,6 +1027,61 @@
         "extra_moves": [
             "Bug Buzz",
             "Energy Ball"
+        ]
+    },
+
+    "Cubone": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Marowak": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    
+    "Hitmonlee": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Hitmonchan": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+    
+    "Lickitung": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+    
+    "Rhyhorn": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Rhydon": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Chansey": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Kangaskhan": {
+        "extra_moves": [
+            "Rock Climb"
         ]
     },
 
@@ -1119,7 +1180,8 @@
             }
         },
         "extra_moves": [
-            "Follow Me"
+            "Follow Me",
+            "Rock Climb"
         ]
     },
 
@@ -1140,6 +1202,7 @@
         },
         "extra_moves": [
             "Follow Me",
+            "Rock Climb",
             "Scorching Sands"
         ]
     },
@@ -1174,7 +1237,7 @@
                         "Swords Dance",
                         "Megahorn",
                         "Earthquake",
-                        "Rock Slide"
+                        "Rock Climb"
                     ],
                     "item": "Pinsirite",
                     "ability": "Mold Breaker"
@@ -1241,7 +1304,10 @@
                     "ability": "Intimidate"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Eevee": {
@@ -1392,7 +1458,16 @@
                     "ability": "Weak Armor"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+    
+    "Kabutops": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Aerodactyl": {
@@ -1511,7 +1586,10 @@
                     "ability": "Thick Fat"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Articuno": {
@@ -1537,10 +1615,17 @@
         ]
     },
 
+    "Mewtwo": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
     "Mew": {
         "extra_moves": [
             "Bug Buzz",
-            "Hurricane"
+            "Hurricane",
+            "Rock Climb"
         ]
     },
 
@@ -1644,7 +1729,8 @@
         },
         "extra_moves": [
             "Dazzling Gleam",
-            "Play Rough"
+            "Play Rough",
+            "Rock Climb"
         ]
     },
 
@@ -1692,7 +1778,8 @@
             }
         },
         "extra_moves": [
-            "Mystical Fire"
+            "Mystical Fire",
+            "Rock Climb"
         ]
     },
 
@@ -1748,6 +1835,7 @@
             "Avalanche",
             "Dragon Rush",
             "Metal Claw",
+            "Rock Climb",
             "Thrash"
         ]
     },
@@ -2146,7 +2234,8 @@
             }
         },
         "extra_moves": [
-            "Energy Ball"
+            "Energy Ball",
+            "Rock Climb"
         ]
     },
 
@@ -2477,7 +2566,8 @@
         "extra_moves": [
             "Acrobatics",
             "Cut",
-            "Low Sweep"
+            "Low Sweep",
+            "Rock Climb"
         ]
     },
 
@@ -3169,6 +3259,12 @@
         ]
     },
 
+    "Regirock": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
     "Regice": {
         "movesets": {
             "gen7pu": {
@@ -3219,7 +3315,10 @@
                     "ability": "Filter"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Registeel": {
@@ -3308,7 +3407,10 @@
                     "ability": "Heatproof"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Latias": {
@@ -3581,6 +3683,7 @@
     "Groudon": {
         "extra_moves": [
             "Low Sweep",
+            "Rock Climb",
             "Work Up"
         ]
     },
@@ -3629,7 +3732,10 @@
                     "ability": "Overgrow"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
     
     "Torterra": {
@@ -3722,12 +3828,22 @@
                     "ability": "Rock Head"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Chimchar": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Monferno": {
         "extra_moves": [
-            "Drain Punch"
+            "Drain Punch",
+            "Rock Climb"
         ]
     },
 
@@ -3801,7 +3917,8 @@
             }
         },
         "extra_moves": [
-            "Aura Sphere"
+            "Aura Sphere",
+            "Rock Climb"
         ]
     },
 
@@ -3923,7 +4040,14 @@
         "extra_moves": [
             "Baby-Doll Eyes",
             "Dual Wingbeat",
+            "Rock Climb",
             "Sing"
+        ]
+    },
+
+    "Bibarel": {
+        "extra_moves": [
+            "Rock Climb"
         ]
     },
 
@@ -4040,6 +4164,12 @@
         }
     },
 
+    "Cranidos": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
     "Rampardos": {
         "movesets": {
             "Choice Scarf": {
@@ -4052,7 +4182,10 @@
                 "item": "Choice Scarf",
                 "ability": "Rock Head"
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Bastiodon": {
@@ -4427,6 +4560,18 @@
         ]
     },
 
+    "Lickilicky": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Rhyperior": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
     "Electivire": {
         "movesets": {
             "gen7zu": {
@@ -4463,7 +4608,8 @@
             }
         },
         "extra_moves": [
-            "Drain Punch"
+            "Drain Punch",
+            "Rock Climb"
         ]
     },
 
@@ -4493,7 +4639,10 @@
                     "ability": "Quick Draw"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Togekiss": {
@@ -6297,10 +6446,23 @@
         }
     },
 
+    "Fletchling": {
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
+    "Talonflame": {
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
     "Vivillon": {
         "extra_moves": [
             "Air Cutter",
             "Air Slash",
+            "Dual Wingbeat",
             "Pollen Puff"
         ]
     },
@@ -6348,6 +6510,133 @@
             "Dark Pulse",
             "Iron Tail",
             "Will-O-Wisp"
+        ]
+    },
+
+    "Flabebe": {
+        "movesets": {
+            "gen7lc": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Psychic",
+                        "Moonblast",
+                        "Synthesis"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Natural Cure"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam"
+        ]
+    },
+
+    "Florges": {
+        "movesets": {
+            "gen7ru": {
+                "Cleric": {
+                    "moves": [
+                        "Moonblast",
+                        "Synthesis",
+                        "Aromatherapy",
+                        "Wish"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Natural Cure"
+                }
+            },
+            "gen7uu": {
+                "Cleric": {
+                    "moves": [
+                        "Moonblast",
+                        "Synthesis",
+                        "Aromatherapy",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Natural Cure"
+                },
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Giga Drain",
+                        "Draining Kiss",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Natural Cure"
+                }
+            },
+            "gen8nationaldexru": {
+                "Defensive Utility": {
+                    "moves": [
+                        "Wish",
+                        "Synthesis",
+                        "Moonblast",
+                        "Aromatherapy"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Natural Cure"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam"
+        ]
+    },
+
+    "Skiddo": {
+        "movesets": {
+            "gen7lc": {
+                "Bulk Up": {
+                    "moves": [
+                        "Bulk Up",
+                        "Horn Leech",
+                        "Rock Climb",
+                        "Return"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Sap Sipper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Wild Charge",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Gogoat": {
+        "movesets": {
+            "gen7pu": {
+                "Return + Bulk Up": {
+                    "moves": [
+                        "Bulk Up",
+                        "Horn Leech",
+                        "Return",
+                        "Milk Drink"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Sap Sipper"
+                },
+                "Rock Climb + Bulk Up": {
+                    "moves": [
+                        "Bulk Up",
+                        "Horn Leech",
+                        "Rock Climb",
+                        "Milk Drink"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Sap Sipper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Superpower",
+            "Wild Charge",
+            "Zen Headbutt"
         ]
     }
 }
