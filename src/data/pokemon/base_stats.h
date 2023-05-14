@@ -18870,7 +18870,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_MAGICIAN, ABILITY_MAGIC_GUARD},
+    #else
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
@@ -18894,7 +18898,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_MAGICIAN, ABILITY_MAGIC_GUARD},
+    #else
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
@@ -18905,7 +18913,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 69,
         .baseDefense   = 72,
         .baseSpeed     = 104,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 115,
+    #else
         .baseSpAttack  = 114,
+    #endif
         .baseSpDefense = 100,
         .type1 = TYPE_FIRE,
         .type2 = TYPE_PSYCHIC,
@@ -18918,7 +18930,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_MAGICIAN, ABILITY_MAGIC_GUARD},
+    #else
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
@@ -18942,7 +18958,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -18966,7 +18986,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -18974,7 +18998,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_GRENINJA] =
     {
         .baseHP        = 72,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 100,
+    #else
         .baseAttack    = 95,
+    #endif
         .baseDefense   = 67,
         .baseSpeed     = 122,
         .baseSpAttack  = 103,
@@ -18990,7 +19018,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
     },
@@ -19021,12 +19053,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_DIGGERSBY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 101,
+        .baseAttack    = 61,
+        .baseDefense   = 80,
+        .baseSpeed     = 78,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 85,
         .baseAttack    = 56,
         .baseDefense   = 77,
         .baseSpeed     = 78,
         .baseSpAttack  = 50,
         .baseSpDefense = 77,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_GROUND,
         .catchRate = 127,
@@ -27289,7 +27330,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_GRENINJA_BATTLE_BOND] =
     {
         .baseHP        = 72,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 100,
+    #else
         .baseAttack    = 95,
+    #endif
         .baseDefense   = 67,
         .baseSpeed     = 122,
         .baseSpAttack  = 103,

@@ -6248,5 +6248,52 @@
             "Mud Shot",
             "Stone Edge"
         ]
+    },
+
+    "Delphox": {
+        "movesets": {
+            "gen7nu": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Fire Blast",
+                        "Psychic",
+                        "Grass Knot"
+                    ],
+                    "item": "Grassium Z",
+                    "ability": "Magic Guard"
+                },
+                "Wish + Protect": {
+                    "moves": [
+                        "Wish",
+                        "Protect",
+                        "Mystical Fire",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Magic Guard"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Fire Blast",
+                        "Psyshock",
+                        "Dazzling Gleam",
+                        "Trick"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Magic Guard"
+                },
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Fire Blast",
+                        "Psychic",
+                        "Grass Knot"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Magic Guard"
+                }
+            }
+        }
     }
 }
