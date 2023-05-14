@@ -1288,7 +1288,7 @@
 
     "Flareon": {
         "movesets": {
-            "gen7ou": {
+            "gen8uu": {
                 "Choice Scarf (Rock Slide)": {
                     "moves": [
                         "Flare Blitz",
@@ -5692,7 +5692,6 @@
         "extra_moves": [
             "Electroweb",
             "Infestation",
-            "Rock Slide",
             "Scald",
             "Sludge Wave",
             "Stone Edge"
@@ -5704,7 +5703,6 @@
             "Acrobatics",
             "Poison Jab",
             "Rock Climb",
-            "Rock Slide",
             "Stone Edge"
         ]
     },
@@ -5714,8 +5712,7 @@
             "Acrobatics",
             "Blaze Kick",
             "Poison Jab",
-            "Rock Climb",
-            "Rock Slide"
+            "Rock Climb"
         ]
     },
 
@@ -5782,8 +5779,7 @@
         "extra_moves": [
             "Bulldoze",
             "Scorching Sands",
-            "Stone Edge",
-            "Rock Slide"
+            "Stone Edge"
         ]
     },
 
@@ -5806,8 +5802,451 @@
             "Bulldoze",
             "Scorching Sands",
             "Stone Edge",
-            "Rock Slide",
             "Zen Headbutt"
+        ]
+    },
+
+    "Bouffalant": {
+        "extra_moves": [
+            "Body Press",
+            "Close Combat",
+            "Endeavor",
+            "Flame Charge",
+            "Heat Crash",
+            "High Horsepower",
+            "Smart Strike",
+            "Outrage",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Rufflet": {
+        "extra_moves": [
+            "Defog",
+            "Dual Wingbeat",
+            "Steel Wing",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Braviary": {
+        "extra_moves": [
+            "Defog",
+            "Dual Wingbeat",
+            "Quash",
+            "Steel Wing",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Vullaby": {
+        "extra_moves": [
+            "Dual Wingbeat",
+            "Hurricane",
+            "Superpower",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Mandibuzz": {
+        "extra_moves": [
+            "Dual Wingbeat",
+            "Hurricane",
+            "Quash",
+            "Superpower",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Heatmor": {
+        "extra_moves": [
+            "Low Sweep",
+            "Power Whip",
+            "Rock Climb",
+            "Scorching Sands",
+            "Work Up"
+        ]
+    },
+
+    "Durant": {
+        "movesets": {
+            "gen8uu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "First Impression",
+                        "Iron Head",
+                        "Rock Climb",
+                        "Superpower"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Hustle"
+                }
+            },
+            "gen8monotype": {
+                "Life Orb Attacker (Steel)": {
+                    "moves": [
+                        "First Impression",
+                        "Superpower",
+                        "Rock Climb",
+                        "Crunch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Hustle"
+                }
+            }
+        },
+        "extra_moves": [
+            "Bug Buzz",
+            "Low Sweep",
+            "Work Up"
+        ]
+    },
+
+    "Deino": {
+        "extra_moves": [
+            "Zen Headbutt"
+        ]
+    },
+
+    "Zweilous": {
+        "extra_moves": [
+            "Zen Headbutt"
+        ]
+    },
+
+    "Hydreigon": {
+        "extra_moves": [
+            "Breaking Swipe",
+            "Dual Wingbeat",
+            "Heat Wave",
+            "Hydro Pump",
+            "Stealth Rock",
+            "Steel Wing",
+            "Thunder Wave",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Larvesta": {
+        "extra_moves": [
+            "Leech Life"
+        ]
+    },
+
+    "Volcarona": {
+        "extra_moves": [
+            "Inferno",
+            "Leech Life"
+        ]
+    },
+
+    "Cobalion": {
+        "movesets": {
+            "gen7uu": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Flash Cannon",
+                        "Aura Sphere",
+                        "Hidden Power Grass"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Justified"
+                }
+            },
+            "gen7monotype": {
+                "Utility (Fighting)": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Iron Head",
+                        "Taunt",
+                        "Volt Switch"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Justified"
+                }
+            }
+        },
+        "extra_moves": [
+            "Air Slash",
+            "Focus Blast",
+            "Low Sweep",
+            "Poison Jab",
+            "Rock Climb",
+            "Rock Polish",
+            "Smart Strike",
+            "Steel Beam",
+            "X-Scissor",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Terrakion": {
+        "movesets": {
+            "gen7uu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Rock Climb",
+                        "Close Combat",
+                        "Stealth Rock"
+                    ],
+                    "item": "Rockium Z",
+                    "ability": "Justified"
+                }
+            }
+        },
+        "extra_moves": [
+            "Air Slash",
+            "Aura Sphere",
+            "Low Sweep",
+            "Poison Jab",
+            "Smart Strike",
+            "X-Scissor",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Virizion": {
+        "extra_moves": [
+            "Air Slash",
+            "Aura Sphere",
+            "Low Sweep",
+            "Poison Jab",
+            "Rock Climb",
+            "Smart Strike",
+            "X-Scissor",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Tornadus": {
+        "extra_moves": [
+            "Foul Play"
+        ]
+    },
+
+    "Tornadus-Therian": {
+        "extra_moves": [
+            "Foul Play"
+        ]
+    },
+
+    "Thundurus": {
+        "extra_moves": [
+            "Smart Strike",
+            "Volt Switch"
+        ]
+    },
+
+    "Thundurus-Therian": {
+        "extra_moves": [
+            "Smart Strike",
+            "Volt Switch"
+        ]
+    },
+
+    "Reshiram": {
+        "extra_moves": [
+            "Dragon Dance",
+            "Dual Wingbeat",
+            "Earth Power",
+            "Rock Climb",
+            "Roost",
+            "Scorching Sands",
+            "Stone Edge"
+        ]
+    },
+
+    "Zekrom": {
+        "movesets": {
+            "gen7ubers": {
+                "Pseudo-Edge Quake": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Bolt Strike",
+                        "Earthquake",
+                        "Rock Climb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Teravolt"
+                }
+            }
+        },
+        "extra_moves": [
+            "Body Press",
+            "Breaking Swipe",
+            "Dual Wingbeat",
+            "Roost"
+        ]
+    },
+
+    "Kyurem": {
+        "movesets": {
+            "gen8ubers": {
+                "Pressure": {
+                    "moves": [
+                        "Substitute",
+                        "Roost",
+                        "Icicle Crash",
+                        "Dragon Dance"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Pressure"
+                }
+            }
+        },
+        "extra_moves": [
+            "Frost Breath",
+            "Rock Climb",
+            "Work Up"
+        ]
+    },
+
+    "Kyurem-Black": {
+        "movesets": {
+            "gen8ubers": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Icicle Crash",
+                        "Roost",
+                        "Fusion Bolt"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Teravolt"
+                }
+            },
+            "gen8doublesou": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Icicle Crash",
+                        "Fusion Bolt",
+                        "Dragon Dance",
+                        "Protect"
+                    ],
+                    "item": "Chople Berry",
+                    "ability": "Teravolt"
+                }
+            }
+        },
+        "extra_moves": [
+            "Frost Breath",
+            "Rock Climb",
+            "Work Up"
+        ]
+    },
+
+    "Kyurem-White": {
+        "extra_moves": [
+            "Frost Breath",
+            "Rock Climb",
+            "Work Up"
+        ]
+    },
+
+    "Keldeo": {
+        "extra_moves": [
+            "Low Sweep",
+            "Megahorn",
+            "Poison Jab",
+            "Rock Climb",
+            "Smart Strike",
+            "X-Scissor"
+        ]
+    },
+
+    "Meloetta": {
+        "movesets": {
+            "gen7uu": {
+                "Z-Celebrate": {
+                    "moves": [
+                        "Celebrate",
+                        "Psychic",
+                        "Focus Blast",
+                        "Relic Song"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Serene Grace"
+                }
+            },
+            "gen7monotype": {
+                "Choice Specs (Normal)": {
+                    "moves": [
+                        "Relic Song",
+                        "Psychic",
+                        "Shadow Ball",
+                        "Focus Blast"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Serene Grace"
+                },
+                "Choice Scarf (Normal)": {
+                    "moves": [
+                        "Psychic",
+                        "U-turn",
+                        "Focus Blast",
+                        "Relic Song"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Serene Grace"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Wake-Up Slap",
+            "Close Combat"
+        ]
+    },
+
+    "Genesect": {
+        "extra_moves": [
+            "Zen Headbutt"
+        ]
+    },
+
+    "Chespin": {
+        "movesets": {
+            "gen7lc": {
+                "Offensive Utility": {
+                    "moves": [
+                        "Horn Leech",
+                        "Zen Headbutt",
+                        "Synthesis",
+                        "Spikes"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Bulletproof"
+                }
+            }
+        },
+        "extra_moves": [
+            "Mud Shot",
+            "Rock Climb",
+            "Stone Edge"
+        ]
+    },
+
+    "Chesnaught": {
+        "movesets": {
+            "gen7uu": {
+                "Bulk Up": {
+                    "moves": [
+                        "Bulk Up",
+                        "Body Press",
+                        "Horn Leech",
+                        "Rock Climb"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Iron Barbs"
+                }
+            }
+        },
+        "extra_moves": [
+            "Close Combat",
+            "Mud Shot",
+            "Stone Edge"
         ]
     }
 }

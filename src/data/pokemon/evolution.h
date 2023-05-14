@@ -447,11 +447,31 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 #else
     [SPECIES_GOLETT]                = {{EVO_LEVEL, 43, SPECIES_GOLURK}},
 #endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_PAWNIARD]              = {{EVO_LEVEL, 40, SPECIES_BISHARP}},
+#else
     [SPECIES_PAWNIARD]              = {{EVO_LEVEL, 52, SPECIES_BISHARP}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_RUFFLET]               = {{EVO_LEVEL, 40, SPECIES_BRAVIARY}},
+#else
     [SPECIES_RUFFLET]               = {{EVO_LEVEL, 54, SPECIES_BRAVIARY}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_VULLABY]               = {{EVO_LEVEL, 40, SPECIES_MANDIBUZZ}},
+#else
     [SPECIES_VULLABY]               = {{EVO_LEVEL, 54, SPECIES_MANDIBUZZ}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_DEINO]                 = {{EVO_LEVEL, 38, SPECIES_ZWEILOUS}},
+#else
     [SPECIES_DEINO]                 = {{EVO_LEVEL, 50, SPECIES_ZWEILOUS}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_ZWEILOUS]              = {{EVO_LEVEL, 58, SPECIES_HYDREIGON}},
+#else
     [SPECIES_ZWEILOUS]              = {{EVO_LEVEL, 64, SPECIES_HYDREIGON}},
+#endif
     [SPECIES_LARVESTA]              = {{EVO_LEVEL, 59, SPECIES_VOLCARONA}},
     [SPECIES_CHESPIN]               = {{EVO_LEVEL, 16, SPECIES_QUILLADIN}},
     [SPECIES_QUILLADIN]             = {{EVO_LEVEL, 36, SPECIES_CHESNAUGHT}},

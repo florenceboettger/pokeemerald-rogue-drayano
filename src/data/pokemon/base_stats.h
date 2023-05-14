@@ -18174,7 +18174,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 95,
         .baseAttack    = 110,
         .baseDefense   = 95,
+    #ifdef ROGUE_DRAYANO
+        .baseSpeed     = 65,
+    #else
         .baseSpeed     = 55,
+    #endif
         .baseSpAttack  = 40,
         .baseSpDefense = 95,
         .type1 = TYPE_NORMAL,
@@ -18291,12 +18295,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_HEATMOR] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 85,
+        .baseAttack    = 105,
+        .baseDefense   = 66,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 97,
+        .baseSpDefense = 66,
+    #else
         .baseHP        = 85,
         .baseAttack    = 97,
         .baseDefense   = 66,
         .baseSpeed     = 65,
         .baseSpAttack  = 105,
         .baseSpDefense = 66,
+    #endif
         .type1 = TYPE_FIRE,
         .type2 = TYPE_FIRE,
         .catchRate = 90,
@@ -18308,7 +18321,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MOLD_BREAKER, ABILITY_FLASH_FIRE, ABILITY_WHITE_SMOKE},
+    #else
         .abilities = {ABILITY_GLUTTONY, ABILITY_FLASH_FIRE, ABILITY_WHITE_SMOKE},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
@@ -18332,7 +18349,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_BUG,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_HEATPROOF, ABILITY_HUSTLE, ABILITY_TRUANT},
+    #else
         .abilities = {ABILITY_SWARM, ABILITY_HUSTLE, ABILITY_TRUANT},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
     },
@@ -18761,7 +18782,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_IRON_BARBS, ABILITY_BULLETPROOF},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
@@ -18785,14 +18810,22 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_IRON_BARBS, ABILITY_BULLETPROOF},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
     [SPECIES_CHESNAUGHT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 93,
+    #else
         .baseHP        = 88,
+    #endif
         .baseAttack    = 107,
         .baseDefense   = 122,
         .baseSpeed     = 64,
@@ -18809,7 +18842,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_IRON_BARBS, ABILITY_BULLETPROOF},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
@@ -27208,12 +27245,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MELOETTA_PIROUETTE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 100,
+        .baseAttack    = 77,
+        .baseDefense   = 90,
+        .baseSpeed     = 128,
+        .baseSpAttack  = 128,
+        .baseSpDefense = 77,
+    #else
         .baseHP        = 100,
         .baseAttack    = 128,
         .baseDefense   = 90,
         .baseSpeed     = 128,
         .baseSpAttack  = 77,
         .baseSpDefense = 77,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FIGHTING,
         .catchRate = 3,

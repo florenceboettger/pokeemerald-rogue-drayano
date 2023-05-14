@@ -9979,11 +9979,27 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_HEAD_CHARGE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .effect = EFFECT_RECOIL_50,
+    #else
         .effect = EFFECT_RECOIL_25,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .power = 150,
+    #else
         .power = 120,
+    #endif
         .type = TYPE_NORMAL,
+    #ifdef ROGUE_DRAYANO
+        .accuracy = 80,
+    #else
         .accuracy = 100,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .pp = 5,
+    #else
         .pp = 15,
+    #endif
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -10050,7 +10066,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_RELIC_SONG] =
     {
         .effect = EFFECT_RELIC_SONG,
+    #ifdef ROGUE_DRAYANO
+        .power = 80,
+    #else
         .power = 75,
+    #endif
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 10,
@@ -10059,7 +10079,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SOUND | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_SPECIAL,
+    #ifdef ROGUE_DRAYANO
+        .zMovePower = 160,
+    #else
         .zMovePower = 140,
+    #endif
         .zMoveEffect = Z_EFFECT_NONE,
         .argument = STATUS1_SLEEP,
     },

@@ -15855,6 +15855,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_RESHIRAM]    = TMHM_LEARNSET(TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM02_DRAGON_CLAW)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM26_EARTHQUAKE)
+                                        #endif
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
                                           TMHM(TM35_FLAMETHROWER)
@@ -15883,6 +15886,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_ZEKROM]      = TMHM_LEARNSET(TMHM(HM01_CUT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM02_DRAGON_CLAW)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM26_EARTHQUAKE)
+                                        #endif
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
                                           TMHM(HM02_FLY)

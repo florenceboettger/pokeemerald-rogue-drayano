@@ -2011,6 +2011,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_MIMIC)
                                             | TUTOR(MOVE_MUD_SLAP)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_ROCK_SLIDE)
+                                        #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
                                             | TUTOR(MOVE_SUBSTITUTE)

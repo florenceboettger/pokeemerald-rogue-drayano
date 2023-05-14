@@ -14189,6 +14189,9 @@ static const struct LevelUpMove sPawniardLevelUpLearnset[] = {
     LEVEL_UP_MOVE(41, MOVE_EMBARGO),
     LEVEL_UP_MOVE(46, MOVE_IRON_DEFENSE),
     LEVEL_UP_MOVE(49, MOVE_NIGHT_SLASH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(52, MOVE_PSYCHO_CUT),
+#endif
     LEVEL_UP_MOVE(54, MOVE_IRON_HEAD),
     LEVEL_UP_MOVE(57, MOVE_SWORDS_DANCE),
     LEVEL_UP_MOVE(62, MOVE_GUILLOTINE),
@@ -14196,6 +14199,10 @@ static const struct LevelUpMove sPawniardLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sBisharpLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_LEAF_BLADE),
+    LEVEL_UP_MOVE( 1, MOVE_AIR_SLASH),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_GUILLOTINE),
     LEVEL_UP_MOVE( 1, MOVE_IRON_HEAD),
     LEVEL_UP_MOVE( 1, MOVE_METAL_BURST),
@@ -14215,6 +14222,9 @@ static const struct LevelUpMove sBisharpLevelUpLearnset[] = {
     LEVEL_UP_MOVE(41, MOVE_EMBARGO),
     LEVEL_UP_MOVE(46, MOVE_IRON_DEFENSE),
     LEVEL_UP_MOVE(49, MOVE_NIGHT_SLASH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(53, MOVE_PSYCHO_CUT),
+#endif
     LEVEL_UP_MOVE(57, MOVE_IRON_HEAD),
     LEVEL_UP_MOVE(63, MOVE_SWORDS_DANCE),
     LEVEL_UP_MOVE(71, MOVE_GUILLOTINE),
@@ -14229,13 +14239,20 @@ static const struct LevelUpMove sBouffalantLevelUpLearnset[] = {
     LEVEL_UP_MOVE(16, MOVE_HORN_ATTACK),
     LEVEL_UP_MOVE(21, MOVE_SCARY_FACE),
     LEVEL_UP_MOVE(26, MOVE_REVENGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(31, MOVE_BODY_SLAM),
+#else
     LEVEL_UP_MOVE(31, MOVE_HEAD_CHARGE),
+#endif
     LEVEL_UP_MOVE(36, MOVE_FOCUS_ENERGY),
     LEVEL_UP_MOVE(41, MOVE_MEGAHORN),
     LEVEL_UP_MOVE(46, MOVE_REVERSAL),
     LEVEL_UP_MOVE(50, MOVE_THRASH),
     LEVEL_UP_MOVE(56, MOVE_SWORDS_DANCE),
     LEVEL_UP_MOVE(61, MOVE_GIGA_IMPACT),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(65, MOVE_HEAD_CHARGE),
+#endif
     LEVEL_UP_END
 };
 
@@ -14344,7 +14361,12 @@ static const struct LevelUpMove sHeatmorLevelUpLearnset[] = {
     LEVEL_UP_MOVE(21, MOVE_FURY_SWIPES),
     LEVEL_UP_MOVE(26, MOVE_SNATCH),
     LEVEL_UP_MOVE(31, MOVE_FLAME_BURST),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(34, MOVE_BUG_BITE),
+    LEVEL_UP_MOVE(37, MOVE_CROSS_CHOP),
+#else
     LEVEL_UP_MOVE(36, MOVE_BUG_BITE),
+#endif
     LEVEL_UP_MOVE(41, MOVE_SLASH),
     LEVEL_UP_MOVE(44, MOVE_FIRE_LASH),
     LEVEL_UP_MOVE(47, MOVE_AMNESIA),
@@ -14399,6 +14421,9 @@ static const struct LevelUpMove sDeinoLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sZweilousLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_DOUBLE_HIT),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_DOUBLE_HIT),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE( 1, MOVE_FOCUS_ENERGY),
@@ -14421,6 +14446,9 @@ static const struct LevelUpMove sZweilousLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sHydreigonLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_TRI_ATTACK),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_OUTRAGE),
     LEVEL_UP_MOVE( 1, MOVE_HYPER_VOICE),
     LEVEL_UP_MOVE( 1, MOVE_TRI_ATTACK),
@@ -14661,6 +14689,9 @@ static const struct LevelUpMove sLandorusLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sKyuremLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_ICE_FANG),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ICY_WIND),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE( 8, MOVE_IMPRISON),
@@ -14700,6 +14731,9 @@ static const struct LevelUpMove sKeldeoLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sMeloettaLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_RELIC_SONG),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ROUND),
     LEVEL_UP_MOVE( 1, MOVE_QUICK_ATTACK),
     LEVEL_UP_MOVE( 1, MOVE_CONFUSION),
@@ -14712,11 +14746,19 @@ static const struct LevelUpMove sMeloettaLevelUpLearnset[] = {
     LEVEL_UP_MOVE(31, MOVE_PSYBEAM),
     LEVEL_UP_MOVE(36, MOVE_ECHOED_VOICE),
     LEVEL_UP_MOVE(43, MOVE_U_TURN),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(50, MOVE_AURA_SPHERE),
+#else
     LEVEL_UP_MOVE(50, MOVE_WAKE_UP_SLAP),
+#endif
     LEVEL_UP_MOVE(57, MOVE_PSYCHIC),
     LEVEL_UP_MOVE(64, MOVE_HYPER_VOICE),
     LEVEL_UP_MOVE(71, MOVE_ROLE_PLAY),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(78, MOVE_FOCUS_BLAST),
+#else
     LEVEL_UP_MOVE(78, MOVE_CLOSE_COMBAT),
+#endif
     LEVEL_UP_MOVE(85, MOVE_PERISH_SONG),
     LEVEL_UP_END
 };
@@ -14753,8 +14795,15 @@ static const struct LevelUpMove sChespinLevelUpLearnset[] = {
     LEVEL_UP_MOVE(11, MOVE_BITE),
     LEVEL_UP_MOVE(15, MOVE_LEECH_SEED),
     LEVEL_UP_MOVE(18, MOVE_PIN_MISSILE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(22, MOVE_SEED_BOMB),
+#endif
     LEVEL_UP_MOVE(27, MOVE_TAKE_DOWN),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(32, MOVE_NEEDLE_ARM),
+#else
     LEVEL_UP_MOVE(32, MOVE_SEED_BOMB),
+#endif
     LEVEL_UP_MOVE(35, MOVE_MUD_SHOT),
     LEVEL_UP_MOVE(39, MOVE_BULK_UP),
     LEVEL_UP_MOVE(42, MOVE_BODY_SLAM),
@@ -14764,8 +14813,13 @@ static const struct LevelUpMove sChespinLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sQuilladinLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_PIN_MISSILE),
+    LEVEL_UP_MOVE( 1, MOVE_PIN_MISSILE),
+#else
     LEVEL_UP_MOVE( 0, MOVE_NEEDLE_ARM),
     LEVEL_UP_MOVE( 1, MOVE_NEEDLE_ARM),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
     LEVEL_UP_MOVE( 1, MOVE_VINE_WHIP),
     LEVEL_UP_MOVE( 5, MOVE_VINE_WHIP),
@@ -14773,8 +14827,15 @@ static const struct LevelUpMove sQuilladinLevelUpLearnset[] = {
     LEVEL_UP_MOVE(11, MOVE_BITE),
     LEVEL_UP_MOVE(15, MOVE_LEECH_SEED),
     LEVEL_UP_MOVE(19, MOVE_PIN_MISSILE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(24, MOVE_SEED_BOMB),
+#endif
     LEVEL_UP_MOVE(29, MOVE_TAKE_DOWN),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(35, MOVE_NEEDLE_ARM),
+#else
     LEVEL_UP_MOVE(35, MOVE_SEED_BOMB),
+#endif
     LEVEL_UP_MOVE(39, MOVE_MUD_SHOT),
     LEVEL_UP_MOVE(44, MOVE_BULK_UP),
     LEVEL_UP_MOVE(48, MOVE_BODY_SLAM),
@@ -14786,7 +14847,9 @@ static const struct LevelUpMove sQuilladinLevelUpLearnset[] = {
 static const struct LevelUpMove sChesnaughtLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 0, MOVE_SPIKY_SHIELD),
     LEVEL_UP_MOVE( 1, MOVE_SPIKY_SHIELD),
+#ifndef ROGUE_DRAYANO
     LEVEL_UP_MOVE( 1, MOVE_NEEDLE_ARM),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_HAMMER_ARM),
     LEVEL_UP_MOVE( 1, MOVE_FEINT),
     LEVEL_UP_MOVE( 1, MOVE_BELLY_DRUM),
@@ -14799,8 +14862,15 @@ static const struct LevelUpMove sChesnaughtLevelUpLearnset[] = {
     LEVEL_UP_MOVE(11, MOVE_BITE),
     LEVEL_UP_MOVE(15, MOVE_LEECH_SEED),
     LEVEL_UP_MOVE(19, MOVE_PIN_MISSILE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(24, MOVE_SEED_BOMB),
+#endif
     LEVEL_UP_MOVE(29, MOVE_TAKE_DOWN),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(35, MOVE_NEEDLE_ARM),
+#else
     LEVEL_UP_MOVE(35, MOVE_SEED_BOMB),
+#endif
     LEVEL_UP_MOVE(41, MOVE_MUD_SHOT),
     LEVEL_UP_MOVE(48, MOVE_BULK_UP),
     LEVEL_UP_MOVE(54, MOVE_BODY_SLAM),
@@ -20456,6 +20526,9 @@ static const struct LevelUpMove sShayminSkyLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sKyuremWhiteLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_ICE_FANG),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ICY_WIND),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE( 8, MOVE_IMPRISON),
@@ -20475,6 +20548,9 @@ static const struct LevelUpMove sKyuremWhiteLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sKyuremBlackLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_ICE_FANG),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ICY_WIND),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE( 8, MOVE_IMPRISON),

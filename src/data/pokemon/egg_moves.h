@@ -3386,7 +3386,8 @@ const u16 gEggMoves[] = {
         MOVE_DRILL_RUN
     #ifdef ROGUE_DRAYANO
         MOVE_NIGHT_SLASH
-    #endif),
+    #endif
+    ),
 
     egg_moves(FOONGUS,
         MOVE_GASTRO_ACID,
@@ -3471,7 +3472,8 @@ const u16 gEggMoves[] = {
         MOVE_HARDEN
     #ifdef ROGUE_DRAYANO
         MOVE_FIRST_IMPRESSION
-    #endif),
+    #endif
+    ),
 
     egg_moves(CUBCHOO,
         MOVE_YAWN,
@@ -3555,7 +3557,11 @@ const u16 gEggMoves[] = {
         MOVE_IRON_HEAD,
         MOVE_AMNESIA,
         MOVE_BELCH,
-        MOVE_COTTON_GUARD),
+        MOVE_COTTON_GUARD
+    #ifdef ROGUE_DRAYANO
+        MOVE_HEAD_SMASH
+    #endif
+    ),
 
     egg_moves(VULLABY,
         MOVE_STEEL_WING,
@@ -3617,7 +3623,11 @@ const u16 gEggMoves[] = {
         MOVE_SPIKES,
         MOVE_DEFENSE_CURL,
         MOVE_ROLLOUT,
-        MOVE_POWER_UP_PUNCH),
+        MOVE_POWER_UP_PUNCH
+    #ifdef ROGUE_DRAYANO
+        MOVE_HORN_LEECH
+    #endif
+    ),
 
     egg_moves(FENNEKIN,
         MOVE_WISH,
