@@ -19965,6 +19965,9 @@ const u8 gTMHMLearnsets[][64] =
 
     [SPECIES_SIRFETCHD]   = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT)
+                                        #endif
                                           TMHM(TM42_FACADE)
                                           TMHM(TM17_PROTECT)
                                           TMHM(TM44_REST)
@@ -20700,6 +20703,9 @@ const u8 gTMHMLearnsets[][64] =
 
     [SPECIES_FARFETCHD_GALARIAN]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT)
+                                        #endif
                                           TMHM(TM42_FACADE)
                                           TMHM(TM17_PROTECT)
                                           TMHM(TM44_REST)
@@ -20933,7 +20939,11 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM39_ROCK_TOMB)
                                           TMHM(TM37_SANDSTORM)
                                           TMHM(TM36_SLUDGE_BOMB)
-                                          TMHM(HM03_SURF)),
+                                          TMHM(HM03_SURF)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM06_TOXIC)
+                                        #endif
+                                        ),
 
     [SPECIES_PIKACHU_COSPLAY]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)

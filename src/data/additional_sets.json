@@ -557,11 +557,13 @@
             "Draining Kiss"
         ]
     },
+
     "Vulpix": {
         "extra_moves": [
             "Dazzling Gleam"
         ]
     },
+
     "Ninetales": {
         "movesets": {
             "gen7ru": {
@@ -615,6 +617,7 @@
             "Dazzling Gleam"
         ]
     },
+
     "Wigglytuff": {
         "movesets": {
             "gen7pu": {
@@ -667,6 +670,7 @@
             }
         }
     },
+
     "Vileplume": {
         "movesets": {
             "gen7ru": {
@@ -683,11 +687,13 @@
             }
         }
     },
+
     "Parasect": {
         "extra_moves": [
             "Bug Buzz"
         ]
     },
+
     "Venomoth": {
         "extra_moves": [
             "Hurricane",
@@ -695,6 +701,7 @@
             "Baton Pass"
         ]
     },
+
     "Dugtrio": {
         "movesets": {
             "gen7zu": {
@@ -711,6 +718,7 @@
             }
         }
     },
+
     "Persian": {
         "movesets": {
             "gen8zu": {
@@ -918,8 +926,18 @@
             }
         },
         "extra_moves": [
+            "Dual Wingbeat",
             "Focus Blast",
             "Hurricane"
+        ]
+    },
+    
+    "Farfetch'd-Galar": {
+        "extra_moves": [
+            "Close Combat",
+            "Drill Run",
+            "Dual Wingbeat",
+            "Roost"
         ]
     },
 
@@ -982,6 +1000,45 @@
         }
     },
 
+    "Muk": {
+        "movesets": {
+            "gen7pu": {
+                "Rest + Sleep Talk": {
+                    "moves": [
+                        "Curse",
+                        "Poison Jab",
+                        "Rest",
+                        "Sleep Talk"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Regenerator"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Gunk Shot",
+                        "Shadow Sneak",
+                        "Thunder Punch",
+                        "Ice Punch"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Regenerator"
+                }
+            },
+            "gen7zu": {
+                "Curse": {
+                    "moves": [
+                        "Rest",
+                        "Sleep Talk",
+                        "Curse",
+                        "Fire Punch"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Regenerator"
+                }
+            }
+        }
+    },
+
     "Onix": {
         "extra_moves": [
             "Rock Climb"
@@ -1030,6 +1087,75 @@
         ]
     },
 
+    "Exeggutor": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Psyshock",
+                        "Weather Ball",
+                        "Giga Drain"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Chlorophyll"
+                }
+            },
+            "gen8pu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Psychic",
+                        "Giga Drain",
+                        "Earth Power"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Chlorophyll"
+                }
+            }
+        }
+    },
+
+    "Exeggutor-Alola": {
+        "movesets": {
+            "gen7nu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Knock Off",
+                        "Outrage",
+                        "Wood Hammer",
+                        "Earthquake"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Frisk"
+                }
+            },
+            "gen7letsgoou": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Dragon Hammer",
+                        "Wood Hammer",
+                        "Earthquake"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Harvest"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dragon Tail",
+            "Earth Power",
+            "Iron Head",
+            "Iron Tail",
+            "Knock Off",
+            "Stomping Tantrum",
+            "Superpower",
+            "Swords Dance",
+            "Zen Headbutt"
+        ]
+    },
+
     "Cubone": {
         "extra_moves": [
             "Rock Climb"
@@ -1037,7 +1163,22 @@
     },
 
     "Marowak": {
+        "movesets": {
+            "gen7zu": {
+                "Trick Room Attacker": {
+                    "moves": [
+                        "Bonemerang",
+                        "Head Smash",
+                        "Knock Off",
+                        "Swords Dance"
+                    ],
+                    "item": "Thick Club",
+                    "ability": "Rock Head"
+                }
+            }
+        },
         "extra_moves": [
+            "Double-Edge",
             "Rock Climb"
         ]
     },
@@ -1131,6 +1272,23 @@
             "Power Gem",
             "Quash",
             "Tri Attack"
+        ]
+    },
+
+    "Mr. Mime-Galar": {
+        "extra_moves": [
+            "Charge Beam",
+            "Drain Punch",
+            "Energy Ball",
+            "Foul Play",
+            "Grass Knot",
+            "Icy Wind",
+            "Magical Leaf",
+            "Mystical Fire",
+            "Nasty Plot",
+            "Psyshock",
+            "Thief",
+            "Thunder Wave"
         ]
     },
 
@@ -2389,6 +2547,23 @@
         "extra_moves": [
             "Nasty Plot"
         ]
+    },
+
+    "Hitmontop": {
+        "movesets": {
+            "gen8nu": {
+                "Spitmontop (Rapid Spin)": {
+                    "moves": [
+                        "Rapid Spin",
+                        "Triple Axel",
+                        "Mach Punch",
+                        "Triple Kick"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Technician"
+                }
+            }
+        }
     },
 
     "Magby": {
@@ -3724,7 +3899,7 @@
                 "Stealth Rock (Sleep Powder)": {
                     "moves": [
                         "Stealth Rock",
-                        "Leaf Blade",
+                        "Grav Apple",
                         "Superpower",
                         "Sleep Powder"
                     ],
@@ -3778,7 +3953,7 @@
                 "Bulky Swords Dance": {
                     "moves": [
                         "Swords Dance",
-                        "Leaf Blade",
+                        "Grav Apple",
                         "Earthquake",
                         "Synthesis"
                     ],
@@ -4825,6 +5000,16 @@
                     ],
                     "item": "Normalium Z",
                     "ability": "Serene Grace"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Freeze-Dry",
+                        "Blizzard",
+                        "Earth Power",
+                        "Dazzling Gleam"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Serene Grace"
                 }
             },
             "gen7zu": {
@@ -5846,6 +6031,41 @@
             "Stone Edge"
         ]
     },
+
+    "Stunfisk-Galar": {
+        "movesets": {
+            "gen8nu": {
+                "Special Wall": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Earthquake",
+                        "Iron Head",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Filter"
+                }
+            },
+            "gen8pu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Earthquake",
+                        "Iron Head",
+                        "Yawn"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Absorb"
+                }
+            }
+        },
+        "extra_moves": [
+            "Foul Play",
+            "Ice Fang",
+            "Stone Edge",
+            "Thunder Wave"
+        ]
+    },
     
     "Mienfoo": {
         "extra_moves": [
@@ -6637,6 +6857,343 @@
             "Superpower",
             "Wild Charge",
             "Zen Headbutt"
+        ]
+    },
+
+    "Meowstic-M": {
+        "extra_moves": [
+            "Mystical Fire"
+        ]
+    },
+
+    "Meowstic-F": {
+        "extra_moves": [
+            "Mystical Fire"
+        ]
+    },
+
+    "Spritzee": {
+        "movesets": {
+            "gen7lc": {
+                "Defensive": {
+                    "moves": [
+                        "Wish",
+                        "Protect",
+                        "Draining Kiss",
+                        "Calm Mind"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Aroma Veil"
+                }
+            }
+        },
+        "extra_moves": [
+            "Charge Beam",
+            "Energy Ball",
+            "Flash Cannon",
+            "Gyro Ball",
+            "Trick Room"
+        ]
+    },
+
+    "Aromatisse": {
+        "movesets": {
+            "gen7nu": {
+                "Offensive Trick Room": {
+                    "moves": [
+                        "Trick Room",
+                        "Nasty Plot",
+                        "Sparkly Swirl",
+                        "Psychic"
+                    ],
+                    "item": "Fairium Z",
+                    "ability": "Aroma Veil"
+                }
+            },
+            "gen8pu": {
+                "Defensive": {
+                    "moves": [
+                        "Sparkly Swirl",
+                        "Wish",
+                        "Protect",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Aroma Veil"
+                }
+            },
+            "gen81v1": {
+                "Defensive Rocky Helmet": {
+                    "moves": [
+                        "Trick Room",
+                        "Encore",
+                        "Disable",
+                        "Sparkly Swirl"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Aroma Veil"
+                }
+            }
+        },
+        "extra_moves": [
+            "Charge Beam",
+            "Drain Punch",
+            "Energy Ball",
+            "Flash Cannon",
+            "Gyro Ball"
+        ]
+    },
+
+    "Golisopod": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Type-Null": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Silvally": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Minior": {
+        "extra_moves": [
+            "Acrobatics",
+            "Air Slash",
+            "Charge Beam",
+            "Dazzling Gleam",
+            "U-turn"
+        ]
+    },
+
+    "Turtonator": {
+        "extra_moves": [
+            "Charge Beam",
+            "Dragon Tail",
+            "Focus Blast",
+            "Head Smash",
+            "Shock Wave",
+            "Venoshock",
+            "Will-O-Wisp"
+        ]
+    },
+
+    "Togedemaru": {
+        "movesets": {
+            "gen7nu": {
+                "Choice Band": {
+                    "moves": [
+                        "Zippy Zap",
+                        "Iron Head",
+                        "U-turn",
+                        "Zen Headbutt"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Sturdy"
+                }
+            }
+        }
+    },
+
+    "Dhelmise": {
+        "movesets": {
+            "gen8nu": {
+                "Defensive": {
+                    "moves": [
+                        "Power Whip",
+                        "Spirit Shackle",
+                        "Rapid Spin",
+                        "Synthesis"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Steelworker"
+                }
+            }
+        }
+    },
+
+    "Tapu Koko": {
+        "movesets": {
+            "gen8doublesou": {
+                "Physical Attacker": {
+                    "moves": [
+                        "Wild Charge",
+                        "Brave Bird",
+                        "Play Rough",
+                        "U-turn"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Electric Surge"
+                }
+            },
+            "gen8battlestadiumsingles": {
+                "Physical Attacker": {
+                    "moves": [
+                        "Wild Charge",
+                        "Brave Bird",
+                        "U-turn",
+                        "Play Rough"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Electric Surge"
+                }
+            },
+            "gen81v1": {
+                "Charge + Wild Charge": {
+                    "moves": [
+                        "Charge",
+                        "Wild Charge",
+                        "Play Rough",
+                        "Quick Attack"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Electric Surge" 
+                }
+            }
+        },
+        "extra_moves": [
+            "Iron Head"
+        ]
+    },
+
+    "Tapu Bulu": {
+        "movesets": {
+            "gen7ou": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Horn Leech",
+                        "Close Combat",
+                        "Play Rough"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Grassy Surge"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Horn Leech",
+                        "Play Rough",
+                        "Close Combat",
+                        "Rock Climb"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Grassy Surge"
+                }
+            },
+            "gen7monotype": {
+                "Choice Band (Fairy)": {
+                    "moves": [
+                        "Play Rough",
+                        "Horn Leech",
+                        "Close Combat",
+                        "Rock Climb"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Grassy Surge"
+                }
+            },
+            "gen7doublesou": {
+                "Offensive": {
+                    "moves": [
+                        "Wood Hammer",
+                        "Play Rough",
+                        "Swords Dance",
+                        "Protect"
+                    ],
+                    "item": "Grassium Z",
+                    "ability": "Grassy Surge"
+                }
+            },
+            "gen71v1": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Wood Hammer",
+                        "Rock Climb",
+                        "Play Rough",
+                        "Taunt"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Grassy Surge"
+                }
+            },
+            "gen8uu": {
+                "Defensive": {
+                    "moves": [
+                        "Horn Leech",
+                        "Play Rough",
+                        "Toxic",
+                        "Synthesis"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Grassy Surge"
+                }
+            },
+            "gen8ou": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Horn Leech",
+                        "Close Combat",
+                        "Play Rough"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Grassy Surge"
+                }
+            }
+        }
+    },
+
+    "Guzzlord": {
+        "extra_moves": [
+            "Dragon Rush",
+            "Parting Shot",
+            "Pursuit",
+            "Sucker Punch"
+        ]
+    },
+
+    "Sirfetch'd": {
+        "extra_moves": [
+            "Close Combat",
+            "Drill Run",
+            "Dual Wingbeat",
+            "Roost"
+        ]
+    },
+
+    "Mr. Rime": {
+        "movesets": {
+            "gen8zu": {
+                "Screen Cleaner": {
+                    "moves": [
+                        "Slack Off",
+                        "Psychic",
+                        "Freezy Frost",
+                        "Nasty Plot"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Screen Cleaner"
+                }
+            }
+        },
+        "extra_moves": [
+            "Charge Beam",
+            "Drain Punch",
+            "Energy Ball",
+            "Foul Play",
+            "Grass Knot",
+            "Icy Wind",
+            "Magical Leaf",
+            "Mystical Fire",
+            "Psyshock",
+            "Thief",
+            "Thunder Wave"
         ]
     }
 }
