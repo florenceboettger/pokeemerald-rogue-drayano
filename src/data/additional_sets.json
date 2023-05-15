@@ -7195,5 +7195,39 @@
             "Thief",
             "Thunder Wave"
         ]
+    },
+
+    "Clobbopus": {
+        "movesets": {
+            "gen8lc": {
+                "Technician Pivot": {
+                    "moves": [
+                        "Aqua Jet",
+                        "Mach Punch",
+                        "Flip Turn",
+                        "Ice Punch"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Technician"
+                }
+            }
+        }
+    },
+
+    "Grapploct": {
+        "movesets": {
+            "gen8uu": {
+                "Technician Pivot": {
+                    "moves": [
+                        "Aqua Jet",
+                        "Mach Punch",
+                        "Flip Turn",
+                        "Ice Punch"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Technician"
+                }
+            }
+        }
     }
 }
