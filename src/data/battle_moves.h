@@ -12586,7 +12586,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_SNIPE_SHOT] =
     {
         .effect = EFFECT_SNIPE_SHOT,
+    #ifdef ROGUE_DRAYANO
+        .power = 90,
+    #else
         .power = 80,
+    #endif
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 15,
