@@ -2572,6 +2572,33 @@
         ]
     },
 
+    "Lugia": {
+        "movesets": {
+            "gen7ubers": {
+                "Wall": {
+                    "moves": [
+                        "Scald",
+                        "Roost",
+                        "Toxic",
+                        "Whirlwind"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Multiscale"
+                }
+            }
+        },
+        "extra_moves": [
+            "Air Slash",
+            "Dragon Pulse",
+            "Dragon Tail",
+            "Psycho Boost",
+            "Psyshock",
+            "Signal Beam",
+            "Steel Wing",
+            "Zap Cannon"
+        ]
+    },
+
     "Trapinch": {
         "extra_moves": [
             "Scorching Sands"

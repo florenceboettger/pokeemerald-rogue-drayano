@@ -8203,8 +8203,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 110,
         .baseSpAttack  = 90,
         .baseSpDefense = 154,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_FLYING,
+    #else
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FLYING,
+    #endif
         .catchRate = 3,
         .expYield = 306,
         .evYield_SpDefense = 3,
