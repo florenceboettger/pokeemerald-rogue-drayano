@@ -417,6 +417,9 @@ namespace PokemonDataGenerator
 
 			foreach (var pokemon in s_PerPokemonData.Values)
 			{
+				bool newPokemon = pokemon.Presets.Count + pokemon.ObsoletePresets.Count == 0 && pokemon.AdditionalPresets.Count > 0;
+				if (newPokemon)
+					upperBlock.AppendLine("#ifdef ROGUE_DRAYANO");
 				upperBlock.AppendLine($"static const struct RogueMonPreset sRoguePresets_{FormatKeyword(pokemon.PokemonName)}[] = ");
 				upperBlock.AppendLine("{");
 
@@ -429,6 +432,8 @@ namespace PokemonDataGenerator
 				//}
 
 				HashSet<string> containedCategories = new HashSet<string>();
+				HashSet<string> additionalCategories = new HashSet<string>();
+				HashSet<string> obsoleteCategories = new HashSet<string>();
 				//HashSet<string> containedMoves = new HashSet<string>();
 
 				foreach (var preset in pokemon.Presets)
@@ -441,25 +446,31 @@ namespace PokemonDataGenerator
 					upperBlock.AppendLine("#ifndef ROGUE_DRAYANO");
 					foreach (var preset in pokemon.ObsoletePresets)
 					{
-						AppendPresetString(preset, containedCategories, upperBlock);
+						AppendPresetString(preset, obsoleteCategories, upperBlock);
 					}
 					upperBlock.AppendLine("#endif");
 				}
 
 				if (pokemon.AdditionalPresets.Count > 0)
                 {
-					upperBlock.AppendLine("#ifdef ROGUE_DRAYANO");
+					if (!newPokemon)
+						upperBlock.AppendLine("#ifdef ROGUE_DRAYANO");
 					foreach (var preset in pokemon.AdditionalPresets)
                     {
-						AppendPresetString(preset, containedCategories, upperBlock);
+						AppendPresetString(preset, additionalCategories, upperBlock);
                     }
-					upperBlock.AppendLine("#endif");
+					if (!newPokemon)
+						upperBlock.AppendLine("#endif");
                 }
 
 				upperBlock.AppendLine("};");
+				if (newPokemon)
+					upperBlock.AppendLine("#endif");
 				upperBlock.AppendLine("");
 
 				// Moveset
+				if (newPokemon)
+					upperBlock.AppendLine("#ifdef ROGUE_DRAYANO");
 				upperBlock.AppendLine($"static const u16 sRoguePresets_{FormatKeyword(pokemon.PokemonName)}_Moveset[] = ");
 				upperBlock.AppendLine("{");
 				//foreach(var move in containedMoves)
@@ -467,25 +478,59 @@ namespace PokemonDataGenerator
 					upperBlock.AppendLine($"\tMOVE_{FormatKeyword(move)},");
 
 				if (pokemon.AdditionalContainedMoves.Count > 0)
-                {
-					upperBlock.AppendLine("#ifdef ROGUE_DRAYANO");
+				{
+					if (!newPokemon)
+						upperBlock.AppendLine("#ifdef ROGUE_DRAYANO");
 					foreach (var move in pokemon.AdditionalContainedMoves)
 						upperBlock.AppendLine($"\tMOVE_{FormatKeyword(move)},");
-					upperBlock.AppendLine("#endif");
+					if (!newPokemon)
+                        upperBlock.AppendLine("#endif");
 				}
 
 				upperBlock.AppendLine("};");
+				if (newPokemon)
+					upperBlock.AppendLine("#endif");
 				upperBlock.AppendLine("");
 
 
-
+				if (newPokemon)
+					lowerBlock.AppendLine("#ifdef ROGUE_DRAYANO");
 				lowerBlock.AppendLine($"\t[SPECIES_{FormatKeyword(pokemon.PokemonName)}] = {{");
-				lowerBlock.AppendLine($"\t\t.flags = {string.Join(" | ", containedCategories.Select(str => FormatKeyword("MON_FLAGS_" + str)))},");
+
+				if (FormatKeyword(pokemon.PokemonName) == "FLAPPLE")
+				{
+					int i = 0;
+				}
+
+				obsoleteCategories.UnionWith(containedCategories);
+				HashSet<string> newCategories = new HashSet<string>(additionalCategories);
+				newCategories.ExceptWith(obsoleteCategories);
+				if (newCategories.Count > 0)
+                {
+					if (!newPokemon)
+					{
+						lowerBlock.AppendLine("#ifndef ROGUE_DRAYANO");
+						obsoleteCategories.UnionWith(containedCategories);
+						lowerBlock.AppendLine($"\t\t.flags = {string.Join(" | ", obsoleteCategories.Select(str => FormatKeyword("MON_FLAGS_" + str)))},");
+						lowerBlock.AppendLine("#endif");
+						lowerBlock.AppendLine("#ifdef ROGUE_DRAYANO");
+					}
+					additionalCategories.UnionWith(containedCategories);
+					lowerBlock.AppendLine($"\t\t.flags = {string.Join(" | ", additionalCategories.Select(str => FormatKeyword("MON_FLAGS_" + str)))},");
+					if (!newPokemon)
+						lowerBlock.AppendLine("#endif");
+				}
+				else
+					lowerBlock.AppendLine($"\t\t.flags = {string.Join(" | ", obsoleteCategories.Select(str => FormatKeyword("MON_FLAGS_" + str)))},");
+
+
 				lowerBlock.AppendLine($"\t\t.presetCount = ARRAY_COUNT(sRoguePresets_{FormatKeyword(pokemon.PokemonName)}),");
 				lowerBlock.AppendLine($"\t\t.presets = sRoguePresets_{FormatKeyword(pokemon.PokemonName)},");
 				lowerBlock.AppendLine($"\t\t.movesCount = ARRAY_COUNT(sRoguePresets_{FormatKeyword(pokemon.PokemonName)}_Moveset),");
 				lowerBlock.AppendLine($"\t\t.moves = sRoguePresets_{FormatKeyword(pokemon.PokemonName)}_Moveset,");
 				lowerBlock.AppendLine("\t},");
+				if (newPokemon)
+					lowerBlock.AppendLine("#endif");
 				lowerBlock.AppendLine("");
 			}
 

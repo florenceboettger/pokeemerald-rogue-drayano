@@ -2,7 +2,7 @@
 #define ROGUE_CONFIG_H
 
 #define ROGUE_EXPANSION
-#define ROGUE_DRAYANO
+//#define ROGUE_DRAYANO
 
 //#define ROGUE_FEATURE_AUTOMATION // Activate this for builds where automated external interactions are enabled (e.g. Soak Tests)
 //#define ROGUE_FEATURE_SKIP_SAVE_WARNINGS // Activate this if you intend on putting on a physical cart with 64k FLASH save
