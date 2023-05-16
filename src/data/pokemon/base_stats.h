@@ -1051,29 +1051,55 @@
         .flags = FLAG_MYTHICAL,                         \
     }
 
-#define CRAMORANT_BASE_STATS                              \
-    {                                                     \
-        .baseHP        = 70,                              \
-        .baseAttack    = 85,                              \
-        .baseDefense   = 55,                              \
-        .baseSpeed     = 85,                              \
-        .baseSpAttack  = 85,                              \
-        .baseSpDefense = 95,                              \
-        .type1 = TYPE_FLYING,                             \
-        .type2 = TYPE_WATER,                              \
-        .catchRate = 45,                                  \
-        .expYield = 166,                                  \
-        .evYield_SpDefense = 2,                           \
-        .genderRatio = PERCENT_FEMALE(50),                \
-        .eggCycles = 20,                                  \
-        .friendship = 70,                                 \
-        .growthRate = GROWTH_MEDIUM_FAST,                 \
-        .eggGroup1 = EGG_GROUP_WATER_1,                   \
-        .eggGroup2 = EGG_GROUP_FLYING,                    \
-        .abilities = {ABILITY_GULP_MISSILE, ABILITY_NONE},\
-        .bodyColor = BODY_COLOR_BLUE,                     \
-        .noFlip = FALSE,                                  \
-    }
+#ifdef ROGUE_DRAYANO
+    #define CRAMORANT_BASE_STATS                              \
+        {                                                     \
+            .baseHP        = 70,                              \
+            .baseAttack    = 85,                              \
+            .baseDefense   = 65,                              \
+            .baseSpeed     = 105,                              \
+            .baseSpAttack  = 100,                              \
+            .baseSpDefense = 95,                              \
+            .type1 = TYPE_FLYING,                             \
+            .type2 = TYPE_WATER,                              \
+            .catchRate = 45,                                  \
+            .expYield = 166,                                  \
+            .evYield_SpDefense = 2,                           \
+            .genderRatio = PERCENT_FEMALE(50),                \
+            .eggCycles = 20,                                  \
+            .friendship = 70,                                 \
+            .growthRate = GROWTH_MEDIUM_FAST,                 \
+            .eggGroup1 = EGG_GROUP_WATER_1,                   \
+            .eggGroup2 = EGG_GROUP_FLYING,                    \
+            .abilities = {ABILITY_GULP_MISSILE, ABILITY_NONE},\
+            .bodyColor = BODY_COLOR_BLUE,                     \
+            .noFlip = FALSE,                                  \
+        }
+#else
+    #define CRAMORANT_BASE_STATS                              \
+        {                                                     \
+            .baseHP        = 70,                              \
+            .baseAttack    = 85,                              \
+            .baseDefense   = 55,                              \
+            .baseSpeed     = 85,                              \
+            .baseSpAttack  = 85,                              \
+            .baseSpDefense = 95,                              \
+            .type1 = TYPE_FLYING,                             \
+            .type2 = TYPE_WATER,                              \
+            .catchRate = 45,                                  \
+            .expYield = 166,                                  \
+            .evYield_SpDefense = 2,                           \
+            .genderRatio = PERCENT_FEMALE(50),                \
+            .eggCycles = 20,                                  \
+            .friendship = 70,                                 \
+            .growthRate = GROWTH_MEDIUM_FAST,                 \
+            .eggGroup1 = EGG_GROUP_WATER_1,                   \
+            .eggGroup2 = EGG_GROUP_FLYING,                    \
+            .abilities = {ABILITY_GULP_MISSILE, ABILITY_NONE},\
+            .bodyColor = BODY_COLOR_BLUE,                     \
+            .noFlip = FALSE,                                  \
+        }
+#endif
 
 #define TOXTRICITY_BASE_STATS(ability2)                                \
     {                                                                  \
@@ -23498,12 +23524,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BOLTUND] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 69,
+        .baseAttack    = 100,
+        .baseDefense   = 60,
+        .baseSpeed     = 121,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 69,
         .baseAttack    = 90,
         .baseDefense   = 60,
         .baseSpeed     = 121,
         .baseSpAttack  = 90,
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_ELECTRIC,
         .catchRate = 45,
@@ -23618,12 +23653,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_FLAPPLE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 110,
+        .baseDefense   = 80,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 70,
         .baseAttack    = 110,
         .baseDefense   = 80,
         .baseSpeed     = 70,
         .baseSpAttack  = 95,
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_DRAGON,
         .catchRate = 45,
@@ -23642,12 +23686,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_APPLETUN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 110,
+        .baseAttack    = 85,
+        .baseDefense   = 85,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 85,
+    #else
         .baseHP        = 110,
         .baseAttack    = 85,
         .baseDefense   = 80,
         .baseSpeed     = 30,
         .baseSpAttack  = 100,
         .baseSpDefense = 80,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_DRAGON,
         .catchRate = 45,
@@ -23814,12 +23867,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CENTISKORCH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 100,
+        .baseAttack    = 115,
+        .baseDefense   = 65,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 100,
         .baseAttack    = 115,
         .baseDefense   = 65,
         .baseSpeed     = 65,
         .baseSpAttack  = 90,
         .baseSpDefense = 90,
+    #endif
         .type1 = TYPE_FIRE,
         .type2 = TYPE_BUG,
         .catchRate = 75,

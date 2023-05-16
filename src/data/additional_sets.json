@@ -7242,9 +7242,246 @@
         "extra_moves": [
             "Bounce",
             "Grassy Glide",
+            "Rock Climb",
             "Swords Dance",
             "Wild Charge",
             "Zen Headbutt"
+        ]
+    },
+
+    "Chewtle": {
+        "movesets": {
+            "gen8lc": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Liquidation",
+                        "Ice Fang",
+                        "Jaw Lock"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Strong Jaw"
+                }
+            }
+        },
+        "extra_moves": [
+            "Assurance",
+            "Mud Shot",
+            "Payback",
+            "Revenge",
+            "Rock Climb",
+            "Scale Shot",
+            "Skitter Smack"
+        ]
+    },
+
+    "Drednaw": {
+        "movesets": {
+            "gen8ru": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Liquidation",
+                        "Ice Fang",
+                        "Earthquake"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Strong Jaw"
+                }
+            },
+            "gen8zu": {
+                "Suicide Lead": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Head Smash",
+                        "Aqua Jet",
+                        "Jaw Lock"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Strong Jaw"
+                }
+            }
+        },
+        "extra_moves": [
+            "Assurance",
+            "Body Press",
+            "Earth Power",
+            "High Horsepower",
+            "Iron Defense",
+            "Iron Tail",
+            "Meteor Beam",
+            "Mud Shot",
+            "Muddy Water",
+            "Payback",
+            "Poison Jab",
+            "Revenge",
+            "Rock Blast",
+            "Rock Climb",
+            "Scale Shot",
+            "Skitter Smack",
+            "Superpower",
+            "Throat Chop"
+        ]
+    },
+
+    "Boltund": {
+        "movesets": {
+            "gen8zu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Thunder Fang",
+                        "Ice Fang",
+                        "Fire Fang",
+                        "Volt Switch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Strong Jaw"
+                }
+            }
+        },
+        "extra_moves": [
+            "Psychic Fangs",
+            "Snarl"
+        ]
+    },
+
+    "Coalossal": {
+        "movesets": {
+            "gen8pu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Power Gem",
+                        "Flamethrower",
+                        "Rapid Spin"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Flame Body"
+                }
+            },
+            "gen8vgc2020": {
+                "Offensive": {
+                    "moves": [
+                        "Heat Wave",
+                        "Power Gem",
+                        "Earth Power",
+                        "Protect"
+                    ],
+                    "item": "Weakness Policy",
+                    "ability": "Steam Engine"
+                }
+            }
+        },
+        "extra_moves": [
+            "Body Press",
+            "Body Slam",
+            "Flare Blitz",
+            "Gyro Ball",
+            "High Horsepower",
+            "Iron Defense",
+            "Iron Head",
+            "Overheat",
+            "Scald",
+            "Scorching Sands",
+            "Stone Edge",
+            "Will-O-Wisp"
+        ]
+    },
+
+    "Flapple": {
+        "movesets": {
+            "gen8zu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Grav Apple",
+                        "Outrage",
+                        "Sucker Punch",
+                        "U-turn"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Hustle"
+                },
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Grav Apple",
+                        "Acrobatics",
+                        "Sucker Punch"
+                    ],
+                    "item": "Flying Gem",
+                    "ability": "Hustle"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat",
+            "Grassy Glide",
+            "Heavy Slam",
+            "Iron Defense",
+            "Roost",
+            "Scale Shot"
+        ]
+    },
+
+    "Appletun": {
+        "extra_moves": [
+            "Amnesia",
+            "Grass Knot",
+            "Grassy Glide",
+            "Gyro Ball",
+            "Heavy Slam",
+            "High Horsepower",
+            "Iron Defense",
+            "Superpower"
+        ]
+    },
+
+    "Sandaconda": {
+        "extra_moves": [
+            "Body Press",
+            "Brutal Swing",
+            "High Horsepower",
+            "Iron Defense",
+            "Iron Head",
+            "Scale Shot",
+            "Scorching Sands",
+            "Skitter Smack",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Cramorant": {
+        "extra_moves": [
+            "Air Slash",
+            "Brave Bird",
+            "Dual Wingbeat",
+            "Icy Wind",
+            "Scald",
+            "Superpower",
+            "Throat Chop",
+            "Weather Ball"
+        ]
+    },
+
+    "Toxtricity": {
+        "extra_moves": [
+            "Hex",
+            "Payback",
+            "Stored Power"
+        ]
+    },
+
+    "Centiskorch": {
+        "extra_moves": [
+            "Brutal Swing",
+            "Heat Crash",
+            "Mystical Fire",
+            "Scald",
+            "Scorching Sands",
+            "Thunder Fang",
+            "Venoshock",
+            "Will-O-Wisp",
+            "X-Scissor"
         ]
     },
 
@@ -7282,8 +7519,7 @@
             "Magical Leaf",
             "Mystical Fire",
             "Psyshock",
-            "Thief",
-            "Thunder Wave"
+            "Thief"
         ]
     },
 

@@ -19787,6 +19787,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM44_REST)
                                           TMHM(HM03_SURF)
                                         #ifdef ROGUE_DRAYANO
+                                          TMHM(TM31_BRICK_BREAK)
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM27_RETURN)
@@ -19810,6 +19811,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM37_SANDSTORM)
                                           TMHM(HM03_SURF)
                                         #ifdef ROGUE_DRAYANO
+                                          TMHM(TM31_BRICK_BREAK)
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM27_RETURN)

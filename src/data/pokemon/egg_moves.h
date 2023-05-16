@@ -4153,12 +4153,18 @@ const u16 gEggMoves[] = {
         MOVE_BLOCK),
 
     egg_moves(APPLIN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_LEAF_STORM,
+    #endif
         MOVE_SUCKER_PUNCH,
         MOVE_ROLLOUT,
         MOVE_DEFENSE_CURL,
         MOVE_RECYCLE),
 
     egg_moves(SILICOBRA,
+    #ifdef ROGUE_DRAYANO
+        MOVE_QUICK_ATTACK,
+    #endif
         MOVE_DRAGON_RUSH,
         MOVE_MUD_SLAP,
         MOVE_LAST_RESORT,
