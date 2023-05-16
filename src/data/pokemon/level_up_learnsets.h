@@ -13638,7 +13638,7 @@ static const struct LevelUpMove sEelektrossLevelUpLearnset[] = {
 static const struct LevelUpMove sElgyemLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_CONFUSION),
 #ifdef ROGUE_DRAYANO
-    LEVEL_UP_MOVE( 1, GROWL),
+    LEVEL_UP_MOVE( 1, MOVE_GROWL),
     LEVEL_UP_MOVE( 4, MOVE_HEAL_BLOCK),
     LEVEL_UP_MOVE( 7, MOVE_SHOCK_WAVE),
     LEVEL_UP_MOVE(10, MOVE_MIRACLE_EYE),
@@ -18969,6 +18969,7 @@ static const struct LevelUpMove sGrapploctLevelUpLearnset[] = {
     LEVEL_UP_MOVE(40, MOVE_REVERSAL),
     LEVEL_UP_MOVE(45, MOVE_SUPERPOWER),
     LEVEL_UP_MOVE(50, MOVE_TOPSY_TURVY),
+#endif
     LEVEL_UP_END
 };
 

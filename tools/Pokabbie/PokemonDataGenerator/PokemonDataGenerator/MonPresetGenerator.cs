@@ -61,7 +61,7 @@ namespace PokemonDataGenerator
 		{
 			PokemonData output;
 
-			pokemon = pokemon.ToLower().Trim();
+			pokemon = FormatKeyword(pokemon).ToLower().Trim();
 			if (!s_PerPokemonData.TryGetValue(pokemon, out output))
 			{
 				output = new PokemonData();
@@ -114,9 +114,54 @@ namespace PokemonDataGenerator
             }
         }
 
-		private static void AddSets(string pokemonName, string categoryName, JObject sets, bool useGen3Format, bool additionalSets)
+		private static string ModifyName(string pokemonName)
         {
 			if (pokemonName.Equals("Eevee-starter", StringComparison.CurrentCultureIgnoreCase))
+				return null;
+
+			if (pokemonName.StartsWith("Deoxys", StringComparison.CurrentCultureIgnoreCase))
+			{
+				// Only use the normal form, as others don't exist in emerald for AI
+				if (pokemonName.Equals("Deoxys", StringComparison.CurrentCultureIgnoreCase))
+					pokemonName = "Deoxys";
+				else
+					return null;
+			}
+
+			if (pokemonName.StartsWith("Darmanitan-Zen", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName = "Darmanitan-Zen-Mode" + pokemonName.Substring("Darmanitan Zen".Length);
+
+			if (pokemonName.Equals("Darmanitan-Galar-Zen", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName = "Darmanitan-Zen-Mode-Galar";
+
+			if (pokemonName.Equals("Meowstic-f", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName = "Meowstic-female";
+
+			if (pokemonName.Equals("Indeedee-f", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName = "Indeedee-female";
+
+			if (pokemonName.StartsWith("Calyrex-", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "-rider";
+
+			if (pokemonName.EndsWith("Urshifu-rapid-strike", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "-style";
+
+			if (pokemonName.EndsWith("Wormadam-Sandy", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "-cloak";
+			if (pokemonName.EndsWith("Wormadam-Trash", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "-cloak";
+
+			if (pokemonName.EndsWith("Alola", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "n";
+			if (pokemonName.EndsWith("Galar", StringComparison.CurrentCultureIgnoreCase))
+				pokemonName += "ian";
+
+			return pokemonName;
+		}
+
+		private static void AddSets(string pokemonName, string categoryName, JObject sets, bool useGen3Format, bool additionalSets)
+        {
+			/*if (pokemonName.Equals("Eevee-starter", StringComparison.CurrentCultureIgnoreCase))
 				return;
 
 			if (pokemonName.StartsWith("Deoxys", StringComparison.CurrentCultureIgnoreCase))
@@ -154,7 +199,14 @@ namespace PokemonDataGenerator
 			if (pokemonName.EndsWith("Alola", StringComparison.CurrentCultureIgnoreCase))
 				pokemonName += "n";
 			if (pokemonName.EndsWith("Galar", StringComparison.CurrentCultureIgnoreCase))
-				pokemonName += "ian";
+				pokemonName += "ian";*/
+
+			pokemonName = ModifyName(pokemonName);
+
+			if (pokemonName == null)
+            {
+				return;
+            }
 
 			var pokemonData = FindOrCreate(pokemonName);
 
@@ -255,6 +307,13 @@ namespace PokemonDataGenerator
 						AddSets(pokemonName, categoryName, sets, useGen3Format, true);
 					}
 				}
+
+				pokemonName = ModifyName(pokemonName);
+
+				if (pokemonName == null)
+                {
+					return;
+                }
 
 				var pokemonData = FindOrCreate(pokemonName);
 
