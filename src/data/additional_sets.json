@@ -7158,6 +7158,96 @@
         ]
     },
 
+    "Inteleon": {
+        "movesets": {
+            "gen8nu": {
+                "Sniper": {
+                    "moves": [
+                        "Snipe Shot",
+                        "Air Cutter",
+                        "Frost Breath",
+                        "U-turn"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Sniper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Air Slash",
+            "Nasty Plot",
+            "Weather Ball"
+        ]
+    },
+
+    "Orbeetle": {
+        "extra_moves": [
+            "Body Press",
+            "Expanding Force",
+            "Leech Life",
+            "Psyshock",
+            "Signal Beam",
+            "Struggle Bug",
+            "Trick Room"
+        ]
+    },
+
+    "Thievul": {
+        "movesets": {
+            "gen8pu": {
+                "Unburden Sweeper": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Dark Pulse",
+                        "Mystical Fire",
+                        "Grass Knot"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Unburden"
+                }
+            }
+        }
+    },
+
+    "Eldegoss": {
+        "movesets": {
+            "gen8pu": {
+                "Defensive Spinner": {
+                    "moves": [
+                        "Giga Drain",
+                        "Rapid Spin",
+                        "Toxic",
+                        "Leech Seed"
+                    ],
+                    "item": "Eject Button",
+                    "ability": "Regenerator"
+                }
+            },
+            "gen8nu": {
+                "Defensive Utility": {
+                    "moves": [
+                        "Giga Drain",
+                        "Rapid Spin",
+                        "Toxic",
+                        "Synthesis"
+                    ],
+                    "item": "Eject Pack",
+                    "ability": "Regenerator"
+                }
+            }
+        }
+    },
+
+    "Dubwool": {
+        "extra_moves": [
+            "Bounce",
+            "Grassy Glide",
+            "Swords Dance",
+            "Wild Charge",
+            "Zen Headbutt"
+        ]
+    },
+
     "Sirfetch'd": {
         "extra_moves": [
             "Close Combat",

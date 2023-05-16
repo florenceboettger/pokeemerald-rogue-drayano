@@ -4084,6 +4084,9 @@ const u16 gEggMoves[] = {
         MOVE_SUPER_FANG),
 
     egg_moves(SOBBLE,
+    #ifdef ROGUE_DRAYANO
+        MOVE_AIR_CUTTER,
+    #endif
         MOVE_AQUA_JET,
         MOVE_DOUBLE_TEAM,
         MOVE_AQUA_RING,

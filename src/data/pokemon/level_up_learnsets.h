@@ -18332,6 +18332,9 @@ static const struct LevelUpMove sSkwovetLevelUpLearnset[] = {
     LEVEL_UP_MOVE(35, MOVE_BULLET_SEED),
     LEVEL_UP_MOVE(40, MOVE_SUPER_FANG),
     LEVEL_UP_MOVE(45, MOVE_BELCH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(50, MOVE_RECYCLE),
+#endif
     LEVEL_UP_END
 };
 
@@ -18351,6 +18354,9 @@ static const struct LevelUpMove sGreedentLevelUpLearnset[] = {
     LEVEL_UP_MOVE(41, MOVE_BULLET_SEED),
     LEVEL_UP_MOVE(48, MOVE_SUPER_FANG),
     LEVEL_UP_MOVE(55, MOVE_BELCH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(62, MOVE_RECYCLE),
+#endif
     LEVEL_UP_END
 };
 
@@ -18451,6 +18457,9 @@ static const struct LevelUpMove sNickitLevelUpLearnset[] = {
     LEVEL_UP_MOVE(28, MOVE_NIGHT_SLASH),
     LEVEL_UP_MOVE(32, MOVE_TAIL_SLAP),
     LEVEL_UP_MOVE(36, MOVE_FOUL_PLAY),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(39, MOVE_MYSTICAL_FIRE),
+#endif
     LEVEL_UP_END
 };
 
@@ -18468,6 +18477,9 @@ static const struct LevelUpMove sThievulLevelUpLearnset[] = {
     LEVEL_UP_MOVE(34, MOVE_NIGHT_SLASH),
     LEVEL_UP_MOVE(40, MOVE_TAIL_SLAP),
     LEVEL_UP_MOVE(46, MOVE_FOUL_PLAY),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(49, MOVE_MYSTICAL_FIRE),
+#endif
     LEVEL_UP_MOVE(52, MOVE_PARTING_SHOT),
     LEVEL_UP_END
 };
