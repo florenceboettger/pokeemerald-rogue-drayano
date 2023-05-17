@@ -10697,13 +10697,19 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_WHISCASH] =
     {
     #ifdef ROGUE_DRAYANO
-    #else
         .baseHP        = 110,
         .baseAttack    = 93,
         .baseDefense   = 88,
         .baseSpeed     = 60,
         .baseSpAttack  = 76,
         .baseSpDefense = 73,
+    #else
+        .baseHP        = 110,
+        .baseAttack    = 78,
+        .baseDefense   = 73,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 76,
+        .baseSpDefense = 71,
     #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_GROUND,
