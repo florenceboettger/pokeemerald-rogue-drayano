@@ -2395,7 +2395,7 @@ const u16 gEggMoves[] = {
 
     egg_moves(TURTWIG,
     #ifdef ROGUE_DRAYANO
-        MOVE_GRAV_APPLE
+        MOVE_GRAV_APPLE,
     #endif
         MOVE_WORRY_SEED,
         MOVE_GROWTH,
@@ -3382,6 +3382,9 @@ const u16 gEggMoves[] = {
 
     egg_moves(KARRABLAST,
         MOVE_MEGAHORN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_NIGHT_SLASH,
+    #endif
         MOVE_PURSUIT,
         MOVE_COUNTER,
         MOVE_HORN_ATTACK,
@@ -3390,9 +3393,6 @@ const u16 gEggMoves[] = {
         MOVE_SCREECH,
         MOVE_KNOCK_OFF,
         MOVE_DRILL_RUN
-    #ifdef ROGUE_DRAYANO
-        MOVE_NIGHT_SLASH
-    #endif
     ),
 
     egg_moves(FOONGUS,
@@ -3470,15 +3470,15 @@ const u16 gEggMoves[] = {
         MOVE_FOCUS_ENERGY,
         MOVE_REVERSAL,
         MOVE_ENDURE,
+    #ifdef ROGUE_DRAYANO
+        MOVE_FIRST_IMPRESSION,
+    #endif
         MOVE_RAZOR_WIND,
         MOVE_NIGHT_SLASH,
         MOVE_ENDEAVOR,
         MOVE_IRON_TAIL,
         MOVE_DRAGON_PULSE,
         MOVE_HARDEN
-    #ifdef ROGUE_DRAYANO
-        MOVE_FIRST_IMPRESSION
-    #endif
     ),
 
     egg_moves(CUBCHOO,
@@ -3557,6 +3557,9 @@ const u16 gEggMoves[] = {
         MOVE_STOMP,
         MOVE_ROCK_CLIMB,
         MOVE_HEADBUTT,
+    #ifdef ROGUE_DRAYANO
+        MOVE_HEAD_SMASH,
+    #endif
         MOVE_SKULL_BASH,
         MOVE_MUD_SHOT,
         MOVE_MUD_SLAP,
@@ -3564,9 +3567,6 @@ const u16 gEggMoves[] = {
         MOVE_AMNESIA,
         MOVE_BELCH,
         MOVE_COTTON_GUARD
-    #ifdef ROGUE_DRAYANO
-        MOVE_HEAD_SMASH
-    #endif
     ),
 
     egg_moves(VULLABY,
@@ -3622,6 +3622,9 @@ const u16 gEggMoves[] = {
         MOVE_MAGNET_RISE),
 
     egg_moves(CHESPIN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_HORN_LEECH,
+    #endif
         MOVE_SYNTHESIS,
         MOVE_BELLY_DRUM,
         MOVE_CURSE,
@@ -3630,9 +3633,6 @@ const u16 gEggMoves[] = {
         MOVE_DEFENSE_CURL,
         MOVE_ROLLOUT,
         MOVE_POWER_UP_PUNCH
-    #ifdef ROGUE_DRAYANO
-        MOVE_HORN_LEECH
-    #endif
     ),
 
     egg_moves(FENNEKIN,
@@ -3672,9 +3672,9 @@ const u16 gEggMoves[] = {
         MOVE_SNATCH,
         MOVE_FIRE_SPIN,
     #ifdef ROGUE_DRAYANO
-        MOVE_INCINERATE,
+        MOVE_INCINERATE
     #else
-        MOVE_FLARE_BLITZ,
+        MOVE_FLARE_BLITZ
     #endif
     ),
 
@@ -3696,10 +3696,10 @@ const u16 gEggMoves[] = {
         MOVE_QUICK_GUARD,
         MOVE_FOUL_PLAY,
         MOVE_STORM_THROW,
-        MOVE_POWER_TRIP
     #ifdef ROGUE_DRAYANO
-        MOVE_SUCKER_PUNCH
+        MOVE_SUCKER_PUNCH,
     #endif
+        MOVE_POWER_TRIP
     ),
 
     egg_moves(FURFROU,

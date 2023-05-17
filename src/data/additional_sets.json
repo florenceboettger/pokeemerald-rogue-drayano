@@ -1275,23 +1275,6 @@
         ]
     },
 
-    "Mr. Mime-Galar": {
-        "extra_moves": [
-            "Charge Beam",
-            "Drain Punch",
-            "Energy Ball",
-            "Foul Play",
-            "Grass Knot",
-            "Icy Wind",
-            "Magical Leaf",
-            "Mystical Fire",
-            "Nasty Plot",
-            "Psyshock",
-            "Thief",
-            "Thunder Wave"
-        ]
-    },
-
     "Jynx": {
         "movesets": {
             "gen8zu": {
@@ -4374,15 +4357,17 @@
 
     "Rampardos": {
         "movesets": {
-            "Choice Scarf": {
-                "moves": [
-                    "Head Smash",
-                    "Accelerock",
-                    "Superpower",
-                    "Zen Headbutt"
-                ],
-                "item": "Choice Scarf",
-                "ability": "Rock Head"
+            "gen7pu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Head Smash",
+                        "Accelerock",
+                        "Superpower",
+                        "Zen Headbutt"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Rock Head"
+                }
             }
         },
         "extra_moves": [
@@ -4748,17 +4733,6 @@
         "extra_moves": [
             "Teleport",
             "Weather Ball"
-        ]
-    },
-
-    "Mime Jr.": {
-        "extra_moves": [
-            "Dazzling Gleam",
-            "Disarming Voice",
-            "Mystical Fire",
-            "Power Gem",
-            "Quash",
-            "Tri Attack"
         ]
     },
 
@@ -5244,7 +5218,7 @@
         ]
     },
 
-    "Mincinno": {
+    "Minccino": {
         "extra_moves": [
             "Gunk Shot",
             "Play Rough",
@@ -5252,7 +5226,7 @@
         ]
     },
 
-    "Cincinno": {
+    "Cinccino": {
         "extra_moves": [
             "Gunk Shot",
             "Play Rough",
@@ -5841,13 +5815,6 @@
         ]
     },
 
-    "Lampent": {
-        "extra_moves": [
-            "Dazzling Gleam",
-            "Mystical Fire"
-        ]
-    },
-
     "Chandelure": {
         "extra_moves": [
             "Dazzling Gleam",
@@ -6304,12 +6271,6 @@
         ]
     },
 
-    "Zweilous": {
-        "extra_moves": [
-            "Zen Headbutt"
-        ]
-    },
-
     "Hydreigon": {
         "extra_moves": [
             "Breaking Swipe",
@@ -6760,7 +6721,7 @@
         ]
     },
 
-    "Flabebe": {
+    "Flabébé": {
         "movesets": {
             "gen7lc": {
                 "Calm Mind": {
@@ -6887,7 +6848,7 @@
         ]
     },
 
-    "Meowstic-M": {
+    "Meowstic": {
         "extra_moves": [
             "Mystical Fire"
         ]
@@ -7513,6 +7474,20 @@
     },
 
     "Sirfetch'd": {
+        "movesets": {
+            "gen8ru": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Sacred Sword",
+                        "Leaf Blade",
+                        "Drill Run"
+                    ],
+                    "item": "Leek",
+                    "ability": "Scrappy"
+                }
+            }
+        },
         "extra_moves": [
             "Close Combat",
             "Drill Run",

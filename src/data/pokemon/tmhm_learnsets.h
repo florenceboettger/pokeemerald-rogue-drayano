@@ -15203,10 +15203,10 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM03_SURF)
                                           TMHM(TM12_TAUNT)
                                           TMHM(TM06_TOXIC)
-                                          TMHM(TM03_WATER_PULSE)
                                         #ifdef ROGUE_DRAYANO
                                           TMHM(HM07_WATERFALL)
-                                        #endif),
+                                        #endif
+                                          TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_CRYOGONAL]   = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
@@ -21360,16 +21360,21 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM44_REST)
                                           TMHM(HM06_ROCK_SMASH)
                                           TMHM(TM47_STEEL_WING)
-                                          TMHM(TM11_SUNNY_DAY)
                                         #ifdef ROGUE_DRAYANO
                                           TMHM(HM01_CUT)
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM27_RETURN)
                                           TMHM(TM06_TOXIC)
-                                        #endif),
+                                        #endif
+                                          TMHM(TM11_SUNNY_DAY)),
 
     [SPECIES_WEEZING_GALARIAN]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM21_FRUSTRATION)
+                                          TMHM(TM10_HIDDEN_POWER)
+                                          TMHM(TM27_RETURN)
+                                        #endif
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
                                           TMHM(TM35_FLAMETHROWER)
@@ -21386,11 +21391,6 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM25_THUNDER)
                                           TMHM(TM24_THUNDERBOLT)
                                           TMHM(TM06_TOXIC)
-                                        #ifdef ROGUE_DRAYANO
-                                          TMHM(TM21_FRUSTRATION)
-                                          TMHM(TM10_HIDDEN_POWER)
-                                          TMHM(TM27_RETURN)
-                                        #endif
                                           ),
 
     [SPECIES_MR_MIME_GALARIAN]  = TMHM_LEARNSET(TMHM(TM45_ATTRACT)

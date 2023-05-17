@@ -1406,7 +1406,7 @@ const struct BaseStats gBaseStats[] =
         #ifdef ROGUE_DRAYANO
             .baseSpAttack  = 110,
         #else
-            .baseSpAttack  = 109
+            .baseSpAttack  = 109,
         #endif
         .baseSpDefense = 85,
         .type1 = TYPE_FIRE,
@@ -3460,7 +3460,7 @@ const struct BaseStats gBaseStats[] =
         .type1 = TYPE_FIRE,
         .type2 = TYPE_FAIRY,
     #else
-        .type1 = TYPE_FIRE
+        .type1 = TYPE_FIRE,
         .type2 = TYPE_FIRE,
     #endif
         .catchRate = 60,
@@ -10256,7 +10256,7 @@ const struct BaseStats gBaseStats[] =
         .baseSpAttack  = 45,
         .baseSpDefense = 45,
     #else
-        .baseHP        = 45
+        .baseHP        = 45,
         .baseAttack    = 100,
         .baseDefense   = 45,
         .baseSpeed     = 10,
@@ -10302,7 +10302,7 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 50,
         .baseAttack    = 70,
         .baseDefense   = 50,
-        .baseSpeed     = 70
+        .baseSpeed     = 70,
         .baseSpAttack  = 50,
         .baseSpDefense = 50,
     #endif
@@ -10310,8 +10310,8 @@ const struct BaseStats gBaseStats[] =
         .type1 = TYPE_BUG,
         .type2 = TYPE_DRAGON,
     #else
-        .type1 = TYPE_GROUND
-        .type2 = TYPE_DRAGON
+        .type1 = TYPE_GROUND,
+        .type2 = TYPE_DRAGON,
     #endif
         .catchRate = 120,
         .expYield = 119,
@@ -10357,8 +10357,8 @@ const struct BaseStats gBaseStats[] =
         .type1 = TYPE_BUG,
         .type2 = TYPE_DRAGON,
     #else
-        .type1 = TYPE_GROUND
-        .type2 = TYPE_DRAGON
+        .type1 = TYPE_GROUND,
+        .type2 = TYPE_DRAGON,
     #endif
         .catchRate = 45,
         .expYield = 234,
