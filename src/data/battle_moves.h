@@ -9992,7 +9992,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_HEAD_CHARGE] =
     {
     #ifdef ROGUE_DRAYANO
-        .effect = EFFECT_RECOIL_50,
+        .effect = EFFECT_RECOIL_33,
     #else
         .effect = EFFECT_RECOIL_25,
     #endif
