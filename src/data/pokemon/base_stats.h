@@ -9943,6 +9943,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_VOLBEAT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 33,
+        .baseDefense   = 75,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 107,
+        .baseSpDefense = 85,
+    #else
         .baseHP        = 65,
         .baseAttack    = 73,
         .baseSpeed     = 85,
@@ -9954,8 +9962,14 @@ const struct BaseStats gBaseStats[] =
             .baseDefense   = 55,
             .baseSpDefense = 75,
         #endif
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_BUG,
+        .type2 = TYPE_ELECTRIC,
+    #else
         .type1 = TYPE_BUG,
         .type2 = TYPE_BUG,
+    #endif
         .catchRate = 150,
         .expYield = 151,
         .evYield_Speed     = 1,
@@ -9966,13 +9980,25 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_ERRATIC,
         .eggGroup1 = EGG_GROUP_BUG,
         .eggGroup2 = EGG_GROUP_HUMAN_LIKE,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_ILLUMINATE, ABILITY_TINTED_LENS, ABILITY_PRANKSTER},
+    #else
         .abilities = {ABILITY_ILLUMINATE, ABILITY_SWARM, ABILITY_PRANKSTER},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
     },
 
     [SPECIES_ILLUMISE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 33,
+        .baseDefense   = 85,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 87,
+        .baseSpDefense = 95,
+    #else
         .baseHP        = 65,
         .baseAttack    = 47,
         .baseSpeed     = 85,
@@ -9984,8 +10010,14 @@ const struct BaseStats gBaseStats[] =
             .baseDefense   = 55,
             .baseSpDefense = 75,
         #endif
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_BUG,
+        .type2 = TYPE_FAIRY,
+    #else
         .type1 = TYPE_BUG,
         .type2 = TYPE_BUG,
+    #endif
         .catchRate = 150,
         .expYield = 151,
         .evYield_Speed     = 1,

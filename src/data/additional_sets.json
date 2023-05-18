@@ -2704,6 +2704,107 @@
         ]
     },
 
+    "Volbeat": {
+        "movesets": {
+            "gen7nu": {
+                "Offensive Tail Glow": {
+                    "moves": [
+                        "Tail Glow",
+                        "Thunderbolt",
+                        "Bug Buzz",
+                        "Giga Drain"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Tinted Lens"
+                },
+                "Tail Glow + Baton Pass": {
+                    "moves": [
+                        "Tail Glow",
+                        "Baton Pass",
+                        "Thunderbolt",
+                        "Substitute"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Prankster"
+                }
+            },
+            "gen7pu": {
+                "Weather Setter": {
+                    "moves": [
+                        "Volt Switch",
+                        "Thunder Wave",
+                        "Encore",
+                        "Bug Buzz"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Prankster"
+                }
+            },
+            "gen7zu": {
+                "Weather Setter": {
+                    "moves": [
+                        "Volt Switch",
+                        "Thunder Wave",
+                        "Roost",
+                        "Encore"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Prankster"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Dual Wingbeat",
+            "Lunge"
+        ]
+    },
+
+    "Illumise": {
+        "movesets": {
+            "gen7nu": {
+                "Offensive Quiver Dance": {
+                    "moves": [
+                        "Quiver Dance",
+                        "Bug Buzz",
+                        "Moonblast",
+                        "Thunderbolt"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Tinted Lens"
+                },
+                "Quiver Dance + Baton Pass": {
+                    "moves": [
+                        "Quiver Dance",
+                        "Baton Pass",
+                        "Substitute",
+                        "Draining Kiss"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Prankster"
+                }
+            },
+            "gen7pu": {
+                "Weather Setter": {
+                    "moves": [
+                        "U-turn",
+                        "Thunder Wave",
+                        "Encore",
+                        "Draining Kiss"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Prankster"
+                }
+            }
+        },
+        "extra_moves": [
+            "Charge Beam",
+            "Dual Wingbeat",
+            "Flatter",
+            "Lunge"
+        ]
+    },
+
     "Trapinch": {
         "extra_moves": [
             "Scorching Sands"
