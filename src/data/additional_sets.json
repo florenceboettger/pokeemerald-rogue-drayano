@@ -2590,6 +2590,20 @@
         ]
     },
 
+    "Masquerain": {
+        "extra_moves": [
+            "Acrobatics",
+            "Dual Wingbeat",
+            "Energy Ball",
+            "Hurricane",
+            "Lunge",
+            "Mud Shot",
+            "Struggle Bug",
+            "Twister",
+            "U-turn"
+        ]
+    },
+
     "Trapinch": {
         "extra_moves": [
             "Scorching Sands"

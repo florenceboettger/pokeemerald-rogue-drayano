@@ -9095,12 +9095,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SURSKIT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 40,
+        .baseAttack    = 30,
+        .baseDefense   = 30,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 55,
+    #else
         .baseHP        = 40,
         .baseAttack    = 30,
         .baseDefense   = 32,
         .baseSpeed     = 65,
         .baseSpAttack  = 50,
         .baseSpDefense = 52,
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_WATER,
         .catchRate = 200,
@@ -9120,6 +9129,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MASQUERAIN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 50,
+        .baseDefense   = 55,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 100,
+    #else
         .baseHP        = 70,
         .baseAttack    = 60,
         .baseDefense   = 62,
@@ -9131,8 +9148,14 @@ const struct BaseStats gBaseStats[] =
             .baseSpeed     = 60,
             .baseSpAttack  = 80,
         #endif
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_BUG,
+        .type2 = TYPE_WATER,
+    #else
         .type1 = TYPE_BUG,
         .type2 = TYPE_FLYING,
+    #endif
         .catchRate = 75,
         .expYield = 159,
         .evYield_SpAttack  = 1,

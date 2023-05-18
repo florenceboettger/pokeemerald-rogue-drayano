@@ -7078,16 +7078,28 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM30_SHADOW_BALL)
                                           TMHM(TM22_SOLAR_BEAM)
                                           TMHM(TM11_SUNNY_DAY)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM03_SURF)
+                                        #endif
                                           TMHM(TM46_THIEF)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_MASQUERAIN]  = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                           TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM08_DIVE)
+                                        #endif
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
                                           TMHM(HM05_FLASH)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM19_GIGA_DRAIN)
                                           TMHM(TM10_HIDDEN_POWER)
@@ -7101,8 +7113,14 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM30_SHADOW_BALL)
                                           TMHM(TM22_SOLAR_BEAM)
                                           TMHM(TM11_SUNNY_DAY)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM03_SURF)
+                                        #endif
                                           TMHM(TM46_THIEF)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_SHROOMISH]   = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
