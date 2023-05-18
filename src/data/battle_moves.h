@@ -9297,13 +9297,21 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     #endif
         .type = TYPE_WATER,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 15,
+    #endif
         .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_THAW_USER,
         .split = SPLIT_SPECIAL,
+    #ifdef ROGUE_DRAYANO
+        .zMovePower = 140,
+    #else
         .zMovePower = 160,
+    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
