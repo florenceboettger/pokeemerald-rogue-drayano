@@ -7250,6 +7250,92 @@
         ]
     },
 
+    "Lycanroc": {
+        "extra_moves": [
+            "Iron Head",
+            "Iron Tail",
+            "Outrage",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Lycanroc-Midnight": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Stone Edge",
+                        "Earthquake",
+                        "Fire Punch",
+                        "Head Smash"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "No Guard"
+                }
+            },
+            "gen7zu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Stone Edge",
+                        "Earthquake",
+                        "Sucker Punch"
+                    ],
+                    "item": "Lycanium Z",
+                    "ability": "No Guard"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Head Smash",
+                        "Earthquake",
+                        "Crunch",
+                        "Toxic"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "No Guard"
+                }
+            },
+            "gen8pu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Stone Edge",
+                        "Close Combat",
+                        "Rock Polish"
+                    ],
+                    "item": "Shuca Berry",
+                    "ability": "No Guard"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Head Smash",
+                        "Close Combat",
+                        "Play Rough",
+                        "Earthquake"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "No Guard"
+                }
+            }
+        },
+        "extra_moves": [
+            "Iron Head",
+            "Iron Tail",
+            "Outrage",
+            "Throat Chop",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Lycanroc-Dusk": {
+        "extra_moves": [
+            "Iron Head",
+            "Iron Tail",
+            "Outrage",
+            "Zen Headbutt"
+        ]
+    },
+
     "Golisopod": {
         "extra_moves": [
             "Rock Climb"

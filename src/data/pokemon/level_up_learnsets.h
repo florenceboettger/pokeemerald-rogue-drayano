@@ -16948,6 +16948,9 @@ static const struct LevelUpMove sLycanrocLevelUpLearnset[] = {
     LEVEL_UP_MOVE(40, MOVE_CRUNCH),
     LEVEL_UP_MOVE(45, MOVE_ROCK_CLIMB),
     LEVEL_UP_MOVE(48, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(53, MOVE_EARTHQUAKE),
+#endif
     LEVEL_UP_END
 };
 
@@ -20933,6 +20936,9 @@ static const struct LevelUpMove sLycanrocMidnightLevelUpLearnset[] = {
     LEVEL_UP_MOVE(40, MOVE_CRUNCH),
     LEVEL_UP_MOVE(45, MOVE_ROCK_CLIMB),
     LEVEL_UP_MOVE(48, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(53, MOVE_HEAD_SMASH),
+#endif
     LEVEL_UP_END
 };
 
@@ -20955,6 +20961,9 @@ static const struct LevelUpMove sLycanrocDuskLevelUpLearnset[] = {
     LEVEL_UP_MOVE(40, MOVE_CRUNCH),
     LEVEL_UP_MOVE(45, MOVE_ROCK_CLIMB),
     LEVEL_UP_MOVE(48, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(53, MOVE_ACCELEROCK),
+#endif
     LEVEL_UP_END
 };
 
