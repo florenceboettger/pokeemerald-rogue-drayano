@@ -7132,12 +7132,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_STEELIX] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 105,
+        .baseDefense   = 200,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 75,
         .baseAttack    = 85,
         .baseDefense   = 200,
         .baseSpeed     = 30,
         .baseSpAttack  = 55,
         .baseSpDefense = 65,
+    #endif
         .type1 = TYPE_STEEL,
         .type2 = TYPE_GROUND,
         .catchRate = 25,
@@ -8281,12 +8290,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_TREECKO] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 40,
+        .baseAttack    = 65,
+        .baseDefense   = 35,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 55,
+    #else
         .baseHP        = 40,
         .baseAttack    = 45,
         .baseDefense   = 35,
         .baseSpeed     = 70,
         .baseSpAttack  = 65,
         .baseSpDefense = 55,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
         .catchRate = 45,
@@ -8298,19 +8316,32 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_DRAGON,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_HYPER_CUTTER, ABILITY_UNBURDEN},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_UNBURDEN},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
     [SPECIES_GROVYLE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 85,
+        .baseDefense   = 45,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 50,
         .baseAttack    = 65,
         .baseDefense   = 45,
         .baseSpeed     = 95,
         .baseSpAttack  = 85,
         .baseSpDefense = 65,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
         .catchRate = 45,
@@ -8322,21 +8353,39 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_DRAGON,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_HYPER_CUTTER, ABILITY_UNBURDEN},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_UNBURDEN},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
 
     [SPECIES_SCEPTILE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 110,
+        .baseDefense   = 65,
+        .baseSpeed     = 120,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 70,
         .baseAttack    = 85,
         .baseDefense   = 65,
         .baseSpeed     = 120,
         .baseSpAttack  = 105,
         .baseSpDefense = 85,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GRASS,
+        .type2 = TYPE_DRAGON,
+    #else
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
+    #endif
         .catchRate = 45,
         .expYield = 239,
         .evYield_Speed     = 3,
@@ -8346,7 +8395,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_DRAGON,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_HYPER_CUTTER, ABILITY_UNBURDEN},
+    #else
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_UNBURDEN},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
@@ -13771,7 +13824,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_HUMAN_LIKE,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_JUSTIFIED, ABILITY_INNER_FOCUS, ABILITY_MEGA_LAUNCHER},
+    #else
         .abilities = {ABILITY_STEADFAST, ABILITY_INNER_FOCUS, ABILITY_JUSTIFIED},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -25568,12 +25625,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SCEPTILE_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 115,
+        .baseDefense   = 75,
+        .baseSpeed     = 150,
+        .baseSpAttack  = 145,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 70,
         .baseAttack    = 110,
         .baseDefense   = 75,
         .baseSpeed     = 145,
         .baseSpAttack  = 145,
         .baseSpDefense = 85,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_DRAGON,
         .catchRate = 45,

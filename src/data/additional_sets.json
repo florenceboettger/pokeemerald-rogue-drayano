@@ -2601,6 +2601,95 @@
         ]
     },
 
+    "Treecko": {
+        "extra_moves": [
+            "Assurance",
+            "Dynamic Punch",
+            "Grassy Glide",
+            "Grassy Terrain",
+            "Grass Knot",
+            "Iron Tail",
+            "Work Up"
+        ]
+    },
+
+    "Sceptile": {
+        "movesets": {
+            "gen7uu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Draco Meteor",
+                        "Focus Blast",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Sceptilite",
+                    "ability": "Overgrow"
+                }
+            },
+            "gen7nu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Leaf Blade",
+                        "Earthquake",
+                        "Cross Poison",
+                        "Scale Shot"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Hyper Cutter"
+                },
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Earthquake",
+                        "Leaf Blade",
+                        "Cross Poison"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Overgrow"
+                },
+                "Unburden + Grassy Seed": {
+                    "moves": [
+                        "Grassy Glide",
+                        "Earthquake",
+                        "Cross Poison",
+                        "Outrage"
+                    ],
+                    "item": "Grassy Seed",
+                    "ability": "Unburden"
+                }
+            },
+            "gen71v1": {
+                "Offensive": {
+                    "moves": [
+                        "Frenzy Plant",
+                        "Grass Whistle",
+                        "Substitute",
+                        "Leech Seed"
+                    ],
+                    "item": "Sceptilite",
+                    "ability": "Overgrow"
+                }
+            }
+        },
+        "extra_moves": [
+            "Assurance",
+            "Breaking Swipe",
+            "Brutal Swing",
+            "Bulldoze",
+            "Drain Punch",
+            "Dynamic Punch",
+            "Grass Knot",
+            "Grassy Terrain",
+            "Iron Tail",
+            "Low Sweep",
+            "Rock Climb",
+            "Solar Blade",
+            "Throat Chop",
+            "Work Up"
+        ]
+    },
+
     "Masquerain": {
         "extra_moves": [
             "Acrobatics",
@@ -4772,6 +4861,72 @@
     "Lickilicky": {
         "extra_moves": [
             "Rock Climb"
+        ]
+    },
+
+    "Riolu": {
+        "extra_moves": [
+            "Drain Punch",
+            "Poison Jab",
+            "Shadow Claw",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Lucario": {
+        "movesets": {
+            "gen7uu": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Aura Sphere",
+                        "Flash Cannon",
+                        "Vacuum Wave"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Mega Launcher"
+                },
+                "Mega Launcher + Specs": {
+                    "moves": [
+                        "Aura Sphere",
+                        "Vacuum Wave",
+                        "Dark Pulse",
+                        "Water Pulse"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Mega Launcher"  
+                }
+            },
+            "gen7battlespotsingles": {
+                "Special Attacker": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Focus Blast",
+                        "Flash Cannon",
+                        "Vacuum Wave"
+                    ],
+                    "item": "Lucarionite",
+                    "ability": "Inner Focus"
+                }
+            },
+            "gen8monotype": {
+                "Nasty Plot (Steel)": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Aura Sphere",
+                        "Dark Pulse",
+                        "Vacuum Wave"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Mega Launcher"
+                }
+            }
+        },
+        "extra_moves": [
+            "Drain Punch",
+            "Poison Jab",
+            "Shadow Claw",
+            "Zen Headbutt"
         ]
     },
 

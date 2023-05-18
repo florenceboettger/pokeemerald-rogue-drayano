@@ -10133,6 +10133,9 @@ static const struct LevelUpMove sRioluLevelUpLearnset[] = {
 static const struct LevelUpMove sLucarioLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 0, MOVE_AURA_SPHERE),
     LEVEL_UP_MOVE( 1, MOVE_AURA_SPHERE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_LIFE_DEW),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_LASER_FOCUS),
     LEVEL_UP_MOVE( 1, MOVE_FORESIGHT),
     LEVEL_UP_MOVE( 1, MOVE_QUICK_ATTACK),
