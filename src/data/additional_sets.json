@@ -2704,6 +2704,35 @@
         ]
     },
 
+    "Whismur": {
+        "extra_moves": [
+            "Bug Buzz",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Exploud": {
+        "movesets": {
+            "gen7ru": {
+                "Punk Rock": {
+                    "moves": [
+                        "Boomburst",
+                        "Overdrive",
+                        "Focus Blast",
+                        "Shadow Ball"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Punk Rock"
+                }
+            }
+        },
+        "extra_moves": [
+            "Bug Buzz",
+            "Outrage",
+            "Zen Headbutt"
+        ]
+    },
+
     "Volbeat": {
         "movesets": {
             "gen7nu": {

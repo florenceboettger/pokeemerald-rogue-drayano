@@ -9441,7 +9441,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SOUNDPROOF, ABILITY_SCRAPPY, ABILITY_RATTLED},
+    #else
         .abilities = {ABILITY_SOUNDPROOF, ABILITY_NONE, ABILITY_RATTLED},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },
@@ -9465,13 +9469,25 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_FIELD,
-        .abilities = {ABILITY_SOUNDPROOF, ABILITY_NONE, ABILITY_SCRAPPY},
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SOUNDPROOF, ABILITY_SCRAPPY, ABILITY_RATTLED},
+    #else
+        .abilities = {ABILITY_SOUNDPROOF, ABILITY_NONE, ABILITY_RATTLED},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
 
     [SPECIES_EXPLOUD] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 104,
+        .baseAttack    = 101,
+        .baseDefense   = 63,
+        .baseSpeed     = 78,
+        .baseSpAttack  = 101,
+        .baseSpDefense = 73,
+    #else
         .baseHP        = 104,
         .baseAttack    = 91,
         .baseDefense   = 63,
@@ -9482,6 +9498,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseSpDefense = 63,
         #endif
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 45,
@@ -9493,7 +9510,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_FIELD,
-        .abilities = {ABILITY_SOUNDPROOF, ABILITY_NONE, ABILITY_SCRAPPY},
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SOUNDPROOF, ABILITY_SCRAPPY, ABILITY_PUNK_ROCK},
+    #else
+        .abilities = {ABILITY_SOUNDPROOF, ABILITY_NONE, ABILITY_RATTLED},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -9579,12 +9600,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_NOSEPASS] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 30,
+        .baseAttack    = 35,
+        .baseDefense   = 135,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 30,
         .baseAttack    = 45,
         .baseDefense   = 135,
         .baseSpeed     = 30,
         .baseSpAttack  = 45,
         .baseSpDefense = 90,
+    #endif
         .type1 = TYPE_ROCK,
         .type2 = TYPE_ROCK,
         .catchRate = 255,
