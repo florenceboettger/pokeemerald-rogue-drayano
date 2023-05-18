@@ -497,11 +497,6 @@ namespace PokemonDataGenerator
 					lowerBlock.AppendLine("#ifdef ROGUE_DRAYANO");
 				lowerBlock.AppendLine($"\t[SPECIES_{FormatKeyword(pokemon.PokemonName)}] = {{");
 
-				if (FormatKeyword(pokemon.PokemonName) == "FLAPPLE")
-				{
-					int i = 0;
-				}
-
 				obsoleteCategories.UnionWith(containedCategories);
 				HashSet<string> newCategories = new HashSet<string>(additionalCategories);
 				newCategories.ExceptWith(obsoleteCategories);
