@@ -548,7 +548,13 @@
         ]
     },
     "Arbok": {},
-    "Raichu": {},
+
+    "Raichu": {
+        "extra_moves": [
+            "Zippy Zap"
+        ]
+    },
+    
     "Sandslash": {},
     "Nidoqueen": {},
     "Nidoking": {},

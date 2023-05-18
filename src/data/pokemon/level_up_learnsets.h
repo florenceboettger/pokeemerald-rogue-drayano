@@ -480,6 +480,9 @@ static const struct LevelUpMove sPikachuLevelUpLearnset[] = {
     LEVEL_UP_MOVE(50, MOVE_WILD_CHARGE),
     LEVEL_UP_MOVE(53, MOVE_LIGHT_SCREEN),
     LEVEL_UP_MOVE(58, MOVE_THUNDER),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(61, MOVE_ZIPPY_ZAP),
+#endif
     LEVEL_UP_END
 };
 
