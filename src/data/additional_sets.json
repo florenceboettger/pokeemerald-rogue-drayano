@@ -1062,7 +1062,9 @@
 
     "Voltorb": {
         "extra_moves": [
-            "Bug Buzz"
+            "Bug Buzz",
+            "Energy Ball",
+            "Flash Cannon"
         ]
     },
 
@@ -1082,8 +1084,8 @@
             }
         },
         "extra_moves": [
-            "Bug Buzz",
-            "Energy Ball"
+            "Energy Ball",
+            "Flash Cannon"
         ]
     },
 
