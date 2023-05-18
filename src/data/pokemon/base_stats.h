@@ -2865,9 +2865,9 @@ const struct BaseStats gBaseStats[] =
         .baseSpDefense = 80,
         .type1 = TYPE_WATER,
     #ifdef ROGUE_DRAYANO
-        .type2 = TYPE_WATER,
-    #else
         .type2 = TYPE_PSYCHIC,
+    #else
+        .type2 = TYPE_WATER,
     #endif
         .catchRate = 75,
         .expYield = 175,
