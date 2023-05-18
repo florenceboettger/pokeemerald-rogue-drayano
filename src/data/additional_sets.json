@@ -453,8 +453,19 @@
             }
         }
     },
-    "Butterfree": {},
-    "Beedrill": {},
+
+    "Butterfree": {
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
+    "Beedrill": {
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
     "Pidgeot": {
         "movesets": {
             "gen7pu": {
