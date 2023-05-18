@@ -1872,7 +1872,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
-        .abilities = {ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_INTIMIDATE},
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_KEEN_EYE, ABILITY_SNIPER, ABILITY_INTIMIDATE},
+    #else
+        .abilities = {ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_SNIPER},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -1901,11 +1905,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
-        #ifdef ROGUE_DRAYANO
-            .abilities = {ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_INTIMIDATE},
-        #else
-            .abilities = {ABILITY_KEEN_EYE, ABILITY_SNIPER, ABILITY_INTIMIDATE},
-        #endif
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_KEEN_EYE, ABILITY_SNIPER, ABILITY_INTIMIDATE},
+    #else
+        .abilities = {ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_SNIPER},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },

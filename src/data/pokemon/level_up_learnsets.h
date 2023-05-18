@@ -2565,7 +2565,7 @@ static const struct LevelUpMove sMrMimeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(46, MOVE_BATON_PASS),
     LEVEL_UP_MOVE(50, MOVE_SAFEGUARD),
 #ifdef ROGUE_DRAYANO
-    LEVEL_UP_MOVE(53, MOVE_SPARKLY_SWIRL),
+    LEVEL_UP_MOVE(53, MOVE_GLITZY_GLOW),
 #endif
     LEVEL_UP_END
 };

@@ -1232,9 +1232,9 @@
                 "Nasty Plot": {
                     "moves": [
                         "Nasty Plot",
-                        "Sparkly Swirl",
+                        "Glitzy Glow",
                         "Focus Blast",
-                        "Psyshock"
+                        "Dazzling Gleam"
                     ],
                     "item": "Fightinium Z",
                     "ability": "Soundproof"
@@ -1244,7 +1244,7 @@
                 "Nasty Plot Sweeper": {
                     "moves": [
                         "Nasty Plot",
-                        "Sparkly Swirl",
+                        "Glitzy Glow",
                         "Psychic",
                         "Encore"
                     ],
@@ -1255,8 +1255,8 @@
             "gen8zu": {
                 "Choice Scarf": {
                     "moves": [
-                        "Psychic",
-                        "Sparkly Swirl",
+                        "Glitzy Glow",
+                        "Dazzling Gleam",
                         "Trick",
                         "Aura Sphere"
                     ],
@@ -1266,10 +1266,10 @@
             }
         },
         "extra_moves": [
-            "Dazzling Gleam",
             "Disarming Voice",
             "Mystical Fire",
             "Power Gem",
+            "Psyshock",
             "Quash",
             "Tri Attack"
         ]

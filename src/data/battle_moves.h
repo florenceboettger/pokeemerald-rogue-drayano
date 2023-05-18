@@ -12387,6 +12387,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_GLITZY_GLOW] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 95,
+        .accuracy = 100,
+        .pp = 5,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .zMovePower = 175,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 80,
             .accuracy = 95,
@@ -12398,6 +12405,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
             .zMovePower = 175,
         #endif
+    #endif
         .effect = EFFECT_GLITZY_GLOW,
         .type = TYPE_PSYCHIC,
         .pp = 15,
