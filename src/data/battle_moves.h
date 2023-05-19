@@ -12413,10 +12413,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
             .zMovePower = 175,
         #endif
+        .pp = 15,
     #endif
         .effect = EFFECT_GLITZY_GLOW,
         .type = TYPE_PSYCHIC,
-        .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
