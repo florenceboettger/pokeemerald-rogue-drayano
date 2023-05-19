@@ -3379,8 +3379,10 @@ static const struct LevelUpMove sTyphlosionLevelUpLearnset[] = {
 #ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE( 0, MOVE_SCORCHING_SANDS),
     LEVEL_UP_MOVE( 1, MOVE_SCORCHING_SANDS),
-#endif
+    LEVEL_UP_MOVE( 1, MOVE_EARTH_POWER),
+#else
     LEVEL_UP_MOVE( 1, MOVE_ERUPTION),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE( 1, MOVE_GYRO_BALL),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
