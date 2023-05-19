@@ -1801,24 +1801,180 @@
     },
 
     "Articuno": {
+        "movesets": {
+            "gen7pu": {
+                "SubRoost": {
+                    "moves": [
+                        "Substitute",
+                        "Roost",
+                        "Freeze-Dry",
+                        "Air Slash"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Pressure"
+                }
+            },
+            "gen8pu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Roost",
+                        "Defog",
+                        "Freeze-Dry",
+                        "Air Slash"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Pressure"
+                }
+            },
+            "gen8zu": {
+                "Roost + 3 Attacks": {
+                    "moves": [
+                        "Roost",
+                        "Air Slash",
+                        "Freeze-Dry",
+                        "U-turn"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Pressure"
+                }
+            }
+        },
         "extra_moves": [
-            "Extrasensory",
-            "Hurricane"
+            "Extrasensory"
         ]
     },
 
     "Zapdos": {
+        "movesets": {
+            "gen7letsgoou": {
+                "Pivot": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Roost",
+                        "U-turn",
+                        "Air Slash"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Static"
+                }
+            },
+            "gen8ou": {
+                "Utility": {
+                    "moves": [
+                        "Discharge",
+                        "Air Slash",
+                        "Roost",
+                        "Defog"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Static"
+                }
+            },
+            "gen8monotype": {
+                "Defog (Flying)": {
+                    "moves": [
+                        "Air Slash",
+                        "Volt Switch",
+                        "Defog",
+                        "Roost"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Pressure"
+                }
+            },
+            "gen8battlestadiumsingles": {
+                "Dynamax Attacker": {
+                    "moves": [
+                        "Air Slash",
+                        "Thunderbolt",
+                        "Heat Wave",
+                        "Roost"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Static"
+                },
+                "Defensive": {
+                    "moves": [
+                        "Volt Switch",
+                        "Air Slash",
+                        "Heat Wave",
+                        "Roost"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Pressure"
+                },
+                "Defensive Kee Berry": {
+                    "moves": [
+                        "Discharge",
+                        "Air Slash",
+                        "Roost",
+                        "Eerie Impulse"
+                    ],
+                    "item": "Kee Berry",
+                    "ability": "Pressure"
+                }
+            },
+            "gen81v1": {
+                "Eerie Impulse + Life Orb": {
+                    "moves": [
+                        "Eerie Impulse",
+                        "Roost",
+                        "Charge Beam",
+                        "Air Slash"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Pressure"
+                }
+            }
+        },
         "extra_moves": [
             "Extrasensory",
-            "Hurricane",
             "Thunder Shock"
         ]
     },
 
     "Moltres": {
+        "movesets": {
+            "gen8ou": {
+                "Substitute": {
+                    "moves": [
+                        "Substitute",
+                        "Flamethrower",
+                        "Air Slash",
+                        "Roost"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Pressure"
+                }
+            },
+            "gen81v1": {
+                "Maranga Berry Stall": {
+                    "moves": [
+                        "Burn Up",
+                        "Substitute",
+                        "Roost",
+                        "Air Slash"
+                    ],
+                    "item": "Maranga Berry",
+                    "ability": "Pressure"
+                }
+            },
+            "gen8nationaldexuu": {
+                "Offensive": {
+                    "moves": [
+                        "Flamethrower",
+                        "Air Slash",
+                        "Roost",
+                        "U-turn"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Flame Body"
+                }
+            }
+        },
         "extra_moves": [
+            "Brave Bird",
             "Extrasensory",
-            "Scorching Sands",
             "Sky Attack"
         ]
     },
@@ -2619,6 +2775,349 @@
     "Magby": {
         "extra_moves": [
             "Scorching Sands"
+        ]
+    },
+
+    "Raikou": {
+        "movesets": {
+            "gen7ru": {
+                "Substitute + Calm Mind": {
+                    "moves": [
+                        "Substitute",
+                        "Calm Mind",
+                        "Thunderbolt",
+                        "Hidden Power Ice"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Volt Absorb"
+                },
+                "Calm Mind + 3 Attacks": {
+                    "moves": [
+                        "Calm Mind",
+                        "Thunderbolt",
+                        "Aura Sphere",
+                        "Hidden Power Ice"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Volt Absorb"
+                }
+            },
+            "gen71v1": {
+                "Electrium Z": {
+                    "moves": [
+                        "Zap Cannon",
+                        "Calm Mind",
+                        "Laser Focus",
+                        "Substitute"
+                    ],
+                    "item": "Electrium Z",
+                    "ability": "Volt Absorb"
+                }
+            },
+            "gen8ru": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Volt Switch",
+                        "Thunderbolt",
+                        "Scald",
+                        "Toxic"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Volt Absorb"
+                },
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Thunderbolt",
+                        "Scald",
+                        "Shadow Ball"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Volt Absorb"
+                }
+            },
+            "gen8uu": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Volt Switch",
+                        "Thunderbolt",
+                        "Scald",
+                        "Aura Sphere"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Volt Absorb"
+                }
+            },
+            "gen8battlestadiumsingles": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Discharge",
+                        "Scald",
+                        "Substitute"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Volt Absorb"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Volt Switch",
+                        "Scald",
+                        "Extrasensory"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Volt Absorb"
+                }
+            },
+            "gen8nationaldexru": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Volt Switch",
+                        "Thunderbolt",
+                        "Aura Sphere",
+                        "Scald"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Volt Absorb"
+                },
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Thunderbolt",
+                        "Aura Sphere",
+                        "Hidden Power Grass"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Volt Absorb"
+                }
+            },
+            "gen8bdspou": {
+                "Choice Specs": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Volt Switch",
+                        "Scald",
+                        "Shadow Ball"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Volt Absorb"
+                },
+                "Calm Mind": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Scald",
+                        "Calm Mind",
+                        "Shadow Ball"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Volt Absorb"
+                }
+            }
+        }
+    },
+
+    "Entei": {
+        "movesets": {
+            "gen7uu": {
+                "Choice Band": {
+                    "moves": [
+                        "Sacred Fire",
+                        "Extreme Speed",
+                        "Stone Edge",
+                        "Flare Blitz"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Physical Attacker": {
+                    "moves": [
+                        "Sacred Fire",
+                        "Stone Edge",
+                        "Bulldoze",
+                        "Flame Charge"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Flash Fire"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Sacred Fire",
+                        "Stone Edge",
+                        "High Horsepower",
+                        "Iron Head"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen71v1": {
+                "Rockium Z": {
+                    "moves": [
+                        "Extreme Speed",
+                        "Sacred Fire",
+                        "Stone Edge",
+                        "Stomping Tantrum"
+                    ],
+                    "item": "Rockium Z",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen8uu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Sacred Fire",
+                        "Flare Blitz",
+                        "Stone Edge",
+                        "Extreme Speed"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen8ru": {
+                "Choice Band": {
+                    "moves": [
+                        "Extreme Speed",
+                        "Sacred Fire",
+                        "Stone Edge",
+                        "Flare Blitz"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen81v1": {
+                "Assault Vest": {
+                    "moves": [
+                        "Flare Blitz",
+                        "High Horsepower",
+                        "Eruption",
+                        "Extreme Speed"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Flash Fire"
+                }
+            }
+        }
+    },
+
+    "Suicune": {
+        "movesets": {
+            "gen7uu": {
+                "CroCune": {
+                    "moves": [
+                        "Calm Mind",
+                        "Rest",
+                        "Sleep Talk",
+                        "Scald"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen7doublesou": {
+                "Bulky Tailwind": {
+                    "moves": [
+                        "Scald",
+                        "Ice Beam",
+                        "Tailwind",
+                        "Snarl"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Assault Vest": {
+                    "moves": [
+                        "Scald",
+                        "Ice Beam",
+                        "Mirror Coat",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen7battlespotdoubles": {
+                "Tailwind Offense": {
+                    "moves": [
+                        "Tailwind",
+                        "Icy Wind",
+                        "Protect",
+                        "Scald"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen7vgc2018": {
+                "Offensive Support": {
+                    "moves": [
+                        "Tailwind",
+                        "Scald",
+                        "Ice Beam",
+                        "Snarl"
+                    ],
+                    "item": "Mago Berry",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen71v1": {
+                "Setup": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Icy Wind",
+                        "Calm Mind",
+                        "Mirror Coat"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen8ou": {
+                "VinCune": {
+                    "moves": [
+                        "Scald",
+                        "Substitute",
+                        "Calm Mind",
+                        "Protect"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen8battlestadiumsingles": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Scald",
+                        "Ice Beam",
+                        "Air Slash"
+                    ],
+                    "item": "Chesto Berry",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen81v1": {
+                "Assault Vest": {
+                    "moves": [
+                        "Whirlpool",
+                        "Mirror Coat",
+                        "Snarl",
+                        "Scald"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Water Absorb"
+                }
+            }
+        },
+        "extra_moves": [
+            "Frost Breath",
+            "Hurricane"
         ]
     },
 
@@ -3665,7 +4164,10 @@
                     "ability": "Swift Swim"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Scald"
+        ]
     },
 
     "Bagon": {
