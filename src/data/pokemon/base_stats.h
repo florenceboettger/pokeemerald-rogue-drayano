@@ -4818,7 +4818,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 100,
         .baseDefense   = 95,
         .baseSpeed     = 110,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 70,
+    #else
         .baseSpAttack  = 40,
+    #endif
         .baseSpDefense = 70,
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
@@ -7993,12 +7997,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MILTANK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 95,
+        .baseAttack    = 85,
+        .baseDefense   = 105,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 70,
+    #else
         .baseHP        = 95,
         .baseAttack    = 80,
         .baseDefense   = 105,
         .baseSpeed     = 100,
         .baseSpAttack  = 40,
         .baseSpDefense = 70,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 45,
@@ -16441,12 +16454,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_WHIMSICOTT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 67,
+        .baseDefense   = 85,
+        .baseSpeed     = 116,
+        .baseSpAttack  = 87,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 60,
         .baseAttack    = 67,
         .baseDefense   = 85,
         .baseSpeed     = 116,
         .baseSpAttack  = 77,
         .baseSpDefense = 75,
+    #endif
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_GRASS,
             .type2 = TYPE_FAIRY,
@@ -16500,12 +16522,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LILLIGANT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 60,
+        .baseDefense   = 75,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 115,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 70,
         .baseAttack    = 60,
         .baseDefense   = 75,
         .baseSpeed     = 90,
         .baseSpAttack  = 110,
         .baseSpDefense = 75,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
         .catchRate = 75,

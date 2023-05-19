@@ -1456,17 +1456,62 @@
                 "Choice Band": {
                     "moves": [
                         "Head Charge",
-                        "Megahorn",
+                        "Rock Climb",
                         "Earthquake",
                         "Close Combat"
                     ],
                     "item": "Choice Band",
                     "ability": "Intimidate"
+                },
+                "Tauros": {
+                    "moves": [
+                        "Strength",
+                        "Work Up",
+                        "Fire Blast",
+                        "Earthquake"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sheer Force"
+                },
+                "Tauros 2": {
+                    "moves": [
+                        "Strength",
+                        "Work Up",
+                        "Zen Headbutt",
+                        "Earthquake"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sheer Force"
+                },
+                "Throwback Thursday": {
+                    "moves": [
+                        "Body Slam",
+                        "Giga Impact",
+                        "Blizzard",
+                        "Earthquake"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Intimidate"
+                }
+            },
+            "gen8nu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Strength",
+                        "Close Combat",
+                        "Throat Chop",
+                        "Iron Head"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sheer Force"
                 }
             }
         },
         "extra_moves": [
-            "Rock Climb"
+            "High Horsepower",
+            "Iron Tail",
+            "Smart Strike",
+            "Stone Edge"
         ]
     },
 
@@ -5533,6 +5578,109 @@
             "Poltergeist",
             "Trick",
             "Triple Axel"
+        ]
+    },
+
+    "Cottonee": {
+        "extra_moves": [
+            "Knock Off",
+            "Tailwind"
+        ]
+    },
+
+    "Whimsicott": {
+        "movesets": {
+            "gen7monotype": {
+                "Offensive Utility (Grass)": {
+                    "moves": [
+                        "Encore",
+                        "Moonblast",
+                        "U-turn",
+                        "Sleep Powder"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Prankster"
+                }
+            },
+            "gen8monotype": {
+                "Utility (Grass)": {
+                    "moves": [
+                        "Grass Whistle",
+                        "Encore",
+                        "Knock Off",
+                        "Moonblast"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Prankster"
+                }
+            },
+            "gen8vgc2022": {
+                "Prankster Support": {
+                    "moves": [
+                        "Dazzling Gleam",
+                        "Tailwind",
+                        "Helping Hand",
+                        "Protect"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Prankster"
+                }
+            },
+            "gen8nationaldexmonotype": {
+                "Offensive Utility (Grass)": {
+                    "moves": [
+                        "Encore",
+                        "Sleep Powder",
+                        "Moonblast",
+                        "U-turn"
+                    ],
+                    "item": "Pixie Plate",
+                    "ability": "Prankster"
+                }
+            }
+        }
+    },
+
+    "Petilil": {
+        "extra_moves": [
+            "Pollen Puff"
+        ]
+    },
+
+    "Lilligant": {
+        "movesets": {
+            "gen7nu": {
+                "Quiver Dance": {
+                    "moves": [
+                        "Quiver Dance",
+                        "Fiery Dance",
+                        "Energy Ball",
+                        "Hyper Beam"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Chlorophyll"
+                }
+            },
+            "gen8zu": {
+                "Quiver Dance": {
+                    "moves": [
+                        "Quiver Dance",
+                        "Giga Drain",
+                        "Fiery Dance",
+                        "Sleep Powder"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                }
+            }
+        },
+        "extra_moves": [
+            "Aromatherapy",
+            "Leaf Storm",
+            "Poison Powder",
+            "Pollen Puff",
+            "Recover",
+            "Stun Spore"
         ]
     },
 
