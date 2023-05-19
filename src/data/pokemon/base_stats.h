@@ -2857,12 +2857,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GOLDUCK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 80,
+        .baseAttack    = 72,
+        .baseDefense   = 78,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 80,
         .baseAttack    = 82,
         .baseDefense   = 78,
         .baseSpeed     = 85,
         .baseSpAttack  = 95,
         .baseSpDefense = 80,
+    #endif
         .type1 = TYPE_WATER,
     #ifdef ROGUE_DRAYANO
         .type2 = TYPE_PSYCHIC,

@@ -558,7 +558,6 @@
             "Dual Wingbeat"
         ]
     },
-    "Arbok": {},
 
     "Raichu": {
         "extra_moves": [
@@ -782,7 +781,11 @@
                     "ability": "Swift Swim"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Aura Sphere",
+            "Power Gem"
+        ]
     },
 
     "Primeape": {
