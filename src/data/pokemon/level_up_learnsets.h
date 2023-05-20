@@ -1476,6 +1476,9 @@ static const struct LevelUpMove sTentacruelLevelUpLearnset[] = {
 static const struct LevelUpMove sGeodudeLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_DEFENSE_CURL),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_RAPID_SPIN),
+#endif
     LEVEL_UP_MOVE( 4, MOVE_MUD_SPORT),
     LEVEL_UP_MOVE( 6, MOVE_ROCK_POLISH),
     LEVEL_UP_MOVE(10, MOVE_ROLLOUT),
@@ -1490,6 +1493,9 @@ static const struct LevelUpMove sGeodudeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(36, MOVE_EXPLOSION),
     LEVEL_UP_MOVE(40, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(42, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(46, MOVE_HEAD_SMASH),
+#endif
     LEVEL_UP_END
 };
 
@@ -1498,6 +1504,9 @@ static const struct LevelUpMove sGravelerLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE( 1, MOVE_MUD_SPORT),
     LEVEL_UP_MOVE( 1, MOVE_ROCK_POLISH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_RAPID_SPIN),
+#endif
     LEVEL_UP_MOVE( 4, MOVE_MUD_SPORT),
     LEVEL_UP_MOVE( 6, MOVE_ROCK_POLISH),
     LEVEL_UP_MOVE(10, MOVE_ROLLOUT),
@@ -1512,15 +1521,24 @@ static const struct LevelUpMove sGravelerLevelUpLearnset[] = {
     LEVEL_UP_MOVE(44, MOVE_EXPLOSION),
     LEVEL_UP_MOVE(50, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(54, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(46, MOVE_HEAD_SMASH),
+#endif
     LEVEL_UP_END
 };
 
 static const struct LevelUpMove sGolemLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_HEAVY_SLAM),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_HEAVY_SLAM),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE( 1, MOVE_MUD_SPORT),
     LEVEL_UP_MOVE( 1, MOVE_ROCK_POLISH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_RAPID_SPIN),
+#endif
     LEVEL_UP_MOVE( 4, MOVE_MUD_SPORT),
     LEVEL_UP_MOVE( 6, MOVE_ROCK_POLISH),
     LEVEL_UP_MOVE(10, MOVE_STEAMROLLER),
@@ -1535,7 +1553,11 @@ static const struct LevelUpMove sGolemLevelUpLearnset[] = {
     LEVEL_UP_MOVE(44, MOVE_EXPLOSION),
     LEVEL_UP_MOVE(50, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(54, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(60, MOVE_HEAD_SMASH),
+#else
     LEVEL_UP_MOVE(60, MOVE_HEAVY_SLAM),
+#endif
     // headlong rush?
     LEVEL_UP_END
 };
@@ -20196,6 +20218,9 @@ static const struct LevelUpMove sPersianAlolanLevelUpLearnset[] = {
 static const struct LevelUpMove sGeodudeAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_DEFENSE_CURL),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_RAPID_SPIN),
+#endif
     LEVEL_UP_MOVE( 4, MOVE_CHARGE),
     LEVEL_UP_MOVE( 6, MOVE_ROCK_POLISH),
     LEVEL_UP_MOVE(10, MOVE_ROLLOUT),
@@ -20210,6 +20235,9 @@ static const struct LevelUpMove sGeodudeAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE(36, MOVE_EXPLOSION),
     LEVEL_UP_MOVE(40, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(42, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(46, MOVE_WILD_CHARGE),
+#endif
     LEVEL_UP_END
 };
 
@@ -20218,6 +20246,9 @@ static const struct LevelUpMove sGravelerAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE( 1, MOVE_CHARGE),
     LEVEL_UP_MOVE( 1, MOVE_ROCK_POLISH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_RAPID_SPIN),
+#endif
     LEVEL_UP_MOVE( 4, MOVE_CHARGE),
     LEVEL_UP_MOVE( 6, MOVE_ROCK_POLISH),
     LEVEL_UP_MOVE(10, MOVE_ROLLOUT),
@@ -20232,15 +20263,24 @@ static const struct LevelUpMove sGravelerAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE(44, MOVE_EXPLOSION),
     LEVEL_UP_MOVE(50, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(54, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(60, MOVE_WILD_CHARGE),
+#endif
     LEVEL_UP_END
 };
 
 static const struct LevelUpMove sGolemAlolanLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_HEAVY_SLAM),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_HEAVY_SLAM),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE( 1, MOVE_CHARGE),
     LEVEL_UP_MOVE( 1, MOVE_ROCK_POLISH),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_RAPID_SPIN),
+#endif
     LEVEL_UP_MOVE( 4, MOVE_CHARGE),
     LEVEL_UP_MOVE( 6, MOVE_ROCK_POLISH),
     LEVEL_UP_MOVE(10, MOVE_STEAMROLLER),
@@ -20255,7 +20295,11 @@ static const struct LevelUpMove sGolemAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE(44, MOVE_EXPLOSION),
     LEVEL_UP_MOVE(50, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(54, MOVE_STONE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(60, MOVE_WILD_CHARGE),
+#else
     LEVEL_UP_MOVE(60, MOVE_HEAVY_SLAM),
+#endif
     LEVEL_UP_END
 };
 

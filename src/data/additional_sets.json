@@ -812,19 +812,111 @@
                     "ability": "Gorilla Tactics"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
     },
 
     "Poliwrath": {
         "extra_moves": [
             "Drain Punch",
-            "High Horsepower"
+            "High Horsepower",
+            "Rock Climb"
+        ]
+    },
+
+    "Machop": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Machoke": {
+        "extra_moves": [
+            "Rock Climb"
         ]
     },
 
     "Machamp": {
         "extra_moves": [
-            "High Horsepower"
+            "High Horsepower",
+            "Rock Climb"
+        ]
+    },
+
+    "Geodude": {
+        "movesets": {
+            "gen7lc": {
+                "Spinner": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Rapid Spin",
+                        "Earthquake",
+                        "Rock Climb"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Sturdy"
+                },
+                "Rock Head": {
+                    "moves": [
+                        "Head Smash",
+                        "Earthquake",
+                        "Stealth Rock",
+                        "Explosion"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Rock Head"
+                }
+            }
+        },
+        "extra_moves": [
+            "Body Press"
+        ]
+    },
+
+    "Geodude-Alola": {
+        "extra_moves": [
+            "Body Press"
+        ]
+    },
+
+    "Golem": {
+        "movesets": {
+            "gen7zu": {
+                "Spinner": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Rapid Spin",
+                        "Earthquake",
+                        "Rock Climb"
+                    ],
+                    "item": "Custap Berry",
+                    "ability": "Sturdy"
+                }
+            },
+            "gen7letsgoou": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Head Smash",
+                        "Earthquake",
+                        "Heat Crash"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Rock Head"
+                }
+            }
+        },
+        "extra_moves": [
+            "Body Press"
+        ]
+    },
+
+    "Golem-Alola": {
+        "extra_moves": [
+            "Body Press",
+            "Heat Crash"
         ]
     },
 
