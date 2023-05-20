@@ -3237,6 +3237,42 @@
         ]
     },
 
+    "Beautifly": {
+        "movesets": {
+            "gen7pu": {
+                "Quiver Dance (Air Slash + Giga Drain)": {
+                    "moves": [
+                        "Quiver Dance",
+                        "Bug Buzz",
+                        "Air Slash",
+                        "Giga Drain"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Swarm"
+                }
+            }
+        },
+        "extra_moves": [
+            "Electroweb",
+            "Energy Ball",
+            "Iron Defense",
+            "Ominous Wind",
+            "Struggle Bug",
+            "U-turn",
+            "Venoshock"
+        ]
+    },
+
+    "Dustox": {
+        "extra_moves": [
+            "Electroweb",
+            "Energy Ball",
+            "Ominous Wind",
+            "Struggle Bug",
+            "U-turn"
+        ]
+    },
+
     "Masquerain": {
         "extra_moves": [
             "Acrobatics",
