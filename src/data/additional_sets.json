@@ -6532,7 +6532,6 @@
         },
         "extra_moves": [
             "Dragon Rage",
-            "Iron Tail",
             "Wrap"
         ]
     },
@@ -6577,8 +6576,7 @@
         "extra_moves": [
             "Aqua Tail",
             "Dragon Rage",
-            "Knock Off",
-            "Iron Tail"
+            "Knock Off"
         ]
     },
 
@@ -6621,8 +6619,7 @@
         },
         "extra_moves": [
             "Aqua Tail",
-            "Dragon Rage",
-            "Iron Tail"
+            "Dragon Rage"
         ]
     },
 
