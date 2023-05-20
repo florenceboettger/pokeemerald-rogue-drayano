@@ -323,30 +323,57 @@
         .noFlip = FALSE,                                                            \
     }
 
-#define ROTOM_FORM_BASE_STATS(type, flip)             \
-    {                                                 \
-        .baseHP        = 50,                          \
-        .baseAttack    = 65,                          \
-        .baseDefense   = 107,                         \
-        .baseSpeed     = 86,                          \
-        .baseSpAttack  = 105,                         \
-        .baseSpDefense = 107,                         \
-        .type1 = TYPE_ELECTRIC,                       \
-        .type2 = type,                                \
-        .catchRate = 45,                              \
-        .expYield = 182,                              \
-        .evYield_Speed     = 1,                       \
-        .evYield_SpAttack  = 1,                       \
-        .genderRatio = MON_GENDERLESS,                \
-        .eggCycles = 20,                              \
-        .friendship = 70,                             \
-        .growthRate = GROWTH_MEDIUM_FAST,             \
-        .eggGroup1 = EGG_GROUP_AMORPHOUS,             \
-        .eggGroup2 = EGG_GROUP_AMORPHOUS,             \
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},\
-        .bodyColor = BODY_COLOR_RED,                  \
-        .noFlip = flip,                               \
-    }
+#ifdef ROGUE_DRAYANO
+    #define ROTOM_FORM_BASE_STATS(type, ability1, flip)             \
+        {                                                 \
+            .baseHP        = 50,                          \
+            .baseAttack    = 65,                          \
+            .baseDefense   = 107,                         \
+            .baseSpeed     = 86,                          \
+            .baseSpAttack  = 105,                         \
+            .baseSpDefense = 107,                         \
+            .type1 = TYPE_ELECTRIC,                       \
+            .type2 = type,                                \
+            .catchRate = 45,                              \
+            .expYield = 182,                              \
+            .evYield_Speed     = 1,                       \
+            .evYield_SpAttack  = 1,                       \
+            .genderRatio = MON_GENDERLESS,                \
+            .eggCycles = 20,                              \
+            .friendship = 70,                             \
+            .growthRate = GROWTH_MEDIUM_FAST,             \
+            .eggGroup1 = EGG_GROUP_AMORPHOUS,             \
+            .eggGroup2 = EGG_GROUP_AMORPHOUS,             \
+            .abilities = {ability1, ABILITY_NONE},\
+            .bodyColor = BODY_COLOR_RED,                  \
+            .noFlip = flip,                               \
+        }
+#else
+    #define ROTOM_FORM_BASE_STATS(type, flip)             \
+        {                                                 \
+            .baseHP        = 50,                          \
+            .baseAttack    = 65,                          \
+            .baseDefense   = 107,                         \
+            .baseSpeed     = 86,                          \
+            .baseSpAttack  = 105,                         \
+            .baseSpDefense = 107,                         \
+            .type1 = TYPE_ELECTRIC,                       \
+            .type2 = type,                                \
+            .catchRate = 45,                              \
+            .expYield = 182,                              \
+            .evYield_Speed     = 1,                       \
+            .evYield_SpAttack  = 1,                       \
+            .genderRatio = MON_GENDERLESS,                \
+            .eggCycles = 20,                              \
+            .friendship = 70,                             \
+            .growthRate = GROWTH_MEDIUM_FAST,             \
+            .eggGroup1 = EGG_GROUP_AMORPHOUS,             \
+            .eggGroup2 = EGG_GROUP_AMORPHOUS,             \
+            .abilities = {ABILITY_LEVITATE, ABILITY_NONE},\
+            .bodyColor = BODY_COLOR_RED,                  \
+            .noFlip = flip,                               \
+        }
+#endif
 
 #define ARCEUS_BASE_STATS(type)                        \
     {                                                  \
@@ -14802,12 +14829,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_ROTOM] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 50,
+        .baseDefense   = 77,
+        .baseSpeed     = 101,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 77,
+    #else
         .baseHP        = 50,
         .baseAttack    = 50,
         .baseDefense   = 77,
         .baseSpeed     = 91,
         .baseSpAttack  = 95,
         .baseSpDefense = 77,
+    #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_GHOST,
         .catchRate = 45,
@@ -27762,11 +27798,20 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GASTRODON_EAST_SEA] = GASTRODON_BASE_STATS(BODY_COLOR_BLUE),
 
+#ifdef ROGUE_DRAYANO
+    [SPECIES_ROTOM_HEAT]  = ROTOM_FORM_BASE_STATS(TYPE_FIRE, ABILITY_LEVITATE, FLIP),
+    [SPECIES_ROTOM_WASH]  = ROTOM_FORM_BASE_STATS(TYPE_WATER, ABILITY_LEVITATE, NO_FLIP),
+    [SPECIES_ROTOM_FROST] = ROTOM_FORM_BASE_STATS(TYPE_ICE, ABILITY_LEVITATE, FLIP),
+    [SPECIES_ROTOM_FAN]   = ROTOM_FORM_BASE_STATS(TYPE_FLYING, ABILITY_MOTOR_DRIVE, FLIP),
+    [SPECIES_ROTOM_MOW]   = ROTOM_FORM_BASE_STATS(TYPE_GRASS, ABILITY_LEVITATE, FLIP),
+#else
     [SPECIES_ROTOM_HEAT]  = ROTOM_FORM_BASE_STATS(TYPE_FIRE, FLIP),
     [SPECIES_ROTOM_WASH]  = ROTOM_FORM_BASE_STATS(TYPE_WATER, NO_FLIP),
     [SPECIES_ROTOM_FROST] = ROTOM_FORM_BASE_STATS(TYPE_ICE, FLIP),
     [SPECIES_ROTOM_FAN]   = ROTOM_FORM_BASE_STATS(TYPE_FLYING, FLIP),
     [SPECIES_ROTOM_MOW]   = ROTOM_FORM_BASE_STATS(TYPE_GRASS, FLIP),
+#endif
+
 
     [SPECIES_GIRATINA_ORIGIN] =
     {

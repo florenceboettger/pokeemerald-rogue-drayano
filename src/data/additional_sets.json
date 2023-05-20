@@ -6321,6 +6321,77 @@
         ]
     },
 
+    "Rotom-Fan": {
+        "movesets": {
+            "gen7pu": {
+                "Defensive Pivot": {
+                    "moves": [
+                        "Volt Switch",
+                        "Hurricane",
+                        "Will-O-Wisp",
+                        "Defog"
+                    ],
+                    "item": "Iapapa Berry",
+                    "ability": "Motor Drive"
+                }
+            },
+            "gen7zu": {
+                "Defensive Pivot": {
+                    "moves": [
+                        "Volt Switch",
+                        "Hurricane",
+                        "Pain Split",
+                        "Defog"
+                    ],
+                    "item": "Wiki Berry",
+                    "ability": "Motor Drive"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Volt Switch",
+                        "Hurricane",
+                        "Thunderbolt",
+                        "Trick"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Motor Drive"
+                }
+            },
+            "gen8pu": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Discharge",
+                        "Hurricane",
+                        "Pain Split"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Motor Drive"
+                },
+                "Utility": {
+                    "moves": [
+                        "Defog",
+                        "Volt Switch",
+                        "Hurricane",
+                        "Toxic"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Motor Drive"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Volt Switch",
+                        "Hurricane",
+                        "Thunderbolt",
+                        "Trick"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Motor Drive"
+                }
+            }
+        }
+    },
+
     "Cottonee": {
         "extra_moves": [
             "Knock Off",
