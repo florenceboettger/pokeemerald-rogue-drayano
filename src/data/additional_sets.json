@@ -6515,6 +6515,161 @@
         }
     },
 
+    "Snivy": {
+        "movesets": {
+            "gen7lc": {
+                "Coil": {
+                    "moves": [
+                        "Coil",
+                        "Leaf Blade",
+                        "Aqua Tail",
+                        "Synthesis"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Multiscale"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dragon Rage",
+            "Iron Tail",
+            "Wrap"
+        ]
+    },
+
+    "Servine": {
+        "movesets": {
+            "gen7pu": {
+                "Fast Utility": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Draco Meteor",
+                        "Synthesis",
+                        "Hidden Power Ice"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Contrary"
+                },
+                "Coil": {
+                    "moves": [
+                        "Coil",
+                        "Leaf Blade",
+                        "Dragon Rush",
+                        "Synthesis"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Multiscale"
+                }
+            },
+            "gen7zu": {
+                "Offensive Support": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Taunt",
+                        "Synthesis",
+                        "Hidden Power Fire"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Contrary"
+                }
+            }
+        },
+        "extra_moves": [
+            "Aqua Tail",
+            "Dragon Rage",
+            "Knock Off",
+            "Iron Tail"
+        ]
+    },
+
+    "Serperior": {
+        "movesets": {
+            "gen7ou": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Glare",
+                        "Draco Meteor",
+                        "Knock Off"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Contrary"
+                },
+                "Coil": {
+                    "moves": [
+                        "Coil",
+                        "Power Whip",
+                        "Dragon Rush",
+                        "Synthesis"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Multiscale"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Focus Sash Lead": {
+                    "moves": [
+                        "Leaf Storm",
+                        "Hidden Power Rock",
+                        "Glare",
+                        "Draco Meteor"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Contrary"
+                }
+            }
+        },
+        "extra_moves": [
+            "Aqua Tail",
+            "Dragon Rage",
+            "Iron Tail"
+        ]
+    },
+
+    "Tepig": {
+        "movesets": {
+            "gen7lc": {
+                "Life Orb": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Head Smash",
+                        "Sucker Punch",
+                        "Superpower"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sheer Force"
+                }
+            }
+        },
+        "extra_moves": [
+            "Wild Charge",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Emboar": {
+        "movesets": {
+            "gen71v1": {
+                "Fast Choice Scarf": {
+                    "moves": [
+                        "Rock Climb",
+                        "V-create",
+                        "Cross Chop",
+                        "Earthquake"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Mold Breaker"
+                }
+            }
+        },
+        "extra_moves": [
+            "Iron Head",
+            "Iron Tail",
+            "Poison Jab",
+            "Zen Headbutt"
+        ]
+    },
+
     "Cottonee": {
         "extra_moves": [
             "Knock Off",

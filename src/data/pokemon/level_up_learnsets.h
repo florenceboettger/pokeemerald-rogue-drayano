@@ -11411,6 +11411,9 @@ static const struct LevelUpMove sVictiniLevelUpLearnset[] = {
     LEVEL_UP_MOVE(49, MOVE_ZEN_HEADBUTT),
     LEVEL_UP_MOVE(57, MOVE_INFERNO),
     LEVEL_UP_MOVE(65, MOVE_DOUBLE_EDGE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(73, MOVE_V_CREATE),
+#endif
     LEVEL_UP_MOVE(73, MOVE_FLARE_BLITZ),
     LEVEL_UP_MOVE(81, MOVE_FINAL_GAMBIT),
     LEVEL_UP_MOVE(89, MOVE_STORED_POWER),
@@ -11438,6 +11441,10 @@ static const struct LevelUpMove sSnivyLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sServineLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_DRAGON_BREATH),
+    LEVEL_UP_MOVE( 1, MOVE_DRAGON_BREATH),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_VINE_WHIP),
@@ -11460,6 +11467,11 @@ static const struct LevelUpMove sServineLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sSerperiorLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_DRAGON_PULSE),
+    LEVEL_UP_MOVE( 1, MOVE_DRAGON_PULSE),
+    LEVEL_UP_MOVE( 1, MOVE_DRAGON_BREATH),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_VINE_WHIP),
@@ -11478,6 +11490,10 @@ static const struct LevelUpMove sSerperiorLevelUpLearnset[] = {
     LEVEL_UP_MOVE(50, MOVE_WRING_OUT),
     LEVEL_UP_MOVE(56, MOVE_GASTRO_ACID),
     LEVEL_UP_MOVE(62, MOVE_LEAF_STORM),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(68, MOVE_POWER_WHIP),
+    LEVEL_UP_MOVE(75, MOVE_DRAGON_RUSH),
+#endif
     LEVEL_UP_END
 };
 
@@ -11501,7 +11517,12 @@ static const struct LevelUpMove sTepigLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sPigniteLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_MUD_SHOT),
+    LEVEL_UP_MOVE( 1, MOVE_MUD_SHOT),
+#else
     LEVEL_UP_MOVE( 0, MOVE_ARM_THRUST),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ARM_THRUST),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
@@ -11525,6 +11546,11 @@ static const struct LevelUpMove sPigniteLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sEmboarLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_HIGH_HORSEPOWER),
+    LEVEL_UP_MOVE( 1, MOVE_HIGH_HORSEPOWER),
+    LEVEL_UP_MOVE( 1, MOVE_MUD_SHOT),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ARM_THRUST),
     LEVEL_UP_MOVE( 1, MOVE_HAMMER_ARM),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
@@ -11545,6 +11571,10 @@ static const struct LevelUpMove sEmboarLevelUpLearnset[] = {
     LEVEL_UP_MOVE(50, MOVE_HEAD_SMASH),
     LEVEL_UP_MOVE(55, MOVE_ROAR),
     LEVEL_UP_MOVE(62, MOVE_FLARE_BLITZ),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(68, MOVE_CROSS_CHOP),
+    LEVEL_UP_MOVE(75, MOVE_V_CREATE),
+#endif
     LEVEL_UP_END
 };
 
