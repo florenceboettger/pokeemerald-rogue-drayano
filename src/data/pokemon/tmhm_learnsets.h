@@ -12626,6 +12626,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_PIGNITE]     = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM31_BRICK_BREAK)
                                           TMHM(TM32_DOUBLE_TEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM26_EARTHQUAKE)
+                                        #endif
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
                                           TMHM(TM35_FLAMETHROWER)
