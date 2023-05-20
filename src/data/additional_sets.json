@@ -2604,9 +2604,68 @@
     },
 
     "Azumarill": {
-        "extra_moves": [
-            "Drain Punch"
-        ]
+        "movesets": {
+            "gen7battlespotsingles": {
+                "Belly Drum": {
+                    "moves": [
+                        "Belly Drum",
+                        "Aqua Jet",
+                        "Play Rough",
+                        "Drain Punch"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Huge Power"
+                }
+            },
+            "gen71v1": {
+                "Z-Belly Drum": {
+                    "moves": [
+                        "Drain Punch",
+                        "Belly Drum",
+                        "Aqua Jet",
+                        "Play Rough"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Huge Power"
+                }
+            },
+            "gen8monotype": {
+                "Choice Band (Fairy)": {
+                    "moves": [
+                        "Liquidation",
+                        "Aqua Jet",
+                        "Knock Off",
+                        "Drain Punch"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Huge Power"
+                }
+            },
+            "gen8battlestadiumsingles": {
+                "Bad Bunny (Huge Power Wallbreaker)": {
+                    "moves": [
+                        "Liquidation",
+                        "Aqua Jet",
+                        "Play Rough",
+                        "Bounce"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Huge Power"
+                }
+            },
+            "gen8bdspou": {
+                "Choice Band": {
+                    "moves": [
+                        "Waterfall",
+                        "Play Rough",
+                        "Aqua Jet",
+                        "Drain Punch"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Huge Power"
+                }
+            }
+        }
     },
 
     "Hoppip": {

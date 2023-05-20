@@ -9627,7 +9627,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 20,
         .baseDefense   = 40,
         .baseSpeed     = 20,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 40,
+    #else
         .baseSpAttack  = 20,
+    #endif
         .baseSpDefense = 40,
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_NORMAL,
