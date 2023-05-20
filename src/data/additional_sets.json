@@ -6414,6 +6414,70 @@
         }
     },
 
+    "Mesprit": {
+        "movesets": {
+            "gen8pu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Psychic",
+                        "Moonblast",
+                        "U-turn",
+                        "Trick"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                },
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Psychic",
+                        "Moonblast",
+                        "Shadow Ball"
+                    ],
+                    "item": "Colbur Berry",
+                    "ability": "Levitate"
+                },
+                "Offensive Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Psychic",
+                        "Moonblast",
+                        "U-turn"
+                    ],
+                    "item": "Colbur Berry",
+                    "ability": "Levitate"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Psychic",
+                        "Moonblast",
+                        "Shadow Ball",
+                        "U-turn"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                }
+            }
+        }
+    },
+
+    "Azelf": {
+        "movesets": {
+            "gen7uu": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Psyshock",
+                        "Flamethrower",
+                        "Moonblast"
+                    ],
+                    "item": "Adrenaline Orb",
+                    "ability": "Levitate"
+                }
+            }
+        }
+    },
+
     "Cottonee": {
         "extra_moves": [
             "Knock Off",
