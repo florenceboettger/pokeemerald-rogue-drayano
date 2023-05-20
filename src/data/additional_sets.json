@@ -6388,6 +6388,28 @@
                     "item": "Choice Scarf",
                     "ability": "Motor Drive"
                 }
+            },
+            "gen8zu": {
+                "Defog": {
+                    "moves": [
+                        "Defog",
+                        "Volt Switch",
+                        "Hurricane",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Motor Drive"
+                },
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Thunderbolt",
+                        "Hurricane",
+                        "Substitute"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Motor Drive"
+                }
             }
         }
     },
