@@ -15472,7 +15472,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_SHELL_ARMOR, ABILITY_SUPER_LUCK},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -15485,8 +15489,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 60,
         .baseSpAttack  = 83,
         .baseSpDefense = 60,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_FIGHTING,
+    #else
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
+    #endif
         .catchRate = 45,
         .expYield = 145,
         .evYield_SpAttack  = 2,
@@ -15496,21 +15505,39 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_SHELL_ARMOR, ABILITY_SUPER_LUCK},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
 
     [SPECIES_SAMUROTT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 95,
+        .baseAttack    = 110,
+        .baseDefense   = 85,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 70,
+    #else
         .baseHP        = 95,
         .baseAttack    = 100,
         .baseDefense   = 85,
         .baseSpeed     = 70,
         .baseSpAttack  = 108,
         .baseSpDefense = 70,
+    #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_FIGHTING,
+    #else
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
+    #endif
         .catchRate = 45,
         .expYield = 238,
         .evYield_SpAttack  = 3,
@@ -15520,7 +15547,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_SHELL_ARMOR, ABILITY_SUPER_LUCK},
+    #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },

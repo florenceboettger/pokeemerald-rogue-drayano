@@ -11598,6 +11598,10 @@ static const struct LevelUpMove sOshawottLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sDewottLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_LOW_SWEEP),
+    LEVEL_UP_MOVE( 1, MOVE_LOW_SWEEP),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE( 1, MOVE_WATER_GUN),
@@ -11620,7 +11624,13 @@ static const struct LevelUpMove sDewottLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sSamurottLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_SACRED_SWORD),
+    LEVEL_UP_MOVE( 1, MOVE_SACRED_SWORD),
+    LEVEL_UP_MOVE( 1, MOVE_LOW_SWEEP),
+#else
     LEVEL_UP_MOVE( 0, MOVE_SLASH),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_SLASH),
     LEVEL_UP_MOVE( 1, MOVE_MEGAHORN),
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
@@ -11641,6 +11651,10 @@ static const struct LevelUpMove sSamurottLevelUpLearnset[] = {
     LEVEL_UP_MOVE(51, MOVE_RETALIATE),
     LEVEL_UP_MOVE(58, MOVE_SWORDS_DANCE),
     LEVEL_UP_MOVE(63, MOVE_HYDRO_PUMP),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(68, MOVE_CLOSE_COMBAT),
+    LEVEL_UP_MOVE(75, MOVE_SHELL_SMASH),
+#endif
     LEVEL_UP_END
 };
 

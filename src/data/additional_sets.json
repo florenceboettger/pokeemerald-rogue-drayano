@@ -6663,7 +6663,72 @@
             "Iron Head",
             "Iron Tail",
             "Poison Jab",
+            "Sucker Punch",
             "Zen Headbutt"
+        ]
+    },
+
+    "Oshawott": {
+        "extra_moves": [
+            "Grass Knot",
+            "Icy Wind",
+            "Scald",
+            "X-Scissor"
+        ]
+    },
+
+    "Samurott": {
+        "movesets": {
+            "gen7uu": {
+                "Physical Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Liquidation",
+                        "Close Combat",
+                        "Drill Run"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Torrent"
+                },
+                "Special Shell Smash": {
+                    "moves": [
+                        "Surf",
+                        "Shell Smash",
+                        "Focus Blast",
+                        "Ice Beam"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Shell Armor"
+                }
+            },
+            "gen7nu": {
+                "Special Wallbreaker": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Grass Knot",
+                        "Ice Beam",
+                        "Focus Blast"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Torrent"
+                },
+                "Swords Dance Sweeper": {
+                    "moves": [
+                        "Swords Dance",
+                        "Sacred Sword",
+                        "Aqua Jet",
+                        "X-Scissor"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Super Luck"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dragon Tail",
+            "Icy Wind",
+            "Knock Off",
+            "Scald"
         ]
     },
 

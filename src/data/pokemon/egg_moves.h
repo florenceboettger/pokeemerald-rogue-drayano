@@ -2914,6 +2914,11 @@ const u16 gEggMoves[] = {
         MOVE_BURN_UP),
 
     egg_moves(OSHAWOTT,
+    #ifdef ROGUE_DRAYANO
+        MOVE_COVET,
+        MOVE_DRILL_RUN,
+        MOVE_SUCKER_PUNCH,
+    #endif
         MOVE_COPYCAT,
         MOVE_DETECT,
         MOVE_AIR_SLASH,
