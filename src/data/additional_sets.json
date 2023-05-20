@@ -1844,6 +1844,13 @@
         ]
     },
 
+    "Articuno-Galar": {
+        "extra_moves": [
+            "Air Slash",
+            "Extrasensory"
+        ]
+    },
+
     "Zapdos": {
         "movesets": {
             "gen7letsgoou": {
@@ -1933,6 +1940,14 @@
         ]
     },
 
+    "Zapdos-Galar": {
+        "extra_moves": [
+            "Air Slash",
+            "Extrasensory",
+            "Hurricane"
+        ]
+    },
+
     "Moltres": {
         "movesets": {
             "gen8ou": {
@@ -1976,6 +1991,12 @@
             "Brave Bird",
             "Extrasensory",
             "Sky Attack"
+        ]
+    },
+
+    "Moltres-Galar": {
+        "extra_moves": [
+            "Extrasensory"
         ]
     },
 
@@ -2835,6 +2856,33 @@
         "extra_moves": [
             "Scorching Sands"
         ]
+    },
+
+    "Magcargo": {
+        "movesets": {
+            "gen7pu": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Recover",
+                        "Toxic",
+                        "Lava Plume"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Solid Rock"
+                },
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Lava Plume",
+                        "Power Gem",
+                        "Earth Power"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Solid Rock"
+                }
+            }
+        }
     },
 
     "Raikou": {

@@ -7414,12 +7414,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SLUGMA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 50,
+        .baseDefense   = 50,
+        .baseSpeed     = 20,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 50,
+    #else
         .baseHP        = 40,
         .baseAttack    = 40,
         .baseDefense   = 40,
         .baseSpeed     = 20,
         .baseSpAttack  = 70,
         .baseSpDefense = 40,
+    #endif
         .type1 = TYPE_FIRE,
         .type2 = TYPE_FIRE,
         .catchRate = 190,
@@ -7438,6 +7447,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MAGCARGO] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 50,
+        .baseDefense   = 150,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 100,
+    #else
         .baseSpDefense = 80,
         .baseAttack    = 50,
         .baseDefense   = 120,
@@ -7449,6 +7466,7 @@ const struct BaseStats gBaseStats[] =
             .baseHP        = 50,
             .baseSpAttack  = 80,
         #endif
+    #endif
         .type1 = TYPE_FIRE,
         .type2 = TYPE_ROCK,
         .catchRate = 75,
@@ -7460,7 +7478,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_WEAK_ARMOR, ABILITY_FLAME_BODY, ABILITY_SOLID_ROCK},
+    #else
         .abilities = {ABILITY_MAGMA_ARMOR, ABILITY_FLAME_BODY, ABILITY_WEAK_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
     },
@@ -7924,7 +7946,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 30,
         .baseDefense   = 15,
         .baseSpeed     = 65,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 95,
+    #else
         .baseSpAttack  = 85,
+    #endif
         .baseSpDefense = 65,
         .type1 = TYPE_ICE,
         .type2 = TYPE_PSYCHIC,
