@@ -6478,6 +6478,43 @@
         }
     },
 
+    "Regigigas": {
+        "movesets": {
+            "gen7ubers": {
+                "Assault Vest": {
+                    "moves": [
+                        "Return",
+                        "Knock Off",
+                        "Drain Punch",
+                        "Earthquake"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Unaware"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Return",
+                        "Knock Off",
+                        "Drain Punch",
+                        "Earthquake"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Unaware"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Return",
+                        "Knock Off",
+                        "Drain Punch",
+                        "Earthquake"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Unaware"
+                }
+            }
+        }
+    },
+
     "Cottonee": {
         "extra_moves": [
             "Knock Off",

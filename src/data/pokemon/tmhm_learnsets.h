@@ -12277,6 +12277,10 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM15_HYPER_BEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM17_PROTECT)
+                                          TMHM(TM44_REST)
+                                        #endif
                                           TMHM(TM18_RAIN_DANCE)
                                           TMHM(TM27_RETURN)
                                           TMHM(HM06_ROCK_SMASH)

@@ -15039,7 +15039,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_SLOW,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SLOW_START, ABILITY_NONE, ABILITY_UNAWARE},
+    #else
         .abilities = {ABILITY_SLOW_START, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
         .flags = FLAG_LEGENDARY,
