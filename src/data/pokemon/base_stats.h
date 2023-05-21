@@ -25800,7 +25800,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_STEELIX_MEGA] =
     {
         .baseHP        = 75,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 135,
+    #else
         .baseAttack    = 125,
+    #endif
         .baseDefense   = 230,
         .baseSpeed     = 30,
         .baseSpAttack  = 55,

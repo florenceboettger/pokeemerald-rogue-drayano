@@ -1152,7 +1152,34 @@
     },
 
     "Onix": {
+        "movesets": {
+            "gen7lc": {
+                "SturdyJuice": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Rock Blast",
+                        "Earthquake",
+                        "Glare"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Sturdy"
+                }
+            },
+            "gen8lc": {
+                "SturdyJuice": {
+                    "moves": [
+                        "High Horsepower",
+                        "Rock Blast",
+                        "Stealth Rock",
+                        "Explosion"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Sturdy"
+                }
+            }
+        },
         "extra_moves": [
+            "Body Press",
             "Rock Climb"
         ]
     },
@@ -2927,26 +2954,23 @@
         ]
     },
 
-    "Hitmontop": {
+    "Steelix": {
         "movesets": {
-            "gen8nu": {
-                "Spitmontop (Rapid Spin)": {
+            "gen7monotype": {
+                "Curse (Ground)": {
                     "moves": [
-                        "Rapid Spin",
-                        "Triple Axel",
-                        "Mach Punch",
-                        "Triple Kick"
+                        "Coil",
+                        "Heavy Slam",
+                        "Rest",
+                        "Glare"
                     ],
-                    "item": "Assault Vest",
-                    "ability": "Technician"
+                    "item": "Steelixite",
+                    "ability": "Sturdy"
                 }
             }
-        }
-    },
-
-    "Magby": {
+        },
         "extra_moves": [
-            "Scorching Sands"
+            "Rock Climb"
         ]
     },
 
@@ -2975,6 +2999,29 @@
                 }
             }
         }
+    },
+
+    "Hitmontop": {
+        "movesets": {
+            "gen8nu": {
+                "Spitmontop (Rapid Spin)": {
+                    "moves": [
+                        "Rapid Spin",
+                        "Triple Axel",
+                        "Mach Punch",
+                        "Triple Kick"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Technician"
+                }
+            }
+        }
+    }, 
+
+    "Magby": {
+        "extra_moves": [
+            "Scorching Sands"
+        ]
     },
 
     "Raikou": {
@@ -5270,6 +5317,18 @@
     "Bibarel": {
         "extra_moves": [
             "Rock Climb"
+        ]
+    },
+
+    "Starly": {
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
+    "Staraptor": {
+        "extra_moves": [
+            "Dual Wingbeat"
         ]
     },
 
