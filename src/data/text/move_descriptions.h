@@ -114,9 +114,15 @@ static const u8 sJumpKickDescription[] = _(
     "A strong jumping kick. May\n"
     "miss and hurt the kicker.");
 
+
 static const u8 sRollingKickDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A roundhouse kick that\n"
+    "may make the target flinch.");
+#else
     "A fast kick delivered from\n"
     "a rapid spin.");
+#endif
 
 static const u8 sSandAttackDescription[] = _(
     "Reduces the foe's accuracy\n"
