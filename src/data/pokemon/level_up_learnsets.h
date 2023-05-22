@@ -851,6 +851,9 @@ static const struct LevelUpMove sOddishLevelUpLearnset[] = {
     LEVEL_UP_MOVE(43, MOVE_MOONBLAST),
     LEVEL_UP_MOVE(47, MOVE_GRASSY_TERRAIN),
     LEVEL_UP_MOVE(51, MOVE_PETAL_DANCE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(55, MOVE_APPLE_ACID),
+#endif
     LEVEL_UP_END
 };
 
@@ -876,10 +879,17 @@ static const struct LevelUpMove sGloomLevelUpLearnset[] = {
     LEVEL_UP_MOVE(49, MOVE_PETAL_BLIZZARD),
     LEVEL_UP_MOVE(54, MOVE_GRASSY_TERRAIN),
     LEVEL_UP_MOVE(59, MOVE_PETAL_DANCE),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(64, MOVE_APPLE_ACID),
+#endif
     LEVEL_UP_END
 };
 
 static const struct LevelUpMove sVileplumeLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_SLUDGE),
+    LEVEL_UP_MOVE( 1, MOVE_SLUDGE),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_MEGA_DRAIN),
     LEVEL_UP_MOVE( 1, MOVE_AROMATHERAPY),
     LEVEL_UP_MOVE( 1, MOVE_POISON_POWDER),
@@ -890,6 +900,9 @@ static const struct LevelUpMove sVileplumeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(49, MOVE_PETAL_BLIZZARD),
     LEVEL_UP_MOVE(59, MOVE_PETAL_DANCE),
     LEVEL_UP_MOVE(69, MOVE_SOLAR_BEAM),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(79, MOVE_APPLE_ACID),
+#endif
     LEVEL_UP_END
 };
 
@@ -4132,7 +4145,12 @@ static const struct LevelUpMove sAmpharosLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sBellossomLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_DRAINING_KISS),
+    LEVEL_UP_MOVE( 1, MOVE_DRAINING_KISS),
+#else
     LEVEL_UP_MOVE( 0, MOVE_MAGICAL_LEAF),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_MAGICAL_LEAF),
     LEVEL_UP_MOVE( 1, MOVE_LEAF_STORM),
     LEVEL_UP_MOVE( 1, MOVE_LEAF_BLADE),
@@ -4140,10 +4158,16 @@ static const struct LevelUpMove sBellossomLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_SWEET_SCENT),
     LEVEL_UP_MOVE( 1, MOVE_STUN_SPORE),
     LEVEL_UP_MOVE( 1, MOVE_SUNNY_DAY),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(39, MOVE_EARTH_POWER),
+#endif
     LEVEL_UP_MOVE(39, MOVE_QUIVER_DANCE),
     LEVEL_UP_MOVE(49, MOVE_PETAL_BLIZZARD),
     LEVEL_UP_MOVE(59, MOVE_PETAL_DANCE),
     LEVEL_UP_MOVE(69, MOVE_LEAF_STORM),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(79, MOVE_FIERY_DANCE),
+#endif
     LEVEL_UP_END
 };
 

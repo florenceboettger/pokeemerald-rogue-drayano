@@ -2543,7 +2543,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_GRASS,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_RUN_AWAY},
+    #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_RUN_AWAY},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -2570,7 +2574,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_GRASS,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_STENCH},
+    #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_STENCH},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
     },
@@ -2601,7 +2609,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_GRASS,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EFFECT_SPORE, ABILITY_THICK_FAT},
+    #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_EFFECT_SPORE},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
@@ -6442,8 +6454,13 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseDefense   = 85,
         #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GRASS,
+        .type2 = TYPE_FAIRY,
+    #else
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
+    #endif
         .catchRate = 45,
         .expYield = 221,
         .evYield_SpDefense = 3,
@@ -6456,7 +6473,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_GRASS,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_CLOUD_NINE, ABILITY_HEALER},
+    #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_HEALER},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },

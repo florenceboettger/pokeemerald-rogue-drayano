@@ -698,6 +698,52 @@
                         "Strength Sap"
                     ],
                     "item": "Black Sludge",
+                    "ability": "Thick Fat"
+                },
+                "Offensive Chlorophyll": {
+                    "moves": [
+                        "Apple Acid",
+                        "Sludge Bomb",
+                        "Sleep Powder",
+                        "Earth Power"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                }
+            },
+            "gen8nu": {
+                "Defensive": {
+                    "moves": [
+                        "Apple Acid",
+                        "Sludge Bomb",
+                        "Strength Sap",
+                        "Sleep Powder"
+                    ],
+                    "item": "Black Sludge",
+                    "ability": "Thick Fat"
+                }
+            },
+            "gen8ru": {
+                "Physically Defensive": {
+                    "moves": [
+                        "Apple Acid",
+                        "Sludge Bomb",
+                        "Strength Sap",
+                        "Sleep Powder"
+                    ],
+                    "item": "Black Sludge",
+                    "ability": "Thick Fat"
+                }
+            },
+            "gen8nationaldexru": {
+                "Physically Defensive": {
+                    "moves": [
+                        "Strength Sap",
+                        "Giga Drain",
+                        "Sludge Bomb",
+                        "Sleep Powder"
+                    ],
+                    "item": "Rocky Helmet",
                     "ability": "Effect Spore"
                 }
             }
@@ -2775,6 +2821,47 @@
             "Energy Ball",
             "Rock Climb"
         ]
+    },
+
+    "Bellossom": {
+        "movesets": {
+            "gen7pu": {
+                "Bulky Quiver Dance": {
+                    "moves": [
+                        "Fiery Dance",
+                        "Quiver Dance",
+                        "Giga Drain",
+                        "Moonblast"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Chlorophyll"
+                }
+            },
+            "gen7zu": {
+                "Bulky Quiver Dance": {
+                    "moves": [
+                        "Quiver Dance",
+                        "Apple Acid",
+                        "Strength Sap",
+                        "Draining Kiss"
+                    ],
+                    "item": "Grassium Z",
+                    "ability": "Chlorophyll"
+                }
+            },
+            "gen8zu": {
+                "Quiver Dance": {
+                    "moves": [
+                        "Quiver Dance",
+                        "Strength Sap",
+                        "Giga Drain",
+                        "Draining Kiss"
+                    ],
+                    "item": "Kee Berry",
+                    "ability": "Chlorophyll"
+                }
+            }
+        }
     },
 
     "Azumarill": {
