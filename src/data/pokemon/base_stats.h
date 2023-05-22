@@ -3735,7 +3735,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_SCALES},
+    #else
         .abilities = {ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_BODY},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
     },
@@ -3768,7 +3772,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_SCALES},
+    #else
         .abilities = {ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_BODY},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
     },
@@ -11586,7 +11594,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_FAIRY,
         .eggGroup2 = EGG_GROUP_MINERAL,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_LEVITATE, ABILITY_ICE_BODY, ABILITY_MOODY},
+        .abilities = {ABILITY_INNER_FOCUS, ABILITY_LEVITATE, ABILITY_MOODY},
     #else
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_ICE_BODY, ABILITY_MOODY},
     #endif
@@ -14819,7 +14827,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_FAIRY,
         .eggGroup2 = EGG_GROUP_MINERAL,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_LEVITATE, ABILITY_SNOW_CLOAK, ABILITY_CURSED_BODY},
+        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_LEVITATE, ABILITY_CURSED_BODY},
     #else
         .abilities = {ABILITY_SNOW_CLOAK, ABILITY_NONE, ABILITY_CURSED_BODY},
     #endif
@@ -16962,6 +16970,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CRUSTLE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 105,
+        .baseDefense   = 125,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 70,
         .baseDefense   = 125,
         .baseSpeed     = 45,
@@ -16972,6 +16988,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseAttack    = 95,
         #endif
+    #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_ROCK,
         .catchRate = 75,

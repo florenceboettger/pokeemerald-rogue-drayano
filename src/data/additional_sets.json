@@ -1112,6 +1112,40 @@
         }
     },
 
+    "Seel": {
+        "movesets": {
+            "gen7lc": {
+                "Perish Trapper": {
+                    "moves": [
+                        "Whirlpool",
+                        "Perish Song",
+                        "Protect",
+                        "Rest"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Ice Scales"
+                }
+            }
+        }
+    },
+
+    "Dewgong": {
+        "movesets": {
+            "gen7pu": {
+                "Perish Trapper": {
+                    "moves": [
+                        "Whirlpool",
+                        "Perish Song",
+                        "Ice Beam",
+                        "Rest"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Ice Scales"
+                }
+            }
+        }
+    },
+
     "Muk": {
         "movesets": {
             "gen7pu": {
@@ -6892,6 +6926,43 @@
             "Recover",
             "Stun Spore"
         ]
+    },
+
+    "Dwebble": {
+        "movesets": {
+            "gen8lc": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Earthquake",
+                        "Rock Blast",
+                        "Crabhammer"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Sturdy"
+                }
+            }
+        },
+        "extra_moves": [
+            "Stone Edge"
+        ]
+    },
+
+    "Crustle": {
+        "movesets": {
+            "gen7zu": {
+                "Shell Smash": {
+                    "moves": [
+                        "Shell Smash",
+                        "Stone Edge",
+                        "Earthquake",
+                        "Crabhammer"
+                    ],
+                    "item": "White Herb",
+                    "ability": "Sturdy"
+                }
+            }
+        }
     },
 
     "Minccino": {

@@ -12767,6 +12767,9 @@ static const struct LevelUpMove sDwebbleLevelUpLearnset[] = {
     LEVEL_UP_MOVE(37, MOVE_SHELL_SMASH),
     LEVEL_UP_MOVE(41, MOVE_FLAIL),
     LEVEL_UP_MOVE(43, MOVE_ROCK_WRECKER),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(47, MOVE_CRABHAMMER),
+#endif
     LEVEL_UP_END
 };
 
@@ -12789,6 +12792,9 @@ static const struct LevelUpMove sCrustleLevelUpLearnset[] = {
     LEVEL_UP_MOVE(43, MOVE_SHELL_SMASH),
     LEVEL_UP_MOVE(50, MOVE_FLAIL),
     LEVEL_UP_MOVE(55, MOVE_ROCK_WRECKER),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(62, MOVE_CRABHAMMER),
+#endif
     LEVEL_UP_END
 };
 
