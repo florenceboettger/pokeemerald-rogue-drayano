@@ -8072,8 +8072,8 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 85,
         .baseDefense   = 105,
         .baseSpeed     = 100,
-        .baseSpAttack  = 65,
-        .baseSpDefense = 70,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 95,
     #else
         .baseHP        = 95,
         .baseAttack    = 80,
