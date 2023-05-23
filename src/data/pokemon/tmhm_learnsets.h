@@ -21056,6 +21056,9 @@ const u8 gTMHMLearnsets[][64] =
                                                  TMHM(TM28_DIG)
                                                  TMHM(TM42_FACADE)
                                                  TMHM(HM05_FLASH)
+                                                #ifdef ROGUE_DRAYANO
+                                                 TMHM(HM02_FLY)
+                                                #endif
                                                  TMHM(TM15_HYPER_BEAM)
                                                  TMHM(TM23_IRON_TAIL)
                                                  TMHM(TM16_LIGHT_SCREEN)
@@ -21065,6 +21068,9 @@ const u8 gTMHMLearnsets[][64] =
                                                  TMHM(TM44_REST)
                                                  TMHM(HM06_ROCK_SMASH)
                                                  TMHM(HM04_STRENGTH)
+                                                #ifdef ROGUE_DRAYANO
+                                                 TMHM(HM03_SURF)
+                                                #endif
                                                  TMHM(TM24_THUNDERBOLT)
                                                  TMHM(TM25_THUNDER)
                                                  TMHM(TM06_TOXIC)),

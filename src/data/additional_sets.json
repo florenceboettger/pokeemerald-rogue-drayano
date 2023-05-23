@@ -560,7 +560,64 @@
     },
 
     "Raichu": {
+        "movesets": {
+            "gen7zu": {
+                "Physical Pivot": {
+                    "moves": [
+                        "Zippy Zap",
+                        "Volt Switch",
+                        "Floaty Fall",
+                        "Knock Off"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Lightning Rod"
+                }
+            },
+            "gen8zu": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Thunderbolt",
+                        "Focus Blast",
+                        "Splishy Splash"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Lightning Rod"
+                }
+            }
+        }
+    },
+
+    "Raichu-Alola": {
+        "movesets": {
+            "gen7letsgoou": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Psychic",
+                        "Calm Mind",
+                        "Splishy Splash"
+                    ],
+                    "item": "Expert Belt",
+                    "ability": "Surge Surfer"
+                }
+            },
+            "gen8nationaldexmonotype": {
+                "Terrain Sweeper (Electric)": {
+                    "moves": [
+                        "Rising Voltage",
+                        "Psychic",
+                        "Splishy Splash",
+                        "Focus Blast"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Surge Surfer"
+                }
+            }
+        },
         "extra_moves": [
+            "Floaty Fall",
+            "Volt Switch",
             "Zippy Zap"
         ]
     },
@@ -8763,6 +8820,38 @@
             "Energy Ball",
             "Flash Cannon",
             "Gyro Ball"
+        ]
+    },
+
+    "Tyrantrum": {
+        "movesets": {
+            "gen7ru": {
+                "Choice Band": {
+                    "moves": [
+                        "Head Smash",
+                        "Outrage",
+                        "Earthquake",
+                        "Accelerock"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Rock Head"
+                }
+            },
+            "gen8nu": {
+                "Choice Band": {
+                    "moves": [
+                        "Head Smash",
+                        "Accelerock",
+                        "Close Combat",
+                        "Scale Shot"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Rock Head"
+                }
+            }
+        },
+        "extra_moves": [
+            "Superpower"
         ]
     },
 
