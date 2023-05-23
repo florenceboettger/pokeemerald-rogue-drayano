@@ -18474,7 +18474,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SHEER_FORCE, ABILITY_SLUSH_RUSH, ABILITY_SWIFT_SWIM},
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_SLUSH_RUSH, ABILITY_TOUGH_CLAWS},
     #else
         .abilities = {ABILITY_SNOW_CLOAK, ABILITY_SLUSH_RUSH, ABILITY_SWIFT_SWIM},
     #endif

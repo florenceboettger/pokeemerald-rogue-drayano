@@ -7806,17 +7806,17 @@
             "gen7pu": {
                 "Assault Vest": {
                     "moves": [
-                        "Icicle Crash",
+                        "Triple Axel",
                         "Ice Shard",
                         "Close Combat",
                         "Liquidation"
                     ],
                     "item": "Assault Vest",
-                    "ability": "Sheer Force"
+                    "ability": "Tough Claws"
                 },
                 "Slush Rush 2.0": {
                     "moves": [
-                        "Triple Axel",
+                        "Icicle Crash",
                         "Close Combat",
                         "Earthquake",
                         "Stone Edge"
