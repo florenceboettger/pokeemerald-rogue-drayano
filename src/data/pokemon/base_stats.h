@@ -17148,14 +17148,19 @@ const struct BaseStats gBaseStats[] =
     {
     #ifdef ROGUE_DRAYANO
         .baseHP        = 68,
+        .baseAttack    = 40,
+        .baseDefense   = 145,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 105,
     #else
         .baseHP        = 58,
-    #endif
         .baseAttack    = 50,
         .baseDefense   = 145,
         .baseSpeed     = 30,
         .baseSpAttack  = 95,
         .baseSpDefense = 105,
+    #endif
         .type1 = TYPE_GHOST,
         .type2 = TYPE_GHOST,
         .catchRate = 90,
@@ -24709,10 +24714,10 @@ const struct BaseStats gBaseStats[] =
     {
     #ifdef ROGUE_DRAYANO
         .baseHP        = 68,
-        .baseAttack    = 95,
+        .baseAttack    = 105,
         .baseDefense   = 145,
         .baseSpeed     = 30,
-        .baseSpAttack  = 50,
+        .baseSpAttack  = 40,
         .baseSpDefense = 105,
     #else
         .baseHP        = 58,
