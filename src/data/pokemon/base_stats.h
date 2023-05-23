@@ -15471,8 +15471,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpAttack  = 100,
         .baseSpDefense = 65,
     #endif
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_FIRE,
+        .type2 = TYPE_GROUND,
+    #else
         .type1 = TYPE_FIRE,
         .type2 = TYPE_FIGHTING,
+    #endif
         .catchRate = 45,
         .expYield = 238,
         .evYield_Attack    = 3,
