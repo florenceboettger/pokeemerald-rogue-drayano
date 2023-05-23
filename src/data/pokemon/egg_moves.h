@@ -962,6 +962,9 @@ const u16 gEggMoves[] = {
         MOVE_LUNGE),
 
     egg_moves(CHINCHOU,
+    #ifdef ROGUE_DRAYANO
+        MOVE_TAKE_DOWN,
+    #endif
         MOVE_FLAIL,
         MOVE_SCREECH,
         MOVE_AMNESIA,

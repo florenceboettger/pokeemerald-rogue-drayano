@@ -2718,6 +2718,23 @@
         ]
     },
 
+    "Chinchou": {
+        "movesets": {
+            "gen8lc": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Volt Switch",
+                        "Ice Beam",
+                        "Parabolic Charge",
+                        "Scald"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Volt Absorb"
+                }
+            }
+        }
+    },
+
     "Lanturn": {
         "movesets": {
             "gen7pu": {
@@ -6752,6 +6769,43 @@
         }
     },
 
+    "Darkrai": {
+        "movesets": {
+            "gen7ubers": {
+                "Special Attacker": {
+                    "moves": [
+                        "Dark Void",
+                        "Nasty Plot",
+                        "Dark Pulse",
+                        "Sludge Bomb"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Bad Dreams"
+                },
+                "Special Attacker (Thunder)": {
+                    "moves": [
+                        "Dark Void",
+                        "Nasty Plot",
+                        "Dark Pulse",
+                        "Thunder"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Bad Dreams"
+                },
+                "Special Attacker (Focus Blast)": {
+                    "moves": [
+                        "Dark Void",
+                        "Nasty Plot",
+                        "Dark Pulse",
+                        "Focus Blast"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Bad Dreams"
+                }
+            }
+        }
+    },
+
     "Snivy": {
         "movesets": {
             "gen7lc": {
@@ -8821,6 +8875,86 @@
             "Flash Cannon",
             "Gyro Ball"
         ]
+    },
+
+    "Helioptile": {
+        "movesets": {
+            "gen7lc": {
+                "Life Orb": {
+                    "moves": [
+                        "Parabolic Charge",
+                        "Surf",
+                        "Glare",
+                        "U-turn"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Dry Skin"
+                }
+            }
+        }
+    },
+
+    "Heliolisk": {
+        "movesets": {
+            "gen8nu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Parabolic Charge",
+                        "Hyper Voice",
+                        "Volt Switch",
+                        "Dark Pulse"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Dry Skin"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Parabolic Charge",
+                        "Hyper Voice",
+                        "Grass Knot",
+                        "Volt Switch"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Dry Skin"
+                }
+            },
+            "gen8ru": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Parabolic Charge",
+                        "Grass Knot",
+                        "U-turn",
+                        "Surf"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Dry Skin"
+                }
+            },
+            "gen8monotype": {
+                "Substitute + Glare (Normal)": {
+                    "moves": [
+                        "Substitute",
+                        "Glare",
+                        "Parabolic Charge",
+                        "Grass Knot"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Dry Skin"
+                }
+            },
+            "gen8nationaldexru": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Parabolic Charge",
+                        "Volt Switch",
+                        "Grass Knot"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Dry Skin"
+                }
+            }
+        }
     },
 
     "Tyrantrum": {
