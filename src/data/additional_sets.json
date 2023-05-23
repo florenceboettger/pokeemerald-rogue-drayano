@@ -7807,9 +7807,9 @@
                 "Assault Vest": {
                     "moves": [
                         "Triple Axel",
-                        "Ice Shard",
+                        "Shadow Claw",
                         "Close Combat",
-                        "Liquidation"
+                        "Aqua Jet"
                     ],
                     "item": "Assault Vest",
                     "ability": "Tough Claws"
@@ -9616,6 +9616,40 @@
         ]
     },
 
+    "Clobbopus": {
+        "movesets": {
+            "gen8lc": {
+                "Technician Pivot": {
+                    "moves": [
+                        "Aqua Jet",
+                        "Mach Punch",
+                        "Flip Turn",
+                        "Ice Punch"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Technician"
+                }
+            }
+        }
+    },
+
+    "Grapploct": {
+        "movesets": {
+            "gen8uu": {
+                "Technician Pivot": {
+                    "moves": [
+                        "Aqua Jet",
+                        "Mach Punch",
+                        "Flip Turn",
+                        "Ice Punch"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Technician"
+                }
+            }
+        }
+    },
+
     "Sirfetch'd": {
         "movesets": {
             "gen8ru": {
@@ -9668,37 +9702,24 @@
         ]
     },
 
-    "Clobbopus": {
+    "Falinks": {
         "movesets": {
-            "gen8lc": {
-                "Technician Pivot": {
+            "gen8zu": {
+                "Choice Band": {
                     "moves": [
-                        "Aqua Jet",
-                        "Mach Punch",
-                        "Flip Turn",
-                        "Ice Punch"
+                        "Close Combat",
+                        "Leech Life",
+                        "Throat Chop",
+                        "Rock Climb"
                     ],
-                    "item": "Eviolite",
-                    "ability": "Technician"
+                    "item": "Choice Band",
+                    "ability": "Defiant"
                 }
             }
-        }
-    },
-
-    "Grapploct": {
-        "movesets": {
-            "gen8uu": {
-                "Technician Pivot": {
-                    "moves": [
-                        "Aqua Jet",
-                        "Mach Punch",
-                        "Flip Turn",
-                        "Ice Punch"
-                    ],
-                    "item": "Assault Vest",
-                    "ability": "Technician"
-                }
-            }
-        }
+        },
+        "extra_moves": [
+            "Poison Jab",
+            "Zen Headbutt"
+        ]
     }
 }
