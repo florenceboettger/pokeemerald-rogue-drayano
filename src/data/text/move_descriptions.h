@@ -2493,8 +2493,13 @@ static const u8 sSparklingAriaDescription[] = _(
     "burns on contact.");
 
 static const u8 sIceHammerDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Swings an icy fist. Has\n"
+    "a high-critical hit ratio.");
+#else
     "Swings the fist to strike.\n"
     "Lowers the user's Speed.");
+#endif
 
 static const u8 sFloralHealingDescription[] = _(
     "Restores an ally's HP.\n"

@@ -1323,16 +1323,37 @@
 
     "Krabby": {
         "extra_moves": [
+            "Hammer Arm",
             "Rock Climb",
-            "Shadow Claw"
+            "Shadow Claw",
+            "Superpower",
+            "X-Scissor"
         ]
     },
 
     "Kingler": {
+        "movesets": {
+            "gen7nu": {
+                "Choice Band": {
+                    "moves": [
+                        "Aqua Jet",
+                        "Liquidation",
+                        "Ice Hammer",
+                        "Knock Off"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Sheer Force"
+                }
+            }
+        },
         "extra_moves": [
+            "Hammer Arm",
             "Low Sweep",
             "Rock Climb",
-            "Shadow Claw"
+            "Shadow Claw",
+            "Stomping Tantrum",
+            "Superpower",
+            "X-Scissor"
         ]
     },
 
@@ -8986,6 +9007,26 @@
         },
         "extra_moves": [
             "Superpower"
+        ]
+    },
+
+    "Crabominable": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Band": {
+                    "moves": [
+                        "Mach Punch",
+                        "Ice Hammer",
+                        "Earthquake",
+                        "Thunder Punch"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Iron Fist"
+                }
+            }
+        },
+        "extra_moves": [
+            "Crabhammer"
         ]
     },
 
