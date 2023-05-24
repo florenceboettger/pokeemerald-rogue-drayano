@@ -8725,7 +8725,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_ZIGZAGOON] =
     {
         .baseHP        = 38,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 40,
+    #else
         .baseAttack    = 30,
+    #endif
         .baseDefense   = 41,
         .baseSpeed     = 60,
         .baseSpAttack  = 30,
@@ -8750,12 +8754,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LINOONE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 85,
+        .baseAttack    = 85,
+        .baseDefense   = 60,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 78,
         .baseAttack    = 70,
         .baseDefense   = 61,
         .baseSpeed     = 100,
         .baseSpAttack  = 50,
         .baseSpDefense = 61,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 90,
@@ -15625,12 +15638,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_WATCHOG] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 95,
+        .baseDefense   = 75,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 60,
         .baseAttack    = 85,
         .baseDefense   = 69,
         .baseSpeed     = 77,
         .baseSpAttack  = 60,
         .baseSpDefense = 69,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 255,
@@ -19695,12 +19717,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BUNNELBY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 45,
+        .baseAttack    = 38,
+        .baseDefense   = 40,
+        .baseSpeed     = 57,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 40,
+    #else
         .baseHP        = 38,
         .baseAttack    = 36,
         .baseDefense   = 38,
         .baseSpeed     = 57,
         .baseSpAttack  = 32,
         .baseSpDefense = 36,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 255,
@@ -21443,12 +21474,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GUMSHOOS] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 88,
+        .baseAttack    = 125,
+        .baseDefense   = 70,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 52,
+        .baseSpDefense = 70,
+    #else
         .baseHP        = 88,
         .baseAttack    = 110,
         .baseDefense   = 60,
         .baseSpeed     = 45,
         .baseSpAttack  = 55,
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 127,
@@ -24578,12 +24618,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_OBSTAGOON] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 98,
+        .baseAttack    = 100,
+        .baseDefense   = 101,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 81,
+    #else
         .baseHP        = 93,
         .baseAttack    = 90,
         .baseDefense   = 101,
         .baseSpeed     = 95,
         .baseSpAttack  = 60,
         .baseSpDefense = 81,
+    #endif
         .type1 = TYPE_DARK,
         .type2 = TYPE_NORMAL,
         .catchRate = 45,
@@ -26813,12 +26862,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_RATICATE_ALOLAN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 80,
+        .baseDefense   = 70,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 100,
+    #else
         .baseHP        = 75,
         .baseAttack    = 71,
         .baseDefense   = 70,
         .baseSpeed     = 77,
         .baseSpAttack  = 40,
         .baseSpDefense = 80,
+    #endif
         .type1 = TYPE_DARK,
         .type2 = TYPE_NORMAL,
         .catchRate = 127,
@@ -27625,12 +27683,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_ZIGZAGOON_GALARIAN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 38,
+        .baseAttack    = 40,
+        .baseDefense   = 41,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 41,
+    #else
         .baseHP        = 38,
         .baseAttack    = 30,
         .baseDefense   = 41,
         .baseSpeed     = 60,
         .baseSpAttack  = 30,
         .baseSpDefense = 41,
+    #endif
         .type1 = TYPE_DARK,
         .type2 = TYPE_NORMAL,
         .catchRate = 255,
@@ -27650,12 +27717,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LINOONE_GALARIAN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 85,
+        .baseAttack    = 85,
+        .baseDefense   = 60,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 78,
         .baseAttack    = 70,
         .baseDefense   = 61,
         .baseSpeed     = 100,
         .baseSpAttack  = 50,
         .baseSpDefense = 61,
+    #endif
         .type1 = TYPE_DARK,
         .type2 = TYPE_NORMAL,
         .catchRate = 90,
