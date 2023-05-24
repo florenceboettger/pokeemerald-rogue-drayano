@@ -20449,6 +20449,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM12_TAUNT)
                                           TMHM(TM46_THIEF)
                                         #ifdef ROGUE_DRAYANO
+                                          TMHM(TM08_BULK_UP)
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM27_RETURN)
