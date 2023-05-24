@@ -2755,8 +2755,13 @@ static const u8 sDynamaxCannonDescription[] = _(
     "2x damage to Dynamaxed foes.");
     
 static const u8 sSnipeShotDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A water jet with a high crit\n"
+    "rate. Can't be redirected.");
+#else
     "The user ignores effects\n"
     "that draw in moves.");
+#endif
     
 static const u8 sJawLockDescription[] = _(
     "Prevents the user and\n"
