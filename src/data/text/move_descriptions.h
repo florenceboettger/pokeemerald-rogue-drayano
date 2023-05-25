@@ -2706,20 +2706,35 @@ static const u8 sPikaPapowDescription[] = _(
     "power. It never misses.");
 
 static const u8 sBouncyBubbleDescription[] = _(
-    "An attack that absorbs\n"
-#if B_UPDATED_MOVE_DATA >= GEN_8
-    "all the damage inflicted.");
-#else
+#ifdef ROGUE_DRAYANO
+    "A bubble attack that absorbs\n"
     "half the damage inflicted.");
+#else
+        "An attack that absorbs\n"
+    #if B_UPDATED_MOVE_DATA >= GEN_8
+        "all the damage inflicted.");
+    #else
+        "half the damage inflicted.");
+    #endif
 #endif
 
 static const u8 sBuzzyBuzzDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Shoots a jolt of electricity\n"
+    "with a high paralysis chance.");
+#else
     "Shoots a jolt of electricity\n"
     "that always paralyzes.");
+#endif
 
 static const u8 sSizzlySlideDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A fiery dash attack with a\n"
+    "high chance to burn.");
+#else
     "User cloaked in fire charges.\n"
     "Leaves the foe with a burn.");
+#endif
 
 static const u8 sGlitzyGlowDescription[] = _(
     "Telekinetic force that sets\n"

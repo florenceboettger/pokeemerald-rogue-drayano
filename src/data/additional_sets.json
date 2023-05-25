@@ -1802,6 +1802,44 @@
     },
 
     "Vaporeon": {
+        "movesets": {
+            "gen7nu": {
+                "Defensive": {
+                    "moves": [
+                        "Bouncy Bubble",
+                        "Toxic",
+                        "Wish",
+                        "Protect"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen71v1": {
+                "Fake Tears": {
+                    "moves": [
+                        "Fake Tears",
+                        "Yawn",
+                        "Protect",
+                        "Bouncy Bubble"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen8nationaldexru": {
+                "Defensive Pivot": {
+                    "moves": [
+                        "Wish",
+                        "Protect",
+                        "Flip Turn",
+                        "Bouncy Bubble"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Water Absorb"
+                }
+            }
+        },
         "extra_moves": [
             "Grass Knot"
         ]
@@ -1809,10 +1847,22 @@
 
     "Jolteon": {
         "movesets": {
+            "gen7ru": {
+                "Special Attacker": {
+                    "moves": [
+                        "Yawn",
+                        "Volt Switch",
+                        "Buzzy Buzz",
+                        "Hidden Power Ice"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Quick Feet"
+                }
+            },
             "gen8pu": {
                 "Offensive Pivot": {
                     "moves": [
-                        "Thunderbolt",
+                        "Buzzy Buzz",
                         "Shadow Ball",
                         "Volt Switch",
                         "Extrasensory"
@@ -1822,7 +1872,7 @@
                 },
                 "Offensive Pivot (Grass Knot)": {
                     "moves": [
-                        "Thunderbolt",
+                        "Buzzy Buzz",
                         "Shadow Ball",
                         "Volt Switch",
                         "Grass Knot"
@@ -1831,10 +1881,7 @@
                     "ability": "Volt Absorb"
                 }
             }
-        },
-        "extra_moves": [
-            "Grass Knot"
-        ]
+        }
     },
 
     "Flareon": {
@@ -1842,7 +1889,7 @@
             "gen8uu": {
                 "Choice Scarf (Rock Slide)": {
                     "moves": [
-                        "Flare Blitz",
+                        "Sizzly Slide",
                         "Close Combat",
                         "Wild Charge",
                         "Rock Slide"
@@ -1872,7 +1919,7 @@
                 },
                 "Choice Band (Play Rough)": {
                     "moves": [
-                        "Flare Blitz",
+                        "Sizzly Slide",
                         "Close Combat",
                         "Wild Charge",
                         "Play Rough"
@@ -1884,7 +1931,7 @@
             "gen7uu": {
                 "Guts Wallbreaker (Rock Slide)": {
                     "moves": [
-                        "Flare Blitz",
+                        "Sizzly Slide",
                         "Close Combat",
                         "Wild Charge",
                         "Rock Slide"
@@ -1902,13 +1949,37 @@
                     "item": "Toxic Orb",
                     "ability": "Guts"
                 }
+            },
+            "gen7pu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Flare Blitz",
+                        "Close Combat",
+                        "Sizzly Slide",
+                        "Quick Attack"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen7zu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Sizzly Slide",
+                        "Facade",
+                        "Close Combat",
+                        "Wild Charge"
+                    ],
+                    "item": "Toxic Orb",
+                    "ability": "Guts"
+                }
             }
         },
         "extra_moves": [
             "Blaze Kick",
             "Grass Knot",
             "Scorching Sands",
-            "Wild Charge"
+            "Superpower"
         ]
     },
 
@@ -3096,10 +3167,68 @@
     },
 
     "Espeon": {
+        "gen7ru": {
+            "Calm Mind": {
+                "moves": [
+                    "Calm Mind",
+                    "Glitzy Glow",
+                    "Shadow Ball",
+                    "Morning Sun"
+                ],
+                "item": "Leftovers",
+                "ability": "Magic Bounce"
+            },
+            "Choice Specs": {
+                "moves": [
+                    "Glitzy Glow",
+                    "Shadow Ball",
+                    "Dazzling Gleam",
+                    "Trick"
+                ],
+                "item": "Choice Specs",
+                "ability": "Magic Bounce"
+            }
+        },
+        "gen7battlespotsingles": {
+            "Dual Screens": {
+                "moves": [
+                    "Yawn",
+                    "Shadow Ball",
+                    "Reflect",
+                    "Glitzy Glow"
+                ],
+                "item": "Light Clay",
+                "ability": "Magic Bounce"
+            },
+            "Psychium Z": {
+                "moves": [
+                    "Psychic",
+                    "Aura Sphere",
+                    "Calm Mind",
+                    "Morning Sun"
+                ],
+                "item": "Psychium Z",
+                "ability": "Magic Bounce"
+            }
+        },
+        "gen8nu": {
+            "Wallbreaker": {
+                "moves": [
+                    "Glitzy Glow",
+                    "Aura Sphere",
+                    "Shadow Ball",
+                    "Trick"
+                ],
+                "item": "Choice Specs",
+                "ability": "Magic Bounce"
+            }
+        },
         "extra_moves": [
+            "Grass Knot",
             "Growth",
             "Mystical Fire",
-            "Quash"
+            "Quash",
+            "Zap Cannon"
         ]
     },
     
@@ -3110,6 +3239,7 @@
             "Gunk Shot",
             "Mystical Fire",
             "Power Gem",
+            "Psyshock",
             "Quash"
         ]
     },
@@ -6356,11 +6486,21 @@
                     "moves": [
                         "Swords Dance",
                         "Grass Whistle",
-                        "Power Whip",
+                        "Sappy Seed",
                         "Knock Off"
                     ],
                     "item": "Life Orb",
                     "ability": "Chlorophyll"
+                },
+                "Tank": {
+                    "moves": [
+                        "Sappy Seed",
+                        "Toxic",
+                        "Knock Off",
+                        "Synthesis"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Super Luck"
                 }
             },
             "gen7zu": {
@@ -6433,7 +6573,7 @@
                 "Z-Celebrate": {
                     "moves": [
                         "Celebrate",
-                        "Ice Beam",
+                        "Freezy Frost",
                         "Grass Knot",
                         "Earth Power"
                     ],
@@ -6444,7 +6584,7 @@
             "gen8zu": {
                 "Choice Specs": {
                     "moves": [
-                        "Ice Beam",
+                        "Freezy Frost",
                         "Freeze-Dry",
                         "Shadow Ball",
                         "Water Pulse"
@@ -9035,6 +9175,73 @@
         },
         "extra_moves": [
             "Superpower"
+        ]
+    },
+
+    "Sylveon": {
+        "movesets": {
+            "gen7uu": {
+                "Cleric": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Wish",
+                        "Protect",
+                        "Sparkly Swirl"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Pixilate"
+                }
+            },
+            "gen7monotype": {
+                "Choice Specs": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Mystical Fire",
+                        "Psyshock",
+                        "Shadow Ball"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Pixilate"
+                }
+            },
+            "gen8uu": {
+                "Utility": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Wish",
+                        "Protect",
+                        "Sparkly Swirl"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Pixilate"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Mystical Fire",
+                        "Psyshock",
+                        "Sparkly Swirl"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Pixilate"
+                }
+            },
+            "gen8nationaldexru": {
+                "Cleric": {
+                    "moves": [
+                        "Wish",
+                        "Protect",
+                        "Hyper Voice",
+                        "Sparkly Swirl"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Pixilate"
+                }
+            }
+        },
+        "extra_moves": [
+            "Grass Knot",
+            "Dazzling Gleam"
         ]
     },
 

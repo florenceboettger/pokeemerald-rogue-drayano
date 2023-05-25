@@ -12331,10 +12331,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_BOUNCY_BUBBLE] =
     {
     #ifdef ROGUE_DRAYANO
-        .power = 90,
-        .pp = 5,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .zMovePower = 175,
+        .power = 80,
+        .pp = 10,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .zMovePower = 160,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 60,
@@ -12361,6 +12361,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_BUZZY_BUZZ] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 90,
+        .pp = 5,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .zMovePower = 175,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 60,
             .pp = 20,
@@ -12372,10 +12378,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
             .zMovePower = 175,
         #endif
+    #endif
         .effect = EFFECT_PARALYZE_HIT,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .secondaryEffectChance = 50,
+    #else
         .secondaryEffectChance = 100,
+    #endif
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_SPECIAL,
@@ -12384,6 +12395,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SIZZLY_SLIDE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 90,
+        .pp = 5,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THAW_USER,
+        .zMovePower = 175,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 60,
             .pp = 20,
@@ -12395,6 +12412,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THAW_USER,
             .zMovePower = 175,
         #endif
+    #endif
         .effect = EFFECT_BURN_HIT,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -12438,6 +12456,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_BADDY_BAD] =
     {
+    #ifdef ROGUE_DRAYANO
+            .power = 95,
+            .accuracy = 100,
+            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+            .zMovePower = 175,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 80,
             .accuracy = 95,
@@ -12449,13 +12473,22 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
             .zMovePower = 175,
         #endif
+    #endif
         .effect = EFFECT_BADDY_BAD,
         .type = TYPE_DARK,
+    #ifdef ROGUE_DRAYANO
+        .pp = 5,
+    #else
         .pp = 15,
+    #endif
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
+    #ifdef ROGUE_DRAYANO
+        .split = SPLIT_PHYSICAL,
+    #else
         .split = SPLIT_SPECIAL,
+    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
@@ -12465,7 +12498,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .power = 95,
         .accuracy = 100,
         .pp = 5,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
         .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
@@ -12494,11 +12527,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_FREEZY_FROST] =
     {
     #ifdef ROGUE_DRAYANO
-            .power = 95,
-            .accuracy = 100,
-            .pp = 5,
-            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-            .zMovePower = 175,
+        .power = 95,
+        .accuracy = 100,
+        .pp = 5,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 100,
