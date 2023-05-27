@@ -10723,6 +10723,7 @@ static const struct LevelUpMove sElectivireLevelUpLearnset[] = {
     LEVEL_UP_MOVE(62, MOVE_GIGA_IMPACT),
     LEVEL_UP_MOVE(65, MOVE_ELECTRIC_TERRAIN),
 #endif
+    LEVEL_UP_END
 };
 
 static const struct LevelUpMove sMagmortarLevelUpLearnset[] = {
