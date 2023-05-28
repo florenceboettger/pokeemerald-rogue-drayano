@@ -970,6 +970,16 @@
                     ],
                     "item": "Eviolite",
                     "ability": "Rock Head"
+                },
+                "Accelerock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Rock Blast",
+                        "Earthquake",
+                        "Accelerock"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Sturdy"
                 }
             }
         },
@@ -986,7 +996,39 @@
 
     "Golem": {
         "movesets": {
+            "gen7pu": {
+                "Lead": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Earthquake",
+                        "Stone Edge",
+                        "Accelerock"
+                    ],
+                    "item": "Weakness Policy",
+                    "ability": "Sturdy"
+                }
+            },
             "gen7zu": {
+                "Offensive Utility": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Earthquake",
+                        "Stone Edge",
+                        "Accelerock"
+                    ],
+                    "item": "Custap Berry",
+                    "ability": "Sturdy"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Earthquake",
+                        "Stone Edge",
+                        "Accelerock",
+                        "Fire Punch"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Sturdy"
+                },
                 "Spinner": {
                     "moves": [
                         "Stealth Rock",
@@ -1017,6 +1059,20 @@
     },
 
     "Golem-Alola": {
+        "movesets": {
+            "gen7monotype": {
+                "Trapper (Rock)": {
+                    "moves": [
+                        "Fire Punch",
+                        "Wild Charge",
+                        "Earthquake",
+                        "Accelerock"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Magnet Pull"
+                }
+            }
+        },
         "extra_moves": [
             "Body Press",
             "Heat Crash"
