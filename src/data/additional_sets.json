@@ -621,8 +621,95 @@
             "Zippy Zap"
         ]
     },
+
+    "Sandshrew": {
+        "extra_moves": [
+            "Leech Life",
+            "Scorching Sands",
+            "Smack Down"
+        ]
+    },
+
+    "Sandshrew-Alola": {
+        "movesets": {
+            "gen7lc": {
+                "Ice Shard + Swords Dance": {
+                    "moves": [
+                        "Ice Shard",
+                        "Iron Head",
+                        "Earthquake",
+                        "Swords Dance"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Slush Rush"
+                }
+            }
+        }
+    },
     
-    "Sandslash": {},
+    "Sandslash": {
+        "movesets": {
+            "gen7pu": {
+                "Hazard Setter": {
+                    "moves": [
+                        "Earthquake",
+                        "Spikes",
+                        "Stealth Rock",
+                        "Rapid Spin"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Rough Skin"
+                }
+            },
+            "gen7letsgoou": {
+                "Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Rock Climb",
+                        "Earthquake",
+                        "Toxic"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Rough Skin"
+                }
+            },
+            "gen8pu": {
+                "Offensive Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Earthquake",
+                        "Accelerock",
+                        "Leech Life"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sand Rush"
+                }
+            }
+        },
+        "extra_moves": [
+            "Low Sweep",
+            "Poison Jab",
+            "Rock Polish",
+            "Scorching Sands",
+            "Smack Down"
+        ]
+    },
+
+    "Sandslash-Alola": {
+        "movesets": {
+            "gen7letsgoou": {
+                "moves": [
+                    "Swords Dance",
+                    "Ice Shard",
+                    "Earthquake",
+                    "Ice Punch"
+                ],
+                "item": "Rocky Helmet",
+                "ability": "Iron Barbs"
+            }
+        }
+    },
+
     "Nidoqueen": {},
     "Nidoking": {},
     "Clefable": {
