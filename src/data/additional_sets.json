@@ -712,9 +712,72 @@
 
     "Nidoqueen": {},
     "Nidoking": {},
+
     "Clefable": {
+        "movesets": {
+            "gen7monotype": {
+                "Calm Mind (Fairy)": {
+                    "moves": [
+                        "Calm Mind",
+                        "Draining Kiss",
+                        "Flamethrower",
+                        "Soft-Boiled"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Magic Guard"
+                }
+            },
+            "gen7letsgoou": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Draining Kiss",
+                        "Fire Blast",
+                        "Thunder Wave"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Magic Guard"
+                }
+            },
+            "gen8battlestadiumsingles": {
+                "Kee Berry Sweeper": {
+                    "moves": [
+                        "Draining Kiss",
+                        "Moonlight",
+                        "Calm Mind",
+                        "Stored Power"
+                    ],
+                    "item": "Kee Berry",
+                    "ability": "Unaware"
+                }
+            },
+            "gen81v1": {
+                "Sitrus Berry": {
+                    "moves": [
+                        "Soft-Boiled",
+                        "Draining Kiss",
+                        "Counter",
+                        "Calm Mind"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Unaware"
+                }
+            },
+            "gen8nationaldex": {
+                "Utility": {
+                    "moves": [
+                        "Draining Kiss",
+                        "Soft-Boiled",
+                        "Stealth Rock",
+                        "Calm Mind"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Magic Guard"
+                }
+            }
+        },
         "extra_moves": [
-            "Draining Kiss"
+            "Power Gem"
         ]
     },
 
@@ -828,7 +891,10 @@
                     "ability": "Friend Guard"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Power Gem"
+        ]
     },
 
     "Vileplume": {
@@ -895,8 +961,33 @@
     },
 
     "Parasect": {
+        "movesets": {
+            "gen7pu": {
+                "Swords Dance + Sappy Seed (Crabhammer)": {
+                    "moves": [
+                        "Swords Dance",
+                        "Sappy Seed",
+                        "Spore",
+                        "Crabhammer"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Dry Skin"
+                },
+                "Swords Dance + Sappy Seed (X-Scissor)": {
+                    "moves": [
+                        "Swords Dance",
+                        "Sappy Seed",
+                        "Spore",
+                        "X-Scissor"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Dry Skin"
+                }
+            }
+        },
         "extra_moves": [
-            "Bug Buzz"
+            "Bug Buzz",
+            "Seed Bomb"
         ]
     },
 
