@@ -8591,7 +8591,11 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 80,
         .baseAttack    = 120,
+    #ifdef ROGUE_DRAYANO
+        .baseDefense   = 75,
+    #else
         .baseDefense   = 70,
+    #endif
         .baseSpeed     = 80,
         .baseSpAttack  = 110,
         .baseSpDefense = 70,
@@ -21218,7 +21222,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 78,
         .baseAttack    = 107,
         .baseDefense   = 75,
+    #ifdef ROGUE_DRAYANO
+        .baseSpeed     = 75,
+    #else
         .baseSpeed     = 70,
+    #endif
         .baseSpAttack  = 100,
         .baseSpDefense = 100,
         .type1 = TYPE_GRASS,
@@ -21287,7 +21295,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_INCINEROAR] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 100,
+    #else
         .baseHP        = 95,
+    #endif
         .baseAttack    = 115,
         .baseDefense   = 90,
         .baseSpeed     = 60,
@@ -21361,7 +21373,11 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 80,
         .baseAttack    = 74,
+    #ifdef ROGUE_DRAYANO
+        .baseDefense   = 79,
+    #else
         .baseDefense   = 74,
+    #endif
         .baseSpeed     = 60,
         .baseSpAttack  = 126,
         .baseSpDefense = 116,
