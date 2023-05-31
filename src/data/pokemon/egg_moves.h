@@ -337,6 +337,9 @@ const u16 gEggMoves[] = {
         MOVE_PSYCHIC_TERRAIN),
 
     egg_moves(MACHOP,
+    #ifdef ROGUE_DRAYANO
+        MOVE_MACH_PUNCH,
+    #endif
         MOVE_MEDITATE,
         MOVE_ROLLING_KICK,
         MOVE_ENCORE,
@@ -4379,6 +4382,9 @@ const u16 gEggMoves[] = {
         MOVE_SWALLOW),
 
     egg_moves(MEOWTH_GALARIAN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_BULLET_PUNCH,
+    #endif
         MOVE_SPITE,
         MOVE_DOUBLE_EDGE,
         MOVE_CURSE,

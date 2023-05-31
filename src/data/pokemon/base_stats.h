@@ -3095,6 +3095,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_POLIWRATH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 105,
+        .baseDefense   = 95,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 90,
         .baseDefense   = 95,
         .baseSpeed     = 70,
@@ -3105,6 +3113,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseAttack    = 85,
         #endif
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_FIGHTING,
         .catchRate = 45,
@@ -24676,12 +24685,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PERRSERKER] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 110,
+        .baseDefense   = 105,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 70,
         .baseAttack    = 110,
         .baseDefense   = 100,
         .baseSpeed     = 50,
         .baseSpAttack  = 50,
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_STEEL,
         .type2 = TYPE_STEEL,
         .catchRate = 90,
@@ -27144,12 +27162,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PERSIAN_ALOLAN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 60,
+        .baseDefense   = 60,
+        .baseSpeed     = 120,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 65,
         .baseAttack    = 60,
         .baseDefense   = 60,
         .baseSpeed     = 115,
         .baseSpAttack  = 75,
         .baseSpDefense = 65,
+    #endif
         .type1 = TYPE_DARK,
         .type2 = TYPE_DARK,
         .catchRate = 90,

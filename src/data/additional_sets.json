@@ -1016,6 +1016,46 @@
         }
     },
 
+    "Meowth": {
+        "extra_moves": [
+            "Dazzling Gleam"
+        ]
+    },
+
+    "Meowth-Alola": {
+        "extra_moves": [
+            "Dazzling Gleam"
+        ]
+    },
+
+    "Meowth-Galar": {
+        "movesets": {
+            "gen8lc": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Fake Out",
+                        "Bullet Punch",
+                        "U-turn",
+                        "Play Rough"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Tough Claws"
+                }
+            }
+        },
+        "extra_moves": [
+            "Curse",
+            "Gunk Shot",
+            "Gyro Ball",
+            "Hone Claws",
+            "Iron Head",
+            "Seed Bomb",
+            "Shadow Claw",
+            "Swords Dance",
+            "Throat Chop"
+        ]
+    },
+
     "Persian": {
         "movesets": {
             "gen8zu": {
@@ -1032,6 +1072,15 @@
             }
         },
         "extra_moves": [
+            "Dazzling Gleam",
+            "Quash"
+        ]
+    },
+
+    "Persian-Alola": {
+        "extra_moves": [
+            "Dazzling Gleam",
+            "U-turn",
             "Quash"
         ]
     },
@@ -1099,28 +1148,199 @@
         ]
     },
 
-    "Poliwrath": {
+    "Growlithe": {
         "extra_moves": [
-            "Drain Punch",
+            "Hone Claws"
+        ]
+    },
+
+    "Arcanine": {
+        "extra_moves": [
+            "Hone Claws"
+        ]
+    },
+
+    "Poliwag": {
+        "movesets": {
+            "gen7lc": {
+                "Belly Drum": {
+                    "moves": [
+                        "Belly Drum",
+                        "Liquidation",
+                        "Lovely Kiss",
+                        "Thief"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Water Absorb"
+                }
+            }
+        }
+    },
+
+    "Poliwrath": {
+        "movesets": {
+            "gen7pu": {
+                "Special Tank": {
+                    "moves": [
+                        "Waterfall",
+                        "Drain Punch",
+                        "Lovely Kiss",
+                        "Protect"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen7letsgoou": {
+                "Tank": {
+                    "moves": [
+                        "Close Combat",
+                        "Lovely Kiss",
+                        "Waterfall",
+                        "Seismic Toss"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Swift Swim"
+                }
+            },
+            "gen7zu": {
+                "Special Tank": {
+                    "moves": [
+                        "Liquidation",
+                        "Drain Punch",
+                        "Ice Punch",
+                        "Protect"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen8zu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Liquidation",
+                        "Drain Punch",
+                        "Ice Punch",
+                        "Earthquake"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Swift Swim"
+                }
+            }
+        },
+        "extra_moves": [
+            "Curse",
+            "Focus Blast",
             "High Horsepower",
-            "Rock Climb"
+            "Low Kick",
+            "Poison Jab",
+            "Rock Climb",
+            "Superpower",
+            "Throat Chop",
+            "Vacuum Wave"
+        ]
+    },
+
+    "Alakazam": {
+        "movesets": {
+            "gen8nationaldex": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Psyshock",
+                        "Aura Sphere",
+                        "Shadow Ball"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Magic Guard"
+                },
+                "Nasty Plot (Mega)": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Psyshock",
+                        "Aura Sphere",
+                        "Shadow Ball"
+                    ],
+                    "item": "Alakazite",
+                    "ability": "Magic Guard"
+                }
+            },
+            "gen8bdspou": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Psychic",
+                        "Aura Sphere",
+                        "Shadow Ball"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Magic Guard"
+                }
+            }
+        },
+        "extra_moves": [
+            "Charge Beam",
+            "Energy Ball"
         ]
     },
 
     "Machop": {
         "extra_moves": [
+            "Drain Punch",
             "Rock Climb"
         ]
     },
 
     "Machoke": {
+        "movesets": {
+            "gen7zu": {
+                "Bulky Attacker": {
+                    "moves": [
+                        "Close Combat",
+                        "Knock Off",
+                        "Mach Punch",
+                        "Earthquake"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Guts"
+                }
+            }
+        },
         "extra_moves": [
+            "Drain Punch",
             "Rock Climb"
         ]
     },
 
     "Machamp": {
+        "movesets": {
+            "gen7ru": {
+                "Assault Vest": {
+                    "moves": [
+                        "Drain Punch",
+                        "Knock Off",
+                        "Ice Punch",
+                        "Bullet Punch"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Guts"
+                }
+            },
+            "gen8nationaldexru": {
+                "Guts Wallbreaker": {
+                    "moves": [
+                        "Close Combat",
+                        "Mach Punch",
+                        "Knock Off",
+                        "Bullet Punch"
+                    ],
+                    "item": "Flame Orb",
+                    "ability": "Guts"
+                }
+            }
+        },
         "extra_moves": [
+            "Cross Poison",
             "High Horsepower",
             "Rock Climb"
         ]
@@ -10158,6 +10378,44 @@
                 }
             }
         }
+    },
+
+    "Perrserker": {
+        "movesets": {
+            "gen8pu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Bullet Punch",
+                        "Seed Bomb",
+                        "Substitute"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Steely Spirit"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Bullet Punch",
+                        "Close Combat",
+                        "Seed Bomb",
+                        "U-turn"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Tough Claws"
+                }
+            }
+        },
+        "extra_moves": [
+            "Curse",
+            "Double-Edge",
+            "Gunk Shot",
+            "Gyro Ball",
+            "Heavy Slam",
+            "Hone Claws",
+            "Play Rough",
+            "Shadow Claw",
+            "Throat Chop"
+        ]
     },
 
     "Sirfetch'd": {

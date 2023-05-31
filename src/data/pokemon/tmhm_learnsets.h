@@ -1259,6 +1259,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM34_SHOCK_WAVE)
                                           TMHM(TM49_SNATCH)
                                           TMHM(TM11_SUNNY_DAY)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM03_SURF)
+                                        #endif
                                           TMHM(TM12_TAUNT)
                                           TMHM(TM46_THIEF)
                                           TMHM(TM25_THUNDER)
@@ -1288,6 +1291,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM34_SHOCK_WAVE)
                                           TMHM(TM49_SNATCH)
                                           TMHM(TM11_SUNNY_DAY)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM03_SURF)
+                                        #endif
                                           TMHM(TM12_TAUNT)
                                           TMHM(TM46_THIEF)
                                           TMHM(TM25_THUNDER)
@@ -20348,6 +20354,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM27_RETURN)
+                                          TMHM(HM03_SURF)
                                           TMHM(TM06_TOXIC)
                                         #endif
                                           ),
@@ -21155,6 +21162,9 @@ const u8 gTMHMLearnsets[][64] =
                                                  TMHM(TM17_PROTECT)
                                                  TMHM(TM44_REST)
                                                  TMHM(TM30_SHADOW_BALL)
+                                                #ifdef ROGUE_DRAYANO
+                                                 TMHM(HM03_SURF)
+                                                #endif
                                                  TMHM(TM12_TAUNT)
                                                  TMHM(TM24_THUNDERBOLT)
                                                  TMHM(TM25_THUNDER)
@@ -21168,6 +21178,9 @@ const u8 gTMHMLearnsets[][64] =
                                                   TMHM(TM17_PROTECT)
                                                   TMHM(TM44_REST)
                                                   TMHM(TM30_SHADOW_BALL)
+                                                #ifdef ROGUE_DRAYANO
+                                                  TMHM(HM03_SURF)
+                                                #endif
                                                   TMHM(TM12_TAUNT)
                                                   TMHM(TM24_THUNDERBOLT)
                                                   TMHM(TM25_THUNDER)
@@ -21296,6 +21309,7 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM27_RETURN)
+                                          TMHM(HM03_SURF)
                                           TMHM(TM06_TOXIC)
                                         #endif
                                           ),
