@@ -20257,6 +20257,9 @@ static const u16 sRoguePresets_BEEDRILL_Moveset[] =
 	MOVE_TAILWIND,
 	MOVE_X_SCISSOR,
 	MOVE_ROOST,
+#ifdef ROGUE_DRAYANO
+	MOVE_SKITTER_SMACK,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_BEEDRILL_MEGA[] = 
@@ -20558,6 +20561,7 @@ static const u16 sRoguePresets_VENOMOTH_Moveset[] =
 	MOVE_HURRICANE,
 	MOVE_MORNING_SUN,
 	MOVE_BATON_PASS,
+	MOVE_SKITTER_SMACK,
 #endif
 };
 
@@ -29938,6 +29942,9 @@ static const u16 sRoguePresets_VICTREEBEL_Moveset[] =
 	MOVE_POWER_WHIP,
 	MOVE_POISON_JAB,
 	MOVE_SUCKER_PUNCH,
+#ifdef ROGUE_DRAYANO
+	MOVE_GRASSY_GLIDE,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_KINGLER[] = 
@@ -32583,6 +32590,8 @@ static const u16 sRoguePresets_PARASECT_Moveset[] =
 	MOVE_SYNTHESIS,
 #ifdef ROGUE_DRAYANO
 	MOVE_BUG_BUZZ,
+	MOVE_SKITTER_SMACK,
+	MOVE_GRASSY_GLIDE,
 #endif
 };
 
@@ -32872,6 +32881,9 @@ static const u16 sRoguePresets_PRIMEAPE_Moveset[] =
 	MOVE_LOW_KICK,
 	MOVE_ICE_PUNCH,
 	MOVE_EARTHQUAKE,
+#ifdef ROGUE_DRAYANO
+	MOVE_LASH_OUT,
+#endif
 };
 
 static const struct RogueMonPreset sRoguePresets_POLIWRATH[] = 

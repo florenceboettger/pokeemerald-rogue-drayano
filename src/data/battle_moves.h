@@ -13160,7 +13160,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_GRASSY_GLIDE] =
     {
         .effect = EFFECT_GRASSY_GLIDE,
+    #ifdef ROGUE_DRAYANO
+        .power = 60,
+    #else
         .power = 70,
+    #endif
         .type = TYPE_GRASS,
         .accuracy = 100,
         .pp = 20,

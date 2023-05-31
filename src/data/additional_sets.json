@@ -153,6 +153,7 @@
             }
         }
     },
+
     "Charmander": {
         "movesets": {
             "gen7lc": {
@@ -169,6 +170,7 @@
             }
         }
     },
+
     "Charizard": {
         "movesets": {
             "gen7ou": {
@@ -307,6 +309,7 @@
             }
         }
     },
+
     "Blastoise": {
         "movesets": {
             "gen7ru": {
@@ -453,8 +456,15 @@
             }
         }
     },
+
     "Butterfree": {},
-    "Beedrill": {},
+
+    "Beedrill": {
+        "extra_moves": [
+            "Skitter Smack"
+        ]
+    },
+
     "Pidgeot": {
         "movesets": {
             "gen7pu": {
@@ -486,7 +496,9 @@
             "Dual Wingbeat"
         ]
     },
+
     "Raticate": {},
+
     "Spearow": {
         "movesets": {
             "gen7lc": {
@@ -506,6 +518,7 @@
             "Dual Wingbeat"
         ]
     },
+
     "Fearow": {
         "movesets": {
             "gen7pu": {
@@ -547,21 +560,29 @@
             "Dual Wingbeat"
         ]
     },
+
     "Arbok": {},
+
     "Raichu": {},
+
     "Sandslash": {},
+
     "Nidoqueen": {},
+
     "Nidoking": {},
+
     "Clefable": {
         "extra_moves": [
             "Draining Kiss"
         ]
     },
+
     "Vulpix": {
         "extra_moves": [
             "Dazzling Gleam"
         ]
     },
+
     "Ninetales": {
         "movesets": {
             "gen7ru": {
@@ -615,6 +636,7 @@
             "Dazzling Gleam"
         ]
     },
+
     "Wigglytuff": {
         "movesets": {
             "gen7pu": {
@@ -667,6 +689,7 @@
             }
         }
     },
+
     "Vileplume": {
         "movesets": {
             "gen7ru": {
@@ -683,18 +706,24 @@
             }
         }
     },
+
     "Parasect": {
         "extra_moves": [
-            "Bug Buzz"
+            "Bug Buzz",
+            "Skitter Smack",
+            "Grassy Glide"
         ]
     },
+
     "Venomoth": {
         "extra_moves": [
             "Hurricane",
             "Morning Sun",
-            "Baton Pass"
+            "Baton Pass",
+            "Skitter Smack"
         ]
     },
+
     "Dugtrio": {
         "movesets": {
             "gen7zu": {
@@ -711,6 +740,7 @@
             }
         }
     },
+
     "Persian": {
         "movesets": {
             "gen8zu": {
@@ -730,6 +760,7 @@
             "Quash"
         ]
     },
+
     "Golduck": {
         "movesets": {
             "gen7vgc2017": {
@@ -758,17 +789,33 @@
             }
         }
     },
+
+    "Primeape": {
+        "extra_moves": [
+            "Lash Out"
+        ]
+    },
+
     "Poliwrath": {
         "extra_moves": [
             "Drain Punch",
             "High Horsepower"
         ]
     },
+
     "Machamp": {
         "extra_moves": [
             "High Horsepower"
         ]
     },
+
+    "Victreebel": {
+        "extra_moves": [
+            "Grassy Glide"
+        ]
+    },
+
+    "Golem": {},
 
     "Rapidash": {
         "movesets": {
