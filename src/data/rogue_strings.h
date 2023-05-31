@@ -3,7 +3,9 @@
 // Make sure to bump ROGUE_COMPAT_VERSION in rogue_controller.c when changing this
 const u8 gText_RogueVersion[] = _("v1.3.2");
 
-#ifdef ROGUE_EXPANSION
+#if defined(ROGUE_DRAYANO)
+const u8 gText_RogueVersionPrefix[] = _("Rebalanced");
+#elif defined(ROGUE_EXPANSION)
 const u8 gText_RogueVersionPrefix[] = _("EX");
 #else
 const u8 gText_RogueVersionPrefix[] = _("Vanilla");

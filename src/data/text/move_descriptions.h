@@ -114,9 +114,15 @@ static const u8 sJumpKickDescription[] = _(
     "A strong jumping kick. May\n"
     "miss and hurt the kicker.");
 
+
 static const u8 sRollingKickDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A roundhouse kick that\n"
+    "may make the target flinch.");
+#else
     "A fast kick delivered from\n"
     "a rapid spin.");
+#endif
 
 static const u8 sSandAttackDescription[] = _(
     "Reduces the foe's accuracy\n"
@@ -2487,8 +2493,13 @@ static const u8 sSparklingAriaDescription[] = _(
     "burns on contact.");
 
 static const u8 sIceHammerDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Swings an icy fist. Has\n"
+    "a high-critical hit ratio.");
+#else
     "Swings the fist to strike.\n"
     "Lowers the user's Speed.");
+#endif
 
 static const u8 sFloralHealingDescription[] = _(
     "Restores an ally's HP.\n"
@@ -2695,20 +2706,35 @@ static const u8 sPikaPapowDescription[] = _(
     "power. It never misses.");
 
 static const u8 sBouncyBubbleDescription[] = _(
-    "An attack that absorbs\n"
-#if B_UPDATED_MOVE_DATA >= GEN_8
-    "all the damage inflicted.");
-#else
+#ifdef ROGUE_DRAYANO
+    "A bubble attack that absorbs\n"
     "half the damage inflicted.");
+#else
+        "An attack that absorbs\n"
+    #if B_UPDATED_MOVE_DATA >= GEN_8
+        "all the damage inflicted.");
+    #else
+        "half the damage inflicted.");
+    #endif
 #endif
 
 static const u8 sBuzzyBuzzDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Shoots a jolt of electricity\n"
+    "with a high paralysis chance.");
+#else
     "Shoots a jolt of electricity\n"
     "that always paralyzes.");
+#endif
 
 static const u8 sSizzlySlideDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A fiery dash attack with a\n"
+    "high chance to burn.");
+#else
     "User cloaked in fire charges.\n"
     "Leaves the foe with a burn.");
+#endif
 
 static const u8 sGlitzyGlowDescription[] = _(
     "Telekinetic force that sets\n"
@@ -2744,8 +2770,13 @@ static const u8 sDynamaxCannonDescription[] = _(
     "2x damage to Dynamaxed foes.");
     
 static const u8 sSnipeShotDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A water jet with a high crit\n"
+    "rate. Can't be redirected.");
+#else
     "The user ignores effects\n"
     "that draw in moves.");
+#endif
     
 static const u8 sJawLockDescription[] = _(
     "Prevents the user and\n"

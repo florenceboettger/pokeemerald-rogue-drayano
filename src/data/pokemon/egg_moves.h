@@ -337,6 +337,9 @@ const u16 gEggMoves[] = {
         MOVE_PSYCHIC_TERRAIN),
 
     egg_moves(MACHOP,
+    #ifdef ROGUE_DRAYANO
+        MOVE_MACH_PUNCH,
+    #endif
         MOVE_MEDITATE,
         MOVE_ROLLING_KICK,
         MOVE_ENCORE,
@@ -577,6 +580,9 @@ const u16 gEggMoves[] = {
         MOVE_GRASSY_TERRAIN),
 
     egg_moves(CUBONE,
+    #ifdef ROGUE_DRAYANO
+        MOVE_HEAD_SMASH,
+    #endif
         MOVE_ANCIENT_POWER,
         MOVE_BELLY_DRUM,
         MOVE_SCREECH,
@@ -959,6 +965,9 @@ const u16 gEggMoves[] = {
         MOVE_LUNGE),
 
     egg_moves(CHINCHOU,
+    #ifdef ROGUE_DRAYANO
+        MOVE_TAKE_DOWN,
+    #endif
         MOVE_FLAIL,
         MOVE_SCREECH,
         MOVE_AMNESIA,
@@ -2391,6 +2400,9 @@ const u16 gEggMoves[] = {
         MOVE_DEFENSE_CURL),
 
     egg_moves(TURTWIG,
+    #ifdef ROGUE_DRAYANO
+        MOVE_GRAV_APPLE,
+    #endif
         MOVE_WORRY_SEED,
         MOVE_GROWTH,
         MOVE_TICKLE,
@@ -2908,6 +2920,11 @@ const u16 gEggMoves[] = {
         MOVE_BURN_UP),
 
     egg_moves(OSHAWOTT,
+    #ifdef ROGUE_DRAYANO
+        MOVE_COVET,
+        MOVE_DRILL_RUN,
+        MOVE_SUCKER_PUNCH,
+    #endif
         MOVE_COPYCAT,
         MOVE_DETECT,
         MOVE_AIR_SLASH,
@@ -3376,6 +3393,9 @@ const u16 gEggMoves[] = {
 
     egg_moves(KARRABLAST,
         MOVE_MEGAHORN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_NIGHT_SLASH,
+    #endif
         MOVE_PURSUIT,
         MOVE_COUNTER,
         MOVE_HORN_ATTACK,
@@ -3383,7 +3403,8 @@ const u16 gEggMoves[] = {
         MOVE_BUG_BITE,
         MOVE_SCREECH,
         MOVE_KNOCK_OFF,
-        MOVE_DRILL_RUN),
+        MOVE_DRILL_RUN
+    ),
 
     egg_moves(FOONGUS,
         MOVE_GASTRO_ACID,
@@ -3460,12 +3481,16 @@ const u16 gEggMoves[] = {
         MOVE_FOCUS_ENERGY,
         MOVE_REVERSAL,
         MOVE_ENDURE,
+    #ifdef ROGUE_DRAYANO
+        MOVE_FIRST_IMPRESSION,
+    #endif
         MOVE_RAZOR_WIND,
         MOVE_NIGHT_SLASH,
         MOVE_ENDEAVOR,
         MOVE_IRON_TAIL,
         MOVE_DRAGON_PULSE,
-        MOVE_HARDEN),
+        MOVE_HARDEN
+    ),
 
     egg_moves(CUBCHOO,
         MOVE_YAWN,
@@ -3543,13 +3568,17 @@ const u16 gEggMoves[] = {
         MOVE_STOMP,
         MOVE_ROCK_CLIMB,
         MOVE_HEADBUTT,
+    #ifdef ROGUE_DRAYANO
+        MOVE_HEAD_SMASH,
+    #endif
         MOVE_SKULL_BASH,
         MOVE_MUD_SHOT,
         MOVE_MUD_SLAP,
         MOVE_IRON_HEAD,
         MOVE_AMNESIA,
         MOVE_BELCH,
-        MOVE_COTTON_GUARD),
+        MOVE_COTTON_GUARD
+    ),
 
     egg_moves(VULLABY,
         MOVE_STEEL_WING,
@@ -3604,6 +3633,9 @@ const u16 gEggMoves[] = {
         MOVE_MAGNET_RISE),
 
     egg_moves(CHESPIN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_HORN_LEECH,
+    #endif
         MOVE_SYNTHESIS,
         MOVE_BELLY_DRUM,
         MOVE_CURSE,
@@ -3611,7 +3643,8 @@ const u16 gEggMoves[] = {
         MOVE_SPIKES,
         MOVE_DEFENSE_CURL,
         MOVE_ROLLOUT,
-        MOVE_POWER_UP_PUNCH),
+        MOVE_POWER_UP_PUNCH
+    ),
 
     egg_moves(FENNEKIN,
         MOVE_WISH,
@@ -3649,7 +3682,12 @@ const u16 gEggMoves[] = {
         MOVE_YAWN,
         MOVE_SNATCH,
         MOVE_FIRE_SPIN,
-        MOVE_FLARE_BLITZ),
+    #ifdef ROGUE_DRAYANO
+        MOVE_INCINERATE
+    #else
+        MOVE_FLARE_BLITZ
+    #endif
+    ),
 
     egg_moves(FLABEBE,
         MOVE_COPYCAT,
@@ -3669,7 +3707,11 @@ const u16 gEggMoves[] = {
         MOVE_QUICK_GUARD,
         MOVE_FOUL_PLAY,
         MOVE_STORM_THROW,
-        MOVE_POWER_TRIP),
+    #ifdef ROGUE_DRAYANO
+        MOVE_SUCKER_PUNCH,
+    #endif
+        MOVE_POWER_TRIP
+    ),
 
     egg_moves(FURFROU,
         MOVE_ROLE_PLAY,
@@ -4053,6 +4095,9 @@ const u16 gEggMoves[] = {
         MOVE_SUPER_FANG),
 
     egg_moves(SOBBLE,
+    #ifdef ROGUE_DRAYANO
+        MOVE_AIR_CUTTER,
+    #endif
         MOVE_AQUA_JET,
         MOVE_DOUBLE_TEAM,
         MOVE_AQUA_RING,
@@ -4119,12 +4164,18 @@ const u16 gEggMoves[] = {
         MOVE_BLOCK),
 
     egg_moves(APPLIN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_LEAF_STORM,
+    #endif
         MOVE_SUCKER_PUNCH,
         MOVE_ROLLOUT,
         MOVE_DEFENSE_CURL,
         MOVE_RECYCLE),
 
     egg_moves(SILICOBRA,
+    #ifdef ROGUE_DRAYANO
+        MOVE_QUICK_ATTACK,
+    #endif
         MOVE_DRAGON_RUSH,
         MOVE_MUD_SLAP,
         MOVE_LAST_RESORT,
@@ -4331,6 +4382,9 @@ const u16 gEggMoves[] = {
         MOVE_SWALLOW),
 
     egg_moves(MEOWTH_GALARIAN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_BULLET_PUNCH,
+    #endif
         MOVE_SPITE,
         MOVE_DOUBLE_EDGE,
         MOVE_CURSE,
@@ -4398,6 +4452,9 @@ const u16 gEggMoves[] = {
         MOVE_MEMENTO),
 
     egg_moves(STUNFISK_GALARIAN,
+    #ifdef ROGUE_DRAYANO
+        MOVE_AQUA_TAIL,
+    #endif
         MOVE_BIND,
         MOVE_YAWN,
         MOVE_ASTONISH,

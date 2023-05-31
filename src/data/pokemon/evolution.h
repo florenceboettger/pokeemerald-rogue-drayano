@@ -159,7 +159,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_HERACROSS]             = {{EVO_MEGA_EVOLUTION, ITEM_HERACRONITE, SPECIES_HERACROSS_MEGA}},
     [SPECIES_SNEASEL]               = {{EVO_ITEM_HOLD_NIGHT, ITEM_RAZOR_CLAW, SPECIES_WEAVILE}},
     [SPECIES_TEDDIURSA]             = {{EVO_LEVEL, 30, SPECIES_URSARING}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_SLUGMA]                = {{EVO_LEVEL, 32, SPECIES_MAGCARGO}},
+#else
     [SPECIES_SLUGMA]                = {{EVO_LEVEL, 38, SPECIES_MAGCARGO}},
+#endif
     [SPECIES_SWINUB]                = {{EVO_LEVEL, 33, SPECIES_PILOSWINE}},
     [SPECIES_PILOSWINE]             = {{EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_MAMOSWINE}},
     [SPECIES_REMORAID]              = {{EVO_LEVEL, 25, SPECIES_OCTILLERY}},
@@ -325,7 +329,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_DRIFLOON]              = {{EVO_LEVEL, 28, SPECIES_DRIFBLIM}},
     [SPECIES_BUNEARY]               = {{EVO_FRIENDSHIP, 0, SPECIES_LOPUNNY}},
     [SPECIES_LOPUNNY]               = {{EVO_MEGA_EVOLUTION, ITEM_LOPUNNITE, SPECIES_LOPUNNY_MEGA}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_GLAMEOW]               = {{EVO_LEVEL, 32, SPECIES_PURUGLY}},
+#else
     [SPECIES_GLAMEOW]               = {{EVO_LEVEL, 38, SPECIES_PURUGLY}},
+#endif
     [SPECIES_CHINGLING]             = {{EVO_FRIENDSHIP_NIGHT, 0, SPECIES_CHIMECHO}},
     [SPECIES_STUNKY]                = {{EVO_LEVEL, 34, SPECIES_SKUNTANK}},
     [SPECIES_BRONZOR]               = {{EVO_LEVEL, 33, SPECIES_BRONZONG}},
@@ -389,15 +397,27 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_TRUBBISH]              = {{EVO_LEVEL, 36, SPECIES_GARBODOR}},
     [SPECIES_ZORUA]                 = {{EVO_LEVEL, 30, SPECIES_ZOROARK}},
     [SPECIES_MINCCINO]              = {{EVO_ITEM, ITEM_SHINY_STONE, SPECIES_CINCCINO}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_GOTHITA]               = {{EVO_LEVEL, 30, SPECIES_GOTHORITA}},
+#else
     [SPECIES_GOTHITA]               = {{EVO_LEVEL, 32, SPECIES_GOTHORITA}},
+#endif
     [SPECIES_GOTHORITA]             = {{EVO_LEVEL, 41, SPECIES_GOTHITELLE}},
     [SPECIES_SOLOSIS]               = {{EVO_LEVEL, 32, SPECIES_DUOSION}},
     [SPECIES_DUOSION]               = {{EVO_LEVEL, 41, SPECIES_REUNICLUS}},
     [SPECIES_DUCKLETT]              = {{EVO_LEVEL, 35, SPECIES_SWANNA}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_VANILLITE]             = {{EVO_LEVEL, 29, SPECIES_VANILLISH}},
+#else
     [SPECIES_VANILLITE]             = {{EVO_LEVEL, 35, SPECIES_VANILLISH}},
+#endif
     [SPECIES_VANILLISH]             = {{EVO_LEVEL, 47, SPECIES_VANILLUXE}},
     [SPECIES_DEERLING]              = {{EVO_LEVEL, 34, SPECIES_SAWSBUCK}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_KARRABLAST]            = {{EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_ESCAVALIER}},
+#else
     [SPECIES_KARRABLAST]            = {{EVO_TRADE_SPECIFIC_MON, SPECIES_SHELMET, SPECIES_ESCAVALIER}},
+#endif
     [SPECIES_FOONGUS]               = {{EVO_LEVEL, 39, SPECIES_AMOONGUSS}},
     [SPECIES_FRILLISH]              = {{EVO_LEVEL, 40, SPECIES_JELLICENT}},
     [SPECIES_JOLTIK]                = {{EVO_LEVEL, 36, SPECIES_GALVANTULA}},
@@ -406,20 +426,56 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_KLANG]                 = {{EVO_LEVEL, 49, SPECIES_KLINKLANG}},
     [SPECIES_TYNAMO]                = {{EVO_LEVEL, 39, SPECIES_EELEKTRIK}},
     [SPECIES_EELEKTRIK]             = {{EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_EELEKTROSS}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_ELGYEM]                = {{EVO_LEVEL, 37, SPECIES_BEHEEYEM}},
+#else
     [SPECIES_ELGYEM]                = {{EVO_LEVEL, 42, SPECIES_BEHEEYEM}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_LITWICK]               = {{EVO_LEVEL, 27, SPECIES_LAMPENT}},
+#else
     [SPECIES_LITWICK]               = {{EVO_LEVEL, 41, SPECIES_LAMPENT}},
+#endif
     [SPECIES_LAMPENT]               = {{EVO_ITEM, ITEM_DUSK_STONE, SPECIES_CHANDELURE}},
     [SPECIES_AXEW]                  = {{EVO_LEVEL, 38, SPECIES_FRAXURE}},
     [SPECIES_FRAXURE]               = {{EVO_LEVEL, 48, SPECIES_HAXORUS}},
     [SPECIES_CUBCHOO]               = {{EVO_LEVEL, 37, SPECIES_BEARTIC}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_SHELMET]              = {{EVO_TRADE_ITEM, ITEM_REAPER_CLOTH, SPECIES_ACCELGOR}},
+#else
     [SPECIES_SHELMET]               = {{EVO_TRADE_SPECIFIC_MON, SPECIES_KARRABLAST, SPECIES_ACCELGOR}},
+#endif
     [SPECIES_MIENFOO]               = {{EVO_LEVEL, 50, SPECIES_MIENSHAO}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_GOLETT]                = {{EVO_LEVEL, 40, SPECIES_GOLURK}},
+#else
     [SPECIES_GOLETT]                = {{EVO_LEVEL, 43, SPECIES_GOLURK}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_PAWNIARD]              = {{EVO_LEVEL, 40, SPECIES_BISHARP}},
+#else
     [SPECIES_PAWNIARD]              = {{EVO_LEVEL, 52, SPECIES_BISHARP}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_RUFFLET]               = {{EVO_LEVEL, 40, SPECIES_BRAVIARY}},
+#else
     [SPECIES_RUFFLET]               = {{EVO_LEVEL, 54, SPECIES_BRAVIARY}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_VULLABY]               = {{EVO_LEVEL, 40, SPECIES_MANDIBUZZ}},
+#else
     [SPECIES_VULLABY]               = {{EVO_LEVEL, 54, SPECIES_MANDIBUZZ}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_DEINO]                 = {{EVO_LEVEL, 38, SPECIES_ZWEILOUS}},
+#else
     [SPECIES_DEINO]                 = {{EVO_LEVEL, 50, SPECIES_ZWEILOUS}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_ZWEILOUS]              = {{EVO_LEVEL, 58, SPECIES_HYDREIGON}},
+#else
     [SPECIES_ZWEILOUS]              = {{EVO_LEVEL, 64, SPECIES_HYDREIGON}},
+#endif
     [SPECIES_LARVESTA]              = {{EVO_LEVEL, 59, SPECIES_VOLCARONA}},
     [SPECIES_CHESPIN]               = {{EVO_LEVEL, 16, SPECIES_QUILLADIN}},
     [SPECIES_QUILLADIN]             = {{EVO_LEVEL, 36, SPECIES_CHESNAUGHT}},
@@ -472,7 +528,12 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_CRABRAWLER]            = {{EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_CRABOMINABLE}},
     [SPECIES_CUTIEFLY]              = {{EVO_LEVEL, 25, SPECIES_RIBOMBEE}},
     [SPECIES_ROCKRUFF]              = {{EVO_LEVEL_DAY, 25, SPECIES_LYCANROC},
-                                       {EVO_LEVEL_NIGHT, 25, SPECIES_LYCANROC_MIDNIGHT}},
+                                       {EVO_LEVEL_NIGHT, 25, SPECIES_LYCANROC_MIDNIGHT}
+                                       #ifdef ROGUE_DRAYANO
+                                            ,
+                                            {EVO_LEVEL_DUSK, 25, SPECIES_LYCANROC_DUSK}
+                                       #endif
+                                       },
     [SPECIES_MAREANIE]              = {{EVO_LEVEL, 38, SPECIES_TOXAPEX}},
     [SPECIES_MUDBRAY]               = {{EVO_LEVEL, 30, SPECIES_MUDSDALE}},
     [SPECIES_DEWPIDER]              = {{EVO_LEVEL, 22, SPECIES_ARAQUANID}},
