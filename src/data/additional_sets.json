@@ -4308,21 +4308,7 @@
         ]
     },
 
-    "Zigzagoon-Galar": {
-        "extra_moves": [
-            "Rock Climb"
-        ]
-    },
-
     "Linoone": {
-        "extra_moves": [
-            "Low Sweep",
-            "Pin Missile",
-            "Rock Climb"
-        ]
-    },
-
-    "Linoone-Galar": {
         "extra_moves": [
             "Low Sweep",
             "Pin Missile",
