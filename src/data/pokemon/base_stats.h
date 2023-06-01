@@ -25588,14 +25588,14 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_CHARIZARD_MEGA_X] =
     {
         .baseHP        = 78,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 131,
+    #else
         .baseAttack    = 130,
+    #endif
         .baseDefense   = 111,
         .baseSpeed     = 100,
-    #ifdef ROGUE_DRAYANO
-        .baseSpAttack  = 131,
-    #else
         .baseSpAttack  = 130,
-    #endif
         .baseSpDefense = 85,
         .type1 = TYPE_FIRE,
         .type2 = TYPE_DRAGON,
@@ -25673,10 +25673,10 @@ const struct BaseStats gBaseStats[] =
     {
     #ifdef ROGUE_DRAYANO
         .baseHP        = 65,
-        .baseAttack    = 200,
-        .baseDefense   = 40,
-        .baseSpeed     = 185,
-        .baseSpAttack  = 5,
+        .baseAttack    = 175,
+        .baseDefense   = 55,
+        .baseSpeed     = 170,
+        .baseSpAttack  = 30,
         .baseSpDefense = 110,
     #else
         .baseHP        = 65,
@@ -25708,11 +25708,11 @@ const struct BaseStats gBaseStats[] =
     {
     #ifdef ROGUE_DRAYANO
         .baseHP        = 83,
-        .baseAttack    = 40,
-        .baseDefense   = 70,
-        .baseSpeed     = 121,
-        .baseSpAttack  = 215,
-        .baseSpDefense = 80,
+        .baseAttack    = 60,
+        .baseDefense   = 75,
+        .baseSpeed     = 126,
+        .baseSpAttack  = 180,
+        .baseSpDefense = 85,
     #else
         .baseHP        = 83,
         .baseAttack    = 60,
