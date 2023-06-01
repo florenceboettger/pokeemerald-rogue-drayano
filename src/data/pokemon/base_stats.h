@@ -13478,12 +13478,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LOPUNNY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 106,
+        .baseDefense   = 84,
+        .baseSpeed     = 105,
+        .baseSpAttack  = 44,
+        .baseSpDefense = 96,
+    #else
         .baseHP        = 65,
         .baseAttack    = 76,
         .baseDefense   = 84,
         .baseSpeed     = 105,
         .baseSpAttack  = 54,
         .baseSpDefense = 96,
+    #endif
     #ifdef ROGUE_DRAYANO
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FIGHTING,
@@ -26123,11 +26132,11 @@ const struct BaseStats gBaseStats[] =
     {
     #ifdef ROGUE_DRAYANO
         .baseHP        = 70,
-        .baseAttack    = 115,
+        .baseAttack    = 110,
         .baseDefense   = 75,
         .baseSpeed     = 150,
         .baseSpAttack  = 145,
-        .baseSpDefense = 80,
+        .baseSpDefense = 85,
     #else
         .baseHP        = 70,
         .baseAttack    = 110,
@@ -26156,7 +26165,11 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 80,
         .baseAttack    = 160,
+    #ifdef ROGUE_DRAYANO
+        .baseDefense   = 85,
+    #else
         .baseDefense   = 80,
+    #endif
         .baseSpeed     = 100,
         .baseSpAttack  = 130,
         .baseSpDefense = 80,
@@ -26628,12 +26641,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LOPUNNY_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 136,
+        .baseDefense   = 94,
+        .baseSpeed     = 135,
+        .baseSpAttack  = 74,
+        .baseSpDefense = 96,
+    #else
         .baseHP        = 65,
         .baseAttack    = 136,
         .baseDefense   = 94,
         .baseSpeed     = 135,
         .baseSpAttack  = 54,
         .baseSpDefense = 96,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FIGHTING,
         .catchRate = 60,
