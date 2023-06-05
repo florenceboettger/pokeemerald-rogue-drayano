@@ -19738,7 +19738,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_PROTEAN, ABILITY_BATTLE_BOND},
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
     #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
     #endif

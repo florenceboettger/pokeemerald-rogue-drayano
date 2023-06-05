@@ -9497,21 +9497,21 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);   // Unaffected by rototiller - print STRINGID_NOEFFECTONTARGET
         }
         return;
-#ifdef ROGUE_DRAYANO
-    case VARIOUS_TRY_ACTIVATE_BATTLE_BOND:
-        if (gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA
-            && HasAttackerFaintedTarget()
-            && CalculateEnemyPartyCount() > 1)
-        {
-            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species);
-            gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerAttacker]] = gBattleMons[gBattlerAttacker].species;
-            gBattleMons[gBattlerAttacker].species = SPECIES_GRENINJA_ASH;
-            BattleScriptPushCursor();
-            gBattlescriptCurrInstr = BattleScript_BattleBondActivatesOnMoveEndAttacker;
-            return;
-        }
-        break;
-#else
+// #ifdef ROGUE_DRAYANO
+//    case VARIOUS_TRY_ACTIVATE_BATTLE_BOND:
+//        if (gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA
+//            && HasAttackerFaintedTarget()
+//            && CalculateEnemyPartyCount() > 1)
+//        {
+//            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species);
+//            gBattleStruct->changedSpecies[gBattlerPartyIndexes[gBattlerAttacker]] = gBattleMons[gBattlerAttacker].species;
+//            gBattleMons[gBattlerAttacker].species = SPECIES_GRENINJA_ASH;
+//            BattleScriptPushCursor();
+//            gBattlescriptCurrInstr = BattleScript_BattleBondActivatesOnMoveEndAttacker;
+//            return;
+//        }
+//        break;
+//#else
     case VARIOUS_TRY_ACTIVATE_BATTLE_BOND:
         if (gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA_BATTLE_BOND
             && HasAttackerFaintedTarget()
@@ -9525,7 +9525,7 @@ static void Cmd_various(void)
             return;
         }
         break;
-#endif
+// #endif
     case VARIOUS_CONSUME_BERRY:
         if (ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item) == HOLD_EFFECT_NONE)
         {
