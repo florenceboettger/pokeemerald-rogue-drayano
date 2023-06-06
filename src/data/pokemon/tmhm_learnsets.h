@@ -21039,6 +21039,9 @@ const u8 gTMHMLearnsets[][64] =
                                              TMHM(TM23_IRON_TAIL)
                                              TMHM(TM17_PROTECT)
                                              TMHM(TM44_REST)
+                                            #ifdef ROGUE_DRAYANO
+                                             TMHM(TM27_RETURN)
+                                            #endif
                                              TMHM(TM30_SHADOW_BALL)
                                              TMHM(TM36_SLUDGE_BOMB)
                                              TMHM(TM12_TAUNT)
@@ -21054,6 +21057,9 @@ const u8 gTMHMLearnsets[][64] =
                                               TMHM(TM23_IRON_TAIL)
                                               TMHM(TM17_PROTECT)
                                               TMHM(TM44_REST)
+                                            #ifdef ROGUE_DRAYANO
+                                              TMHM(TM27_RETURN)
+                                            #endif
                                               TMHM(TM30_SHADOW_BALL)
                                               TMHM(TM36_SLUDGE_BOMB)
                                               TMHM(TM12_TAUNT)
