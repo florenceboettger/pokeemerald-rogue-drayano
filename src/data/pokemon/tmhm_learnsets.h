@@ -21194,6 +21194,9 @@ const u8 gTMHMLearnsets[][64] =
                                                  TMHM(TM26_EARTHQUAKE)
                                                  TMHM(TM17_PROTECT)
                                                  TMHM(TM44_REST)
+                                                #ifdef ROGUE_DRAYANO
+                                                 TMHM(TM27_RETURN)
+                                                #endif
                                                  TMHM(HM06_ROCK_SMASH)
                                                  TMHM(HM04_STRENGTH)
                                                  TMHM(TM24_THUNDERBOLT)
@@ -21208,6 +21211,9 @@ const u8 gTMHMLearnsets[][64] =
                                                   TMHM(TM35_FLAMETHROWER)
                                                   TMHM(TM17_PROTECT)
                                                   TMHM(TM44_REST)
+                                                #ifdef ROGUE_DRAYANO
+                                                 TMHM(TM27_RETURN)
+                                                #endif
                                                   TMHM(HM06_ROCK_SMASH)
                                                   TMHM(HM04_STRENGTH)
                                                   TMHM(TM24_THUNDERBOLT)
@@ -21223,6 +21229,9 @@ const u8 gTMHMLearnsets[][64] =
                                                TMHM(TM15_HYPER_BEAM)
                                                TMHM(TM17_PROTECT)
                                                TMHM(TM44_REST)
+                                              #ifdef ROGUE_DRAYANO
+                                               TMHM(TM27_RETURN)
+                                              #endif
                                                TMHM(HM06_ROCK_SMASH)
                                                TMHM(HM04_STRENGTH)
                                                TMHM(TM24_THUNDERBOLT)
