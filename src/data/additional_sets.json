@@ -6562,6 +6562,38 @@
         }
     },
 
+    "Lopunny": {
+        "movesets": {
+            "gen7ou": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Fake Out",
+                        "Return",
+                        "High Jump Kick",
+                        "Mach Punch"
+                    ],
+                    "item": "Lopunnite",
+                    "ability": "Limber"
+                }
+            },
+            "gen7pu": {
+                "Offensive Pivot": {
+                    "moves": [
+                        "Mach Punch",
+                        "U-turn",
+                        "Return",
+                        "Close Combat"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Limber"
+                }
+            }
+        },
+        "extra_moves": [
+            "Drain Punch"
+        ]
+    },
+
     "Mismagius": {
         "movesets": {
             "gen7nu": {
