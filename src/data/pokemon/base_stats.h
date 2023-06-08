@@ -26962,12 +26962,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_RAICHU_ALOLAN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 85,
+        .baseDefense   = 50,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 60,
         .baseAttack    = 85,
         .baseDefense   = 50,
         .baseSpeed     = 110,
         .baseSpAttack  = 95,
         .baseSpDefense = 85,
+    #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 75,
