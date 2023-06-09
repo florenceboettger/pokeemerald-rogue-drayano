@@ -3820,6 +3820,23 @@
         }
     },
 
+    "Corsola": {
+        "movesets": {
+            "gen7zu": {
+                "Special Wall": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Power Gem",
+                        "Toxic",
+                        "Recover"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Regenerator"
+                }
+            }
+        }
+    },
+
     "Hitmontop": {
         "movesets": {
             "gen8nu": {
@@ -10452,6 +10469,36 @@
             "Play Rough",
             "Shadow Claw",
             "Throat Chop"
+        ]
+    },
+
+    "Cursola": {
+        "movesets": {
+            "gen8zu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Power Gem",
+                        "Earth Power",
+                        "Mystical Fire"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Weak Armor"
+                },
+                "Unburden": {
+                    "moves": [
+                        "Strength Sap",
+                        "Shadow Ball",
+                        "Scald",
+                        "Earth Power"
+                    ],
+                    "item": "Ghost Gem",
+                    "ability": "Unburden"
+                }
+            }
+        },
+        "extra_moves": [
+            "Will-O-Wisp"
         ]
     },
 
