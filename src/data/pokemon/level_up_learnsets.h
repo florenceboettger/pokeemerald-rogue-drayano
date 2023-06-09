@@ -5263,7 +5263,18 @@ static const struct LevelUpMove sOctilleryLevelUpLearnset[] = {
 
 static const struct LevelUpMove sDelibirdLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_PRESENT),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 5, MOVE_ICY_WIND),
+    LEVEL_UP_MOVE(15, MOVE_SWIFT),
+#endif
     LEVEL_UP_MOVE(25, MOVE_DRILL_PECK),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(35, MOVE_AIR_CUTTER),
+    LEVEL_UP_MOVE(45, MOVE_BRAVE_BIRD),
+    LEVEL_UP_MOVE(55, MOVE_AIR_SLASH),
+    LEVEL_UP_MOVE(65, MOVE_BLIZZARD),
+    LEVEL_UP_MOVE(75, MOVE_HURRICANE),
+#endif
     LEVEL_UP_END
 };
 

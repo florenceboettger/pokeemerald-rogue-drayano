@@ -3837,6 +3837,49 @@
         }
     },
 
+    "Delibird": {
+        "movesets": {
+            "gen7pu": {
+                "Lead": {
+                    "moves": [
+                        "Spikes",
+                        "Rapid Spin",
+                        "Icy Wind",
+                        "Destiny Bond"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Technician"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Blizzard",
+                        "Hurricane",
+                        "U-turn",
+                        "Water Pulse"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Sheer Force"
+                },
+                "Nasty Plot": {
+                    "moves": [
+                        "Ice Beam",
+                        "Air Slash",
+                        "Nasty Plot",
+                        "Water Pulse"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sheer Force"
+                }
+            }
+        },
+        "extra_moves": [
+            "Acrobatics",
+            "Hone Claws",
+            "Triple Axel",
+            "Work Up"
+        ]
+    },
+
     "Hitmontop": {
         "movesets": {
             "gen8nu": {

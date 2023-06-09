@@ -5697,7 +5697,11 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM43_SECRET_POWER)
                                           TMHM(TM46_THIEF)
                                           TMHM(TM06_TOXIC)
-                                          TMHM(TM03_WATER_PULSE)),
+                                          TMHM(TM03_WATER_PULSE)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT)
+                                          TMHM(HM04_STRENGTH)
+                                        #endif),
 
     [SPECIES_MANTINE]     = TMHM_LEARNSET(TMHM(TM40_AERIAL_ACE)
                                           TMHM(TM45_ATTRACT)

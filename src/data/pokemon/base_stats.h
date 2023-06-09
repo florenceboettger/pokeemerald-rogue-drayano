@@ -7713,12 +7713,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_DELIBIRD] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 45,
+        .baseAttack    = 85,
+        .baseDefense   = 50,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 50,
+    #else
         .baseHP        = 45,
         .baseAttack    = 55,
         .baseDefense   = 45,
         .baseSpeed     = 75,
         .baseSpAttack  = 65,
         .baseSpDefense = 45,
+    #endif
         .type1 = TYPE_ICE,
         .type2 = TYPE_FLYING,
         .catchRate = 45,
@@ -7730,7 +7739,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_FAST,
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_VITAL_SPIRIT, ABILITY_TECHNICIAN, ABILITY_SHEER_FORCE},
+    #else
         .abilities = {ABILITY_VITAL_SPIRIT, ABILITY_HUSTLE, ABILITY_INSOMNIA},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
