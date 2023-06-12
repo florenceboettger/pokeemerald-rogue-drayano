@@ -5578,7 +5578,7 @@ const struct BaseStats gBaseStats[] =
         .type2 = TYPE_FAIRY,
     #else
         .type1 = TYPE_GRASS,
-        .type2 = TYPE_FAIRY,
+        .type2 = TYPE_GRASS,
     #endif
         .catchRate = 45,
         .expYield = 236,
