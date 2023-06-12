@@ -5574,6 +5574,8 @@ const struct BaseStats gBaseStats[] =
         .baseSpDefense = 100,
     #endif
     #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_GRASS,
+        .type2 = TYPE_FAIRY,
     #else
         .type1 = TYPE_GRASS,
         .type2 = TYPE_FAIRY,
