@@ -25698,7 +25698,7 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 120,
         .baseSpeed     = 78,
     #ifdef ROGUE_DRAYANO
-        .baseSpAttack  = 145,
+        .baseSpAttack  = 140,
     #else
         .baseSpAttack  = 135,
     #endif
