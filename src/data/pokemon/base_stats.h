@@ -19706,7 +19706,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_PROTEAN, ABILITY_INFILTRATOR},
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
     #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
     #endif
@@ -19734,7 +19734,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_PROTEAN, ABILITY_INFILTRATOR},
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
     #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
     #endif
@@ -27058,7 +27058,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_MARVEL_SCALE, ABILITY_SLUSH_RUSH},
+        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_ICE_BODY, ABILITY_SLUSH_RUSH},
     #else
         .abilities = {ABILITY_SNOW_CLOAK, ABILITY_NONE, ABILITY_SLUSH_RUSH},
     #endif
