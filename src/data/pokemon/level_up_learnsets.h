@@ -812,7 +812,8 @@ static const struct LevelUpMove sVulpixLevelUpLearnset[] = {
 
 static const struct LevelUpMove sNinetalesLevelUpLearnset[] = {
 #ifdef ROGUE_DRAYANO
-    LEVEL_UP_MOVE( 1, MOVE_MOONBLAST),
+    LEVEL_UP_MOVE( 0, MOVE_DAZZLING_GLEAM),
+    LEVEL_UP_MOVE( 1, MOVE_DAZZLING_GLEAM),
 #endif
     LEVEL_UP_MOVE( 1, MOVE_IMPRISON),
     LEVEL_UP_MOVE( 1, MOVE_NASTY_PLOT),
