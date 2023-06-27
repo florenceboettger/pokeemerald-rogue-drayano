@@ -3549,7 +3549,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_BALLISTIC | FLAG_SHEER_FORCE_BOOST,
     #endif
         .split = SPLIT_SPECIAL,
+    #ifdef ROGUE_DRAYANO
+        .zMovePower = 175,
+    #else
         .zMovePower = 120,
+    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
