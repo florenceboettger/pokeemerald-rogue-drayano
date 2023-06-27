@@ -4462,6 +4462,32 @@
         ]
     },
 
+    "Taillow": {
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
+    "Swellow": {
+        "movesets": {
+            "gen7ru": {
+                "Physical Pivot": {
+                    "moves": [
+                        "Extreme Speed",
+                        "Brave Bird",
+                        "U-turn",
+                        "Roost"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Scrappy"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
     "Masquerain": {
         "extra_moves": [
             "Acrobatics",
@@ -7810,6 +7836,92 @@
             "Icy Wind",
             "Knock Off",
             "Scald"
+        ]
+    },
+
+    "Pidove": {
+        "movesets": {
+            "gen7lc": {
+                "Z-Tailwind": {
+                    "moves": [
+                        "Tailwind",
+                        "Air Cutter",
+                        "Hidden Power Grass",
+                        "Swift"
+                    ],
+                    "item": "Flyinium Z",
+                    "ability": "Super Luck"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat",
+            "Hurricane"
+        ]
+    },
+
+    "Unfezant": {
+        "movesets": {
+            "gen7pu": {
+                "Tailwind Support": {
+                    "moves": [
+                        "Tailwind",
+                        "Hypnosis",
+                        "U-turn",
+                        "Boomburst"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Super Luck"
+                }
+            },
+            "gen8pu": {
+                "Defog": {
+                    "moves": [
+                        "Defog",
+                        "Roost",
+                        "Air Slash",
+                        "U-turn"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Super Luck"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Hurricane",
+                        "U-turn",
+                        "Toxic",
+                        "Defog"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Super Luck"
+                }
+            },
+            "gen8zu": {
+                "Choice Band": {
+                    "moves": [
+                        "Air Slash",
+                        "U-turn",
+                        "Boomburst",
+                        "Heat Wave"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Unaware"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Hurricane",
+                        "U-turn",
+                        "Boomburst",
+                        "Heat Wave"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Super Luck"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dual Wingbeat",
+            "Hurricane"
         ]
     },
 

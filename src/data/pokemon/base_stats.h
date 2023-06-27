@@ -9184,11 +9184,15 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 60,
         .baseSpeed     = 125,
         .baseSpDefense = 50,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 85,
+    #else
         #if P_UPDATED_STATS >= GEN_7
             .baseSpAttack  = 75,
         #else
             .baseSpAttack  = 50,
         #endif
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
         .catchRate = 45,
@@ -16056,12 +16060,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PIDOVE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 36,
+        .baseDefense   = 50,
+        .baseSpeed     = 43,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 30,
+    #else
         .baseHP        = 50,
         .baseAttack    = 55,
         .baseDefense   = 50,
         .baseSpeed     = 43,
         .baseSpAttack  = 36,
         .baseSpDefense = 30,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
         .catchRate = 255,
@@ -16073,19 +16086,32 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_UNAWARE},
+    #else
         .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
     },
 
     [SPECIES_TRANQUILL] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 50,
+        .baseDefense   = 65,
+        .baseSpeed     = 66,
+        .baseSpAttack  = 77,
+        .baseSpDefense = 42,
+    #else
         .baseHP        = 62,
         .baseAttack    = 77,
         .baseDefense   = 62,
         .baseSpeed     = 65,
         .baseSpAttack  = 50,
         .baseSpDefense = 42,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
         .catchRate = 120,
@@ -16097,13 +16123,25 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_UNAWARE},
+    #else
         .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
     },
 
     [SPECIES_UNFEZANT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 80,
+        .baseAttack    = 65,
+        .baseDefense   = 80,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 55,
+    #else
         .baseHP        = 80,
         .baseDefense   = 80,
         .baseSpeed     = 93,
@@ -16114,6 +16152,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseAttack    = 105,
         #endif
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
         .catchRate = 45,
@@ -16125,7 +16164,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_UNAWARE},
+    #else
         .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
         .flags = FLAG_GENDER_DIFFERENCE,
