@@ -7461,8 +7461,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 50,
         .baseSpDefense = 50,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_GROUND,
+    #else
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
+    #endif
         .catchRate = 120,
         .expYield = 66,
         .evYield_Attack    = 1,
@@ -7485,8 +7490,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 55,
         .baseSpAttack  = 75,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_GROUND,
+    #else
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
+    #endif
         .catchRate = 60,
         .expYield = 175,
         .evYield_Attack    = 2,

@@ -3793,6 +3793,43 @@
         ]
     },
 
+    "Teddiursa": {
+        "movesets": {
+            "gen7lc": {
+                "Quick Feet": {
+                    "moves": [
+                        "Facade",
+                        "Crunch",
+                        "Earthquake",
+                        "Protect"
+                    ],
+                    "item": "Toxic Orb",
+                    "ability": "Quick Feet"
+                }
+            }
+        },
+        "extra_moves": [
+            "High Horsepower"
+        ]
+    },
+
+    "Ursaring": {
+        "movesets": {
+            "gen7pu": {
+                "Trick Room Wallbreaker": {
+                    "moves": [
+                        "Swords Dance",
+                        "Facade",
+                        "Crunch",
+                        "Earthquake"
+                    ],
+                    "item": "Flame Orb",
+                    "ability": "Guts"
+                }
+            }
+        }
+    },
+
     "Magcargo": {
         "movesets": {
             "gen7pu": {
