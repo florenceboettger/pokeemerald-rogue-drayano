@@ -152,6 +152,9 @@ const u16 gEggMoves[] = {
         MOVE_VENOM_DRENCH),
 
     egg_moves(VULPIX,
+    #ifdef ROGUE_DRAYANO
+        MOVE_MOONBLAST,
+    #endif
         MOVE_FEINT_ATTACK,
         MOVE_HYPNOSIS,
         MOVE_FLAIL,

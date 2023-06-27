@@ -6221,7 +6221,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_FAST,
         .eggGroup1 = EGG_GROUP_UNDISCOVERED,
         .eggGroup2 = EGG_GROUP_UNDISCOVERED,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER},
+    #else
         .abilities = {ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRIEND_GUARD},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
     },
@@ -7457,8 +7461,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 50,
         .baseSpDefense = 50,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_GROUND,
+    #else
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
+    #endif
         .catchRate = 120,
         .expYield = 66,
         .evYield_Attack    = 1,
@@ -7481,8 +7490,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 55,
         .baseSpAttack  = 75,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_GROUND,
+    #else
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
+    #endif
         .catchRate = 60,
         .expYield = 175,
         .evYield_Attack    = 2,
@@ -19702,7 +19716,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_PROTEAN, ABILITY_INFILTRATOR},
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
     #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
     #endif
@@ -19730,7 +19744,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_WATER_1,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_PROTEAN, ABILITY_INFILTRATOR},
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
     #else
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
     #endif
@@ -25694,7 +25708,7 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 120,
         .baseSpeed     = 78,
     #ifdef ROGUE_DRAYANO
-        .baseSpAttack  = 145,
+        .baseSpAttack  = 140,
     #else
         .baseSpAttack  = 135,
     #endif
@@ -27054,7 +27068,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_MARVEL_SCALE, ABILITY_SLUSH_RUSH},
+        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_ICE_BODY, ABILITY_SLUSH_RUSH},
     #else
         .abilities = {ABILITY_SNOW_CLOAK, ABILITY_NONE, ABILITY_SLUSH_RUSH},
     #endif

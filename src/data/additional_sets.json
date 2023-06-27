@@ -3793,6 +3793,46 @@
         ]
     },
 
+    "Teddiursa": {
+        "movesets": {
+            "gen7lc": {
+                "Quick Feet": {
+                    "moves": [
+                        "Facade",
+                        "Crunch",
+                        "Earthquake",
+                        "Protect"
+                    ],
+                    "item": "Toxic Orb",
+                    "ability": "Quick Feet"
+                }
+            }
+        },
+        "extra_moves": [
+            "High Horsepower"
+        ]
+    },
+
+    "Ursaring": {
+        "movesets": {
+            "gen7pu": {
+                "Trick Room Wallbreaker": {
+                    "moves": [
+                        "Swords Dance",
+                        "Facade",
+                        "Crunch",
+                        "Earthquake"
+                    ],
+                    "item": "Flame Orb",
+                    "ability": "Guts"
+                }
+            }
+        },
+        "extra_moves": [
+            "High Horsepower"
+        ]
+    },
+
     "Magcargo": {
         "movesets": {
             "gen7pu": {
@@ -4328,6 +4368,16 @@
                         "Outrage"
                     ],
                     "item": "Grassy Seed",
+                    "ability": "Unburden"
+                },
+                "Flying Gem + Acrobatics": {
+                    "moves": [
+                        "Leaf Blade",
+                        "Earthquake",
+                        "Acrobatics",
+                        "Outrage"
+                    ],
+                    "item": "Flying Gem",
                     "ability": "Unburden"
                 }
             },
