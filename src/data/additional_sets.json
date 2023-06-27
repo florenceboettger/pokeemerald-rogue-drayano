@@ -4366,6 +4366,16 @@
                     ],
                     "item": "Grassy Seed",
                     "ability": "Unburden"
+                },
+                "Flying Gem + Acrobatics": {
+                    "moves": [
+                        "Leaf Blade",
+                        "Earthquake",
+                        "Acrobatics",
+                        "Outrage"
+                    ],
+                    "item": "Flying Gem",
+                    "ability": "Unburden"
                 }
             },
             "gen71v1": {
