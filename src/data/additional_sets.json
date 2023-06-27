@@ -3827,7 +3827,10 @@
                     "ability": "Guts"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "High Horsepower"
+        ]
     },
 
     "Magcargo": {
