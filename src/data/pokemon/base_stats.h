@@ -15584,12 +15584,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_OSHAWOTT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 55,
+        .baseAttack    = 63,
+        .baseDefense   = 45,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 45,
+    #else
         .baseHP        = 55,
         .baseAttack    = 55,
         .baseDefense   = 45,
         .baseSpeed     = 45,
         .baseSpAttack  = 63,
         .baseSpDefense = 45,
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
         .catchRate = 45,
@@ -15612,12 +15621,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_DEWOTT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 83,
+        .baseDefense   = 60,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 75,
         .baseAttack    = 75,
         .baseDefense   = 60,
         .baseSpeed     = 60,
         .baseSpAttack  = 83,
         .baseSpDefense = 60,
+    #endif
     #ifdef ROGUE_DRAYANO
         .type1 = TYPE_WATER,
         .type2 = TYPE_FIGHTING,
