@@ -1885,7 +1885,10 @@
                     "ability": "Chlorophyll"
                 }
             }
-        }
+        },
+        "extra_moves": [
+            "Soft-Boiled"
+        ]
     },
 
     "Exeggutor-Alola": {
@@ -1921,6 +1924,7 @@
             "Iron Head",
             "Iron Tail",
             "Knock Off",
+            "Soft-Boiled",
             "Stomping Tantrum",
             "Superpower",
             "Swords Dance",
