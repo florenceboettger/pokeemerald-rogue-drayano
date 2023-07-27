@@ -24489,12 +24489,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SIZZLIPEDE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 65,
+        .baseDefense   = 45,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 50,
+    #else
         .baseHP        = 50,
         .baseAttack    = 65,
         .baseDefense   = 45,
         .baseSpeed     = 45,
         .baseSpAttack  = 50,
         .baseSpDefense = 50,
+    #endif
         .type1 = TYPE_FIRE,
         .type2 = TYPE_BUG,
         .catchRate = 190,
