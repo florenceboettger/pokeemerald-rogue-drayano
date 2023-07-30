@@ -6782,7 +6782,8 @@
     "Glameow": {
         "extra_moves": [
             "Covet",
-            "Crunch"
+            "Crunch",
+            "Shadow Claw"
         ]
     },
 
@@ -6812,9 +6813,11 @@
             }
         },
         "extra_moves": [
+            "Bulldoze",
             "Covet",
             "Crunch",
-            "Play Rough"
+            "Play Rough",
+            "Shadow Claw"
         ]
     },
 
@@ -10182,6 +10185,7 @@
             }
         },
         "extra_moves": [
+            "Acrobatics",
             "Iron Head"
         ]
     },
