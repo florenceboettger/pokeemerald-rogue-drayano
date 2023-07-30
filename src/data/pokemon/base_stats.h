@@ -17107,12 +17107,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MARACTUS] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 106,
+        .baseDefense   = 72,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 86,
+        .baseSpDefense = 81,
+    #else
         .baseHP        = 75,
         .baseAttack    = 86,
         .baseDefense   = 67,
         .baseSpeed     = 60,
         .baseSpAttack  = 106,
         .baseSpDefense = 67,
+    #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_GRASS,
         .catchRate = 255,

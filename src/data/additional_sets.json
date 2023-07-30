@@ -8035,6 +8035,39 @@
         ]
     },
 
+    "Maractus": {
+        "movesets": {
+            "gen7pu": {
+                "Lead": {
+                    "moves": [
+                        "Spikes",
+                        "Scald",
+                        "Needle Arm",
+                        "Sucker Punch"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Water Absorb"
+                }
+            },
+            "gen8zu": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Spikes",
+                        "Synthesis",
+                        "Horn Leech",
+                        "Knock Off"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Absorb"
+                }
+            }
+        },
+        "extra_moves": [
+            "Bounce",
+            "Drain Punch"
+        ]
+    },
+
     "Dwebble": {
         "movesets": {
             "gen8lc": {
