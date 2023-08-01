@@ -16955,12 +16955,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BASCULIN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 92,
+        .baseDefense   = 65,
+        .baseSpeed     = 98,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 55,
+    #else
         .baseHP        = 70,
         .baseAttack    = 92,
         .baseDefense   = 65,
         .baseSpeed     = 98,
         .baseSpAttack  = 80,
         .baseSpDefense = 55,
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
         .catchRate = 25,
@@ -28407,12 +28416,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_BASCULIN_BLUE_STRIPED] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 92,
+        .baseDefense   = 65,
+        .baseSpeed     = 98,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 55,
+    #else
         .baseHP        = 70,
         .baseAttack    = 92,
         .baseDefense   = 65,
         .baseSpeed     = 98,
         .baseSpAttack  = 80,
         .baseSpDefense = 55,
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
         .catchRate = 25,
