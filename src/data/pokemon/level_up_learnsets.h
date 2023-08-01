@@ -6788,6 +6788,9 @@ static const struct LevelUpMove sWailordLevelUpLearnset[] = {
     LEVEL_UP_MOVE(51, MOVE_BOUNCE),
     LEVEL_UP_MOVE(58, MOVE_HYDRO_PUMP),
     LEVEL_UP_MOVE(65, MOVE_HEAVY_SLAM),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(72, MOVE_BOUNCY_BUBBLE),
+#endif
     LEVEL_UP_END
 };
 

@@ -4636,6 +4636,23 @@
         ]
     },
 
+    "Wailord": {
+        "movesets": {
+            "gen7pu": {
+                "Bulky Offense": {
+                    "moves": [
+                        "Bouncy Bubble",
+                        "Focus Blast",
+                        "Ice Beam",
+                        "Noble Roar"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Pressure"
+                }
+            }
+        }
+    },
+
     "Trapinch": {
         "extra_moves": [
             "Scorching Sands"

@@ -10440,7 +10440,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_WAILORD] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 200,
+    #else
         .baseHP        = 170,
+    #endif
         .baseAttack    = 90,
         .baseDefense   = 45,
         .baseSpeed     = 60,
