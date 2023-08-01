@@ -4653,6 +4653,52 @@
         }
     },
 
+    "Numel": {
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
+    "Camerupt": {
+        "movesets": {
+            "gen7ru": {
+                "Tank": {
+                    "moves": [
+                        "Fire Blast",
+                        "Earth Power",
+                        "Slack Off",
+                        "Power Gem"
+                    ]
+                }
+            },
+            "gen8zu": {
+                "Simple": {
+                    "moves": [
+                        "Flame Charge",
+                        "Growth",
+                        "Fire Blast",
+                        "Earthquake"
+                    ],
+                    "item": "Groundium Z",
+                    "ability": "Simple"
+                },
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Lava Plume",
+                        "Slack Off",
+                        "Earth Power"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Solid Rock"
+                }
+            }
+        },
+        "extra_moves": [
+            "Rock Climb"
+        ]
+    },
+
     "Trapinch": {
         "extra_moves": [
             "Scorching Sands"
