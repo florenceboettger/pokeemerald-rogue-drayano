@@ -10061,6 +10061,23 @@
         ]
     },
 
+    "Goodra": {
+        "movesets": {
+            "gen7vgc2017": {
+                "Special Tank": {
+                    "moves": [
+                        "Dragon Pulse",
+                        "Sludge Bomb",
+                        "Hydro Pump",
+                        "Flamethrower"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Sap Sipper"
+                }
+            }
+        }
+    },
+
     "Crabominable": {
         "movesets": {
             "gen7pu": {

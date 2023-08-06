@@ -20940,8 +20940,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 55,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_DRAGON,
+        .type2 = TYPE_WATER,
+    #else
         .type1 = TYPE_DRAGON,
         .type2 = TYPE_DRAGON,
+    #endif
         .catchRate = 45,
         .expYield = 60,
         .evYield_SpDefense = 1,
@@ -20967,8 +20972,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 60,
         .baseSpAttack  = 83,
         .baseSpDefense = 113,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_DRAGON,
+        .type2 = TYPE_WATER,
+    #else
         .type1 = TYPE_DRAGON,
         .type2 = TYPE_DRAGON,
+    #endif
         .catchRate = 45,
         .expYield = 158,
         .evYield_SpDefense = 2,
@@ -20994,8 +21004,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 110,
         .baseSpDefense = 150,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_DRAGON,
+        .type2 = TYPE_WATER,
+    #else
         .type1 = TYPE_DRAGON,
         .type2 = TYPE_DRAGON,
+    #endif
         .catchRate = 45,
         .expYield = 270,
         .evYield_SpDefense = 3,
