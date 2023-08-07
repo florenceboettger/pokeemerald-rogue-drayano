@@ -4416,6 +4416,258 @@
         ]
     },
 
+    "Mudkip": {
+        "movesets": {
+            "gen7lc": {
+                "Bulky Attacker": {
+                    "moves": [
+                        "Waterfall",
+                        "Ice Beam",
+                        "Superpower",
+                        "Double-Edge"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Water Veil"
+                }
+            }
+        }
+    },
+
+    "Swampert": {
+        "movesets": {
+            "gen7ou": {
+                "Rain Sweeper": {
+                    "moves": [
+                        "Waterfall",
+                        "Earthquake",
+                        "Ice Punch",
+                        "Stealth Rock"
+                    ],
+                    "item": "Swampertite",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen7uu": {
+                "Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Earthquake",
+                        "Scald",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Veil"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Earthquake",
+                        "Waterfall",
+                        "Ice Punch",
+                        "Superpower"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen7monotype": {
+                "Defensive (Water)": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Scald",
+                        "Roar",
+                        "Earthquake"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Veil"
+                },
+                "Rain Sweeper (Water)": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Waterfall",
+                        "Earthquake",
+                        "Ice Punch"
+                    ],
+                    "item": "Swampertite",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen7doublesou": {
+                "Rain Attacker": {
+                    "moves": [
+                        "Waterfall",
+                        "Earthquake",
+                        "Superpower",
+                        "Protect"
+                    ],
+                    "item": "Swampertite",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Mega Rain Attacker": {
+                    "moves": [
+                        "Waterfall",
+                        "Earthquake",
+                        "Ice Punch",
+                        "Substitute"
+                    ],
+                    "item": "Swampertite",
+                    "ability": "Water Veil"
+                },
+                "Utility": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Yawn",
+                        "Roar",
+                        "Earthquake"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen7vgc2018": {
+                "Swampertite": {
+                    "moves": [
+                        "Waterfall",
+                        "Earthquake",
+                        "Rock Slide",
+                        "Protect"
+                    ],
+                    "item": "Swampertite",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen71v1": {
+                "Yawn + Protect": {
+                    "moves": [
+                        "Yawn",
+                        "Protect",
+                        "Ice Beam",
+                        "Earthquake"
+                    ],
+                    "item": "Swampertite",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen8uu": {
+                "Mixed Wall": {
+                    "moves": [
+                        "Earthquake",
+                        "Flip Turn",
+                        "Toxic",
+                        "Stealth Rock"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen8nationaldex": {
+                "Rain Sweeper": {
+                    "moves": [
+                        "Waterfall",
+                        "Earthquake",
+                        "Ice Punch",
+                        "Flip Turn"
+                    ],
+                    "item": "Swampertite",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen8ou": {
+                "Defensive Pivot": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Flip Turn",
+                        "Earthquake",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen8monotype": {
+                "Specially Defensive": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Earthquake",
+                        "Roar",
+                        "Flip Turn"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen8battlestadiumsingles": {
+                "Stealth Rock Setter": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Flip Turn",
+                        "Yawn",
+                        "Ice Beam"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Damp"
+                }
+            },
+            "gen81v1": {
+                "Assault Vest": {
+                    "moves": [
+                        "Ice Punch",
+                        "Earthquake",
+                        "Counter",
+                        "Mirror Coat"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Water Veil"
+                },
+                "Chilan Berry": {
+                    "moves": [
+                        "Earthquake",
+                        "Ice Beam",
+                        "Yawn",
+                        "Endure"
+                    ],
+                    "item": "Chilan Berry",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen8nationaldexuu": {
+                "Defensive Pivot": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Flip Turn",
+                        "Earthquake",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Veil"
+                }
+            },
+            "gen8nationaldexmonotype": {
+                "Defensive (Water)": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Earthquake",
+                        "Flip Turn",
+                        "Roar"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Water Veil"
+                },
+                "Swiftly Swimming (Water)": {
+                    "moves": [
+                        "Waterfall",
+                        "Earthquake",
+                        "Stone Edge",
+                        "Flip Turn"
+                    ],
+                    "item": "Swampertite",
+                    "ability": "Water Veil"
+                }
+            }
+        }
+    },
+
     "Zigzagoon": {
         "extra_moves": [
             "Rock Climb"
