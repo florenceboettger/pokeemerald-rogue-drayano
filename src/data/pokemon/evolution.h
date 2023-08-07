@@ -113,7 +113,12 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
                                        {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
                                        {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_GLACEON},
                                        {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON},
-                                       {EVO_MOVE_TYPE, TYPE_FAIRY, SPECIES_SYLVEON}},
+                                    #ifdef ROGUE_DRAYANO
+                                       {EVO_ITEM, ITEM_SHINY_STONE, SPECIES_SYLVEON}
+                                    #else
+                                       {EVO_MOVE_TYPE, TYPE_FAIRY, SPECIES_SYLVEON}
+                                    #endif
+                                    },
     [SPECIES_PORYGON]               = {{EVO_TRADE_ITEM, ITEM_UPGRADE, SPECIES_PORYGON2}},
     [SPECIES_OMANYTE]               = {{EVO_LEVEL, 40, SPECIES_OMASTAR}},
     [SPECIES_KABUTO]                = {{EVO_LEVEL, 40, SPECIES_KABUTOPS}},
@@ -205,7 +210,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SHROOMISH]             = {{EVO_LEVEL, 23, SPECIES_BRELOOM}},
     [SPECIES_WINGULL]               = {{EVO_LEVEL, 25, SPECIES_PELIPPER}},
     [SPECIES_SURSKIT]               = {{EVO_LEVEL, 22, SPECIES_MASQUERAIN}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_WAILMER]               = {{EVO_LEVEL, 36, SPECIES_WAILORD}},
+#else
     [SPECIES_WAILMER]               = {{EVO_LEVEL, 40, SPECIES_WAILORD}},
+#endif
     [SPECIES_SKITTY]                = {{EVO_ITEM, ITEM_MOON_STONE, SPECIES_DELCATTY}},
     [SPECIES_BALTOY]                = {{EVO_LEVEL, 36, SPECIES_CLAYDOL}},
     [SPECIES_NOSEPASS]              = {{EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_PROBOPASS}},

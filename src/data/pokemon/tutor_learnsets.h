@@ -6784,6 +6784,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_ROLLOUT)
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_SOFT_BOILED)
+                                        #endif
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_SWAGGER)
                                             | TUTOR(MOVE_SWIFT)

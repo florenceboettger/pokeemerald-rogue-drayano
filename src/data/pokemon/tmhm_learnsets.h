@@ -17392,6 +17392,10 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM24_THUNDERBOLT)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM03_SURF)
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_SLIGGOO]     = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
@@ -17412,6 +17416,10 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM11_SUNNY_DAY)
                                           TMHM(TM24_THUNDERBOLT)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM03_SURF)
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_GOODRA]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
@@ -17441,6 +17449,10 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM25_THUNDER)
                                           TMHM(TM24_THUNDERBOLT)
                                           TMHM(TM06_TOXIC)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM03_SURF)
+                                          TMHM(HM07_WATERFALL)
+                                        #endif
                                           TMHM(TM03_WATER_PULSE)),
 
     [SPECIES_KLEFKI]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
