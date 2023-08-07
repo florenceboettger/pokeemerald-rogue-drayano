@@ -2321,6 +2321,7 @@ static const struct LevelUpMove sExeggcuteLevelUpLearnset[] = {
     LEVEL_UP_MOVE(34, MOVE_SOFT_BOILED),
 #else
     LEVEL_UP_MOVE(33, MOVE_WORRY_SEED),
+#endif
     LEVEL_UP_MOVE(37, MOVE_NATURAL_GIFT),
     LEVEL_UP_MOVE(43, MOVE_SOLAR_BEAM),
     LEVEL_UP_MOVE(47, MOVE_EXTRASENSORY),
