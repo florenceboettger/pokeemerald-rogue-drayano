@@ -3863,6 +3863,87 @@
         }
     },
 
+    "Qwilfish": {
+        "movesets": {
+            "Rain Sweeper": {
+                "moves": [
+                    "Swords Dance",
+                    "Waterfall",
+                    "Gunk Shot",
+                    "Explosion"
+                ],
+                "item": "Life Orb",
+                "ability": "Swift Swim"
+            }
+        }
+    },
+
+    "Sneasel": {
+        "movesets": {
+            "gen7nu": {
+                "Choice Band": {
+                    "moves": [
+                        "Knock Off",
+                        "Icicle Crash",
+                        "Ice Shard",
+                        "Pursuit"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Technician"
+                }
+            },
+            "gen7ru": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Feint Attack",
+                        "Icicle Crash",
+                        "Ice Shard",
+                        "Pursuit"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Technician"
+                }
+            },
+            "gen8nu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Swords Dance",
+                        "Triple Axel",
+                        "Knock Off",
+                        "Ice Shard"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Technician"
+                }
+            },
+            "gen8pu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Knock Off",
+                        "Triple Axel",
+                        "Ice Shard"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Technician"
+                },
+                "Choice Band": {
+                    "moves": [
+                        "Knock Off",
+                        "Triple Axel",
+                        "Ice Shard",
+                        "Low Kick"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Technician"
+                }
+            }
+        },
+        "extra_moves": [
+            "Power-Up Punch"
+        ]
+    },
+
     "Teddiursa": {
         "movesets": {
             "gen7lc": {
@@ -7290,6 +7371,12 @@
             "Poison Jab",
             "Shadow Claw",
             "Zen Headbutt"
+        ]
+    },
+
+    "Weavile": {
+        "extra_moves": [
+            "Crunch"
         ]
     },
 

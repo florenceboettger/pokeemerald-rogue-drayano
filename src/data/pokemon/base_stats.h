@@ -7357,6 +7357,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_QWILFISH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 95,
+        .baseDefense   = 95,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 55,
+    #else
         .baseHP        = 65,
         .baseAttack    = 95,
         .baseSpeed     = 85,
@@ -7367,6 +7375,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseDefense   = 75,
         #endif
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_POISON,
         .catchRate = 45,
@@ -7479,7 +7488,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_INNER_FOCUS, ABILITY_KEEN_EYE, ABILITY_TECHNICIAN},
+    #else
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_KEEN_EYE, ABILITY_PICKPOCKET},
+    #endif
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = TRUE,
     },
@@ -7735,12 +7748,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_OCTILLERY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 115,
+        .baseDefense   = 75,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 115,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 75,
         .baseAttack    = 105,
         .baseDefense   = 75,
         .baseSpeed     = 45,
         .baseSpAttack  = 105,
         .baseSpDefense = 75,
+    #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_WATER,
         .catchRate = 75,
