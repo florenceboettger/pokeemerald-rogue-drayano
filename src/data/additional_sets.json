@@ -3797,6 +3797,72 @@
         ]
     },
 
+    "Snubbull": {
+        "movesets": {
+            "gen7lc": {
+                "Berry Juice": {
+                    "moves": [
+                        "Play Rough",
+                        "Close Combat",
+                        "Bulk Up",
+                        "Earthquake"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Intimidate"
+                },
+                "Sub Snub (Substitute)": {
+                    "moves": [
+                        "Substitute",
+                        "Play Rough",
+                        "Close Combat",
+                        "Fire Punch"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Intimidate"
+                },
+                "Eviolite": {
+                    "moves": [
+                        "Play Rough",
+                        "Earthquake",
+                        "Close Combat",
+                        "Thief"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Intimidate"
+                }
+            }
+        }
+    },
+
+    "Granbull": {
+        "movesets": {
+            "gen7pu": {
+                "Offensive Support": {
+                    "moves": [
+                        "Close Combat",
+                        "Thunder Wave",
+                        "Play Rough",
+                        "Earthquake"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Intimidate"
+                }
+            },
+            "gen7zu": {
+                "Defensive": {
+                    "moves": [
+                        "Play Rough",
+                        "Earthquake",
+                        "Toxic",
+                        "Close Combat"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Intimidate"
+                }
+            }
+        }
+    },
+
     "Teddiursa": {
         "movesets": {
             "gen7lc": {

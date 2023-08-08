@@ -7105,12 +7105,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GIRAFARIG] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 90,
+        .baseDefense   = 65,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 70,
         .baseAttack    = 80,
         .baseDefense   = 65,
         .baseSpeed     = 85,
         .baseSpAttack  = 90,
         .baseSpDefense = 65,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 60,
@@ -7122,7 +7131,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_INNER_FOCUS, ABILITY_RATTLED, ABILITY_SAP_SIPPER},
+    #else
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_EARLY_BIRD, ABILITY_SAP_SIPPER},
+    #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
     },
@@ -7268,12 +7281,20 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SNUBBULL] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+    #else
         .baseHP        = 60,
+    #endif
         .baseAttack    = 80,
         .baseDefense   = 50,
         .baseSpeed     = 30,
         .baseSpAttack  = 40,
         .baseSpDefense = 40,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_FAIRY,
+        .type2 = TYPE_FIGHTING,
+    #else
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_FAIRY,
             .type2 = TYPE_FAIRY,
@@ -7281,6 +7302,7 @@ const struct BaseStats gBaseStats[] =
             .type1 = TYPE_NORMAL,
             .type2 = TYPE_NORMAL,
         #endif
+    #endif
         .catchRate = 190,
         .expYield = 60,
         .evYield_Attack    = 1,
@@ -7297,12 +7319,20 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GRANBULL] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 100,
+    #else
         .baseHP        = 90,
+    #endif
         .baseAttack    = 120,
         .baseDefense   = 75,
         .baseSpeed     = 45,
         .baseSpAttack  = 60,
         .baseSpDefense = 60,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_FAIRY,
+        .type2 = TYPE_FIGHTING,
+    #else
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_FAIRY,
             .type2 = TYPE_FAIRY,
@@ -7310,6 +7340,7 @@ const struct BaseStats gBaseStats[] =
             .type1 = TYPE_NORMAL,
             .type2 = TYPE_NORMAL,
         #endif
+    #endif
         .catchRate = 75,
         .expYield = 158,
         .evYield_Attack    = 2,
