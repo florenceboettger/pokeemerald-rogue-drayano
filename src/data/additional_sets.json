@@ -1761,6 +1761,285 @@
         }
     },
 
+    "Gengar": {
+        "movesets": {
+            "gen7anythinggoes": {
+                "Offensive Trapper": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Taunt",
+                        "Substitute"
+                    ],
+                    "item": "Gengarite",
+                    "ability": "Levitate"
+                },
+                "Status Inducer": {
+                    "moves": [
+                        "Hex",
+                        "Sludge Bomb",
+                        "Will-O-Wisp",
+                        "Taunt"
+                    ],
+                    "item": "Gengarite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7ubers": {
+                "Offensive Trapper": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Icy Wind",
+                        "Thunder"
+                    ],
+                    "item": "Gengarite",
+                    "ability": "Levitate"
+                },
+                "Hex": {
+                    "moves": [
+                        "Hex",
+                        "Will-O-Wisp",
+                        "Sludge Bomb",
+                        "Substitute"
+                    ],
+                    "item": "Gengarite",
+                    "ability": "Levitate"
+                },
+                "Utility Trapper": {
+                    "moves": [
+                        "Taunt",
+                        "Destiny Bond",
+                        "Sludge Wave",
+                        "Shadow Ball"
+                    ],
+                    "item": "Gengarite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7ou": {
+                "Offensive Utility": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Taunt",
+                        "Aura Sphere"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Levitate"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Aura Sphere",
+                        "Trick"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7monotype": {
+                "Choice Scarf (Ghost)": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Aura Sphere",
+                        "Trick"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                },
+                "All-out Attacker (Ghost)": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Aura Sphere",
+                        "Taunt"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Levitate"
+                },
+                "Choice Scarf Attacker (Poison)": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Focus Blast",
+                        "Trick"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Offensive Trapper": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Bomb",
+                        "Destiny Bond",
+                        "Icy Wind"
+                    ],
+                    "item": "Gengarite",
+                    "ability": "Levitate"
+                },
+                "Casinogar (Sleep Trapper)": {
+                    "moves": [
+                        "Hypnosis",
+                        "Substitute",
+                        "Hex",
+                        "Aura Sphere"
+                    ],
+                    "item": "Gengarite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7vgc2019": {
+                "Shadow Tag Utilizer": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Shadow Ball",
+                        "Substitute",
+                        "Protect"
+                    ],
+                    "item": "Gengarite",
+                    "ability": "Levitate"
+                }
+            },
+            "gen7letsgoou": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Bomb",
+                        "Sucker Punch",
+                        "Self-Destruct"
+                    ],
+                    "item": "Sitrus Berry",
+                    "ability": "Levitate"
+                },
+                "Special Attacker": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Bomb",
+                        "Thunderbolt",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8ou": {
+                "Substitute": {
+                    "moves": [
+                        "Substitute",
+                        "Nasty Plot",
+                        "Shadow Ball",
+                        "Aura Sphere"
+                    ],
+                    "item": "Black Sludge",
+                    "ability": "Levitate"
+                }
+            },
+            "gen81v1": {
+                "Life Orb": {
+                    "moves": [
+                        "Will-O-Wisp",
+                        "Disable",
+                        "Hex",
+                        "Sludge Wave"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8monotype": {
+                "Revenge Killer (Ghost)": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Bomb",
+                        "Aura Sphere",
+                        "Dazzling Gleam"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                },
+                "Choice Specs (Ghost)": {
+                    "moves": [
+                        "Sludge Wave",
+                        "Shadow Ball",
+                        "Aura Sphere",
+                        "Thunderbolt"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                },
+                "Choice Scarf (Poison)": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Focus Blast",
+                        "Dazzling Gleam"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8nationaldex": {
+                "Ghostium Z": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Shadow Ball",
+                        "Aura Sphere",
+                        "Substitute"
+                    ],
+                    "item": "Ghostium Z",
+                    "ability": "Levitate"
+                }
+            },
+            "gen8nationaldexmonotype": {
+                "Nasty Plot (Ghost)": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Shadow Ball",
+                        "Focus Blast",
+                        "Sludge Wave"
+                    ],
+                    "item": "Fightinium Z",
+                    "ability": "Levitate"
+                },
+                "Choice Specs (Ghost)": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Aura Sphere",
+                        "Dazzling Gleam"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                },
+                "Choice Specs (Poison)": {
+                    "moves": [
+                        "Shadow Ball",
+                        "Sludge Wave",
+                        "Aura Sphere",
+                        "Dazzling Gleam"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Levitate"
+                },
+                "Nasty Plot (Poison)": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Shadow Ball",
+                        "Aura Sphere",
+                        "Sludge Wave"
+                    ],
+                    "item": "Ghostium Z",
+                    "ability": "Cursed Body"
+                }
+            }
+        }
+    },
+
     "Onix": {
         "movesets": {
             "gen7lc": {

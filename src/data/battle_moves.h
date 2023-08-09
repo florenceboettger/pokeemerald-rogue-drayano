@@ -7823,7 +7823,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     {
         .effect = EFFECT_HIT,
     #ifdef ROGUE_DRAYANO
-        .power = 90,
+        .power = 80,
     #else
         .power = 70,
     #endif
@@ -7836,7 +7836,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_HIGH_CRIT,
         .split = SPLIT_PHYSICAL,
     #ifdef ROGUE_DRAYANO
-        .zMovePower = 175,
+        .zMovePower = 160,
     #else
         .zMovePower = 140,
     #endif

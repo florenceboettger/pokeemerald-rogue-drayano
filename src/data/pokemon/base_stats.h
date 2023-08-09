@@ -3945,7 +3945,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CURSED_BODY, ABILITY_LEVITATE},
+    #else
         .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
@@ -3969,7 +3973,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CURSED_BODY, ABILITY_LEVITATE},
+    #else
         .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
@@ -3993,11 +4001,15 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_AMORPHOUS,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CURSED_BODY, ABILITY_LEVITATE},
+    #else
         #if P_UPDATED_ABILITIES >= GEN_7
             .abilities = {ABILITY_CURSED_BODY, ABILITY_NONE},
         #else
             .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
         #endif
+    #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
