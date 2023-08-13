@@ -2632,10 +2632,17 @@ static const u8 sProtectivePadsDesc[] = _(
     "from contact move\n"
     "effects.");
 
+#ifdef ROGUE_DRAYANO
+static const u8 sThroatSprayDesc[] = _(
+    "Raises Sp. Atk. if\n"
+    "the holder uses a\n"
+    "sound-based move.");
+#else
 static const u8 sThroatSprayDesc[] = _(
     "Raises Sp. Atk. if\n"
     "a Pokémon is hit by\n"
     "a sound-based move.");
+#endif
 
 static const u8 sEjectPackDesc[] = _(
     "Forces the user to\n"
