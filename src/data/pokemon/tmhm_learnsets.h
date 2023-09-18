@@ -7828,6 +7828,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM23_IRON_TAIL)
                                           TMHM(TM16_LIGHT_SCREEN)
                                           TMHM(TM17_PROTECT)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM29_PSYCHIC)
+                                        #endif
                                           TMHM(TM18_RAIN_DANCE)
                                           TMHM(TM44_REST)
                                           TMHM(TM27_RETURN)

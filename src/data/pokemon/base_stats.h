@@ -10146,7 +10146,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 40,
         .baseDefense   = 55,
         .baseSpeed     = 60,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 60,
+    #else
         .baseSpAttack  = 40,
+    #endif
         .baseSpDefense = 55,
         .type1 = TYPE_FIGHTING,
         .type2 = TYPE_PSYCHIC,
@@ -10166,12 +10170,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MEDICHAM] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 60,
+        .baseDefense   = 80,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 60,
         .baseAttack    = 60,
         .baseDefense   = 75,
         .baseSpeed     = 80,
         .baseSpAttack  = 60,
         .baseSpDefense = 75,
+    #endif
         .type1 = TYPE_FIGHTING,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 90,
@@ -10238,12 +10251,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_PLUSLE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 50,
+        .baseDefense   = 50,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 85,
+    #else
         .baseHP        = 60,
         .baseAttack    = 50,
         .baseDefense   = 40,
         .baseSpeed     = 95,
         .baseSpAttack  = 85,
         .baseSpDefense = 75,
+    #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_ELECTRIC,
         .catchRate = 200,
@@ -10265,12 +10287,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MINUN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 40,
+        .baseDefense   = 50,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 95,
+    #else
         .baseHP        = 60,
         .baseAttack    = 40,
         .baseDefense   = 50,
         .baseSpeed     = 95,
         .baseSpAttack  = 75,
         .baseSpDefense = 85,
+    #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_ELECTRIC,
         .catchRate = 200,
@@ -21006,7 +21037,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FAIRY,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHEEK_POUCH, ABILITY_PICKUP, ABILITY_ELECTRIC_SURGE},
+    #else
         .abilities = {ABILITY_CHEEK_POUCH, ABILITY_PICKUP, ABILITY_PLUS},
+    #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
     },
@@ -26589,12 +26624,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MEDICHAM_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 100,
+        .baseDefense   = 90,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 60,
         .baseAttack    = 100,
         .baseDefense   = 85,
         .baseSpeed     = 100,
         .baseSpAttack  = 80,
         .baseSpDefense = 85,
+    #endif
         .type1 = TYPE_FIGHTING,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 90,

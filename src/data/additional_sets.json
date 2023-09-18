@@ -5215,6 +5215,105 @@
         ]
     },
 
+    "Medicham": {
+        "movesets": {
+            "gen7ou": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Fake Out",
+                        "Close Combat",
+                        "Ice Punch",
+                        "Zen Headbutt"
+                    ],
+                    "item": "Medichamite",
+                    "ability": "Telepathy"
+                }
+            },
+            "gen7nu": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Close Combat",
+                        "Psycho Cut",
+                        "Thunder Punch",
+                        "Bullet Punch"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Pure Power"
+                }
+            },
+            "gen7vgc2019": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Fake Out",
+                        "Close Combat",
+                        "Zen Headbutt",
+                        "Bullet Punch"
+                    ],
+                    "item": "Medichamite",
+                    "ability": "Telepathy"
+                }
+            },
+            "gen71v1": {
+                "Offensive": {
+                    "moves": [
+                        "Fake Out",
+                        "High Jump Kick",
+                        "Zen Headbutt",
+                        "Poison Jab"
+                    ],
+                    "item": "Medichamite",
+                    "ability": "Telepathy"
+                }
+            },
+            "gen8nationaldex": {
+                "Wallbreaker": {
+                    "moves": [
+                        "Fake Out",
+                        "Close Combat",
+                        "Zen Headbutt",
+                        "Ice Punch"
+                    ],
+                    "item": "Medichamite",
+                    "ability": "Telepathy"
+                }
+            },
+            "gen8nationaldexru": {
+                "All-Out Attacker": {
+                    "moves": [
+                        "Close Combat",
+                        "Ice Punch",
+                        "Bullet Punch",
+                        "Zen Headbutt"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Pure Power"
+                }
+            }
+        },
+        "extra_moves": [
+            "Acrobatics",
+            "Energy Ball",
+            "Vacuum Wave"
+        ]
+    },
+
+    "Plusle": {
+        "extra_moves": [
+            "Grass Knot",
+            "Signal Beam",
+            "Volt Switch"
+        ]
+    },
+
+    "Minun": {
+        "extra_moves": [
+            "Flash Cannon",
+            "Grass Knot",
+            "Signal Beam",
+            "Volt Switch"
+        ]
+    },
+
     "Volbeat": {
         "movesets": {
             "gen7nu": {
@@ -10758,7 +10857,7 @@
                         "Hidden Power Ice"
                     ],
                     "item": "Choice Specs",
-                    "ability": "Pickup"
+                    "ability": "Electric Surge"
                 }
             }
         }

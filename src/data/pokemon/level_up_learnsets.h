@@ -7905,6 +7905,9 @@ static const struct LevelUpMove sMedititeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(39, MOVE_REVERSAL),
     LEVEL_UP_MOVE(41, MOVE_RECOVER),
     LEVEL_UP_MOVE(44, MOVE_COUNTER),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(47, MOVE_CLOSE_COMBAT),
+#endif
     LEVEL_UP_END
 };
 
@@ -7933,6 +7936,9 @@ static const struct LevelUpMove sMedichamLevelUpLearnset[] = {
     LEVEL_UP_MOVE(42, MOVE_REVERSAL),
     LEVEL_UP_MOVE(47, MOVE_RECOVER),
     LEVEL_UP_MOVE(53, MOVE_COUNTER),
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE(60, MOVE_CLOSE_COMBAT),
+#endif
     LEVEL_UP_END
 };
 
