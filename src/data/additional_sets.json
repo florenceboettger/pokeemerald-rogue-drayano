@@ -10745,6 +10745,23 @@
         ]
     },
 
+    "Dedenne": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Volt Switch",
+                        "Parabolic Charge",
+                        "Draining Kiss",
+                        "Hidden Power Ice"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Pickup"
+                }
+            }
+        }
+    },
+
     "Goodra": {
         "movesets": {
             "gen7vgc2017": {

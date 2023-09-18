@@ -20980,12 +20980,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_DEDENNE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 67,
+        .baseAttack    = 58,
+        .baseDefense   = 67,
+        .baseSpeed     = 101,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 67,
+    #else
         .baseHP        = 67,
         .baseAttack    = 58,
         .baseDefense   = 57,
         .baseSpeed     = 101,
         .baseSpAttack  = 81,
         .baseSpDefense = 67,
+    #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_FAIRY,
         .catchRate = 180,
