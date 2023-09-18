@@ -7523,6 +7523,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_SKITTY]      = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
                                           TMHM(TM04_CALM_MIND)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT)
+                                        #endif
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
@@ -7549,6 +7552,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_DELCATTY]    = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM14_BLIZZARD)
                                           TMHM(TM04_CALM_MIND)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM01_CUT)
+                                        #endif
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)

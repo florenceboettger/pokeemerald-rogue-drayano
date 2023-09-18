@@ -9953,12 +9953,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SKITTY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 50,
+        .baseDefense   = 50,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 40,
+    #else
         .baseHP        = 50,
         .baseAttack    = 45,
         .baseDefense   = 45,
         .baseSpeed     = 50,
         .baseSpAttack  = 35,
         .baseSpDefense = 35,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 255,
@@ -9977,6 +9986,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_DELCATTY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 95,
+        .baseDefense   = 65,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 85,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 70,
         .baseAttack    = 65,
         .baseDefense   = 65,
@@ -9987,6 +10004,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseSpeed     = 70,
         #endif
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 60,

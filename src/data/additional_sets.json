@@ -5215,6 +5215,19 @@
         ]
     },
 
+    "Skitty": {
+        "extra_moves": [
+            "Hone Claws"
+        ]
+    },
+
+    "Delcatty": {
+        "extra_moves": [
+            "Hone Claws",
+            "Power Gem"
+        ]
+    },
+
     "Medicham": {
         "movesets": {
             "gen7ou": {
