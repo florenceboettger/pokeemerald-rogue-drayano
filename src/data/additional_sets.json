@@ -4144,15 +4144,17 @@
 
     "Qwilfish": {
         "movesets": {
-            "Rain Sweeper": {
-                "moves": [
-                    "Swords Dance",
-                    "Waterfall",
-                    "Gunk Shot",
-                    "Explosion"
-                ],
-                "item": "Life Orb",
-                "ability": "Swift Swim"
+            "gen7pu": {
+                "Rain Sweeper": {
+                    "moves": [
+                        "Swords Dance",
+                        "Waterfall",
+                        "Gunk Shot",
+                        "Explosion"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Swift Swim"
+                }
             }
         }
     },
