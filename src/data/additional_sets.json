@@ -5215,6 +5215,38 @@
         ]
     },
 
+    "Hariyama": {
+        "movesets": {
+            "gen7nu": {
+                "Defensive": {
+                    "moves": [
+                        "Drain Punch",
+                        "Knock Off",
+                        "Rest",
+                        "Sleep Talk"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Thick Fat"
+                }
+            },
+            "gen7ru": {
+                "Tank": {
+                    "moves": [
+                        "Drain Punch",
+                        "Knock Off",
+                        "Earthquake",
+                        "Bullet Punch"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Thick Fat"
+                }
+            }
+        },
+        "extra_moves": [
+            "Stone Edge"
+        ]
+    },
+
     "Skitty": {
         "extra_moves": [
             "Hone Claws"

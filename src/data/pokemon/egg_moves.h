@@ -1802,6 +1802,9 @@ const u16 gEggMoves[] = {
         MOVE_WHIRLWIND),
 
     egg_moves(MAKUHITA,
+    #ifdef ROGUE_DRAYANO
+        MOVE_DRAIN_PUNCH,
+    #endif
         MOVE_FEINT_ATTACK,
         MOVE_DETECT,
         MOVE_FORESIGHT,
