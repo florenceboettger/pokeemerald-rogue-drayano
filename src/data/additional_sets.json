@@ -4056,6 +4056,12 @@
         ]
     },
 
+    "Gligar": {
+        "extra_moves": [
+            "Dual Wingbeat"
+        ]
+    },
+
     "Steelix": {
         "movesets": {
             "gen7monotype": {
@@ -8126,6 +8132,12 @@
             "Ice Fang",
             "Ice Shard",
             "Tri Attack"
+        ]
+    },
+
+    "Gliscor": {
+        "extra_moves": [
+            "Dual Wingbeat"
         ]
     },
     
