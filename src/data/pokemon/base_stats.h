@@ -28306,7 +28306,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_MIMICRY, ABILITY_WATER_ABSORB, ABILITY_FILTER},
+        .abilities = {ABILITY_MIMICRY, ABILITY_WATER_ABSORB, ABILITY_ARENA_TRAP},
     #else
         .abilities = {ABILITY_MIMICRY, ABILITY_NONE},
     #endif
