@@ -907,11 +907,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SONIC_BOOM] =
     {
+    #ifdef ROGUE_DRAYANO
+        .effect = EFFECT_LEVEL_DAMAGE,
+    #else
         .effect = EFFECT_SONICBOOM,
+    #endif
         .power = 1,
         .type = TYPE_NORMAL,
         .accuracy = 90,
+    #ifdef ROGUE_DRAYANO
+        .pp = 25,
+    #else
         .pp = 20,
+    #endif
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -1557,11 +1565,19 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DRAGON_RAGE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .effect = EFFECT_LEVEL_DAMAGE,
+    #else
         .effect = EFFECT_DRAGON_RAGE,
+    #endif
         .power = 1,
         .type = TYPE_DRAGON,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .pp = 15,
+    #else
         .pp = 10,
+    #endif
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
