@@ -4350,12 +4350,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LICKITUNG] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 65,
+        .baseDefense   = 75,
+        .baseSpeed     = 25,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 90,
         .baseAttack    = 55,
         .baseDefense   = 75,
         .baseSpeed     = 30,
         .baseSpAttack  = 60,
         .baseSpDefense = 75,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 45,
@@ -4370,7 +4379,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_MONSTER,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_UNAWARE, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE},
+    #else
         .abilities = {ABILITY_OWN_TEMPO, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },
@@ -14643,12 +14656,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LICKILICKY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 110,
+        .baseAttack    = 105,
+        .baseDefense   = 95,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 95,
+    #else
         .baseHP        = 110,
         .baseAttack    = 85,
         .baseDefense   = 95,
         .baseSpeed     = 50,
         .baseSpAttack  = 80,
         .baseSpDefense = 95,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 30,
@@ -14663,7 +14685,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_MONSTER,
         .eggGroup2 = EGG_GROUP_MONSTER,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_UNAWARE, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE},
+    #else
         .abilities = {ABILITY_OWN_TEMPO, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE},
+    #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
     },

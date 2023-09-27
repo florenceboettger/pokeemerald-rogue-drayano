@@ -2253,6 +2253,20 @@
     },
     
     "Lickitung": {
+        "movesets": {
+            "gen7lc": {
+                "Curse + Unaware": {
+                    "moves": [
+                        "Curse",
+                        "Body Slam",
+                        "Knock Off",
+                        "Wish"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Unaware"
+                }
+            }
+        },
         "extra_moves": [
             "Rock Climb"
         ]
@@ -7773,12 +7787,6 @@
         ]
     },
 
-    "Lickilicky": {
-        "extra_moves": [
-            "Rock Climb"
-        ]
-    },
-
     "Riolu": {
         "extra_moves": [
             "Drain Punch",
@@ -7848,6 +7856,27 @@
     "Weavile": {
         "extra_moves": [
             "Crunch"
+        ]
+    },
+
+    "Lickilicky": {
+        "movesets": {
+            "gen7zu": {
+                "Curse + Unaware": {
+                    "moves": [
+                        "Curse",
+                        "Body Slam",
+                        "Knock Off",
+                        "Wish"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Unaware"
+                }
+            }
+        },
+        "extra_moves": [
+            "Rock Climb",
+            "Swords Dance"
         ]
     },
 
@@ -8178,6 +8207,12 @@
     "Gliscor": {
         "extra_moves": [
             "Dual Wingbeat"
+        ]
+    },
+
+    "Gallade": {
+        "extra_moves": [
+            "Shadow Claw"
         ]
     },
     
