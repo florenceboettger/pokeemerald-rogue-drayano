@@ -7685,6 +7685,11 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SWAGGER)),
 
     [SPECIES_TRUBBISH]      = TUTOR_LEARNSET(TUTOR(MOVE_EXPLOSION)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_FIRE_PUNCH)
+                                            | TUTOR(MOVE_ICE_PUNCH)
+                                            | TUTOR(MOVE_THUNDER_PUNCH)
+                                        #endif
                                             | TUTOR(MOVE_ROLLOUT)
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
@@ -7693,6 +7698,11 @@ static const u32 sTutorLearnsets[] =
 
     [SPECIES_GARBODOR]      = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                             | TUTOR(MOVE_EXPLOSION)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_FIRE_PUNCH)
+                                            | TUTOR(MOVE_ICE_PUNCH)
+                                            | TUTOR(MOVE_THUNDER_PUNCH)
+                                        #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
                                             | TUTOR(MOVE_SUBSTITUTE)

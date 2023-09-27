@@ -5179,6 +5179,45 @@
         ]
     },
 
+    "Gardevoir": {
+        "movesets": {
+            "gen7ou": {
+                "Offensive Support": {
+                    "moves": [
+                        "Recover",
+                        "Psyshock",
+                        "Hyper Voice",
+                        "Focus Blast"
+                    ],
+                    "item": "Gardevoirite",
+                    "ability": "Trace"
+                }
+            },
+            "gen7monotype": {
+                "Wallbreaker (Psychic)": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Psyshock",
+                        "Aura Sphere",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Gardevoirite",
+                    "ability": "Trace"
+                },
+                "Mega Wallbreaker (Fairy)": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Psyshock",
+                        "Aura Sphere",
+                        "Recover"
+                    ],
+                    "item": "Gardevoirite",
+                    "ability": "Trace"
+                }
+            }
+        }
+    },
+
     "Masquerain": {
         "extra_moves": [
             "Acrobatics",
@@ -9093,6 +9132,68 @@
                 }
             }
         }
+    },
+
+    "Trubbish": {
+        "movesets": {
+            "gen7lc": {
+                "Spikes": {
+                    "moves": [
+                        "Spikes",
+                        "Recycle",
+                        "Cross Poison",
+                        "Drain Punch"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Sticky Hold"
+                }
+            }
+        }
+    },
+
+    "Garbodor": {
+        "movesets": {
+            "gen7nu": {
+                "Offensive Spikes Setter": {
+                    "moves": [
+                        "Gunk Shot",
+                        "Spikes",
+                        "Earthquake",
+                        "Explosion"
+                    ],
+                    "item": "Toxic Plate",
+                    "ability": "Aftermath"
+                }
+            },
+            "gen8nu": {
+                "Defensive": {
+                    "moves": [
+                        "Gunk Shot",
+                        "Spikes",
+                        "Earthquake",
+                        "Pain Split"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Aftermath"
+                }
+            },
+            "gen8pu": {
+                "Spiker": {
+                    "moves": [
+                        "Spikes",
+                        "Cross Poison",
+                        "Earthquake",
+                        "Pain Split"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Aftermath"
+                }
+            }
+        },
+        "extra_moves": [
+            "Stomping Tantrum",
+            "Superpower"
+        ]
     },
 
     "Minccino": {

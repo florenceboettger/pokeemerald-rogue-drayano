@@ -15000,7 +15000,11 @@ const struct BaseStats gBaseStats[] =
             .eggGroup1 = EGG_GROUP_AMORPHOUS,
         #endif
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_STEADFAST, ABILITY_HYPER_CUTTER, ABILITY_JUSTIFIED},
+    #else
         .abilities = {ABILITY_STEADFAST, ABILITY_NONE, ABILITY_JUSTIFIED},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
     },
@@ -17629,12 +17633,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_TRUBBISH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 50,
+        .baseDefense   = 62,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 62,
+    #else
         .baseHP        = 50,
         .baseAttack    = 50,
         .baseDefense   = 62,
         .baseSpeed     = 65,
         .baseSpAttack  = 40,
         .baseSpDefense = 62,
+    #endif
         .type1 = TYPE_POISON,
         .type2 = TYPE_POISON,
         .catchRate = 190,
@@ -17654,7 +17667,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GARBODOR] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 100,
+    #else
         .baseHP        = 80,
+    #endif
         .baseAttack    = 95,
         .baseDefense   = 82,
         .baseSpeed     = 75,
@@ -17675,7 +17692,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_MINERAL,
         .eggGroup2 = EGG_GROUP_MINERAL,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_STENCH, ABILITY_GOOEY, ABILITY_AFTERMATH},
+    #else
         .abilities = {ABILITY_STENCH, ABILITY_WEAK_ARMOR, ABILITY_AFTERMATH},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = TRUE,
     },
