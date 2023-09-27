@@ -249,7 +249,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_CACNEA]                = {{EVO_LEVEL, 32, SPECIES_CACTURNE}},
 #ifdef ROGUE_DRAYANO
     [SPECIES_SNORUNT]               = {{EVO_LEVEL, 32, SPECIES_GLALIE},
-                                       {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}},
+                                       {EVO_ITEM, ITEM_DAWN_STONE, SPECIES_FROSLASS}},
 #else
     [SPECIES_SNORUNT]               = {{EVO_LEVEL, 42, SPECIES_GLALIE},
                                        {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}},

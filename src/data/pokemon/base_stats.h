@@ -14990,7 +14990,11 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 233,
         .evYield_Attack    = 3,
+    #ifdef ROGUE_DRAYANO
+        .genderRatio = PERCENT_FEMALE(50),
+    #else
         .genderRatio = MON_MALE,
+    #endif
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
@@ -15101,7 +15105,11 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 75,
         .expYield = 168,
         .evYield_Speed     = 2,
+    #ifdef ROGUE_DRAYANO
+        .genderRatio = PERCENT_FEMALE(50),
+    #else
         .genderRatio = MON_FEMALE,
+    #endif
         .eggCycles = 20,
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_FAST,
@@ -27167,7 +27175,11 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 278,
         .evYield_Attack    = 3,
+    #ifdef ROGUE_DRAYANO
+        .genderRatio = PERCENT_FEMALE(50),
+    #else
         .genderRatio = MON_MALE,
+    #endif
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
