@@ -16489,7 +16489,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 45,
         .baseDefense   = 43,
         .baseSpeed     = 72,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 65,
+    #else
         .baseSpAttack  = 55,
+    #endif
         .baseSpDefense = 43,
         #if P_UPDATED_STATS >= GEN_7
             .baseHP        = 65,
@@ -16514,12 +16518,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SWOOBAT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 57,
+        .baseDefense   = 63,
+        .baseSpeed     = 114,
+        .baseSpAttack  = 86,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 67,
         .baseAttack    = 57,
         .baseDefense   = 55,
         .baseSpeed     = 114,
         .baseSpAttack  = 77,
         .baseSpDefense = 55,
+    #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FLYING,
         .catchRate = 45,
@@ -17998,12 +18011,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_VANILLITE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 36,
+        .baseAttack    = 44,
+        .baseDefense   = 50,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 36,
         .baseAttack    = 50,
         .baseDefense   = 50,
         .baseSpeed     = 44,
         .baseSpAttack  = 65,
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_ICE,
         .type2 = TYPE_ICE,
         .catchRate = 255,
@@ -18023,12 +18045,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_VANILLISH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 51,
+        .baseAttack    = 59,
+        .baseDefense   = 65,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 51,
         .baseAttack    = 65,
         .baseDefense   = 65,
         .baseSpeed     = 59,
         .baseSpAttack  = 80,
         .baseSpDefense = 75,
+    #endif
         .type1 = TYPE_ICE,
         .type2 = TYPE_ICE,
         .catchRate = 120,
@@ -18048,12 +18079,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_VANILLUXE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 71,
+        .baseAttack    = 79,
+        .baseDefense   = 85,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 95,
+    #else
         .baseHP        = 71,
         .baseAttack    = 95,
         .baseDefense   = 85,
         .baseSpeed     = 79,
         .baseSpAttack  = 110,
         .baseSpDefense = 95,
+    #endif
     #ifdef ROGUE_DRAYANO
         .type1 = TYPE_ICE,
         .type2 = TYPE_FAIRY,

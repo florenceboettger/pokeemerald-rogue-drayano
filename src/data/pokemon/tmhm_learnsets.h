@@ -13196,6 +13196,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_BLITZLE]     = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM35_FLAMETHROWER)
+                                        #endif
                                           TMHM(HM05_FLASH)
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
@@ -13214,6 +13217,9 @@ const u8 gTMHMLearnsets[][64] =
     [SPECIES_ZEBSTRIKA]   = TMHM_LEARNSET(TMHM(TM45_ATTRACT)
                                           TMHM(TM32_DOUBLE_TEAM)
                                           TMHM(TM42_FACADE)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM35_FLAMETHROWER)
+                                        #endif
                                           TMHM(HM05_FLASH)
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)

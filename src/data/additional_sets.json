@@ -2123,8 +2123,8 @@
                 "Special Attacker": {
                     "moves": [
                         "Volt Switch",
-                        "Thunderbolt",
-                        "Hidden Power Water",
+                        "Buzzy Buzz",
+                        "Energy Ball",
                         "Bug Buzz"
                     ],
                     "item": "Life Orb",
@@ -2133,6 +2133,7 @@
             }
         },
         "extra_moves": [
+            "Aura Sphere",
             "Energy Ball",
             "Flash Cannon"
         ]
@@ -8835,6 +8836,90 @@
             "Dual Wingbeat",
             "Hurricane"
         ]
+    },
+
+    "Blitzle": {
+        "movesets": {
+            "gen7lc": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Wild Charge",
+                        "Volt Switch",
+                        "Flare Blitz",
+                        "Hidden Power Grass"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sap Sipper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Low Sweep"
+        ]
+    },
+
+    "Zebstrika": {
+        "movesets": {
+            "gen7pu": {
+                "Physical Attacker": {
+                    "moves": [
+                        "Zippy Zap",
+                        "Volt Switch",
+                        "Flare Blitz",
+                        "High Horsepower"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sap Sipper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Low Sweep"
+        ]
+    },
+
+    "Woobat": {
+        "movesets": {
+            "gen7lc": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Psychic",
+                        "Air Slash",
+                        "Substitute"
+                    ],
+                    "item": "Salac Berry",
+                    "ability": "Simple"
+                }
+            }
+        }
+    },
+
+    "Swoobat": {
+        "movesets": {
+            "gen7pu": {
+                "Nasty Plot 1": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Stored Power",
+                        "Mystical Fire",
+                        "Roost"
+                    ],
+                    "item": "Psychic Seed",
+                    "ability": "Simple"
+                },
+                "Nasty Plot 2": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Stored Power",
+                        "Hurricane",
+                        "Substitute"
+                    ],
+                    "item": "Salac Berry",
+                    "ability": "Simple"
+                }
+            }
+        }
     },
 
     "Cottonee": {
