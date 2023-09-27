@@ -304,7 +304,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_RALTS]                 = {{EVO_LEVEL, 20, SPECIES_KIRLIA}},
     [SPECIES_KIRLIA]                = {{EVO_LEVEL, 30, SPECIES_GARDEVOIR},
                                     #ifdef ROGUE_DRAYANO
-                                       {EVO_ITEM, ITEM_DAWN_STONE, SPECIES_GALLADE}
+                                       {EVO_ITEM, ITEM_DAWN_STONE, SPECIES_GALLADE}},
                                     #else
                                        {EVO_ITEM_MALE, ITEM_DAWN_STONE, SPECIES_GALLADE}},
                                     #endif
