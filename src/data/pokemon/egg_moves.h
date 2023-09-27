@@ -2090,6 +2090,9 @@ const u16 gEggMoves[] = {
         MOVE_SPOTLIGHT),
 
     egg_moves(TRAPINCH,
+    #ifdef ROGUE_DRAYANO
+        MOVE_UPROAR,
+    #endif
         MOVE_FOCUS_ENERGY,
         MOVE_QUICK_ATTACK,
         MOVE_GUST,
@@ -4045,6 +4048,9 @@ const u16 gEggMoves[] = {
         MOVE_SING),
 
     egg_moves(TURTONATOR,
+    #ifdef ROGUE_DRAYANO
+        MOVE_LAVA_PLUME,
+    #endif
         MOVE_WIDE_GUARD,
         MOVE_REVENGE,
         MOVE_HEAD_SMASH,

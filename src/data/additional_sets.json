@@ -2123,8 +2123,8 @@
                 "Special Attacker": {
                     "moves": [
                         "Volt Switch",
-                        "Thunderbolt",
-                        "Hidden Power Water",
+                        "Buzzy Buzz",
+                        "Energy Ball",
                         "Bug Buzz"
                     ],
                     "item": "Life Orb",
@@ -2133,6 +2133,7 @@
             }
         },
         "extra_moves": [
+            "Aura Sphere",
             "Energy Ball",
             "Flash Cannon"
         ]
@@ -2252,6 +2253,20 @@
     },
     
     "Lickitung": {
+        "movesets": {
+            "gen7lc": {
+                "Curse + Unaware": {
+                    "moves": [
+                        "Curse",
+                        "Body Slam",
+                        "Knock Off",
+                        "Wish"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Unaware"
+                }
+            }
+        },
         "extra_moves": [
             "Rock Climb"
         ]
@@ -5178,6 +5193,45 @@
         ]
     },
 
+    "Gardevoir": {
+        "movesets": {
+            "gen7ou": {
+                "Offensive Support": {
+                    "moves": [
+                        "Recover",
+                        "Psyshock",
+                        "Hyper Voice",
+                        "Focus Blast"
+                    ],
+                    "item": "Gardevoirite",
+                    "ability": "Trace"
+                }
+            },
+            "gen7monotype": {
+                "Wallbreaker (Psychic)": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Psyshock",
+                        "Aura Sphere",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Gardevoirite",
+                    "ability": "Trace"
+                },
+                "Mega Wallbreaker (Fairy)": {
+                    "moves": [
+                        "Hyper Voice",
+                        "Psyshock",
+                        "Aura Sphere",
+                        "Recover"
+                    ],
+                    "item": "Gardevoirite",
+                    "ability": "Trace"
+                }
+            }
+        }
+    },
+
     "Masquerain": {
         "extra_moves": [
             "Acrobatics",
@@ -7733,12 +7787,6 @@
         ]
     },
 
-    "Lickilicky": {
-        "extra_moves": [
-            "Rock Climb"
-        ]
-    },
-
     "Riolu": {
         "extra_moves": [
             "Drain Punch",
@@ -7808,6 +7856,27 @@
     "Weavile": {
         "extra_moves": [
             "Crunch"
+        ]
+    },
+
+    "Lickilicky": {
+        "movesets": {
+            "gen7zu": {
+                "Curse + Unaware": {
+                    "moves": [
+                        "Curse",
+                        "Body Slam",
+                        "Knock Off",
+                        "Wish"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Unaware"
+                }
+            }
+        },
+        "extra_moves": [
+            "Rock Climb",
+            "Swords Dance"
         ]
     },
 
@@ -8138,6 +8207,12 @@
     "Gliscor": {
         "extra_moves": [
             "Dual Wingbeat"
+        ]
+    },
+
+    "Gallade": {
+        "extra_moves": [
+            "Shadow Claw"
         ]
     },
     
@@ -8837,6 +8912,90 @@
         ]
     },
 
+    "Blitzle": {
+        "movesets": {
+            "gen7lc": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Wild Charge",
+                        "Volt Switch",
+                        "Flare Blitz",
+                        "Hidden Power Grass"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sap Sipper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Low Sweep"
+        ]
+    },
+
+    "Zebstrika": {
+        "movesets": {
+            "gen7pu": {
+                "Physical Attacker": {
+                    "moves": [
+                        "Zippy Zap",
+                        "Volt Switch",
+                        "Flare Blitz",
+                        "High Horsepower"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sap Sipper"
+                }
+            }
+        },
+        "extra_moves": [
+            "Low Sweep"
+        ]
+    },
+
+    "Woobat": {
+        "movesets": {
+            "gen7lc": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Psychic",
+                        "Air Slash",
+                        "Substitute"
+                    ],
+                    "item": "Salac Berry",
+                    "ability": "Simple"
+                }
+            }
+        }
+    },
+
+    "Swoobat": {
+        "movesets": {
+            "gen7pu": {
+                "Nasty Plot 1": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Stored Power",
+                        "Mystical Fire",
+                        "Roost"
+                    ],
+                    "item": "Psychic Seed",
+                    "ability": "Simple"
+                },
+                "Nasty Plot 2": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Stored Power",
+                        "Hurricane",
+                        "Substitute"
+                    ],
+                    "item": "Salac Berry",
+                    "ability": "Simple"
+                }
+            }
+        }
+    },
+
     "Cottonee": {
         "extra_moves": [
             "Knock Off",
@@ -9008,6 +9167,68 @@
                 }
             }
         }
+    },
+
+    "Trubbish": {
+        "movesets": {
+            "gen7lc": {
+                "Spikes": {
+                    "moves": [
+                        "Spikes",
+                        "Recycle",
+                        "Cross Poison",
+                        "Drain Punch"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Sticky Hold"
+                }
+            }
+        }
+    },
+
+    "Garbodor": {
+        "movesets": {
+            "gen7nu": {
+                "Offensive Spikes Setter": {
+                    "moves": [
+                        "Gunk Shot",
+                        "Spikes",
+                        "Earthquake",
+                        "Explosion"
+                    ],
+                    "item": "Toxic Plate",
+                    "ability": "Aftermath"
+                }
+            },
+            "gen8nu": {
+                "Defensive": {
+                    "moves": [
+                        "Gunk Shot",
+                        "Spikes",
+                        "Earthquake",
+                        "Pain Split"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Aftermath"
+                }
+            },
+            "gen8pu": {
+                "Spiker": {
+                    "moves": [
+                        "Spikes",
+                        "Cross Poison",
+                        "Earthquake",
+                        "Pain Split"
+                    ],
+                    "item": "Rocky Helmet",
+                    "ability": "Aftermath"
+                }
+            }
+        },
+        "extra_moves": [
+            "Stomping Tantrum",
+            "Superpower"
+        ]
     },
 
     "Minccino": {

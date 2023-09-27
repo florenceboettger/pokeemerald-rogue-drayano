@@ -213,8 +213,8 @@ static const u8 sSupersonicDescription[] = _(
     "that may confuse the foe.");
 
 static const u8 sSonicBoomDescription[] = _(
-    "Launches shock waves that\n"
-    "always inflict 20 HP damage.");
+    "Shock waves that inflict\n"
+    "user's level in damage.");
 
 static const u8 sDisableDescription[] = _(
     "Psychically disables one of\n"
@@ -350,8 +350,8 @@ static const u8 sStringShotDescription[] = _(
     "to reduce its Speed.");
 
 static const u8 sDragonRageDescription[] = _(
-    "Launches shock waves that\n"
-    "always inflict 40 HP damage.");
+    "Shock waves that inflict\n"
+    "user's level in damage.");
 
 static const u8 sFireSpinDescription[] = _(
     "Traps the foe in a ring of\n"
