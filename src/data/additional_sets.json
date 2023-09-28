@@ -11141,8 +11141,47 @@
         }
     },
 
+    "Goomy": {
+        "movesets": {
+            "gen7lc": {
+                "Sap Sipper": {
+                    "moves": [
+                        "Dragon Pulse",
+                        "Sludge Wave",
+                        "Recover",
+                        "Surf"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Sap Sipper"
+                },
+                "Toxic Staller": {
+                    "moves": [
+                        "Surf",
+                        "Recover",
+                        "Sludge Wave",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Sap Sipper"
+                }
+            }
+        }
+    },
+
     "Goodra": {
         "movesets": {
+            "gen7ru": {
+                "Toxic Staller": {
+                    "moves": [
+                        "Surf",
+                        "Recover",
+                        "Sludge Wave",
+                        "Toxic"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Sap Sipper"
+                }
+            },
             "gen7vgc2017": {
                 "Special Tank": {
                     "moves": [
