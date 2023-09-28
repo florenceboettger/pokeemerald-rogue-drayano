@@ -257,8 +257,7 @@
 #define LEVEL_UP_MOVE_LV   0xFE00
 #define LEVEL_UP_END       0xFFFF
 
-#ifdef ROGUE_DRAYANO
-// Theoretical value for the moment
+#ifdef ROGUE_DRAYANO // Theoretical value for the moment
 #define MAX_LEVEL_UP_MOVES       40
 #else
 #define MAX_LEVEL_UP_MOVES       20
