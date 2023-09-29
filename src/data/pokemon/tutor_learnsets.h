@@ -9175,6 +9175,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_THUNDER_WAVE)),
 
     [SPECIES_BOUFFALANT]    = TUTOR_LEARNSET(TUTOR(MOVE_MUD_SLAP)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_BODY_PRESS)
+                                        #endif
                                             | TUTOR(MOVE_ROCK_SLIDE)
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
