@@ -616,8 +616,13 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
                                        {EVO_LEVEL, 0, SPECIES_ALCREMIE_RAINBOW_SWIRL}},
     [SPECIES_SNOM]                  = {{EVO_FRIENDSHIP_NIGHT, 0, SPECIES_FROSMOTH}},
     [SPECIES_CUFANT]                = {{EVO_LEVEL, 34, SPECIES_COPPERAJAH}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_DREEPY]                = {{EVO_LEVEL, 36, SPECIES_DRAKLOAK}},
+    [SPECIES_DRAKLOAK]              = {{EVO_LEVEL, 56, SPECIES_DRAGAPULT}},
+#else
     [SPECIES_DREEPY]                = {{EVO_LEVEL, 50, SPECIES_DRAKLOAK}},
     [SPECIES_DRAKLOAK]              = {{EVO_LEVEL, 60, SPECIES_DRAGAPULT}},
+#endif
     [SPECIES_KUBFU]                 = {{EVO_DARK_SCROLL, 0, SPECIES_URSHIFU},
                                        {EVO_WATER_SCROLL, 0, SPECIES_URSHIFU_RAPID_STRIKE_STYLE}},
     [SPECIES_RATTATA_ALOLAN]        = {{EVO_LEVEL_NIGHT, 20, SPECIES_RATICATE_ALOLAN}},

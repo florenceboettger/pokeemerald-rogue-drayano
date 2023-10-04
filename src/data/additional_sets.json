@@ -12018,5 +12018,134 @@
             "Poison Jab",
             "Zen Headbutt"
         ]
+    },
+
+    "Dragapult": {
+        "movesets": {
+            "gen8ou": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Dragon Darts",
+                        "Shadow Claw",
+                        "Fire Blast"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Clear Body"
+                }
+            },
+            "gen8monotype": {
+                "Dragon Dance (Dragon)": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Dragon Darts",
+                        "Shadow Claw",
+                        "Substitute"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Infiltrator"
+                },
+                "Physical Choice Scarf (Dragon)": {
+                    "moves": [
+                        "Dragon Darts",
+                        "Shadow Claw",
+                        "U-turn",
+                        "Fire Blast"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Infiltrator"
+                },
+                "Dragon Dance (Ghost)": {
+                    "moves": [
+                        "Dragon Dance",
+                        "Dragon Darts",
+                        "Shadow Claw",
+                        "Shadow Sneak"
+                    ],
+                    "item": "Dragon Fang",
+                    "ability": "Infiltrator"
+                }
+            },
+            "gen8doublesou": {
+                "Dragon Dance": {
+                    "moves": [
+                        "Dragon Darts",
+                        "Shadow Claw",
+                        "Dragon Dance",
+                        "Protect"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Clear Body"
+                }
+            },
+            "gen8battlestadiumsingles": {
+                "Physical Attacker": {
+                    "moves": [
+                        "Dragon Darts",
+                        "Shadow Claw",
+                        "U-turn",
+                        "Sucker Punch"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Infiltrator"
+                },
+                "Dynamax Sweeper": {
+                    "moves": [
+                        "Dragon Darts",
+                        "Shadow Claw",
+                        "Steel Wing",
+                        "Dragon Dance"
+                    ],
+                    "item": "Weakness Policy",
+                    "ability": "Clear Body"
+                },
+                "Bulky Substitute": {
+                    "moves": [
+                        "Substitute",
+                        "Dragon Darts",
+                        "Phantom Force",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Infiltrator"
+                }
+            },
+            "gen8vgc2021": {
+                "Offensive": {
+                    "moves": [
+                        "Shadow Claw",
+                        "Fly",
+                        "Dragon Darts",
+                        "Dragon Dance"
+                    ],
+                    "item": "Lum Berry",
+                    "ability": "Clear Body"
+                }
+            },
+            "gen8vgc2020": {
+                "Offensive": {
+                    "moves": [
+                        "Dragon Darts",
+                        "Shadow Claw",
+                        "Fly",
+                        "Protect"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Clear Body"
+                }
+            },
+            "gen81v1": {
+                "Choice Band": {
+                    "moves": [
+                        "Dragon Darts",
+                        "Phantom Force",
+                        "Outrage",
+                        "Shadow Sneak"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Clear Body"
+                }
+            }
+        }
     }
 }
