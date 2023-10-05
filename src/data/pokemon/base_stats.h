@@ -16009,6 +16009,14 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_STOUTLAND] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 95,
+        .baseAttack    = 115,
+        .baseDefense   = 90,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 85,
         .baseDefense   = 90,
         .baseSpeed     = 80,
@@ -16019,6 +16027,7 @@ const struct BaseStats gBaseStats[] =
         #else
             .baseAttack    = 100,
         #endif
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 45,
