@@ -1538,7 +1538,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SWIFT)),
 
     [SPECIES_SLOWPOKE]      = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
-                                        #ifdef
+                                        #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
                                         #endif
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -7620,8 +7620,8 @@ static const u32 sTutorLearnsets[] =
 
     [SPECIES_COMBEE]        = TUTOR_LEARNSET(TUTOR(MOVE_MUD_SLAP)
                                         #ifdef ROGUE_DRAYANO
-                                            | TUTOR(MOVE_AIR_CUTTER
-                                            | TUTOR(MOVE_BUG_BUZZ))
+                                            | TUTOR(MOVE_AIR_CUTTER)
+                                            | TUTOR(MOVE_BUG_BUZZ)
                                         #endif
                                             | TUTOR(MOVE_SNORE)
                                             | TUTOR(MOVE_SWIFT)),
@@ -11822,7 +11822,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_STEENEE]       = TUTOR_LEARNSET(TUTOR(MOVE_SLEEP_TALK)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_COVET)
-                                        #endfif
+                                        #endif
                                             | TUTOR(MOVE_SNORE)
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_SWAGGER)),
@@ -12328,7 +12328,7 @@ static const u32 sTutorLearnsets[] =
 
 #ifdef ROGUE_DRAYANO
     [SPECIES_MELMETAL]      = TUTOR_LEARNSET(TUTOR(MOVE_BODY_PRESS)
-                                            | TUTOR(MOVE_BRUTAL_SWING))
+                                            | TUTOR(MOVE_BRUTAL_SWING)),
 #endif
 
     [SPECIES_GROOKEY]       = TUTOR_LEARNSET(TUTOR(MOVE_ENDURE)
@@ -13358,7 +13358,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SNORE)
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_SWAGGER)
-                                            | TUTOR(MOVE_SWIFT))
+                                            | TUTOR(MOVE_SWIFT)),
 #endif
 
 #ifdef ROGUE_DRAYANO    

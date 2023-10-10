@@ -16868,6 +16868,7 @@ static const struct LevelUpMove sSliggooLevelUpLearnset[] = {
     LEVEL_UP_MOVE(47, MOVE_DRAGON_PULSE),
 #ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE(52, MOVE_HYDRO_PUMP),
+#endif
     LEVEL_UP_END
 };
 
