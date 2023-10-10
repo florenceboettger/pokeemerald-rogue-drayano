@@ -898,6 +898,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SWORDS_DANCE)),
 
     [SPECIES_VILEPLUME]     = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
+                                        #endif
                                             | TUTOR(MOVE_DOUBLE_EDGE)
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_MIMIC)
@@ -1181,6 +1184,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_POLIWRATH]     = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DEFENSE_CURL)
@@ -1270,6 +1274,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_MACHOP]        = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -1293,6 +1298,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_MACHOKE]       = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -1316,6 +1322,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_MACHAMP]       = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -1380,6 +1387,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_TENTACRUEL]    = TUTOR_LEARNSET(TUTOR(MOVE_DOUBLE_EDGE)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_ICY_WIND)
@@ -1697,6 +1705,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SWIFT)),
 
     [SPECIES_GASTLY]        = TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
+                                        #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_EXPLOSION)
                                             | TUTOR(MOVE_FIRE_PUNCH)
@@ -1711,6 +1722,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_THUNDER_PUNCH)),
 
     [SPECIES_HAUNTER]       = TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
+                                        #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_EXPLOSION)
                                             | TUTOR(MOVE_FIRE_PUNCH)
@@ -1727,6 +1741,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_GENGAR]        = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_AURA_SPHERE)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -1960,6 +1975,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -1982,6 +1998,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -2034,6 +2051,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_THUNDER_PUNCH)),
 
     [SPECIES_KOFFING]       = TUTOR_LEARNSET(TUTOR(MOVE_ENDURE)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
+                                        #endif
                                             | TUTOR(MOVE_EXPLOSION)
                                             | TUTOR(MOVE_MIMIC)
                                             | TUTOR(MOVE_ROLLOUT)
@@ -2043,6 +2063,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SWAGGER)),
 
     [SPECIES_WEEZING]       = TUTOR_LEARNSET(TUTOR(MOVE_ENDURE)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
+                                        #endif
                                             | TUTOR(MOVE_EXPLOSION)
                                             | TUTOR(MOVE_MIMIC)
                                             | TUTOR(MOVE_ROLLOUT)
@@ -2735,6 +2758,8 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_BUG_BUZZ)
                                             | TUTOR(MOVE_BULLDOZE)
                                             | TUTOR(MOVE_BURNING_JEALOUSY)
+                                            | TUTOR(MOVE_COACHING)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DEFENSE_CURL)
@@ -3874,6 +3899,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BUG_BUZZ)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -4283,6 +4309,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -4675,6 +4702,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_COMBUSKEN]     = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BLAZE_KICK)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -4703,6 +4731,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BRAVE_BIRD)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DOUBLE_EDGE)
@@ -7695,6 +7724,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_THUNDER_WAVE)),
 
     [SPECIES_STUNKY]        = TUTOR_LEARNSET(TUTOR(MOVE_DOUBLE_EDGE)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
+                                        #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_EXPLOSION)
                                             | TUTOR(MOVE_FURY_CUTTER)
@@ -7708,6 +7740,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_SKUNTANK]      = TUTOR_LEARNSET(TUTOR(MOVE_ENDURE)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BURNING_JEALOUSY)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_EXPLOSION)
                                             | TUTOR(MOVE_FURY_CUTTER)
@@ -7885,6 +7918,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_FURY_CUTTER)
@@ -7904,6 +7938,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_FURY_CUTTER)
@@ -7975,6 +8010,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_CROAGUNK]      = TUTOR_LEARNSET(TUTOR(MOVE_COUNTER)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_DYNAMIC_PUNCH)
                                             | TUTOR(MOVE_ENDURE)
@@ -7993,6 +8029,8 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_FURY_CUTTER)
                                             | TUTOR(MOVE_ICE_PUNCH)
@@ -8307,6 +8345,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AIR_SLASH)
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_FIRE_PUNCH)
@@ -8996,6 +9035,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_TIMBURR]       = TUTOR_LEARNSET(TUTOR(MOVE_COUNTER)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_DYNAMIC_PUNCH)
                                             | TUTOR(MOVE_ENDURE)
@@ -9011,6 +9051,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_GURDURR]       = TUTOR_LEARNSET(TUTOR(MOVE_DYNAMIC_PUNCH)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_FIRE_PUNCH)
                                             | TUTOR(MOVE_ICE_PUNCH)
@@ -9025,6 +9066,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_FIRE_PUNCH)
                                             | TUTOR(MOVE_ICE_PUNCH)
@@ -9064,6 +9106,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_THROH]         = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_FIRE_PUNCH)
@@ -9080,6 +9123,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_FIRE_PUNCH)
@@ -9283,6 +9327,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SWORDS_DANCE)),
 
     [SPECIES_SCRAGGY]       = TUTOR_LEARNSET(TUTOR(MOVE_COUNTER)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_COACHING)
+                                        #endif
                                             | TUTOR(MOVE_FIRE_PUNCH)
                                             | TUTOR(MOVE_ICE_PUNCH)
                                             | TUTOR(MOVE_ROCK_SLIDE)
@@ -9293,6 +9340,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_THUNDER_PUNCH)),
 
     [SPECIES_SCRAFTY]       = TUTOR_LEARNSET(TUTOR(MOVE_FIRE_PUNCH)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_COACHING)
+                                        #endif
                                             | TUTOR(MOVE_ICE_PUNCH)
                                             | TUTOR(MOVE_ROCK_SLIDE)
                                             | TUTOR(MOVE_SLEEP_TALK)
@@ -9383,6 +9433,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_FIRE_PUNCH)
                                             | TUTOR(MOVE_ICE_PUNCH)
                                             | TUTOR(MOVE_THUNDER_PUNCH)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_ROLLOUT)
                                             | TUTOR(MOVE_SLEEP_TALK)
@@ -9393,6 +9444,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_GARBODOR]      = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BODY_PRESS)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_EXPLOSION)
                                         #ifdef ROGUE_DRAYANO
@@ -9901,6 +9953,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_ACROBATICS)
                                             | TUTOR(MOVE_AURA_SPHERE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_PSYCH_UP)
                                             | TUTOR(MOVE_ROCK_SLIDE)
@@ -9917,6 +9970,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ROCK_SLIDE)
                                             | TUTOR(MOVE_SLEEP_TALK)
@@ -10137,6 +10191,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_AIR_SLASH)
                                             | TUTOR(MOVE_AURA_SPHERE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
@@ -10150,6 +10205,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AIR_SLASH)
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ROCK_SLIDE)
                                             | TUTOR(MOVE_SLEEP_TALK)
@@ -10162,6 +10218,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_AIR_SLASH)
                                             | TUTOR(MOVE_AURA_SPHERE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
@@ -10244,6 +10301,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_AIR_SLASH)
                                             | TUTOR(MOVE_AURA_SPHERE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_PSYCH_UP)
                                             | TUTOR(MOVE_SLEEP_TALK)
@@ -10524,6 +10582,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_PANCHAM]       = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_FIRE_PUNCH)
                                             | TUTOR(MOVE_ICE_PUNCH)
@@ -10538,6 +10597,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_PANGORO]       = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_FIRE_PUNCH)
                                             | TUTOR(MOVE_ICE_PUNCH)
@@ -10800,6 +10860,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_ACROBATICS)
                                             | TUTOR(MOVE_BODY_PRESS)
                                             | TUTOR(MOVE_BRAVE_BIRD)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ROCK_SLIDE)
                                             | TUTOR(MOVE_SLEEP_TALK)
@@ -11382,6 +11443,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_ACROBATICS)
                                             | TUTOR(MOVE_BREAKING_SWIPE)
                                             | TUTOR(MOVE_BURNING_JEALOUSY)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_SNORE)
                                             | TUTOR(MOVE_SUBSTITUTE)
@@ -11391,6 +11453,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_ICE_PUNCH)
@@ -11408,6 +11471,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_BODY_PRESS)
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ICE_PUNCH)
                                             | TUTOR(MOVE_ROCK_SLIDE)
@@ -11463,6 +11527,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_ACROBATICS)
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ROCK_SLIDE)
                                             | TUTOR(MOVE_SEISMIC_TOSS)
@@ -11656,6 +11721,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
@@ -11670,6 +11736,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_BREAKING_SWIPE)
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ICE_PUNCH)
                                             | TUTOR(MOVE_ROCK_SLIDE)
@@ -11748,6 +11815,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_NIHILEGO]      = TUTOR_LEARNSET(TUTOR(MOVE_SLEEP_TALK)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_SNORE)
                                             | TUTOR(MOVE_SUBSTITUTE)
@@ -11757,6 +11825,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_BUZZWOLE]      = TUTOR_LEARNSET(TUTOR(MOVE_COUNTER)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_DYNAMIC_PUNCH)
                                             | TUTOR(MOVE_ENDURE)
@@ -11772,6 +11841,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_PHEROMOSA]     = TUTOR_LEARNSET(TUTOR(MOVE_ICY_WIND)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BUG_BUZZ)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
@@ -11819,6 +11889,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_BODY_PRESS)
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)  
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
@@ -11852,6 +11923,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_ACROBATICS)
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BLAZE_KICK)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_FIRE_PUNCH)
                                             | TUTOR(MOVE_ICE_PUNCH)
@@ -11900,6 +11972,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
@@ -11985,6 +12058,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_ACROBATICS)
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BURNING_JEALOUSY)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_DOUBLE_EDGE)
                                             | TUTOR(MOVE_ENDURE)
@@ -12332,6 +12406,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SUBSTITUTE)),
 
     [SPECIES_CLOBBOPUS]     = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_COACHING)
+                                        #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_ICE_PUNCH)
                                             | TUTOR(MOVE_MEGA_PUNCH)
@@ -12343,6 +12420,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_GRAPPLOCT]     = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_ICE_PUNCH)
@@ -12475,6 +12553,7 @@ static const u32 sTutorLearnsets[] =
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRAVE_BIRD)
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_FURY_CUTTER)
@@ -12521,6 +12600,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_FALINKS]       = TUTOR_LEARNSET(TUTOR(MOVE_COUNTER)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BODY_PRESS)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_ROCK_SLIDE)
@@ -12740,6 +12820,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_ZAMAZENTA]     = TUTOR_LEARNSET(TUTOR(MOVE_ENDURE)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BODY_PRESS)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
@@ -12757,6 +12838,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_KUBFU]         = TUTOR_LEARNSET(TUTOR(MOVE_BODY_SLAM)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_ACROBATICS)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DYNAMIC_PUNCH)
@@ -12775,6 +12857,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_ACROBATICS)
                                             | TUTOR(MOVE_AURA_SPHERE)
                                             | TUTOR(MOVE_BODY_PRESS)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_COUNTER)
                                             | TUTOR(MOVE_DYNAMIC_PUNCH)
@@ -13120,6 +13203,7 @@ static const u32 sTutorLearnsets[] =
     [SPECIES_WEEZING_GALARIAN]  = TUTOR_LEARNSET(TUTOR(MOVE_ENDURE)
                                         #ifdef ROGUE_DRAYANO
                                             | TUTOR(MOVE_BRUTAL_SWING)
+                                            | TUTOR(MOVE_CORROSIVE_GAS)
                                         #endif
                                             | TUTOR(MOVE_EXPLOSION)
                                             | TUTOR(MOVE_SLEEP_TALK)
@@ -13158,6 +13242,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AIR_SLASH)
                                             | TUTOR(MOVE_BLAZE_KICK)
                                             | TUTOR(MOVE_BRAVE_BIRD)
+                                            | TUTOR(MOVE_COACHING)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_MEGA_KICK)
