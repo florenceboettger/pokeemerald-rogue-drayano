@@ -384,6 +384,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_AIR_CUTTER)
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BUG_BUZZ)
+                                            | TUTOR(MOVE_CROSS_POISON)
                                         #endif
                                             | TUTOR(MOVE_ENDURE)
                                             | TUTOR(MOVE_FURY_CUTTER)
@@ -10157,6 +10158,7 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_BREAKING_SWIPE)
                                             | TUTOR(MOVE_BRUTAL_SWING)
                                             | TUTOR(MOVE_BULLDOZE)
+                                            | TUTOR(MOVE_CROSS_POISON)
                                         #endif
                                             | TUTOR(MOVE_SLEEP_TALK)
                                             | TUTOR(MOVE_SNORE)
