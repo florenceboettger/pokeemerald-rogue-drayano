@@ -15223,8 +15223,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 105,
         .baseSpDefense = 105,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_PSYCHIC,
+        .type2 = TYPE_FAIRY,
+    #else
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_PSYCHIC,
+    #endif
         .catchRate = 3,
         .expYield = 261,
         .evYield_Attack    = 1,
@@ -15250,8 +15255,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 115,
         .baseSpAttack  = 125,
         .baseSpDefense = 70,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_PSYCHIC,
+        .type2 = TYPE_FAIRY,
+    #else
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_PSYCHIC,
+    #endif
         .catchRate = 3,
         .expYield = 261,
         .evYield_Attack    = 2,
