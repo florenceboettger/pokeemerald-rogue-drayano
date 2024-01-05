@@ -767,7 +767,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     [MOVE_TWINEEDLE] =
     {
         .effect = EFFECT_TWINEEDLE,
-        .power = 25,
+    #ifdef ROGUE_DRAYANO
+        .power = 40,
+    #else
+        .power = 20,
+    #endif
         .type = TYPE_BUG,
         .accuracy = 100,
         .pp = 20,
@@ -7570,6 +7574,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_DRAGON_PULSE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 90,
+        .zMovePower = 175,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 85,
             .zMovePower = 160,
@@ -7577,6 +7585,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .power = 90,
             .zMovePower = 175,
         #endif
+    #endif
         .effect = EFFECT_HIT,
         .type = TYPE_DRAGON,
         .accuracy = 100,
