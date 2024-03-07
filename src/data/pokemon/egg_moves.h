@@ -1591,6 +1591,9 @@ const u16 gEggMoves[] = {
         MOVE_IRON_TAIL),
 
     egg_moves(TREECKO,
+    #ifdef ROGUE_DRAYANO
+        MOVE_SLAM,
+    #endif
         MOVE_CRUNCH,
         MOVE_MUD_SPORT,
         MOVE_ENDEAVOR,
