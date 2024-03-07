@@ -32,7 +32,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_VULPIX]                = {{EVO_ITEM, ITEM_FIRE_STONE, SPECIES_NINETALES}},
     [SPECIES_JIGGLYPUFF]            = {{EVO_ITEM, ITEM_MOON_STONE, SPECIES_WIGGLYTUFF}},
     [SPECIES_ZUBAT]                 = {{EVO_LEVEL, 22, SPECIES_GOLBAT}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_GOLBAT]                = {{EVO_LEVEL, 33, SPECIES_CROBAT}},
+#else
     [SPECIES_GOLBAT]                = {{EVO_FRIENDSHIP, 0, SPECIES_CROBAT}},
+#endif
     [SPECIES_ODDISH]                = {{EVO_LEVEL, 21, SPECIES_GLOOM}},
     [SPECIES_GLOOM]                 = {{EVO_ITEM, ITEM_LEAF_STONE, SPECIES_VILEPLUME},
                                        {EVO_ITEM, ITEM_SUN_STONE, SPECIES_BELLOSSOM}},

@@ -2488,7 +2488,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 45,
         .baseDefense   = 35,
         .baseSpeed     = 55,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 45,
+    #else
         .baseSpAttack  = 30,
+    #endif
         .baseSpDefense = 40,
         .type1 = TYPE_POISON,
         .type2 = TYPE_FLYING,
@@ -2501,7 +2505,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR},
+    #else
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR},
+    #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
@@ -2512,7 +2520,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 80,
         .baseDefense   = 70,
         .baseSpeed     = 90,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 80,
+    #else
         .baseSpAttack  = 65,
+    #endif
         .baseSpDefense = 75,
         .type1 = TYPE_POISON,
         .type2 = TYPE_FLYING,
@@ -2525,7 +2537,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR},
+    #else
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR},
+    #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
@@ -6113,7 +6129,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 90,
         .baseDefense   = 80,
         .baseSpeed     = 130,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 90,
+    #else
         .baseSpAttack  = 70,
+    #endif
         .baseSpDefense = 80,
         .type1 = TYPE_POISON,
         .type2 = TYPE_FLYING,
@@ -6126,7 +6146,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR},
+    #else
         .abilities = {ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR},
+    #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },

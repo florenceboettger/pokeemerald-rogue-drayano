@@ -979,6 +979,7 @@ static const struct LevelUpMove sVileplumeLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_POISON_POWDER),
     LEVEL_UP_MOVE( 1, MOVE_STUN_SPORE),
 #ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 1, MOVE_SLEEP_POWDER),
     LEVEL_UP_MOVE(39, MOVE_EARTH_POWER),
 #endif
     LEVEL_UP_MOVE(49, MOVE_PETAL_BLIZZARD),
@@ -21578,7 +21579,7 @@ static const struct LevelUpMove sStunfiskGalarianLevelUpLearnset[] = {
     LEVEL_UP_MOVE(50, MOVE_FLAIL),
 #ifdef ROGUE_DRAYANO
     LEVEL_UP_MOVE(55, MOVE_IRON_HEAD),
-    LEVEL_UP_MOVE(60, MOVE_FISSURE),
+    LEVEL_UP_MOVE(61, MOVE_FISSURE),
 #else
     LEVEL_UP_MOVE(55, MOVE_FISSURE),
 #endif

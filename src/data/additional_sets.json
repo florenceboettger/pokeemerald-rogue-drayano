@@ -904,6 +904,26 @@
         "extra_moves": [
             "Power Gem"
         ]
+    },  
+
+    "Zubat": {
+        "extra_moves": [
+            "Crunch",
+            "Dual Wingbeat",
+            "Heat Wave",
+            "Hurricane",
+            "Zen Headbutt"
+        ]
+    },
+
+    "Golbat": {
+        "extra_moves": [
+            "Crunch",
+            "Dual Wingbeat",
+            "Heat Wave",
+            "Hurricane",
+            "Zen Headbutt"
+        ]
     },
 
     "Vileplume": {
@@ -3578,6 +3598,17 @@
             "Smart Strike",
             "Twineedle",
             "Venoshock"
+        ]
+    },
+
+    "Crobat": {
+        "extra_moves": [
+            "Crunch",
+            "Dark Pulse",
+            "Dual Wingbeat",
+            "Hurricane",
+            "X-Scissor",
+            "Zen Headbutt"
         ]
     },
 

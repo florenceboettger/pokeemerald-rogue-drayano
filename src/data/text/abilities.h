@@ -162,7 +162,11 @@ static const u8 sFlowerVeilDescription[] = _("Protects Grass-types.");
 static const u8 sCheekPouchDescription[] = _("Eating Berries restores HP.");
 static const u8 sProteanDescription[] = _("Changes type to used move.");
 static const u8 sFurCoatDescription[] = _("Raises Defense.");
+#ifdef ROGUE_DRAYANO
+static const u8 sBulletproofDescription[] = _("Blocks balls and bombs.");
+#else
 static const u8 sBulletproofDescription[] = _("Avoids some projectiles.");
+#endif
 static const u8 sCompetitiveDescription[] = _("Lowered stats up Sp. Atk.");
 static const u8 sStrongJawDescription[] = _("Boosts biting moves.");
 static const u8 sRefrigerateDescription[] = _("Normal moves become Ice.");
