@@ -5332,6 +5332,72 @@
         ]
     },
 
+    "Ninjask": {
+        "movesets": {
+            "gen7zu": {
+                "Choice Band": {
+                    "moves": [
+                        "First Impression",
+                        "U-turn",
+                        "Dual Wingbeat",
+                        "Night Slash"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Infiltrator"
+                },
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Leech Life",
+                        "Dual Wingbeat",
+                        "Drill Run"
+                    ],
+                    "item": "Groundium Z",
+                    "ability": "Speed Boost"
+                }
+            },
+            "gen7pu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Leech Life",
+                        "Dual Wingbeat",
+                        "Drill Run"
+                    ],
+                    "item": "Groundium Z",
+                    "ability": "Speed Boost"
+                }
+            },
+            "gen8nu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Acrobatics",
+                        "Drill Run",
+                        "Protect",
+                        "Swords Dance"
+                    ],
+                    "item": "Flying Gem",
+                    "ability": "Speed Boost"
+                }
+            },
+            "gen8pu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Extreme Speed",
+                        "U-turn",
+                        "Dual Wingbeat"
+                    ],
+                    "item": "Heavy-Duty Boots",
+                    "ability": "Speed Boost"
+                }
+            }
+        },
+        "extra_moves": [
+            "Final Gambit"
+        ]
+    },
+
     "Whismur": {
         "extra_moves": [
             "Bug Buzz",
