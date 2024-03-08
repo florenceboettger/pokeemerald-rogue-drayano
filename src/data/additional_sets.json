@@ -4778,9 +4778,21 @@
                         "Scald",
                         "Roost",
                         "Toxic",
-                        "Whirlwind"
+                        "Aeroblast"
                     ],
                     "item": "Leftovers",
+                    "ability": "Multiscale"
+                }
+            },
+            "gen8ubers": {
+                "Great Wall (Defensive)": {
+                    "moves": [
+                        "Roost",
+                        "Ice Beam",
+                        "Toxic",
+                        "Aeroblast"
+                    ],
+                    "item": "Heavy-Duty Boots",
                     "ability": "Multiscale"
                 }
             }

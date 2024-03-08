@@ -3311,6 +3311,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_AEROBLAST] =
     {
+    #ifdef ROGUE_DRAYANO
+        .effect = EFFECT_HIT_SWITCH_TARGET,
+        .power = 60,
+        .type = TYPE_FLYING,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = -6,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .zMovePower = 120,
+        .zMoveEffect = Z_EFFECT_NONE,
+    #else
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_FLYING,
@@ -3323,6 +3337,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .split = SPLIT_SPECIAL,
         .zMovePower = 180,
         .zMoveEffect = Z_EFFECT_NONE,
+    #endif
     },
 
     [MOVE_COTTON_SPORE] =

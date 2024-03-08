@@ -726,8 +726,13 @@ static const u8 sSnoreDescription[] = _(
     "used only while asleep.");
 
 static const u8 sCurseDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "+Attack, +Defense, -Speed.\n"
+    "Ghost-type: curse target.");
+#else
     "A move that functions\n"
     "differently for GHOSTS.");
+#endif
 
 static const u8 sFlailDescription[] = _(
     "Inflicts more damage when\n"
@@ -738,8 +743,13 @@ static const u8 sConversion2Description[] = _(
     "to the last attack's type.");
 
 static const u8 sAeroblastDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Launches a vacuumed blast.\n"
+    "Switches the foe out.");
+#else
     "Launches a vacuumed blast.\n"
     "High critical-hit ratio.");
+#endif
 
 static const u8 sCottonSporeDescription[] = _(
     "Spores cling to the foe,\n"
@@ -2061,8 +2071,13 @@ static const u8 sShiftGearDescription[] = _(
     "Attack and Speed.");
 
 static const u8 sCircleThrowDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Knocks the foe away to\n"
+    "force opponent to switch.");
+#else
     "Knocks the foe away to end\n"
     "the battle.");
+#endif
 
 static const u8 sIncinerateDescription[] = _(
     "Burns up Berries and Gems\n"
