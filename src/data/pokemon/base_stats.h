@@ -9146,7 +9146,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 40,
         .baseAttack    = 30,
         .baseDefense   = 30,
+    #ifdef ROGUE_DRAYANO
+        .baseSpeed     = 35,
+    #else
         .baseSpeed     = 30,
+    #endif
         .baseSpAttack  = 40,
         .baseSpDefense = 50,
         .type1 = TYPE_WATER,
@@ -9171,7 +9175,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 60,
         .baseAttack    = 50,
         .baseDefense   = 50,
+    #ifdef ROGUE_DRAYANO
+        .baseSpeed     = 60,
+    #else
         .baseSpeed     = 50,
+    #endif
         .baseSpAttack  = 60,
         .baseSpDefense = 70,
         .type1 = TYPE_WATER,
@@ -9196,7 +9204,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 80,
         .baseAttack    = 70,
         .baseDefense   = 70,
+    #ifdef ROGUE_DRAYANO
+        .baseSpeed     = 90,
+    #else
         .baseSpeed     = 70,
+    #endif
         .baseSpAttack  = 90,
         .baseSpDefense = 100,
         .type1 = TYPE_WATER,
@@ -9219,7 +9231,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_SEEDOT] =
     {
         .baseHP        = 40,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 45,
+    #else
         .baseAttack    = 40,
+    #endif
         .baseDefense   = 50,
         .baseSpeed     = 30,
         .baseSpAttack  = 30,
@@ -9238,7 +9254,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_RATTLED, ABILITY_PICKPOCKET},
+    #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EARLY_BIRD, ABILITY_PICKPOCKET},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -9246,7 +9266,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_NUZLEAF] =
     {
         .baseHP        = 70,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 80,
+    #else
         .baseAttack    = 70,
+    #endif
         .baseDefense   = 40,
         .baseSpeed     = 60,
         .baseSpAttack  = 60,
@@ -9265,7 +9289,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_RATTLED, ABILITY_PICKPOCKET},
+    #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EARLY_BIRD, ABILITY_PICKPOCKET},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -9273,7 +9301,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_SHIFTRY] =
     {
         .baseHP        = 90,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 120,
+    #else
         .baseAttack    = 100,
+    #endif
         .baseDefense   = 60,
         .baseSpeed     = 80,
         .baseSpAttack  = 90,
@@ -9292,7 +9324,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_GRASS,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_RATTLED, ABILITY_PICKPOCKET},
+    #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EARLY_BIRD, ABILITY_PICKPOCKET},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },

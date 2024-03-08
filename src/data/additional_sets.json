@@ -5210,6 +5210,49 @@
         ]
     },
 
+    "Shiftry": {
+        "movesets": {
+            "gen7pu": {
+                "Mixed Life Orb": {
+                    "moves": [
+                        "Knock Off",
+                        "Sucker Punch",
+                        "Leaf Blade",
+                        "Parting Shot"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Chlorophyll"
+                },
+                "Swords Dance": {
+                    "moves": [
+                        "Knock Off",
+                        "Sucker Punch",
+                        "Leaf Blade",
+                        "Swords Dance"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Rattled"
+                },
+                "Choice Scarf": {
+                    "moves": [
+                        "Knock Off",
+                        "Leaf Blade",
+                        "Rock Slide",
+                        "Parting Shot"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Chlorophyll"
+                }
+            }
+        },
+        "extra_moves": [
+            "Defog",
+            "Explosion",
+            "Low Kick",
+            "Hurricane"
+        ]
+    },
+
     "Taillow": {
         "extra_moves": [
             "Dual Wingbeat"

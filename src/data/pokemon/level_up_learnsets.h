@@ -6634,6 +6634,10 @@ static const struct LevelUpMove sNuzleafLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sShiftryLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_PARTING_SHOT),
+    LEVEL_UP_MOVE( 1, MOVE_PARTING_SHOT),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_RAZOR_LEAF),
     LEVEL_UP_MOVE( 1, MOVE_FEINT_ATTACK),
     LEVEL_UP_MOVE( 1, MOVE_WHIRLWIND),
