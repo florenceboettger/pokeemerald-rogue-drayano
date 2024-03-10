@@ -10885,7 +10885,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SPOINK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+    #else
         .baseHP        = 60,
+    #endif
         .baseAttack    = 25,
         .baseDefense   = 35,
         .baseSpeed     = 60,
@@ -10909,7 +10913,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GRUMPIG] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+    #else
         .baseHP        = 80,
+    #endif
         .baseAttack    = 45,
         .baseDefense   = 65,
         .baseSpeed     = 80,
@@ -14274,12 +14282,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CHATOT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 76,
+        .baseAttack    = 65,
+        .baseDefense   = 50,
+        .baseSpeed     = 96,
+        .baseSpAttack  = 104,
+        .baseSpDefense = 50,
+    #else
         .baseHP        = 76,
         .baseAttack    = 65,
         .baseDefense   = 45,
         .baseSpeed     = 91,
         .baseSpAttack  = 92,
         .baseSpDefense = 42,
+    #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
         .catchRate = 30,
@@ -14294,7 +14311,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_FLYING,
         .eggGroup2 = EGG_GROUP_FLYING,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SOUNDPROOF, ABILITY_TANGLED_FEET, ABILITY_PUNK_ROCK},
+    #else
         .abilities = {ABILITY_KEEN_EYE, ABILITY_TANGLED_FEET, ABILITY_BIG_PECKS},
+    #endif
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
     },
@@ -19252,7 +19273,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_STATIC, ABILITY_WATER_ABSORB, ABILITY_SAND_VEIL},
+        .abilities = {ABILITY_STATIC, ABILITY_DRY_SKIN, ABILITY_SAND_VEIL},
     #else
         .abilities = {ABILITY_STATIC, ABILITY_LIMBER, ABILITY_SAND_VEIL},
     #endif
@@ -28619,7 +28640,7 @@ const struct BaseStats gBaseStats[] =
         .eggGroup1 = EGG_GROUP_WATER_1,
         .eggGroup2 = EGG_GROUP_AMORPHOUS,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_MIMICRY, ABILITY_WATER_ABSORB, ABILITY_ARENA_TRAP},
+        .abilities = {ABILITY_MIMICRY, ABILITY_DRY_SKIN, ABILITY_ARENA_TRAP},
     #else
         .abilities = {ABILITY_MIMICRY, ABILITY_NONE},
     #endif

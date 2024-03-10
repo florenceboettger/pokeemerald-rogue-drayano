@@ -5764,6 +5764,23 @@
         ]
     },
 
+    "Spoink": {
+        "movesets": {
+            "gen7lc": {
+                "Calm Mind": {
+                    "moves": [
+                        "Calm Mind",
+                        "Psychic",
+                        "Slack Off",
+                        "Hidden Power Fighting"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Thick Fat"
+                }
+            }
+        }
+    },
+
     "Trapinch": {
         "extra_moves": [
             "Scorching Sands"
@@ -7966,6 +7983,10 @@
             "Teleport",
             "Weather Ball"
         ]
+    },
+
+    "Chatot": {
+
     },
 
     "Riolu": {
@@ -10195,7 +10216,7 @@
                         "Toxic"
                     ],
                     "item": "Leftovers",
-                    "ability": "Water Absorb"
+                    "ability": "Dry Skin"
                 }
             },
             "gen8zu": {
@@ -10207,7 +10228,7 @@
                         "Foul Play"
                     ],
                     "item": "Leftovers",
-                    "ability": "Water Absorb"
+                    "ability": "Dry Skin"
                 }
             }
         },
@@ -10243,7 +10264,7 @@
                         "Yawn"
                     ],
                     "item": "Leftovers",
-                    "ability": "Water Absorb"
+                    "ability": "Dry Skin"
                 }
             }
         },
