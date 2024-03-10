@@ -7986,7 +7986,94 @@
     },
 
     "Chatot": {
+        "movesets": {
+            "gen7zu": {
+                "Choice Attacker": {
+                    "moves": [
+                        "Boomburst",
+                        "Chatter",
+                        "Heat Wave",
+                        "U-turn"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Punk Rock"
+                },
+                "Nasty Plot": {
+                    "moves": [
+                        "Nasty Plot",
+                        "Boomburst",
+                        "Encore",
+                        "Heat Wave"
+                    ],
+                    "item": "Normalium Z",
+                    "ability": "Punk Rock"
+                }
+            },
+            "gen7pu": {
+                "Choice Attacker": {
+                    "moves": [
+                        "Boomburst",
+                        "Heat Wave",
+                        "Hidden Power Fighting",
+                        "U-turn"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Punk Rock"
+                }
+            }
+        },
+        "extra_moves": [
+            "Bug Buzz"
+        ]
+    },
 
+    "Spiritomb": {
+        "movesets": {
+            "gen7pu": {
+                "Pursuit Trapper": {
+                    "moves": [
+                        "Pursuit",
+                        "Sucker Punch",
+                        "Parting Shot",
+                        "Will-O-Wisp"
+                    ],
+                    "item": "Figy Berry",
+                    "ability": "Infiltrator"
+                }
+            }
+        }
+    },
+
+    "Garchomp": {
+        "movesets": {
+            "gen8ou": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Earthquake",
+                        "Scale Shot",
+                        "Extreme Speed"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Rough Skin"
+                }
+            },
+            "gen8ubers": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Earthquake",
+                        "Extreme Speed",
+                        "Stone Edge"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Rough Skin" 
+                }
+            }
+        },
+        "extra_moves": [
+            "Aqua Tail"
+        ]
     },
 
     "Riolu": {
@@ -8053,6 +8140,67 @@
             "Shadow Claw",
             "Zen Headbutt"
         ]
+    },
+
+    "Carnivine": {
+        "extra_moves": [
+            "Dark Pulse",
+            "Leech Life"
+        ]
+    },
+
+    "Finneon": {
+        "movesets": {
+            "gen7lc": {
+                "Defog": {
+                    "moves": [
+                        "Defog",
+                        "Scald",
+                        "U-turn",
+                        "Roost"
+                    ],
+                    "item": "Berry Juice",
+                    "ability": "Storm Drain"
+                }
+            }
+        }
+    },
+
+    "Lumineon": {
+        "movesets": {
+            "gen7pu": {
+                "Defog": {
+                    "moves": [
+                        "Defog",
+                        "Scald",
+                        "U-turn",
+                        "Roost"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Storm Drain"
+                },
+                "Special Scarf": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Air Slash",
+                        "U-turn",
+                        "Ice Beam"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Dazzling"
+                },
+                "Tail Glow": {
+                    "moves": [
+                        "Tail Glow",
+                        "Hydro Pump",
+                        "Hurricane",
+                        "Roost"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Swift Swim"
+                }
+            }
+        }
     },
 
     "Weavile": {

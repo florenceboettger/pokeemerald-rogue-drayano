@@ -11170,6 +11170,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
                                           TMHM(TM35_FLAMETHROWER)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(HM02_FLY)
+                                        #endif
                                           TMHM(TM21_FRUSTRATION)
                                           TMHM(TM10_HIDDEN_POWER)
                                           TMHM(TM15_HYPER_BEAM)

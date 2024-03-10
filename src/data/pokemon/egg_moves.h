@@ -2744,8 +2744,13 @@ const u16 gEggMoves[] = {
         MOVE_STEEL_WING,
         MOVE_SLEEP_TALK,
         MOVE_DEFOG,
+    #ifdef ROGUE_DRAYANO
+        MOVE_AIR_CUTTER
+    #else
         MOVE_AIR_CUTTER,
-        MOVE_BOOMBURST),
+        MOVE_BOOMBURST
+    #endif
+        ),
 
     egg_moves(SPIRITOMB,
         MOVE_DESTINY_BOND,
