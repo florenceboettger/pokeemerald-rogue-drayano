@@ -5554,6 +5554,35 @@
         ]
     },
 
+    "Manectric": {
+        "movesets": {
+            "gen7uu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Volt Switch",
+                        "Flamethrower",
+                        "Thunderbolt",
+                        "Energy Ball"
+                    ],
+                    "item": "Manectite",
+                    "ability": "Lightning Rod"
+                }
+            },
+            "gen7pu": {
+                "Choice Scarf": {
+                    "moves": [
+                        "Thunderbolt",
+                        "Volt Switch",
+                        "Overheat",
+                        "Energy Ball"
+                    ],
+                    "item": "Choice Scarf",
+                    "ability": "Lightning Rod"
+                }
+            }
+        }
+    },
+
     "Plusle": {
         "extra_moves": [
             "Grass Knot",
@@ -11347,6 +11376,148 @@
                 }
             }
         }
+    },
+
+    "Pumpkaboo-Small": {
+        "movesets": {
+            "gen7lc": {
+                "Z-Trick-or-Treat": {
+                    "moves": [
+                        "Trick-or-Treat",
+                        "Shadow Ball",
+                        "Fire Blast",
+                        "Giga Drain"
+                    ],
+                    "item": "Ghostium Z",
+                    "ability": "Flash Fire"
+                }
+            }
+        },
+        "extra_moves": [
+            "Flame Charge"
+        ]
+    },
+
+    "Pumpkaboo-Super": {
+        "movesets": {
+            "gen7lc": {
+                "Special Spinblocker": {
+                    "moves": [
+                        "Fire Blast",
+                        "Will-O-Wisp",
+                        "Synthesis",
+                        "Giga Drain"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Flash Fire"
+                },
+                "Mixed Spinblocker": {
+                    "moves": [
+                        "Bullet Seed",
+                        "Synthesis",
+                        "Will-O-Wisp",
+                        "Shadow Sneak"
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Flash Fire"
+                }
+            }
+        },
+        "extra_moves": [
+            "Flame Charge"
+        ]
+    },
+
+    "Gourgeist": {
+        "movesets": {
+            "gen7pu": {
+                "Z-Trick-or-Treat": {
+                    "moves": [
+                        "Trick-or-Treat",
+                        "Seed Bomb",
+                        "Shadow Punch",
+                        "Shadow Sneak"
+                    ],
+                    "item": "Ghostium Z",
+                    "ability": "Flash Fire"
+                }
+            }
+        },
+        "extra_moves": [
+            "Flame Charge"
+        ]
+    },
+
+    "Gourgeist-Large": {
+        "movesets": {
+            "gen7pu": {
+                "Defensive": {
+                    "moves": [
+                        "Seed Bomb",
+                        "Foul Play",
+                        "Will-O-Wisp",
+                        "Synthesis"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Flash Fire"
+                }
+            }
+        },
+        "extra_moves": [
+            "Flame Charge"
+        ]
+    },
+
+    "Gourgeist-Small": {
+        "movesets": {
+            "gen7pu": {
+                "SubSeed": {
+                    "moves": [
+                        "Substitute",
+                        "Leech Seed",
+                        "Will-O-Wisp",
+                        "Shadow Punch"
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Flash Fire"
+                }
+            }
+        },
+        "extra_moves": [
+            "Flame Charge"
+        ]
+    },
+
+    "Gourgeist-Super": {
+        "movesets": {
+            "gen7pu": {
+                "Physically Defensive": {
+                    "moves": [
+                        "Will-O-Wisp",
+                        "Leech Seed",
+                        "Synthesis",
+                        "Foul Play"
+                    ],
+                    "item": "Colbur Berry",
+                    "ability": "Flash Fire"
+                }
+            },
+            "gen7zu": {
+                "Physically Defensive": {
+                    "moves": [
+                        "Shadow Sneak",
+                        "Fire Punch",
+                        "Seed Bomb",
+                        "Trick-or-Treat"
+                    ],
+                    "item": "Ghostium Z",
+                    "ability": "Flash Fire"
+                }
+            }
+        },
+        "extra_moves": [
+            "Flame Charge"
+        ]
     },
 
     "Crabominable": {

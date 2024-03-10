@@ -17132,6 +17132,10 @@ static const struct LevelUpMove sPumpkabooLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sGourgeistLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_SHADOW_PUNCH),
+    LEVEL_UP_MOVE( 1, MOVE_SHADOW_PUNCH),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_EXPLOSION),
     LEVEL_UP_MOVE( 1, MOVE_PHANTOM_FORCE),
     LEVEL_UP_MOVE( 1, MOVE_TRICK),

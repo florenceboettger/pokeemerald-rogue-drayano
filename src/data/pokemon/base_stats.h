@@ -755,6 +755,23 @@
         }
 #endif
 
+#ifdef ROGUE_DRAYANO
+#define PUMKPABOO_MISC_STATS                                           \
+        .type1 = TYPE_GHOST,                                           \
+        .type2 = TYPE_GRASS,                                           \
+        .catchRate = 120,                                              \
+        .expYield = 67,                                                \
+        .evYield_Defense   = 1,                                        \
+        .genderRatio = PERCENT_FEMALE(50),                             \
+        .eggCycles = 20,                                               \
+        .friendship = 70,                                              \
+        .growthRate = GROWTH_MEDIUM_FAST,                              \
+        .eggGroup1 = EGG_GROUP_AMORPHOUS,                              \
+        .eggGroup2 = EGG_GROUP_AMORPHOUS,                              \
+        .abilities = {ABILITY_PICKUP, ABILITY_FRISK, ABILITY_FLASH_FIRE},\
+        .bodyColor = BODY_COLOR_BROWN,                                 \
+        .noFlip = FALSE
+#else
 #define PUMKPABOO_MISC_STATS                                           \
         .type1 = TYPE_GHOST,                                           \
         .type2 = TYPE_GRASS,                                           \
@@ -770,7 +787,25 @@
         .abilities = {ABILITY_PICKUP, ABILITY_FRISK, ABILITY_INSOMNIA},\
         .bodyColor = BODY_COLOR_BROWN,                                 \
         .noFlip = FALSE
+#endif
 
+#ifdef ROGUE_DRAYANO
+#define GOURGEIST_MISC_STATS                                           \
+        .type1 = TYPE_GHOST,                                           \
+        .type2 = TYPE_GRASS,                                           \
+        .catchRate = 60,                                               \
+        .expYield = 173,                                               \
+        .evYield_Defense   = 2,                                        \
+        .genderRatio = PERCENT_FEMALE(50),                             \
+        .eggCycles = 20,                                               \
+        .friendship = 70,                                              \
+        .growthRate = GROWTH_MEDIUM_FAST,                              \
+        .eggGroup1 = EGG_GROUP_AMORPHOUS,                              \
+        .eggGroup2 = EGG_GROUP_AMORPHOUS,                              \
+        .abilities = {ABILITY_PICKUP, ABILITY_FRISK, ABILITY_FLASH_FIRE},\
+        .bodyColor = BODY_COLOR_BROWN,                                 \
+        .noFlip = FALSE
+#else
 #define GOURGEIST_MISC_STATS                                           \
         .type1 = TYPE_GHOST,                                           \
         .type2 = TYPE_GRASS,                                           \
@@ -786,6 +821,7 @@
         .abilities = {ABILITY_PICKUP, ABILITY_FRISK, ABILITY_INSOMNIA},\
         .bodyColor = BODY_COLOR_BROWN,                                 \
         .noFlip = FALSE
+#endif
 
 #define XERNEAS_BASE_STATS                              \
     {                                                   \
@@ -10148,12 +10184,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SABLEYE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 80,
+        .baseDefense   = 80,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 70,
+    #else
         .baseHP        = 50,
         .baseAttack    = 75,
         .baseDefense   = 75,
         .baseSpeed     = 50,
         .baseSpAttack  = 65,
         .baseSpDefense = 65,
+    #endif
         .type1 = TYPE_DARK,
         .type2 = TYPE_GHOST,
         .catchRate = 45,
@@ -10169,19 +10214,32 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroup1 = EGG_GROUP_HUMAN_LIKE,
         .eggGroup2 = EGG_GROUP_HUMAN_LIKE,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MAGIC_GUARD, ABILITY_STALL, ABILITY_PRANKSTER},
+    #else
         .abilities = {ABILITY_KEEN_EYE, ABILITY_STALL, ABILITY_PRANKSTER},
+    #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
     },
 
     [SPECIES_MAWILE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 95,
+        .baseDefense   = 90,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 50,
         .baseAttack    = 85,
         .baseDefense   = 85,
         .baseSpeed     = 50,
         .baseSpAttack  = 55,
         .baseSpDefense = 55,
+    #endif
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_STEEL,
             .type2 = TYPE_FAIRY,
@@ -10264,7 +10322,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 180,
         .baseSpeed     = 50,
         .baseSpAttack  = 60,
+    #ifdef ROGUE_DRAYANO
+        .baseSpDefense = 80,
+    #else
         .baseSpDefense = 60,
+    #endif
         .type1 = TYPE_STEEL,
         .type2 = TYPE_ROCK,
         .catchRate = 45,
@@ -26792,12 +26854,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SABLEYE_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 80,
+        .baseDefense   = 130,
+        .baseSpeed     = 20,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 120,
+    #else
         .baseHP        = 50,
         .baseAttack    = 85,
         .baseDefense   = 125,
         .baseSpeed     = 20,
         .baseSpAttack  = 85,
         .baseSpDefense = 115,
+    #endif
         .type1 = TYPE_DARK,
         .type2 = TYPE_GHOST,
         .catchRate = 45,
@@ -26817,12 +26888,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MAWILE_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
         .baseHP        = 50,
         .baseAttack    = 105,
         .baseDefense   = 125,
         .baseSpeed     = 50,
         .baseSpAttack  = 55,
         .baseSpDefense = 95,
+    #else
+        .baseHP        = 50,
+        .baseAttack    = 105,
+        .baseDefense   = 125,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 95,
+    #endif
         .type1 = TYPE_STEEL,
         .type2 = TYPE_FAIRY,
         .catchRate = 45,
@@ -26847,7 +26927,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 230,
         .baseSpeed     = 50,
         .baseSpAttack  = 60,
+    #ifdef ROGUE_DRAYANO
+        .baseSpDefense = 100,
+    #else
         .baseSpDefense = 80,
+    #endif
         .type1 = TYPE_STEEL,
         .type2 = TYPE_STEEL,
         .catchRate = 45,

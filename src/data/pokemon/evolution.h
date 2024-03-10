@@ -292,8 +292,16 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SHUPPET]               = {{EVO_LEVEL, 37, SPECIES_BANETTE}},
 #endif
     [SPECIES_BANETTE]               = {{EVO_MEGA_EVOLUTION, ITEM_BANETTITE, SPECIES_BANETTE_MEGA}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_ARON]                  = {{EVO_LEVEL, 24, SPECIES_LAIRON}},
+#else
     [SPECIES_ARON]                  = {{EVO_LEVEL, 32, SPECIES_LAIRON}},
+#endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_LAIRON]                = {{EVO_LEVEL, 40, SPECIES_AGGRON}},
+#else
     [SPECIES_LAIRON]                = {{EVO_LEVEL, 42, SPECIES_AGGRON}},
+#endif
     [SPECIES_AGGRON]                = {{EVO_MEGA_EVOLUTION, ITEM_AGGRONITE, SPECIES_AGGRON_MEGA}},
 #ifdef ROGUE_DRAYANO
     [SPECIES_LILEEP]                = {{EVO_LEVEL, 30, SPECIES_CRADILY}},
@@ -526,7 +534,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SWIRLIX]               = {{EVO_TRADE_ITEM, ITEM_WHIPPED_DREAM, SPECIES_SLURPUFF}},
     [SPECIES_INKAY]                 = {{EVO_LEVEL, 30, SPECIES_MALAMAR}},
     [SPECIES_BINACLE]               = {{EVO_LEVEL, 39, SPECIES_BARBARACLE}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_SKRELP]                = {{EVO_LEVEL, 40, SPECIES_DRAGALGE}},
+#else
     [SPECIES_SKRELP]                = {{EVO_LEVEL, 48, SPECIES_DRAGALGE}},
+#endif
     [SPECIES_CLAUNCHER]             = {{EVO_LEVEL, 37, SPECIES_CLAWITZER}},
     [SPECIES_HELIOPTILE]            = {{EVO_ITEM, ITEM_SUN_STONE, SPECIES_HELIOLISK}},
     [SPECIES_TYRUNT]                = {{EVO_LEVEL_DAY, 39, SPECIES_TYRANTRUM}},
@@ -536,7 +548,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_PHANTUMP]              = {{EVO_TRADE, 0, SPECIES_TREVENANT}},
     [SPECIES_PUMPKABOO]             = {{EVO_TRADE, 0, SPECIES_GOURGEIST}},
     [SPECIES_BERGMITE]              = {{EVO_LEVEL, 37, SPECIES_AVALUGG}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_NOIBAT]                = {{EVO_LEVEL, 40, SPECIES_NOIVERN}},
+#else
     [SPECIES_NOIBAT]                = {{EVO_LEVEL, 48, SPECIES_NOIVERN}},
+#endif
     [SPECIES_DIANCIE]               = {{EVO_MEGA_EVOLUTION, ITEM_DIANCITE, SPECIES_DIANCIE_MEGA}},
     [SPECIES_ROWLET]                = {{EVO_LEVEL, 17, SPECIES_DARTRIX}},
     [SPECIES_DARTRIX]               = {{EVO_LEVEL, 34, SPECIES_DECIDUEYE}},

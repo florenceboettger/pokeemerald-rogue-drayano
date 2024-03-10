@@ -8797,6 +8797,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SWAGGER)),
 
     [SPECIES_GOURGEIST]     = TUTOR_LEARNSET(TUTOR(MOVE_DREAM_EATER)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_FIRE_PUNCH)
+                                        #endif
                                             | TUTOR(MOVE_EXPLOSION)
                                             | TUTOR(MOVE_ROCK_SLIDE)
                                             | TUTOR(MOVE_SLEEP_TALK)
