@@ -8928,6 +8928,53 @@
         }
     },
 
+    "Manaphy": {
+        "movesets": {
+            "gen7monotype": {
+                "Waterium Z": {
+                    "moves": [
+                        "Tail Glow",
+                        "Rain Dance",
+                        "Hydro Pump",
+                        "Psychic"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Hydration"
+                }
+            },
+            "gen71v1": {
+                "Tail Glow + 3 Attacks": {
+                    "moves": [
+                        "Tail Glow",
+                        "Hydro Pump",
+                        "Icy Wind",
+                        "Energy Ball"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Hydration"
+                }
+            },
+            "gen8nationaldex": {
+                "Stallbreaker": {
+                    "moves": [
+                        "Tail Glow",
+                        "Hydro Pump",
+                        "Energy Ball",
+                        "Rest"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Hydration"
+                }
+            }
+        },
+        "extra_moves": [
+            "Dazzling Gleam",
+            "Knock Off",
+            "Signal Beam",
+            "U-turn"
+        ]
+    },
+
     "Darkrai": {
         "movesets": {
             "gen7ubers": {
