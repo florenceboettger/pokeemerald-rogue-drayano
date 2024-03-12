@@ -4404,6 +4404,129 @@
         ]
     },
 
+    "Kingdra": {
+        "movesets": {
+            "gen7ou": {
+                "Choice Specs": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Snipe Shot",
+                        "Draco Meteor",
+                        "Ice Beam"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Swift Swim"
+                }
+            },
+            "gen7ru": {
+                "CritDra": {
+                    "moves": [
+                        "Focus Energy",
+                        "Draco Meteor",
+                        "Snipe Shot",
+                        "Substitute"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Sniper"
+                }
+            },
+            "gen7monotype": {
+                "Rain Sweeper (Water)": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Draco Meteor",
+                        "Ice Beam",
+                        "Scald"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Swift Swim"
+                }
+            },
+            "gen7battlespotsingles": {
+                "Waterium Z": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Snipe Shot",
+                        "Draco Meteor",
+                        "Ice Beam"
+                    ],
+                    "item": "Waterium Z",
+                    "ability": "Swift Swim"
+                },
+                "Choice Specs": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Snipe Shot",
+                        "Draco Meteor",
+                        "Ice Beam"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Swift Swim"
+                }
+            },
+            "gen8ou": {
+                "Rain Sweeper": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Draco Meteor",
+                        "Snipe Shot",
+                        "Flip Turn"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Swift Swim"
+                }
+            },
+            "gen8uu": {
+                "Choice Specs": {
+                    "moves": [
+                        "Hydro Pump",
+                        "Draco Meteor",
+                        "Snipe Shot",
+                        "Hurricane"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Swift Swim"
+                }
+            },
+            "gen8ru": {
+                "Rain Sweeper": {
+                    "moves": [
+                        "Snipe Shot",
+                        "Draco Meteor",
+                        "Hurricane",
+                        "Hydro Pump"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Swift Swim"
+                }
+            },
+            "gen8nu": {
+                "CritDra": {
+                    "moves": [
+                        "Focus Energy",
+                        "Draco Meteor",
+                        "Snipe Shot",
+                        "Agility"
+                    ],
+                    "item": "Scope Lens",
+                    "ability": "Sniper"
+                }
+            },
+            "gen8monotype": {
+                "Swift Swim (Water)": {
+                    "moves": [
+                        "Snipe Shot",
+                        "Draco Meteor",
+                        "Dragon Pulse",
+                        "Hurricane"
+                    ],
+                    "item": "Choice Specs",
+                    "ability": "Swift Swim"
+                }
+            }
+        }
+    },
+
     "Hitmontop": {
         "movesets": {
             "gen8nu": {
