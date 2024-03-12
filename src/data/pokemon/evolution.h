@@ -351,7 +351,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_SHIELDON]              = {{EVO_LEVEL, 30, SPECIES_BASTIODON}},
     [SPECIES_BURMY]                 = {{EVO_LEVEL_FEMALE, 20, SPECIES_WORMADAM},
                                        {EVO_LEVEL_MALE, 20, SPECIES_MOTHIM}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_COMBEE]                = {{EVO_LEVEL, 21, SPECIES_VESPIQUEN}},
+#else
     [SPECIES_COMBEE]                = {{EVO_LEVEL_FEMALE, 21, SPECIES_VESPIQUEN}},
+#endif
     [SPECIES_BUIZEL]                = {{EVO_LEVEL, 26, SPECIES_FLOATZEL}},
     [SPECIES_CHERUBI]               = {{EVO_LEVEL, 25, SPECIES_CHERRIM}},
     [SPECIES_SHELLOS]               = {{EVO_LEVEL, 30, SPECIES_GASTRODON}},
@@ -478,7 +482,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
 #else
     [SPECIES_SHELMET]               = {{EVO_TRADE_SPECIFIC_MON, SPECIES_KARRABLAST, SPECIES_ACCELGOR}},
 #endif
+#ifdef ROGUE_DRAYANO
+    [SPECIES_MIENFOO]               = {{EVO_LEVEL, 41, SPECIES_MIENSHAO}},
+#else
     [SPECIES_MIENFOO]               = {{EVO_LEVEL, 50, SPECIES_MIENSHAO}},
+#endif
 #ifdef ROGUE_DRAYANO
     [SPECIES_GOLETT]                = {{EVO_LEVEL, 40, SPECIES_GOLURK}},
 #else
@@ -580,7 +588,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_DEWPIDER]              = {{EVO_LEVEL, 22, SPECIES_ARAQUANID}},
     [SPECIES_FOMANTIS]              = {{EVO_LEVEL_DAY, 34, SPECIES_LURANTIS}},
     [SPECIES_MORELULL]              = {{EVO_LEVEL, 24, SPECIES_SHIINOTIC}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_SALANDIT]              = {{EVO_LEVEL, 33, SPECIES_SALAZZLE}},
+#else
     [SPECIES_SALANDIT]              = {{EVO_LEVEL_FEMALE, 33, SPECIES_SALAZZLE}},
+#endif
     [SPECIES_STUFFUL]               = {{EVO_LEVEL, 27, SPECIES_BEWEAR}},
     [SPECIES_BOUNSWEET]             = {{EVO_LEVEL, 18, SPECIES_STEENEE}},
     [SPECIES_STEENEE]               = {{EVO_MOVE, MOVE_STOMP, SPECIES_TSAREENA}},

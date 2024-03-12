@@ -13585,11 +13585,7 @@ const struct BaseStats gBaseStats[] =
         .expYield = 49,
         .evYield_Speed     = 1,
         .itemRare = ITEM_HONEY,
-    #ifdef ROGUE_DRAYANO
-        .genderRatio = PERCENT_FEMALE(50),
-    #else
         .genderRatio = PERCENT_FEMALE(12.5),
-    #endif
         .eggCycles = 15,
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_SLOW,
@@ -13620,7 +13616,11 @@ const struct BaseStats gBaseStats[] =
         .evYield_Defense   = 1,
         .evYield_SpDefense = 1,
         .itemRare = ITEM_POISON_BARB,
+    #ifdef ROGUE_DRAYANO
+        .genderRatio = PERCENT_FEMALE(50),
+    #else
         .genderRatio = MON_FEMALE,
+    #endif
         .eggCycles = 15,
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_SLOW,
@@ -22729,7 +22729,11 @@ const struct BaseStats gBaseStats[] =
         .expYield = 168,
         .evYield_Speed     = 2,
         .itemRare = ITEM_SMOKE_BALL,
+    #ifdef ROGUE_DRAYANO
+        .genderRatio = PERCENT_FEMALE(12.5),
+    #else
         .genderRatio = MON_FEMALE,
+    #endif
         .eggCycles = 20,
         .friendship = 70,
         .growthRate = GROWTH_MEDIUM_FAST,

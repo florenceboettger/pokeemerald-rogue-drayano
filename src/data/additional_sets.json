@@ -8209,6 +8209,12 @@
         ]
     },
 
+    "Magnezone": {
+        "extra_moves": [
+            "Bug Buzz"
+        ]
+    },
+
     "Lickilicky": {
         "movesets": {
             "gen7zu": {
