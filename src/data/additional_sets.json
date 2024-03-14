@@ -9352,6 +9352,23 @@
         ]
     },
 
+    "Stoutland": {
+        "movesets": {
+            "gen7pu": {
+                "Choice Band": {
+                    "moves": [
+                        "Return",
+                        "High Horsepower",
+                        "Pursuit",
+                        "Facade"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Scrappy"
+                }
+            }
+        }
+    },
+
     "Pidove": {
         "movesets": {
             "gen7lc": {
