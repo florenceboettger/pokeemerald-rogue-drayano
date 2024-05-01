@@ -11903,10 +11903,73 @@
     },
 
     "Lycanroc": {
+        "movesets": {
+            "gen7pu": {
+                "Swords Dance": {
+                    "moves": [
+                        "Swords Dance",
+                        "Stone Edge",
+                        "Drill Run",
+                        "Accelerock"
+                    ],
+                    "item": "Lycanium Z",
+                    "ability": "Super Luck"
+                },
+                "Offensive Stealth Rock": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Stone Edge",
+                        "Accelerock",
+                        "Earthquake"
+                    ],
+                    "item": "Lycanium Z",
+                    "ability": "Super Luck"
+                }
+            },
+            "gen8pu": {
+                "All-out Attacker": {
+                    "moves": [
+                        "Stone Edge",
+                        "Earthquake",
+                        "Psychic Fangs",
+                        "Accelerock"
+                    ],
+                    "item": "Choice Band",
+                    "ability": "Sand Rush"
+                }
+            },
+            "gen8nu": {
+                "Sand Rush Sweeper": {
+                    "moves": [
+                        "Swords Dance",
+                        "Stone Edge",
+                        "Earthquake",
+                        "Psychic Fangs"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Sand Rush"
+                }
+            },
+            "gen8anythinggoes": {
+                "Lead": {
+                    "moves": [
+                        "Stealth Rock",
+                        "Taunt",
+                        "Rock Tomb",
+                        "Endeavor"
+                    ],
+                    "item": "Focus Sash",
+                    "ability": "Super Luck"
+                }
+            }
+        },
         "extra_moves": [
+            "Close Combat",
             "Iron Head",
             "Iron Tail",
             "Outrage",
+            "Play Rough",
+            "Sucker Punch",
             "Zen Headbutt"
         ]
     },
@@ -11930,8 +11993,8 @@
                     "moves": [
                         "Swords Dance",
                         "Stone Edge",
-                        "Earthquake",
-                        "Sucker Punch"
+                        "Close Combat",
+                        "Accelerock"
                     ],
                     "item": "Lycanium Z",
                     "ability": "No Guard"
@@ -11939,12 +12002,12 @@
                 "Choice Band": {
                     "moves": [
                         "Head Smash",
-                        "Earthquake",
+                        "Accelerock",
                         "Crunch",
-                        "Toxic"
+                        "Close Combat"
                     ],
                     "item": "Choice Band",
-                    "ability": "No Guard"
+                    "ability": "Reckless"
                 }
             },
             "gen8pu": {
@@ -11953,7 +12016,7 @@
                         "Swords Dance",
                         "Stone Edge",
                         "Close Combat",
-                        "Rock Polish"
+                        "Accelerock"
                     ],
                     "item": "Shuca Berry",
                     "ability": "No Guard"
@@ -11966,7 +12029,7 @@
                         "Earthquake"
                     ],
                     "item": "Choice Scarf",
-                    "ability": "No Guard"
+                    "ability": "Reckless"
                 }
             }
         },
@@ -11974,6 +12037,7 @@
             "Iron Head",
             "Iron Tail",
             "Outrage",
+            "Sucker Punch",
             "Throat Chop",
             "Zen Headbutt"
         ]

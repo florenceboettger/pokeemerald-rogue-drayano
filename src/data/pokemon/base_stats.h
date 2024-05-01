@@ -22385,8 +22385,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 112,
         .baseSpAttack  = 55,
         .baseSpDefense = 65,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_ROCK,
+        .type2 = TYPE_GROUND,
+    #else
         .type1 = TYPE_ROCK,
         .type2 = TYPE_ROCK,
+    #endif
         .catchRate = 90,
         .expYield = 170,
         .evYield_Attack    = 2,
@@ -22396,7 +22401,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SUPER_LUCK, ABILITY_SAND_RUSH, ABILITY_STEADFAST},
+    #else
         .abilities = {ABILITY_KEEN_EYE, ABILITY_SAND_RUSH, ABILITY_STEADFAST},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
@@ -29597,8 +29606,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 82,
         .baseSpAttack  = 55,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .type1 = TYPE_ROCK,
+        .type2 = TYPE_FIGHTING,
+    #else
         .type1 = TYPE_ROCK,
         .type2 = TYPE_ROCK,
+    #endif
         .catchRate = 90,
         .expYield = 170,
         .evYield_Attack    = 2,
@@ -29608,7 +29622,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_RECKLESS, ABILITY_VITAL_SPIRIT, ABILITY_NO_GUARD},
+    #else
         .abilities = {ABILITY_KEEN_EYE, ABILITY_VITAL_SPIRIT, ABILITY_NO_GUARD},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
     },
@@ -29632,7 +29650,11 @@ const struct BaseStats gBaseStats[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroup1 = EGG_GROUP_FIELD,
         .eggGroup2 = EGG_GROUP_FIELD,
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TOUGH_CLAWS, ABILITY_OWN_TEMPO, ABILITY_STAKEOUT},
+    #else
         .abilities = {ABILITY_TOUGH_CLAWS, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
     },
