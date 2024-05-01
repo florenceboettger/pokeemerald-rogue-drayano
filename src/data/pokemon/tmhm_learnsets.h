@@ -6131,6 +6131,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(HM01_CUT)
                                           TMHM(TM28_DIG)
                                           TMHM(TM32_DOUBLE_TEAM)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM26_EARTHQUAKE)
+                                        #endif
                                           TMHM(TM42_FACADE)
                                           TMHM(TM38_FIRE_BLAST)
                                           TMHM(TM35_FLAMETHROWER)
