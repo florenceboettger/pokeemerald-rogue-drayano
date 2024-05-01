@@ -5715,7 +5715,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         #endif
         .effect = EFFECT_POISON_FANG,
     #ifdef ROGUE_DRAYANO
-        .power = 70,
+        .power = 65,
     #else
         .power = 50,
     #endif
@@ -5731,7 +5731,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_STRONG_JAW_BOOST,
         .split = SPLIT_PHYSICAL,
     #ifdef ROGUE_DRAYANO
-        .zMovePower = 140,
+        .zMovePower = 120,
     #else
         .zMovePower = 100,
     #endif
@@ -7896,11 +7896,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_STRONG_JAW_BOOST,
         #endif
         .effect = EFFECT_FLINCH_STATUS,
-    #ifdef ROGUE_DRAYANO
-        .power = 70,
-    #else
         .power = 65,
-    #endif
         .type = TYPE_ELECTRIC,
         .accuracy = 95,
         .pp = 15,
@@ -7909,11 +7905,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .argument = STATUS1_PARALYSIS,
-    #ifdef ROGUE_DRAYANO
-        .zMovePower = 140,
-    #else
         .zMovePower = 120,
-    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
@@ -7925,11 +7917,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_STRONG_JAW_BOOST,
         #endif
         .effect = EFFECT_FLINCH_STATUS,
-    #ifdef ROGUE_DRAYANO
-        .power = 70,
-    #else
         .power = 65,
-    #endif
         .type = TYPE_ICE,
         .accuracy = 95,
         .pp = 15,
@@ -7938,11 +7926,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .argument = STATUS1_FREEZE,
-    #ifdef ROGUE_DRAYANO
-        .zMovePower = 140,
-    #else
         .zMovePower = 120,
-    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
@@ -7954,11 +7938,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
             .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST | FLAG_STRONG_JAW_BOOST,
         #endif
         .effect = EFFECT_FLINCH_STATUS,
-    #ifdef ROGUE_DRAYANO
-        .power = 70,
-    #else
         .power = 65,
-    #endif
         .type = TYPE_FIRE,
         .accuracy = 95,
         .pp = 15,
@@ -7967,11 +7947,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .argument = STATUS1_BURN,
-    #ifdef ROGUE_DRAYANO
-        .zMovePower = 140,
-    #else
         .zMovePower = 120,
-    #endif
         .zMoveEffect = Z_EFFECT_NONE,
     },
 
