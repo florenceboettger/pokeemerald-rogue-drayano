@@ -9578,12 +9578,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GARDEVOIR] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 68,
+        .baseAttack    = 60,
+        .baseDefense   = 65,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 125,
+        .baseSpDefense = 115,
+    #else
         .baseHP        = 68,
         .baseAttack    = 65,
         .baseDefense   = 65,
         .baseSpeed     = 80,
         .baseSpAttack  = 125,
         .baseSpDefense = 115,
+    #endif
         #if P_UPDATED_TYPES >= GEN_6
             .type1 = TYPE_PSYCHIC,
             .type2 = TYPE_FAIRY,
@@ -15248,12 +15257,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GALLADE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 68,
+        .baseAttack    = 125,
+        .baseDefense   = 65,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 115,
+    #else
         .baseHP        = 68,
         .baseAttack    = 125,
         .baseDefense   = 65,
         .baseSpeed     = 80,
         .baseSpAttack  = 65,
         .baseSpDefense = 115,
+    #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FIGHTING,
         .catchRate = 45,
@@ -26931,12 +26949,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GARDEVOIR_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 68,
+        .baseAttack    = 80,
+        .baseDefense   = 79,
+        .baseSpeed     = 115,
+        .baseSpAttack  = 165,
+        .baseSpDefense = 135,
+    #else
         .baseHP        = 68,
         .baseAttack    = 85,
         .baseDefense   = 65,
         .baseSpeed     = 100,
         .baseSpAttack  = 165,
         .baseSpDefense = 135,
+    #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FAIRY,
         .catchRate = 45,
@@ -27505,12 +27532,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_GALLADE_MEGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 68,
+        .baseAttack    = 165,
+        .baseDefense   = 100,
+        .baseSpeed     = 125,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 115,
+    #else
         .baseHP        = 68,
         .baseAttack    = 165,
         .baseDefense   = 95,
         .baseSpeed     = 110,
         .baseSpAttack  = 65,
         .baseSpDefense = 115,
+    #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FIGHTING,
         .catchRate = 45,
