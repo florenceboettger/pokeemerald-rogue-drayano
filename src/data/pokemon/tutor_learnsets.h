@@ -4752,6 +4752,9 @@ static const u32 sTutorLearnsets[] =
                                             | TUTOR(MOVE_SUBSTITUTE)
                                             | TUTOR(MOVE_SWAGGER)
                                             | TUTOR(MOVE_SWIFT)
+                                        #ifdef ROGUE_DRAYANO
+                                            | TUTOR(MOVE_SWORDS_DANCE)
+                                        #endif
                                             | TUTOR(MOVE_THUNDER_PUNCH)
                                             | TUTOR(MOVE_THUNDER_WAVE)),
 

@@ -7995,6 +7995,9 @@ const u8 gTMHMLearnsets[][64] =
                                           TMHM(TM22_SOLAR_BEAM)
                                           TMHM(HM04_STRENGTH)
                                           TMHM(TM11_SUNNY_DAY)
+                                        #ifdef ROGUE_DRAYANO
+                                          TMHM(TM24_THUNDERBOLT)
+                                        #endif
                                           TMHM(TM06_TOXIC)
                                           TMHM(TM03_WATER_PULSE)),
 

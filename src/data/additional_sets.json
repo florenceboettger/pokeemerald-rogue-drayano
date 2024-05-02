@@ -5711,6 +5711,7 @@
 
     "Plusle": {
         "extra_moves": [
+            "Flash Cannon",
             "Grass Knot",
             "Signal Beam",
             "Volt Switch"
@@ -5718,6 +5719,30 @@
     },
 
     "Minun": {
+        "movesets": {
+            "gen7pu": {
+                "Nasty Plot": {
+                    "moves": [
+                        "Swords Dance",
+                        "Wild Charge",
+                        "Knock Off",
+                        "Substitute"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Volt Absorb"
+                },
+                "Pivot": {
+                    "moves": [
+                        "Fake Out",
+                        "U-turn",
+                        "Wild Charge",
+                        "Knock Off"
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Volt Absorb"
+                }
+            }
+        },
         "extra_moves": [
             "Flash Cannon",
             "Grass Knot",
@@ -5825,6 +5850,23 @@
             "Flatter",
             "Lunge"
         ]
+    },
+
+    "Swalot": {
+        "movesets": {
+            "gen7pu": {
+                "Assault Vest": {
+                    "moves": [
+                        "Sludge Bomb",
+                        "Giga Drain",
+                        "Ice Beam",
+                        "Earth Power"
+                    ],
+                    "item": "Assault Vest",
+                    "ability": "Liquid Ooze"
+                }
+            }
+        }
     },
 
     "Wailord": {
@@ -6373,7 +6415,7 @@
             "gen7lc": {
                 "Poltergeist Wallbreaker": {
                     "moves": [
-                        "Poltergeist",
+                        "Return",
                         "Shadow Sneak",
                         "Knock Off",
                         "Will-O-Wisp"
@@ -11882,6 +11924,12 @@
         },
         "extra_moves": [
             "Flame Charge"
+        ]
+    },
+
+    "Vikavolt": {
+        "extra_moves": [
+            "Air Slash"
         ]
     },
 
