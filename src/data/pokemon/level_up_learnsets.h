@@ -8231,6 +8231,9 @@ static const struct LevelUpMove sMedititeLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sMedichamLevelUpLearnset[] = {
+#ifdef ROGUE_DRAYANO
+    LEVEL_UP_MOVE( 0, MOVE_ZEN_HEADBUTT),
+#endif
     LEVEL_UP_MOVE( 1, MOVE_ZEN_HEADBUTT),
     LEVEL_UP_MOVE( 1, MOVE_FIRE_PUNCH),
     LEVEL_UP_MOVE( 1, MOVE_THUNDER_PUNCH),
