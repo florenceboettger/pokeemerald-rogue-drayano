@@ -151,7 +151,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_MAREEP]                = {{EVO_LEVEL, 15, SPECIES_FLAAFFY}},
     [SPECIES_FLAAFFY]               = {{EVO_LEVEL, 30, SPECIES_AMPHAROS}},
     [SPECIES_AMPHAROS]              = {{EVO_MEGA_EVOLUTION, ITEM_AMPHAROSITE, SPECIES_AMPHAROS_MEGA}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_MARILL]                = {{EVO_LEVEL, 28, SPECIES_AZUMARILL}},
+#else
     [SPECIES_MARILL]                = {{EVO_LEVEL, 18, SPECIES_AZUMARILL}},
+#endif
     [SPECIES_HOPPIP]                = {{EVO_LEVEL, 18, SPECIES_SKIPLOOM}},
     [SPECIES_SKIPLOOM]              = {{EVO_LEVEL, 27, SPECIES_JUMPLUFF}},
     [SPECIES_AIPOM]                 = {{EVO_MOVE, MOVE_DOUBLE_HIT, SPECIES_AMBIPOM}},
@@ -259,7 +263,11 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
                                        {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}},
 #endif
     [SPECIES_GLALIE]                = {{EVO_MEGA_EVOLUTION, ITEM_GLALITITE, SPECIES_GLALIE_MEGA}},
+#ifdef ROGUE_DRAYANO
+    [SPECIES_AZURILL]               = {{EVO_LEVEL, 16, SPECIES_MARILL}},
+#else
     [SPECIES_AZURILL]               = {{EVO_FRIENDSHIP, 0, SPECIES_MARILL}},
+#endif
     [SPECIES_SPOINK]                = {{EVO_LEVEL, 32, SPECIES_GRUMPIG}},
     [SPECIES_MAWILE]                = {{EVO_MEGA_EVOLUTION, ITEM_MAWILITE, SPECIES_MAWILE_MEGA}},
 #ifdef ROGUE_DRAYANO
