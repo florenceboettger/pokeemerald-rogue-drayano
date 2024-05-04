@@ -1651,11 +1651,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_THUNDER_WAVE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .accuracy = 100,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_7
             .accuracy = 90,
         #else
             .accuracy = 100,
         #endif
+    #endif
         .effect = EFFECT_PARALYZE,
         .power = 0,
         .type = TYPE_ELECTRIC,
