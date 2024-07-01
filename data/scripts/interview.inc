@@ -1,6 +1,5 @@
 Interview_EventScript_EndInterview::
 	special InterviewAfter
-	incrementgamestat GAME_STAT_GOT_INTERVIEWED
 	release
 	end
 
@@ -243,7 +242,7 @@ BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview::
 	call_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_Satisfied
 	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied
 	msgbox BattleFrontier_BattleTowerLobby_Text_DescribeYourBattle, MSGBOX_DEFAULT
-	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW
+	setvar VAR_0x8004, EASY_CHAT_TYPE_ROGUE_GAMESHOW_CHOOSE_MON
 	copyvar VAR_0x8005, VAR_0x8009
 	call Common_ShowEasyChatScreen
 	lock

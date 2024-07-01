@@ -24,7 +24,6 @@ struct TrainerCard
     /*0x00*/ u8 gender;
     /*0x01*/ u8 stars;
     /*0x02*/ bool8 hasPokedex;
-    /*0x03*/ bool8 caughtAllHoenn;
     /*0x04*/ bool8 hasAllPaintings;
     /*0x06*/ u16 hofDebutHours;
     /*0x08*/ u16 hofDebutMinutes;
@@ -54,7 +53,7 @@ struct TrainerCard
     /*0x4C*/ bool8 shouldDrawStickers; // FRLG only
     /*0x4D*/ u8 unused;
     /*0x4E*/ u8 monIconTint; // FRLG only
-    /*0x4F*/ u8 facilityClass;
+    /*0x4F*/ u8 unionRoomClass;
     /*0x50*/ u8 stickers[TRAINER_CARD_STICKER_TYPES]; // FRLG only
     /*0x54*/ u16 monSpecies[PARTY_SIZE]; // FRLG only
              // Note: Link players use linkHasAllFrontierSymbols, not the field below,
@@ -67,6 +66,7 @@ extern struct TrainerCard gTrainerCards[4];
 
 u32 CountPlayerTrainerStars(void);
 u8 GetTrainerCardStars(u8 cardId);
+void UpdateTrainerCardMonIconsFromParty();
 void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 gameVersion);
 void ShowPlayerTrainerCard(void (*callback)(void));
 void ShowTrainerCardInLink(u8 cardId, void (*callback)(void));

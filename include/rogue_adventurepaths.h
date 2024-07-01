@@ -9,14 +9,17 @@ extern EWRAM_DATA struct RogueAdvPath gRogueAdvPath;
 
 bool8 RogueAdv_GenerateAdventurePathsIfRequired();
 void RogueAdv_ApplyAdventureMetatiles();
+void RogueAdv_Debug_ForceRegenerateAdventurePaths();
+
+u8 RogueAdv_GetTileNum();
+bool8 RogueAdv_IsViewingPath();
 
 u8 RogueAdv_OverrideNextWarp(struct WarpData *warp);
 void RogueAdv_ModifyObjectEvents(struct MapHeader *mapHeader, struct ObjectEventTemplate *objectEvents, u8* objectEventCount, u8 objectEventCapacity);
 bool8 RogueAdv_CanUseEscapeRope(void);
 
-void RogueAdv_GetNodeParams();
-void RogueAdv_ExecuteNodeAction();
-
-void RogueAdv_DebugExecuteRandomNextNode();
+u8 Rogue_GetTypeForHintForRoom(struct RogueAdvPathRoom const* room);
+void RogueAdv_GetLastInteractedRoomParams();
+void RogueAdv_WarpLastInteractedRoom();
 
 #endif

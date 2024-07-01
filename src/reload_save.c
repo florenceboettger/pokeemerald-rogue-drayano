@@ -8,6 +8,8 @@
 #include "overworld.h"
 #include "malloc.h"
 
+#include "rogue_save.h"
+
 // Reloads the game, continuing from the point of the last save
 // Used to gracefully exit after a link connection error
 void ReloadSave(void)
@@ -18,7 +20,9 @@ void ReloadSave(void)
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_FORCED_BLANK);
     REG_IME = imeBackup;
     gMain.inBattle = FALSE;
+    gMain.nativeSpeedUpActive = FALSE;
     SetSaveBlocksPointers(GetSaveBlocksPointersBaseOffset());
+    RogueSave_UpdatePointers();
     ResetMenuAndMonGlobals();
     Save_ResetSaveCounters();
     LoadGameSave(SAVE_NORMAL);

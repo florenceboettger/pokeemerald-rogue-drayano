@@ -342,7 +342,7 @@ static void AutoCmd_GenerateEnemyParty(u16* args)
 
 static void AutoCmd_SetRunDifficulty(u16* args)
 {
-    gRogueRun.currentDifficulty = args[0];
+    Rogue_GetCurrentDifficulty() = args[0];
 }
 
 static void AutoCmd_SetWeather(u16* args)
@@ -411,7 +411,7 @@ static void AutoCmd_Warp(u16* args)
 
 static void AutoCmd_WarpNextAdventureEncounter(u16* args)
 {
-    RogueAdv_DebugExecuteRandomNextNode();
+    //RogueAdv_DebugExecuteRandomNextNode();
 }
 
 static void AutoCmd_SetAutomationFlag(u16* args)

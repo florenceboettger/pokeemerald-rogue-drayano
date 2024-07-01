@@ -3,7 +3,7 @@
   "name": "Rogue_Route_Johto_Cave0",
   "layout": "LAYOUT_ROGUE_ROUTE_JOHTO_CAVE0",
   "music": "MUS_HG_ICE_PATH",
-  "region_map_section": "MAPSEC_SPECIAL_AREA",
+  "region_map_section": "MAPSEC_ADVENTURE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Rogue_Battle_BreederF",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_BreederM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER1"
     },
     {
@@ -46,11 +46,11 @@
       "y": 44,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
-      "movement_range_x": 3,
+      "movement_range_x": 2,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_RichF",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER2"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_RichM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER3"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_CooltrainerF",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER4"
     },
     {
@@ -89,20 +89,20 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_CooltrainerM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER5"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
-      "x": 50,
-      "y": 6,
+      "x": 46,
+      "y": 12,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_PokefanF",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER6"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_PokefanM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER7"
     },
     {
@@ -128,7 +128,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Rogue_Battle_SchoolkidF",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER8"
     },
     {
@@ -141,7 +141,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_SchoolkidM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER9"
     },
     {
@@ -154,7 +154,7 @@
       "movement_range_y": 4,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_TuberM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER11"
     },
     {
@@ -167,7 +167,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_PoshF",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER12"
     },
     {
@@ -180,7 +180,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Rogue_Battle_PoshM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER13"
     },
     {
@@ -193,7 +193,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_MagmaF",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER14"
     },
     {
@@ -206,7 +206,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "Rogue_Battle_MagmaM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER15"
     },
     {
@@ -219,7 +219,7 @@
       "movement_range_y": 5,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_AquaF",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER16"
     },
     {
@@ -232,7 +232,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
-      "script": "Rogue_Battle_AquaM",
+      "script": "Rogue_Battle_Trainer",
       "flag": "FLAG_ROGUE_TRAINER16"
     },
     {
@@ -250,8 +250,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 47,
-      "y": 4,
+      "x": 27,
+      "y": 22,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -276,8 +276,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 50,
-      "y": 3,
+      "x": 38,
+      "y": 26,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -328,8 +328,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 51,
-      "y": 13,
+      "x": 45,
+      "y": 20,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -507,6 +507,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_12"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_WALLY",
+      "x": 42,
+      "y": 47,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Rogue_Battle_Rival",
+      "flag": "FLAG_ROGUE_RIVAL_DISABLED"
     }
   ],
   "warp_events": [
@@ -515,14 +528,14 @@
       "y": 51,
       "elevation": 0,
       "dest_map": "MAP_ROGUE_ROUTE_JOHTO_CAVE0",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 42,
       "y": 47,
       "elevation": 0,
       "dest_map": "MAP_ROGUE_ROUTE_JOHTO_CAVE0",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

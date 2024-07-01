@@ -61,6 +61,7 @@ gSpecials::
 	def_special ObjectEventInteractionGetBerryCountString
 	def_special Bag_ChooseBerry
 	def_special Bag_ChooseBall
+	def_special Bag_ChoosePokeblock
 	def_special ObjectEventInteractionPlantBerryTree
 	def_special ObjectEventInteractionPickBerryTree
 	def_special ObjectEventInteractionRemoveBerryTree
@@ -117,8 +118,8 @@ gSpecials::
 	def_special Script_GetCurrentMauvilleMan
 	def_special HasBardSongBeenChanged
 	def_special SaveBardSongLyrics
-	def_special GetHipsterSpokenFlag
-	def_special SetHipsterSpokenFlag
+	def_special HasHipsterTaughtWord
+	def_special SetHipsterTaughtWord
 	def_special HipsterTryTeachWord
 	def_special PlayBardSong
 	def_special SetMauvilleOldManObjEventGfx
@@ -143,6 +144,7 @@ gSpecials::
 	def_special TryPutNameRaterShowOnTheAir
 	def_special BufferMonNickname
 	def_special ChangePlayerNickname
+	def_special ChangePokemonHubName
 	def_special IsMonOTIDNotPlayers
 	def_special BufferTrendyPhraseString
 	def_special IsTrendyPhraseBoring
@@ -183,25 +185,38 @@ gSpecials::
 	def_special Rogue_AlterMonIVs
 	def_special Rogue_ApplyStatusToMon
 	def_special Rogue_ReleaseMonInSlot
-	def_special Rogue_ReleaseMonInSlot_NoLabBuffering
 	def_special Rogue_CalcMaxPartySize
 	def_special Rogue_GetMonEvoCount
 	def_special Rogue_GetMonEvoParams
 	def_special RogueDebug_FillGenPC
+	def_special RogueDebug_FillDex
 	def_special RogueDebug_ClearQuests
 	def_special RogueDebug_CompleteAvaliableQuests
 	def_special RogueDebug_CollectAllQuests
 	def_special RogueDebug_StartBattle
+	def_special RogueDebug_GiveDynamicUniqueMon
+	def_special RogueGift_EnsureDynamicCustomMonsAreValid
+	def_special Rogue_GetDynamicUniqueMonSpecies
+	def_special Rogue_BufferDynamicUniqueMonCountDown
+	def_special Rogue_QuestCollectNextReward
+	def_special Rogue_HasAnyNewQuests
+	def_special Rogue_HasPendingQuestRewards
+	def_special Rogue_UnlockChallengeQuests
+	def_special Rogue_UnlockMasteryQuests
+	def_special Rogue_ShowNewQuests
+	def_special Rogue_ShowNewMonMasteries
+	def_special Rogue_DetermineItemPickupCount
 	def_special Rogue_CheckBerryTreat
 	def_special Rogue_ApplyBerryTreat
 	def_special Rogue_ChangeMonBall
-	def_special Rogue_GetBufferedShinySpecies
-	def_special Rogue_AnyNewQuestsPending
 	def_special Rogue_BufferLabMonName
 	def_special Rogue_GiveLabMon
 	def_special Rogue_ChooseMiniBossRewardMons
 	def_special Rogue_ClearCharmsAndCurses
-	def_special Rogue_Popup
+	def_special Rogue_ClearCharms
+	def_special Rogue_ClearCurses
+	def_special Rogue_IsRoamerActive
+	def_special Rogue_BufferRoamerName
 	def_special Rogue_GetActiveCampaign
 	def_special Rogue_GetUnlockedCampaignCount
 	def_special Rogue_GetNextUnlockedCampaign
@@ -209,10 +224,124 @@ gSpecials::
 	def_special Rogue_BufferCampaignName
 	def_special Rogue_CheckMonCombo
 	def_special Rogue_ApplyMonCombo
+	def_special Rogue_TryInteractFormChange
 	def_special Rogue_GetFollowMonSpecies
+	def_special Rogue_SetupFollowMonFromParty
+	def_special Rogue_TryEnqueueWildBattleMon
+	def_special Rogue_GetTrainerNum
+	def_special Rogue_PlayStaticTrainerEncounterBGM
+	def_special Rogue_PlayRivalTrainerEncounterBGM
+	def_special Rogue_PlayTeamBossTrainerEncounterBGM
+	def_special Rogue_ShouldSkipTrainerOpenningMsg
+	def_special Rogue_BufferNextVictoryLapTrainer
+	def_special Rogue_BeginVictoryLap
+	def_special Rogue_EndVictoryLap
+	def_special Rogue_EnterPartnerMonCapacity
+	def_special Rogue_IsMultiplayerActive
+	def_special Rogue_IsMultiplayerHost
+	def_special Rogue_IsMultiplayerClient
+	def_special Rogue_HostMultiplayer
+	def_special Rogue_JoinMultiplayer
+	def_special Rogue_CloseMultiplayer
+	def_special Rogue_IsRogueAssistantConnected
+	def_special Rogue_IsMultiplayerAdventureJoinable
+	def_special Rogue_MultiplayerRequestMon
+	def_special Rogue_MultiplayerRequestParty
+	def_special Rogue_MultiplayerTalkToPlayer
+	def_special Rogue_WaitForRemoteResponse
+	def_special Rogue_WaitForRemoteResponseCancellable
+	def_special Rogue_WaitForRemoteInput
+	def_special Rogue_WaitForRemoteInputCancellable
+	def_special Rogue_WaitForPlayerStatus
+	def_special Rogue_WaitForPlayerStatusCancellable
+	def_special Rogue_WaitForNextPlayerStatus
+	def_special Rogue_WaitForNextPlayerStatusCancellable
+	def_special Rogue_PrepareForTrade
+	def_special Rogue_BattleSim_WagerItem
+	def_special Rogue_BattleSim_HandleItemWager
+	def_special Rogue_BattleSim_HandleItemIVs
+	def_special Rogue_BattleSim_HandleItemMoney
+	def_special Rogue_FixPartyMonDetails
+	def_special Rogue_RememberAdventure
+	def_special Rogue_IsValidAdventureToRemember
+	def_special Rogue_SafeSmartCheck
+	def_special Rogue_CanActivatePikinEasterEgg
+	def_special Rogue_SetupFollowParterMonObjectEvent
+	def_special Rogue_RegisterRideMon
+	def_special Rogue_RunRewardLvls
+	def_special Rogue_RunRewardMoney
+	def_special Rogue_SetTimeAndSeason
+	def_special Popup_CannotTakeItem
+	def_special Popup_NewBadgeGet
+	def_special Rogue_GetBagCapacityUpgradeLevel
+	def_special Rogue_IncreaseBagCapacityUpgradeLevel
+	def_special Rogue_BufferBagUpgradeCost
+	def_special Rogue_CheckBagUpgradeCost
+	def_special Rogue_RemoveBagUpgradeCost
+	def_special Rogue_CheckHubConnectionDir
+	def_special Rogue_AssignDefaultRegion
+	def_special Rogue_IsFinalQuestActive
+	def_special Rogue_IsNearHoneyTree
+	def_special Rogue_TryScatterPokeblockNearHoneyTree
+	def_special Rogue_ScatterPokeblockItem
+	def_special Rogue_IsValidPokeblockBerry
+	def_special Rogue_IsValidPieCrust
+	def_special Rogue_IsValidPieFilling
+	def_special Rogue_CanMakeShinyPieFor
+	def_special Rogue_WillMonLikePie
+	def_special Rogue_FeedMonPie
+	def_special Rogue_SwapMonGender
+	def_special Rogue_CanPlantBerries
+	def_special Rogue_CheckDaycareCount
+	def_special Rogue_IsDaycareSlotEmpty
+	def_special Rogue_SwapDaycareMon
+	def_special Rogue_TransformIntoValidDaycareEgg
+	def_special Rogue_SetupDaycareSpeciesGraphics
+	def_special Rogue_HealAlivePlayerParty
+	def_special Rogue_OnHealWithNurse
+	def_special Rogue_SelectCatchingContestMode
+	def_special Rogue_BufferContestMode
+	def_special Rogue_CatchingContestBegin
+	def_special Rogue_CatchingContestEnd
+	def_special Rogue_GiveCatchingContestMon
+	def_special Rogue_CanOverLevel
+	def_special Rogue_AnyLegendsInSafari
+	def_special Rogue_CheckSafariMonLikesPokeblock
+	def_special Rogue_AppendMultichoicePokeblockItems
+	def_special Rogue_AppendMultichoiceBerriesForPokeblock
+	def_special Rogue_EnqueueSafariBattle
+	def_special Rogue_BufferSafariMonInfo
+	def_special Rogue_DisplayPopupsFromScript
+	def_special Rogue_DisplayPopupsFromScriptSkippable
+	def_special RogueGift_ClearDynamicCustomMons
+	def_special RogueHub_GetStatueLevel
+	def_special RogueHub_SetupDecorationMultichoice
+	def_special RogueHub_HandleDecorationMultichoiceResult
+	def_special RogueHub_ClearAllDecorations
+	def_special RogueHub_PlaceHomeDecor
+	def_special RogueHub_RemoveHomeDecor
+	def_special RogueHub_IsRemovingDecor
+	def_special RogueHub_AppendChangeStyle_Paths
+	def_special RogueHub_HandleChangeStyle_Paths
+	def_special RogueHub_AppendChangeStyle_Exterior
+	def_special RogueHub_HandleChangeStyle_Exterior
+	def_special RogueHub_AppendChangeStyle_Interior
+	def_special RogueHub_HandleChangeStyle_Interior
 	def_special RogueAdv_ApplyAdventureMetatiles
-	def_special RogueAdv_GetNodeParams
-	def_special RogueAdv_ExecuteNodeAction
+	def_special RogueAdv_GetLastInteractedRoomParams
+	def_special RogueAdv_WarpLastInteractedRoom
+	def_special RoguePlayer_HandleEasterEggOutfitUnlocks
+	def_special RogueSafari_CompactEmptyEntries
+	def_special GameShow_RestartGameShow
+	def_special GameShow_SelectRandomSpecies
+	def_special GameShow_BufferSpecies
+	def_special GameShow_CheckResultMatchesSpecies
+	def_special GameShow_AppendSpeciesMultichoiceOptions
+	def_special GameShow_SelectRewardItem
+	def_special GameShow_IsTeamTriviaRoundValid
+	def_special GameShow_NextTriviaQuestion
+	def_special ReloadWarpSilent
+	def_special ReloadSafeWarp
 	def_special GetFirstFreePokeblockSlot
 	def_special DoBerryBlending
 	def_special PlayRoulette
@@ -304,7 +433,7 @@ gSpecials::
 	def_special CallSlateportTentFunction
 	def_special ChoosePartyForBattleFrontier
 	def_special ValidateEReaderTrainer
-	def_special GetBestBattleTowerStreak
+	def_special GetBattleTowerSinglesStreak
 	def_special ReducePlayerPartyToSelectedMons
 	def_special BedroomPC
 	def_special PlayerPC
@@ -322,6 +451,17 @@ gSpecials::
 	def_special ScriptMenu_CreatePCMultichoice
 	def_special AccessHallOfFamePC
 	def_special Special_ShowDiploma
+	def_special Special_ViewDifficultyConfigMenu
+	def_special Special_ViewRoguePokedex
+	def_special Special_SelectMonInPokedex
+	def_special Special_SelectCaughtMonInPokedex
+	def_special Special_SelectDayCareMonInPokedex
+	def_special Special_SelectDayCareCaughtMonInPokedex
+	def_special Special_SelectSafariMonInPokedex
+	def_special Special_ViewPlayerCustomisationMenu
+	def_special Special_ViewAssistantBox
+	def_special Special_ViewVoltorbFlip
+	def_special Special_ViewWorldMap
 	def_special CheckLeadMonCool
 	def_special CheckLeadMonBeauty
 	def_special CheckLeadMonCute
@@ -331,10 +471,14 @@ gSpecials::
 	def_special LookThroughPorthole
 	def_special DoSoftReset
 	def_special GameClear
+	def_special GameClearFakeout
 	def_special MoveElevator
 	def_special ShowGlassWorkshopMenu
 	def_special SpawnCameraObject
+	def_special SpawnCameraObjectAtCoords
 	def_special RemoveCameraObject
+	def_special ShowPlayerObject
+	def_special HidePlayerObject
 	def_special GetPokeblockNameByMonNature
 	def_special GetSecretBaseNearbyMapName
 	def_special CheckRelicanthWailord
@@ -358,7 +502,7 @@ gSpecials::
 	def_special TryUpdateRusturfTunnelState
 	def_special IsGrassTypeInParty
 	def_special DoContestHallWarp
-	def_special PutZigzagoonInPlayerParty
+	def_special LoadWallyZigzagoon
 	def_special IsStarterInParty
 	def_special CopyCurSecretBaseOwnerName_StrVar1
 	def_special ScriptCheckFreePokemonStorageSpace
@@ -368,7 +512,7 @@ gSpecials::
 	def_special IsPokerusInParty
 	def_special SetSootopolisGymCrackedIceMetatiles
 	def_special ShakeCamera
-	def_special StartGroudonKyogreBattle
+	def_special ShakeCameraNoSE
 	def_special BattleSetup_StartWildBattle
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
@@ -478,7 +622,7 @@ gSpecials::
 	def_special ShowWirelessCommunicationScreen
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
-	def_special RetrieveWonderNewsVal
+	def_special WonderNews_GetRewardInfo
 	def_special ChooseMonForWirelessMinigame
 	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
@@ -486,8 +630,6 @@ gSpecials::
 	def_special HasAtLeastOneBerry
 	def_special IsPokemonJumpSpeciesInParty
 	def_special ShowPokemonJumpRecords
-	def_special IsDodrioInParty
-	def_special ShowDodrioBerryPickingRecords
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
@@ -534,11 +676,10 @@ gSpecials::
 	def_special CloseBattleFrontierTutorWindow
 	def_special ScrollableMultichoice_RedrawPersistentMenu
 	def_special ChooseMonForMoveTutor
-	def_special GetBattleFrontierTutorMoveIndex
 	def_special ScrollableMultichoice_ClosePersistentMenu
 	def_special DoDeoxysRockInteraction
 	def_special SetDeoxysRockPalette
-	def_special CreateEventLegalEnemyMon
+	def_special CreateEnemyEventMon
 	def_special StartMirageTowerDisintegration
 	def_special StartMirageTowerShake
 	def_special StartMirageTowerFossilFallAndSink
@@ -585,3 +726,9 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special SetTotemBoost
 	def_special TrySpecialOverworldEvo
+	def_special GetNumberSprayStrength
+	def_special GetSprayId
+	def_special GetLastUsedSprayType
+	def_special TrySkyBattle
+	def_special VsSeekerResetObjectMovementAfterChargeComplete
+	def_special VsSeekerFreezeObjectsAfterChargeComplete

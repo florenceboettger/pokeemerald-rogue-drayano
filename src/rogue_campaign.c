@@ -9,6 +9,8 @@
 
 #include "rogue_campaign.h"
 #include "rogue_controller.h"
+#include "rogue_pokedex.h"
+#include "rogue_save.h"
 
 extern const u8 gText_Campaign_None[];
 extern const u8 gText_Campaign_LowBST[];
@@ -61,30 +63,9 @@ void Rogue_ResetCampaignAfter(u16 count)
         // Reset the state for any new quests
         for(i = count; i < ROGUE_CAMPAIGN_COUNT; ++i)
         {
-            memset(&gRogueGlobalData.campaignData[i], 0, sizeof(struct RogueCampaignState));
+            memset(&gRogueSaveBlock->campaignData[i], 0, sizeof(struct RogueCampaignState));
         }
     }
-}
-
-bool8 Rogue_CheckTrainerCardCampaignCompletion(void)
-{
-    u16 i;
-
-    for(i = ROGUE_CAMPAIGN_FIRST; i <= ROGUE_CAMPAIGN_LAST; ++i)
-    {
-        // These campaigns don't contribute to trainer card
-        switch (i)
-        {
-        case ROGUE_CAMPAIGN_LOW_BST:
-        case ROGUE_CAMPAIGN_LATERMANNER:
-            continue;
-        }
-
-        if(!gRogueGlobalData.campaignData[i].isCompleted)
-            return FALSE;
-    }
-
-    return TRUE;
 }
 
 u16 Rogue_GetActiveCampaign(void)
@@ -130,28 +111,29 @@ bool8 Rogue_TryUpdateDesiredCampaign(u16 word0, u16 word1)
 
     if(campaignId != ROGUE_CAMPAIGN_NONE)
     {
-        gRogueGlobalData.campaignData[campaignId - ROGUE_CAMPAIGN_FIRST].isUnlocked =  TRUE;
+        gRogueSaveBlock->campaignData[campaignId - ROGUE_CAMPAIGN_FIRST].isUnlocked =  TRUE;
         return TRUE;
     }
 
     return FALSE;
 }
 
-u16 Rogue_PreActivateDesiredCampaign(void)
+void Rogue_PreActivateDesiredCampaign(void)
 {
     // Activate desired campaign
     {
         u16 desiredCampaign;
 
         if(VarGet(VAR_ROGUE_SKIP_TO_DIFFICULTY) != 0)
-            return ROGUE_CAMPAIGN_NONE;
+            return;
 
         desiredCampaign = VarGet(VAR_ROGUE_DESIRED_CAMPAIGN);
 
         switch (desiredCampaign)
         {
         case ROGUE_CAMPAIGN_LOW_BST:
-            if(FlagGet(FLAG_ROGUE_RAINBOW_MODE) || FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+            //if(FlagGet(FLAG_ROGUE_RAINBOW_MODE) || FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+            if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
                 desiredCampaign = ROGUE_CAMPAIGN_NONE;
             break;
 
@@ -167,7 +149,7 @@ u16 Rogue_PreActivateDesiredCampaign(void)
     case ROGUE_CAMPAIGN_LOW_BST:
         Rogue_ResetConfigHubSettings();
 
-        FlagSet(FLAG_ROGUE_FORCE_BASIC_BAG);
+        //FlagSet(FLAG_ROGUE_FORCE_BASIC_BAG);
 
         // Expansion Room settings
 #ifdef ROGUE_EXPANSION
@@ -177,23 +159,20 @@ u16 Rogue_PreActivateDesiredCampaign(void)
 #endif
         VarSet(VAR_ROGUE_REGION_DEX_LIMIT, 0);
 
-        FlagSet(FLAG_ROGUE_HOENN_BOSSES);
-        FlagSet(FLAG_ROGUE_KANTO_BOSSES);
-        FlagSet(FLAG_ROGUE_JOHTO_BOSSES);
         break;
 
     case ROGUE_CAMPAIGN_LATERMANNER:
         Rogue_ResetConfigHubSettings();
-        FlagSet(FLAG_ROGUE_FORCE_BASIC_BAG);
+        //FlagSet(FLAG_ROGUE_FORCE_BASIC_BAG);
         break;
 
     case ROGUE_CAMPAIGN_POKEBALL_LIMIT:
-        FlagSet(FLAG_ROGUE_FORCE_BASIC_BAG);
+        //FlagSet(FLAG_ROGUE_FORCE_BASIC_BAG);
         break;
     }
 }
 
-u16 Rogue_PostActivateDesiredCampaign(void)
+void Rogue_PostActivateDesiredCampaign(void)
 {
     switch (Rogue_GetActiveCampaign())
     {
@@ -244,17 +223,17 @@ u16 Rogue_PostActivateDesiredCampaign(void)
     }
 }
 
-u16 Rogue_DeactivateActiveCampaign(void)
+void Rogue_DeactivateActiveCampaign(void)
 {
     if(Rogue_IsCampaignActive())
     {
-        if(gRogueRun.currentDifficulty >= 14)
+        if(Rogue_GetCurrentDifficulty() >= 14)
         {
-            if (GetGameStat(GAME_STAT_CAMPAIGNS_COMPLETED) < 999)
-                IncrementGameStat(GAME_STAT_CAMPAIGNS_COMPLETED);
+            //if (GetGameStat(GAME_STAT_CAMPAIGNS_COMPLETED) < 999)
+            //    IncrementGameStat(GAME_STAT_CAMPAIGNS_COMPLETED);
 
-            gRogueGlobalData.campaignData[Rogue_GetActiveCampaign() - ROGUE_CAMPAIGN_FIRST].isCompleted =  TRUE;
-            gRogueGlobalData.campaignData[Rogue_GetActiveCampaign() - ROGUE_CAMPAIGN_FIRST].bestScore =  Rogue_GetCampaignScore();
+            gRogueSaveBlock->campaignData[Rogue_GetActiveCampaign() - ROGUE_CAMPAIGN_FIRST].isCompleted =  TRUE;
+            gRogueSaveBlock->campaignData[Rogue_GetActiveCampaign() - ROGUE_CAMPAIGN_FIRST].bestScore =  Rogue_GetCampaignScore();
         }
     }
 
@@ -307,7 +286,7 @@ u16 Rogue_GetCampaignRunId(void)
     // Some basic verification for screenshots, do bitwise XOR on this and score and then bitflip
     u16 scoreEncode;
     u16 trainerId = (gSaveBlock2Ptr->playerTrainerId[0]) | (gSaveBlock2Ptr->playerTrainerId[1] << 8);
-    u16 compatOffset = ROGUE_COMPAT_VERSION - 4; // 4 was the first version this was present
+    u16 compatOffset = RogueSave_GetVersionId();
 
     switch (Rogue_GetActiveCampaign())
     {
@@ -329,7 +308,7 @@ bool8 Rogue_CheckCampaignBansItem(u16 item)
     {
     case ROGUE_CAMPAIGN_LOW_BST:
         {
-            if(item == ITEM_TM06_TOXIC)
+            if(item == ITEM_TM06)
                 return TRUE;
         }
         break;
@@ -452,10 +431,5 @@ static u16 Campaign_LowBst_ScoreFromSpecies(u16 species)
     if(species == SPECIES_NONE)
         return 0;
 
-    return gBaseStats[species].baseHP +
-        gBaseStats[species].baseAttack +
-        gBaseStats[species].baseDefense +
-        gBaseStats[species].baseSpeed +
-        gBaseStats[species].baseSpAttack +
-        gBaseStats[species].baseSpDefense;
+    return RoguePokedex_GetSpeciesBST(species);
 }

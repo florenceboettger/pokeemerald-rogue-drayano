@@ -25,7 +25,6 @@ void BattleSetup_StartScriptedWildBattle(void);
 void BattleSetup_StartScriptedDoubleWildBattle(void);
 void BattleSetup_StartLatiBattle(void);
 void BattleSetup_StartLegendaryBattle(void);
-void StartGroudonKyogreBattle(void);
 void StartRegiBattle(void);
 u8 BattleSetup_GetTerrainId(void);
 u8 GetWildBattleTransition(void);
@@ -39,6 +38,7 @@ void BattleSetup_ConfigureAutomationTrainerBattle(void);
 void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerScript);
 void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript);
 void SetUpTwoTrainersBattle(void);
+bool32 GetTrainerFlagFromObjectEventId(u8 trainerObjEventId);
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
 void SetTrainerFacingDirection(void);
 u8 GetTrainerBattleMode(void);
@@ -66,5 +66,11 @@ bool8 ShouldTryRematchBattle(void);
 bool8 IsTrainerReadyForRematch(void);
 void ShouldTryGetTrainerScript(void);
 u16 CountBattledRematchTeams(u16 trainerId);
+
+void DoStandardWildBattle_Debug(void);
+void BattleSetup_StartTrainerBattle_Debug(void);
+s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
+s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
+u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBattleTrainerId);
 
 #endif // GUARD_BATTLE_SETUP_H

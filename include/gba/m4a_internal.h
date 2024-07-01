@@ -213,7 +213,7 @@ struct SoundInfo
     ExtVolPitFunc ExtVolPit;
     u8 gap2[16];
     struct SoundChannel chans[MAX_DIRECTSOUND_CHANNELS];
-    s8 pcmBuffer[PCM_DMA_BUF_SIZE * 2];
+    s8 ALIGNED(4) pcmBuffer[PCM_DMA_BUF_SIZE * 2];
 };
 
 struct SongHeader
@@ -436,6 +436,7 @@ void m4aSoundVSyncOff(void);
 
 void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
 void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
+void m4aMPlayRawVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 rawVolume);
 void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 pitch);
 void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s8 pan);
 void ClearModM(struct MusicPlayerTrack *track);

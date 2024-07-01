@@ -24,8 +24,8 @@
 #include "trig.h"
 #include "window.h"
 #include "constants/songs.h"
+#include "constants/battle_move_effects.h"
 #include "gba/io_reg.h"
-
 #include "item.h"
 
 #include "constants/rogue.h"
@@ -34,7 +34,6 @@
 #include "rogue_quest.h"
 #include "rogue_questmenu.h"
 
-extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
@@ -42,7 +41,6 @@ EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 static void MailboxMenu_MoveCursorFunc(s32, bool8, struct ListMenu *);
 static void ConditionGraph_CalcRightHalf(struct ConditionGraph *);
 static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *);
-static void MoveRelearnerCursorCallback(s32, bool8, struct ListMenu *);
 static void MoveRelearnerDummy(void);
 static void QuestMenuCursorCallback(s32, bool8, struct ListMenu *);
 static void QuestMenuDummy(void);
@@ -115,52 +113,52 @@ static const u8 sConditionToLineLength[MAX_CONDITION + 1] =
     34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 35
 };
 
-
 static const struct WindowTemplate sMoveRelearnerWindowTemplates[] =
 {
-    {
+    [RELEARNERWIN_DESC_BATTLE] = {
         .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 16,
         .height = 12,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0xA
     },
-    {
+    [RELEARNERWIN_DESC_CONTEST] = {
         .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 1,
         .width = 16,
         .height = 12,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0xCA
     },
-    {
+    [RELEARNERWIN_MOVE_LIST] = {
         .bg = 1,
         .tilemapLeft = 19,
         .tilemapTop = 1,
         .width = 10,
         .height = 12,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x18A
     },
-    {
+    [RELEARNERWIN_MSG] = {
         .bg = 1,
         .tilemapLeft = 4,
         .tilemapTop = 15,
         .width = 22,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x202
     },
-    {
+    // Unused. Identical to sMoveRelearnerYesNoMenuTemplate
+    [RELEARNERWIN_YESNO] = {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 8,
         .width = 5,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 0x25A
     },
     DUMMY_WIN_TEMPLATE
@@ -173,33 +171,9 @@ static const struct WindowTemplate sMoveRelearnerYesNoMenuTemplate =
     .tilemapTop = 8,
     .width = 5,
     .height = 4,
-    .paletteNum = 0xF,
+    .paletteNum = 15,
     .baseBlock = 0x25A
 };
-
-
-static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
-{
-    .items = NULL,
-    .moveCursorFunc = MoveRelearnerCursorCallback,
-    .itemPrintFunc = NULL,
-    .totalItems = 0,
-    .maxShowed = 0,
-    .windowId = 2,
-    .header_X = 0,
-    .item_X = 8,
-    .cursor_X = 0,
-    .upText_Y = 1,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 0,
-    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = FONT_NORMAL,
-    .cursorKind = 0
-};
-
 
 static const struct WindowTemplate sQuestMenuWindowTemplates[] =
 {
@@ -318,21 +292,20 @@ u8 MailboxMenu_AddWindow(u8 windowIdx)
         {
             sMailboxWindowIds[windowIdx] = AddWindow(&sWindowTemplates_MailboxMenu[windowIdx]);
         }
-        SetStandardWindowBorderStyle(sMailboxWindowIds[windowIdx], 0);
+        SetStandardWindowBorderStyle(sMailboxWindowIds[windowIdx], FALSE);
     }
     return sMailboxWindowIds[windowIdx];
 }
 
 void MailboxMenu_RemoveWindow(u8 windowIdx)
 {
-    ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], 0);
+    ClearStdWindowAndFrameToTransparent(sMailboxWindowIds[windowIdx], FALSE);
     ClearWindowTilemap(sMailboxWindowIds[windowIdx]);
     RemoveWindow(sMailboxWindowIds[windowIdx]);
     sMailboxWindowIds[windowIdx] = WINDOW_NONE;
 }
 
-// Unused
-static u8 MailboxMenu_GetWindowId(u8 windowIdx)
+static u8 UNUSED MailboxMenu_GetWindowId(u8 windowIdx)
 {
     return sMailboxWindowIds[windowIdx];
 }
@@ -379,7 +352,7 @@ u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
     gMultiuseListMenuTemplate.moveCursorFunc = MailboxMenu_MoveCursorFunc;
     gMultiuseListMenuTemplate.itemPrintFunc = MailboxMenu_ItemPrintFunc;
     gMultiuseListMenuTemplate.fontId = FONT_NORMAL;
-    gMultiuseListMenuTemplate.cursorKind = 0;
+    gMultiuseListMenuTemplate.cursorKind = CURSOR_BLACK_ARROW;
     gMultiuseListMenuTemplate.lettersSpacing = 0;
     gMultiuseListMenuTemplate.itemVerticalPadding = 0;
     gMultiuseListMenuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
@@ -683,7 +656,7 @@ static void ConditionGraph_CalcRightHalf(struct ConditionGraph *graph)
     // No need for conditional, positions on the Beauty line are always above the Cute line
     ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_BEAUTY], &graph->curPositions[GRAPH_CUTE], TRUE, NULL);
 
-    // Calculate Cute -> Tough line (includes left scanline because this crosses the halfway point)
+    // Calculate Cute -> Smart line (includes left scanline because this crosses the halfway point)
     i = (graph->curPositions[GRAPH_CUTE].y <= graph->curPositions[GRAPH_SMART].y);
     ConditionGraph_CalcLine(graph, graph->scanlineRight[0], &graph->curPositions[GRAPH_CUTE], &graph->curPositions[GRAPH_SMART], i, graph->scanlineLeft[0]);
 
@@ -796,32 +769,32 @@ void ConditionGraph_CalcPositions(u8 *conditions, struct UCoords16 *positions)
 // Move relearner
 //----------------
 
-void InitMoveRelearnerWindows(bool8 useContextWindow)
+void InitMoveRelearnerWindows(bool8 useContestWindow)
 {
     u8 i;
 
     InitWindows(sMoveRelearnerWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 1, 0xE0);
-    LoadPalette(gStandardMenuPalette, 0xF0, 0x20);
+    LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sMoveRelearnerWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(1));
 
-    if (!useContextWindow)
+    if (!useContestWindow)
     {
-        PutWindowTilemap(0);
-        DrawStdFrameWithCustomTileAndPalette(0, 0, 0x1, 0xE);
+        PutWindowTilemap(RELEARNERWIN_DESC_BATTLE);
+        DrawStdFrameWithCustomTileAndPalette(RELEARNERWIN_DESC_BATTLE, FALSE, 0x1, 0xE);
     }
     else
     {
-        PutWindowTilemap(1);
-        DrawStdFrameWithCustomTileAndPalette(1, 0, 1, 0xE);
+        PutWindowTilemap(RELEARNERWIN_DESC_CONTEST);
+        DrawStdFrameWithCustomTileAndPalette(RELEARNERWIN_DESC_CONTEST, FALSE, 1, 0xE);
     }
-    PutWindowTilemap(2);
-    PutWindowTilemap(3);
-    DrawStdFrameWithCustomTileAndPalette(2, 0, 1, 0xE);
-    DrawStdFrameWithCustomTileAndPalette(3, 0, 1, 0xE);
+    PutWindowTilemap(RELEARNERWIN_MOVE_LIST);
+    PutWindowTilemap(RELEARNERWIN_MSG);
+    DrawStdFrameWithCustomTileAndPalette(RELEARNERWIN_MOVE_LIST, FALSE, 1, 0xE);
+    DrawStdFrameWithCustomTileAndPalette(RELEARNERWIN_MSG, FALSE, 1, 0xE);
     MoveRelearnerDummy();
     ScheduleBgCopyTilemapToVram(1);
 }
@@ -831,139 +804,20 @@ static void MoveRelearnerDummy(void)
 
 }
 
-u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
-{
-    gMultiuseListMenuTemplate = sMoveRelearnerMovesListTemplate;
-    gMultiuseListMenuTemplate.totalItems = numChoices;
-    gMultiuseListMenuTemplate.items = items;
-
-    if (numChoices < 6)
-        gMultiuseListMenuTemplate.maxShowed = numChoices;
-    else
-        gMultiuseListMenuTemplate.maxShowed = 6;
-
-    return gMultiuseListMenuTemplate.maxShowed;
-}
-
-static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
-{
-    s32 x;
-    const struct BattleMove *move;
-    u8 buffer[32];
-    const u8 *str;
-
-    FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    str = gText_MoveRelearnerBattleMoves;
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
-
-    str = gText_MoveRelearnerPP;
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, 4, 0x29, TEXT_SKIP_DRAW, NULL);
-
-    str = gText_MoveRelearnerPower;
-    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x6A);
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x19, TEXT_SKIP_DRAW, NULL);
-
-    str = gText_MoveRelearnerAccuracy;
-    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x6A);
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 0x29, TEXT_SKIP_DRAW, NULL);
-    if (chosenMove == LIST_CANCEL)
-    {
-        CopyWindowToVram(0, COPYWIN_GFX);
-        return;
-    }
-    move = &gBattleMoves[chosenMove];
-    str = gTypeNames[move->type];
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, 4, 0x19, TEXT_SKIP_DRAW, NULL);
-
-    x = 4 + GetStringWidth(FONT_NORMAL, gText_MoveRelearnerPP, 0);
-    ConvertIntToDecimalStringN(buffer, move->pp, STR_CONV_MODE_LEFT_ALIGN, 2);
-    AddTextPrinterParameterized(0, FONT_NORMAL, buffer, x, 0x29, TEXT_SKIP_DRAW, NULL);
-
-    if (move->power < 2)
-    {
-        str = gText_ThreeDashes;
-    }
-    else
-    {
-        ConvertIntToDecimalStringN(buffer, move->power, STR_CONV_MODE_LEFT_ALIGN, 3);
-        str = buffer;
-    }
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x19, TEXT_SKIP_DRAW, NULL);
-
-    if (move->accuracy == 0)
-    {
-        str = gText_ThreeDashes;
-    }
-    else
-    {
-        ConvertIntToDecimalStringN(buffer, move->accuracy, STR_CONV_MODE_LEFT_ALIGN, 3);
-        str = buffer;
-    }
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, 0x6A, 0x29, TEXT_SKIP_DRAW, NULL);
-
-    str = gMoveDescriptionPointers[chosenMove - 1];
-    AddTextPrinterParameterized(0, FONT_NARROW, str, 0, 0x41, 0, NULL);
-}
-
-static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
-{
-    s32 x;
-    const u8 *str;
-    const struct ContestMove *move;
-
-    MoveRelearnerShowHideHearts(chosenMove);
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    str = gText_MoveRelearnerContestMovesTitle;
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
-
-    str = gText_MoveRelearnerAppeal;
-    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x5C);
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 0x19, TEXT_SKIP_DRAW, NULL);
-
-    str = gText_MoveRelearnerJam;
-    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 0x5C);
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 0x29, TEXT_SKIP_DRAW, NULL);
-
-    if (chosenMove == MENU_NOTHING_CHOSEN)
-    {
-        CopyWindowToVram(1, COPYWIN_GFX);
-        return;
-    }
-
-    move = &gContestMoves[chosenMove];
-    str = gContestMoveTypeTextPointers[move->contestCategory];
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, 4, 0x19, TEXT_SKIP_DRAW, NULL);
-
-    str = gContestEffectDescriptionPointers[move->effect];
-    AddTextPrinterParameterized(1, FONT_NARROW, str, 0, 0x41, TEXT_SKIP_DRAW, NULL);
-
-    CopyWindowToVram(1, COPYWIN_GFX);
-}
-
-static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
-{
-    if (onInit != TRUE)
-        PlaySE(SE_SELECT);
-    MoveRelearnerLoadBattleMoveDescription(itemIndex);
-    MoveRelearnerMenuLoadContestMoveDescription(itemIndex);
-}
-
 void MoveRelearnerPrintText(u8 *str)
 {
     u8 speed;
 
-    FillWindowPixelBuffer(3, PIXEL_FILL(1));
+    FillWindowPixelBuffer(RELEARNERWIN_MSG, PIXEL_FILL(1));
     gTextFlags.canABSpeedUpPrint = TRUE;
     speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized2(3, FONT_NORMAL, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, 3);
+    AddTextPrinterParameterized2(RELEARNERWIN_MSG, FONT_NORMAL, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, 3);
 }
 
 bool16 MoveRelearnerRunTextPrinters(void)
 {
     RunTextPrinters();
-    return IsTextPrinterActive(3);
+    return IsTextPrinterActive(RELEARNERWIN_MSG);
 }
 
 void MoveRelearnerCreateYesNoMenu(void)
@@ -1042,216 +896,13 @@ extern const u8 gText_QuestLogOverviewCompleted[];
 extern const u8 gText_QuestLogOverviewUnlocked[];
 extern const u8 gText_QuestLogOverviewRewardsToCollect[];
 
-#ifdef ROGUE_DEBUG
-extern const u8 gText_RogueDebug_Header[];
-#endif
-
-static void QuestMenuOverview(u8 windowId)
-{
-    s32 x;
-    const u8 *str;
-
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    str = gText_QuestLogTitleOverview;
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
-    
-    CopyWindowToVram(windowId, COPYWIN_GFX);
-
-    str = gText_QuestLogOverviewCompleted;
-    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, 20, 0, NULL);
-
-    ConvertUIntToDecimalStringN(gStringVar1, GetCompletedQuestPerc(), STR_CONV_MODE_RIGHT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar2, gText_Var1Percent);
-    str = gStringVar2;
-    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 50, 20, 0, NULL);
-
-    str = gText_QuestLogOverviewUnlocked;
-    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, 35, 0, NULL);
-    
-    ConvertUIntToDecimalStringN(gStringVar1, GetUnlockedQuestCount(), STR_CONV_MODE_RIGHT_ALIGN, 6);
-    str = gStringVar1;
-    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 50, 35, 0, NULL);
-
-#ifdef ROGUE_DEBUG
-    str = gText_RogueDebug_Header;
-    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, 65, 0, NULL);
-
-    ConvertUIntToDecimalStringN(gStringVar1, QUEST_CAPACITY - 1, STR_CONV_MODE_RIGHT_ALIGN, 6);
-    str = gStringVar1;
-    AddTextPrinterParameterized(windowId, FONT_NARROW, str, 50, 65, 0, NULL);
-#endif
-
-    if(AnyQuestRewardsPending())
-    {
-        str = gText_QuestLogOverviewRewardsToCollect;
-        AddTextPrinterParameterized(windowId, FONT_SHORT, str, 2, 80, 0, NULL);
-    }
-}
-
-static void QuestMenuPreviewDescription(u32 chosenQuest)
-{
-    s32 x;
-    const struct RogueQuestConstants* quest;
-    struct RogueQuestState questState;
-    u8 buffer[32];
-    const u8 *str;
-
-    FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    str = gText_QuestLogTitleDesc;
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
-    AddTextPrinterParameterized(0, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
-
-    if (chosenQuest == LIST_CANCEL || !GetQuestState(chosenQuest, &questState))
-    {
-        CopyWindowToVram(0, COPYWIN_GFX);
-        return;
-    }
-
-    quest = &gRogueQuests[chosenQuest];
-
-    str = quest->desc;
-    AddTextPrinterParameterized(0, FONT_NARROW, str, 2, 20, 0, NULL);
-
-    str = gText_QuestLogTitleStatus;
-    AddTextPrinterParameterized(0, FONT_SHORT, str, 2, 80, 0, NULL);
-
-    if(Rogue_IsRunActive() && !IsQuestActive(chosenQuest))
-    {
-        str = gText_QuestLogMarkerInactive;
-        x = GetStringRightAlignXOffset(FONT_SHORT, str, 0x80) - 4;
-        AddTextPrinterParameterized(0, FONT_SHORT, str, x, 65, 0, NULL);
-    }
-
-    if(IsQuestRepeatable(chosenQuest) && chosenQuest != QUEST_IronMono2) // Exception for quests who's description is too long
-    {
-        str = gText_QuestLogMarkerRepeatable;
-        AddTextPrinterParameterized(0, FONT_SHORT, str, 2, 65, 0, NULL);
-    }
-
-    if(questState.isCompleted)
-        str = gText_QuestLogStatusComplete;
-    else
-        str = gText_QuestLogStatusIncomplete;
-
-    x = GetStringRightAlignXOffset(FONT_SHORT, str, 0x80) - 4;
-    AddTextPrinterParameterized(0, FONT_SHORT, str, x, 80, 0, NULL);
-}
-
-static void QuestMenuRewardDescription(u32 chosenQuest)
-{
-    s32 x, y;
-    u8 i;
-    const struct RogueQuestConstants* quest;
-    struct RogueQuestState questState;
-    u8 buffer[32];
-    const u8 *str;
-
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    str = gText_QuestLogTitleRewards;
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 0x80);
-    AddTextPrinterParameterized(1, FONT_NORMAL, str, x, 1, TEXT_SKIP_DRAW, NULL);
-
-    if (chosenQuest == LIST_CANCEL || !GetQuestState(chosenQuest, &questState))
-    {
-        CopyWindowToVram(0, COPYWIN_GFX);
-        return;
-    }
-
-    quest = &gRogueQuests[chosenQuest];
-
-    y = 0;
-
-    for(i = 0; i < ARRAY_COUNT(quest->rewards); ++i)
-    {
-        if(quest->rewards[i].type == QUEST_REWARD_NONE)
-            break;
-
-        if(quest->rewards[i].previewText)
-        {
-            str = quest->rewards[i].previewText;
-        }
-        else
-        {
-            switch(quest->rewards[i].type)
-            {
-                case QUEST_REWARD_SET_FLAG:
-                case QUEST_REWARD_CLEAR_FLAG:
-                    str = gText_QuestLogTitleDesc;
-                    break;
-
-                case QUEST_REWARD_GIVE_ITEM:
-                    CopyItemNameHandlePlural(quest->rewards[i].params[0], gStringVar1, quest->rewards[i].params[1]);
-                    str = gStringVar1;
-                    break;
-
-                case QUEST_REWARD_GIVE_MONEY:
-                    ConvertUIntToDecimalStringN(gStringVar1, quest->rewards[i].params[0], STR_CONV_MODE_LEFT_ALIGN, 6);
-                    StringExpandPlaceholders(gStringVar2, gText_QuestLogTitleRewardMoney);
-                    str = gStringVar2;
-                    break;
-    
-                case QUEST_REWARD_GIVE_POKEMON:
-                    StringCopy(gStringVar1, gSpeciesNames[quest->rewards[i].params[0]]);
-                    
-                    if(quest->rewards[i].params[2] == TRUE)
-                        StringExpandPlaceholders(gStringVar2, gText_QuestLogTitleRewardShinyPokemon);
-                    else
-                        StringExpandPlaceholders(gStringVar2, gText_QuestLogTitleRewardPokemon);
-                    str = gStringVar2;
-                    break;
-            }
-        }
-
-        AddTextPrinterParameterized(1, FONT_SHORT, str, 2, 20 + 15 * i, 0, NULL);
-    }
-
-    // Add extra text to indicate new quests are unlockable
-    if(DoesQuestHaveUnlocks(chosenQuest))
-    {
-        str = gText_QuestLogTitleQuestUnlocks;
-        AddTextPrinterParameterized(1, FONT_SHORT, str, 2, 20 + 15 * i, 0, NULL);
-    }
-
-    if(questState.isCompleted)
-    {
-        if(questState.hasPendingRewards)
-        {
-            str = gText_QuestLogStatusCollection;
-            x = GetStringRightAlignXOffset(FONT_SHORT, str, 0x80) - 4;
-            AddTextPrinterParameterized(1, FONT_SHORT, str, x, 80, 0, NULL);
-        }
-        else if(IsQuestRepeatable(chosenQuest))
-        {
-            str = gText_QuestLogMarkerRepeatable;
-            x = GetStringRightAlignXOffset(FONT_SHORT, str, 0x80) - 4;
-            AddTextPrinterParameterized(1, FONT_SHORT, str, x, 80, 0, NULL);
-        }
-        else
-        {
-            str = gText_QuestLogStatusCollected;
-            x = GetStringRightAlignXOffset(FONT_SHORT, str, 0x80) - 4;
-            AddTextPrinterParameterized(1, FONT_SHORT, str, x, 80, 0, NULL);
-        }
-    }
-
-}
-
 static void QuestMenuCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
 
-    if(Rogue_IsQuestMenuOverviewActive())
-    {
-        QuestMenuOverview(0);
-        QuestMenuOverview(1);
-    }
-    else
-    {
-        QuestMenuPreviewDescription(itemIndex);
-        QuestMenuRewardDescription(itemIndex);
-    }
+    // REMOVE
+    AGB_ASSERT(FALSE);
 }
 
 void QuestMenuPrintText(u8 *str)
@@ -1316,7 +967,7 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
     *(dst++) = TEXT_COLOR_TRANSPARENT;
     *(dst++) = TEXT_COLOR_LIGHT_BLUE;
     if (GetBoxOrPartyMonData(box, mon, MON_DATA_IS_EGG, NULL))
-        return StringCopyPadded(dst, gText_EggNickname, 0, 12);
+        return StringCopyPadded(dst, gText_EggNickname, 0, POKEMON_NAME_LENGTH + 2);
     GetBoxOrPartyMonData(box, mon, MON_DATA_NICKNAME, dst);
     StringGet_Nickname(dst);
     species = GetBoxOrPartyMonData(box, mon, MON_DATA_SPECIES, NULL);
@@ -1332,7 +983,7 @@ static u8 *GetConditionMenuMonString(u8 *dst, u16 boxId, u16 monId)
         level = GetLevelFromBoxMonExp(boxMon);
     }
 
-    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, gSpeciesNames[species]))
+    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(dst, GetSpeciesName(species)))
         gender = MON_GENDERLESS;
 
     for (str = dst; *str != EOS; str++)
@@ -1418,7 +1069,7 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
         locationDst[3] = TEXT_COLOR_TRANSPARENT;
         locationDst[4] = TEXT_COLOR_LIGHT_BLUE;
         if (box == TOTAL_BOXES_COUNT) // Party mon.
-            BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, 8);
+            BufferConditionMenuSpacedStringN(&locationDst[5], gText_InParty, BOX_NAME_LENGTH);
         else
             BufferConditionMenuSpacedStringN(&locationDst[5], GetBoxNamePtr(box), BOX_NAME_LENGTH);
     }
@@ -1427,7 +1078,7 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
         for (i = 0; i < POKEMON_NAME_LENGTH + 2; i++)
             nameDst[i] = CHAR_SPACE;
         nameDst[i] = EOS;
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < BOX_NAME_LENGTH; i++)
             locationDst[i] = CHAR_SPACE;
         locationDst[i] = EOS;
     }
@@ -1470,13 +1121,12 @@ void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, 
 
     if (partyId != numMons)
     {
-        u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES2, NULL);
-        u32 trainerId = GetBoxOrPartyMonData(boxId, monId, MON_DATA_OT_ID, NULL);
+        u16 species = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SPECIES_OR_EGG, NULL);
         u32 personality = GetBoxOrPartyMonData(boxId, monId, MON_DATA_PERSONALITY, NULL);
         bool8 isShiny = GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_SHINY, NULL);
-        u8 gender = GetGenderFromSpeciesAndPersonality(species, personality);
+        u8 gender = GetGenderForSpecies(species, GetBoxOrPartyMonData(boxId, monId, MON_DATA_GENDER_FLAG, NULL));
 
-        LoadSpecialPokePic(&gMonFrontPicTable[species], tilesDst, species, personality, TRUE);
+        LoadSpecialPokePic(tilesDst, species, personality, gender, TRUE);
         LZ77UnCompWram(GetMonSpritePalFromSpecies(species, gender, isShiny), palDst);
     }
 }
@@ -1525,7 +1175,7 @@ static const struct OamData sOam_ConditionMonPic =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -1542,7 +1192,7 @@ static const struct OamData sOam_ConditionSelectionIcon =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -1939,7 +1589,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
                                      0,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      sLvlUpStatStrings[i]);
 
         StringCopy(text, (statsDiff[i] >= 0) ? gText_Plus : gText_Dash);
@@ -1948,7 +1598,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
                                      56,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      text);
         if (abs(statsDiff[i]) <= 9)
             x = 18;
@@ -1961,7 +1611,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
                                      56 + x,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      text);
     }
 }
@@ -2003,7 +1653,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
                                      0,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      sLvlUpStatStrings[i]);
 
         AddTextPrinterParameterized3(windowId,
@@ -2011,7 +1661,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
                                      56 + x,
                                      15 * i,
                                      color,
-                                     -1,
+                                     TEXT_SKIP_DRAW,
                                      text);
     }
 }

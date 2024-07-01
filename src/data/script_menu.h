@@ -1,3 +1,7 @@
+#define MULTICHOICE_LIST_CAPACITY 12
+
+typedef void (*MultichoiceList_Callback)(struct MenuAction* outList, u8* outCount, u8 listCapcity);
+
 // multichoice lists
 static const struct MenuAction MultichoiceList_BrineyOnDewford[] =
 {
@@ -96,7 +100,7 @@ static const struct MenuAction MultichoiceList_Generations3[] =
     {gText_Gen3},
 };
 
-static const struct MenuAction MultichoiceList_Generations8[] =
+static const struct MenuAction MultichoiceList_Generations9[] =
 {
     {gText_Gen1},
     {gText_Gen2},
@@ -106,6 +110,7 @@ static const struct MenuAction MultichoiceList_Generations8[] =
     {gText_Gen6},
     {gText_Gen7},
     {gText_Gen8},
+    {gText_Gen9},
 };
 
 static const struct MenuAction MultichoiceList_ChallengeInfo[] =
@@ -560,12 +565,10 @@ static const struct MenuAction MultichoiceList_LinkLeader[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_ContestRank[] =
+static const struct MenuAction MultichoiceList_HostJoin[] =
 {
-    {gText_NormalRank},
-    {gText_SuperRank},
-    {gText_HyperRank},
-    {gText_MasterRank},
+    {gText_JoinAdventure},
+    {gText_HostAdventure},
     {gText_Exit},
 };
 
@@ -854,6 +857,63 @@ static const struct MenuAction MultichoiceList_Exit[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_WorkbenchOptions[] =
+{
+    {gText_UpgradeArea},
+    {gText_ExpandArea},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ChangeClothes[] =
+{
+    {gText_ChangeOutfit},
+    {gText_ChangeName},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_SelectSeason[] =
+{
+    {gText_SeasonSpring},
+    {gText_SeasonSummer},
+    {gText_SeasonAutumn},
+    {gText_SeasonWinter},
+};
+
+static const struct MenuAction MultichoiceList_SelectTime[] =
+{
+    {gText_TimeDawn},
+    {gText_TimeMidday},
+    {gText_TimeDusk},
+    {gText_TimeMidnight},
+};
+
+static const struct MenuAction MultichoiceList_SelectPieFilling[] =
+{
+    {gText_PieSmall},
+    {gText_PieMedium},
+    {gText_PieLarge},
+};
+
+static const struct MenuAction MultichoiceList_ClassicModern[] =
+{
+    {gText_Modern},
+    {gText_Classic},
+};
+
+static const struct MenuAction MultichoiceList_BattleWager[] =
+{
+    {gText_WagerMoney},
+    {gText_WagerIVs},
+    {gText_WagerItems},
+};
+
+static const struct MenuAction MultichoiceList_Expand3[] =
+{
+    {gText_StrVar1},
+    {gText_StrVar2},
+    {gText_StrVar3},
+};
+
 struct MultichoiceListStruct
 {
     const struct MenuAction *list;
@@ -883,7 +943,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_BATTLE_MODE]                = MULTICHOICE(MultichoiceList_BattleMode),
     [MULTI_YESNOINFO_2]                = MULTICHOICE(MultichoiceList_YesNoInfo2),
     [MULTI_GENERATIONS_UPTO3]          = MULTICHOICE(MultichoiceList_Generations3),
-    [MULTI_GENERATIONS_UPTO8]          = MULTICHOICE(MultichoiceList_Generations8),
+    [MULTI_GENERATIONS_UPTO9]          = MULTICHOICE(MultichoiceList_Generations9),
     [MULTI_CHALLENGEINFO]              = MULTICHOICE(MultichoiceList_ChallengeInfo),
     [MULTI_LEVEL_MODE]                 = MULTICHOICE(MultichoiceList_LevelMode),
     [MULTI_MECHADOLL1_Q1]              = MULTICHOICE(MultichoiceList_Mechadoll1_Q1),
@@ -944,7 +1004,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_WIRELESS_ALL_SERVICES]      = MULTICHOICE(MultichoiceList_LinkServicesAll),
     [MULTI_WIRELESS_MINIGAME]          = MULTICHOICE(MultichoiceList_WirelessMinigame),
     [MULTI_LINK_LEADER]                = MULTICHOICE(MultichoiceList_LinkLeader),
-    [MULTI_CONTEST_RANK]               = MULTICHOICE(MultichoiceList_ContestRank),
+    [MULTI_LINK_HOST_JOIN]             = MULTICHOICE(MultichoiceList_HostJoin),
     [MULTI_FRONTIER_ITEM_CHOOSE]       = MULTICHOICE(MultichoiceList_FrontierItemChoose),
     [MULTI_LINK_CONTEST_INFO]          = MULTICHOICE(MultichoiceList_LinkContestInfo),
     [MULTI_LINK_CONTEST_MODE]          = MULTICHOICE(MultichoiceList_LinkContestMode),
@@ -979,6 +1039,73 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_REGION_OR_NATIONAL]         = MULTICHOICE(MultichoiceList_RegionOrNational),
     [MULTI_REGION_UPTO_HOENN]          = MULTICHOICE(MultichoiceList_RegionUpToHoenn),
     [MULTI_REGION_FULL]                = MULTICHOICE(MultichoiceList_RegionFull),
+    [MULTI_WORKBENCH_OPTIONS]          = MULTICHOICE(MultichoiceList_WorkbenchOptions),
+    [MULTI_CHANGE_CLOTHES]             = MULTICHOICE(MultichoiceList_ChangeClothes),
+    [MULTI_SELECT_SEASON]              = MULTICHOICE(MultichoiceList_SelectSeason),
+    [MULTI_SELECT_TIME]                = MULTICHOICE(MultichoiceList_SelectTime),
+    [MULTI_SELECT_PIE_FILLING]         = MULTICHOICE(MultichoiceList_SelectPieFilling),
+    [MULTI_CLASSIC_MODERN]             = MULTICHOICE(MultichoiceList_ClassicModern),
+    [MULTI_BATTLE_WAGER]               = MULTICHOICE(MultichoiceList_BattleWager),
+    [MULTI_EXPAND3]                    = MULTICHOICE(MultichoiceList_Expand3),
+};
+
+static const MultichoiceList_Callback sMultichoiceCallback[] =
+{
+    // TODO - Remove these
+    [MULTI_HUB_AREA_BUILDS] = NULL,
+    [MULTI_HUB_AREA_BUILD_DIRECTION] = NULL, 
+    [MULTI_HUB_AREA_UPGRADES] = NULL,
+    [MULTI_ROGUE_DAYCARE] = Rogue_DaycareMultichoiceCallback,
+};
+
+// Text displayed as options.
+static const u8 sText_Example1[] = _("Example 1");
+static const u8 sText_Example2[] = _("Example 2");
+static const u8 sText_Example3[] = _("Example 3");
+static const u8 sText_Example4[] = _("Example 4");
+static const u8 sText_Example5[] = _("Example 5");
+static const u8 sText_Example6[] = _("Example 6");
+static const u8 sText_Example7[] = _("Example 7");
+static const u8 sText_Example8[] = _("Example 8");
+static const u8 sText_Example9[] = _("Example 9");
+
+// Sets of multichoices.
+static const struct ListMenuItem ScrollingMultichoiceList_Test0[] =
+{
+    {sText_Example1, 0},
+    {sText_Example2, 1},
+    {sText_Example3, 2},
+    {sText_Example4, 3},
+    {sText_Example5, 4},
+    {sText_Example6, 5},
+    {sText_Example7, 6},
+    {sText_Example8, 7},
+    {sText_Example9, 8},
+};
+
+static const struct ListMenuItem ScrollingMultichoiceList_Test1[] =
+{
+    {sText_Example9, 0},
+    {sText_Example8, 1},
+    {sText_Example7, 2},
+    {sText_Example6, 3},
+    {sText_Example5, 4},
+    {sText_Example4, 5},
+    {sText_Example3, 6},
+    {sText_Example2, 7},
+    {sText_Example1, 8},
+};
+
+struct ScrollingMultichoiceListStruct
+{
+    const struct ListMenuItem *list;
+    u16 count;
+};
+
+static const struct ScrollingMultichoiceListStruct sScrollingMultichoiceLists[] =
+{
+    [MULTI_SCROLL_TEST0] = MULTICHOICE(ScrollingMultichoiceList_Test0),
+    [MULTI_SCROLL_TEST1] = MULTICHOICE(ScrollingMultichoiceList_Test1),
 };
 
 const u8 *const gStdStrings[] =
@@ -1013,6 +1140,11 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BATTLE_ARENA] = gText_BattleArena,
     [STDSTRING_BATTLE_PIKE] = gText_BattlePike,
     [STDSTRING_BATTLE_PYRAMID] = gText_BattlePyramid,
+    [STDSTRING_MEDICINE] = gText_Medicine,
+    [STDSTRING_CHARMS] = gText_Charms,
+    [STDSTRING_STONES] = gText_Stones,
+    [STDSTRING_POKEBLOCK] = gText_Pokeblock,
+    [STDSTRING_HELD_ITEMS] = gText_HeldItems,
 };
 
 static const u8 sLinkServicesMultichoiceIds[] =

@@ -1,6 +1,8 @@
 const BOSS_NPC = 1
 const DITTO_NPC = 2
 
+const VAR_APPLY_FINAL_QUEST_FAKE_OUT = VAR_TEMP_A
+
 mapscripts Rogue_Boss_13_MapScripts
 {
 }
@@ -9,77 +11,65 @@ script Rogue_Battle_Boss13
 {
     lockall()
 
+    special(Rogue_IsFinalQuestActive)
+
+    if(var(VAR_RESULT) == TRUE)
+    {
+        // TEMP - remove this once we have a new map
+        if(var(VAR_ROGUE_DIFFICULTY) >= ROGUE_FINAL_CHAMP_DIFFICULTY)
+        {
+            setvar(VAR_RESULT, FALSE)
+        }
+    }
+
+    // Calculate value here before difficulty increments
+    copyvar(VAR_APPLY_FINAL_QUEST_FAKE_OUT, VAR_RESULT)
+
     special(SpawnCameraObject)
     applymovement(OBJ_EVENT_ID_CAMERA, CameraToBattleFieldBoss13)
     waitmovement(0)
 
-    // Special case for Red
-    if(var(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA) == TRAINER_ROGUE_BOSS_RED || var(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA) == TRAINER_ROGUE_BOSS_MIRROR)
+    buffertrainername(STR_VAR_1, VAR_ROGUE_SPECIAL_ENCOUNTER_DATA)
+    special(Rogue_ShouldSkipTrainerOpenningMsg)
+    if(var(VAR_RESULT) == NO)
     {
-        buffertrainername(STR_VAR_1, VAR_ROGUE_SPECIAL_ENCOUNTER_DATA)
-        msgbox(format("{STR_VAR_1}: ...\p...\p..."))
-
-        call(Rogue_SetDesiredWeather)
-
-        applymovement(BOSS_NPC, BossToFightBoss13)
-        applymovement(OBJ_EVENT_ID_PLAYER, PlayerToFightBoss13)
-        waitmovement(0)
-
-        // Manually kick off the encouter to control the music + avoid the trainer from changing directions
-        //playbgm(MUS_ENCOUNTER_CHAMPION, FALSE)
-        msgbox(format("!"))
-        trainerbattle(TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, 0, format("...!"))
+        msgbox(gPlaceholder_Gym_PreBattleOpenning)
     }
-    // Special case for Pokabbie
-    elif(var(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA) == TRAINER_ROGUE_BOSS_POKABBIE)
-    {
-        buffertrainername(STR_VAR_1, VAR_ROGUE_SPECIAL_ENCOUNTER_DATA)
-        msgbox(format("...\p...\p...\pPOKABBIE: You did well to make it here..."))
 
-        call(Rogue_SetDesiredWeather)
+    call(Rogue_SetDesiredWeather)
 
-        applymovement(BOSS_NPC, BossToFightBoss13)
-        applymovement(OBJ_EVENT_ID_PLAYER, PlayerToFightBoss13)
-        waitmovement(0)
+    applymovement(BOSS_NPC, BossToFightBoss13)
+    applymovement(OBJ_EVENT_ID_PLAYER, PlayerToFightBoss13)
+    waitmovement(0)
 
+    // Manually kick off the encouter to control the music + avoid the trainer from changing directions
+    //playbgm(MUS_ENCOUNTER_CHAMPION, FALSE)
+    msgbox(gPlaceholder_Gym_PreBattleTaunt)
+    trainerbattle(TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, 0, gPlaceholder_Gym_PostBattleTaunt)
 
-        msgbox(format("Oh!\nIt's {PLAYER}!\pMy bad, I thought you were someone else.\pWhat's that?\pWe should battle?\pDon't be silly!\pI'm not the one you'll be battling..."))
-
-        playmoncry(SPECIES_DITTO, CRY_MODE_ENCOUNTER)
-        waitmoncry
-
-        applymovement(DITTO_NPC, DittoToFightBoss13)
-        waitmovement(0)
-
-        // Manually kick off the encouter to control the music + avoid the trainer from changing directions
-        //playbgm(MUS_ENCOUNTER_CHAMPION, FALSE)
-        trainerbattle(TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, 0, format("Congratulations {PLAYER}!"))
-    }
-    else
-    {
-        buffertrainername(STR_VAR_1, VAR_ROGUE_SPECIAL_ENCOUNTER_DATA)
-        msgbox(format("...\p...\p...\p{STR_VAR_1}: You did well to make it here...\pNow...\pFor one last time..."))
-
-        call(Rogue_SetDesiredWeather)
-
-        applymovement(BOSS_NPC, BossToFightBoss13)
-        applymovement(OBJ_EVENT_ID_PLAYER, PlayerToFightBoss13)
-        waitmovement(0)
-
-        // Manually kick off the encouter to control the music + avoid the trainer from changing directions
-        //playbgm(MUS_ENCOUNTER_CHAMPION, FALSE)
-        msgbox(format("Let's battle!"))
-        trainerbattle(TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, 0, format("Congratulations {PLAYER}!"))
-    }
     call(Rogue_BattleDefeated_Boss13)
 }
 
 script Rogue_BattleDefeated_Boss13
-{    
-    fadescreen(FADE_TO_BLACK)
-    special(GameClear)
-    waitstate
-    releaseall
+{
+    if(var(VAR_APPLY_FINAL_QUEST_FAKE_OUT) == TRUE)
+    {
+        // Fake out the game clear
+        call(Rogue_EventScript_AttemptPostGymHeal) // todo - avoid popup from here
+
+        fadescreen(FADE_TO_BLACK)
+        special(GameClearFakeout)
+        waitstate
+        releaseall
+    }
+    else
+    {
+        // Normal game clear
+        fadescreen(FADE_TO_BLACK)
+        special(GameClear)
+        waitstate
+        releaseall
+    }
 }
 
 movement CameraToBattleFieldBoss13 {

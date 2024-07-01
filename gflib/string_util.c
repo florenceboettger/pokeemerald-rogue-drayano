@@ -2,6 +2,10 @@
 #include "string_util.h"
 #include "text.h"
 #include "strings.h"
+#include "union_room_chat.h"
+
+#include "rogue_multiplayer.h"
+#include "rogue_hub.h"
 
 EWRAM_DATA u8 gStringVar1[0x100] = {0};
 EWRAM_DATA u8 gStringVar2[0x100] = {0};
@@ -147,6 +151,31 @@ s32 StringCompareN(const u8 *str1, const u8 *str2, u32 n)
     }
 
     return *str1 - *str2;
+}
+
+static u8 CharToLower(u8 c)
+{
+    if(c >= CHAR_A && c <= CHAR_Z)
+    {
+        return c  + CHAR_a - CHAR_A;
+    }
+
+    return c;
+}
+
+s32 StringCompareCaseInsensitiveN(const u8 *str1, const u8 *str2, u32 n)
+{
+    while (CharToLower(*str1) == CharToLower(*str2))
+    {
+        if (*str1 == EOS)
+            return 0;
+        str1++;
+        str2++;
+        if (--n == 0)
+            return 0;
+    }
+
+    return CharToLower(*str1) - CharToLower(*str2);
 }
 
 bool8 IsStringLengthAtLeast(const u8 *str, s32 n)
@@ -298,7 +327,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
 
         if (state == WRITING_DIGITS)
         {
-            char *out = dest++;
+            u8 *out = dest++;
 
             if (digit <= 0xF)
                 c = sDigits[digit];
@@ -309,7 +338,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
         }
         else if (digit != 0 || powerOfSixteen == 1)
         {
-            char *out;
+            u8 *out;
             state = WRITING_DIGITS;
             out = dest++;
 
@@ -354,7 +383,7 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
             switch (c)
             {
-            case EXT_CTRL_CODE_RESET_SIZE:
+            case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
             case EXT_CTRL_CODE_FILL_WINDOW:
             case EXT_CTRL_CODE_JPN:
@@ -455,10 +484,15 @@ static const u8 *ExpandPlaceholder_KunChan(void)
 
 static const u8 *ExpandPlaceholder_RivalName(void)
 {
-    if (gSaveBlock2Ptr->playerGender == MALE)
-        return gText_ExpandedPlaceholder_May;
+    if(RogueMP_IsRemotePlayerActive())
+        return RogueMP_GetPlayerName(RogueMP_GetRemotePlayerId());
     else
-        return gText_ExpandedPlaceholder_Brendan;
+        return gText_ExpandedPlaceholder_RemotePlayer;
+
+    //if (gSaveBlock2Ptr->playerGender == MALE)
+    //    return gText_ExpandedPlaceholder_May;
+    //else
+    //    return gText_ExpandedPlaceholder_Brendan;
 }
 
 static const u8 *ExpandPlaceholder_Version(void)
@@ -496,6 +530,12 @@ static const u8 *ExpandPlaceholder_Groudon(void)
     return gText_ExpandedPlaceholder_Groudon;
 }
 
+static const u8 *ExpandPlaceholder_PokemonHub(void)
+{
+    //return gText_ExpandedPlaceholder_PokemonHub;
+    return RogueHub_GetHubName();
+}
+
 const u8 *GetExpandedPlaceholder(u32 id)
 {
     typedef const u8 *(*ExpandPlaceholderFunc)(void);
@@ -516,6 +556,7 @@ const u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_MAXIE]        = ExpandPlaceholder_Maxie,
         [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
         [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
+        [PLACEHOLDER_ID_POKEMON_HUB]  = ExpandPlaceholder_PokemonHub,
     };
 
     if (id >= ARRAY_COUNT(funcs))
@@ -665,13 +706,13 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW] = 4,
         [EXT_CTRL_CODE_PALETTE]                = 2,
         [EXT_CTRL_CODE_FONT]                   = 2,
-        [EXT_CTRL_CODE_RESET_SIZE]             = 1,
+        [EXT_CTRL_CODE_RESET_FONT]             = 1,
         [EXT_CTRL_CODE_PAUSE]                  = 2,
         [EXT_CTRL_CODE_PAUSE_UNTIL_PRESS]      = 1,
         [EXT_CTRL_CODE_WAIT_SE]                = 1,
         [EXT_CTRL_CODE_PLAY_BGM]               = 3,
         [EXT_CTRL_CODE_ESCAPE]                 = 2,
-        [EXT_CTRL_CODE_SHIFT_TEXT]             = 2,
+        [EXT_CTRL_CODE_SHIFT_RIGHT]            = 2,
         [EXT_CTRL_CODE_SHIFT_DOWN]             = 2,
         [EXT_CTRL_CODE_FILL_WINDOW]            = 1,
         [EXT_CTRL_CODE_PLAY_SE]                = 3,
@@ -778,4 +819,20 @@ void StripExtCtrlCodes(u8 *str)
         }
     }
     str[destIndex] = EOS;
+}
+
+u8 *StringCopyUppercase(u8 *dest, const u8 *src)
+{
+    while (*src != EOS)
+    {
+        if (*src >= CHAR_a && *src <= CHAR_z)
+            *dest = gCaseToggleTable[*src];
+        else
+            *dest = *src;
+        dest++;
+        src++;
+    }
+
+    *dest = EOS;
+    return dest;
 }

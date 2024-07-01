@@ -3,6 +3,7 @@
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "bg.h"
+#include "debug.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_object_lock.h"
@@ -50,6 +51,13 @@
 #include "constants/rogue.h"
 #include "rogue.h"
 #include "rogue_controller.h"
+#include "rogue_charms.h"
+#include "rogue_hub.h"
+#include "rogue_multiplayer.h"
+#include "rogue_player_customisation.h"
+#include "rogue_pokedex.h"
+#include "rogue_questmenu.h"
+#include "rogue_settings.h"
 
 // Menu actions
 enum
@@ -63,11 +71,15 @@ enum
     MENU_ACTION_OPTION,
     MENU_ACTION_EXIT,
     MENU_ACTION_RETIRE_SAFARI,
+    MENU_ACTION_RETIRE_ADVENTURE,
     MENU_ACTION_PLAYER_LINK,
     MENU_ACTION_REST_FRONTIER,
     MENU_ACTION_RETIRE_FRONTIER,
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_QUICK_SAVE,
+    MENU_ACTION_QUESTS,
+    MENU_ACTION_DECORATE,
+    MENU_ACTION_DEBUG,
 };
 
 // Save status
@@ -89,7 +101,7 @@ EWRAM_DATA static u8 sRogueRunWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
 EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
-EWRAM_DATA static u8 sInitStartMenuData[2] = {0};
+EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u8 sSaveDialogTimer = 0;
@@ -100,6 +112,8 @@ EWRAM_DATA static bool8 sBufferedAButton = FALSE;
 // Menu action callbacks
 static bool8 StartMenuPokedexCallback(void);
 static bool8 StartMenuPokemonCallback(void);
+static bool8 StartMenuQuestsCallback(void);
+static bool8 StartMenuDecorateCallback(void);
 static bool8 StartMenuBagCallback(void);
 static bool8 StartMenuPokeNavCallback(void);
 static bool8 StartMenuPlayerNameCallback(void);
@@ -110,6 +124,7 @@ static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
+static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuQuickSaveCallback(void);
 
 // Menu callbacks
@@ -146,10 +161,27 @@ static void Task_SaveAfterLinkBattle(u8 taskId);
 static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
-static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
-static const struct WindowTemplate sRogueRunWindowTemplate = {0, 1, 1, 9, 6, 0xF, 8};
+static const struct WindowTemplate sWindowTemplate_SafariBalls = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 9,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x8
+};
 
-static const u8* const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
+static const struct WindowTemplate sRogueRunWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 9,
+    .height = 6,
+    .paletteNum = 15,
+    .baseBlock = 0x8,
+};
+
+static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
     gText_Floor1,
     gText_Floor2,
@@ -161,25 +193,48 @@ static const u8* const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
     gText_Peak
 };
 
-static const struct WindowTemplate sPyramidFloorWindowTemplate_2 = {0, 1, 1, 0xA, 4, 0xF, 8};
-static const struct WindowTemplate sPyramidFloorWindowTemplate_1 = {0, 1, 1, 0xC, 4, 0xF, 8};
+static const struct WindowTemplate sWindowTemplate_PyramidFloor = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 10,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x8
+};
+
+static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 12,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x8
+};
+
+static const u8 sText_MenuDebug[] = _("DEBUG");
 
 static const struct MenuAction sStartMenuItems[] =
 {
-    [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
-    [MENU_ACTION_POKEMON]         = {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
-    [MENU_ACTION_BAG]             = {gText_MenuBag,     {.u8_void = StartMenuBagCallback}},
-    [MENU_ACTION_POKENAV]         = {gText_MenuPokenav, {.u8_void = StartMenuPokeNavCallback}},
-    [MENU_ACTION_PLAYER]          = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerNameCallback}},
-    [MENU_ACTION_SAVE]            = {gText_MenuSave,    {.u8_void = StartMenuSaveCallback}},
-    [MENU_ACTION_OPTION]          = {gText_MenuOption,  {.u8_void = StartMenuOptionCallback}},
-    [MENU_ACTION_EXIT]            = {gText_MenuExit,    {.u8_void = StartMenuExitCallback}},
-    [MENU_ACTION_RETIRE_SAFARI]   = {gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback}},
-    [MENU_ACTION_PLAYER_LINK]     = {gText_MenuPlayer,  {.u8_void = StartMenuLinkModePlayerNameCallback}},
-    [MENU_ACTION_REST_FRONTIER]   = {gText_MenuRest,    {.u8_void = StartMenuSaveCallback}},
-    [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
+    [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex,     {.u8_void = StartMenuPokedexCallback}},
+    [MENU_ACTION_POKEMON]         = {gText_MenuPokemon,     {.u8_void = StartMenuPokemonCallback}},
+    [MENU_ACTION_BAG]             = {gText_MenuBag,         {.u8_void = StartMenuBagCallback}},
+    [MENU_ACTION_POKENAV]         = {gText_MenuPokenav,     {.u8_void = StartMenuPokeNavCallback}},
+    [MENU_ACTION_PLAYER]          = {gText_MenuPlayer,      {.u8_void = StartMenuPlayerNameCallback}},
+    [MENU_ACTION_SAVE]            = {gText_MenuSave,        {.u8_void = StartMenuSaveCallback}},
+    [MENU_ACTION_OPTION]          = {gText_MenuOption,      {.u8_void = StartMenuOptionCallback}},
+    [MENU_ACTION_EXIT]            = {gText_MenuExit,        {.u8_void = StartMenuExitCallback}},
+    [MENU_ACTION_RETIRE_SAFARI]   = {gText_MenuRetire,      {.u8_void = StartMenuSafariZoneRetireCallback}},
+    [MENU_ACTION_RETIRE_ADVENTURE]= {gText_MenuRetireRun,   {.u8_void = StartMenuSafariZoneRetireCallback}},
+    [MENU_ACTION_PLAYER_LINK]     = {gText_MenuPlayer,      {.u8_void = StartMenuLinkModePlayerNameCallback}},
+    [MENU_ACTION_REST_FRONTIER]   = {gText_MenuRest,        {.u8_void = StartMenuSaveCallback}},
+    [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,      {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
-    [MENU_ACTION_QUICK_SAVE]      = {gText_MenuRest,    {.u8_void = StartMenuQuickSaveCallback}},
+    [MENU_ACTION_DEBUG]           = {sText_MenuDebug,       {.u8_void = StartMenuDebugCallback}},
+    [MENU_ACTION_QUICK_SAVE]      = {gText_MenuQuickSave,   {.u8_void = StartMenuQuickSaveCallback}},
+    [MENU_ACTION_QUESTS]          = {gText_MenuQuests,      {.u8_void = StartMenuQuestsCallback}},
+    [MENU_ACTION_DECORATE]        = {gText_MenuDecorate,    {.u8_void = StartMenuDecorateCallback}},
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -223,6 +278,7 @@ static const struct WindowTemplate sSaveInfoWindowTemplate = {
 static void BuildStartMenuActions(void);
 static void AddStartMenuAction(u8 action);
 static void BuildNormalStartMenu(void);
+static void BuildDebugStartMenu(void);
 static void BuildRogueRunStartMenu(void);
 static void BuildSafariZoneStartMenu(void);
 static void BuildLinkModeStartMenu(void);
@@ -253,12 +309,13 @@ static void CB2_SaveAfterLinkBattle(void);
 static void ShowSaveInfoWindow(void);
 static void RemoveSaveInfoWindow(void);
 static void HideStartMenuWindow(void);
+static void HideStartMenuDebug(void);
 
 void SetDexPokemonPokenavFlags(void) // unused
 {
     FlagSet(FLAG_SYS_POKEDEX_GET);
     FlagSet(FLAG_SYS_POKEMON_GET);
-    FlagSet(FLAG_SYS_POKENAV_GET);
+    //FlagSet(FLAG_SYS_QUEST_LOG_GET);
 }
 
 static void BuildStartMenuActions(void)
@@ -295,7 +352,10 @@ static void BuildStartMenuActions(void)
     }
     else
     {
-        BuildNormalStartMenu();
+        if (DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == TRUE)
+            BuildDebugStartMenu();
+        else
+            BuildNormalStartMenu();
     }
 }
 
@@ -306,7 +366,9 @@ static void AddStartMenuAction(u8 action)
 
 static void BuildNormalStartMenu(void)
 {
-    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
+    bool8 inCatchingContest = Rogue_IsCatchingContestActive();
+
+    if (!inCatchingContest && FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         AddStartMenuAction(MENU_ACTION_POKEDEX);
     }
@@ -315,22 +377,38 @@ static void BuildNormalStartMenu(void)
         AddStartMenuAction(MENU_ACTION_POKEMON);
     }
 
-    AddStartMenuAction(MENU_ACTION_BAG);
-
-    if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
+    if(!inCatchingContest)
     {
-        AddStartMenuAction(MENU_ACTION_POKENAV);
+        AddStartMenuAction(MENU_ACTION_BAG);
     }
 
+    if (FlagGet(FLAG_SYS_QUEST_LOG_GET) == TRUE)
+    {
+        AddStartMenuAction(MENU_ACTION_QUESTS);
+    }
+
+    if (RogueHub_IsPlayerBaseLayout(gMapHeader.mapLayoutId) && !RogueMP_IsClient())
+    {
+        AddStartMenuAction(MENU_ACTION_DECORATE);
+    }
+
+
     AddStartMenuAction(MENU_ACTION_PLAYER);
-    AddStartMenuAction(MENU_ACTION_SAVE);
+
+    if (!inCatchingContest)
+    {
+        AddStartMenuAction(MENU_ACTION_SAVE);
+    }
+
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    //AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
 static void BuildRogueRunStartMenu(void)
 {
-    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
+    bool8 inCatchingContest = Rogue_IsCatchingContestActive();
+
+    if (!inCatchingContest && FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
         AddStartMenuAction(MENU_ACTION_POKEDEX);
     }
@@ -339,18 +417,54 @@ static void BuildRogueRunStartMenu(void)
         AddStartMenuAction(MENU_ACTION_POKEMON);
     }
 
-    AddStartMenuAction(MENU_ACTION_BAG);
+    if(!inCatchingContest)
+    {
+        AddStartMenuAction(MENU_ACTION_BAG);
+    }
 
-    //if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-    //{
-    //    AddStartMenuAction(MENU_ACTION_POKENAV);
-    //}
+    if (FlagGet(FLAG_SYS_QUEST_LOG_GET) == TRUE)
+    {
+        AddStartMenuAction(MENU_ACTION_QUESTS);
+    }
+
+    if (RogueHub_IsPlayerBaseLayout(gMapHeader.mapLayoutId) && !RogueMP_IsClient())
+    {
+        AddStartMenuAction(MENU_ACTION_DECORATE);
+    }
+
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
-    AddStartMenuAction(MENU_ACTION_QUICK_SAVE);
+
+    if (!inCatchingContest && FlagGet(FLAG_SYS_SAVE_DISABLED) == FALSE)
+    {
+        if(IsCharmActive(EFFECT_ALLOW_SAVE_SCUM))
+        {
+            AddStartMenuAction(MENU_ACTION_SAVE);
+        }
+        else
+        {
+            AddStartMenuAction(MENU_ACTION_QUICK_SAVE);
+        }
+    }
+
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_RETIRE_SAFARI);
-    AddStartMenuAction(MENU_ACTION_EXIT);
+    AddStartMenuAction(MENU_ACTION_RETIRE_ADVENTURE);
+    //AddStartMenuAction(MENU_ACTION_EXIT);
+}
+
+static void BuildDebugStartMenu(void)
+{
+    AddStartMenuAction(MENU_ACTION_DEBUG);
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
+        AddStartMenuAction(MENU_ACTION_POKEDEX);
+    if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
+        AddStartMenuAction(MENU_ACTION_POKEMON);
+    AddStartMenuAction(MENU_ACTION_BAG);
+    //if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
+    //    AddStartMenuAction(MENU_ACTION_POKENAV);
+    AddStartMenuAction(MENU_ACTION_PLAYER);
+    AddStartMenuAction(MENU_ACTION_SAVE);
+    AddStartMenuAction(MENU_ACTION_OPTION);
 }
 
 static void BuildSafariZoneStartMenu(void)
@@ -369,10 +483,10 @@ static void BuildLinkModeStartMenu(void)
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
 
-    if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-    {
-        AddStartMenuAction(MENU_ACTION_POKENAV);
-    }
+    //if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
+    //{
+    //    AddStartMenuAction(MENU_ACTION_POKENAV);
+    //}
 
     AddStartMenuAction(MENU_ACTION_PLAYER_LINK);
     AddStartMenuAction(MENU_ACTION_OPTION);
@@ -384,10 +498,10 @@ static void BuildUnionRoomStartMenu(void)
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
 
-    if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-    {
-        AddStartMenuAction(MENU_ACTION_POKENAV);
-    }
+    //if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
+    //{
+    //    AddStartMenuAction(MENU_ACTION_POKENAV);
+    //}
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
@@ -424,7 +538,7 @@ static void BuildMultiPartnerRoomStartMenu(void)
 
 static void ShowSafariBallsWindow(void)
 {
-    sSafariBallsWindowId = AddWindow(&sSafariBallsWindowTemplate);
+    sSafariBallsWindowId = AddWindow(&sWindowTemplate_SafariBalls);
     PutWindowTilemap(sSafariBallsWindowId);
     DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -438,9 +552,9 @@ static void ShowSafariBallsWindow(void)
 static void ShowPyramidFloorWindow(void)
 {
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum == FRONTIER_STAGES_PER_CHALLENGE)
-        sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_1);
+        sBattlePyramidFloorWindowId = AddWindow(&sWindowTemplate_PyramidPeak);
     else
-        sBattlePyramidFloorWindowId = AddWindow(&sPyramidFloorWindowTemplate_2);
+        sBattlePyramidFloorWindowId = AddWindow(&sWindowTemplate_PyramidFloor);
 
     PutWindowTilemap(sBattlePyramidFloorWindowId);
     DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
@@ -454,7 +568,7 @@ static void ShowRogueRunWindow(void)
 {
     struct WindowTemplate windowTemplate;
     memcpy(&windowTemplate, &sRogueRunWindowTemplate, sizeof(windowTemplate));
-    windowTemplate.height = Rogue_MiniMenuHeight() * 2;
+    windowTemplate.height = Rogue_MiniMenuHeight();
 
     sRogueRunWindowId = AddWindow(&windowTemplate);
     PutWindowTilemap(sRogueRunWindowId);
@@ -610,7 +724,7 @@ void ShowReturnToFieldStartMenu(void)
 
 void Task_ShowStartMenu(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch(task->data[0])
     {
@@ -637,7 +751,7 @@ void ShowStartMenu(void)
         StopPlayerAvatar();
     }
     CreateStartMenuTask(Task_ShowStartMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 HandleStartMenuInput(void)
@@ -654,6 +768,18 @@ static bool8 HandleStartMenuInput(void)
         sStartMenuCursorPos = Menu_MoveCursor(1);
     }
 
+    if (JOY_NEW(L_BUTTON) && !sBufferedAButton)
+    {
+        PlaySE(SE_SELECT);
+        sStartMenuCursorPos = Menu_MoveCursorNoWrapAround(-4);
+    }
+
+    if (JOY_NEW(R_BUTTON) && !sBufferedAButton)
+    {
+        PlaySE(SE_SELECT);
+        sStartMenuCursorPos = Menu_MoveCursorNoWrapAround(4);
+    }
+
     if (JOY_NEW(A_BUTTON) || sBufferedAButton)
     {
         // RogueNote: Audio music bug, wait for fanfare music to stop
@@ -661,26 +787,30 @@ static bool8 HandleStartMenuInput(void)
         if(!WaitFanfare(FALSE))
         {
             sBufferedAButton = TRUE;
-            return;
+            return FALSE;
         }
 
         sBufferedAButton = FALSE;
-        PlaySE(SE_SELECT);
-        if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
+
+        if(sCurrentStartMenuActions[sStartMenuCursorPos] == MENU_ACTION_POKEMON && GetMonData(&gPlayerParty[0], MON_DATA_SPECIES) == SPECIES_NONE)
         {
-            if (GetNationalPokedexCount(FLAG_GET_SEEN) == 0)
-                return FALSE;
+            PlaySE(SE_FAILURE);
         }
-
-        gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
-
-        if (gMenuCallback != StartMenuSaveCallback
-            && gMenuCallback != StartMenuExitCallback
-            && gMenuCallback != StartMenuSafariZoneRetireCallback
-            && gMenuCallback != StartMenuBattlePyramidRetireCallback
-            && gMenuCallback != StartMenuQuickSaveCallback)
+        else
         {
-           FadeScreen(FADE_TO_BLACK, 0);
+            PlaySE(SE_SELECT);
+
+            gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
+
+            if (gMenuCallback != StartMenuSaveCallback
+                && gMenuCallback != StartMenuExitCallback
+                && gMenuCallback != StartMenuDebugCallback
+                && gMenuCallback != StartMenuSafariZoneRetireCallback
+                && gMenuCallback != StartMenuBattlePyramidRetireCallback
+                && gMenuCallback != StartMenuQuickSaveCallback)
+            {
+            FadeScreen(FADE_TO_BLACK, 0);
+            }
         }
 
         return FALSE;
@@ -715,7 +845,9 @@ static bool8 StartMenuPokedexCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_OpenPokedex);
+
+        Rogue_ShowPokedexFromMenu();
+        //SetMainCallback2(CB2_OpenPokedex);
 
         return TRUE;
     }
@@ -727,15 +859,50 @@ static bool8 StartMenuPokemonCallback(void)
 {
     if (!gPaletteFade.active)
     {
+        if(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES) == SPECIES_NONE)
+        {
+            PlaySE(SE_FAILURE);
+            return FALSE;
+        }
+        else
+        {
+            PlayRainStoppingSoundEffect();
+            RemoveExtraStartMenuWindows();
+            CleanupOverworldWindowsAndTilemaps();
+            SetMainCallback2(CB2_PartyMenuFromStartMenu); // Display party menu
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static bool8 StartMenuQuestsCallback(void)
+{
+    if (!gPaletteFade.active)
+    {
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_PartyMenuFromStartMenu); // Display party menu
+        //SetMainCallback2(CB2_PartyMenuFromStartMenu); // Display party menu
 
+        Rogue_OpenQuestMenu(CB2_ReturnToFieldWithOpenMenu, TRUE);
         return TRUE;
     }
 
     return FALSE;
+}
+
+extern const u8 Rogue_Area_Home_DecorateFromMenu[];
+
+static bool8 StartMenuDecorateCallback(void)
+{
+    RemoveExtraStartMenuWindows();
+    HideStartMenu();
+
+    ScriptContext_SetupScript(Rogue_Area_Home_DecorateFromMenu);
+
+    return TRUE;
 }
 
 static bool8 StartMenuBagCallback(void)
@@ -833,7 +1000,7 @@ static bool8 StartMenuSafariZoneRetireCallback(void)
 
     if(Rogue_IsRunActive())
     {
-        ScriptContext1_SetupScript(Rogue_RetireFromRun);
+        ScriptContext_SetupScript(Rogue_RetireFromRun);
     }
     else
     {
@@ -848,9 +1015,30 @@ static bool8 StartMenuQuickSaveCallback(void)
     RemoveExtraStartMenuWindows();
     HideStartMenu();
 
-    ScriptContext1_SetupScript(Rogue_QuickSaveRun);
+    gRogueRun.isQuickSaveValid = TRUE;
+    ScriptContext_SetupScript(Rogue_QuickSaveRun);
 
     return TRUE;
+}
+
+static bool8 StartMenuDebugCallback(void)
+{
+    RemoveExtraStartMenuWindows();
+    HideStartMenuDebug(); // Hide start menu without enabling movement
+
+#if DEBUG_OVERWORLD_MENU == TRUE
+    FreezeObjectEvents();
+    Debug_ShowMainMenu();
+#endif
+
+return TRUE;
+}
+
+static void HideStartMenuDebug(void)
+{
+    PlaySE(SE_SELECT);
+    ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
+    RemoveStartMenuWindow();
 }
 
 static bool8 StartMenuLinkModePlayerNameCallback(void)
@@ -880,7 +1068,7 @@ void ShowBattlePyramidStartMenu(void)
     ClearDialogWindowAndFrameToTransparent(0, FALSE);
     ScriptUnfreezeObjectEvents();
     CreateStartMenuTask(Task_ShowStartMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 StartMenuBattlePyramidBagCallback(void)
@@ -921,7 +1109,7 @@ static bool8 SaveCallback(void)
     case SAVE_ERROR:    // Close start menu
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         SoftResetInBattlePyramid();
         return TRUE;
     }
@@ -958,7 +1146,7 @@ static bool8 BattlePyramidRetireCallback(void)
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         return TRUE;
     }
 
@@ -1030,7 +1218,7 @@ static void SaveGameTask(u8 taskId)
     }
 
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void HideSaveMessageWindow(void)
@@ -1134,7 +1322,7 @@ static u8 SaveConfirmInputCallback(void)
             sSaveDialogCallback = SaveFileExistsCallback;
             return SAVE_IN_PROGRESS;
         }
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveInfoWindow();
         HideSaveMessageWindow();
@@ -1180,7 +1368,7 @@ static u8 SaveOverwriteInputCallback(void)
     case 0: // Yes
         sSaveDialogCallback = SaveSavingMessageCallback;
         return SAVE_IN_PROGRESS;
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveInfoWindow();
         HideSaveMessageWindow();
@@ -1299,7 +1487,7 @@ static u8 BattlePyramidRetireInputCallback(void)
     {
     case 0: // Yes
         return SAVE_CANCELED;
-    case -1: // B Button
+    case MENU_B_PRESSED:
     case 1: // No
         HideSaveMessageWindow();
         return SAVE_SUCCESS;
@@ -1334,8 +1522,8 @@ static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates_LinkBattleSave, ARRAY_COUNT(sBgTemplates_LinkBattleSave));
         InitWindows(sWindowTemplates_LinkBattleSave);
-        LoadUserWindowBorderGfx_(0, 8, 224);
-        Menu_LoadStdPalAt(240);
+        LoadUserWindowBorderGfx_(0, 8, BG_PLTT_ID(14));
+        Menu_LoadStdPalAt(BG_PLTT_ID(15));
         break;
     case 3:
         ShowBg(0);
@@ -1402,7 +1590,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             }
             else
             {
-                gSoftResetDisabled = 1;
+                gSoftResetDisabled = TRUE;
                 *state = 1;
             }
             break;
@@ -1416,7 +1604,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             {
                 ClearContinueGameWarpStatus2();
                 *state = 3;
-                gSoftResetDisabled = 0;
+                gSoftResetDisabled = FALSE;
             }
             break;
         case 3:
@@ -1445,8 +1633,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
 static void ShowSaveInfoWindow(void)
 {
     struct WindowTemplate saveInfoWindow = sSaveInfoWindowTemplate;
-    u8 gender;
-    u8 color;
+    u8 color = 0;
     u32 xOffset;
     u32 yOffset;
 
@@ -1458,17 +1645,25 @@ static void ShowSaveInfoWindow(void)
     sSaveInfoWindowId = AddWindow(&saveInfoWindow);
     DrawStdWindowFrame(sSaveInfoWindowId, FALSE);
 
-    gender = gSaveBlock2Ptr->playerGender;
-    color = TEXT_COLOR_RED;  // Red when female, blue when male.
-
-    if ((gender % 2) == MALE)
+    // Unique text colour for player?
+    switch (RoguePlayer_GetTextVariantId() % 3)
     {
+    case 0:
+        color = TEXT_COLOR_RED;
+        break;
+
+    case 1:
+        color = TEXT_COLOR_GREEN;
+        break;
+
+    case 2:
         color = TEXT_COLOR_BLUE;
+        break;
     }
 
     // Print region name
     yOffset = 1;
-    BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_GREEN);
+    BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_BLUE);
     AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, 0, yOffset, TEXT_SKIP_DRAW, NULL);
 
     // Print player name
@@ -1530,7 +1725,7 @@ static void Task_WaitForBattleTowerLinkSave(u8 taskId)
     if (!FuncIsActiveTask(Task_LinkFullSave))
     {
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
@@ -1550,7 +1745,7 @@ static void HideStartMenuWindow(void)
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 void HideStartMenu(void)

@@ -8,6 +8,8 @@
 #include "constants/songs.h"
 #include "task.h"
 
+#include "rogue_controller.h"
+
 struct Fanfare
 {
     u16 songNum;
@@ -52,6 +54,9 @@ static const struct Fanfare sFanfares[] = {
     [FANFARE_OBTAIN_B_POINTS]     = { MUS_OBTAIN_B_POINTS,     313 },
     [FANFARE_OBTAIN_SYMBOL]       = { MUS_OBTAIN_SYMBOL,       318 },
     [FANFARE_REGISTER_MATCH_CALL] = { MUS_REGISTER_MATCH_CALL, 135 },
+    [FANFARE_BUG_CONTEST_1ST_PLACE] = { MUS_HG_BUG_CONTEST_1ST_PLACE, 240 },
+    [FANFARE_BUG_CONTEST_2ND_PLACE] = { MUS_HG_BUG_CONTEST_2ND_PLACE, 240 },
+    [FANFARE_BUG_CONTEST_3RD_PLACE] = { MUS_HG_BUG_CONTEST_3RD_PLACE, 180 },
 };
 
 void InitMapMusic(void)
@@ -156,7 +161,7 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     sMapMusicFadeInSpeed = fadeInSpeed;
 }
 
-void FadeInNewMapMusic(u16 songNum, u8 speed)
+static void UNUSED FadeInNewMapMusic(u16 songNum, u8 speed)
 {
     FadeInNewBGM(songNum, speed);
     sCurrentMapMusic = songNum;
@@ -182,6 +187,8 @@ void PlayFanfareByFanfareNum(u8 fanfareNum)
     m4aMPlayStop(&gMPlayInfo_BGM);
     songNum = sFanfares[fanfareNum].songNum;
     sFanfareCounter = sFanfares[fanfareNum].duration;
+
+    songNum = Rogue_ModifyPlayFanfare(songNum);
     m4aSongNumStart(songNum);
 }
 
@@ -300,7 +307,7 @@ bool8 IsBGMStopped(void)
 
 void PlayCry_Normal(u16 species, s8 pan)
 {
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+    m4aMPlayRawVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, Rogue_ModifySoundVolume(&gMPlayInfo_BGM, 85, ROGUE_SOUND_TYPE_CRY));
     PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, CRY_MODE_NORMAL);
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
@@ -320,7 +327,7 @@ void PlayCry_ByMode(u16 species, s8 pan, u8 mode)
     }
     else
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+        m4aMPlayRawVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, Rogue_ModifySoundVolume(&gMPlayInfo_BGM, 85, ROGUE_SOUND_TYPE_CRY));
         PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
         gPokemonCryBGMDuckingCounter = 2;
         RestoreBGMVolumeAfterPokemonCry();
@@ -337,7 +344,7 @@ void PlayCry_ReleaseDouble(u16 species, s8 pan, u8 mode)
     else
     {
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+            m4aMPlayRawVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, Rogue_ModifySoundVolume(&gMPlayInfo_BGM, 85, ROGUE_SOUND_TYPE_CRY));
         PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     }
 }
@@ -351,7 +358,7 @@ void PlayCry_DuckNoRestore(u16 species, s8 pan, u8 mode)
     }
     else
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+        m4aMPlayRawVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, Rogue_ModifySoundVolume(&gMPlayInfo_BGM, 85, ROGUE_SOUND_TYPE_CRY));
         PlayCryInternal(species, pan, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
         gPokemonCryBGMDuckingCounter = 2;
     }
@@ -359,7 +366,7 @@ void PlayCry_DuckNoRestore(u16 species, s8 pan, u8 mode)
 
 void PlayCry_Script(u16 species, u8 mode)
 {
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 85);
+    m4aMPlayRawVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, Rogue_ModifySoundVolume(&gMPlayInfo_BGM, 85, ROGUE_SOUND_TYPE_CRY));
     PlayCryInternal(species, 0, CRY_VOLUME, CRY_PRIORITY_NORMAL, mode);
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
@@ -373,9 +380,12 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     u32 pitch;
     u32 chorus;
 
+    if(species >= FOLLOWMON_SHINY_OFFSET)
+        species -= FOLLOWMON_SHINY_OFFSET;
+
     // Set default values
     // May be overridden depending on mode.
-    length = 140;
+    length = 210;
     reverse = FALSE;
     release = 0;
     pitch = 15360;
@@ -459,8 +469,12 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
-    species--;
-    gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);
+    species = GetCryIdBySpecies(species);
+    if (species != 0)
+    {
+        species--;
+        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);
+    }
 }
 
 bool8 IsCryFinished(void)
@@ -531,6 +545,8 @@ static void RestoreBGMVolumeAfterPokemonCry(void)
 
 void PlayBGM(u16 songNum)
 {
+    songNum = Rogue_ModifyPlayBGM(songNum);
+
     if (gDisableMusic)
         songNum = 0;
     if (songNum == MUS_NONE)
@@ -540,11 +556,13 @@ void PlayBGM(u16 songNum)
 
 void PlaySE(u16 songNum)
 {
+    songNum = Rogue_ModifyPlaySE(songNum);
     m4aSongNumStart(songNum);
 }
 
 void PlaySE12WithPanning(u16 songNum, s8 pan)
 {
+    songNum = Rogue_ModifyPlaySE(songNum);
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE1);
     m4aMPlayImmInit(&gMPlayInfo_SE2);
@@ -554,6 +572,7 @@ void PlaySE12WithPanning(u16 songNum, s8 pan)
 
 void PlaySE1WithPanning(u16 songNum, s8 pan)
 {
+    songNum = Rogue_ModifyPlaySE(songNum);
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE1);
     m4aMPlayPanpotControl(&gMPlayInfo_SE1, TRACKS_ALL, pan);
@@ -561,6 +580,7 @@ void PlaySE1WithPanning(u16 songNum, s8 pan)
 
 void PlaySE2WithPanning(u16 songNum, s8 pan)
 {
+    songNum = Rogue_ModifyPlaySE(songNum);
     m4aSongNumStart(songNum);
     m4aMPlayImmInit(&gMPlayInfo_SE2);
     m4aMPlayPanpotControl(&gMPlayInfo_SE2, TRACKS_ALL, pan);

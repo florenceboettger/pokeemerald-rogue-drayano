@@ -13,7 +13,6 @@
 #include "task.h"
 #include "menu.h"
 #include "m4a.h"
-#include "bard_music.h"
 #include "sound.h"
 #include "strings.h"
 #include "overworld.h"
@@ -25,15 +24,11 @@
 
 static void InitGiddyTaleList(void);
 static void StartBardSong(bool8 useTemporaryLyrics);
-static void Task_BardSong(u8 taskId);
 static void StorytellerSetup(void);
 static void Storyteller_ResetFlag(void);
 
 static u8 sSelectedStory;
 
-struct BardSong gBardSong;
-
-static EWRAM_DATA u16 sUnknownBardRelated = 0;
 static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
 static EWRAM_DATA u8 sStorytellerWindowId = 0;
 
@@ -46,7 +41,7 @@ static const u16 sDefaultBardSongLyrics[BARD_SONG_LENGTH] = {
     EC_WORD_DANCE
 };
 
-static const u8 * const sGiddyAdjectives[] = {
+static const u8 *const sGiddyAdjectives[] = {
     GiddyText_SoPretty,
     GiddyText_SoDarling,
     GiddyText_SoRelaxed,
@@ -60,7 +55,7 @@ static const u8 * const sGiddyAdjectives[] = {
 // Non-random lines Giddy can say. Not all are strictly
 // questions, but most are, and the player will receive
 // a Yes/No prompt afterwards regardless.
-static const u8 * const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
+static const u8 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
     GiddyText_ISoWantToGoOnAVacation,
     GiddyText_IBoughtCrayonsWith120Colors,
     GiddyText_WouldntItBeNiceIfWeCouldFloat,
@@ -88,7 +83,7 @@ static void SetupHipster(void)
     struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
 
     hipster->id = MAUVILLE_MAN_HIPSTER;
-    hipster->alreadySpoken = FALSE;
+    hipster->taughtWord = FALSE;
     hipster->language = gGameLanguage;
 }
 
@@ -170,12 +165,12 @@ void SaveBardSongLyrics(void)
 }
 
 // Copies lyrics into gStringVar4
-static void PrepareSongText(void)
+static void UNUSED PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
     u16 * lyrics = gSpecialVar_0x8004 == 0 ? bard->songLyrics : bard->temporaryLyrics;
-    u8 * wordEnd = gStringVar4;
-    u8 * str = wordEnd;
+    u8 *wordEnd = gStringVar4;
+    u8 *str = wordEnd;
     u16 lineNum;
 
     // Put three words on each line
@@ -222,30 +217,31 @@ static void PrepareSongText(void)
 void PlayBardSong(void)
 {
     StartBardSong(gSpecialVar_0x8004);
-    ScriptContext1_Stop();
+    ScriptContext_Stop();
 }
 
-void GetHipsterSpokenFlag(void)
+void HasHipsterTaughtWord(void)
 {
-    gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken;
+    gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord;
 }
 
-void SetHipsterSpokenFlag(void)
+void SetHipsterTaughtWord(void)
 {
-    (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken = TRUE;
+    (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = TRUE;
 }
 
 void HipsterTryTeachWord(void)
 {
-    u16 phrase = GetNewHipsterPhraseToTeach();
+    u16 word = UnlockRandomTrendySaying();
 
-    if (phrase == EC_EMPTY_WORD)
+    if (word == EC_EMPTY_WORD)
     {
+        // All words already unlocked
         gSpecialVar_Result = FALSE;
     }
     else
     {
-        CopyEasyChatWord(gStringVar1, phrase);
+        CopyEasyChatWord(gStringVar1, word);
         gSpecialVar_Result = TRUE;
     }
 }
@@ -369,7 +365,7 @@ static void ResetBardFlag(void)
 
 static void ResetHipsterFlag(void)
 {
-    (&gSaveBlock1Ptr->oldMan.hipster)->alreadySpoken = FALSE;
+    (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = FALSE;
 }
 
 static void ResetTraderFlag(void)
@@ -428,12 +424,12 @@ enum {
 
 static void StartBardSong(bool8 useTemporaryLyrics)
 {
-    u8 taskId = CreateTask(Task_BardSong, 80);
-
-    gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
+    AGB_ASSERT(FALSE);
+    //u8 taskId = CreateTask(Task_BardSong, 80);
+    //gTasks[taskId].tUseTemporaryLyrics = useTemporaryLyrics;
 }
 
-static void EnableTextPrinters(void)
+static void UNUSED EnableTextPrinters(void)
 {
     gDisableTextPrinters = FALSE;
 }
@@ -443,253 +439,12 @@ static void DisableTextPrinters(struct TextPrinterTemplate * printer, u16 render
     gDisableTextPrinters = TRUE;
 }
 
-static void DrawSongTextWindow(const u8 * str)
+static void UNUSED DrawSongTextWindow(const u8 *str)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
     gDisableTextPrinters = TRUE;
     CopyWindowToVram(0, COPYWIN_FULL);
-}
-
-static void BardSing(struct Task *task, struct BardSong *song)
-{
-    switch (task->tState)
-    {
-    case BARD_STATE_INIT:
-    {
-        struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-        u16 *lyrics;
-        s32 i;
-
-        // Copy lyrics
-        if (gSpecialVar_0x8004 == 0)
-            lyrics = bard->songLyrics;
-        else
-            lyrics = bard->temporaryLyrics;
-        for (i = 0; i < BARD_SONG_LENGTH; i++)
-            song->lyrics[i] = lyrics[i];
-        song->currWord = 0;
-    }
-        break;
-    case BARD_STATE_WAIT_BGM:
-        break;
-    case BARD_STATE_GET_WORD:
-    {
-        u16 word = song->lyrics[song->currWord];
-        song->sound = GetWordSounds(word);
-        GetWordPhonemes(song, MACRO1(word));
-        song->currWord++;
-        if (song->sound->var00 != 0xFF)
-            song->state = 0;
-        else
-        {
-            song->state = 3;
-            song->phonemeTimer = 2;
-        }
-        break;
-    }
-    case BARD_STATE_HANDLE_WORD:
-    case BARD_STATE_WAIT_WORD:
-    {
-        const struct BardSound *sound = &song->sound[song->currPhoneme];
-
-        switch (song->state)
-        {
-        case 0:
-            song->phonemeTimer = song->phonemes[song->currPhoneme].length;
-            if (sound->var00 <= 50)
-            {
-                u8 num = sound->var00 / 3;
-                m4aSongNumStart(PH_TRAP_HELD + 3 * num);
-            }
-            song->state = 2;
-            song->phonemeTimer--;
-            break;
-        case 2:
-            song->state = 1;
-            if (sound->var00 <= 50)
-            {
-                song->volume = 0x100 + sound->volume * 16;
-                m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, song->volume);
-                song->pitch = 0x200 + song->phonemes[song->currPhoneme].pitch;
-                m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, song->pitch);
-            }
-            break;
-        case 1:
-            if (song->voiceInflection > 10)
-                song->volume -= 2;
-            if (song->voiceInflection & 1)
-                song->pitch += 64;
-            else
-                song->pitch -= 64;
-            m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, song->volume);
-            m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, song->pitch);
-            song->voiceInflection++;
-            song->phonemeTimer--;
-            if (song->phonemeTimer == 0)
-            {
-                song->currPhoneme++;
-                if (song->currPhoneme != 6 && song->sound[song->currPhoneme].var00 != 0xFF)
-                    song->state = 0;
-                else
-                {
-                    song->state = 3;
-                    song->phonemeTimer = 2;
-                }
-            }
-            break;
-        case 3:
-            song->phonemeTimer--;
-            if (song->phonemeTimer == 0)
-            {
-                m4aMPlayStop(&gMPlayInfo_SE2);
-                song->state = 4;
-            }
-            break;
-        }
-    }
-        break;
-    case BARD_STATE_PAUSE:
-        break;
-    }
-}
-
-static void Task_BardSong(u8 taskId)
-{
-    struct Task *task = &gTasks[taskId];
-
-    BardSing(task, &gBardSong);
-
-    switch (task->tState)
-    {
-    case BARD_STATE_INIT:
-        PrepareSongText();
-        DrawSongTextWindow(gStringVar4);
-        task->tWordState = 0;
-        task->tDelay = 0;
-        task->tCharIndex = 0;
-        task->tCurrWord = 0;
-        FadeOutBGMTemporarily(4);
-        task->tState = BARD_STATE_WAIT_BGM;
-        break;
-    case BARD_STATE_WAIT_BGM:
-        if (IsBGMPausedOrStopped())
-            task->tState = BARD_STATE_GET_WORD;
-        break;
-    case BARD_STATE_GET_WORD:
-    {
-        struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-        u8 *str = &gStringVar4[task->tCharIndex];
-        u16 wordLen = 0;
-
-        // Read letters until delimiter
-        while (*str != CHAR_SPACE
-            && *str != CHAR_NEWLINE
-            && *str != EXT_CTRL_CODE_BEGIN
-            && *str != EOS)
-        {
-            str++;
-            wordLen++;
-        }
-
-        if (!task->tUseTemporaryLyrics)
-            sUnknownBardRelated = MACRO2(bard->songLyrics[task->tCurrWord]);
-        else
-            sUnknownBardRelated = MACRO2(bard->temporaryLyrics[task->tCurrWord]);
-
-        gBardSong.length /= wordLen;
-        if (gBardSong.length <= 0)
-            gBardSong.length = 1;
-        task->tCurrWord++;
-
-        if (task->tDelay == 0)
-        {
-            task->tState = BARD_STATE_HANDLE_WORD;
-            task->tWordState = 0;
-        }
-        else
-        {
-            task->tState = BARD_STATE_PAUSE;
-            task->tWordState = 0;
-        }
-    }
-        break;
-    case BARD_STATE_PAUSE:
-        // Wait before singing next word
-        if (task->tDelay == 0)
-            task->tState = BARD_STATE_HANDLE_WORD;
-        else
-            task->tDelay--;
-        break;
-    case BARD_STATE_HANDLE_WORD:
-        if (gStringVar4[task->tCharIndex] == EOS)
-        {
-            // End song
-            FadeInBGM(6);
-            m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE2, 2);
-            EnableBothScriptContexts();
-            DestroyTask(taskId);
-        }
-        else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
-        {
-            // Handle space
-            EnableTextPrinters();
-            task->tCharIndex++;
-            task->tState = BARD_STATE_GET_WORD;
-            task->tDelay = 0;
-        }
-        else if (gStringVar4[task->tCharIndex] == CHAR_NEWLINE)
-        {
-            // Handle newline
-            task->tCharIndex++;
-            task->tState = BARD_STATE_GET_WORD;
-            task->tDelay = 0;
-        }
-        else if (gStringVar4[task->tCharIndex] == EXT_CTRL_CODE_BEGIN)
-        {
-            // Handle ctrl code
-            task->tCharIndex += 2;  // skip over control codes
-            task->tState = BARD_STATE_GET_WORD;
-            task->tDelay = 8;
-        }
-        else if (gStringVar4[task->tCharIndex] == CHAR_BARD_WORD_DELIMIT)
-        {
-            // Handle word boundary
-            gStringVar4[task->tCharIndex] = CHAR_SPACE;  // Replace with a real space
-            EnableTextPrinters();
-            task->tCharIndex++;
-            task->tDelay = 0;
-        }
-        else
-        {
-            // Handle regular word
-            switch (task->tWordState)
-            {
-            case 0:
-                EnableTextPrinters();
-                task->tWordState++;
-                break;
-            case 1:
-                task->tWordState++;
-                break;
-            case 2:
-                task->tCharIndex++;
-                task->tWordState = 0;
-                task->tDelay = gBardSong.length;
-                task->tState = BARD_STATE_WAIT_WORD;
-                break;
-            }
-        }
-        break;
-    case BARD_STATE_WAIT_WORD:
-        // Wait for word to finish being sung.
-        // BardSing will continue to play it.
-        task->tDelay--;
-        if (task->tDelay == 0)
-            task->tState = BARD_STATE_HANDLE_WORD;
-        break;
-    }
-    RunTextPrintersAndIsPrinter0Active();
 }
 
 void SetMauvilleOldManObjEventGfx(void)
@@ -739,8 +494,7 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
     }
 }
 
-// Unused
-static void SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 language2, u32 language3)
+static void UNUSED SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 language2, u32 language3)
 {
     s32 i;
 
@@ -843,7 +597,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
         {
             for (i = 0; i < NUM_TRADER_ITEMS; i++)
             {
-                u8 * str = trader->playerNames[i];
+                u8 *str = trader->playerNames[i];
                 if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
                 {
                     StripExtCtrlCodes(str);
@@ -931,54 +685,54 @@ static const struct Story sStorytellerStories[] = {
         MauvilleCity_PokemonCenter_1F_Text_SavedGameAction,
         MauvilleCity_PokemonCenter_1F_Text_SavedGameStory
     },
-    {
-        GAME_STAT_STARTED_TRENDS, 1,
-        MauvilleCity_PokemonCenter_1F_Text_TrendsStartedTitle,
-        MauvilleCity_PokemonCenter_1F_Text_TrendsStartedAction,
-        MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory
-    },
+    //{
+    //    GAME_STAT_STARTED_TRENDS, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_TrendsStartedTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_TrendsStartedAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory
+    //},
     {
         GAME_STAT_PLANTED_BERRIES, 1,
         MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedTitle,
         MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedAction,
         MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory
     },
-    {
-        GAME_STAT_TRADED_BIKES, 1,
-        MauvilleCity_PokemonCenter_1F_Text_BikeTradesTitle,
-        MauvilleCity_PokemonCenter_1F_Text_BikeTradesAction,
-        MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory
-    },
-    {
-        GAME_STAT_GOT_INTERVIEWED, 1,
-        MauvilleCity_PokemonCenter_1F_Text_InterviewsTitle,
-        MauvilleCity_PokemonCenter_1F_Text_InterviewsAction,
-        MauvilleCity_PokemonCenter_1F_Text_InterviewsStory
-    },
+    //{
+    //    GAME_STAT_TRADED_BIKES, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_BikeTradesTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_BikeTradesAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory
+    //},
+    //{
+    //    GAME_STAT_GOT_INTERVIEWED, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_InterviewsTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_InterviewsAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_InterviewsStory
+    //},
     {
         GAME_STAT_TRAINER_BATTLES, 1,
         MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesTitle,
         MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesAction,
         MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory
     },
-    {
-        GAME_STAT_POKEMON_CAPTURES, 1,
-        MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtTitle,
-        MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtAction,
-        MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory
-    },
-    {
-        GAME_STAT_FISHING_CAPTURES, 1,
-        MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtTitle,
-        MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtAction,
-        MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory
-    },
-    {
-        GAME_STAT_HATCHED_EGGS, 1,
-        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedTitle,
-        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction,
-        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory
-    },
+    //{
+    //    GAME_STAT_POKEMON_CAPTURES, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory
+    //},
+    //{
+    //    GAME_STAT_FISHING_CAPTURES, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory
+    //},
+    //{
+    //    GAME_STAT_HATCHED_EGGS, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_EggsHatchedTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory
+    //},
     {
         GAME_STAT_EVOLVED_POKEMON, 1,
         MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedTitle,
@@ -991,156 +745,156 @@ static const struct Story sStorytellerStories[] = {
         MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterAction,
         MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory
     },
-    {
-        GAME_STAT_RESTED_AT_HOME, 1,
-        MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeTitle,
-        MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeAction,
-        MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory
-    },
-    {
-        GAME_STAT_ENTERED_SAFARI_ZONE, 1,
-        MauvilleCity_PokemonCenter_1F_Text_SafariGamesTitle,
-        MauvilleCity_PokemonCenter_1F_Text_SafariGamesAction,
-        MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory
-    },
-    {
-        GAME_STAT_USED_CUT, 1,
-        MauvilleCity_PokemonCenter_1F_Text_UsedCutTitle,
-        MauvilleCity_PokemonCenter_1F_Text_UsedCutAction,
-        MauvilleCity_PokemonCenter_1F_Text_UsedCutStory
-    },
-    {
-        GAME_STAT_USED_ROCK_SMASH, 1,
-        MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashTitle,
-        MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashAction,
-        MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory
-    },
-    {
-        GAME_STAT_MOVED_SECRET_BASE, 1,
-        MauvilleCity_PokemonCenter_1F_Text_MovedBasesTitle,
-        MauvilleCity_PokemonCenter_1F_Text_MovedBasesAction,
-        MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory
-    },
-    {
-        GAME_STAT_USED_SPLASH, 1,
-        MauvilleCity_PokemonCenter_1F_Text_UsedSplashTitle,
-        MauvilleCity_PokemonCenter_1F_Text_UsedSplashAction,
-        MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory
-    },
-    {
-        GAME_STAT_USED_STRUGGLE, 1,
-        MauvilleCity_PokemonCenter_1F_Text_UsedStruggleTitle,
-        MauvilleCity_PokemonCenter_1F_Text_UsedStruggleAction,
-        MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory
-    },
-    {
-        GAME_STAT_SLOT_JACKPOTS, 1,
-        MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsTitle,
-        MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsAction,
-        MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory
-    },
-    {
-        GAME_STAT_CONSECUTIVE_ROULETTE_WINS, 2,
-        MauvilleCity_PokemonCenter_1F_Text_RouletteWinsTitle,
-        MauvilleCity_PokemonCenter_1F_Text_RouletteWinsAction,
-        MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory
-    },
-    {
-        GAME_STAT_ENTERED_BATTLE_TOWER, 1,
-        MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesTitle,
-        MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesAction,
-        MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory
-    },
+    //{
+    //    GAME_STAT_RESTED_AT_HOME, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory
+    //},
+    //{
+    //    GAME_STAT_ENTERED_SAFARI_ZONE, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_SafariGamesTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_SafariGamesAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory
+    //},
+    //{
+    //    GAME_STAT_USED_CUT, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedCutTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedCutAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedCutStory
+    //},
+    //{
+    //    GAME_STAT_USED_ROCK_SMASH, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory
+    //},
+    //{
+    //    GAME_STAT_MOVED_SECRET_BASE, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_MovedBasesTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_MovedBasesAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory
+    //},
+    //{
+    //    GAME_STAT_USED_SPLASH, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedSplashTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedSplashAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory
+    //},
+    //{
+    //    GAME_STAT_USED_STRUGGLE, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedStruggleTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedStruggleAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory
+    //},
+    //{
+    //    GAME_STAT_SLOT_JACKPOTS, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory
+    //},
+    //{
+    //    GAME_STAT_CONSECUTIVE_ROULETTE_WINS, 2,
+    //    MauvilleCity_PokemonCenter_1F_Text_RouletteWinsTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_RouletteWinsAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory
+    //},
+    //{
+    //    GAME_STAT_ENTERED_BATTLE_TOWER, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory
+    //},
     {
         GAME_STAT_POKEBLOCKS, 1,
         MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksTitle,
         MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksAction,
         MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory
     },
+    //{
+    //    GAME_STAT_ENTERED_CONTEST, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_EnteredContestsTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_EnteredContestsAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory
+    //},
+    //{
+    //    GAME_STAT_WON_CONTEST, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_WonContestsTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_WonContestsAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_WonContestsStory
+    //},
     {
-        GAME_STAT_ENTERED_CONTEST, 1,
-        MauvilleCity_PokemonCenter_1F_Text_EnteredContestsTitle,
-        MauvilleCity_PokemonCenter_1F_Text_EnteredContestsAction,
-        MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory
-    },
-    {
-        GAME_STAT_WON_CONTEST, 1,
-        MauvilleCity_PokemonCenter_1F_Text_WonContestsTitle,
-        MauvilleCity_PokemonCenter_1F_Text_WonContestsAction,
-        MauvilleCity_PokemonCenter_1F_Text_WonContestsStory
-    },
-    {
-        GAME_STAT_SHOPPED, 1,
+        GAME_STAT_ITEMS_BOUGHT, 1,
         MauvilleCity_PokemonCenter_1F_Text_TimesShoppedTitle,
         MauvilleCity_PokemonCenter_1F_Text_TimesShoppedAction,
         MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory
     },
-    {
-        GAME_STAT_USED_ITEMFINDER, 1,
-        MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderTitle,
-        MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderAction,
-        MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory
-    },
-    {
-        GAME_STAT_GOT_RAINED_ON, 1,
-        MauvilleCity_PokemonCenter_1F_Text_TimesRainedTitle,
-        MauvilleCity_PokemonCenter_1F_Text_TimesRainedAction,
-        MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory
-    },
+    //{
+    //    GAME_STAT_USED_ITEMFINDER, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory
+    //},
+    //{
+    //    GAME_STAT_GOT_RAINED_ON, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_TimesRainedTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_TimesRainedAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory
+    //},
     {
         GAME_STAT_CHECKED_POKEDEX, 1,
         MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexTitle,
         MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexAction,
         MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory
     },
-    {
-        GAME_STAT_RECEIVED_RIBBONS, 1,
-        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle,
-        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsAction,
-        MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory
-    },
+    //{
+    //    GAME_STAT_RECEIVED_RIBBONS, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory
+    //},
     {
         GAME_STAT_JUMPED_DOWN_LEDGES, 1,
         MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedTitle,
         MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedAction,
         MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory
     },
-    {
-        GAME_STAT_WATCHED_TV, 1,
-        MauvilleCity_PokemonCenter_1F_Text_TVWatchedTitle,
-        MauvilleCity_PokemonCenter_1F_Text_TVWatchedAction,
-        MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory
-    },
-    {
-        GAME_STAT_CHECKED_CLOCK, 1,
-        MauvilleCity_PokemonCenter_1F_Text_CheckedClockTitle,
-        MauvilleCity_PokemonCenter_1F_Text_CheckedClockAction,
-        MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory
-    },
-    {
-        GAME_STAT_WON_POKEMON_LOTTERY, 1,
-        MauvilleCity_PokemonCenter_1F_Text_WonLotteryTitle,
-        MauvilleCity_PokemonCenter_1F_Text_WonLotteryAction,
-        MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory
-    },
-    {
-        GAME_STAT_USED_DAYCARE, 1,
-        MauvilleCity_PokemonCenter_1F_Text_UsedDaycareTitle,
-        MauvilleCity_PokemonCenter_1F_Text_UsedDaycareAction,
-        MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory
-    },
-    {
-        GAME_STAT_RODE_CABLE_CAR, 1,
-        MauvilleCity_PokemonCenter_1F_Text_RodeCableCarTitle,
-        MauvilleCity_PokemonCenter_1F_Text_RodeCableCarAction,
-        MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory
-    },
-    {
-        GAME_STAT_ENTERED_HOT_SPRINGS, 1,
-        MauvilleCity_PokemonCenter_1F_Text_HotSpringsTitle,
-        MauvilleCity_PokemonCenter_1F_Text_HotSpringsAction,
-        MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory
-    }
+    //{
+    //    GAME_STAT_WATCHED_TV, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_TVWatchedTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_TVWatchedAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory
+    //},
+    //{
+    //    GAME_STAT_CHECKED_CLOCK, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_CheckedClockTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_CheckedClockAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory
+    //},
+    //{
+    //    GAME_STAT_WON_POKEMON_LOTTERY, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_WonLotteryTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_WonLotteryAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory
+    //},
+    //{
+    //    GAME_STAT_USED_DAYCARE, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedDaycareTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedDaycareAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory
+    //},
+    //{
+    //    GAME_STAT_RODE_CABLE_CAR, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_RodeCableCarTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_RodeCableCarAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory
+    //},
+    //{
+    //    GAME_STAT_ENTERED_HOT_SPRINGS, 1,
+    //    MauvilleCity_PokemonCenter_1F_Text_HotSpringsTitle,
+    //    MauvilleCity_PokemonCenter_1F_Text_HotSpringsAction,
+    //    MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory
+    //}
 };
 
 static const s32 sNumStories = ARRAY_COUNT(sStorytellerStories);
@@ -1247,9 +1001,9 @@ static void GetStoryByStattellerPlayerName(u32 player, void *dst)
     memcpy(dst, name, PLAYER_NAME_LENGTH);
 }
 
-static void StorytellerSetPlayerName(u32 player, const u8 * src)
+static void StorytellerSetPlayerName(u32 player, const u8 *src)
 {
-    u8 * name = sStorytellerPtr->trainerNames[player];
+    u8 *name = sStorytellerPtr->trainerNames[player];
     memset(name, EOS, PLAYER_NAME_LENGTH);
     memcpy(name, src, PLAYER_NAME_LENGTH);
 }
@@ -1265,7 +1019,7 @@ static void StorytellerRecordNewStat(u32 player, u32 stat)
     sStorytellerPtr->language[player] = gGameLanguage;
 }
 
-static void ScrambleStatList(u8 * arr, s32 count)
+static void ScrambleStatList(u8 *arr, s32 count)
 {
     s32 i;
 
@@ -1336,7 +1090,7 @@ static void PrintStoryList(void)
             width = curWidth;
     }
     sStorytellerWindowId = CreateWindowFromRect(0, 0, ConvertPixelWidthToTileWidth(width), GetFreeStorySlot() * 2 + 2);
-    SetStandardWindowBorderStyle(sStorytellerWindowId, 0);
+    SetStandardWindowBorderStyle(sStorytellerWindowId, FALSE);
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
@@ -1375,7 +1129,7 @@ static void Task_StoryListMenu(u8 taskId)
         }
         ClearToTransparentAndRemoveWindow(sStorytellerWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         break;
     }
 }

@@ -1,11 +1,17 @@
 #include "global.h"
 #include "main.h"
+#include "battle_main.h"
+#include "data.h"
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_specials.h"
 #include "item.h"
+#include "list_menu.h"
+#include "malloc.h"
 #include "menu.h"
 #include "palette.h"
+#include "party_menu.h"
+#include "pokemon_summary_screen.h"
 #include "script.h"
 #include "script_menu.h"
 #include "sound.h"
@@ -15,8 +21,14 @@
 #include "text.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
+#include "constants/rgb.h"
 #include "constants/script_menu.h"
 #include "constants/songs.h"
+
+#include "rogue_controller.h"
+#include "rogue_gifts.h"
+#include "rogue_hub.h"
+#include "rogue_pokedex.h"
 
 #include "data/script_menu.h"
 
@@ -50,6 +62,30 @@ bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPre
     }
 }
 
+static void MultichoiceLists_GetList(u8 list, struct MenuAction* dest, u8* outCount)
+{
+    if(list >= MULTI_DYNAMIC_CALLBACK_START)
+    {
+        sMultichoiceCallback[list](dest, outCount, MULTICHOICE_LIST_CAPACITY);
+    }
+    else
+    {
+        u8 count;
+        count = sMultichoiceLists[list].count;
+        memcpy(dest, sMultichoiceLists[list].list, sizeof(struct MenuAction) * count);
+
+        *outCount = count;
+    }
+}
+
+u8 ScriptMenu_MultichoiceLength(u8 multichoiceId)
+{
+    u8 count;
+    struct MenuAction actions[MULTICHOICE_LIST_CAPACITY];
+    MultichoiceLists_GetList(multichoiceId, &actions[0], &count);
+    return count;
+}
+
 bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 defaultChoice)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
@@ -64,8 +100,7 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8
     }
 }
 
-// Unused
-static u16 GetLengthWithExpandedPlayerName(const u8 *str)
+static u16 UNUSED GetLengthWithExpandedPlayerName(const u8 *str)
 {
     u16 length = 0;
 
@@ -94,10 +129,12 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreB
 {
     int i;
     u8 windowId;
-    u8 count = sMultichoiceLists[multichoiceId].count;
-    const struct MenuAction *actions = sMultichoiceLists[multichoiceId].list;
+    u8 count;
+    struct MenuAction actions[MULTICHOICE_LIST_CAPACITY];
     int width = 0;
     u8 newWidth;
+
+    MultichoiceLists_GetList(multichoiceId, &actions[0], &count);
 
     for (i = 0; i < count; i++)
     {
@@ -108,8 +145,8 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreB
     newWidth = ConvertPixelWidthToTileWidth(width);
     left = ScriptMenu_AdjustLeftCoordFromWidth(left, newWidth);
     windowId = CreateWindowFromRect(left, top, newWidth, count * 2);
-    SetStandardWindowBorderStyle(windowId, 0);
-    PrintMenuTable(windowId, count, actions);
+    SetStandardWindowBorderStyle(windowId, FALSE);
+    PrintMenuTable(windowId, count, &actions[0]);
     InitMenuInUpperLeftCornerNormal(windowId, count, cursorPos);
     ScheduleBgCopyTilemapToVram(0);
     InitMultichoiceCheckWrap(ignoreBPress, count, windowId, multichoiceId);
@@ -191,7 +228,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                 }
                 ClearToTransparentAndRemoveWindow(tWindowId);
                 DestroyTask(taskId);
-                EnableBothScriptContexts();
+                ScriptContext_Enable();
             }
         }
     }
@@ -199,8 +236,6 @@ static void Task_HandleMultichoiceInput(u8 taskId)
 
 bool8 ScriptMenu_YesNo(u8 left, u8 top)
 {
-    u8 taskId;
-
     if (FuncIsActiveTask(Task_HandleYesNoInput) == TRUE)
     {
         return FALSE;
@@ -209,7 +244,7 @@ bool8 ScriptMenu_YesNo(u8 left, u8 top)
     {
         gSpecialVar_Result = 0xFF;
         DisplayYesNoMenuDefaultYes();
-        taskId = CreateTask(Task_HandleYesNoInput, 0x50);
+        CreateTask(Task_HandleYesNoInput, 0x50);
         return TRUE;
     }
 }
@@ -246,7 +281,7 @@ static void Task_HandleYesNoInput(u8 taskId)
     }
 
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 columnCount)
@@ -260,27 +295,31 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
         u8 taskId;
         u8 rowCount, newWidth;
         int i, width;
+        u8 listCount;
+        struct MenuAction actions[MULTICHOICE_LIST_CAPACITY];
 
         gSpecialVar_Result = 0xFF;
         width = 0;
+        
+        MultichoiceLists_GetList(multichoiceId, &actions[0], &listCount);
 
-        for (i = 0; i < sMultichoiceLists[multichoiceId].count; i++)
+        for (i = 0; i < listCount; i++)
         {
-            StringExpandPlaceholders(gStringVar4, sMultichoiceLists[multichoiceId].list[i].text);
+            StringExpandPlaceholders(gStringVar4, actions[i].text);
             width = DisplayTextAndGetWidth(gStringVar4, width);
         }
 
         newWidth = ConvertPixelWidthToTileWidth(width);
 
         left = ScriptMenu_AdjustLeftCoordFromWidth(left, columnCount * newWidth);
-        rowCount = sMultichoiceLists[multichoiceId].count / columnCount;
+        rowCount = listCount / columnCount;
 
         taskId = CreateTask(Task_HandleMultichoiceGridInput, 80);
 
         gTasks[taskId].tIgnoreBPress = ignoreBPress;
         gTasks[taskId].tWindowId = CreateWindowFromRect(left, top, columnCount * newWidth, rowCount * 2);
-        SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, 0);
-        PrintMenuGridTable(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, sMultichoiceLists[multichoiceId].list);
+        SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, FALSE);
+        PrintMenuGridTable(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, &actions[0]);
         InitMenuActionGrid(gTasks[taskId].tWindowId, newWidth * 8, columnCount, rowCount, 0);
         CopyWindowToVram(gTasks[taskId].tWindowId, COPYWIN_FULL);
         return TRUE;
@@ -309,7 +348,7 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
 
     ClearToTransparentAndRemoveWindow(tWindowId);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 #undef tWindowId
@@ -330,7 +369,7 @@ bool16 ScriptMenu_CreatePCMultichoice(void)
 
 static void CreatePCMultichoice(void)
 {
-    u8 y = 8;
+    u8 x = 8;
     u32 pixelWidth = 0;
     u8 width;
     u8 numChoices;
@@ -354,26 +393,26 @@ static void CreatePCMultichoice(void)
     {
         numChoices = 4;
         windowId = CreateWindowFromRect(0, 0, width, 8);
-        SetStandardWindowBorderStyle(windowId, 0);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_HallOfFame, y, 33, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, y, 49, TEXT_SKIP_DRAW, NULL);
+        SetStandardWindowBorderStyle(windowId, FALSE);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_HallOfFame, x, 33, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, x, 49, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
         numChoices = 3;
         windowId = CreateWindowFromRect(0, 0, width, 6);
-        SetStandardWindowBorderStyle(windowId, 0);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, y, 33, TEXT_SKIP_DRAW, NULL);
+        SetStandardWindowBorderStyle(windowId, FALSE);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, x, 33, TEXT_SKIP_DRAW, NULL);
     }
 
     // Change PC name if player has met Lanette
-    if (FlagGet(FLAG_SYS_PC_LANETTE))
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LanettesPC, y, 1, TEXT_SKIP_DRAW, NULL);
-    else
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, y, 1, TEXT_SKIP_DRAW, NULL);
+    //if (FlagGet(FLAG_SYS_PC_LANETTE))
+    //    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LanettesPC, x, 1, TEXT_SKIP_DRAW, NULL);
+    //else
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, x, 1, TEXT_SKIP_DRAW, NULL);
 
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
-    PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
+    PrintPlayerNameOnWindow(windowId, gStringVar4, x, 17);
     InitMenuInUpperLeftCornerNormal(windowId, numChoices, 0);
     CopyWindowToVram(windowId, COPYWIN_FULL);
     InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
@@ -382,7 +421,7 @@ static void CreatePCMultichoice(void)
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
     LoadMessageBoxAndFrameGfx(0, TRUE);
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_WhichPCShouldBeAccessed, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_WhichPCShouldBeAccessed, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 bool8 ScriptMenu_CreateLilycoveSSTidalMultichoice(void)
@@ -523,7 +562,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
 
         width = ConvertPixelWidthToTileWidth(pixelWidth);
         windowId = CreateWindowFromRect(MAX_MULTICHOICE_WIDTH - width, (6 - count) * 2, width, count * 2);
-        SetStandardWindowBorderStyle(windowId, 0);
+        SetStandardWindowBorderStyle(windowId, FALSE);
 
         for (selectionCount = 0, i = 0; i < SSTIDAL_SELECTION_COUNT; i++)
         {
@@ -578,7 +617,7 @@ static void Task_PokemonPicWindow(u8 taskId)
     }
 }
 
-bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
+bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y, bool8 isObscured)
 {
     u8 taskId;
     u8 spriteId;
@@ -597,7 +636,15 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
         gTasks[taskId].tMonSpriteId = spriteId;
         gSprites[spriteId].callback = SpriteCallbackDummy;
         gSprites[spriteId].oam.priority = 0;
-        SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, 1);
+
+        if(isObscured)
+        {
+            // black out palette
+            TintPalette_StompColour(&gPlttBufferUnfaded[OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum)], 16, RGB(1, 1, 1));
+            TintPalette_StompColour(&gPlttBufferFaded[OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum)], 16, RGB(1, 1, 1));
+        }
+
+        SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
         ScheduleBgCopyTilemapToVram(0);
         return TRUE;
     }
@@ -648,27 +695,27 @@ static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId)
     {
     case MULTI_WIRELESS_NO_BERRY:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptionsNoBerryCrush[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptionsNoBerryCrush[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     case MULTI_CABLE_CLUB_WITH_RECORD_MIX:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sCableClubOptions_WithRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sCableClubOptions_WithRecordMix[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     case MULTI_WIRELESS_NO_RECORD:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     case MULTI_WIRELESS_ALL_SERVICES:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_AllServices[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_AllServices[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     case MULTI_WIRELESS_NO_RECORD_BERRY:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_NoRecordMixBerryCrush[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_NoRecordMixBerryCrush[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     case MULTI_CABLE_CLUB_NO_RECORD_MIX:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sCableClubOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, sCableClubOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         break;
     }
 }
@@ -690,7 +737,7 @@ bool16 ScriptMenu_CreateStartMenuForPokenavTutorial(void)
 static void CreateStartMenuForPokenavTutorial(void)
 {
     u8 windowId = CreateWindowFromRect(21, 0, 7, 18);
-    SetStandardWindowBorderStyle(windowId, 0);
+    SetStandardWindowBorderStyle(windowId, FALSE);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokedex, 8, 9, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokemon, 8, 25, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionBag, 8, 41, TEXT_SKIP_DRAW, NULL);
@@ -765,4 +812,525 @@ int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width)
     }
 
     return adjustedLeft;
+}
+
+// Multichoice lists
+//
+static void Task_ScrollingMultichoiceInput(u8 taskId);
+
+static const struct ListMenuTemplate sMultichoiceListTemplate =
+{
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 1,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_MULTIPLE_SCROLL_L_R,
+    .fontId = 1,
+    .cursorKind = 0
+};
+
+static EWRAM_DATA struct ListMenuItem* sDynamicScrollingMultichoiceList = NULL;
+static EWRAM_DATA u16 sDynamicScrollingMultichoiceCount = 0;
+#ifdef ROGUE_DEBUG
+static EWRAM_DATA u16 sDynamicScrollingMultichoiceCapacity = 0;
+#endif
+
+// 0x8004 = set id
+// 0x8005 = window X
+// 0x8006 = window y
+// 0x8007 = showed at once
+// 0x8008 = Allow B press
+static void ScriptMenu_ScrollingMultichoiceInternal(const struct ListMenuItem *list, u16 listCount, bool8 hasSetSize)
+{
+    int i, windowId, taskId, width = 0;
+    int left = gSpecialVar_0x8005;
+    int top = gSpecialVar_0x8006;
+    int maxShowed = gSpecialVar_0x8007;
+
+    if(!hasSetSize)
+    {
+        maxShowed = min(maxShowed, listCount);
+    }
+
+    for (i = 0; i < listCount; i++)
+        width = DisplayTextAndGetWidth(list[i].name, width);
+
+    width = ConvertPixelWidthToTileWidth(width);
+    left = ScriptMenu_AdjustLeftCoordFromWidth(left, width);
+    windowId = CreateWindowFromRect(left, top, width, maxShowed * 2);
+    SetStandardWindowBorderStyle(windowId, 0);
+    CopyWindowToVram(windowId, 3);
+
+    gMultiuseListMenuTemplate = sMultichoiceListTemplate;
+    gMultiuseListMenuTemplate.windowId = windowId;
+    gMultiuseListMenuTemplate.items = list;
+    gMultiuseListMenuTemplate.totalItems = listCount;
+    gMultiuseListMenuTemplate.maxShowed = maxShowed;
+
+    taskId = CreateTask(Task_ScrollingMultichoiceInput, 0);
+    gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+    gTasks[taskId].data[1] = gSpecialVar_0x8008;
+    gTasks[taskId].data[2] = windowId;
+}
+
+void ScriptMenu_ScrollingMultichoice(void)
+{
+    int setId = gSpecialVar_0x8004;
+    ScriptMenu_ScrollingMultichoiceInternal(sScrollingMultichoiceLists[setId].list, sScrollingMultichoiceLists[setId].count, TRUE);
+}
+
+void ScriptMenu_ScrollingMultichoiceDynamicBegin(u16 capacity)
+{
+    AGB_ASSERT(sDynamicScrollingMultichoiceList == NULL);
+    sDynamicScrollingMultichoiceList = Alloc(sizeof(struct ListMenuItem) * capacity);
+    sDynamicScrollingMultichoiceCount = 0;
+#ifdef ROGUE_DEBUG
+    sDynamicScrollingMultichoiceCapacity = capacity;
+#endif
+}
+
+void ScriptMenu_ScrollingMultichoiceDynamicAppendOption(u8 const* str, u16 value)
+{
+    AGB_ASSERT(sDynamicScrollingMultichoiceList != NULL);
+#ifdef ROGUE_DEBUG
+    AGB_ASSERT(sDynamicScrollingMultichoiceCount < sDynamicScrollingMultichoiceCapacity);
+#endif
+
+    sDynamicScrollingMultichoiceList[sDynamicScrollingMultichoiceCount].name = str;
+    sDynamicScrollingMultichoiceList[sDynamicScrollingMultichoiceCount].id = value;
+    sDynamicScrollingMultichoiceCount++;
+}
+
+void ScriptMenu_ScrollingMultichoiceDynamicEnd(void)
+{
+    AGB_ASSERT(sDynamicScrollingMultichoiceList != NULL);
+    ScriptMenu_ScrollingMultichoiceInternal(sDynamicScrollingMultichoiceList, sDynamicScrollingMultichoiceCount, FALSE);
+}
+
+static void Task_ScrollingMultichoiceInput(u8 taskId)
+{
+    bool32 done = FALSE;
+    s32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    switch (input)
+    {
+    case LIST_HEADER:
+    case LIST_NOTHING_CHOSEN:
+        break;
+    case LIST_CANCEL:
+        if (gTasks[taskId].data[1])
+        {
+            gSpecialVar_Result = 0x7F;
+            done = TRUE;
+        }
+        break;
+    default:
+        gSpecialVar_Result = input;
+        done = TRUE;
+        break;
+    }
+
+    if (done)
+    {
+        DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
+        ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
+        RemoveWindow(gTasks[taskId].data[2]);
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+
+        if(sDynamicScrollingMultichoiceList != NULL)
+        {
+            Free(sDynamicScrollingMultichoiceList);
+            sDynamicScrollingMultichoiceList = NULL;
+        }
+    }
+}
+
+static u8 CreateWindowFromRectWithBaseBlockOffset(u8 x, u8 y, u8 width, u8 height, u16 baseBlockOffset)
+{
+    struct WindowTemplate template = CreateWindowTemplate(0, x + 1, y + 1, width, height, 15, 100 + baseBlockOffset);
+    u8 windowId = AddWindow(&template);
+    PutWindowTilemap(windowId);
+    return windowId;
+}
+
+static void Task_DisplayTextInWindowInput(u8 taskId)
+{
+    if(JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        u8 windowId = gTasks[taskId].data[0];
+
+        ClearStdWindowAndFrame(windowId, TRUE);
+        RemoveWindow(windowId);
+
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+    }
+}
+
+void ScriptMenu_DisplayTextInWindow(const u8* str, u8 x, u8 y, u8 width, u8 height)
+{
+    u8 taskId;
+    u8 windowId = CreateWindowFromRectWithBaseBlockOffset(x, y, width, height, 8 * 8);
+    SetStandardWindowBorderStyle(windowId, 0);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, str, 2, 0, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+
+    taskId = CreateTask(Task_DisplayTextInWindowInput, 0);
+    gTasks[taskId].data[0] = windowId;
+}
+
+static u8 const sText_UniqueMonTitle[] = _("{STR_VAR_1} {FONT_SMALL_NARROW}{COLOR BLUE}({STR_VAR_2})");
+static u8 const sText_UniqueMonTitleRare[] = _("{STR_VAR_1} {FONT_SMALL_NARROW}{COLOR RED}({STR_VAR_2})");
+static u8 const sText_UniqueMonAbility[] = _("A/ {COLOR GREEN}{STR_VAR_1}");
+static u8 const sText_UniqueMonMove[] = _(" -{STR_VAR_1}");
+
+static void PrintUniqueMonInfoToWindow(u8 windowId)
+{
+    u8 i, line;
+    u16 species = RogueGift_GetDynamicUniqueMon(gSpecialVar_0x8004)->species;
+    u32 customMonId = RogueGift_GetDynamicUniqueMon(gSpecialVar_0x8004)->customMonId;
+    u8 rarity = RogueGift_GetCustomMonRarity(customMonId);
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    SetStandardWindowBorderStyle(windowId, 0);
+
+    // Title
+    StringCopy(gStringVar1, RoguePokedex_GetSpeciesName(species));
+    StringCopy(gStringVar2, RogueGift_GetRarityName(rarity));
+    StringExpandPlaceholders(gStringVar4, rarity >= UNIQUE_RARITY_EPIC ? sText_UniqueMonTitleRare : sText_UniqueMonTitle);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 2, 0, TEXT_SKIP_DRAW, NULL);
+
+    line = 0;
+
+    // Ability
+    if(RogueGift_GetCustomMonAbilityCount(customMonId) != 0)
+    {
+        u16 ability = RogueGift_GetCustomMonAbility(customMonId, 0);
+
+        StringCopy(gStringVar1, gAbilityNames[ability]);
+        StringExpandPlaceholders(gStringVar4, sText_UniqueMonAbility);
+        AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 2, 13 + 13 * (line++), TEXT_SKIP_DRAW, NULL);
+    }
+
+    // Moves
+    for(i = 0; i < RogueGift_GetCustomMonMoveCount(customMonId); ++i)
+    {
+        u16 moveId = RogueGift_GetCustomMonMove(customMonId, i);
+        
+        StringCopy(gStringVar1, gMoveNames[moveId]);
+        StringExpandPlaceholders(gStringVar4, sText_UniqueMonMove);
+        AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 2, 13 + 13 * (line++), TEXT_SKIP_DRAW, NULL);
+    }
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+void ScriptMenu_DisplayUniqueMonInfo()
+{
+    u8 taskId;
+    u8 windowId = CreateWindowFromRectWithBaseBlockOffset(12, 1, 14, 10, 8 * 8);
+
+    PrintUniqueMonInfoToWindow(windowId);
+
+    taskId = CreateTask(Task_DisplayTextInWindowInput, 0);
+    gTasks[taskId].data[0] = windowId;
+    gTasks[taskId].data[1] = RogueGift_GetDynamicUniqueMon(gSpecialVar_0x8004)->countDown;
+}
+
+static u8 const sText_PresetMonAbility_Has[] = _("Ability/ {COLOR GREEN}{STR_VAR_1}");
+static u8 const sText_PresetMonAbility_Missing[] = _("Ability/ {COLOR RED}{STR_VAR_1}");
+static u8 const sText_PresetMonItem_Has[] = _("Item/ {COLOR GREEN}{STR_VAR_1}");
+static u8 const sText_PresetMonItem_Missing[] = _("Item/ {COLOR RED}{STR_VAR_1}");
+static u8 const sText_PresetMonNature_Has[] = _("Nature/ {COLOR GREEN}{STR_VAR_1}");
+static u8 const sText_PresetMonNature_Missing[] = _("Nature/ {COLOR RED}{STR_VAR_1}");
+static u8 const sText_PresetMonMove_Has[] = _(" -{COLOR GREEN}{STR_VAR_1}");
+static u8 const sText_PresetMonMove_Missing[] = _(" -{COLOR RED}{STR_VAR_1}");
+static u8 const sText_PresetMonNoData[] = _("No recommendations for\nthis Pokémon.\n\n\n(This Pokémon may need\nto evolve in order to\nget recomendations)");
+
+static void PrintRecommendedMonSetToWindow(u8 windowId, struct Pokemon* mon, struct RoguePokemonCompetitiveSet const* preset)
+{
+    u8 i, line;
+    gSpecialVar_Result = GetMonData(mon, MON_DATA_SPECIES, NULL);
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    SetStandardWindowBorderStyle(windowId, 0);
+
+    line = 0;
+
+    if(preset != NULL)
+    {
+        // Ability
+        if(preset->ability == ITEM_NONE)
+        {
+            StringCopyN(gStringVar1, gText_None, ABILITY_NAME_LENGTH);
+            StringExpandPlaceholders(gStringVar4, sText_PresetMonAbility_Has);
+            AddTextPrinterParameterized(windowId, FONT_SMALL_NARROW, gStringVar4, 2, 12 * (line++), TEXT_SKIP_DRAW, NULL);
+        }
+        else
+        {
+            StringCopyN(gStringVar1, gAbilityNames[preset->ability], ABILITY_NAME_LENGTH);
+            StringExpandPlaceholders(gStringVar4, GetMonAbility(mon) == preset->ability ? sText_PresetMonAbility_Has : sText_PresetMonAbility_Missing);
+            AddTextPrinterParameterized(windowId, FONT_SMALL_NARROW, gStringVar4, 2, 12 * (line++), TEXT_SKIP_DRAW, NULL);
+        }
+
+        // Item
+        if(preset->heldItem == ITEM_NONE)
+        {
+            StringCopyN(gStringVar1, gText_None, ITEM_NAME_LENGTH);
+            StringExpandPlaceholders(gStringVar4, sText_PresetMonItem_Has);
+            AddTextPrinterParameterized(windowId, FONT_SMALL_NARROW, gStringVar4, 2, 12 * (line++), TEXT_SKIP_DRAW, NULL);
+        }
+        else
+        {
+            StringCopyN(gStringVar1, ItemId_GetName(preset->heldItem), ITEM_NAME_LENGTH);
+            StringExpandPlaceholders(gStringVar4, GetMonData(mon, MON_DATA_HELD_ITEM) == preset->heldItem ? sText_PresetMonItem_Has : sText_PresetMonItem_Missing);
+            AddTextPrinterParameterized(windowId, FONT_SMALL_NARROW, gStringVar4, 2, 12 * (line++), TEXT_SKIP_DRAW, NULL);
+        }
+
+        // Nature
+        StringCopy(gStringVar1, gNatureNamePointers[preset->nature]);
+        StringExpandPlaceholders(gStringVar4, GetNature(mon) == preset->nature ? sText_PresetMonNature_Has : sText_PresetMonNature_Missing);
+        AddTextPrinterParameterized(windowId, FONT_SMALL_NARROW, gStringVar4, 2, 12 * (line++), TEXT_SKIP_DRAW, NULL);
+
+        // Moves
+        for(i = 0; i < MAX_MON_MOVES; ++i)
+        {
+            u16 moveId = preset->moves[i];
+
+            if(moveId != MOVE_NONE)
+            {
+                StringCopy(gStringVar1, gMoveNames[moveId]);
+                StringExpandPlaceholders(gStringVar4, MonKnowsMove(mon, moveId) ? sText_PresetMonMove_Has : sText_PresetMonMove_Missing);
+                AddTextPrinterParameterized(windowId, FONT_SMALL_NARROW, gStringVar4, 2, 12 * (line++), TEXT_SKIP_DRAW, NULL);
+            }
+        }
+    }
+    else
+    {
+        AddTextPrinterParameterized(windowId, FONT_SMALL, sText_PresetMonNoData, 2, 12 * (line++), TEXT_SKIP_DRAW, NULL);
+    }
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void Task_DisplayRecommendedMonSetInput(u8 taskId)
+{
+    u8 windowId = gTasks[taskId].data[0];
+
+    if(JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        gSpecialVar_0x8004 = PARTY_SIZE;
+
+        ClearStdWindowAndFrame(windowId, TRUE);
+        RemoveWindow(windowId);
+
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+    }
+    else if(JOY_NEW(DPAD_LEFT))
+    {
+        if(gSpecialVar_0x8004 == 0)
+            gSpecialVar_0x8004 = gPlayerPartyCount - 1;
+        else
+            --gSpecialVar_0x8004; 
+
+        ClearStdWindowAndFrame(windowId, TRUE);
+        RemoveWindow(windowId);
+
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+    }
+    else if(JOY_NEW(DPAD_RIGHT))
+    {
+        gSpecialVar_0x8004 = (gSpecialVar_0x8004 + 1 ) % gPlayerPartyCount;
+
+        ClearStdWindowAndFrame(windowId, TRUE);
+        RemoveWindow(windowId);
+
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+    }
+}
+
+static u32 CalculatePresetDisplayScore(struct Pokemon* mon, struct RoguePokemonCompetitiveSet const* preset)
+{
+    u8 i;
+    u32 score = 0;
+    u32 temp;
+
+#ifdef ROGUE_EXPANSION
+    if(GetNature(mon) == preset->nature)
+        score += 3;
+
+    if(GetMonAbility(mon) == preset->ability)
+        score += 3;
+#else
+    // Rate much higher, as cannot change in Vanilla
+    if(GetNature(mon) == preset->nature)
+        score += 6;
+
+    if(GetMonAbility(mon) == preset->ability)
+        score += 6;
+#endif
+
+    temp = GetMonData(mon, MON_DATA_HELD_ITEM);
+    if(temp == preset->heldItem)
+        score += 1;
+
+#ifdef ROGUE_EXPANSION
+    if(temp >= ITEM_VENUSAURITE && temp <= ITEM_DIANCITE && !IsMegaEvolutionEnabled())
+    {
+        return 1;
+    }
+
+    if(temp >= ITEM_NORMALIUM_Z && temp <= ITEM_ULTRANECROZIUM_Z && !IsZMovesEnabled())
+    {
+        return 1;
+    }
+#endif
+
+    for(i = 0; i < MAX_MON_MOVES; ++i)
+    {
+        u16 moveId = preset->moves[i];
+
+        if(moveId != MOVE_NONE)
+        {
+            if(MonKnowsMove(mon, moveId))
+                moveId += 2;
+        }
+    }
+
+    return score;
+}
+
+static struct RoguePokemonCompetitiveSet const* SelectMonPreset(struct Pokemon* mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+
+    if(gRoguePokemonProfiles[species].competitiveSetCount != 0)
+    {
+        u16 i;
+        u16 bestIdx = 0;
+        u32 bestScore = CalculatePresetDisplayScore(mon, &gRoguePokemonProfiles[species].competitiveSets[0]);
+
+        for(i = 1; i < gRoguePokemonProfiles[species].competitiveSetCount; ++i)
+        {
+            u32 score = CalculatePresetDisplayScore(mon, &gRoguePokemonProfiles[species].competitiveSets[i]);
+
+            if(score > bestScore)
+            {
+                bestIdx = i;
+                bestScore = score;
+            }
+        }
+
+        return &gRoguePokemonProfiles[species].competitiveSets[bestIdx];
+    }
+
+    return NULL;
+}
+
+void ScriptMenu_DisplayRecommendedMonSet()
+{
+    u8 taskId;
+    struct Pokemon* mon = &gPlayerParty[gSpecialVar_0x8004];
+    struct RoguePokemonCompetitiveSet const* preset = SelectMonPreset(mon);
+    u8 windowId = CreateWindowFromRectWithBaseBlockOffset(12, 1, 14, 11, 8 * 8);
+
+    PrintRecommendedMonSetToWindow(windowId, mon, preset);
+
+    taskId = CreateTask(Task_DisplayRecommendedMonSetInput, 0);
+    gTasks[taskId].data[0] = windowId;
+}
+
+static void Task_ShowItemDescriptionInput(u8 taskId)
+{
+}
+
+static u8 const sText_ItemName[] = _("{COLOR BLUE}{STR_VAR_1}");
+
+static void PrintItemDescriptionToWindow(u8 windowId, u16 itemId)
+{
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    SetStandardWindowBorderStyle(windowId, 0);
+
+    StringCopy(gStringVar1, ItemId_GetName(itemId));
+    StringExpandPlaceholders(gStringVar4, sText_ItemName);
+
+    gTextFlags.replaceScrollWithNewLine = TRUE;
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, ItemId_GetDescription(itemId), 0, 14, TEXT_SKIP_DRAW, NULL);
+    gTextFlags.replaceScrollWithNewLine = FALSE;
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+void ScriptMenu_ShowItemDescription()
+{
+    u8 taskId;
+    u8 windowId = CreateWindowFromRect(1, 4, 13, 8);
+
+    PrintItemDescriptionToWindow(windowId, gSpecialVar_0x8004);
+
+    taskId = CreateTask(Task_ShowItemDescriptionInput, 0);
+    gTasks[taskId].data[0] = windowId;
+}
+
+void ScriptMenu_HideItemDescription()
+{
+    u8 taskId = FindTaskIdByFunc(Task_ShowItemDescriptionInput);
+
+    if (taskId == TASK_NONE)
+        return;
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[0], TRUE);
+    RemoveWindow(gTasks[taskId].data[0]);
+    DestroyTask(taskId);
+}
+
+static u8 const sText_RogueAssistant[] = _("{COLOR BLUE}Rogue Assistant");
+static u8 const sText_RogueAssistantInfo[] = _("Download from:\n{COLOR BLUE}https://rogue.assist.pokabbie.com\n\n{COLOR RED}Never download from other links!");
+
+static void PrintRogueAssistantNoticToWindow(u8 windowId)
+{
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    SetStandardWindowBorderStyle(windowId, 0);
+
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, sText_RogueAssistant, 0, 0, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NARROW, sText_RogueAssistantInfo, 0, 14, TEXT_SKIP_DRAW, NULL);
+
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+static void Task_ShowRogueAssistantNoticeInput(u8 taskId)
+{
+}
+
+void ScriptMenu_ShowRogueAssistantNotice()
+{
+    u8 taskId;
+    u8 windowId = CreateWindowFromRect(4, 1, 20, 10);
+
+    PrintRogueAssistantNoticToWindow(windowId);
+
+    taskId = CreateTask(Task_ShowRogueAssistantNoticeInput, 0);
+    gTasks[taskId].data[0] = windowId;
+}
+
+void ScriptMenu_HideRogueAssistantNotice()
+{
+    u8 taskId = FindTaskIdByFunc(Task_ShowRogueAssistantNoticeInput);
+
+    if (taskId == TASK_NONE)
+        return;
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[0], TRUE);
+    RemoveWindow(gTasks[taskId].data[0]);
+    DestroyTask(taskId);
 }

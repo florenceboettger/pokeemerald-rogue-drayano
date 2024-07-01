@@ -7,6 +7,7 @@
 #include "decompress.h"
 #include "event_data.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "main.h"
@@ -21,10 +22,12 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "tv.h"
+#include "wild_encounter.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
 
 #include "rogue_controller.h"
+#include "rogue_baked.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
@@ -60,25 +63,30 @@ void HealPlayerParty(void)
         arg[3] = 0;
         SetMonData(&gPlayerParty[i], MON_DATA_STATUS, arg);
     }
+
+    // Recharge Tera Orb, if possible.
+    if (B_FLAG_TERA_ORB_CHARGED != 0 && CheckBagHasItem(ITEM_TERA_ORB, 1))
+        FlagSet(B_FLAG_TERA_ORB_CHARGED);
 }
 
 u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 unused3)
 {
-    u16 nationalDexNum;
     int sentToPc;
     u8 heldItem[2];
     struct Pokemon mon;
     u16 targetSpecies;
 
-    CreateMon(&mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    if (OW_SYNCHRONIZE_NATURE >= GEN_6 && (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_NO_EGGS_DISCOVERED || OW_SYNCHRONIZE_NATURE == GEN_7))
+        CreateMonWithNature(&mon, species, level, USE_RANDOM_IVS, PickWildMonNature());
+    else
+        CreateMon(&mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+
     heldItem[0] = item;
     heldItem[1] = item >> 8;
     SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
 
-    // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.
-    targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_ITEM_HOLD_ABILITY, 0);
-    if (targetSpecies == SPECIES_NONE)
-        targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_ITEM_HOLD, 0);
+    // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS_NORMAL with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.
+    targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_CHANGE_ITEM_HOLD, 0);
     if (targetSpecies != SPECIES_NONE)
     {
         SetMonData(&mon, MON_DATA_SPECIES, &targetSpecies);
@@ -88,15 +96,17 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     Rogue_ModifyScriptMon(&mon);
 
     sentToPc = GiveMonToPlayer(&mon);
-    nationalDexNum = SpeciesToNationalPokedexNum(species);
 
     // Don't set Pokédex flag for MON_CANT_GIVE
     switch(sentToPc)
     {
     case MON_GIVEN_TO_PARTY:
     case MON_GIVEN_TO_PC:
-        GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
-        GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
+        GetSetPokedexSpeciesFlag(species, FLAG_SET_SEEN);
+        GetSetPokedexSpeciesFlag(species, FLAG_SET_CAUGHT);
+
+        if(IsMonShiny(&mon))
+            GetSetPokedexSpeciesFlag(species, FLAG_SET_CAUGHT_SHINY);
         break;
     }
     return sentToPc;
@@ -107,9 +117,11 @@ u8 ScriptGiveEgg(u16 species)
     struct Pokemon mon;
     u8 isEgg;
 
-    CreateEgg(&mon, species, TRUE);
+    CreateEgg(&mon, Rogue_GetEggSpecies(species), FALSE);
     isEgg = TRUE;
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
+
+    Rogue_ModifyEggMon(&mon);
 
     return GiveMonToPlayer(&mon);
 }
@@ -136,7 +148,7 @@ static bool8 CheckPartyMonHasHeldItem(u16 item)
 
     for(i = 0; i < PARTY_SIZE; i++)
     {
-        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
         if (species != SPECIES_NONE && species != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == item)
             return TRUE;
     }
@@ -160,7 +172,10 @@ void CreateScriptedWildMon(u16 species, u8 level, u16 item, bool8 isShiny)
     Rogue_CreateEventMon(&species, &level, &item);
 
     ZeroEnemyPartyMons();
-    CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+    if (OW_SYNCHRONIZE_NATURE > GEN_3)
+        CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
+    else
+        CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
     if (item)
     {
         heldItem[0] = item;
@@ -174,8 +189,9 @@ void CreateScriptedWildMon(u16 species, u8 level, u16 item, bool8 isShiny)
         SetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY, &shiny);
     }
 
-    Rogue_ModifyEventMon(&gEnemyParty[0]);
+    Rogue_ModifyWildMon(&gEnemyParty[0]);
 }
+
 void CreateScriptedDoubleWildMon(u16 species1, u8 level1, u16 item1, bool8 isShiny1, u16 species2, u8 level2, u16 item2, bool8 isShiny2)
 {
     u8 heldItem1[2];
@@ -183,7 +199,10 @@ void CreateScriptedDoubleWildMon(u16 species1, u8 level1, u16 item1, bool8 isShi
 
     ZeroEnemyPartyMons();
 
-    CreateMon(&gEnemyParty[0], species1, level1, 32, 0, 0, OT_ID_PLAYER_ID, 0);
+    if (OW_SYNCHRONIZE_NATURE > GEN_3)
+        CreateMonWithNature(&gEnemyParty[0], species1, level1, 32, PickWildMonNature());
+    else
+        CreateMon(&gEnemyParty[0], species1, level1, 32, 0, 0, OT_ID_PLAYER_ID, 0);
     if (item1)
     {
         heldItem1[0] = item1;
@@ -197,18 +216,21 @@ void CreateScriptedDoubleWildMon(u16 species1, u8 level1, u16 item1, bool8 isShi
         SetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY, &shiny);
     }
 
-    CreateMon(&gEnemyParty[3], species2, level2, 32, 0, 0, OT_ID_PLAYER_ID, 0);
+    if (OW_SYNCHRONIZE_NATURE > GEN_3)
+        CreateMonWithNature(&gEnemyParty[1], species2, level2, 32, PickWildMonNature());
+    else
+        CreateMon(&gEnemyParty[1], species2, level2, 32, 0, 0, OT_ID_PLAYER_ID, 0);
     if (item2)
     {
         heldItem2[0] = item2;
         heldItem2[1] = item2 >> 8;
-        SetMonData(&gEnemyParty[3], MON_DATA_HELD_ITEM, heldItem2);
+        SetMonData(&gEnemyParty[1], MON_DATA_HELD_ITEM, heldItem2);
     }
 
     if(isShiny2)
     {
         u8 shiny = 1;
-        SetMonData(&gEnemyParty[3], MON_DATA_IS_SHINY, &shiny);
+        SetMonData(&gEnemyParty[1], MON_DATA_IS_SHINY, &shiny);
     }
 }
 

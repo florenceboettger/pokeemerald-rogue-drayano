@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "data.h"
+#include "main.h"
 #include "task.h"
 #include "trig.h"
 #include "scanline_effect.h"
@@ -13,7 +14,7 @@ static void CopyValue32Bit(void);
 // Per-scanline register values.
 // This is double buffered so that it can be safely written to at any time
 // without overwriting the buffer that the DMA is currently reading
-EWRAM_DATA u16 gScanlineEffectRegBuffers[2][0x3C0] = {0};
+EWRAM_DATA u16 ALIGNED(4) gScanlineEffectRegBuffers[2][0x3C0] = {0};
 
 EWRAM_DATA struct ScanlineEffect gScanlineEffect = {0};
 EWRAM_DATA static bool8 sShouldStopWaveTask = FALSE;
@@ -136,6 +137,12 @@ static void TaskFunc_UpdateWavePerFrame(u8 taskId)
     }
     else
     {
+        //if(gMain.nativeSpeedUpActive)
+        //{
+        //    // Does weird things if applied multiple time
+        //    return;
+        //}
+
         if (gTasks[taskId].tApplyBattleBgOffsets)
         {
             switch (gTasks[taskId].tRegOffset)

@@ -1,9 +1,16 @@
+#include "global.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include "gba/gba.h"
 #include "config.h"
 #include "malloc.h"
 #include "mini_printf.h"
+
+#include "m4a.h"
+#include "main.h"
+#include "sound.h"
+#include "test_runner.h"
+#include "constants/songs.h"
 
 #define AGB_PRINT_FLUSH_ADDR 0x9FE209D
 #define AGB_PRINT_STRUCT_ADDR 0x9FE20F8
@@ -285,17 +292,65 @@ void MgbaPrintf(const char* ptr, ...)
     Free(buffer);
 }
 
+void DebugForceReadKeys();
+
+static EWRAM_DATA u8 sDebug_AssertsMuted = FALSE;
+
 void MgbaAssert(const char *pFile, s32 nLine, const char *pExpression, bool32 nStopProgram)
 {
-    if (nStopProgram)
+    if (sDebug_AssertsMuted)
+        return;
+
+    //if (nStopProgram)
     {
         MgbaPrintfBounded(MGBA_LOG_ERROR, "ASSERTION FAILED  FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
-        asm(".hword 0xEFFF");
+
+#if TESTING
+        TestRunner_HandleAssertion("ASSERTION FAILED  FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
+#else
+        DebugPrint("A - Skip");
+        DebugPrint("B - Break Message");
+        DebugPrint("START - Crash Out");
+        DebugPrint("SELECT - Mute Asserts");
+
+        PlaySE(SE_LOW_HEALTH_LOOPING);
+
+        while(TRUE)
+        {
+            if(JOY_NEW(A_BUTTON))
+            {
+                m4aSongNumStop(SE_LOW_HEALTH_LOOPING);
+                MgbaPrintfBounded(MGBA_LOG_ERROR, "SKIPPED");
+                break;
+            }
+            else if(JOY_NEW(B_BUTTON))
+            {
+                m4aSongNumStop(SE_LOW_HEALTH_LOOPING);
+                MgbaPrintfBounded(MGBA_LOG_ERROR, "BREAK PRINT");
+                break;
+            }
+            else if(JOY_NEW(START_BUTTON))
+            {
+                asm(".hword 0xEFFF");
+            }
+            else if(JOY_HELD(SELECT_BUTTON))
+            {
+                m4aSongNumStop(SE_LOW_HEALTH_LOOPING);
+                MgbaPrintfBounded(MGBA_LOG_ERROR, "QUICK SKIP");
+                sDebug_AssertsMuted = TRUE;
+                break;
+            }
+
+            DebugForceReadKeys();
+        }
+#endif
     }
-    else
-    {
-        MgbaPrintfBounded(MGBA_LOG_WARN, "WARING FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
-    }
+    //else
+    //{
+    //    MgbaPrintfBounded(MGBA_LOG_WARN, "WARING FILE=[%s] LINE=[%d]  EXP=[%s]", pFile, nLine, pExpression);
+    //}
+
+    DebugForceReadKeys();
 }
 #endif
 #endif

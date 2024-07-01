@@ -3,6 +3,7 @@
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
+#include "debug.h"
 #include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -27,6 +28,7 @@
 #include "start_menu.h"
 #include "trainer_see.h"
 #include "trainer_hill.h"
+#include "vs_seeker.h"
 #include "wild_encounter.h"
 #include "follow_me.h"
 #include "constants/event_bg.h"
@@ -37,17 +39,19 @@
 #include "constants/trainer_hill.h"
 
 #include "rogue_controller.h"
+#include "rogue_debug.h"
+#include "rogue_ridemon.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
-static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
+static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
 
 u8 gSelectedObjectEvent;
 
 static void GetPlayerPosition(struct MapPosition *);
 static void GetInFrontOfPlayerPosition(struct MapPosition *);
 static u16 GetPlayerCurMetatileBehavior(int);
-static bool8 TryStartInteractionScript(struct MapPosition*, u16, u8);
-static const u8 *GetInteractionScript(struct MapPosition*, u8, u8);
+static bool8 TryStartInteractionScript(struct MapPosition *, u16, u8);
+static const u8 *GetInteractionScript(struct MapPosition *, u8, u8);
 static const u8 *GetInteractedObjectEventScript(struct MapPosition *, u8, u8);
 static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *, u8, u8);
 static const u8 *GetInteractedMetatileScript(struct MapPosition *, u8, u8);
@@ -63,14 +67,16 @@ static s8 GetWarpEventAtMapPosition(struct MapHeader *, struct MapPosition *);
 static void SetupWarp(struct MapHeader *, s8, struct MapPosition *);
 static bool8 TryDoorWarp(struct MapPosition *, u16, u8);
 static s8 GetWarpEventAtPosition(struct MapHeader *, u16, u16, u8);
-static u8 *GetCoordEventScriptAtPosition(struct MapHeader *, u16, u16, u8);
-static struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *, u16, u16, u8);
+static const u8 *GetCoordEventScriptAtPosition(struct MapHeader *, u16, u16, u8);
+static const struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *, u16, u16, u8);
 static bool8 TryStartCoordEventScript(struct MapPosition *);
 static bool8 TryStartWarpEventScript(struct MapPosition *, u16);
 static bool8 TryStartMiscWalkingScripts(u16);
 static bool8 TryStartStepCountScript(u16);
 static void UpdateFriendshipStepCounter(void);
+#if OW_POISON_DAMAGE < GEN_5
 static bool8 UpdatePoisonStepCounter(void);
+#endif // OW_POISON_DAMAGE
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
@@ -132,6 +138,14 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
+
+#if DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == FALSE
+    if ((heldKeys & DEBUG_OVERWORLD_HELD_KEYS) && input->DEBUG_OVERWORLD_TRIGGER_EVENT)
+    {
+        input->input_field_1_2 = TRUE;
+        input->DEBUG_OVERWORLD_TRIGGER_EVENT = FALSE;
+    }
+#endif
 }
 
 int ProcessPlayerFieldInput(struct FieldInput *input)
@@ -147,14 +161,29 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     GetPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 
+    START_TIMER(OVERWORLD_TRAINER_SIGHT_LINE);
     if (CheckForTrainersWantingBattle() == TRUE)
+    {
+        STOP_TIMER(OVERWORLD_TRAINER_SIGHT_LINE);
         return TRUE;
+    }
+    STOP_TIMER(OVERWORLD_TRAINER_SIGHT_LINE);
 
+    START_TIMER(OVERWORLD_MAP_SCRIPT);
     if (TryRunOnFrameMapScript() == TRUE)
+    {
+        STOP_TIMER(OVERWORLD_MAP_SCRIPT);
         return TRUE;
+    }
+    STOP_TIMER(OVERWORLD_MAP_SCRIPT);
 
+    START_TIMER(OVERWORLD_ROGUE_PLAYER_FIELD_INPUT_CB);
     if (Rogue_OnProcessPlayerFieldInput() == TRUE)
+    {
+        STOP_TIMER(OVERWORLD_ROGUE_PLAYER_FIELD_INPUT_CB);
         return TRUE;
+    }
+    STOP_TIMER(OVERWORLD_ROGUE_PLAYER_FIELD_INPUT_CB);
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
@@ -170,18 +199,28 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->heldDirection && input->dpadDirection == playerDirection)
     {
         if (TryArrowWarp(&position, metatileBehavior, playerDirection) == TRUE)
+        {
+            if(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_RIDING)
+                Rogue_OnRideMonWarp();
+
             return TRUE;
+        }
     }
 
     GetInFrontOfPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
-    if (input->pressedAButton && TryStartInteractionScript(&position, metatileBehavior, playerDirection) == TRUE)
+    if (input->pressedAButton && !Rogue_IsRideMonFlying() && TryStartInteractionScript(&position, metatileBehavior, playerDirection) == TRUE)
         return TRUE;
 
     if (input->heldDirection2 && input->dpadDirection == playerDirection)
     {
         if (TryDoorWarp(&position, metatileBehavior, playerDirection) == TRUE)
+        {
+            if(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_RIDING)
+                Rogue_OnRideMonWarp();
+
             return TRUE;
+        }
     }
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
         return TRUE;
@@ -193,6 +232,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
+
+#if DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == FALSE
+    if (input->input_field_1_2)
+    {
+        PlaySE(SE_WIN_OPEN);
+        FreezeObjectEvents();
+        Debug_ShowMainMenu();
+        return TRUE;
+    }
+#endif
 
     return FALSE;
 }
@@ -226,6 +275,9 @@ static u16 GetPlayerCurMetatileBehavior(int runningState)
 static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatileBehavior, u8 direction)
 {
     const u8 *script = GetInteractionScript(position, metatileBehavior, direction);
+
+    script = Rogue_ModifyOverworldInteractionScript(position, metatileBehavior, direction, script);
+
     if (script == NULL)
         return FALSE;
 
@@ -233,7 +285,7 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
     if (script != EventScript_PC)
         PlaySE(SE_SELECT);
 
-    ScriptContext1_SetupScript(script);
+    ScriptContext_SetupScript(script);
     return TRUE;
 }
 
@@ -287,8 +339,39 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
 {
     u8 objectEventId;
     const u8 *script;
+    s16 currX = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    s16 currY = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+    u8 currBehavior = MapGridGetMetatileBehaviorAt(currX, currY);
 
-    objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+    switch (direction)
+    {
+    case DIR_EAST:
+        if (MetatileBehavior_IsSidewaysStairsLeftSideAny(metatileBehavior))
+            // sideways stairs left-side to your right -> check northeast
+            objectEventId = GetObjectEventIdByPosition(currX + 1, currY - 1, position->elevation);
+        else if (MetatileBehavior_IsSidewaysStairsRightSideAny(currBehavior))
+            // on top of right-side stairs -> check southeast
+            objectEventId = GetObjectEventIdByPosition(currX + 1, currY + 1, position->elevation);
+        else
+            // check in front of player
+            objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+        break;
+    case DIR_WEST:
+        if (MetatileBehavior_IsSidewaysStairsRightSideAny(metatileBehavior))
+            // facing sideways stairs right side -> check northwest
+            objectEventId = GetObjectEventIdByPosition(currX - 1, currY - 1, position->elevation);
+        else if (MetatileBehavior_IsSidewaysStairsLeftSideAny(currBehavior))
+            // on top of left-side stairs -> check southwest
+            objectEventId = GetObjectEventIdByPosition(currX - 1, currY + 1, position->elevation);
+        else
+            // check in front of player
+            objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+        break;
+    default:
+        objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+        break;
+    }
+
     if (objectEventId == OBJECT_EVENTS_COUNT || gObjectEvents[objectEventId].localId == OBJ_EVENT_ID_PLAYER)
     {
         if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)
@@ -317,7 +400,7 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
 
 static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    struct BgEvent *bgEvent = GetBackgroundEventAtPosition(&gMapHeader, position->x - MAP_OFFSET, position->y - MAP_OFFSET, position->elevation);
+    const struct BgEvent *bgEvent = GetBackgroundEventAtPosition(&gMapHeader, position->x - MAP_OFFSET, position->y - MAP_OFFSET, position->elevation);
 
     if (bgEvent == NULL)
         return NULL;
@@ -427,10 +510,11 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
-    if (PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE && CheckFollowerFlag(FOLLOWER_FLAG_CAN_SURF))
+    // RogueNote: Always allow surf for follower
+    if (PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE) // CheckFollowerFlag(FOLLOWER_FLAG_CAN_SURF)
         return EventScript_UseSurf;
 
-    if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE && CheckFollowerFlag(FOLLOWER_FLAG_CAN_WATERFALL))
+    if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE) // CheckFollowerFlag(FOLLOWER_FLAG_CAN_WATERFALL)
     {
         if (IsPlayerSurfingNorth() == TRUE)
             return EventScript_UseWaterfall;
@@ -442,12 +526,13 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
 
 static bool32 TrySetupDiveDownScript(void)
 {
-    if (!CheckFollowerFlag(FOLLOWER_FLAG_CAN_DIVE))
-        return FALSE;
+    // RogueNote: always allow dive
+    //if (!CheckFollowerFlag(FOLLOWER_FLAG_CAN_DIVE))
+    //    return FALSE;
 
     if (TrySetDiveWarp() == 2)
     {
-        ScriptContext1_SetupScript(EventScript_UseDive);
+        ScriptContext_SetupScript(EventScript_UseDive);
         return TRUE;
     }
     return FALSE;
@@ -455,12 +540,13 @@ static bool32 TrySetupDiveDownScript(void)
 
 static bool32 TrySetupDiveEmergeScript(void)
 {
-    if (!CheckFollowerFlag(FOLLOWER_FLAG_CAN_DIVE))
-        return FALSE;
+    // RogueNote: always allow dive
+    //if (!CheckFollowerFlag(FOLLOWER_FLAG_CAN_DIVE))
+    //    return FALSE;
 
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
     {
-        ScriptContext1_SetupScript(EventScript_UseDiveUnderwater);
+        ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
         return TRUE;
     }
     return FALSE;
@@ -471,7 +557,11 @@ static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileB
     if (TryStartCoordEventScript(position) == TRUE)
         return TRUE;
     if (TryStartWarpEventScript(position, metatileBehavior) == TRUE)
+    {
+        if(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_RIDING)
+            Rogue_OnRideMonWarp();
         return TRUE;
+    }
     if (TryStartMiscWalkingScripts(metatileBehavior) == TRUE)
         return TRUE;
     if (TryStartStepCountScript(metatileBehavior) == TRUE)
@@ -483,11 +573,11 @@ static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileB
 
 static bool8 TryStartCoordEventScript(struct MapPosition *position)
 {
-    u8 *script = GetCoordEventScriptAtPosition(&gMapHeader, position->x - MAP_OFFSET, position->y - MAP_OFFSET, position->elevation);
+    const u8 *script = GetCoordEventScriptAtPosition(&gMapHeader, position->x - MAP_OFFSET, position->y - MAP_OFFSET, position->elevation);
 
     if (script == NULL)
         return FALSE;
-    ScriptContext1_SetupScript(script);
+    ScriptContext_SetupScript(script);
     return TRUE;
 }
 
@@ -497,7 +587,7 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
 
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
-        ScriptContext1_SetupScript(EventScript_FallDownHole);
+        ScriptContext_SetupScript(EventScript_FallDownHole);
         return TRUE;
     }
     else if (MetatileBehavior_IsBattlePyramidWarp(metatileBehavior))
@@ -531,15 +621,22 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {
+    #if OW_POISON_DAMAGE < GEN_5
         if (UpdatePoisonStepCounter() == TRUE)
         {
-            ScriptContext1_SetupScript(EventScript_FieldPoison);
+            ScriptContext_SetupScript(EventScript_FieldPoison);
             return TRUE;
         }
+    #endif
         if (ShouldEggHatch())
         {
-            IncrementGameStat(GAME_STAT_HATCHED_EGGS);
-            ScriptContext1_SetupScript(EventScript_EggHatch);
+            //IncrementGameStat(GAME_STAT_HATCHED_EGGS);
+            ScriptContext_SetupScript(EventScript_EggHatch);
+            return TRUE;
+        }
+        if (UpdateVsSeekerStepCounter())
+        {
+            ScriptContext_SetupScript(EventScript_VsSeekerChargingDone);
             return TRUE;
         }
     }
@@ -552,8 +649,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     return FALSE;
 }
 
-// Unused
-static void ClearFriendshipStepCounter(void)
+static void UNUSED ClearFriendshipStepCounter(void)
 {
     VarSet(VAR_FRIENDSHIP_STEP_COUNTER, 0);
 }
@@ -581,6 +677,7 @@ void ClearPoisonStepCounter(void)
     VarSet(VAR_POISON_STEP_COUNTER, 0);
 }
 
+#if OW_POISON_DAMAGE < GEN_5
 static bool8 UpdatePoisonStepCounter(void)
 {
     u16 *ptr;
@@ -605,6 +702,7 @@ static bool8 UpdatePoisonStepCounter(void)
     }
     return FALSE;
 }
+#endif // OW_POISON_DAMAGE
 
 void RestartWildEncounterImmunitySteps(void)
 {
@@ -614,21 +712,24 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
+    if (FlagGet(OW_FLAG_NO_ENCOUNTER))
+        return FALSE;
+
     if (sWildEncounterImmunitySteps < 4)
     {
         sWildEncounterImmunitySteps++;
-        sPreviousPlayerMetatileBehavior = metatileBehavior;
+        sPrevMetatileBehavior = metatileBehavior;
         return FALSE;
     }
 
-    if (StandardWildEncounter(metatileBehavior, sPreviousPlayerMetatileBehavior) == TRUE)
+    if (StandardWildEncounter(metatileBehavior, sPrevMetatileBehavior) == TRUE)
     {
         sWildEncounterImmunitySteps = 0;
-        sPreviousPlayerMetatileBehavior = metatileBehavior;
+        sPrevMetatileBehavior = metatileBehavior;
         return TRUE;
     }
 
-    sPreviousPlayerMetatileBehavior = metatileBehavior;
+    sPrevMetatileBehavior = metatileBehavior;
     return FALSE;
 }
 
@@ -638,6 +739,9 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8
 
     if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE && warpEventId != WARP_ID_NONE)
     {
+        //if(Rogue_IsRideMonFlying())
+        //    return FALSE;
+
         StoreInitialPlayerAvatarState();
         SetupWarp(&gMapHeader, warpEventId, position);
         DoWarp();
@@ -729,7 +833,7 @@ static s8 GetWarpEventAtMapPosition(struct MapHeader *mapHeader, struct MapPosit
 
 static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPosition *position)
 {
-    const struct WarpEvent *warpEvent;
+    struct WarpEvent warpEvent;
 
     u8 trainerHillMapId = GetCurrentTrainerHillMapId();
 
@@ -738,36 +842,38 @@ static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPositi
         if (trainerHillMapId == GetNumFloorsInTrainerHillChallenge())
         {
             if (warpEventId == 0)
-                warpEvent = &gMapHeader.events->warps[0];
+                warpEvent = gMapHeader.events->warps[0];
             else
-                warpEvent = SetWarpDestinationTrainerHill4F();
+                warpEvent = *SetWarpDestinationTrainerHill4F();
         }
         else if (trainerHillMapId == TRAINER_HILL_ROOF)
         {
-            warpEvent = SetWarpDestinationTrainerHillFinalFloor(warpEventId);
+            warpEvent = *SetWarpDestinationTrainerHillFinalFloor(warpEventId);
         }
         else
         {
-            warpEvent = &gMapHeader.events->warps[warpEventId];
+            warpEvent = gMapHeader.events->warps[warpEventId];
+            Rogue_ModifyMapWarpEvent(&gMapHeader, warpEventId, &warpEvent);
         }
     }
     else
     {
-        warpEvent = &gMapHeader.events->warps[warpEventId];
+        warpEvent = gMapHeader.events->warps[warpEventId];
+        Rogue_ModifyMapWarpEvent(&gMapHeader, warpEventId, &warpEvent);
     }
 
-    if (warpEvent->mapNum == MAP_NUM(NONE))
+    if (warpEvent.mapNum == MAP_NUM(NONE))
     {
-        SetWarpDestinationToDynamicWarp(warpEvent->warpId);
+        SetWarpDestinationToDynamicWarp(warpEvent.warpId);
     }
     else
     {
         const struct MapHeader *mapHeader;
 
-        SetWarpDestinationToMapWarp(warpEvent->mapGroup, warpEvent->mapNum, warpEvent->warpId);
+        SetWarpDestinationToMapWarp(warpEvent.mapGroup, warpEvent.mapNum, warpEvent.warpId);
         UpdateEscapeWarp(position->x, position->y);
-        mapHeader = Overworld_GetMapHeaderByGroupAndId(warpEvent->mapGroup, warpEvent->mapNum);
-        if (mapHeader->events->warps[warpEvent->warpId].mapNum == MAP_NUM(NONE))
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(warpEvent.mapGroup, warpEvent.mapNum);
+        if (mapHeader->events->warps[warpEvent.warpId].mapNum == MAP_NUM(NONE))
             SetDynamicWarp(mapHeader->events->warps[warpEventId].warpId, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, warpEventId);
     }
 }
@@ -778,6 +884,9 @@ static bool8 TryDoorWarp(struct MapPosition *position, u16 metatileBehavior, u8 
 
     if (direction == DIR_NORTH)
     {
+        //if(Rogue_IsRideMonFlying())
+        //    return FALSE;
+
         if (MetatileBehavior_IsOpenSecretBaseDoor(metatileBehavior) == TRUE)
         {
             StoreInitialPlayerAvatarState();
@@ -804,7 +913,7 @@ static bool8 TryDoorWarp(struct MapPosition *position, u16 metatileBehavior, u8 
 static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     s32 i;
-    struct WarpEvent *warpEvent = mapHeader->events->warps;
+    const struct WarpEvent *warpEvent = mapHeader->events->warps;
     u8 warpCount = mapHeader->events->warpCount;
 
     for (i = 0; i < warpCount; i++, warpEvent++)
@@ -818,7 +927,7 @@ static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 e
     return WARP_ID_NONE;
 }
 
-static u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
+static const u8 *TryRunCoordEventScript(const struct CoordEvent *coordEvent)
 {
     if (coordEvent != NULL)
     {
@@ -827,9 +936,9 @@ static u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
             DoCoordEventWeather(coordEvent->trigger);
             return NULL;
         }
-        if (coordEvent->trigger == 0)
+        if (coordEvent->trigger == TRIGGER_RUN_IMMEDIATELY)
         {
-            ScriptContext2_RunNewScript(coordEvent->script);
+            RunScriptImmediately(coordEvent->script);
             return NULL;
         }
         if (VarGet(coordEvent->trigger) == (u8)coordEvent->index)
@@ -838,10 +947,10 @@ static u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
     return NULL;
 }
 
-static u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
+static const u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     s32 i;
-    struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
+    const struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
     u8 coordEventCount = mapHeader->events->coordEventCount;
 
     for (i = 0; i < coordEventCount; i++)
@@ -850,7 +959,7 @@ static u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 x, u16
         {
             if (coordEvents[i].elevation == elevation || coordEvents[i].elevation == 0)
             {
-                u8 *script = TryRunCoordEventScript(&coordEvents[i]);
+                const u8 *script = TryRunCoordEventScript(&coordEvents[i]);
                 if (script != NULL)
                     return script;
             }
@@ -859,15 +968,15 @@ static u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 x, u16
     return NULL;
 }
 
-u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position)
+const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position)
 {
     return GetCoordEventScriptAtPosition(&gMapHeader, position->x - MAP_OFFSET, position->y - MAP_OFFSET, position->elevation);
 }
 
-static struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
+static const struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     u8 i;
-    struct BgEvent *bgEvents = mapHeader->events->bgEvents;
+    const struct BgEvent *bgEvents = mapHeader->events->bgEvents;
     u8 bgEventCount = mapHeader->events->bgEventCount;
 
     for (i = 0; i < bgEventCount; i++)

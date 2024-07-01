@@ -4,9 +4,9 @@
 // Masks/shifts for blocks in the map grid
 // Map grid blocks consist of a 10 bit metatile id, a 2 bit collision value, and a 4 bit elevation value
 // This is the data stored in each data/layouts/*/map.bin file
-#define MAPGRID_METATILE_ID_MASK 0x03FF // Bits 1-10
-#define MAPGRID_COLLISION_MASK   0x0C00 // Bits 11-12
-#define MAPGRID_ELEVATION_MASK   0xF000 // Bits 13-16
+#define MAPGRID_METATILE_ID_MASK 0x03FF // Bits 0-9
+#define MAPGRID_COLLISION_MASK   0x0C00 // Bits 10-11
+#define MAPGRID_ELEVATION_MASK   0xF000 // Bits 12-15
 #define MAPGRID_COLLISION_SHIFT  10
 #define MAPGRID_ELEVATION_SHIFT  12
 
@@ -16,8 +16,8 @@
 // Masks/shifts for metatile attributes
 // Metatile attributes consist of an 8 bit behavior value, 4 unused bits, and a 4 bit layer type value
 // This is the data stored in each data/tilesets/*/*/metatile_attributes.bin file
-#define METATILE_ATTR_BEHAVIOR_MASK 0x00FF // Bits 1-8
-#define METATILE_ATTR_LAYER_MASK    0xF000 // Bits 13-16
+#define METATILE_ATTR_BEHAVIOR_MASK 0x00FF // Bits 0-7
+#define METATILE_ATTR_LAYER_MASK    0xF000 // Bits 12-15
 #define METATILE_ATTR_LAYER_SHIFT   12
 
 enum {
@@ -39,10 +39,10 @@ struct Tileset
 {
     /*0x00*/ bool8 isCompressed;
     /*0x01*/ bool8 isSecondary;
-    /*0x04*/ void *tiles;
-    /*0x08*/ void *palettes;
-    /*0x0c*/ u16 *metatiles;
-    /*0x10*/ u16 *metatileAttributes;
+    /*0x04*/ const u32 *tiles;
+    /*0x08*/ const u16 (*palettes)[16];
+    /*0x0C*/ const u16 *metatiles;
+    /*0x10*/ const u16 *metatileAttributes;
     /*0x14*/ TilesetCB callback;
 };
 
@@ -50,10 +50,10 @@ struct MapLayout
 {
     /*0x00*/ s32 width;
     /*0x04*/ s32 height;
-    /*0x08*/ u16 *border;
-    /*0x0c*/ u16 *map;
-    /*0x10*/ struct Tileset *primaryTileset;
-    /*0x14*/ struct Tileset *secondaryTileset;
+    /*0x08*/ const u16 *border;
+    /*0x0C*/ const u16 *map;
+    /*0x10*/ const struct Tileset *primaryTileset;
+    /*0x14*/ const struct Tileset *secondaryTileset;
 };
 
 struct BackupMapLayout
@@ -95,7 +95,7 @@ struct CoordEvent
     u8 elevation;
     u16 trigger;
     u16 index;
-    u8 *script;
+    const u8 *script;
 };
 
 struct BgEvent
@@ -104,7 +104,7 @@ struct BgEvent
     u8 elevation;
     u8 kind; // The "kind" field determines how to access bgUnion union below.
     union {
-        u8 *script;
+        const u8 *script;
         struct {
             u16 item;
             u16 hiddenItemId;
@@ -119,10 +119,10 @@ struct MapEvents
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
-    struct ObjectEventTemplate *objectEvents;
-    struct WarpEvent *warps;
-    struct CoordEvent *coordEvents;
-    struct BgEvent *bgEvents;
+    const struct ObjectEventTemplate *objectEvents;
+    const struct WarpEvent *warps;
+    const struct CoordEvent *coordEvents;
+    const struct BgEvent *bgEvents;
 };
 
 struct MapConnection
@@ -136,7 +136,7 @@ struct MapConnection
 struct MapConnections
 {
     s32 count;
-    struct MapConnection *connections;
+    const struct MapConnection *connections;
 };
 
 struct MapHeader
@@ -213,7 +213,8 @@ struct ObjectEvent
     /*0x1D*/ u8 trainerRange_berryTreeId;
     /*0x1E*/ u8 currentMetatileBehavior;
     /*0x1F*/ u8 previousMetatileBehavior;
-    /*0x20*/ u8 previousMovementDirection;
+    /*0x20*/ u8 previousMovementDirection:4;
+             u8 directionOverwrite:4;
     /*0x21*/ u8 directionSequenceIndex;
     /*0x22*/ u8 playerCopyableMovement; // COPY_MOVE_*
     /*0x23*/ u8 spriteId;
@@ -245,20 +246,28 @@ enum {
     PLAYER_AVATAR_STATE_MACH_BIKE,
     PLAYER_AVATAR_STATE_ACRO_BIKE,
     PLAYER_AVATAR_STATE_SURFING,
-    PLAYER_AVATAR_STATE_UNDERWATER,
+    PLAYER_AVATAR_STATE_RIDE_GRABBING,
     PLAYER_AVATAR_STATE_FIELD_MOVE,
     PLAYER_AVATAR_STATE_FISHING,
     PLAYER_AVATAR_STATE_WATERING,
+
+    PLAYER_AVATAR_STATE_VSSEEKER,
+    // This has to be unused (The flags below have to align)
+    PLAYER_AVATAR_STATE_UNDERWATER,
+
+    PLAYER_AVATAR_STATE_COUNT
 };
 
 #define PLAYER_AVATAR_FLAG_ON_FOOT      (1 << 0)
 #define PLAYER_AVATAR_FLAG_MACH_BIKE    (1 << 1)
 #define PLAYER_AVATAR_FLAG_ACRO_BIKE    (1 << 2)
 #define PLAYER_AVATAR_FLAG_SURFING      (1 << 3)
-#define PLAYER_AVATAR_FLAG_UNDERWATER   (1 << 4)
+#define PLAYER_AVATAR_FLAG_RIDING       (1 << 4)
 #define PLAYER_AVATAR_FLAG_CONTROLLABLE (1 << 5)
 #define PLAYER_AVATAR_FLAG_FORCED_MOVE  (1 << 6)
 #define PLAYER_AVATAR_FLAG_DASH         (1 << 7)
+
+#define PLAYER_AVATAR_FLAG_UNDERWATER   (0) // unused now
 
 enum
 {
@@ -287,6 +296,11 @@ enum
     COLLISION_ISOLATED_HORIZONTAL_RAIL,
     COLLISION_VERTICAL_RAIL,
     COLLISION_HORIZONTAL_RAIL,
+    COLLISION_START_SWIMMING,
+    COLLISION_STOP_SWIMMING,
+    //sideways_stairs
+    COLLISION_SIDEWAYS_STAIRS_TO_RIGHT,
+    COLLISION_SIDEWAYS_STAIRS_TO_LEFT
 };
 
 // player running states
@@ -310,8 +324,6 @@ struct PlayerAvatar
     /*0x00*/ u8 flags;
     /*0x01*/ u8 transitionFlags; // used to be named bike, but its definitely not that. seems to be some transition flags
     /*0x02*/ u8 runningState; // this is a static running state. 00 is not moving, 01 is turn direction, 02 is moving.
-             u8 runningCheck : 1;
-             u8 runningToggle : 1;
     /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 objectEventId;

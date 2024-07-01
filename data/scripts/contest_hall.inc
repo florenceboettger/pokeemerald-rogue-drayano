@@ -31,6 +31,7 @@ LilycoveCity_ContestLobby_EventScript_ReceptionWelcome::
 LilycoveCity_ContestLobby_EventScript_GivePokeblockCase::
 	msgbox LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase, MSGBOX_DEFAULT
 	giveitem ITEM_POKEBLOCK_CASE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	msgbox LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp, MSGBOX_DEFAULT
 	return
@@ -111,16 +112,6 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestMon::
 	end
 
 LilycoveCity_ContestLobby_EventScript_ChooseContestRank::
-	message LilycoveCity_ContestLobby_Text_EnterWhichRank
-	waitmessage
-	multichoice 0, 0, MULTI_CONTEST_RANK, FALSE
-	switch VAR_RESULT
-	case 0, LilycoveCity_ContestLobby_EventScript_EnterNormalRank
-	case 1, LilycoveCity_ContestLobby_EventScript_EnterSuperRank
-	case 2, LilycoveCity_ContestLobby_EventScript_EnterHyperRank
-	case 3, LilycoveCity_ContestLobby_EventScript_EnterMasterRank
-	case 4, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
-	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	end
 
 LilycoveCity_ContestLobby_EventScript_EnterNormalRank::
@@ -1134,7 +1125,6 @@ ContestHall_EventScript_GiveLuxuryBall::
 
 ContestHall_EventScript_ReceiveContestRibbon::
 	special GiveMonContestRibbon
-	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
 	setflag FLAG_SYS_RIBBON_GET
 	lockall
 	msgbox ContestHall_Text_ConferRibbonAsPrize, MSGBOX_DEFAULT

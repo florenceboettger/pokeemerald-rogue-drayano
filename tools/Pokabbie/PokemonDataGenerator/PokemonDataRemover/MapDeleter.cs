@@ -74,15 +74,18 @@ namespace PokemonDataRemover
 				Console.WriteLine($"Deleting '{map}'..");
 
 				string mapFilePath = Path.Combine(c_MapsDirectory, map, "map.json");
-				JObject mapFile = LoadJson(mapFilePath);
-				string mapId = mapFile["id"].ToString();
+				if (File.Exists(mapFilePath))
+				{
+					JObject mapFile = LoadJson(mapFilePath);
+					string mapId = mapFile["id"].ToString();
 
-				RemoveWarpEventsFor(mapId);
-								
-				RemoveEventScriptLine($".include \"data/maps/{map}/scripts.inc\"");
-				RemoveMapLayout(map + "_Layout");
-				RemoveMapGroupEntry(map);
-				RemoveEncounters(mapId);
+					RemoveWarpEventsFor(mapId);
+
+					RemoveEventScriptLine($".include \"data/maps/{map}/scripts.inc\"");
+					RemoveMapLayout(map + "_Layout");
+					RemoveMapGroupEntry(map);
+					RemoveEncounters(mapId);
+				}
 
 				string mapDir = Path.Combine(c_MapsDirectory, map);
 				if (Directory.Exists(mapDir))
@@ -156,23 +159,16 @@ namespace PokemonDataRemover
 				"VerdanturfTown",
 				"VictoryRoad",
 
-				"BirthIsland_Harbor",
-				"FarawayIsland_Entrance",
-				"MarineCave_Entrance",
-				"NavelRock_B1F",
-				"NavelRock_Entrance",
-				"NavelRock_Exterior",
-				"NavelRock_Fork",
-				"NavelRock_Harbor",
-				"SkyPillar_1F",
-				"SkyPillar_2F",
-				"SkyPillar_3F",
-				"SkyPillar_4F",
-				"SkyPillar_5F",
-				"SkyPillar_Entrance",
-				"SkyPillar_Outside",
-				"SouthernIsland_Exterior",
-				"TerraCave_Entrance",
+				"DesertRuins",
+				"IslandCave",
+				"AncientTomb",
+				"BirthIsland_",
+				"FarawayIsland_",
+				"MarineCave_",
+				"NavelRock_",
+				"SkyPillar_",
+				"SouthernIsland_",
+				"TerraCave_",
 			};
 
 			bool ShouldDelete(string mapName)

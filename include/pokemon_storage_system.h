@@ -11,6 +11,7 @@
 #define IN_BOX_COLUMNS          6 // Number of columns, 5 Pokémon per column
 #define IN_BOX_COUNT            (IN_BOX_ROWS * IN_BOX_COLUMNS)
 #define BOX_NAME_LENGTH         8
+#define MAX_FUSION_STORAGE      4
 
 /*
             COLUMNS
@@ -27,7 +28,24 @@ struct PokemonStorage
     /*0x0001*/ struct BoxPokemon boxes[ACTUAL_TOTAL_BOXES_COUNT][IN_BOX_COUNT];
     /*0x8344*/ u8 boxNames[ACTUAL_TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
     /*0x83C2*/ u8 boxWallpapers[ACTUAL_TOTAL_BOXES_COUNT];
+    /*0x8432*/ struct Pokemon fusions[MAX_FUSION_STORAGE];
 };
+
+struct __UseablePokemonStorage
+{
+    u8 currentBox;
+    struct BoxPokemon boxes[TOTAL_BOXES_COUNT][IN_BOX_COUNT];
+    u8 boxNames[TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
+    u8 boxWallpapers[TOTAL_BOXES_COUNT];
+};
+
+struct __LeftoverPokemonStorage
+{
+    struct BoxPokemon boxes[LEFTOVER_BOXES_COUNT][IN_BOX_COUNT];
+    u8 boxNames[LEFTOVER_BOXES_COUNT][BOX_NAME_LENGTH + 1];
+    u8 boxWallpapers[LEFTOVER_BOXES_COUNT];
+};
+
 
 extern struct PokemonStorage *gPokemonStoragePtr;
 
@@ -41,6 +59,7 @@ u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n);
 void ShowPokemonStorageSystemPC(void);
 void ResetPokemonStorageSystem(void);
 s16 CompactPartySlots(void);
+s16 CompactEnemyPartySlots(void);
 u8 StorageGetCurrentBox(void);
 u32 GetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request);
 void SetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, const void *value);
@@ -78,5 +97,7 @@ void SetWaldaWallpaperColors(u16 color1, u16 color2);
 u8 *GetWaldaPhrasePtr(void);
 void SetWaldaPhrase(const u8 *src);
 bool32 IsWaldaPhraseEmpty(void);
+
+void EnterPokeStorage(u8 boxOption);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

@@ -132,9 +132,9 @@ void BufferApprenticeChallengeText(u8 saveApprenticeId)
     StringExpandPlaceholders(gStringVar4, challengeText);
 }
 
-void Apprentice_EnableBothScriptContexts(void)
+void Apprentice_ScriptContext_Enable(void)
 {
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void ResetApprenticeStruct(struct Apprentice *apprentice)
@@ -331,119 +331,10 @@ static void SetRandomQuestionData(void)
 // Unlike the first move choice, this can be either a level up move or a TM/HM move
 static u16 GetRandomAlternateMove(u8 monId)
 {
-    u8 i, j;
-    u8 id;
-    u8 numLearnsetMoves;
-    u16 species;
-    const struct LevelUpMove *learnset;
-    bool32 needTMs = FALSE;
-    u16 moveId = MOVE_NONE;
-    bool32 shouldUseMove;
-    u8 level;
-
-    id = APPRENTICE_SPECIES_ID(monId);
-    species = gApprentices[PLAYER_APPRENTICE.id].species[id];
-    learnset = gLevelUpLearnsets[species];
-    j = 0;
-
-    // Despite being open level, level up moves are only read up to level 60
-    if (PLAYER_APPRENTICE.lvlMode == APPRENTICE_LVL_MODE_50)
-        level = 50;
-    else // == APPRENTICE_LVL_MODE_OPEN
-        level = 60;
-
-    for (j = 0; learnset[j].move != LEVEL_UP_END; j++)
-    {
-        if (learnset[j].level > level)
-            break;
-    }
-
-    numLearnsetMoves = j;
-    i = 0;
-
-    // i < 5 here is arbitrary, i isnt used and is only incremented when the selected move isnt in sValidApprenticeMoves
-    // This while loop contains 3 potential infinite loops, though none of them would occur in the base game
-    while (i < 5)
-    {
-        if (Random() % 2 == 0 || needTMs == TRUE)
-        {
-            // Get TM move
-            // NOTE: Below is an infinite loop if a species that only learns TMs for moves
-            //       that are also in its level up learnset is assigned to an Apprentice
-            do
-            {
-                // NOTE: Below is an infinite loop if a species which cannot learn TMs is assigned to an Apprentice
-                do
-                {
-                    id = Random() % (NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES);
-                    shouldUseMove = CanSpeciesLearnTMHM(species, id);
-                }
-                while (!shouldUseMove);
-
-                moveId = ItemIdToBattleMoveId(ITEM_TM01 + id);
-                shouldUseMove = TRUE;
-
-                if (numLearnsetMoves <= MAX_MON_MOVES)
-                    j = 0;
-                else
-                    j = numLearnsetMoves - MAX_MON_MOVES;
-
-                for (; j < numLearnsetMoves; j++)
-                {
-                    // Keep looking for TMs until one not in the level up learnset is found
-                    if ((learnset[j].move) == moveId)
-                    {
-                        shouldUseMove = FALSE;
-                        break;
-                    }
-                }
-            } while (shouldUseMove != TRUE);
-        }
-        else
-        {
-            if (numLearnsetMoves <= MAX_MON_MOVES)
-            {
-                needTMs = TRUE;
-                continue;
-            }
-            else
-            {
-                // Get level up move
-                // NOTE: Below is an infinite loop if a mon whose last 4 moves contain
-                //       all the moves in the rest of its learnset is assigned to an Apprentice
-                do
-                {
-                    // Get a random move excluding the 4 it would know at max level
-                    u8 learnsetId = Random() % (numLearnsetMoves - MAX_MON_MOVES);
-                    moveId = learnset[learnsetId].move;
-                    shouldUseMove = TRUE;
-
-                    for (j = numLearnsetMoves - MAX_MON_MOVES; j < numLearnsetMoves; j++)
-                    {
-                        // Keep looking for moves until one not in the last 4 is found
-                        if ((learnset[j].move) == moveId)
-                        {
-                            shouldUseMove = FALSE;
-                            break;
-                        }
-                    }
-                } while (shouldUseMove != TRUE);
-            }
-        }
-
-        if (TrySetMove(monId, moveId))
-        {
-            if (sValidApprenticeMoves[moveId])
-                break;
-            i++;
-        }
-    }
-
-    gApprenticePartyMovesData->moveCounter++;
-    return moveId;
+    return 0;
 }
 
-static bool8 TrySetMove(u8 monId, u16 moveId)
+static bool8 UNUSED TrySetMove(u8 monId, u16 moveId)
 {
     u8 i;
 
@@ -459,28 +350,6 @@ static bool8 TrySetMove(u8 monId, u16 moveId)
 
 static void GetLatestLearnedMoves(u16 species, u16 *moves)
 {
-    u8 i, j;
-    u8 level, numLearnsetMoves;
-    const struct LevelUpMove *learnset;
-
-    if (PLAYER_APPRENTICE.lvlMode == APPRENTICE_LVL_MODE_50)
-        level = 50;
-    else // == APPRENTICE_LVL_MODE_OPEN
-        level = 60;
-
-    learnset = gLevelUpLearnsets[species];
-    for (i = 0; learnset[i].move != LEVEL_UP_END; i++)
-    {
-        if (learnset[i].level > level)
-            break;
-    }
-
-    numLearnsetMoves = i;
-    if (numLearnsetMoves > MAX_MON_MOVES)
-        numLearnsetMoves = MAX_MON_MOVES;
-
-    for (j = 0; j < numLearnsetMoves; j++)
-        moves[j] = learnset[(i - 1) - j].move;
 }
 
 // Get the level up move or previously suggested move to be the first move choice
@@ -592,7 +461,7 @@ static void CreateApprenticeMenu(u8 menu)
 
             speciesTableId = APPRENTICE_SPECIES_ID(i);
             species =  gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId];
-            strings[i] = gSpeciesNames[species];
+            strings[i] = GetSpeciesName(species);
         }
         break;
     case APPRENTICE_ASK_2SPECIES:
@@ -600,8 +469,8 @@ static void CreateApprenticeMenu(u8 menu)
         top = 8;
         if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS)
             return;
-        strings[1] = gSpeciesNames[gApprenticeQuestionData->altSpeciesId];
-        strings[0] = gSpeciesNames[gApprenticeQuestionData->speciesId];
+        strings[1] = GetSpeciesName(gApprenticeQuestionData->altSpeciesId);
+        strings[0] = GetSpeciesName(gApprenticeQuestionData->speciesId);
         break;
     case APPRENTICE_ASK_MOVES:
         left = 17;
@@ -624,6 +493,9 @@ static void CreateApprenticeMenu(u8 menu)
     default:
         left = 0;
         top = 0;
+#ifdef UBFIX
+        return;
+#endif
         break;
     }
 
@@ -638,7 +510,7 @@ static void CreateApprenticeMenu(u8 menu)
     width = ConvertPixelWidthToTileWidth(pixelWidth);
     left = ScriptMenu_AdjustLeftCoordFromWidth(left, width);
     windowId = CreateAndShowWindow(left, top, width, count * 2);
-    SetStandardWindowBorderStyle(windowId, 0);
+    SetStandardWindowBorderStyle(windowId, FALSE);
 
     for (i = 0; i < count; i++)
         AddTextPrinterParameterized(windowId, FONT_NORMAL, strings[i], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
@@ -666,11 +538,12 @@ static void Task_ChooseAnswer(u8 taskId)
     case MENU_NOTHING_CHOSEN:
         return;
     case MENU_B_PRESSED:
+        // Only ever true. Answering Apprentice questions is required.
         if (tNoBButton)
             return;
 
         PlaySE(SE_SELECT);
-        gSpecialVar_Result = 0x7F;
+        gSpecialVar_Result = MULTI_B_PRESSED;
         break;
     default:
         gSpecialVar_Result = input;
@@ -679,7 +552,7 @@ static void Task_ChooseAnswer(u8 taskId)
 
     RemoveAndHideWindow(tWindowId);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static u8 CreateAndShowWindow(u8 left, u8 top, u8 width, u8 height)
@@ -815,9 +688,9 @@ static void Task_WaitForPrintingMessage(u8 taskId)
     {
         DestroyTask(taskId);
         if (gSpecialVar_0x8005)
-            ExecuteFuncAfterButtonPress(EnableBothScriptContexts);
+            ExecuteFuncAfterButtonPress(ScriptContext_Enable);
         else
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
     }
 }
 
@@ -895,7 +768,7 @@ static void PrintApprenticeMessage(void)
     }
     else
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         return;
     }
 
@@ -906,11 +779,11 @@ static void PrintApprenticeMessage(void)
 
 static void Script_PrintApprenticeMessage(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FreezeObjectEvents();
     PlayerFreeze();
     StopPlayerAvatar();
-    DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, TRUE);
     PrintApprenticeMessage();
 }
 
@@ -1050,13 +923,13 @@ static void ApprenticeBufferString(void)
     switch (gSpecialVar_0x8006)
     {
     case APPRENTICE_BUFF_SPECIES1:
-        StringCopy(stringDst, gSpeciesNames[gApprenticeQuestionData->speciesId]);
+        StringCopy(stringDst, GetSpeciesName(gApprenticeQuestionData->speciesId));
         break;
     case APPRENTICE_BUFF_SPECIES2:
-        StringCopy(stringDst, gSpeciesNames[gApprenticeQuestionData->altSpeciesId]);
+        StringCopy(stringDst, GetSpeciesName(gApprenticeQuestionData->altSpeciesId));
         break;
     case APPRENTICE_BUFF_SPECIES3:
-        StringCopy(stringDst, gSpeciesNames[gApprenticeQuestionData->speciesId]);
+        StringCopy(stringDst, GetSpeciesName(gApprenticeQuestionData->speciesId));
         break;
     case APPRENTICE_BUFF_MOVE1:
         StringCopy(stringDst, gMoveNames[gApprenticeQuestionData->moveId1]);
@@ -1083,7 +956,7 @@ static void ApprenticeBufferString(void)
         break;
     case APPRENTICE_BUFF_LEAD_MON_SPECIES:
         speciesArrayId = APPRENTICE_SPECIES_ID(PLAYER_APPRENTICE.leadMonId);
-        StringCopy(stringDst, gSpeciesNames[gApprentices[PLAYER_APPRENTICE.id].species[speciesArrayId]]);
+        StringCopy(stringDst, GetSpeciesName(gApprentices[PLAYER_APPRENTICE.id].species[speciesArrayId]));
         break;
     }
 }
@@ -1278,8 +1151,7 @@ const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
     }
 }
 
-// Functionally unused
-static void Task_SwitchToFollowupFuncAfterButtonPress(u8 taskId)
+static void UNUSED Task_SwitchToFollowupFuncAfterButtonPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         SwitchTaskToFollowupFunc(taskId);
@@ -1289,7 +1161,7 @@ static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
-        gApprenticeFunc = (void*)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
+        gApprenticeFunc = (void *)(u32)(((u16)gTasks[taskId].data[0] | (gTasks[taskId].data[1] << 16)));
         gApprenticeFunc();
         DestroyTask(taskId);
     }
@@ -1302,8 +1174,7 @@ static void ExecuteFuncAfterButtonPress(void (*func)(void))
     gTasks[taskId].data[1] = (u32)(func) >> 16;
 }
 
-// Unused
-static void ExecuteFollowupFuncAfterButtonPress(TaskFunc task)
+static void UNUSED ExecuteFollowupFuncAfterButtonPress(TaskFunc task)
 {
     u8 taskId = CreateTask(Task_SwitchToFollowupFuncAfterButtonPress, 1);
     SetTaskFuncWithFollowupFunc(taskId, Task_SwitchToFollowupFuncAfterButtonPress, task);

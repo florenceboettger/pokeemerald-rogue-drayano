@@ -75,7 +75,7 @@ namespace PokemonDataGenerator.OverworldSprites
 				"rolycoly",
 				"carkol",
 				"coalossal",
-				"applin",
+				"_", // applin is the wrong way roung
 				"flapple",
 				"appletun",
 				"silicobra",
@@ -161,7 +161,7 @@ namespace PokemonDataGenerator.OverworldSprites
 				"obstagoon",
 				"darumaka_galarian",
 				"darmanitan_galarian",
-				"darmanitan_zen_mode_galarian",
+				"darmanitan_galarian_zen_mode",
 				"yamask_galarian",
 				"runerigus",
 				"stunfisk_galarian",
@@ -175,10 +175,26 @@ namespace PokemonDataGenerator.OverworldSprites
 			};
 			SpriteSheetSplitter.AppendMonBlockSprites(monNames, ref pokedexNumber, settings, ref originX, ref originY);
 
+			settings.FrameNames = new string[]
+			{
+				$"front{groupKey}_1",   $"front{groupKey}_2",
+				$"back{groupKey}_1",    $"back{groupKey}_2",
+				 $"_",                  $"_",
+				$"side{groupKey}_1",    $"side{groupKey}_2",
+			};
+			SpriteSheetSplitter.AppendMonSprites("applin", pokedexNumber++, settings, 192, 384);
+
 			// Special large format
 			//
+			settings.FrameNames = new string[]
+			{
+				$"front{groupKey}_1",   $"front{groupKey}_2",
+				$"back{groupKey}_1",    $"back{groupKey}_2",
+				$"side{groupKey}_1",    $"side{groupKey}_2",
+				 $"_",                  $"_",
+			};
 			settings.CellSize = 64;
-			SpriteSheetSplitter.AppendMonSprites("eternatus", pokedexNumber, settings, 448, 1152);
+			SpriteSheetSplitter.AppendMonSprites("eternatus", pokedexNumber++, settings, 448, 1152);
 		}
 	}
 }

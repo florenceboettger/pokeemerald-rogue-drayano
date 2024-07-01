@@ -16,30 +16,6 @@ mapscripts Rogue_HubTransition_MapScripts
 
 script Rogue_HubTransition_OnEnter
 {
-    lock
-
-    specialvar(VAR_RESULT, Rogue_GetActiveCampaign)
-    if(var(VAR_RESULT) != ROGUE_CAMPAIGN_NONE)
-    {
-        setvar(VAR_0x8004, POPUP_MSG_CAMPAIGN_ANNOUNCE)
-        copyvar(VAR_0x8005, VAR_RESULT)
-        special(Rogue_Popup)
-    }
-
-    if(flag(FLAG_ROGUE_TRAINERS_STRONG_LEGENDARIES))
-    {
-        setvar(VAR_0x8004, POPUP_MSG_LEGENDARY_CLAUSE)
-        setvar(VAR_0x8005, 1)
-        special(Rogue_Popup)
-    }
-    elif(flag(FLAG_ROGUE_TRAINERS_WEAK_LEGENDARIES))
-    {        
-        setvar(VAR_0x8004, POPUP_MSG_LEGENDARY_CLAUSE)
-        setvar(VAR_0x8005, 0)
-        special(Rogue_Popup)
-    }
-
-    release
     setvar(VAR_TEMP_1, 1)
     end
 }
@@ -51,27 +27,27 @@ script Rogue_HubTransition_OnLoad
 script Rogue_HubTransition_RandomMan
 {
     lock
-    applymovement(NPC_RANDOM_MAN, Rogue_RestStop_RandomMan_Spin)
+    applymovement(VAR_LAST_TALKED, Rogue_RestStop_RandomMan_Spin)
     waitmovement(0)
     faceplayer
 
     msgbox(format("WAHEY!\pYou looking to add a bit of randomness to you life?"), MSGBOX_DEFAULT)
-    msgbox(format("You wanna trade me your POKéMON?"), MSGBOX_YESNO)
+    msgbox(format("You wanna trade me your Pokémon?"), MSGBOX_YESNO)
 
     if(var(VAR_RESULT) == YES)
     {
         if(flag(FLAG_SET_SEED_ENABLED))
         {
-            msgbox(format("Oh you have SEEDED mode on do ya?\pDid you want this trade to be for a SEEDED POKéMON too?"), MSGBOX_YESNO)
+            msgbox(format("Oh you have SEEDED mode on do ya?\pDid you want this trade to be for a SEEDED Pokémon too?"), MSGBOX_YESNO)
 
             if(var(VAR_RESULT) == YES)
             {
-                msgbox(format("Okidoke!\nOne SEEDED POKéMON coming up!"), MSGBOX_DEFAULT)
+                msgbox(format("Okidoke!\nOne SEEDED Pokémon coming up!"), MSGBOX_DEFAULT)
                 special(Rogue_SeedRandomGenerators)
             }
             else
             {
-                msgbox(format("Okidoke!\nOne surpise POKéMON coming up!"), MSGBOX_DEFAULT)
+                msgbox(format("Okidoke!\nOne surpise Pokémon coming up!"), MSGBOX_DEFAULT)
             }
         }
 
@@ -84,11 +60,11 @@ script Rogue_HubTransition_RandomMan
         fadescreen(FADE_FROM_BLACK)
         
         msgbox(format("Ke ke ke!\pEnjoy!"))
-        applymovement(NPC_RANDOM_MAN, Rogue_RestStop_RandomMan_RunAway)
+        applymovement(VAR_LAST_TALKED, Rogue_RestStop_RandomMan_RunAway)
         waitmovement(0)
 
         setflag(FLAG_ROGUE_RANDOM_TRADE_DISABLED)
-        removeobject(NPC_RANDOM_MAN)
+        removeobject(VAR_LAST_TALKED)
     }
     else
     {

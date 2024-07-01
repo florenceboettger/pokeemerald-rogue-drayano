@@ -9,7 +9,7 @@
 #define VAR_TEMP_0                 (TEMP_VARS_START + 0x0)
 #define VAR_TEMP_1                 (TEMP_VARS_START + 0x1)
 #define VAR_TEMP_2                 (TEMP_VARS_START + 0x2)
-#define VAR_TEMP_3                 (TEMP_VARS_START + 0x3)
+#define VAR_TEMP_3                 (TEMP_VARS_START + 0x3) // Note: Used when the player checks a TV
 #define VAR_TEMP_4                 (TEMP_VARS_START + 0x4)
 #define VAR_TEMP_5                 (TEMP_VARS_START + 0x5)
 #define VAR_TEMP_6                 (TEMP_VARS_START + 0x6)
@@ -23,6 +23,7 @@
 #define VAR_TEMP_E                 (TEMP_VARS_START + 0xE)
 #define VAR_TEMP_F                 (TEMP_VARS_START + 0xF)
 #define TEMP_VARS_END              VAR_TEMP_F
+#define NUM_TEMP_VARS              (TEMP_VARS_END - TEMP_VARS_START + 1)
 
 // object gfx id vars
 // These 0x10 vars are used to dynamically control a map object's sprite.
@@ -46,49 +47,49 @@
 #define VAR_OBJ_GFX_ID_F           0x401F
 
 // general purpose vars
-#define VAR_RECYCLE_GOODS                    0x4020
-#define VAR_REPEL_STEP_COUNT                 0x4021
-#define VAR_ICE_STEP_COUNT                   0x4022
-#define VAR_STARTER_MON                      0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
-#define VAR_MIRAGE_RND_H                     0x4024
-#define VAR_MIRAGE_RND_L                     0x4025
-#define VAR_SECRET_BASE_MAP                  0x4026
-#define VAR_CYCLING_ROAD_RECORD_COLLISIONS   0x4027
-#define VAR_CYCLING_ROAD_RECORD_TIME_L       0x4028
-#define VAR_CYCLING_ROAD_RECORD_TIME_H       0x4029
-#define VAR_FRIENDSHIP_STEP_COUNTER          0x402A
-#define VAR_POISON_STEP_COUNTER              0x402B
-#define VAR_RESET_RTC_ENABLE                 0x402C
-#define VAR_ENIGMA_BERRY_AVAILABLE           0x402D
-#define VAR_WONDER_NEWS_COUNTER              0x402E
+#define VAR_RECYCLE_GOODS                                0x4020
+#define VAR_REPEL_STEP_COUNT                             0x4021
+#define VAR_ICE_STEP_COUNT                               0x4022
+#define VAR_STARTER_MON                                  0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
+#define VAR_STARTER_SWAP_SPECIES             			 0x4024
+#define VAR_MIRAGE_RND_L                                 0x4025
+#define VAR_SECRET_BASE_MAP                              0x4026
+#define VAR_CYCLING_ROAD_RECORD_COLLISIONS               0x4027
+#define VAR_CYCLING_ROAD_RECORD_TIME_L                   0x4028
+#define VAR_CYCLING_ROAD_RECORD_TIME_H                   0x4029
+#define VAR_FRIENDSHIP_STEP_COUNTER                      0x402A
+#define VAR_POISON_STEP_COUNTER                          0x402B
+#define VAR_RESET_RTC_ENABLE                             0x402C
+#define VAR_ENIGMA_BERRY_AVAILABLE                       0x402D
+#define VAR_WONDER_NEWS_STEP_COUNTER                     0x402E
 
-#define VAR_UNUSED_0x402F                    0x402F
-#define VAR_UNUSED_0x4030                    0x4030
-#define VAR_UNUSED_0x4031                    0x4031
-#define VAR_UNUSED_0x4032                    0x4032
-#define VAR_UNUSED_0x4033                    0x4033
+#define VAR_ROGUE_ACTIVE_POKEBLOCK           0x402F
+#define VAR_ROGUE_SPECIAL_MODE               0x4030
+#define VAR_ROGUE_SAFARI_BALL_TYPE           0x4031
+#define VAR_ROGUE_REGISTERED_RIDE_MON        0x4032
+#define VAR_ROGUE_INTRO_STATE                0x4033
 
 #define VAR_DEOXYS_ROCK_STEP_COUNT           0x4034
 #define VAR_DEOXYS_ROCK_LEVEL                0x4035
 #define VAR_PC_BOX_TO_SEND_MON               0x4036
-#define VAR_UNUSED_0x4037                    0x4037
-#define VAR_UNUSED_0x4038                    0x4038
-#define VAR_UNUSED_0x4039                    0x4039
+#define VAR_ROGUE_INITIAL_DEX_SELECTION      0x4037
+#define VAR_ROGUE_POST_GAME_TUTORIAL         0x4038
+#define VAR_ROGUE_FREE_POKE_BALL             0x4039
 #define VAR_FARAWAY_ISLAND_STEP_COUNTER      0x403A
 #define VAR_REGICE_STEPS_1                   0x403B
 #define VAR_REGICE_STEPS_2                   0x403C
 #define VAR_REGICE_STEPS_3                   0x403D
-#define VAR_UNUSED_0x403E                    0x403E
-#define VAR_UNUSED_0x403F                    0x403F
+#define VAR_ROGUE_REMAINING_FLIGHT_CHARGES   0x403E
+#define VAR_LAST_REPEL_USED                  0x403F
 #define VAR_DAYS                             0x4040
 #define VAR_ROGUE_FLASK_HEALS_USED           0x4041
 #define VAR_ROGUE_FLASK_HEALS_MAX            0x4042
-#define VAR_UNUSED_0x4043                    0x4043
-#define VAR_UNUSED_0x4044                    0x4044
-#define VAR_UNUSED_0x4045                    0x4045
+#define VAR_ROGUE_DAYCARE_EGG_SPECIES        0x4043
+#define VAR_ROGUE_DAYCARE_EGG_CYCLES         0x4044
+#define VAR_ROGUE_TOTAL_RUN_CATCHES          0x4045
 #define VAR_NATIONAL_DEX                     0x4046
-#define VAR_UNUSED_0x4046                    0x4047
-#define VAR_UNUSED_0x4048                    0x4048
+#define VAR_ROGUE_COURIER_ITEM               0x4047
+#define VAR_ROGUE_COURIER_COUNT              0x4048
 #define VAR_UNUSED_0x4049                    0x4049
 #define VAR_UNUSED_0x404A                    0x404A
 #define VAR_UNUSED_0x404B                    0x404B
@@ -113,41 +114,46 @@
 #define VAR_UNUSED_0x405E                    0x405E
 #define VAR_UNUSED_0x405F                    0x405F 
 #define VAR_UNUSED_0x4060                    0x4060
+
 #define VAR_ROGUE_ITEM0                      0x4061 
 #define VAR_ROGUE_ITEM1                      0x4062 
-#define VAR_UNUSED_0x4063                    0x4063
-#define VAR_ROGUE_ITEM2                      0x4064 
-#define VAR_ROGUE_ITEM3                      0x4065 
-#define VAR_ROGUE_ITEM4                      0x4066 
-#define VAR_UNUSED_0x4067                    0x4067 
-#define VAR_ROGUE_ITEM5                      0x4068 
-#define VAR_UNUSED_0x4069                    0x4069
-#define VAR_ROGUE_ITEM6                      0x406A 
-#define VAR_ROGUE_ITEM7                      0x406B 
-#define VAR_ROGUE_ITEM8                      0x406C 
-#define VAR_ROGUE_ITEM9                      0x406D 
-#define VAR_ROGUE_ITEM10                     0x406E 
-#define VAR_UNUSED_0x406F                    0x406F
-#define VAR_ROGUE_ITEM11                     0x4070 
-#define VAR_UNUSED_0x4071                    0x4071
-#define VAR_UNUSED_0x4072                    0x4072
-#define VAR_UNUSED_0x4073                    0x4073 
+#define VAR_ROGUE_ITEM2                      0x4063
+#define VAR_ROGUE_ITEM3                      0x4064 
+#define VAR_ROGUE_ITEM4                      0x4065 
+#define VAR_ROGUE_ITEM5                      0x4066 
+#define VAR_ROGUE_ITEM6                      0x4067 
+#define VAR_ROGUE_ITEM7                      0x4068 
+#define VAR_ROGUE_ITEM8                      0x4069
+#define VAR_ROGUE_ITEM9                      0x406A 
+#define VAR_ROGUE_ITEM10                     0x406B 
+#define VAR_ROGUE_ITEM11                     0x406C 
+#define VAR_ROGUE_ITEM12                     0x406D 
+#define VAR_ROGUE_ITEM13                     0x406E 
+#define VAR_ROGUE_ITEM14                     0x406F
+#define VAR_ROGUE_ITEM15                     0x4070 
+#define VAR_ROGUE_ITEM16                     0x4071
+#define VAR_ROGUE_ITEM17                     0x4072
+#define VAR_ROGUE_ITEM18                     0x4073 
+
+#define VAR_ROGUE_ITEM_START VAR_ROGUE_ITEM0
+#define VAR_ROGUE_ITEM_END VAR_ROGUE_ITEM18
+
 #define VAR_UNUSED_0x4074                    0x4074
-#define VAR_ROGUE_ITEM12                     0x4075 
-#define VAR_ROGUE_ITEM13                     0x4076 
-#define VAR_ROGUE_ITEM14                     0x4077 
-#define VAR_ROGUE_ITEM15                     0x4078 
-#define VAR_ROGUE_ITEM16                     0x4079 
-#define VAR_ROGUE_ITEM17                     0x407A 
+#define VAR_UNUSED_0x4075                    0x4075 
+#define VAR_UNUSED_0x4076                    0x4076 
+#define VAR_UNUSED_0x4077                    0x4077 
+#define VAR_UNUSED_0x4078                    0x4078 
+#define VAR_UNUSED_0x4079                    0x4079 
+#define VAR_UNUSED_0x407A                    0x407A 
 #define VAR_UNUSED_0x407B                    0x407B
-#define VAR_ROGUE_ITEM18                     0x407C 
+#define VAR_UNUSED_0x407C                    0x407C 
 #define VAR_ROGUE_DIFFICULTY                 0x407D
 #define VAR_ROGUE_FURTHEST_DIFFICULTY        0x407E
 #define VAR_ROGUE_STARTER0                   0x407F
 #define VAR_ROGUE_STARTER1                   0x4080 
 #define VAR_ROGUE_STARTER2                   0x4081
 #define VAR_UNUSED_0x4082                    0x4082
-#define VAR_ROGUE_SPECIAL_ENCOUNTER_DATA2    0x4083
+#define VAR_UNUSED_0x4083                    0x4083
 #define VAR_UNUSED_0x4084                    0x4084
 #define VAR_UNUSED_0x4085                    0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_UNUSED_0x4086                    0x4086
@@ -161,7 +167,7 @@
 #define VAR_BOARD_BRINEY_BOAT_STATE          0x408E
 #define VAR_DEVON_CORP_3F_STATE              0x408F
 #define VAR_BRINEY_HOUSE_STATE               0x4090
-#define VAR_ROGUE_REWARD_MONEY               0x4091
+#define VAR_UNUSED_0x4091                    0x4091
 #define VAR_LITTLEROOT_INTRO_STATE           0x4092
 #define VAR_MAUVILLE_GYM_STATE               0x4093
 #define VAR_LILYCOVE_MUSEUM_2F_STATE         0x4094
@@ -200,7 +206,7 @@
 #define VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR  0x40B5
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2     0x40B6 // Leftover from RS, never set
 #define VAR_SLATEPORT_FAN_CLUB_STATE         0x40B7
-#define VAR_ROGUE_SPECIAL_ENCOUNTER_DATA     0x40B8
+#define VAR_UNUSED_0x40B8                    0x40B8
 #define VAR_MT_PYRE_STATE                    0x40B9
 #define VAR_NEW_MAUVILLE_STATE               0x40BA
 #define VAR_ROGUE_CURRENT_LEVEL_CAP          0x40BB
@@ -222,16 +228,16 @@
 #define VAR_FOLLOW_MON_3                     0x40CB
 #define VAR_FOLLOW_MON_4                     0x40CC
 #define VAR_FOLLOW_MON_5                     0x40CD
-#define VAR_FOLLOW_MON_6                     0x40CE
-#define VAR_FOLLOW_MON_7                     0x40CF
-#define VAR_FOLLOW_MON_8                     0x40D0
-#define VAR_FOLLOW_MON_9                     0x40D1
-#define VAR_FOLLOW_MON_A                     0x40D2
-#define VAR_FOLLOW_MON_B                     0x40D3
-#define VAR_FOLLOW_MON_C                     0x40D4
-#define VAR_FOLLOW_MON_D                     0x40D5
-#define VAR_FOLLOW_MON_E                     0x40D6
-#define VAR_FOLLOW_MON_F                     0x40D7
+#define VAR_ROGUE_SPECIAL_ENCOUNTER_DATA     0x40CE
+#define VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1    0x40CF
+#define VAR_ROGUE_SPECIAL_ENCOUNTER_DATA2    0x40D0
+#define VAR_UNUSED_0x40D1                    0x40D1 // unused
+#define VAR_UNUSED_0x40D2                    0x40D2 // unused
+#define VAR_UNUSED_0x40D3                    0x40D3 // unused
+#define VAR_UNUSED_0x40D4                    0x40D4 // unused
+#define VAR_UNUSED_0x40D5                    0x40D5 // unused
+#define VAR_UNUSED_0x40D6                    0x40D6 // unused
+#define VAR_UNUSED_0x40D7                    0x40D7 // unused
 #define VAR_SKY_PILLAR_STATE                 0x40D8
 #define VAR_FRONTIER_BATTLE_MODE             0x40D9
 #define VAR_FRONTIER_FACILITY                0x40DA
@@ -263,7 +269,7 @@
 #define VAR_ROXANNE_CALL_STEP_COUNTER        0x40F4
 #define VAR_SCOTT_BF_CALL_STEP_COUNTER       0x40F5
 #define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER 0x40F6
-#define VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1    0x40F7
+#define VAR_UNUSED_0x40F7                    0x40F7
 #define VAR_ROGUE_DESIRED_CAMPAIGN           0x40F8
 #define VAR_ROGUE_ACTIVE_CAMPAIGN            0x40F9
 #define VAR_UNUSED_0x40FA                    0x40FA 
@@ -303,5 +309,24 @@
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of gTrainerBattleOpponent_A
 
 #define SPECIAL_VARS_END              0x8015
+
+// If an overworld trigger uses this pseudo-variable as the trigger check,
+// then the script will be run using RunScriptImmediately instead of in the
+// global script context. This means it will run faster, but cannot do any
+// cutscenes nor call a wait command. Used for weather effects in vanilla.
+#define TRIGGER_RUN_IMMEDIATELY   0
+
+// Temp var aliases
+#define VAR_TEMP_CHALLENGE_STATUS  VAR_TEMP_0
+
+#define VAR_TEMP_MIXED_RECORDS         VAR_TEMP_0
+#define VAR_TEMP_RECORD_MIX_GIFT_ITEM  VAR_TEMP_1
+
+#define VAR_TEMP_PLAYING_PYRAMID_MUSIC  VAR_TEMP_E
+
+#define VAR_TEMP_FRONTIER_TUTOR_SELECTION  VAR_TEMP_D
+#define VAR_TEMP_FRONTIER_TUTOR_ID         VAR_TEMP_E
+
+#define VAR_TEMP_TRANSFERRED_SPECIES  VAR_TEMP_1
 
 #endif // GUARD_CONSTANTS_VARS_H

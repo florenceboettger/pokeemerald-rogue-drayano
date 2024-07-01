@@ -1,8 +1,11 @@
+#include "config.h"
+#include "config/battle.h"
+#include "config/item.h"
 #include "constants/global.h"
+#include "constants/rogue.h"
 #include "constants/apprentice.h"
 #include "constants/battle.h"
 #include "constants/battle_arena.h"
-#include "constants/battle_config.h"
 #include "constants/battle_dome.h"
 #include "constants/battle_factory.h"
 #include "constants/battle_frontier.h"
@@ -55,7 +58,6 @@
 #include "constants/vars.h"
 #include "constants/weather.h"
 #include "constants/follow_me.h"
-#include "constants/rogue.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -105,30 +107,20 @@ gStdScripts::
 gStdScripts_End::
 
 	.include "data/maps/Route121_SafariZoneEntrance/scripts.inc"
-	.include "data/maps/DesertRuins/scripts.inc"
-	.include "data/maps/IslandCave/scripts.inc"
-	.include "data/maps/AncientTomb/scripts.inc"
-	.include "data/maps/SkyPillar_Top/scripts.inc"
-	.include "data/maps/MarineCave_End/scripts.inc"
-	.include "data/maps/TerraCave_End/scripts.inc"
 	.include "data/scripts/shared_secret_base.inc"
 	.include "data/maps/InsideOfTruck/scripts.inc"
 	.include "data/maps/SafariZone_Northwest/scripts.inc"
 	.include "data/maps/SafariZone_North/scripts.inc"
 	.include "data/maps/SafariZone_Southwest/scripts.inc"
 	.include "data/maps/SafariZone_South/scripts.inc"
-	.include "data/maps/SouthernIsland_Interior/scripts.inc"
 	.include "data/maps/SafariZone_RestHouse/scripts.inc"
 	.include "data/maps/SafariZone_Northeast/scripts.inc"
 	.include "data/maps/SafariZone_Southeast/scripts.inc"
-	.include "data/maps/FarawayIsland_Interior/scripts.inc"
-	.include "data/maps/BirthIsland_Exterior/scripts.inc"
-	.include "data/maps/NavelRock_Top/scripts.inc"
-	.include "data/maps/NavelRock_Bottom/scripts.inc"
 	.include "data/scripts/std_msgbox.inc"
 	.include "data/scripts/trainer_battle.inc"
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
+	.include "data/scripts/debug.inc"
 
 EventScript_WhiteOut::
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
@@ -400,8 +392,8 @@ gText_SandstormIsVicious::
 	.string "It's impossible to keep going.$"
 
 gText_SelectWithoutRegisteredItem::
-	.string "An item in the BAG can be\n"
-	.string "registered to SELECT for easy use.$"
+	.string "Up to four items in the Bag can be\n"
+	.string "registered to {SELECT_BUTTON} for easy use.$"
 
 gText_PokemonTrainerSchoolEmail::
 	.string "There's an e-mail from POKéMON TRAINER\n"
@@ -545,6 +537,13 @@ Common_EventScript_LegendaryFlewAway::
 	release
 	end
 
+EventScript_VsSeekerChargingDone::
+	special VsSeekerFreezeObjectsAfterChargeComplete
+	waitstate
+	special VsSeekerResetObjectMovementAfterChargeComplete
+	releaseall
+	end
+
 	.include "data/scripts/pc_transfer.inc"
 	.include "data/scripts/questionnaire.inc"
 	.include "data/scripts/abnormal_weather.inc"
@@ -601,8 +600,14 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/birch_speech.inc"
 
 	.include "data/scripts/Rogue/Rogue_FollowMon.inc"
+	.include "data/scripts/Rogue/Rogue_Hub.inc"
 	.include "data/scripts/Rogue/Rogue_Manager.inc"
 	.include "data/scripts/Rogue/Rogue_Multiplayer.inc"
+
+	.include "data/scripts/Rogue/Strings/Rogue_Strings_Common.inc"
+	.include "data/scripts/Rogue/Strings/Rogue_Strings_Items.inc"
+	.include "data/scripts/Rogue/Generated/trainers.inc"
+	.include "data/scripts/Rogue/Generated/quests.inc"
 
 	.include "data/maps/Rogue_Hub/scripts.inc"
 
@@ -744,3 +749,161 @@ Common_EventScript_LegendaryFlewAway::
 
 	.include "data/maps/Rogue_Route_Johto_Mountain0/scripts.inc"
 
+
+	.include "data/maps/Rogue_Tile_Test1/scripts.inc"
+
+	.include "data/maps/Rogue_Tile_Test2/scripts.inc"
+
+	.include "data/maps/Rogue_Tile_Test3/scripts.inc"
+
+	.include "data/maps/Rogue_Tile_AdventureEntrance/scripts.inc"
+
+	.include "data/maps/Rogue_Tile_Empty/scripts.inc"
+
+	.include "data/maps/Rogue_Tile_Mart/scripts.inc"
+
+	.include "data/maps/Rogue_Tile_SafariEntrance/scripts.inc"
+
+	.include "data/maps/Rogue_Tile_OutdoorMart/scripts.inc"
+
+	.include "data/maps/Rogue_Tile_BerryPatch1/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Regi/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Deoxys/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Mew/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Kyogre/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Groudon/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Rayquaza/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Hooh/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Lugia/scripts.inc"
+
+	.include "data/maps/Rogue_HallwayFacade_Horizontal/scripts.inc"
+
+	.include "data/maps/Rogue_HallwayFacade_Vertical/scripts.inc"
+
+	.include "data/maps/Rogue_Area_Home/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_Home/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_HomeUpper/scripts.inc"
+
+	.include "data/maps/Rogue_Area_FarmingField/scripts.inc"
+
+	.include "data/maps/Rogue_Area_Labs/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_ProfLab/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_ConfigLab/scripts.inc"
+
+	.include "data/maps/Rogue_Area_AdventureEntrance/scripts.inc"
+
+	.include "data/maps/Rogue_Intro/scripts.inc"
+
+	.include "data/maps/Rogue_Area_SafariZone/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_PokeConnect/scripts.inc"
+
+	.include "data/maps/Rogue_Area_RideTraining/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_SafariCave/scripts.inc"
+
+	.include "data/maps/Rogue_Area_Marts/scripts.inc"
+
+	.include "data/maps/Rogue_Area_SafariZone_Tutorial/scripts.inc"
+
+	.include "data/maps/Rogue_Area_TownSquare/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_Restaurant/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_Cafe/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_School/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_205/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_EternaForest/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_207/scripts.inc"
+
+	.include "data/maps/Rogue_Special_LakeGuardian/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Arceus/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_HoneyTree/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_DayCare/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_RocketHideout/scripts.inc"
+
+	.include "data/maps/Rogue_Boss_Final/scripts.inc"
+
+	.include "data/maps/Rogue_Template_Homes/scripts.inc"
+
+	.include "data/maps/Rogue_Template_Home_Flowers/scripts.inc"
+
+	.include "data/maps/Rogue_Template_Home_Base/scripts.inc"
+
+	.include "data/maps/Rogue_Template_Home_Grass/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_Shrine/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_CatchingContest/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_215/scripts.inc"
+
+	.include "data/maps/Rogue_Special_Gen9_Mon/scripts.inc"
+
+	.include "data/maps/Rogue_Area_ChallengeFrontier/scripts.inc"
+
+	.include "data/maps/Rogue_Area_DayCare/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_SilphCo/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_Sign/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_ChallengeFrontier/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_BattleSim/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_MtChimney/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_MagmaHideout/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_AquaHideout/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_SeafloorCavern/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_212/scripts.inc"
+
+	.include "data/maps/Rogue_Interior_BillsLab/scripts.inc"
+
+	.include "data/maps/Rogue_Template_Home_Interior/scripts.inc"
+
+	.include "data/maps/Rogue_Area_Market/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_217/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_210/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_201/scripts.inc"
+
+	.include "data/maps/Rogue_Boss_VictoryLap/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_LakeValor/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_214/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_209/scripts.inc"
+
+	.include "data/maps/Rogue_Encounter_GalacticHQ/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_MtCoronet/scripts.inc"
+
+	.include "data/maps/Rogue_Route_Sinnoh_IronIsland/scripts.inc"

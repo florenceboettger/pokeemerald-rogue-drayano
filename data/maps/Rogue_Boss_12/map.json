@@ -2,8 +2,8 @@
   "id": "MAP_ROGUE_BOSS_12",
   "name": "Rogue_Boss_12",
   "layout": "LAYOUT_ROGUE_BOSS_12",
-  "music": "MUS_VICTORY_ROAD",
-  "region_map_section": "MAPSEC_SPECIAL_AREA",
+  "music": "MUS_DP_INSIDE_POKEMON_LEAGUE",
+  "region_map_section": "MAPSEC_ADVENTURE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -34,7 +34,7 @@
       "y": 28,
       "elevation": 3,
       "dest_map": "MAP_ROGUE_BOSS_8",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [
@@ -45,7 +45,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "Rogue_Battle_Boss12"
+      "script": "Rogue_EnterBattle"
     },
     {
       "type": "trigger",
@@ -54,7 +54,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "Rogue_Battle_Boss12"
+      "script": "Rogue_EnterBattle"
     },
     {
       "type": "trigger",
@@ -63,7 +63,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "Rogue_Battle_Boss12"
+      "script": "Rogue_EnterBattle"
     }
   ],
   "bg_events": [

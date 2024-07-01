@@ -726,37 +726,36 @@ EventScript_TradeCenter_Chair3::
 	waitstate
 	end
 
-@ VAR_TEMP_1 for below scripts set by ReceiveGiftItem
 EventScript_RecordCenter_Spot0::
 	setvar VAR_0x8005, 0
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot1::
 	setvar VAR_0x8005, 1
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot2::
 	setvar VAR_0x8005, 2
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot3::
 	setvar VAR_0x8005, 3
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 RecordCorner_EventScript_ReceivedGiftItem::
-	bufferitemname STR_VAR_2, VAR_TEMP_1
+	bufferitemname STR_VAR_2, VAR_TEMP_RECORD_MIX_GIFT_ITEM
 	message RecordCorner_Text_PlayerSentOverOneX
 	waitmessage
 	waitbuttonpress
@@ -797,7 +796,7 @@ TradeCenter_EventScript_Attendant::
 	end
 
 RecordCorner_EventScript_Attendant::
-	goto_if_ne VAR_TEMP_0, 0, RecordCorner_EventScript_AlreadyMixed
+	goto_if_ne VAR_TEMP_MIXED_RECORDS, 0, RecordCorner_EventScript_AlreadyMixed
 	special Script_FacePlayer
 	message RecordCorner_Text_TakeSeatAndWait
 	waitmessage
@@ -1271,7 +1270,7 @@ MossdeepCity_GameCorner_1F_EventScript_OldMan2::
 	multichoice 0, 0, MULTI_WIRELESS_MINIGAME, FALSE
 	switch VAR_RESULT
 	case 0, MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump
-	case 1, MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking
+	case 1, MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump
 	case 2, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	end
@@ -1289,22 +1288,6 @@ MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump::
 	call Common_EventScript_SaveGame
 	goto_if_eq VAR_RESULT, 0, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	setvar VAR_0x8004, LINK_GROUP_POKEMON_JUMP
-	goto MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking::
-	setvar VAR_0x8005, 1
-	special IsDodrioInParty
-	goto_if_eq VAR_RESULT, FALSE, MossdeepCity_GameCorner_1F_EventScript_DontHaveRequiredMon
-	msgbox MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon, MSGBOX_DEFAULT
-	fadescreen FADE_TO_BLACK
-	setvar VAR_0x8005, 1
-	special ChooseMonForWirelessMinigame
-	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	call Common_EventScript_SaveGame
-	goto_if_eq VAR_RESULT, 0, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
-	setvar VAR_0x8004, LINK_GROUP_BERRY_PICKING
 	goto MossdeepCity_GameCorner_1F_EventScript_ChooseLinkLeader
 	end
 
@@ -1380,13 +1363,6 @@ MossdeepCity_GameCorner_1F_EventScript_ExplainDodrioBerryPickingRequirements::
 MossdeepCity_GameCorner_1F_EventScript_PokemonJumpRecords::
 	lockall
 	special ShowPokemonJumpRecords
-	waitstate
-	releaseall
-	end
-
-MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingRecords::
-	lockall
-	special ShowDodrioBerryPickingRecords
 	waitstate
 	releaseall
 	end

@@ -30,7 +30,7 @@
 #define MULTI_STYLE2_CHOICE                19
 #define MULTI_YESNOINFO_2                  20
 #define MULTI_GENERATIONS_UPTO3            21
-#define MULTI_GENERATIONS_UPTO8            22
+#define MULTI_GENERATIONS_UPTO9            22
 #define MULTI_CHALLENGEINFO                23
 #define MULTI_LEVEL_MODE                   24
 #define MULTI_MECHADOLL1_Q1                25
@@ -90,7 +90,7 @@
 #define MULTI_WIRELESS_ALL_SERVICES        79
 #define MULTI_WIRELESS_MINIGAME            80
 #define MULTI_LINK_LEADER                  81
-#define MULTI_CONTEST_RANK                 82
+#define MULTI_LINK_HOST_JOIN               82
 #define MULTI_FRONTIER_ITEM_CHOOSE         83
 #define MULTI_LINK_CONTEST_INFO            84
 #define MULTI_LINK_CONTEST_MODE            85
@@ -125,6 +125,23 @@
 #define MULTI_REGION_OR_NATIONAL           114
 #define MULTI_REGION_UPTO_HOENN            115
 #define MULTI_REGION_FULL                  116
+#define MULTI_WORKBENCH_OPTIONS            117
+#define MULTI_CHANGE_CLOTHES               118
+#define MULTI_SELECT_SEASON                119
+#define MULTI_SELECT_TIME                  120
+#define MULTI_SELECT_PIE_FILLING           121
+#define MULTI_CLASSIC_MODERN               123
+#define MULTI_BATTLE_WAGER                 124
+#define MULTI_EXPAND3                      125
+
+#define MULTI_DYNAMIC_CALLBACK_START       (MULTI_EXPAND3 + 1)
+#define MULTI_HUB_AREA_BUILDS              (MULTI_DYNAMIC_CALLBACK_START + 0)
+#define MULTI_HUB_AREA_BUILD_DIRECTION     (MULTI_DYNAMIC_CALLBACK_START + 1)
+#define MULTI_HUB_AREA_UPGRADES            (MULTI_DYNAMIC_CALLBACK_START + 2)
+#define MULTI_ROGUE_DAYCARE                (MULTI_DYNAMIC_CALLBACK_START + 3)
+
+#define MULTI_SCROLL_TEST0                  0
+#define MULTI_SCROLL_TEST1                  1
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0
@@ -167,5 +184,10 @@
 #define STDSTRING_BATTLE_ARENA     27
 #define STDSTRING_BATTLE_PIKE      28
 #define STDSTRING_BATTLE_PYRAMID   29
+#define STDSTRING_MEDICINE         30
+#define STDSTRING_CHARMS           31
+#define STDSTRING_STONES           32
+#define STDSTRING_HELD_ITEMS       33
+#define STDSTRING_POKEBLOCK        34
 
 #endif //GUARD_SCRIPT_MENU_CONSTANTS_H

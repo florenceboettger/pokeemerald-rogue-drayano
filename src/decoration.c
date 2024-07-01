@@ -113,7 +113,7 @@ EWRAM_DATA static u16 sDecorationsCursorPos = 0;
 EWRAM_DATA static u16 sDecorationsScrollOffset = 0;
 EWRAM_DATA u8 gCurDecorationIndex = 0;
 EWRAM_DATA static u8 sCurDecorationCategory = DECORCAT_DESK;
-EWRAM_DATA static u32 sFiller[2] = {};
+EWRAM_DATA static u32 UNUSED sFiller[2] = {};
 EWRAM_DATA static struct DecorationPCContext sDecorationContext = {};
 EWRAM_DATA static u8 sDecorMenuWindowIds[WINDOW_COUNT] = {};
 EWRAM_DATA static struct DecorationItemsMenu *sDecorationItemsMenu = NULL;
@@ -206,7 +206,6 @@ static void TossDecoration(u8 taskId);
 
 #include "data/decoration/tiles.h"
 #include "data/decoration/description.h"
-#include "data/decoration/header.h"
 
 static const u8 *const sDecorationCategoryNames[] =
 {
@@ -314,8 +313,9 @@ static const struct ListMenuTemplate sDecorationItemsListMenuTemplate =
     .cursorShadowPal = 3,
     .lettersSpacing = FALSE,
     .itemVerticalPadding = 0,
-    .scrollMultiple = FALSE,
-    .fontId = FONT_NARROW
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NARROW,
+    .cursorKind = CURSOR_BLACK_ARROW,
 };
 
 #include "data/decoration/icon.h"
@@ -421,7 +421,16 @@ static const u8 sDecorationSlideElevation[] =
 };
 
 static const u16 sDecorShapeSizes[] = {
-    0x04, 0x08, 0x10, 0x20, 0x10, 0x08, 0x10, 0x20, 0x40, 0x20
+    [DECORSHAPE_1x1] = 4,
+    [DECORSHAPE_2x1] = 8,
+    [DECORSHAPE_3x1] = 16,
+    [DECORSHAPE_4x2] = 32,
+    [DECORSHAPE_2x2] = 16,
+    [DECORSHAPE_1x2] = 8,
+    [DECORSHAPE_1x3] = 16,
+    [DECORSHAPE_2x4] = 32,
+    [DECORSHAPE_3x3] = 64,
+    [DECORSHAPE_3x2] = 32,
 };
 
 static const u16 sBrendanPalette[] = INCBIN_U16("graphics/decorations/brendan.gbapal");
@@ -563,7 +572,7 @@ static void AddDecorationActionsWindow(void)
 static void InitDecorationActionsWindow(void)
 {
     sDecorationActionsCursorPos = 0;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     AddDecorationActionsWindow();
     PrintCurMainMenuDescription();
 }
@@ -615,7 +624,7 @@ static void HandleDecorationActionsMenuInput(u8 taskId)
 static void PrintCurMainMenuDescription(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, sSecretBasePCMenuItemDescriptions[sDecorationActionsCursorPos], 0, 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, sSecretBasePCMenuItemDescriptions[sDecorationActionsCursorPos], 0, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static void DecorationMenuAction_Decorate(u8 taskId)
@@ -643,7 +652,7 @@ static void DecorationMenuAction_PutAway(u8 taskId)
     else
     {
         RemoveDecorationWindow(WINDOW_MAIN_MENU);
-        ClearDialogWindowAndFrame(0, 0);
+        ClearDialogWindowAndFrame(0, FALSE);
         FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].tState = 0;
         gTasks[taskId].func = Task_ContinuePuttingAwayDecorations;
@@ -679,8 +688,8 @@ static void ReturnToDecorationActionsAfterInvalidSelection(u8 taskId)
 
 static void SecretBasePC_PrepMenuForSelectingStoredDecors(u8 taskId)
 {
-    LoadPalette(sDecorationMenuPalette, 0xd0, 0x20);
-    ClearDialogWindowAndFrame(0, 0);
+    LoadPalette(sDecorationMenuPalette, BG_PLTT_ID(13), sizeof(sDecorationMenuPalette));
+    ClearDialogWindowAndFrame(0, FALSE);
     RemoveDecorationWindow(WINDOW_MAIN_MENU);
     InitDecorationCategoriesWindow(taskId);
 }
@@ -802,7 +811,7 @@ static void SelectDecorationCategory(u8 taskId)
 
 static void ReturnToDecorationCategoriesAfterInvalidSelection(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     InitDecorationCategoriesWindow(taskId);
 }
 
@@ -825,8 +834,8 @@ static void ReturnToActionsMenuFromCategories(u8 taskId)
 
 void ShowDecorationCategoriesWindow(u8 taskId)
 {
-    LoadPalette(sDecorationMenuPalette, 0xd0, 0x20);
-    ClearDialogWindowAndFrame(0, 0);
+    LoadPalette(sDecorationMenuPalette, BG_PLTT_ID(13), sizeof(sDecorationMenuPalette));
+    ClearDialogWindowAndFrame(0, FALSE);
     gTasks[taskId].tDecorationMenuCommand = DECOR_MENU_TRADE;
     sCurDecorationCategory = DECORCAT_DESK;
     InitDecorationCategoriesWindow(taskId);
@@ -882,7 +891,7 @@ static void PrintDecorationItemMenuItems(u8 taskId)
 
     StringCopy(sDecorationItemsMenu->names[i], gText_Cancel);
     sDecorationItemsMenu->items[i].name = sDecorationItemsMenu->names[i];
-    sDecorationItemsMenu->items[i].id = -2;
+    sDecorationItemsMenu->items[i].id = LIST_CANCEL;
     gMultiuseListMenuTemplate = sDecorationItemsListMenuTemplate;
     gMultiuseListMenuTemplate.windowId = sDecorMenuWindowIds[WINDOW_DECORATION_CATEGORIES];
     gMultiuseListMenuTemplate.totalItems = sDecorationItemsMenu->numMenuItems;
@@ -892,8 +901,6 @@ static void PrintDecorationItemMenuItems(u8 taskId)
 
 static void CopyDecorationMenuItemName(u8 *dest, u16 decoration)
 {
-    StringCopy(dest, gStringVar1);
-    StringAppend(dest, gDecorations[decoration].name);
 }
 
 static void DecorationItemsMenu_OnCursorMove(s32 itemIndex, bool8 flag, struct ListMenu *menu)
@@ -992,7 +999,7 @@ static void HandleDecorationItemsMenuInput(u8 taskId)
             DestroyListMenuTask(tMenuTaskId, &sDecorationsScrollOffset, &sDecorationsCursorPos);
             RemoveDecorationWindow(WINDOW_DECORATION_CATEGORIES);
             RemoveDecorationItemsOtherWindows();
-            free(sDecorationItemsMenu);
+            Free(sDecorationItemsMenu);
             sSecretBasePC_SelectedDecorationActions[tDecorationMenuCommand][0](taskId);
             break;
         }
@@ -1006,17 +1013,10 @@ static void ShowDecorationCategorySummaryWindow(u8 category)
 
 static void PrintDecorationItemDescription(s32 itemIndex)
 {
-    u8 windowId;
-    const u8 *str;
-
-    windowId = sDecorMenuWindowIds[WINDOW_DECORATION_CATEGORY_ITEMS];
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    if ((u32)itemIndex >= sNumOwnedDecorationsInCurCategory)
-        str = gText_GoBackPrevMenu;
-    else
-        str = gDecorations[gCurDecorationItems[itemIndex]].description;
-
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, str, 0, 1, 0, 0);
+    //u8 windowId;
+    //const u8 *str;
+    //str = gText_GoBackPrevMenu;
+    //AddTextPrinterParameterized(windowId, FONT_NORMAL, str, 0, 1, 0, 0);
 }
 
 static void RemoveDecorationItemsOtherWindows(void)
@@ -1133,7 +1133,7 @@ static void Task_ShowDecorationItemsWindow(u8 taskId)
 
 static void DontTossDecoration(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     gTasks[taskId].func = Task_ShowDecorationItemsWindow;
 }
 
@@ -1141,7 +1141,7 @@ static void ReturnToDecorationItemsAfterInvalidSelection(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        ClearDialogWindowAndFrame(0, 0);
+        ClearDialogWindowAndFrame(0, FALSE);
         AddDecorationWindow(WINDOW_DECORATION_CATEGORIES);
         ShowDecorationItemsWindow(taskId);
     }
@@ -1153,7 +1153,7 @@ static void DecorationItemsMenuAction_Cancel(u8 taskId)
     RemoveDecorationItemsScrollIndicators();
     RemoveDecorationItemsOtherWindows();
     DestroyListMenuTask(tMenuTaskId, NULL, NULL);
-    free(sDecorationItemsMenu);
+    Free(sDecorationItemsMenu);
     ReinitDecorationCategoriesWindow(taskId);
 }
 
@@ -1187,78 +1187,12 @@ static u16 GetDecorationElevation(u8 decoration, u8 tileIndex)
     }
 }
 
-static void ShowDecorationOnMap_(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decoration)
+static UNUSED void ShowDecorationOnMap_(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decoration)
 {
-    u16 i, j;
-    s16 x, y;
-    u16 attributes;
-    u16 impassableFlag;
-    u16 overlapsWall;
-    u16 elevation;
-
-    for (j = 0; j < decHeight; j++)
-    {
-        y = mapY - decHeight + 1 + j;
-        for (i = 0; i < decWidth; i++)
-        {
-            x = mapX + i;
-            attributes = GetMetatileAttributesById(NUM_TILES_IN_PRIMARY + gDecorations[decoration].tiles[j * decWidth + i]);
-            if (MetatileBehavior_IsSecretBaseImpassable(attributes & METATILE_ATTR_BEHAVIOR_MASK) == TRUE 
-             || (gDecorations[decoration].permission != DECORPERM_PASS_FLOOR && (attributes >> METATILE_ATTR_LAYER_SHIFT) != METATILE_LAYER_TYPE_NORMAL))
-                impassableFlag = MAPGRID_COLLISION_MASK;
-            else
-                impassableFlag = 0;
-
-            // Choose the metatile that has the wall background instead of the floor if overlapping a wall.
-            if (gDecorations[decoration].permission != DECORPERM_NA_WALL && MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
-                overlapsWall = 1;
-            else
-                overlapsWall = 0;
-
-            elevation = GetDecorationElevation(gDecorations[decoration].id, j * decWidth + i);
-            if (elevation != 0xFFFF)
-                MapGridSetMetatileEntryAt(x, y, (gDecorations[decoration].tiles[j * decWidth + i] + (NUM_TILES_IN_PRIMARY | overlapsWall)) | impassableFlag | elevation);
-            else
-                MapGridSetMetatileIdAt(x, y, (gDecorations[decoration].tiles[j * decWidth + i] + (NUM_TILES_IN_PRIMARY | overlapsWall)) | impassableFlag);
-        }
-    }
 }
 
 void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decoration)
 {
-    switch (gDecorations[decoration].shape)
-    {
-    case DECORSHAPE_1x1:
-        ShowDecorationOnMap_(mapX, mapY, 1, 1, decoration);
-        break;
-    case DECORSHAPE_2x1:
-        ShowDecorationOnMap_(mapX, mapY, 2, 1, decoration);
-        break;
-    case DECORSHAPE_3x1: // unused
-        ShowDecorationOnMap_(mapX, mapY, 3, 1, decoration);
-        break;
-    case DECORSHAPE_4x2:
-        ShowDecorationOnMap_(mapX, mapY, 4, 2, decoration);
-        break;
-    case DECORSHAPE_2x2:
-        ShowDecorationOnMap_(mapX, mapY, 2, 2, decoration);
-        break;
-    case DECORSHAPE_1x2:
-        ShowDecorationOnMap_(mapX, mapY, 1, 2, decoration);
-        break;
-    case DECORSHAPE_1x3: // unused
-        ShowDecorationOnMap_(mapX, mapY, 1, 3, decoration);
-        break;
-    case DECORSHAPE_2x4:
-        ShowDecorationOnMap_(mapX, mapY, 2, 4, decoration);
-        break;
-    case DECORSHAPE_3x3:
-        ShowDecorationOnMap_(mapX, mapY, 3, 3, decoration);
-        break;
-    case DECORSHAPE_3x2:
-        ShowDecorationOnMap_(mapX, mapY, 3, 2, decoration);
-        break;
-    }
 }
 
 void SetDecoration(void)
@@ -1399,50 +1333,6 @@ static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecoration
 
 static void SetUpDecorationShape(u8 taskId)
 {
-    switch (gDecorations[gCurDecorationItems[gCurDecorationIndex]].shape)
-    {
-        case DECORSHAPE_1x1:
-            gTasks[taskId].tDecorWidth = 1;
-            gTasks[taskId].tDecorHeight = 1;
-            break;
-        case DECORSHAPE_2x1:
-            gTasks[taskId].tDecorWidth = 2;
-            gTasks[taskId].tDecorHeight = 1;
-            break;
-        case DECORSHAPE_3x1:
-            gTasks[taskId].tDecorWidth = 3;
-            gTasks[taskId].tDecorHeight = 1;
-            break;
-        case DECORSHAPE_4x2:
-            gTasks[taskId].tDecorWidth = 4;
-            gTasks[taskId].tDecorHeight = 2;
-            break;
-        case DECORSHAPE_2x2:
-            gTasks[taskId].tDecorWidth = 2;
-            gTasks[taskId].tDecorHeight = 2;
-            break;
-        case DECORSHAPE_1x2:
-            gTasks[taskId].tDecorWidth = 1;
-            gTasks[taskId].tDecorHeight = 2;
-            break;
-        case DECORSHAPE_1x3:
-            gTasks[taskId].tDecorWidth = 1;
-            gTasks[taskId].tDecorHeight = 3;
-            gTasks[taskId].tCursorY++;
-            break;
-        case DECORSHAPE_2x4:
-            gTasks[taskId].tDecorWidth = 2;
-            gTasks[taskId].tDecorHeight = 4;
-            break;
-        case DECORSHAPE_3x3:
-            gTasks[taskId].tDecorWidth = 3;
-            gTasks[taskId].tDecorHeight = 3;
-            break;
-        case DECORSHAPE_3x2:
-            gTasks[taskId].tDecorWidth = 3;
-            gTasks[taskId].tDecorHeight = 2;
-            break;
-    }
 }
 
 static void AttemptPlaceDecoration(u8 taskId)
@@ -1474,7 +1364,7 @@ static bool8 IsSecretBaseTrainerSpot(u8 behaviorAt, u16 layerType)
 // Can't place decoration where the player was standing when they interacted with the PC
 static bool8 IsntInitialPosition(u8 taskId, s16 x, s16 y, u16 layerType)
 {
-    if (x == gTasks[taskId].tInitialX + MAP_OFFSET 
+    if (x == gTasks[taskId].tInitialX + MAP_OFFSET
      && y == gTasks[taskId].tInitialY + MAP_OFFSET
      && layerType != METATILE_LAYER_TYPE_NORMAL)
         return FALSE;
@@ -1495,7 +1385,7 @@ static bool8 IsFloorOrBoardAndHole(u16 behaviorAt, const struct Decoration *deco
     return FALSE;
 }
 
-static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
+static UNUSED bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
 {
     u8 i;
     u8 j;
@@ -1611,20 +1501,9 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
 
 static void AttemptPlaceDecoration_(u8 taskId)
 {
-    if (CanPlaceDecoration(taskId, &gDecorations[gCurDecorationItems[gCurDecorationIndex]]) == TRUE)
-    {
-        StringExpandPlaceholders(gStringVar4, gText_PlaceItHere);
-        DisplayItemMessageOnField(taskId, gStringVar4, PlaceDecorationPrompt);
-    }
-    else
-    {
-        PlaySE(SE_FAILURE);
-        StringExpandPlaceholders(gStringVar4, gText_CantBePlacedHere);
-        DisplayItemMessageOnField(taskId, gStringVar4, CantPlaceDecorationPrompt);
-    }
 }
 
-static void PlaceDecorationPrompt(u8 taskId)
+static UNUSED void PlaceDecorationPrompt(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
     DoYesNoFuncWithChoice(taskId, &sPlaceDecorationYesNoFunctions);
@@ -1635,7 +1514,7 @@ static void PlaceDecoration(u8 taskId)
     CancelDecorating_(taskId);
 }
 
-static void PlaceDecoration_(u8 taskId)
+static void UNUSED PlaceDecoration_(u8 taskId)
 {
     u16 i;
 
@@ -1681,7 +1560,7 @@ static void CancelDecoratingPrompt(u8 taskId)
 
 static void CancelDecorating(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     CancelDecorating_(taskId);
 }
 
@@ -1697,7 +1576,7 @@ static void c1_overworld_prev_quest(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         if (!gPaletteFade.active)
         {
             WarpToInitialPosition(taskId);
@@ -1727,7 +1606,7 @@ static void Task_InitDecorationItemsWindow(u8 taskId)
         tState++;
         break;
     case 2:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         tState++;
         break;
     case 3:
@@ -1741,7 +1620,7 @@ static void FieldCB_InitDecorationItemsWindow(void)
 {
     u8 taskId;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     FadeInFromBlack();
     taskId = CreateTask(Task_InitDecorationItemsWindow, 8);
     AddDecorationItemsWindow(taskId);
@@ -1865,13 +1744,13 @@ static void Task_SelectLocation(u8 taskId)
 
 static void ContinueDecorating(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 1);
+    ClearDialogWindowAndFrame(0, TRUE);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gTasks[taskId].tButton = 0;
     gTasks[taskId].func = Task_SelectLocation;
 }
 
-static void CantPlaceDecorationPrompt(u8 taskId)
+static UNUSED void CantPlaceDecorationPrompt(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         ContinueDecorating(taskId);
@@ -1889,7 +1768,7 @@ static void CopyPalette(u16 *dest, u16 pal)
 
 static void CopyTile(u8 *dest, u16 tile)
 {
-    u8 buffer[TILE_SIZE_4BPP];
+    u8 ALIGNED(4) buffer[TILE_SIZE_4BPP];
     u16 mode;
     u16 i;
 
@@ -1950,7 +1829,7 @@ static void SetDecorSelectionMetatiles(struct PlaceDecorationGraphicsDataBuffer 
     shape = data->decoration->shape;
     for (i = 0; i < sDecorTilemaps[shape].size; i++)
     {
-        data->tiles[sDecorTilemaps[shape].tiles[i]] = GetMetatile(data->decoration->tiles[sDecorTilemaps[shape].y[i]] * 8 + sDecorTilemaps[shape].x[i]);
+        data->tiles[sDecorTilemaps[shape].tiles[i]] = GetMetatile(data->decoration->tiles[sDecorTilemaps[shape].y[i]] * NUM_TILES_PER_METATILE + sDecorTilemaps[shape].x[i]);
     }
 }
 
@@ -1959,7 +1838,7 @@ static void SetDecorSelectionBoxOamAttributes(u8 decorShape)
     sDecorSelectorOam.y = 0;
     sDecorSelectorOam.affineMode = ST_OAM_AFFINE_OFF;
     sDecorSelectorOam.objMode = ST_OAM_OBJ_NORMAL;
-    sDecorSelectorOam.mosaic = 0;
+    sDecorSelectorOam.mosaic = FALSE;
     sDecorSelectorOam.bpp = ST_OAM_4BPP;
     sDecorSelectorOam.shape = sDecorationMovementInfo[decorShape].shape;
     sDecorSelectorOam.x = 0;
@@ -2002,7 +1881,7 @@ static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite)
 static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
 {
     ClearPlaceDecorationGraphicsDataBuffer(data);
-    data->decoration = &gDecorations[decor];
+    data->decoration = NULL;
     if (data->decoration->permission == DECORPERM_SPRITE)
         return CreateObjectGraphicsSprite(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
 
@@ -2010,7 +1889,7 @@ static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphics
     SetDecorSelectionMetatiles(data);
     SetDecorSelectionBoxOamAttributes(data->decoration->shape);
     SetDecorSelectionBoxTiles(data);
-    CopyPalette(data->palette, ((u16 *)gTilesetPointer_SecretBaseRedCave->metatiles)[(data->decoration->tiles[0] * 8) + 7] >> 12);
+    CopyPalette(data->palette, ((u16 *)gTilesetPointer_SecretBaseRedCave->metatiles)[(data->decoration->tiles[0] * NUM_TILES_PER_METATILE) + 7] >> 12);
     LoadSpritePalette(&sSpritePal_PlaceDecoration);
     return CreateSprite(&sDecorationSelectorSpriteTemplate, 0, 0, 0);
 }
@@ -2034,13 +1913,13 @@ static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 
     palette.data = GetDecorationIconPicOrPalette(decor, 1);
     palette.tag = paletteTag;
     LoadCompressedSpritePalette(&palette);
-    template = malloc(sizeof(struct SpriteTemplate));
+    template = Alloc(sizeof(struct SpriteTemplate));
     *template = gItemIconSpriteTemplate;
     template->tileTag = tilesTag;
     template->paletteTag = paletteTag;
     spriteId = CreateSprite(template, 0, 0, 0);
     FreeItemIconTemporaryBuffers();
-    free(template);
+    Free(template);
     return spriteId;
 }
 
@@ -2054,38 +1933,7 @@ static const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
 
 static u8 AddDecorationIconObjectFromObjectEvent(u16 tilesTag, u16 paletteTag, u8 decor)
 {
-    u8 spriteId;
-    struct SpriteSheet sheet;
-    struct SpritePalette palette;
-    struct SpriteTemplate *template;
-
-    ClearPlaceDecorationGraphicsDataBuffer(&sPlaceDecorationGraphicsDataBuffer);
-    sPlaceDecorationGraphicsDataBuffer.decoration = &gDecorations[decor];
-    if (sPlaceDecorationGraphicsDataBuffer.decoration->permission != DECORPERM_SPRITE)
-    {
-        SetDecorSelectionMetatiles(&sPlaceDecorationGraphicsDataBuffer);
-        SetDecorSelectionBoxOamAttributes(sPlaceDecorationGraphicsDataBuffer.decoration->shape);
-        SetDecorSelectionBoxTiles(&sPlaceDecorationGraphicsDataBuffer);
-        CopyPalette(sPlaceDecorationGraphicsDataBuffer.palette, ((u16 *)gTilesetPointer_SecretBaseRedCave->metatiles)[(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0] * 8) + 7] >> 12);
-        sheet.data = sPlaceDecorationGraphicsDataBuffer.image;
-        sheet.size = sDecorShapeSizes[sPlaceDecorationGraphicsDataBuffer.decoration->shape] * TILE_SIZE_4BPP;
-        sheet.tag = tilesTag;
-        LoadSpriteSheet(&sheet);
-        palette.data = sPlaceDecorationGraphicsDataBuffer.palette;
-        palette.tag = paletteTag;
-        LoadSpritePalette(&palette);
-        template = Alloc(sizeof(struct SpriteTemplate));
-        *template = sDecorWhilePlacingSpriteTemplate;
-        template->tileTag = tilesTag;
-        template->paletteTag = paletteTag;
-        spriteId = CreateSprite(template, 0, 0, 0);
-        free(template);
-    }
-    else
-    {
-        spriteId = CreateObjectGraphicsSprite(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
-    }
-    return spriteId;
+    return 0;
 }
 
 u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u16 paletteTag)
@@ -2127,7 +1975,7 @@ u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u1
     return spriteId;
 }
 
-static void ClearDecorationContextIndex(u8 idx)
+static UNUSED void ClearDecorationContextIndex(u8 idx)
 {
     sDecorationContext.items[idx] = DECOR_NONE;
     sDecorationContext.pos[idx] = 0;
@@ -2142,27 +1990,6 @@ static void ClearDecorationContextIndex(u8 idx)
 // gSpecialVar_0x8006: localId of decoration object event (if any).
 void PutAwayDecorationIteration(void)
 {
-    u16 i;
-
-    gSpecialVar_0x8005 = 0;
-    gSpecialVar_Result = FALSE;
-    if (gSpecialVar_0x8004 == sCurDecorSelectedInRearrangement)
-    {
-        gSpecialVar_Result = TRUE;
-    }
-    else if (gDecorations[sDecorationContext.items[sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx]].permission == DECORPERM_SPRITE)
-    {
-        gSpecialVar_0x8005 = sDecorRearrangementDataBuffer[gSpecialVar_0x8004].flagId;
-        ClearDecorationContextIndex(sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx);
-        for (i = 0; i < gMapHeader.events->objectEventCount; i++)
-        {
-            if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_0x8005)
-            {
-                gSpecialVar_0x8006 = gMapHeader.events->objectEvents[i].localId;
-                break;
-            }
-        }
-    }
 }
 
 // Unused
@@ -2182,31 +2009,6 @@ void GetObjectEventLocalIdByFlag(void)
 
 static void ClearRearrangementNonSprites(void)
 {
-    u8 i;
-    u8 y;
-    u8 x;
-    int posX;
-    int posY;
-    u8 perm;
-
-    for (i = 0; i < sCurDecorSelectedInRearrangement; i++)
-    {
-        perm = gDecorations[sDecorationContext.items[sDecorRearrangementDataBuffer[i].idx]].permission;
-        posX = sDecorationContext.pos[sDecorRearrangementDataBuffer[i].idx] >> 4;
-        posY = sDecorationContext.pos[sDecorRearrangementDataBuffer[i].idx] & 0x0F;
-        if (perm != DECORPERM_SPRITE)
-        {
-            for (y = 0; y < sDecorRearrangementDataBuffer[i].height; y++)
-            {
-                for (x = 0; x < sDecorRearrangementDataBuffer[i].width; x++)
-                {
-                    MapGridSetMetatileEntryAt(posX + MAP_OFFSET + x, posY + MAP_OFFSET - y, gMapHeader.mapLayout->map[posX + x + gMapHeader.mapLayout->width * (posY - y)] | 0x3000);
-                }
-            }
-
-            ClearDecorationContextIndex(sDecorRearrangementDataBuffer[i].idx);
-        }
-    }
 }
 
 static void Task_PutAwayDecoration(u8 taskId)
@@ -2220,12 +2022,12 @@ static void Task_PutAwayDecoration(u8 taskId)
     case 1:
         if (!gPaletteFade.active) {
             DrawWholeMapView();
-            ClearDialogWindowAndFrame(0, 1);
+            ClearDialogWindowAndFrame(0, TRUE);
             gTasks[taskId].tState = 2;
         }
         break;
     case 2:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         IdentifyOwnedDecorationsCurrentlyInUseInternal(taskId);
         FadeInFromBlack();
         gTasks[taskId].tState = 3;
@@ -2304,7 +2106,7 @@ static void Task_ContinuePuttingAwayDecorations(u8 taskId)
 
 static void ContinuePuttingAwayDecorations(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 1);
+    ClearDialogWindowAndFrame(0, TRUE);
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = InitializeCameraSprite1;
@@ -2369,56 +2171,6 @@ static void ContinuePuttingAwayDecorationsPrompt(u8 taskId)
 
 static void SetDecorRearrangementShape(u8 decor, struct DecorRearrangementDataBuffer *data)
 {
-    if (gDecorations[decor].shape == DECORSHAPE_1x1)
-    {
-        data->width = 1;
-        data->height = 1;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_2x1)
-    {
-        data->width = 2;
-        data->height = 1;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_3x1)
-    {
-        data->width = 3;
-        data->height = 1;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_4x2)
-    {
-        data->width = 4;
-        data->height = 2;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_2x2)
-    {
-        data->width = 2;
-        data->height = 2;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_1x2)
-    {
-        data->width = 1;
-        data->height = 2;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_1x3)
-    {
-        data->width = 1;
-        data->height = 3;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_2x4)
-    {
-        data->width = 2;
-        data->height = 4;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_3x3)
-    {
-        data->width = 3;
-        data->height = 3;
-    }
-    else if (gDecorations[decor].shape == DECORSHAPE_3x2)
-    {
-        data->width = 3;
-        data->height = 2;
-    }
 }
 
 static void SetCameraSpritePosition(u8 x, u8 y)
@@ -2454,7 +2206,7 @@ static bool8 DecorationIsUnderCursor(u8 taskId, u8 idx, struct DecorRearrangemen
     return FALSE;
 }
 
-static void SetDecorRearrangementFlagIdIfFlagUnset(void)
+static UNUSED void SetDecorRearrangementFlagIdIfFlagUnset(void)
 {
     u8 xOff;
     u8 yOff;
@@ -2474,47 +2226,11 @@ static void SetDecorRearrangementFlagIdIfFlagUnset(void)
 
 static bool8 AttemptMarkSpriteDecorUnderCursorForRemoval(u8 taskId)
 {
-    u16 i;
-
-    for (i = 0; i < sDecorationContext.size; i++)
-    {
-        if (sDecorationContext.items[i] != DECOR_NONE)
-        {
-            if (gDecorations[sDecorationContext.items[i]].permission == DECORPERM_SPRITE)
-            {
-                SetDecorRearrangementShape(sDecorationContext.items[i], sDecorRearrangementDataBuffer);
-                if (DecorationIsUnderCursor(taskId, i, sDecorRearrangementDataBuffer) == TRUE)
-                {
-                    sDecorRearrangementDataBuffer->idx = i;
-                    SetDecorRearrangementFlagIdIfFlagUnset();
-                    sCurDecorSelectedInRearrangement = 1;
-                    return TRUE;
-                }
-            }
-        }
-    }
     return FALSE;
 }
 
 static void MarkSpriteDecorsInBoundsForRemoval(u8 left, u8 top, u8 right, u8 bottom)
 {
-    u8 i;
-    u8 xOff;
-    u8 yOff;
-    u8 decor;
-
-    for (i = 0; i < sDecorationContext.size; i++)
-    {
-        decor = sDecorationContext.items[i];
-        xOff = sDecorationContext.pos[i] >> 4;
-        yOff = sDecorationContext.pos[i] & 0x0F;
-        if (decor != DECOR_NONE && gDecorations[decor].permission == DECORPERM_SPRITE && left <= xOff && top <= yOff && right >= xOff && bottom >= yOff)
-        {
-            sDecorRearrangementDataBuffer[sCurDecorSelectedInRearrangement].idx = i;
-            SetDecorRearrangementFlagIdIfFlagUnset();
-            sCurDecorSelectedInRearrangement++;
-        }
-    }
 }
 
 static void AttemptMarkDecorUnderCursorForRemoval(u8 taskId)
@@ -2577,7 +2293,7 @@ static void StopPuttingAwayDecorationsPrompt(u8 taskId)
 
 static void StopPuttingAwayDecorations(u8 taskId)
 {
-    ClearDialogWindowAndFrame(0, 0);
+    ClearDialogWindowAndFrame(0, FALSE);
     StopPuttingAwayDecorations_(taskId);
 }
 
@@ -2621,7 +2337,7 @@ static void Task_ReinitializeDecorationMenuHandler(u8 taskId)
         tState++;
         break;
     case 2:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         tState++;
         break;
     case 3:
@@ -2667,20 +2383,9 @@ static void FreePlayerSpritePalette(void)
 
 static void DecorationItemsMenuAction_AttemptToss(u8 taskId)
 {
-    if (IsSelectedDecorInThePC() == TRUE)
-    {
-        StringCopy(gStringVar1, gDecorations[gCurDecorationItems[gCurDecorationIndex]].name);
-        StringExpandPlaceholders(gStringVar4, gText_DecorationWillBeDiscarded);
-        DisplayItemMessageOnField(taskId, gStringVar4, TossDecorationPrompt);
-    }
-    else
-    {
-        StringExpandPlaceholders(gStringVar4, gText_CantThrowAwayInUse);
-        DisplayItemMessageOnField(taskId, gStringVar4, ReturnToDecorationItemsAfterInvalidSelection);
-    }
 }
 
-static void TossDecorationPrompt(u8 taskId)
+static UNUSED void TossDecorationPrompt(u8 taskId)
 {
     DisplayYesNoMenuDefaultYes();
     DoYesNoFuncWithChoice(taskId, &sTossDecorationYesNoFunctions);

@@ -3,7 +3,7 @@
   "name": "Rogue_Encounter_Den",
   "layout": "LAYOUT_ROGUE_ENCOUNTER_DEN",
   "music": "MUS_PETALBURG_WOODS",
-  "region_map_section": "MAPSEC_SPECIAL_AREA",
+  "region_map_section": "MAPSEC_ADVENTURE",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",
   "map_type": "MAP_TYPE_ROUTE",
@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Rogue_Special_TalkGenericWildMon",
+      "script": "Rogue_InteractWithWildDenMon",
       "flag": "FLAG_TEMP_1"
     }
   ],
@@ -34,7 +34,7 @@
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_ROGUE_ENCOUNTER_DEN",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

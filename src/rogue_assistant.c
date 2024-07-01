@@ -20,25 +20,34 @@
 #include "field_weather.h"
 #include "follow_me.h"
 #include "intro.h"
+#include "item.h"
 #include "main.h"
+#include "malloc.h"
+#include "new_game.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
+#include "script.h"
+#include "string_util.h"
+#include "task.h"
 
 #include "rogue_assistant.h"
 #include "rogue_adventurepaths.h"
+#include "rogue_baked.h"
 #include "rogue_controller.h"
 #include "rogue_followmon.h"
-
-// Constants
-//
-
-#define IN_COMM_BUFFER_SIZE 16
-#define OUT_COMM_BUFFER_SIZE 8
-
-#define NET_PLAYER_CAPACITY 4
+#include "rogue_multiplayer.h"
+#include "rogue_pokedex.h"
+#include "rogue_popup.h"
+#include "rogue_query.h"
+#include "rogue_settings.h"
 
 enum 
 {
+    GAME_CONSTANT_ASSISTANT_STATE_NUM_ADDRESS,
+    GAME_CONSTANT_ASSISTANT_SUBSTATE_NUM_ADDRESS,
+    GAME_CONSTANT_REQUEST_STATE_NUM_ADDRESS,
+
     GAME_CONSTANT_SAVE_BLOCK1_PTR_ADDRESS,
     GAME_CONSTANT_SAVE_BLOCK2_PTR_ADDRESS,
     GAME_CONSTANT_NET_PLAYER_CAPACITY,
@@ -46,91 +55,135 @@ enum
     GAME_CONSTANT_NET_PLAYER_PROFILE_SIZE,
     GAME_CONSTANT_NET_PLAYER_STATE_ADDRESS,
     GAME_CONSTANT_NET_PLAYER_STATE_SIZE,
+
+    GAME_CONSTANT_DEBUG_MAIN_ADDRESS,
+    GAME_CONSTANT_DEBUG_QUERY_UNCOLLAPSE_BUFFER_PTR,
+    GAME_CONSTANT_DEBUG_QUERY_UNCOLLAPSE_CAPACITY,
+    GAME_CONSTANT_DEBUG_QUERY_COLLAPSED_BUFFER_PTR,
+    GAME_CONSTANT_DEBUG_QUERY_COLLAPSED_SIZE_PTR,
 };
 
 #define NETPLAYER_FLAGS_NONE        0
 #define NETPLAYER_FLAGS_ACTIVE      (1 << 0)
+#define NETPLAYER_FLAGS_HOST        (2 << 0)
+
+#define ASSISTANT_CONFIRM_THRESHOLD         (10 * 60) // 10 seconds at 60fps
+#define ASSISTANT_CONFIRM_THRESHOLD_BOX     (3 * 60) // Used a harsher threshold when in theb ox
 
 // Global states
 //
 
-struct NetPlayerProfile
-{
-    u8 trainerName[PLAYER_NAME_LENGTH + 1];
-    u8 flags;
-};
-
+// Player states controlled by the player who it is assigned too
+// OLD TO REMOVE
 struct NetPlayerState
 {
+    u8 trainerName[PLAYER_NAME_LENGTH + 1];
     struct Coords16 pos;
-    struct Coords16 partnerPos;
-    u16 facingDirection;
-    u16 partnerFacingDirection;
+    struct Coords8 partnerPos; // relative to player pos
+    u16 networkId;
     u16 partnerMon;
+    u8 facingDirection;
+    u8 partnerFacingDirection;
+    u8 playerFlags;
     s8 mapGroup;
     s8 mapNum;
 };
 
+//TOTAL_BOXES_COUNT
+
 struct RogueAssistantState
 {
     u8 inCommBuffer[16];
-    u8 outCommBuffer[16];
-    struct NetPlayerProfile netPlayerProfile[NET_PLAYER_CAPACITY];
-    struct NetPlayerState netPlayerState[NET_PLAYER_CAPACITY];
+    u8 outCommBuffer[32];
+    u16 assistantState;
+    u16 assistantSubstate;
+    u16 requestState;
+    u16 externalConfirmCounter;
+    u8 isAssistantConnected : 1;
 };
+
+// TODO - Should really just use gBlockRecvBuffer and other similar vars for communication
+
+// Lightweight box data
+struct RoguePerBoxData
+{
+    u8 name[BOX_NAME_LENGTH + 1];
+    u8 monCount;
+    u8 wallpaper;
+};
+
+struct RogueBoxGlobalData
+{
+    struct RoguePerBoxData boxData[ASSISTANT_HOME_TOTAL_BOXES];
+    struct BoxPokemon* destBoxMons;
+    u8 boxRemoteIndexOrder[ASSISTANT_HOME_TOTAL_BOXES];
+    u32 trainerId;
+};
+
+static EWRAM_DATA struct RogueBoxGlobalData* sRogueAssistantBoxData = NULL;
 
 EWRAM_DATA struct RogueAssistantState gRogueAssistantState;
 
+STATIC_ASSERT(TOTAL_BOXES_COUNT == ASSISTANT_HOME_LOCAL_BOXES, SizeOfAssistantLocalBoxes);
+
+// Make sure to change the same value in RogueAssistant if this ever changes
+// (These numbers must match in order to connect)
+#define ROGUE_ASSISTANT_COMPAT_VERSION 1
+
 const struct RogueAssistantHeader gRogueAssistantHeader =
 {
-    .inCommCapacity = sizeof(gRogueAssistantState.inCommBuffer),
-    .outCommCapacity = sizeof(gRogueAssistantState.outCommBuffer),
-    .inCommBuffer = gRogueAssistantState.inCommBuffer,
-    .outCommBuffer = gRogueAssistantState.outCommBuffer
-};
+    .rogueVersion = ROGUE_VERSION,
+#ifdef ROGUE_DEBUG
+    .rogueDebug = 1,
+#else
+    .rogueDebug = 0,
+#endif
+    .rogueAssistantCompatVersion = ROGUE_ASSISTANT_COMPAT_VERSION,
 
+    // MP Data
+    .multiplayerPtr = &gRogueMultiplayer,
+    .netMultiplayerSize = sizeof(struct RogueNetMultiplayer),
 
-// Read/Write utils
-//
-typedef u8 buffer_offset_t;
+    .netHandshakeOffset = offsetof(struct RogueNetMultiplayer, pendingHandshake),
+    .netHandshakeSize = sizeof(struct RogueNetHandshake),
+    .netHandshakeStateOffset = offsetof(struct RogueNetHandshake, state),
+    .netHandshakePlayerIdOffset = offsetof(struct RogueNetHandshake, playerId),
 
-static u8 Read8(buffer_offset_t* offset, u8* buffer, size_t capacity);
-static u16 Read16(buffer_offset_t* offset, u8* buffer, size_t capacity);
-static u32 Read32(buffer_offset_t* offset, u8* buffer, size_t capacity);
+    .netGameStateOffset = offsetof(struct RogueNetMultiplayer, gameState),
+    .netGameStateSize = sizeof(struct RogueNetGameState),
+    .netPlayerProfileOffset  = offsetof(struct RogueNetMultiplayer, playerProfiles),
+    .netPlayerProfileSize = sizeof(struct RogueNetPlayerProfile),
+    .netPlayerStateOffset  = offsetof(struct RogueNetMultiplayer, playerState),
+    .netPlayerStateSize = sizeof(struct RogueNetPlayer),
+    .netRequestStateOffset = offsetof(struct RogueNetMultiplayer, netRequestState),
+    .netCurrentStateOffset = offsetof(struct RogueNetMultiplayer, netCurrentState),
+    .netPlayerCount = NET_PLAYER_CAPACITY,
 
-static void Write8(buffer_offset_t* offset, u8 value, u8* buffer, size_t capacity);
-static void Write16(buffer_offset_t* offset, u16 value, u8* buffer, size_t capacity);
-static void Write32(buffer_offset_t* offset, u32 value, u8* buffer, size_t capacity);
+    .saveBlock1Ptr = &gSaveBlock1Ptr,
+    .saveBlock2Ptr = &gSaveBlock2Ptr,
+    .rogueBlockPtr = &gRogueSaveBlock,
 
-#define READ_INPUT_8() Read8(&inputPos, gRogueAssistantHeader.inCommBuffer, gRogueAssistantHeader.inCommCapacity)
-#define READ_INPUT_16() Read16(&inputPos, gRogueAssistantHeader.inCommBuffer, gRogueAssistantHeader.inCommCapacity)
-#define READ_INPUT_32() Read32(&inputPos, gRogueAssistantHeader.inCommBuffer, gRogueAssistantHeader.inCommCapacity)
+    // Assistant Data
+    .assistantState = &gRogueAssistantState,
+    .assistantConfirmSize = sizeof(gRogueAssistantState.externalConfirmCounter),
+    .assistantConfirmOffset = offsetof(struct RogueAssistantState, externalConfirmCounter),
 
-#define READ_OUTPUT_8() Read8(&outputPos, gRogueAssistantHeader.outCommBuffer, gRogueAssistantHeader.outCommCapacity)
-#define READ_OUTPUT_16() Read16(&outputPos, gRogueAssistantHeader.outCommBuffer, gRogueAssistantHeader.outCommCapacity)
-#define READ_OUTPUT_32() Read32(&outputPos, gRogueAssistantHeader.outCommBuffer, gRogueAssistantHeader.outCommCapacity)
+    // Box Data
+    .homeBoxPtr = &sRogueAssistantBoxData,
+    .homeBoxSize = sizeof(struct RogueBoxGlobalData),
+    .homeLocalBoxCount = ASSISTANT_HOME_LOCAL_BOXES,
+    .homeTotalBoxCount = ASSISTANT_HOME_TOTAL_BOXES,
+    .homeMinimalBoxOffset = offsetof(struct RogueBoxGlobalData, boxData),
+    .homeMinimalBoxSize = sizeof(struct RoguePerBoxData),
+    .homeDestMonOffset = offsetof(struct RogueBoxGlobalData, destBoxMons),
+    .homeDestMonSize = sizeof(struct BoxPokemon) * IN_BOX_COUNT,
+    .homeTrainerIdOffset = offsetof(struct RogueBoxGlobalData, trainerId),
+    .homeRemoteIndexOrderOffset = offsetof(struct RogueBoxGlobalData, boxRemoteIndexOrder),
 
-#define WRITE_OUTPUT_8(value) Write8(&outputPos, value, gRogueAssistantHeader.outCommBuffer, gRogueAssistantHeader.outCommCapacity)
-#define WRITE_OUTPUT_16(value) Write16(&outputPos, value, gRogueAssistantHeader.outCommBuffer, gRogueAssistantHeader.outCommCapacity)
-#define WRITE_OUTPUT_32(value) Write32(&outputPos, value, gRogueAssistantHeader.outCommBuffer, gRogueAssistantHeader.outCommCapacity)
-
-
-
-// Declerations
-//
-
-typedef void (*CommandCallback)(buffer_offset_t, buffer_offset_t);
-
-static void NetPlayerUpdate(u8 playerId, struct NetPlayerProfile* playerProfile, struct NetPlayerState* playerState);
-
-static bool8 CommCmd_ProcessNext();
-static void CommCmd_Echo(buffer_offset_t inputPos, buffer_offset_t outputPos);
-static void CommCmd_ReadConstant(buffer_offset_t inputPos, buffer_offset_t outputPos);
-
-static const CommandCallback sCommCommands[] = 
-{
-    CommCmd_Echo,
-    CommCmd_ReadConstant,
+    //.inCommCapacity = sizeof(gRogueAssistantState.inCommBuffer),
+    //.outCommCapacity = sizeof(gRogueAssistantState.outCommBuffer),
+    //.inCommBuffer = gRogueAssistantState.inCommBuffer,
+    //.outCommBuffer = gRogueAssistantState.outCommBuffer
 };
 
 
@@ -139,389 +192,198 @@ static const CommandCallback sCommCommands[] =
 
 void Rogue_AssistantInit()
 {
+    PUSH_ASSISTANT_STATE(NONE);
+    gRogueAssistantState.isAssistantConnected = FALSE;
+    gRogueAssistantState.externalConfirmCounter = ASSISTANT_CONFIRM_THRESHOLD;
+
+    Rogue_UpdateAssistantRequestState(REQUEST_STATE_NONE);
+    RogueMP_Init();
+}
+
+bool8 Rogue_IsAssistantConnected()
+{
+    return gRogueAssistantState.isAssistantConnected;
+}
+
+void Rogue_UpdateAssistantState(u16 state, u16 substate)
+{
+    gRogueAssistantState.assistantState = state;
+    gRogueAssistantState.assistantSubstate = substate;
+}
+
+void Rogue_UpdateAssistantRequestState(u16 state)
+{
+    gRogueAssistantState.requestState = state;
+}
+
+static void OnAssistantConnect()
+{
+    Rogue_PushPopup_AssistantConnected();
+}
+
+static void OnAssistantDisconnect()
+{
+    Rogue_PushPopup_AssistantDisconnected();
+
+    // Close multiplayer if active
+    if(RogueMP_IsActive())
+        RogueMP_Close();
 }
 
 void Rogue_AssistantMainCB()
 {
-    CommCmd_ProcessNext();
+    // Expect the external sevice to keep stomping this counter to 0, so if it goes over threshold, we've lost connection
+    if(gRogueAssistantState.isAssistantConnected)
+    {
+        if(!RogueDebug_GetConfigToggle(DEBUG_TOGGLE_DISABLE_ASSISTANT_TIMEOUT))
+        {
+            u16 failThreshold = (sRogueAssistantBoxData != NULL) ? ASSISTANT_CONFIRM_THRESHOLD_BOX : ASSISTANT_CONFIRM_THRESHOLD;
+
+            if(++gRogueAssistantState.externalConfirmCounter >= failThreshold)
+            {
+                gRogueAssistantState.isAssistantConnected = FALSE;
+                OnAssistantDisconnect();
+            }
+        }
+    }
+    else if(gRogueAssistantState.externalConfirmCounter == 0)
+    {
+        gRogueAssistantState.isAssistantConnected = TRUE;
+        OnAssistantConnect();
+    }
+
+    if(RogueMP_IsActiveOrConnecting())
+        RogueMP_MainCB();
 }
 
-static bool8 IsNetPlayerActive(u8 id)
+static void Task_WaitForConnection(u8 taskId)
 {
-    return (gRogueAssistantState.netPlayerProfile[id].flags & NETPLAYER_FLAGS_ACTIVE) != 0;
+    // Wait for connections
+    if (JOY_NEW(B_BUTTON))
+    {
+        // Cancelled
+        gSpecialVar_Result = FALSE;
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+    }
+    else if(Rogue_IsAssistantConnected())
+    {
+        // Has connected
+        gSpecialVar_Result = TRUE;
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+    }
+}
+
+u8 Rogue_WaitForRogueAssistant()
+{
+    u8 taskId = FindTaskIdByFunc(Task_WaitForConnection);
+    if (taskId == TASK_NONE)
+    {
+        taskId = CreateTask(Task_WaitForConnection, 80);
+
+        //gTasks[taskId1].tConnectAsHost = asHost;
+        //if(asHost)
+        //    Rogue_UpdateAssistantRequestState(REQUEST_STATE_MULTIPLAYER_HOST);
+        //else
+        //    Rogue_UpdateAssistantRequestState(REQUEST_STATE_MULTIPLAYER_JOIN);
+    }
+
+    return taskId;
 }
 
 void Rogue_AssistantOverworldCB()
 {
-    // Populate current player state
+    if(RogueMP_IsActiveOrConnecting())
+        RogueMP_OverworldCB();
+}
+
+void RogueBox_OpenConnection()
+{
+    AGB_ASSERT(sRogueAssistantBoxData == NULL);
+    if(sRogueAssistantBoxData == NULL)
     {
-        struct ObjectEvent* player = &gObjectEvents[gPlayerAvatar.objectEventId];
+        u32 i;
+        sRogueAssistantBoxData = AllocZeroed(sizeof(struct RogueBoxGlobalData));
+        sRogueAssistantBoxData->destBoxMons = &gPokemonStoragePtr->boxes[0][0];
+        sRogueAssistantBoxData->trainerId = GetTrainerId(gSaveBlock2Ptr->playerTrainerId);
 
-        if(!IsNetPlayerActive(0))
+        memset(sRogueAssistantBoxData->boxRemoteIndexOrder, 255, sizeof(sRogueAssistantBoxData->boxRemoteIndexOrder));
+
+        for(i = 0; i < ASSISTANT_HOME_LOCAL_BOXES; ++i)
         {
-            gRogueAssistantState.netPlayerProfile[0].flags = NETPLAYER_FLAGS_ACTIVE;
-            memcpy(gRogueAssistantState.netPlayerProfile->trainerName, gSaveBlock2Ptr->playerName, sizeof(gRogueAssistantState.netPlayerProfile->trainerName));
-        }
+            StringCopyN(sRogueAssistantBoxData->boxData[i].name, gPokemonStoragePtr->boxNames[i], BOX_NAME_LENGTH);
+            sRogueAssistantBoxData->boxData[i].monCount = CountMonsInBox(i);
+            sRogueAssistantBoxData->boxData[i].wallpaper = gPokemonStoragePtr->boxWallpapers[i];
 
-        gRogueAssistantState.netPlayerState[0].pos = gSaveBlock1Ptr->pos;
-        gRogueAssistantState.netPlayerState[0].facingDirection = player->facingDirection;
-        gRogueAssistantState.netPlayerState[0].mapGroup = gSaveBlock1Ptr->location.mapGroup;
-        gRogueAssistantState.netPlayerState[0].mapNum = gSaveBlock1Ptr->location.mapNum;
-
-        if(FollowMon_IsPartnerMonActive())
-        {
-            struct ObjectEvent* follower = &gObjectEvents[gSaveBlock2Ptr->follower.objId];
-
-            gRogueAssistantState.netPlayerState[0].partnerMon = FollowMon_GetPartnerFollowSpecies();
-            gRogueAssistantState.netPlayerState[0].partnerPos = follower->currentCoords;
-            gRogueAssistantState.netPlayerState[0].partnerFacingDirection = follower->facingDirection;
-        }
-        else
-        {
-            gRogueAssistantState.netPlayerState[0].partnerMon = 0;
-        }
-    }
-
-    // Do external net update, if needed
-    {
-        u8 i;
-        for(i = 1; i < NET_PLAYER_CAPACITY; ++i)
-        {
-            if(IsNetPlayerActive(i))
-            {
-                NetPlayerUpdate(i, &gRogueAssistantState.netPlayerProfile[i], &gRogueAssistantState.netPlayerState[i]);
-            }
+            sRogueAssistantBoxData->boxRemoteIndexOrder[i] = i;
         }
     }
 }
 
-
-// Multiplayer
-//
-
-struct SyncObjectEventInfo
+void RogueBox_CloseConnection()
 {
-    u8 localId;
-    u16 gfxId;
-    u16 facingDirection;
-    s16 mapX;
-    s16 mapY;
-    s8 mapNum;
-    s8 mapGroup;
-};
-
-static void SyncObjectEvent(struct SyncObjectEventInfo objectInfo)
-{
-    bool8 shouldBeVisible = (objectInfo.gfxId != 0) && (objectInfo.mapGroup == gSaveBlock1Ptr->location.mapGroup && objectInfo.mapNum == gSaveBlock1Ptr->location.mapNum);
-    u8 objectId = GetSpecialObjectEventIdByLocalId(objectInfo.localId);
-    s16 xDist = abs(objectInfo.mapX - gSaveBlock1Ptr->pos.x - MAP_OFFSET);
-    s16 yDist = abs(objectInfo.mapY - gSaveBlock1Ptr->pos.y - MAP_OFFSET);
-
-    if(shouldBeVisible && xDist <= 8 && yDist <= 5)
+    AGB_ASSERT(sRogueAssistantBoxData != NULL);
+    if(sRogueAssistantBoxData != NULL)
     {
-        shouldBeVisible = TRUE;
-    }
+        // Copy name and wallpapers back
+        u32 i;
 
-    if(shouldBeVisible)
-    {
-        if(objectId == OBJECT_EVENTS_COUNT && IsSafeToSpawnObjectEvents())
+        for(i = 0; i < ASSISTANT_HOME_LOCAL_BOXES; ++i)
         {
-            objectId = SpawnSpecialObjectEventParameterized(
-                objectInfo.gfxId,
-                MOVEMENT_TYPE_NONE,
-                objectInfo.localId,
-                objectInfo.mapX,
-                objectInfo.mapY,
-                MapGridGetElevationAt(objectInfo.mapX, objectInfo.mapY)
-            );
+            StringCopyN(gPokemonStoragePtr->boxNames[i], RogueBox_GetName(i), BOX_NAME_LENGTH);
+            gPokemonStoragePtr->boxWallpapers[i] = sRogueAssistantBoxData->boxData[i].wallpaper;
         }
 
-        if(objectId != OBJECT_EVENTS_COUNT)
-        {
-            s16 totalDist;
-            u8 heldMovement = MOVEMENT_ACTION_NONE;
-            struct ObjectEvent* object = &gObjectEvents[objectId];
-            s16 xDiff = objectInfo.mapX - object->currentCoords.x;
-            s16 yDiff = objectInfo.mapY - object->currentCoords.y;
-
-            xDist = abs(xDiff);
-            yDist = abs(yDiff);
-            totalDist = xDist + yDist;
-
-            // Close enough to animate
-            if(totalDist < 12)
-            {
-                u8 heldMovement = MOVEMENT_ACTION_NONE;
-                u8 idealMovement = GetWalkNormalMovementAction(objectInfo.facingDirection);
-
-                // If we're facing a direction we need to go, do that preferably
-                if((idealMovement == MOVEMENT_ACTION_WALK_NORMAL_LEFT && xDiff < 0)
-                    || (idealMovement == MOVEMENT_ACTION_WALK_NORMAL_RIGHT && xDiff > 0)
-                    || (idealMovement == MOVEMENT_ACTION_WALK_NORMAL_UP && yDiff < 0)
-                    || (idealMovement == MOVEMENT_ACTION_WALK_NORMAL_DOWN && yDiff > 0)
-                )
-                {
-                    heldMovement = idealMovement;
-                }
-                // Otherwise try to move on smallest axis distance first
-                else if(xDist > 0 && (yDist == 0 || xDist > yDist))
-                {
-                    heldMovement = xDiff < 0 ? MOVEMENT_ACTION_WALK_NORMAL_LEFT : MOVEMENT_ACTION_WALK_NORMAL_RIGHT;
-                }
-                else if(yDist > 0)
-                {
-                    heldMovement = yDiff < 0 ? MOVEMENT_ACTION_WALK_NORMAL_UP : MOVEMENT_ACTION_WALK_NORMAL_DOWN;
-                }
-
-                // Speed up movement action if far away
-                if(totalDist >= 5)
-                    heldMovement += MOVEMENT_ACTION_WALK_FASTER_DOWN - MOVEMENT_ACTION_WALK_NORMAL_DOWN;
-                else if(totalDist >= 2)
-                    heldMovement += MOVEMENT_ACTION_WALK_FAST_DOWN - MOVEMENT_ACTION_WALK_NORMAL_DOWN;
-
-                if(ObjectEventClearHeldMovementIfFinished(object))
-                {
-                    if(heldMovement != MOVEMENT_ACTION_NONE)
-                    {
-                        // Keep queuing up the correct movement
-                        ObjectEventSetHeldMovement(object, heldMovement);
-                    }
-                    else if(object->facingDirection != objectInfo.facingDirection)
-                    {
-                        // Finished movement, so sync up facing direction
-                        ObjectEventSetHeldMovement(object, GetFaceDirectionMovementAction(objectInfo.facingDirection));
-                    }
-                }
-            }
-            else
-            {
-                // Teleport, as too far
-                MoveObjectEventToMapCoords(object, objectInfo.mapX, objectInfo.mapY);
-            }
-        }
+        Free(sRogueAssistantBoxData);
+        sRogueAssistantBoxData = NULL;
     }
-    else
+}
+
+bool32 RogueBox_IsConnectedAndReady()
+{
+    return Rogue_IsAssistantConnected() && sRogueAssistantBoxData != NULL && sRogueAssistantBoxData->boxRemoteIndexOrder[ASSISTANT_HOME_TOTAL_BOXES - 1] != 255;
+}
+
+u8 RogueBox_GetCountInBox(u8 i)
+{
+    AGB_ASSERT(sRogueAssistantBoxData != NULL);
+    //AGB_ASSERT(sRogueAssistantBoxData->boxData[i].isValid);
+    return sRogueAssistantBoxData->boxData[i].monCount;
+}
+
+static u8 const sText_DefaultBoxName[BOX_NAME_LENGTH + 1] = _("UNNAMED");
+
+u8 const* RogueBox_GetName(u8 boxId)
+{
+    u32 i;
+    u8* srcStr = sRogueAssistantBoxData->boxData[boxId].name;
+    AGB_ASSERT(sRogueAssistantBoxData != NULL);
+
+    // External box names come through as all 0's so handle those here
+    for(i = 0; i < BOX_NAME_LENGTH + 1; ++i)
     {
-        // Remove object if currently exists
-        if(objectId != OBJECT_EVENTS_COUNT)
-        {
-            RemoveObjectEvent(&gObjectEvents[objectId]);
-        }
+        // Found non 0 char so assume this is valid
+        if(srcStr[i] != 0)
+            return srcStr;
     }
+
+    return sText_DefaultBoxName;
 }
 
-void Rogue_RemoveNetObjectEvents()
+bool32 RogueBox_IsLocalBox(u8 i)
 {
-    u8 i, j;
-    u8 objectId;
+    return i < ASSISTANT_HOME_LOCAL_BOXES;
+}
 
-    for(i = OBJ_EVENT_ID_MULTIPLAYER_FIRST; i <= OBJ_EVENT_ID_MULTIPLAYER_LAST; ++i)
+void RogueBox_SwapBoxes(u8 a, u8 b)
+{
+    AGB_ASSERT(sRogueAssistantBoxData != NULL);
+    if(a != b && a < ASSISTANT_HOME_TOTAL_BOXES && b < ASSISTANT_HOME_TOTAL_BOXES)
     {
-        objectId = GetSpecialObjectEventIdByLocalId(i);
-        if(objectId != OBJECT_EVENTS_COUNT)
-        {
-            RemoveObjectEvent(&gObjectEvents[objectId]);
-        }
+        struct RoguePerBoxData tempBoxData;
+        u8 temp8;
+        SWAP(sRogueAssistantBoxData->boxData[a], sRogueAssistantBoxData->boxData[b], tempBoxData);
+        SWAP(sRogueAssistantBoxData->boxRemoteIndexOrder[a], sRogueAssistantBoxData->boxRemoteIndexOrder[b], temp8);
     }
-}
-
-
-static void NetPlayerUpdate(u8 playerId, struct NetPlayerProfile* playerProfile, struct NetPlayerState* playerState)
-{
-    struct SyncObjectEventInfo syncObject;
-
-    syncObject.localId = OBJ_EVENT_ID_MULTIPLAYER_FIRST + playerId * 2 + 0;
-    syncObject.gfxId = OBJ_EVENT_GFX_ANABEL;
-    syncObject.facingDirection = playerState->facingDirection;
-    syncObject.mapX = playerState->pos.x + MAP_OFFSET;
-    syncObject.mapY = playerState->pos.y + MAP_OFFSET;
-    syncObject.mapNum = playerState->mapNum;
-    syncObject.mapGroup = playerState->mapGroup;
-
-    SyncObjectEvent(syncObject);
-
-    // Follower
-    syncObject.localId = OBJ_EVENT_ID_MULTIPLAYER_FIRST + playerId * 2 + 1;
-    syncObject.facingDirection = playerState->partnerFacingDirection;
-    syncObject.mapX = playerState->partnerPos.x;
-    syncObject.mapY = playerState->partnerPos.y;
-    syncObject.mapNum = playerState->mapNum;
-    syncObject.mapGroup = playerState->mapGroup;
-
-    if(playerState->partnerMon != 0 && !Rogue_IsRunActive())
-    {
-        if(VarGet(VAR_FOLLOW_MON_4 + playerId) != playerState->partnerMon)
-        {
-            // Remove the object for one frame to reset the gfx
-            VarSet(VAR_FOLLOW_MON_4 + playerId, playerState->partnerMon);
-            syncObject.gfxId = 0;
-        }
-        else
-        {
-            syncObject.gfxId = OBJ_EVENT_GFX_FOLLOW_MON_4 + playerId;
-        }
-    }
-    else
-    {
-        syncObject.gfxId = 0;
-    }
-
-    SyncObjectEvent(syncObject);
-}
-
-
-// Commands
-//
-
-static bool8 CommCmd_ProcessNext()
-{
-    u16 cmdToken, prevCmdToken, cmdIdx;
-    buffer_offset_t inputPos = 0;
-    buffer_offset_t outputPos = 0;
-
-    cmdToken = READ_INPUT_16();
-    prevCmdToken = READ_OUTPUT_16();
-
-    // If we have a new valid cmd, execute it
-    if(cmdToken != 0 && cmdToken != prevCmdToken)
-    {
-        cmdIdx = READ_INPUT_16();
-        AGB_ASSERT(cmdIdx < ARRAY_COUNT(sCommCommands));
-
-        if(cmdIdx < ARRAY_COUNT(sCommCommands))
-        {
-            // Clear previous output token
-            outputPos = 0;
-            WRITE_OUTPUT_16(0);
-
-            sCommCommands[cmdIdx](inputPos, outputPos);
-
-            // Command has finished, so put the correct token into the out buffer now, to signal that it is safe to read
-            outputPos = 0;
-            WRITE_OUTPUT_16(cmdToken);
-
-            return TRUE;
-        }
-    }
-
-    return FALSE;
-}
-
-static u8 Read8(buffer_offset_t* offset, u8* buffer, size_t capacity)
-{
-    u8* ptr = &buffer[*offset];
-    u8 value;
-    
-    memcpy(&value, ptr, sizeof(u8));
-
-    *offset += sizeof(u8);
-    AGB_ASSERT(*offset < capacity);
-
-    return value;
-}
-
-static u16 Read16(buffer_offset_t* offset, u8* buffer, size_t capacity)
-{
-    u8* ptr = &buffer[*offset];
-    u16 value;
-    
-    memcpy(&value, ptr, sizeof(u16));
-
-    *offset += sizeof(u16);
-    AGB_ASSERT(*offset < capacity);
-
-    return value;
-}
-
-static u32 Read32(buffer_offset_t* offset, u8* buffer, size_t capacity)
-{
-    u8* ptr = &buffer[*offset];
-    u32 value;
-    
-    memcpy(&value, ptr, sizeof(u32));
-
-    *offset += sizeof(u32);
-    AGB_ASSERT(*offset < capacity);
-
-    return value;
-}
-
-static void Write8(buffer_offset_t* offset, u8 value, u8* buffer, size_t capacity)
-{
-    u8* ptr = &buffer[*offset];
-    
-    memcpy(ptr, &value, sizeof(u8));
-
-    *ptr = value;
-
-    *offset += sizeof(u8);
-    AGB_ASSERT(*offset < capacity);
-}
-
-static void Write16(buffer_offset_t* offset, u16 value, u8* buffer, size_t capacity)
-{
-    u8* ptr = &buffer[*offset];
-    
-    memcpy(ptr, &value, sizeof(u16));
-
-    *offset += sizeof(u16);
-    AGB_ASSERT(*offset < capacity);
-}
-
-static void Write32(buffer_offset_t* offset, u32 value, u8* buffer, size_t capacity)
-{
-    u8* ptr = &buffer[*offset];
-    
-    memcpy(ptr, &value, sizeof(u32));
-
-    *offset += sizeof(u32);
-    AGB_ASSERT(*offset < capacity);
-}
-
-// Commands
-//
-
-static void CommCmd_Echo(buffer_offset_t inputPos, buffer_offset_t outputPos)
-{
-    u16 value = READ_INPUT_16();
-
-    WRITE_OUTPUT_16(value);
-}
-
-static void CommCmd_ReadConstant(buffer_offset_t inputPos, buffer_offset_t outputPos)
-{
-    u32 value;
-    u16 constant = READ_INPUT_16();
-
-    switch (constant)
-    {
-    case GAME_CONSTANT_SAVE_BLOCK1_PTR_ADDRESS:
-        value = (u32)&gSaveBlock1Ptr;
-        break;
-    case GAME_CONSTANT_SAVE_BLOCK2_PTR_ADDRESS:
-        value = (u32)&gSaveBlock2Ptr;
-        break;
-
-    case GAME_CONSTANT_NET_PLAYER_CAPACITY:
-        value = NET_PLAYER_CAPACITY;
-        break;
-    case GAME_CONSTANT_NET_PLAYER_PROFILE_ADDRESS:
-        value = (u32)&gRogueAssistantState.netPlayerProfile[0];
-        break;
-    case GAME_CONSTANT_NET_PLAYER_PROFILE_SIZE:
-        value = sizeof(gRogueAssistantState.netPlayerProfile[0]);
-        break;
-    case GAME_CONSTANT_NET_PLAYER_STATE_ADDRESS:
-        value = (u32)&gRogueAssistantState.netPlayerState[0];
-        break;
-    case GAME_CONSTANT_NET_PLAYER_STATE_SIZE:
-        value = sizeof(gRogueAssistantState.netPlayerState[0]);
-        break;
-
-    default: // Error
-        value = (u32)-1;
-        break;
-    }
-
-    WRITE_OUTPUT_32(value);
 }

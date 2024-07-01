@@ -29,6 +29,7 @@ namespace PokemonDataGenerator.OverworldSprites
 		{
 			int x = 0;
 			int y = 0;
+			mon = mon.ToLower();
 
 			Console.WriteLine($"\tSplitting {settings.CategoryName} {mon}..");
 
@@ -48,6 +49,12 @@ namespace PokemonDataGenerator.OverworldSprites
 					{
 						int tl_x = originX + x * settings.CellSize;
 						int tl_y = originY + y * settings.CellSize;
+
+						if(tl_x >= settings.Source.Width)
+						{
+							tl_x %= settings.Source.Width;
+							tl_y += settings.CellSize * (settings.FrameNames.Length / settings.FrameStride);
+						}
 
 						Bitmap spriteFrame = settings.Source.Clone(new Rectangle(tl_x, tl_y, settings.CellSize, settings.CellSize), PixelFormat.Format32bppArgb);
 						ApplyTransparencyToAlphaChannel(spriteFrame);
@@ -261,6 +268,11 @@ namespace PokemonDataGenerator.OverworldSprites
 
 					case "heatmor":
 						initialOffset = 20;
+						spacing = 30;
+						break;
+
+					case "reuniclus":
+						initialOffset = 32;
 						spacing = 30;
 						break;
 

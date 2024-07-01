@@ -1,9 +1,9 @@
 #ifndef GUARD_REGIONMAPSEC_H
 #define GUARD_REGIONMAPSEC_H
 
-#define MAPSEC_LITTLEROOT_TOWN              0x00
-#define MAPSEC_OLDALE_TOWN                  0x01
-#define MAPSEC_DEWFORD_TOWN                 0x02
+#define MAPSEC_POKEMON_HUB                  0x00
+#define MAPSEC_ADVENTURE                    0x01
+#define MAPSEC_OTHER_POKEMON_HUB            0x02
 #define MAPSEC_LAVARIDGE_TOWN               0x03
 #define MAPSEC_FALLARBOR_TOWN               0x04
 #define MAPSEC_VERDANTURF_TOWN              0x05
@@ -100,8 +100,8 @@
 #define MAPSEC_CINNABAR_ISLAND              0x60
 #define MAPSEC_INDIGO_PLATEAU               0x61
 #define MAPSEC_SAFFRON_CITY                 0x62
-#define MAPSEC_ROUTE_4_FLYDUP               0x63
-#define MAPSEC_ROUTE_10_FLYDUP              0x64
+#define MAPSEC_ROUTE_4_POKECENTER           0x63
+#define MAPSEC_ROUTE_10_POKECENTER          0x64
 #define MAPSEC_ROUTE_1                      0x65
 #define MAPSEC_ROUTE_2                      0x66
 #define MAPSEC_ROUTE_3                      0x67

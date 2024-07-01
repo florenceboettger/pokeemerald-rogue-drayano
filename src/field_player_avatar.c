@@ -31,6 +31,11 @@
 #include "constants/songs.h"
 #include "constants/trainer_types.h"
 
+#include "rogue_controller.h"
+#include "rogue_followmon.h"
+#include "rogue_player_customisation.h"
+#include "rogue_ridemon.h"
+
 #define NUM_FORCED_MOVEMENTS 18
 #define NUM_ACRO_BIKE_COLLISIONS 5
 
@@ -66,6 +71,8 @@ static bool8 ForcedMovement_MatJump(void);
 static bool8 ForcedMovement_MatSpin(void);
 static bool8 ForcedMovement_MuddySlope(void);
 
+bool8 ForcedMovement_AffectedByMuddySlope(u8);
+
 static void MovePlayerNotOnBike(u8, u16, u16);
 static u8 CheckMovementInputNotOnBike(u8);
 static void PlayerNotOnBikeNotMoving(u8, u16);
@@ -75,6 +82,8 @@ static u8 CheckForPlayerAvatarCollision(u8);
 static u8 CheckForPlayerAvatarStaticCollision(u8);
 static u8 CheckForObjectEventStaticCollision(struct ObjectEvent *, s16, s16, u8, u8);
 static bool8 CanStopSurfing(s16, s16, u8);
+static bool8 CanStartSwimming(s16, s16, u8, u8);
+static bool8 CanStopSwimming(s16, s16, u8);
 static bool8 ShouldJumpLedge(s16, s16, u8);
 static bool8 TryPushBoulder(s16, s16, u8);
 static void CheckAcroBikeCollision(s16, s16, u8, u8 *);
@@ -86,6 +95,7 @@ static void PlayerAvatarTransition_MachBike(struct ObjectEvent *);
 static void PlayerAvatarTransition_AcroBike(struct ObjectEvent *);
 static void PlayerAvatarTransition_Surfing(struct ObjectEvent *);
 static void PlayerAvatarTransition_Underwater(struct ObjectEvent *);
+static void PlayerAvatarTransition_Riding(struct ObjectEvent *);
 static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent *);
 
 static bool8 PlayerAnimIsMultiFrameStationary(void);
@@ -93,7 +103,8 @@ static bool8 PlayerAnimIsMultiFrameStationaryAndStateNotTurning(void);
 static bool8 PlayerIsAnimActive(void);
 static bool8 PlayerCheckIfAnimFinishedOrInactive(void);
 
-static void PlayerRun(u8);
+static void PlayerWalkSlow(u8 direction);
+static void PlayerRunSlow(u8 direction);
 static void PlayerNotOnBikeCollide(u8);
 static void PlayerNotOnBikeCollideWithFarawayIslandMew(u8);
 
@@ -162,7 +173,7 @@ static bool8 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u8) =
     MetatileBehavior_IsWaterfall,
     MetatileBehavior_IsSecretBaseJumpMat,
     MetatileBehavior_IsSecretBaseSpinMat,
-    MetatileBehavior_IsMuddySlope,
+    ForcedMovement_AffectedByMuddySlope,
 };
 
 // + 1 for ForcedMovement_None, which is excluded above
@@ -223,6 +234,9 @@ static void (*const sPlayerAvatarTransitionFuncs[])(struct ObjectEvent *) =
     [PLAYER_AVATAR_STATE_FIELD_MOVE] = PlayerAvatarTransition_ReturnToField,
     [PLAYER_AVATAR_STATE_FISHING]    = PlayerAvatarTransition_Dummy,
     [PLAYER_AVATAR_STATE_WATERING]   = PlayerAvatarTransition_Dummy,
+
+    //[PLAYER_AVATAR_STATE_RIDE_SITTING] = PlayerAvatarTransition_Dummy,
+    [PLAYER_AVATAR_STATE_RIDE_GRABBING] = PlayerAvatarTransition_Riding,
 };
 
 static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) =
@@ -231,96 +245,6 @@ static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) =
     [DIR_NORTH - 1] = MetatileBehavior_IsNorthArrowWarp,
     [DIR_WEST - 1]  = MetatileBehavior_IsWestArrowWarp,
     [DIR_EAST - 1]  = MetatileBehavior_IsEastArrowWarp,
-};
-
-static const u16 sRivalAvatarGfxIds[][2] =
-{
-    [PLAYER_AVATAR_STATE_NORMAL]     = {OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,     OBJ_EVENT_GFX_RIVAL_MAY_NORMAL},
-    [PLAYER_AVATAR_STATE_MACH_BIKE]  = {OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE,  OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE},
-    [PLAYER_AVATAR_STATE_ACRO_BIKE]  = {OBJ_EVENT_GFX_RIVAL_BRENDAN_ACRO_BIKE,  OBJ_EVENT_GFX_RIVAL_MAY_ACRO_BIKE},
-    [PLAYER_AVATAR_STATE_SURFING]    = {OBJ_EVENT_GFX_RIVAL_BRENDAN_SURFING,    OBJ_EVENT_GFX_RIVAL_MAY_SURFING},
-    [PLAYER_AVATAR_STATE_UNDERWATER] = {OBJ_EVENT_GFX_BRENDAN_UNDERWATER,       OBJ_EVENT_GFX_MAY_UNDERWATER},
-    [PLAYER_AVATAR_STATE_FIELD_MOVE] = {OBJ_EVENT_GFX_RIVAL_BRENDAN_FIELD_MOVE, OBJ_EVENT_GFX_RIVAL_MAY_FIELD_MOVE},
-    [PLAYER_AVATAR_STATE_FISHING]    = {OBJ_EVENT_GFX_BRENDAN_FISHING,          OBJ_EVENT_GFX_MAY_FISHING},
-    [PLAYER_AVATAR_STATE_WATERING]   = {OBJ_EVENT_GFX_BRENDAN_WATERING,         OBJ_EVENT_GFX_MAY_WATERING}
-};
-
-static const u16 sPlayerAvatarGfxIds[][PLAYER_STYLE_COUNT] =
-{
-    [PLAYER_AVATAR_STATE_NORMAL]     = {OBJ_EVENT_GFX_BRENDAN_NORMAL,     OBJ_EVENT_GFX_MAY_NORMAL,     OBJ_EVENT_GFX_RED,                OBJ_EVENT_GFX_LEAF,            OBJ_EVENT_GFX_ETHAN,               OBJ_EVENT_GFX_LYRA            },
-    [PLAYER_AVATAR_STATE_MACH_BIKE]  = {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE,  OBJ_EVENT_GFX_MAY_MACH_BIKE,  OBJ_EVENT_GFX_RED_MACH_BIKE,      OBJ_EVENT_GFX_LEAF_MACH_BIKE,  OBJ_EVENT_GFX_ETHAN_MACH_BIKE,     OBJ_EVENT_GFX_LYRA_MACH_BIKE  },
-    [PLAYER_AVATAR_STATE_ACRO_BIKE]  = {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE,  OBJ_EVENT_GFX_MAY_ACRO_BIKE,  OBJ_EVENT_GFX_RED_ACRO_BIKE,      OBJ_EVENT_GFX_LEAF_ACRO_BIKE,  OBJ_EVENT_GFX_ETHAN_ACRO_BIKE,     OBJ_EVENT_GFX_LYRA_ACRO_BIKE  },
-    [PLAYER_AVATAR_STATE_SURFING]    = {OBJ_EVENT_GFX_BRENDAN_SURFING,    OBJ_EVENT_GFX_MAY_SURFING,    OBJ_EVENT_GFX_RED_SURFING,        OBJ_EVENT_GFX_LEAF_SURFING,    OBJ_EVENT_GFX_ETHAN_SURFING,       OBJ_EVENT_GFX_LYRA_SURFING    },
-    [PLAYER_AVATAR_STATE_UNDERWATER] = {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, OBJ_EVENT_GFX_MAY_UNDERWATER, OBJ_EVENT_GFX_BRENDAN_UNDERWATER, OBJ_EVENT_GFX_MAY_UNDERWATER,  OBJ_EVENT_GFX_BRENDAN_UNDERWATER,  OBJ_EVENT_GFX_MAY_UNDERWATER  },
-    [PLAYER_AVATAR_STATE_FIELD_MOVE] = {OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE, OBJ_EVENT_GFX_MAY_FIELD_MOVE, OBJ_EVENT_GFX_RED_FIELD_MOVE,     OBJ_EVENT_GFX_LEAF_FIELD_MOVE, OBJ_EVENT_GFX_ETHAN_FIELD_MOVE,    OBJ_EVENT_GFX_LYRA_FIELD_MOVE },
-    [PLAYER_AVATAR_STATE_FISHING]    = {OBJ_EVENT_GFX_BRENDAN_FISHING,    OBJ_EVENT_GFX_MAY_FISHING,    OBJ_EVENT_GFX_RED_FISHING,        OBJ_EVENT_GFX_LEAF_FISHING,    OBJ_EVENT_GFX_ETHAN_FISHING,       OBJ_EVENT_GFX_LYRA_FISHING    },
-    [PLAYER_AVATAR_STATE_WATERING]   = {OBJ_EVENT_GFX_BRENDAN_WATERING,   OBJ_EVENT_GFX_MAY_WATERING,   OBJ_EVENT_GFX_BRENDAN_WATERING,   OBJ_EVENT_GFX_MAY_WATERING,    OBJ_EVENT_GFX_BRENDAN_WATERING,    OBJ_EVENT_GFX_MAY_WATERING    },
-};
-
-static const u16 sFRLGAvatarGfxIds[GENDER_COUNT] =
-{
-    [MALE]   = OBJ_EVENT_GFX_RED,
-    [FEMALE] = OBJ_EVENT_GFX_LEAF
-};
-
-static const u16 sRSAvatarGfxIds[GENDER_COUNT] =
-{
-    [MALE]   = OBJ_EVENT_GFX_LINK_RS_BRENDAN,
-    [FEMALE] = OBJ_EVENT_GFX_LINK_RS_MAY
-};
-
-static const u16 sPlayerAvatarGfxToStateFlag[PLAYER_STYLE_COUNT][5][2] =
-{
-    [STYLE_EMR_BRENDAN] =
-    {
-        {OBJ_EVENT_GFX_BRENDAN_NORMAL,     PLAYER_AVATAR_FLAG_ON_FOOT},
-        {OBJ_EVENT_GFX_BRENDAN_MACH_BIKE,  PLAYER_AVATAR_FLAG_MACH_BIKE},
-        {OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE,  PLAYER_AVATAR_FLAG_ACRO_BIKE},
-        {OBJ_EVENT_GFX_BRENDAN_SURFING,    PLAYER_AVATAR_FLAG_SURFING},
-        {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
-    },
-    [STYLE_EMR_MAY] =
-    {
-        {OBJ_EVENT_GFX_MAY_NORMAL,         PLAYER_AVATAR_FLAG_ON_FOOT},
-        {OBJ_EVENT_GFX_MAY_MACH_BIKE,      PLAYER_AVATAR_FLAG_MACH_BIKE},
-        {OBJ_EVENT_GFX_MAY_ACRO_BIKE,      PLAYER_AVATAR_FLAG_ACRO_BIKE},
-        {OBJ_EVENT_GFX_MAY_SURFING,        PLAYER_AVATAR_FLAG_SURFING},
-        {OBJ_EVENT_GFX_MAY_UNDERWATER,     PLAYER_AVATAR_FLAG_UNDERWATER},
-    },
-
-    [STYLE_RED] =
-    {
-        {OBJ_EVENT_GFX_RED,                PLAYER_AVATAR_FLAG_ON_FOOT},
-        {OBJ_EVENT_GFX_RED_MACH_BIKE,      PLAYER_AVATAR_FLAG_MACH_BIKE},
-        {OBJ_EVENT_GFX_RED_ACRO_BIKE,      PLAYER_AVATAR_FLAG_ACRO_BIKE},
-        {OBJ_EVENT_GFX_RED_SURFING,        PLAYER_AVATAR_FLAG_SURFING},
-        {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
-    },
-    [STYLE_LEAF] =
-    {
-        {OBJ_EVENT_GFX_LEAF,               PLAYER_AVATAR_FLAG_ON_FOOT},
-        {OBJ_EVENT_GFX_LEAF_MACH_BIKE,     PLAYER_AVATAR_FLAG_MACH_BIKE},
-        {OBJ_EVENT_GFX_LEAF_ACRO_BIKE,     PLAYER_AVATAR_FLAG_ACRO_BIKE},
-        {OBJ_EVENT_GFX_LEAF_SURFING,       PLAYER_AVATAR_FLAG_SURFING},
-        {OBJ_EVENT_GFX_MAY_UNDERWATER,     PLAYER_AVATAR_FLAG_UNDERWATER},
-    },
-
-    [STYLE_ETHAN] =
-    {
-        {OBJ_EVENT_GFX_ETHAN,              PLAYER_AVATAR_FLAG_ON_FOOT},
-        {OBJ_EVENT_GFX_ETHAN_MACH_BIKE,    PLAYER_AVATAR_FLAG_MACH_BIKE},
-        {OBJ_EVENT_GFX_ETHAN_ACRO_BIKE,    PLAYER_AVATAR_FLAG_ACRO_BIKE},
-        {OBJ_EVENT_GFX_ETHAN_SURFING,      PLAYER_AVATAR_FLAG_SURFING},
-        {OBJ_EVENT_GFX_BRENDAN_UNDERWATER, PLAYER_AVATAR_FLAG_UNDERWATER},
-    },
-    [STYLE_LYRA] =
-    {
-        {OBJ_EVENT_GFX_LYRA,               PLAYER_AVATAR_FLAG_ON_FOOT},
-        {OBJ_EVENT_GFX_LYRA_MACH_BIKE,     PLAYER_AVATAR_FLAG_MACH_BIKE},
-        {OBJ_EVENT_GFX_LYRA_ACRO_BIKE,     PLAYER_AVATAR_FLAG_ACRO_BIKE},
-        {OBJ_EVENT_GFX_LYRA_SURFING,       PLAYER_AVATAR_FLAG_SURFING},
-        {OBJ_EVENT_GFX_MAY_UNDERWATER,     PLAYER_AVATAR_FLAG_UNDERWATER},
-    }
 };
 
 static bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u8) =  //Duplicate of sArrowWarpMetatileBehaviorChecks
@@ -353,7 +277,12 @@ static bool8 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task *, struct Obj
 
 void MovementType_Player(struct Sprite *sprite)
 {
+    //// RogueNote: default here so can shift around in movement below
+    //sprite->x2 = 0;
+    //sprite->y2 = 0;
+
     UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, ObjectEventCB2_NoMovement2);
+    //Rogue_OnMovementType_Player(sprite);
 }
 
 static u8 ObjectEventCB2_NoMovement2(void)
@@ -426,6 +355,8 @@ static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 held
 {
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         MovePlayerOnBike(direction, newKeys, heldKeys);
+    else if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_RIDING))
+        MovePlayerOnRideMon(direction, newKeys, heldKeys);
     else
         MovePlayerNotOnBike(direction, newKeys, heldKeys);
 }
@@ -475,7 +406,22 @@ static bool8 ForcedMovement_None(void)
 static bool8 DoForcedMovement(u8 direction, void (*moveFunc)(u8))
 {
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
-    u8 collision = CheckForPlayerAvatarCollision(direction);
+    u8 collision;
+
+    // Check for sideways stairs onto ice movement.
+    switch (direction)
+    {
+    case DIR_NORTHWEST:
+    case DIR_SOUTHWEST:
+        direction = DIR_WEST;
+        break;
+    case DIR_NORTHEAST:
+    case DIR_SOUTHEAST:
+        direction = DIR_EAST;
+        break;
+    }
+
+    collision = CheckForPlayerAvatarCollision(direction);
 
     playerAvatar->flags |= PLAYER_AVATAR_FLAG_FORCED_MOVE;
     if (collision)
@@ -596,6 +542,19 @@ static bool8 ForcedMovement_MatSpin(void)
     return TRUE;
 }
 
+bool8 ForcedMovement_AffectedByMuddySlope(u8 metatileBehavior)
+{
+    if(MetatileBehavior_IsMuddySlope(metatileBehavior))
+    {
+        if(Rogue_IsRideMonFlying())
+            return FALSE;
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 static bool8 ForcedMovement_MuddySlope(void)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -614,20 +573,6 @@ static bool8 ForcedMovement_MuddySlope(void)
 
 static void MovePlayerNotOnBike(u8 direction, u16 newKeys, u16 heldKeys)
 {
-    if(gSaveBlock2Ptr->optionsAutoRunToggle)
-    {
-        bool8 prevCheck = gPlayerAvatar.runningCheck;
-
-        // Can't use newKeys as it causes weird issues with it being ignored
-        if(heldKeys & B_BUTTON)
-            gPlayerAvatar.runningCheck = TRUE;
-        else
-            gPlayerAvatar.runningCheck = FALSE;
-
-        if(!prevCheck && gPlayerAvatar.runningCheck)
-            gPlayerAvatar.runningToggle = !gPlayerAvatar.runningToggle;
-    }
-
     sPlayerNotOnBikeFuncs[CheckMovementInputNotOnBike(direction)](direction, heldKeys);
 }
 
@@ -651,12 +596,12 @@ static void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys)
     PlayerTurnInPlace(direction);
 }
 
-static bool8 GetPlayerSpritingState(u16 heldKeys)
+bool8 GetPlayerSpritingState(u16 heldKeys)
 {
     if(FlagGet(FLAG_SYS_B_DASH))
     {
         if(gSaveBlock2Ptr->optionsAutoRunToggle)
-            return gPlayerAvatar.runningToggle;
+            return Rogue_IsRunningToggledOn();
         else
             return (heldKeys & B_BUTTON);
     }
@@ -699,13 +644,20 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && GetPlayerSpritingState(heldKeys)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0 && !FollowerComingThroughDoor())
     {
-        PlayerRun(direction);
+        if (ObjectMovingOnRockStairs(&gObjectEvents[gPlayerAvatar.objectEventId], direction))
+            PlayerRunSlow(direction);
+        else
+            PlayerRun(direction);
+
         gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
         return;
     }
     else
     {
-        PlayerWalkNormal(direction);
+        if (ObjectMovingOnRockStairs(&gObjectEvents[gPlayerAvatar.objectEventId], direction))
+            PlayerWalkSlow(direction);
+        else
+            PlayerWalkNormal(direction);
     }
 }
 
@@ -734,23 +686,61 @@ static u8 CheckForPlayerAvatarStaticCollision(u8 direction)
 u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior)
 {
     u8 collision = GetCollisionAtCoords(objectEvent, x, y, direction);
+    //u8 currentBehavior = MapGridGetMetatileBehaviorAt(objectEvent->currentCoords.x, objectEvent->currentCoords.y);
+    bool8 isFlying = Rogue_IsRideMonFlying();
+
     if (collision == COLLISION_ELEVATION_MISMATCH && CanStopSurfing(x, y, direction))
         return COLLISION_STOP_SURFING;
 
-    if (ShouldJumpLedge(x, y, direction))
-    {
-        IncrementGameStat(GAME_STAT_JUMPED_DOWN_LEDGES);
-        return COLLISION_LEDGE_JUMP;
-    }
-    if (collision == COLLISION_OBJECT_EVENT && TryPushBoulder(x, y, direction))
-        return COLLISION_PUSHED_BOULDER;
+    if (collision == COLLISION_ELEVATION_MISMATCH && CanStartSwimming(x, y, direction, metatileBehavior))
+        return COLLISION_START_SWIMMING;
 
-    if (collision == COLLISION_NONE)
+    if (collision == COLLISION_ELEVATION_MISMATCH && CanStopSwimming(x, y, direction))
+        return COLLISION_STOP_SWIMMING;
+
+    if(isFlying)
     {
-        if (CheckForRotatingGatePuzzleCollision(direction, x, y))
-            return COLLISION_ROTATING_GATE;
-        CheckAcroBikeCollision(x, y, metatileBehavior, &collision);
+        if(MetatileBehavior_IsJumpSouth(metatileBehavior)
+        || MetatileBehavior_IsJumpNorth(metatileBehavior)
+        || MetatileBehavior_IsJumpWest(metatileBehavior)
+        || MetatileBehavior_IsJumpEast(metatileBehavior)
+        )
+            return COLLISION_NONE;
     }
+    else
+    {
+        if (ShouldJumpLedge(x, y, direction))
+        {
+            IncrementGameStat(GAME_STAT_JUMPED_DOWN_LEDGES);
+            return COLLISION_LEDGE_JUMP;
+        }
+
+        if (collision == COLLISION_OBJECT_EVENT && TryPushBoulder(x, y, direction))
+            return COLLISION_PUSHED_BOULDER;
+
+        if (collision == COLLISION_NONE)
+        {
+            if (CheckForRotatingGatePuzzleCollision(direction, x, y))
+                return COLLISION_ROTATING_GATE;
+            CheckAcroBikeCollision(x, y, metatileBehavior, &collision);
+        }
+    }
+
+    //sideways stairs logic
+    /*
+    if (MetatileBehavior_IsSidewaysStairsLeftSideTop(metatileBehavior) && direction == DIR_EAST)
+        return COLLISION_IMPASSABLE;    //moving onto left-side top edge east from ground -> cannot move
+    else if (MetatileBehavior_IsSidewaysStairsRightSideTop(metatileBehavior) && direction == DIR_WEST)
+        return COLLISION_IMPASSABLE;    //moving onto left-side top edge east from ground -> cannot move
+    else if (MetatileBehavior_IsSidewaysStairsRightSideBottom(metatileBehavior) && (direction == DIR_EAST || direction == DIR_SOUTH))
+        return COLLISION_IMPASSABLE;
+    else if (MetatileBehavior_IsSidewaysStairsLeftSideBottom(metatileBehavior) && (direction == DIR_WEST || direction == DIR_SOUTH))
+        return COLLISION_IMPASSABLE;
+    else if ((MetatileBehavior_IsSidewaysStairsLeftSideTop(currentBehavior) || MetatileBehavior_IsSidewaysStairsRightSideTop(currentBehavior))
+     && direction == DIR_NORTH && collision == COLLISION_NONE)
+        return COLLISION_IMPASSABLE;    //trying to move north off of top-most tile onto same level doesn't work
+    */
+
     return collision;
 }
 
@@ -780,6 +770,29 @@ static bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
     {
         return FALSE;
     }
+}
+
+static bool8 CanStartSwimming(s16 x, s16 y, u8 direction, u8 metatileBehavior)
+{
+    if ((Rogue_CanRideMonSwim() || Rogue_IsRideMonFlying())
+        //&& MapGridGetElevationAt(x, y) == 3 
+        && MetatileBehavior_IsSurfableAndNotWaterfall(metatileBehavior)
+        && GetObjectEventIdByPosition(x, y, 3) == OBJECT_EVENTS_COUNT
+    )
+        return TRUE;
+
+    return FALSE;
+}
+
+static bool8 CanStopSwimming(s16 x, s16 y, u8 direction)
+{
+    if ((Rogue_CanRideMonSwim() || Rogue_IsRideMonFlying())
+        && MapGridGetElevationAt(x, y) == 3 
+        && GetObjectEventIdByPosition(x, y, 3) == OBJECT_EVENTS_COUNT
+    )
+        return TRUE;
+
+    return FALSE;
 }
 
 static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction)
@@ -828,35 +841,6 @@ static void CheckAcroBikeCollision(s16 x, s16 y, u8 metatileBehavior, u8 *collis
 
 bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction)
 {
-    u8 mewObjectId;
-    struct ObjectEvent *object;
-    s16 playerX;
-    s16 playerY;
-    s16 mewPrevX;
-
-    object = &gObjectEvents[gPlayerAvatar.objectEventId];
-    playerX = object->currentCoords.x;
-    playerY = object->currentCoords.y;
-
-    MoveCoords(direction, &playerX, &playerY);
-    mewObjectId = GetObjectEventIdByLocalIdAndMap(1, MAP_NUM(FARAWAY_ISLAND_INTERIOR), MAP_GROUP(FARAWAY_ISLAND_INTERIOR));
-    if (mewObjectId == OBJECT_EVENTS_COUNT)
-        return FALSE;
-
-    object = &gObjectEvents[mewObjectId];
-    mewPrevX = object->previousCoords.x;
-
-    if (mewPrevX == playerX)
-    {
-        if (object->previousCoords.y != playerY
-            || object->currentCoords.x != mewPrevX
-            || object->currentCoords.y != object->previousCoords.y)
-        {
-            if (object->previousCoords.x == playerX &&
-                object->previousCoords.y == playerY)
-                return TRUE;
-        }
-    }
     return FALSE;
 }
 
@@ -870,12 +854,15 @@ static void DoPlayerAvatarTransition(void)
 {
     u8 i;
     u8 flags = gPlayerAvatar.transitionFlags;
+    u8 mask;
 
     if (flags != 0)
     {
-        for (i = 0; i < ARRAY_COUNT(sPlayerAvatarTransitionFuncs); i++, flags >>= 1)
+        for (i = 0; i < ARRAY_COUNT(sPlayerAvatarTransitionFuncs); i++)
         {
-            if (flags & 1)
+            mask = (1 << i);
+
+            if ((flags & mask) != 0)
                 sPlayerAvatarTransitionFuncs[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
         }
         gPlayerAvatar.transitionFlags = 0;
@@ -932,6 +919,14 @@ static void PlayerAvatarTransition_Underwater(struct ObjectEvent *objEvent)
     ObjectEventTurn(objEvent, objEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_UNDERWATER);
     objEvent->fieldEffectSpriteId = StartUnderwaterSurfBlobBobbing(objEvent->spriteId);
+}
+
+static void PlayerAvatarTransition_Riding(struct ObjectEvent *objEvent)
+{
+    ObjectEventSetGraphicsId(objEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_RIDE_GRABBING));
+    ObjectEventTurn(objEvent, objEvent->movementDirection);
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_RIDING);
+    //objEvent->fieldEffectSpriteId = StartUnderwaterSurfBlobBobbing(objEvent->spriteId);
 }
 
 static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent *objEvent)
@@ -1013,6 +1008,21 @@ void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
     }
 }
 
+// slow
+static void PlayerWalkSlow(u8 direction)
+{
+    PlayerSetAnimId(GetWalkSlowMovementAction(direction), 2);
+}
+
+static void PlayerRunSlow(u8 direction)
+{
+    if(RoguePlayer_HasSpritingAnim())
+        PlayerSetAnimId(GetPlayerRunSlowMovementAction(direction), 2);
+    else
+        PlayerSetAnimId(GetWalkSlowMovementAction(direction), 2);
+}
+
+// normal speed (1 speed)
 void PlayerWalkNormal(u8 direction)
 {
     PlayerSetAnimId(GetWalkNormalMovementAction(direction), COPY_MOVE_WALK);
@@ -1033,9 +1043,12 @@ void PlayerWalkFaster(u8 direction)
     PlayerSetAnimId(GetWalkFasterMovementAction(direction), COPY_MOVE_WALK);
 }
 
-static void PlayerRun(u8 direction)
+void PlayerRun(u8 direction)
 {
-    PlayerSetAnimId(GetPlayerRunMovementAction(direction), COPY_MOVE_WALK);
+    if(RoguePlayer_HasSpritingAnim())
+        PlayerSetAnimId(GetPlayerRunMovementAction(direction), COPY_MOVE_WALK);
+    else
+        PlayerSetAnimId(GetWalkFastMovementAction(direction), COPY_MOVE_WALK);
 }
 
 void PlayerOnBikeCollide(u8 direction)
@@ -1074,6 +1087,12 @@ void PlayerJumpLedge(u8 direction)
 {
     PlaySE(SE_LEDGE);
     PlayerSetAnimId(GetJump2MovementAction(direction), COPY_MOVE_JUMP2);
+}
+
+void PlayerJumpLedgeShort(u8 direction)
+{
+    PlaySE(SE_LEDGE);
+    PlayerSetAnimId(GetJumpMovementAction(direction), COPY_MOVE_JUMP);
 }
 
 // Stop player on current facing direction once they're done moving and if they're not currently Acro Biking on bumpy slope
@@ -1276,23 +1295,60 @@ void StopPlayerAvatar(void)
 
 u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 {
-    //return sRivalAvatarGfxIds[state][gender];
-    return sPlayerAvatarGfxIds[state][gender];
+    // todo - rehookup, if needed
+    return OBJ_EVENT_GFX_PLAYER_NORMAL;
 }
+
+static u16 GetPlayerGraphicsIdByState(u8 state)
+{
+    switch (state)
+    {
+    case PLAYER_AVATAR_STATE_NORMAL:
+        return OBJ_EVENT_GFX_PLAYER_NORMAL;
+
+    case PLAYER_AVATAR_STATE_RIDE_GRABBING:
+        return OBJ_EVENT_GFX_PLAYER_RIDING;
+
+    case PLAYER_AVATAR_STATE_FIELD_MOVE:
+        return OBJ_EVENT_GFX_PLAYER_FIELD_MOVE;
+    }
+
+    // fallback?
+    return OBJ_EVENT_GFX_PLAYER_NORMAL;
+}
+
+static u8 GetPlayerStateByGraphicsId(u16 gfxId)
+{
+    switch (gfxId)
+    {
+    case OBJ_EVENT_GFX_PLAYER_NORMAL:
+        return PLAYER_AVATAR_STATE_NORMAL;
+
+    case OBJ_EVENT_GFX_PLAYER_RIDING:
+        return PLAYER_AVATAR_STATE_RIDE_GRABBING;
+
+    }
+
+    // fallback?
+    return PLAYER_AVATAR_STATE_NORMAL;
+}
+
 
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 {
-    return sPlayerAvatarGfxIds[state][gender];
+    return GetPlayerGraphicsIdByState(state);
 }
 
 u16 GetFRLGAvatarGraphicsIdByGender(u8 gender)
 {
-    return sFRLGAvatarGfxIds[gender];
+    // todo - rehookup, if needed
+    return OBJ_EVENT_GFX_PLAYER_NORMAL;
 }
 
 u16 GetRSAvatarGraphicsIdByGender(u8 gender)
 {
-    return sRSAvatarGfxIds[gender];
+    // todo - rehookup, if needed
+    return OBJ_EVENT_GFX_PLAYER_NORMAL;
 }
 
 u16 GetPlayerAvatarGraphicsIdByStateId(u8 state)
@@ -1320,80 +1376,26 @@ u8 unref_GetRivalAvatarGenderByGraphicsId(u16 gfxId)
 
 u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
 {
-    switch (gfxId)
-    {
-    case OBJ_EVENT_GFX_MAY_NORMAL:
-    case OBJ_EVENT_GFX_MAY_MACH_BIKE:
-    case OBJ_EVENT_GFX_MAY_ACRO_BIKE:
-    case OBJ_EVENT_GFX_MAY_SURFING:
-    case OBJ_EVENT_GFX_MAY_FIELD_MOVE:
-    case OBJ_EVENT_GFX_MAY_UNDERWATER:
-    case OBJ_EVENT_GFX_MAY_FISHING:
-    case OBJ_EVENT_GFX_MAY_WATERING:
-        return STYLE_EMR_MAY;
-
-    case OBJ_EVENT_GFX_BRENDAN_NORMAL:
-    case OBJ_EVENT_GFX_BRENDAN_MACH_BIKE:
-    case OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE:
-    case OBJ_EVENT_GFX_BRENDAN_SURFING:
-    case OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE:
-    case OBJ_EVENT_GFX_BRENDAN_UNDERWATER:
-    case OBJ_EVENT_GFX_BRENDAN_FISHING:
-    case OBJ_EVENT_GFX_BRENDAN_WATERING:
-        return STYLE_EMR_BRENDAN;
-
-    case OBJ_EVENT_GFX_RED:
-    case OBJ_EVENT_GFX_RED_MACH_BIKE:
-    case OBJ_EVENT_GFX_RED_ACRO_BIKE:
-    case OBJ_EVENT_GFX_RED_SURFING:
-    case OBJ_EVENT_GFX_RED_FIELD_MOVE:
-    case OBJ_EVENT_GFX_RED_FISHING:
-        return STYLE_RED;
-
-    case OBJ_EVENT_GFX_LEAF:
-    case OBJ_EVENT_GFX_LEAF_MACH_BIKE:
-    case OBJ_EVENT_GFX_LEAF_ACRO_BIKE:
-    case OBJ_EVENT_GFX_LEAF_SURFING:
-    case OBJ_EVENT_GFX_LEAF_FIELD_MOVE:
-    case OBJ_EVENT_GFX_LEAF_FISHING:
-        return STYLE_LEAF;
-
-    case OBJ_EVENT_GFX_ETHAN:
-    case OBJ_EVENT_GFX_ETHAN_MACH_BIKE:
-    case OBJ_EVENT_GFX_ETHAN_ACRO_BIKE:
-    case OBJ_EVENT_GFX_ETHAN_SURFING:
-    case OBJ_EVENT_GFX_ETHAN_FIELD_MOVE:
-    case OBJ_EVENT_GFX_ETHAN_FISHING:
-        return STYLE_ETHAN;
-
-    case OBJ_EVENT_GFX_LYRA:
-    case OBJ_EVENT_GFX_LYRA_MACH_BIKE:
-    case OBJ_EVENT_GFX_LYRA_ACRO_BIKE:
-    case OBJ_EVENT_GFX_LYRA_SURFING:
-    case OBJ_EVENT_GFX_LYRA_FIELD_MOVE:
-    case OBJ_EVENT_GFX_LYRA_FISHING:
-        return STYLE_LYRA;
-    }
-
-    return STYLE_EMR_BRENDAN;
+    return RoguePlayer_GetOutfitId();
 }
 
 bool8 PartyHasMonWithSurf(void)
 {
-    u8 i;
-
-    if(CanUseHMMove2(MOVE_SURF))
-    {
-        if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-        {
-            for (i = 0; i < PARTY_SIZE; i++)
-            {
-                if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
-                    break;
-                return TRUE;
-            }
-        }
-    }
+    // RogueNote: Don't use Vanilla surfing behaviour
+    //u8 i;
+//
+    //if(CanUseHMMove2(MOVE_SURF))
+    //{
+    //    if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+    //    {
+    //        for (i = 0; i < PARTY_SIZE; i++)
+    //        {
+    //            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
+    //                break;
+    //            return TRUE;
+    //        }
+    //    }
+    //}
     return FALSE;
 }
 
@@ -1433,32 +1435,51 @@ void SetPlayerAvatarStateMask(u8 flags)
 
 static u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 {
-    u8 i;
-
-    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
-    {
-        if (sPlayerAvatarGfxToStateFlag[gender][i][0] == graphicsId)
-            return sPlayerAvatarGfxToStateFlag[gender][i][1];
-    }
-    return PLAYER_AVATAR_FLAG_ON_FOOT;
+    return GetPlayerStateByGraphicsId(graphicsId);
 }
 
 u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
 {
-    u8 i;
+    //u8 state;
     u8 flags = gPlayerAvatar.flags;
 
-    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
-    {
-        if (sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][1] & flags)
-            return sPlayerAvatarGfxToStateFlag[gPlayerAvatar.gender][i][0];
-    }
-    return 0;
+    if(flags & PLAYER_AVATAR_FLAG_ON_FOOT)
+        return GetPlayerStateByGraphicsId(PLAYER_AVATAR_STATE_NORMAL);
+
+    if(flags & PLAYER_AVATAR_FLAG_RIDING)
+        return GetPlayerStateByGraphicsId(PLAYER_AVATAR_STATE_RIDE_GRABBING);
+
+    //if(flags & PLAYER_AVATAR_FLAG_)
+    //    return GetPlayerStateByGraphicsId(PLAYER_AVATAR_STATE_FIELD_MOVE);
+
+    // todo - support any extra states we need here
+    // fallback
+    return GetPlayerStateByGraphicsId(PLAYER_AVATAR_STATE_NORMAL);
 }
 
 void SetPlayerAvatarExtraStateTransition(u16 graphicsId, u8 transitionFlag)
 {
-    u8 stateFlag = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
+    u8 state = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
+    u8 stateFlag = 0;
+
+    switch (state)
+    {
+    case PLAYER_AVATAR_STATE_MACH_BIKE:
+        stateFlag = PLAYER_AVATAR_FLAG_MACH_BIKE;
+        break;
+    
+    case PLAYER_AVATAR_STATE_ACRO_BIKE:
+        stateFlag = PLAYER_AVATAR_FLAG_ACRO_BIKE;
+        break;
+    
+    case PLAYER_AVATAR_STATE_SURFING:
+        stateFlag = PLAYER_AVATAR_FLAG_SURFING;
+        break;
+    
+    case PLAYER_AVATAR_STATE_RIDE_GRABBING:
+        stateFlag = PLAYER_AVATAR_FLAG_RIDING;
+        break;
+    };
 
     gPlayerAvatar.transitionFlags |= stateFlag | transitionFlag;
     DoPlayerAvatarTransition();
@@ -1495,6 +1516,18 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     gPlayerAvatar.gender = gender;
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_CONTROLLABLE | PLAYER_AVATAR_FLAG_ON_FOOT);
     CreateFollowerAvatar();
+
+    // When loading into the intro, we're going to hide the player sprite initially
+    if(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROGUE_INTRO) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROGUE_INTRO))
+        SetPlayerInvisibility(TRUE);
+
+    // Set invis for victory lap
+    if(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROGUE_BOSS_VICTORY_LAP) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROGUE_BOSS_VICTORY_LAP))
+        SetPlayerInvisibility(TRUE);
+
+    // Set invis for final map too
+    if(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROGUE_BOSS_FINAL) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROGUE_BOSS_FINAL))
+        SetPlayerInvisibility(TRUE);
 }
 
 void SetPlayerInvisibility(bool8 invisible)
@@ -1576,7 +1609,7 @@ static void Task_PushBoulder(u8 taskId)
 
 static bool8 PushBoulder_Start(struct Task *task, struct ObjectEvent *player, struct ObjectEvent *boulder)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gPlayerAvatar.preventStep = TRUE;
     task->tState++;
     return FALSE;
@@ -1616,7 +1649,7 @@ static bool8 PushBoulder_End(struct Task *task, struct ObjectEvent *player, stru
         ObjectEventClearHeldMovementIfFinished(player);
         ObjectEventClearHeldMovementIfFinished(boulder);
         gPlayerAvatar.preventStep = FALSE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(FindTaskIdByFunc(Task_PushBoulder));
     }
     return FALSE;
@@ -1678,7 +1711,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct Objec
     task->data[0]++;
     task->data[1] = objectEvent->movementDirection;
     gPlayerAvatar.preventStep = TRUE;
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     PlaySE(SE_WARP_IN);
     return TRUE;
 }
@@ -1724,7 +1757,7 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct Objec
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
         ObjectEventSetHeldMovement(objectEvent, GetWalkSlowMovementAction(GetOppositeDirection(task->data[1])));
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         gPlayerAvatar.preventStep = FALSE;
         DestroyTask(FindTaskIdByFunc(PlayerAvatar_DoSecretBaseMatSpin));
     }
@@ -1735,7 +1768,7 @@ static void CreateStopSurfingTask(u8 direction)
 {
     u8 taskId;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_ClearSavedMusic();
     Overworld_ChangeMusicToDefault();
     gPlayerAvatar.flags ^= PLAYER_AVATAR_FLAG_SURFING;
@@ -1771,9 +1804,11 @@ static void Task_WaitStopSurfing(u8 taskId)
         ObjectEventSetGraphicsId(playerObjEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
         ObjectEventSetHeldMovement(playerObjEvent, GetFaceDirectionMovementAction(playerObjEvent->facingDirection));
         gPlayerAvatar.preventStep = FALSE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
         DestroyTask(taskId);
+
+        SetupFollowParterMonObjectEvent();
     }
 }
 
@@ -1830,7 +1865,7 @@ static void Task_Fishing(u8 taskId)
 
 static bool8 Fishing_Init(struct Task *task)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     gPlayerAvatar.preventStep = TRUE;
     task->tStep++;
     return FALSE;
@@ -1993,12 +2028,12 @@ static bool8 Fishing_WaitForA(struct Task *task)
 // Determine if we're going to play the dot game again
 static bool8 Fishing_CheckMoreDots(struct Task *task)
 {
-    const s16 moreDotsChance[][2] =
-    {
-        [OLD_ROD]   = {0, 0},
-        [GOOD_ROD]  = {40, 10},
-        [SUPER_ROD] = {70, 30}
-    };
+    //const s16 moreDotsChance[][2] =
+    //{
+    //    [OLD_ROD]   = {0, 0},
+    //    [GOOD_ROD]  = {40, 10},
+    //    [SUPER_ROD] = {70, 30}
+    //};
 
     AlignFishingAnimationFrames();
     task->tStep++;
@@ -2021,7 +2056,7 @@ static bool8 Fishing_MonOnHook(struct Task *task)
 {
     AlignFishingAnimationFrames();
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_PokemonOnHook, 1, 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_PokemonOnHook, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     task->tStep++;
     task->tFrameCounter = 0;
     return FALSE;
@@ -2055,7 +2090,7 @@ static bool8 Fishing_StartEncounter(struct Task *task)
     if (task->tFrameCounter != 0)
     {
         gPlayerAvatar.preventStep = FALSE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         FishingWildEncounter(task->tFishingRod);
         RecordFishingAttemptForTV(TRUE);
         DestroyTask(FindTaskIdByFunc(Task_Fishing));
@@ -2068,7 +2103,7 @@ static bool8 Fishing_NotEvenNibble(struct Task *task)
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_NotEvenANibble, 1, 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_NotEvenANibble, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     task->tStep = FISHING_SHOW_RESULT;
     return TRUE;
 }
@@ -2078,7 +2113,7 @@ static bool8 Fishing_GotAway(struct Task *task)
     AlignFishingAnimationFrames();
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_ItGotAway, 1, 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_ItGotAway, 1, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     task->tStep++;
     return TRUE;
 }
@@ -2114,7 +2149,7 @@ static bool8 Fishing_EndNoMon(struct Task *task)
     if (!IsTextPrinterActive(0))
     {
         gPlayerAvatar.preventStep = FALSE;
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         UnfreezeObjectEvents();
         ClearDialogWindowAndFrame(0, TRUE);
         RecordFishingAttemptForTV(FALSE);
@@ -2325,4 +2360,72 @@ static u8 TrySpinPlayerForWarp(struct ObjectEvent *object, s16 *delayTimer)
     ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(sSpinDirections[object->facingDirection]));
     *delayTimer = 0;
     return sSpinDirections[object->facingDirection];
+}
+
+//sideways stairs
+u8 GetRightSideStairsDirection(u8 direction)
+{
+    switch (direction)
+    {
+    case DIR_WEST:
+        return DIR_NORTHWEST;
+    case DIR_EAST:
+        return DIR_SOUTHEAST;
+    default:
+        if (direction > DIR_EAST)
+            direction -= DIR_EAST;
+        
+        return direction;
+    }           
+}
+
+u8 GetLeftSideStairsDirection(u8 direction)
+{
+    switch (direction)
+    {
+    case DIR_WEST:
+        return DIR_SOUTHWEST;
+    case DIR_EAST:
+        return DIR_NORTHEAST;
+    default:
+        if (direction > DIR_EAST)
+            direction -= DIR_EAST;
+        
+        return direction;
+    }
+}
+
+bool8 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u8 direction)
+{
+    #if SLOW_MOVEMENT_ON_STAIRS
+        s16 x = objectEvent->currentCoords.x;
+        s16 y = objectEvent->currentCoords.y;
+        
+        #if FOLLOW_ME_IMPLEMENTED
+            if (PlayerHasFollower() && (objectEvent->isPlayer || objectEvent->localId == GetFollowerLocalId()))
+                return FALSE;
+        #endif
+        
+        switch (direction)
+        {
+        case DIR_NORTH:
+            return MetatileBehavior_IsRockStairs(MapGridGetMetatileBehaviorAt(x,y));
+        case DIR_SOUTH:
+            MoveCoords(DIR_SOUTH, &x, &y);
+            return MetatileBehavior_IsRockStairs(MapGridGetMetatileBehaviorAt(x,y));
+        case DIR_WEST:
+        case DIR_EAST:
+        case DIR_NORTHEAST:
+        case DIR_NORTHWEST:
+        case DIR_SOUTHWEST:
+        case DIR_SOUTHEAST:
+            // directionOverwrite is only used for sideways stairs motion
+            if (objectEvent->directionOverwrite)
+                return TRUE;
+        default:
+            return FALSE;
+        }
+    #else
+        return FALSE;
+    #endif
 }

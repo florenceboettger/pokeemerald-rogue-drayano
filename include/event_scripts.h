@@ -545,6 +545,9 @@ extern const u8 BerryTree_EventScript_ItemUsePlantBerry[];
 extern const u8 BerryTree_EventScript_ItemUseWailmerPail[];
 
 extern const u8 Rogue_EventScript_ItemUseHealingFlask[];
+extern const u8 Rogue_EventScript_UsePokeblockItem[];
+extern const u8 Rogue_EventScript_UseDayCarePhoneItem[];
+extern const u8 Rogue_EventScript_UseGoldenSeedItem[];
 
 extern const u8 EventScript_SelectWithoutRegisteredItem[];
 
@@ -560,5 +563,10 @@ extern const u8 EventScript_RecordCenter_Spot1[];
 extern const u8 EventScript_RecordCenter_Spot2[];
 extern const u8 EventScript_RecordCenter_Spot3[];
 extern const u8 EventScript_TerminateLink[];
+
+extern const u8 VSSeeker_Text_BatteryNotChargedNeedXSteps[];
+extern const u8 VSSeeker_Text_NoTrainersWithinRange[];
+extern const u8 VSSeeker_Text_TrainersNotReady[];
+extern const u8 EventScript_VsSeekerChargingDone[];
 
 #endif // GUARD_EVENT_SCRIPTS_H

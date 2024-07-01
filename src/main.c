@@ -24,15 +24,21 @@
 #include "intro.h"
 #include "main.h"
 #include "trainer_hill.h"
+#include "test_runner.h"
 #include "constants/rgb.h"
 
 #include "rogue_controller.h"
+#include "rogue_debug.h"
+#include "rogue_save.h"
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
 static void VCountIntr(void);
 static void SerialIntr(void);
 static void IntrDummy(void);
+
+// Defined in the linker script so that the test build can override it.
+extern void gInitialMainCB2(void);
 
 const u8 gGameVersion = GAME_VERSION;
 
@@ -71,8 +77,7 @@ IntrFunc gIntrTable[INTR_COUNT];
 u8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
 s8 gPcmDmaCounter;
-
-static EWRAM_DATA u16 sTrainerId = 0;
+void *gAgbMainLoop_sp;
 
 //EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
@@ -80,6 +85,7 @@ static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);
 static void CallCallbacks(void);
 static void SeedRngWithRtc(void);
+static void SeedRngWithVBlanks(void);
 static void ReadKeys(void);
 void InitIntrHandlers(void);
 static void WaitForVBlank(void);
@@ -107,13 +113,15 @@ void AgbMain()
     InitMainCallbacks();
     InitMapMusic();
 #ifdef BUGFIX
-    SeedRngWithRtc(); // see comment at SeedRngWithRtc definition below
+    //SeedRngWithRtc(); // see comment at SeedRngWithRtc definition below
 #endif
+    SeedRngWithVBlanks();
     ClearDma3Requests();
     ResetBgs();
     SetDefaultFontsPointer();
     InitHeap(gHeap, HEAP_SIZE);
 
+    gMain.nativeSpeedUpActive = FALSE;
     gSoftResetDisabled = FALSE;
 
     if (gFlashMemoryPresent != TRUE)
@@ -134,13 +142,22 @@ void AgbMain()
 
     Rogue_MainInit();
 
+    gAgbMainLoop_sp = __builtin_frame_address(0);
+    AgbMainLoop();
+}
+
+void AgbMainLoop(void)
+{
     for (;;)
     {
+        RogueDebug_ResetFrameTimers();
+        START_TIMER(FRAME_TOTAL);
+
         ReadKeys();
 
         if (gSoftResetDisabled == FALSE
-         && (gMain.heldKeysRaw & A_BUTTON)
-         && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
+         && JOY_HELD_RAW(A_BUTTON)
+         && JOY_HELD_RAW(B_START_SELECT) == B_START_SELECT)
         {
             rfu_REQ_stopMode();
             rfu_waitREQComplete();
@@ -170,7 +187,11 @@ void AgbMain()
 
         PlayTimeCounter_Update();
         MapMusicMain();
+
+        START_TIMER(WAIT_FOR_VBLANK);
         WaitForVBlank();
+        STOP_TIMER(WAIT_FOR_VBLANK);
+        STOP_TIMER(FRAME_TOTAL);
     }
 }
 
@@ -186,20 +207,35 @@ static void InitMainCallbacks(void)
     gTrainerHillVBlankCounter = NULL;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
-    SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
+    SetMainCallback2(gInitialMainCB2);
     gSaveBlock2Ptr = &gSaveblock2.block;
     gPokemonStoragePtr = &gPokemonStorage.block;
+    RogueSave_UpdatePointers();
 }
 
 static void CallCallbacks(void)
 {
-    if (gMain.callback1)
-        gMain.callback1();
+    START_TIMER(MAIN_CALLBACKS);
+    {
+        START_TIMER(MAIN_ROGUE_EARLY_CALLBACK);
+        Rogue_MainEarlyCB();
+        STOP_TIMER(MAIN_ROGUE_EARLY_CALLBACK);
 
-    if (gMain.callback2)
-        gMain.callback2();
+        START_TIMER(MAIN_CALLBACK_1);
+        if (gMain.callback1)
+            gMain.callback1();
+        STOP_TIMER(MAIN_CALLBACK_1);
 
-    Rogue_MainCB();
+        START_TIMER(MAIN_CALLBACK_2);
+        if (gMain.callback2)
+            gMain.callback2();
+        STOP_TIMER(MAIN_CALLBACK_2);
+
+        START_TIMER(MAIN_ROGUE_LATE_CALLBACK);
+        Rogue_MainLateCB();
+        STOP_TIMER(MAIN_ROGUE_LATE_CALLBACK);
+    }
+    STOP_TIMER(MAIN_CALLBACKS);
 }
 
 void SetMainCallback2(MainCallback callback)
@@ -218,12 +254,13 @@ void SeedRngAndSetTrainerId(void)
     u16 val = REG_TM1CNT_L;
     SeedRng(val);
     REG_TM1CNT_H = 0;
-    sTrainerId = val;
+    //sTrainerId = val;
 }
 
 u16 GetGeneratedTrainerIdLower(void)
 {
-    return sTrainerId;
+    // sTrainerId
+    return 123;//Random();
 }
 
 void EnableVCountIntrAtLine150(void)
@@ -235,13 +272,23 @@ void EnableVCountIntrAtLine150(void)
 
 // FRLG commented this out to remove RTC, however Emerald didn't undo this!
 #ifdef BUGFIX
-static void SeedRngWithRtc(void)
+static void UNUSED SeedRngWithRtc(void)
 {
     u32 seed = RtcGetMinuteCount();
     seed = (seed >> 16) ^ (seed & 0xFFFF);
     SeedRng(seed);
+    SeedRogueRng(Random());
 }
 #endif
+
+static void SeedRngWithVBlanks(void)
+{
+    SeedRng(gMain.vblankCounter1);
+    SeedRng2(gMain.vblankCounter2);
+
+    // Rogue will be seeded completely separately
+    //SeedRogueRng((Random() & 0xF0) | (Random2() & 0x0F)); // combination of both?
+}
 
 void InitKeys(void)
 {
@@ -253,6 +300,11 @@ void InitKeys(void)
     gMain.newAndRepeatedKeys = 0;
     gMain.heldKeysRaw = 0;
     gMain.newKeysRaw = 0;
+}
+
+void DebugForceReadKeys()
+{
+    ReadKeys();
 }
 
 static void ReadKeys(void)
@@ -295,7 +347,7 @@ static void ReadKeys(void)
             gMain.heldKeys |= A_BUTTON;
     }
 
-    if (gMain.newKeys & gMain.watchedKeysMask)
+    if (JOY_NEW(gMain.watchedKeysMask))
         gMain.watchedKeysPressed = TRUE;
 }
 
@@ -370,8 +422,8 @@ static void VBlankIntr(void)
     m4aSoundMain();
     TryReceiveLinkBattleData();
 
-    if (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
-        Random();
+    if (!gTestRunnerEnabled && (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED))))
+        CycleRandom();
 
     UpdateWirelessStatusIndicatorSprite();
 

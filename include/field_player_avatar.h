@@ -15,10 +15,12 @@ void PlayerWalkNormal(u8 direction);
 void PlayerWalkFast(u8 direction);
 void PlayerRideWaterCurrent(u8 direction);
 void PlayerWalkFaster(u8 direction);
+void PlayerRun(u8 direction);
 void PlayerOnBikeCollide(u8 direction);
 void PlayerFaceDirection(u8 direction);
 void PlayerTurnInPlace(u8 direction);
 void PlayerJumpLedge(u8 direction);
+void PlayerJumpLedgeShort(u8 direction);
 void PlayerIdleWheelie(u8 direction);
 void PlayerStartWheelie(u8 direction);
 void PlayerEndWheelie(u8 direction);
@@ -27,6 +29,7 @@ void PlayerMovingHoppingWheelie(u8 direction);
 void PlayerLedgeHoppingWheelie(u8 direction);
 void PlayerAcroTurnJump(u8 direction);
 void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement);
+bool8 GetPlayerSpritingState(u16 heldKeys);
 bool8 IsPlayerCollidingWithFarawayIslandMew(u8 direction);
 void PlayerOnBikeCollideWithFarawayIslandMew(u8 direction);
 u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior);
@@ -64,5 +67,9 @@ bool32 IsPlayerSpinExitActive(void);
 void SetPlayerInvisibility(bool8 invisible);
 u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y);
 void StartFishing(u8 rod);
+bool8 ObjectMovingOnRockStairs(struct ObjectEvent *objectEvent, u8 direction);
+//sideways stairs
+u8 GetRightSideStairsDirection(u8 direction);
+u8 GetLeftSideStairsDirection(u8 direction);
 
 #endif // GUARD_FIELD_PLAYER_AVATAR_H

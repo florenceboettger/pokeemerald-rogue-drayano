@@ -7,6 +7,15 @@
 #include "pokeball.h"
 #include "rogue.h"
 
+// The purpose of this struct is for outside applications to be
+// able to access parts of the ROM or its save file, like a public API.
+// In vanilla, it was used by Colosseum and XD to access pokemon graphics.
+//
+// If this struct is rearranged in any way, it defeats the purpose of
+// having it at all. Applications like PKHex or streaming HUDs may find
+// these values useful, so there's some potential benefit to keeping it.
+// If there's a compilation problem below, just comment out the assignment
+// instead of changing this struct.
 struct GFRomHeader
 {
     u32 version;
@@ -16,8 +25,8 @@ struct GFRomHeader
     const struct CompressedSpriteSheet * monBackPics;
     const struct CompressedSpritePalette * monNormalPalettes;
     const struct CompressedSpritePalette * monShinyPalettes;
-    const u8 * const * monIcons;
-    const u8 * monIconPaletteIds;
+    const u8 *const * monIcons;
+    const u8 *monIconPaletteIds;
     const struct SpritePalette * monIconPalettes;
     const u8 (* monSpeciesNames)[];
     const u8 (* moveNames)[];
@@ -25,13 +34,14 @@ struct GFRomHeader
     u32 flagsOffset;
     u32 varsOffset;
     u32 pokedexOffset;
-    u32 seenOffset;
+    u32 seen1Offset;
+    u32 seen2Offset;
     u32 pokedexVar;
     u32 pokedexFlag;
     u32 mysteryEventFlag;
     u32 pokedexCount;
     u8 playerNameLength;
-    u8 unk2;
+    u8 trainerNameLength;
     u8 pokemonNameLength1;
     u8 pokemonNameLength2;
 #if 1
@@ -69,9 +79,9 @@ struct GFRomHeader
     u32 externalEventFlagsOffset;
     u32 externalEventDataOffset;
     u32 unk18;
-    const struct BaseStats * baseStats;
+    const struct SpeciesInfo * speciesInfo;
     const u8 (* abilityNames)[];
-    const u8 * const * abilityDescriptions;
+    const u8 *const * abilityDescriptions;
     const struct Item * items;
     const struct BattleMove * moves;
     const struct CompressedSpriteSheet * ballGfx;
@@ -89,7 +99,7 @@ struct GFRomHeader
     u32 giftRibbonsOffset;
     u32 enigmaBerryOffset;
     u32 enigmaBerrySize;
-    const u8 * moveDescriptions;
+    const u8 *moveDescriptions;
     u32 unk20;
 };
 
@@ -99,27 +109,28 @@ __attribute__((section(".text.consts")))
 static const struct GFRomHeader sGFRomHeader = {
     .version = GAME_VERSION,
     .language = GAME_LANGUAGE,
-    .gameName = "pokemon emerald version",
-    .monFrontPics = gMonFrontPicTable,
-    .monBackPics = gMonBackPicTable,
-    .monNormalPalettes = gMonPaletteTable,
-    .monShinyPalettes = gMonShinyPaletteTable,
-    .monIcons = gMonIconTable,
-    .monIconPaletteIds = gMonIconPaletteIndices,
+    .gameName = "pokemon emerald rogue version",
+    //.monFrontPics = gMonFrontPicTable, // Handled in gSpeciesInfo
+    //.monBackPics = gMonBackPicTable, // Handled in gSpeciesInfo
+    //.monNormalPalettes = gMonPaletteTable, // Handled in gSpeciesInfo
+    //.monShinyPalettes = gMonShinyPaletteTable, // Handled in gSpeciesInfo
+    //.monIcons = gMonIconTable,
+    //.monIconPaletteIds = gMonIconPaletteIndices,
     .monIconPalettes = gMonIconPaletteTable,
-    .monSpeciesNames = gSpeciesNames,
+    //.monSpeciesNames = gSpeciesNames, // Handled in gSpeciesInfo
     .moveNames = gMoveNames,
-    .decorations = gDecorations,
+    .decorations = NULL,
     .flagsOffset = offsetof(struct SaveBlock1, flags),
     .varsOffset = offsetof(struct SaveBlock1, vars),
     .pokedexOffset = offsetof(struct SaveBlock2, pokedex),
-    .seenOffset = offsetof(struct SaveBlock1, dexSeen),
+    .seen1Offset = offsetof(struct SaveBlock1, pokedexBitFlags1),
+    .seen2Offset = offsetof(struct SaveBlock1, pokedexBitFlags2),
     .pokedexVar = VAR_NATIONAL_DEX - VARS_START,
     .pokedexFlag = FLAG_RECEIVED_POKEDEX_FROM_BIRCH,
     .mysteryEventFlag = FLAG_SYS_MYSTERY_EVENT_ENABLE,
     .pokedexCount = NATIONAL_DEX_COUNT,
     .playerNameLength = PLAYER_NAME_LENGTH,
-    .unk2 = 10,
+    .trainerNameLength = TRAINER_NAME_LENGTH,
     .pokemonNameLength1 = POKEMON_NAME_LENGTH,
     .pokemonNameLength2 = POKEMON_NAME_LENGTH,
 #if 1
@@ -152,24 +163,24 @@ static const struct GFRomHeader sGFRomHeader = {
     .playerGenderOffset = offsetof(struct SaveBlock2, playerGender),
     .frontierStatusOffset = offsetof(struct SaveBlock2, frontier.challengeStatus),
     .frontierStatusOffset2 = offsetof(struct SaveBlock2, frontier.challengeStatus),
-    .externalEventFlagsOffset = offsetof(struct SaveBlock1, externalEventFlags),
-    .externalEventDataOffset = offsetof(struct SaveBlock1, externalEventData),
+    .externalEventFlagsOffset = 0,
+    .externalEventDataOffset = 0,
     .unk18 = 0x00000000,
-    .baseStats = gBaseStats,
+    .speciesInfo = gSpeciesInfo,
     .abilityNames = gAbilityNames,
     .abilityDescriptions = gAbilityDescriptionPointers,
     .items = gItems,
     .moves = gBattleMoves,
     .ballGfx = gBallSpriteSheets,
     .ballPalettes = gBallSpritePalettes,
-    .gcnLinkFlagsOffset = offsetof(struct SaveBlock2, gcnLinkFlags),
+    .gcnLinkFlagsOffset = 0, //offsetof(struct SaveBlock2, gcnLinkFlags),
     .gameClearFlag = FLAG_SYS_GAME_CLEAR,
     .ribbonFlag = FLAG_SYS_RIBBON_GET,
-    .bagCountItems = BAG_ITEMS_COUNT,
-    .bagCountKeyItems = BAG_KEYITEMS_COUNT,
-    .bagCountPokeballs = BAG_POKEBALLS_COUNT,
-    .bagCountTMHMs = BAG_TMHM_COUNT,
-    .bagCountBerries = BAG_BERRIES_COUNT,
+    .bagCountItems = 0,//BAG_ITEMS_COUNT,
+    .bagCountKeyItems = 0,//BAG_KEYITEMS_COUNT,
+    .bagCountPokeballs = 0,//BAG_POKEBALLS_COUNT,
+    .bagCountTMHMs = 0,//BAG_TMHM_COUNT,
+    .bagCountBerries = 0,//BAG_BERRIES_COUNT,
     .pcItemsCount = PC_ITEMS_COUNT,
     .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
     .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),

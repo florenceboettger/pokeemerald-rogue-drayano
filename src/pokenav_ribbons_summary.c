@@ -3,6 +3,7 @@
 #include "dynamic_placeholder_text_util.h"
 #include "graphics.h"
 #include "international_string_util.h"
+#include "palette.h"
 #include "pokenav.h"
 #include "sound.h"
 #include "sprite.h"
@@ -400,7 +401,7 @@ static void GetMonNicknameLevelGender(u8 *nick, u8 *level, u8 *gender)
     StringGet_Nickname(nick);
 }
 
-static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *otId)
+static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *otId, u8 *gender)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
     struct PokenavMonList *mons = list->monList;
@@ -413,6 +414,7 @@ static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *ot
         *species = GetMonData(mon, MON_DATA_SPECIES);
         *personality = GetMonData(mon, MON_DATA_PERSONALITY);
         *otId = GetMonData(mon, MON_DATA_OT_ID);
+        *gender = GetMonGender(mon);
     }
     else
     {
@@ -421,6 +423,7 @@ static void GetMonSpeciesPersonalityOtId(u16 *species, u32 *personality, u32 *ot
         *species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
         *personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
         *otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
+        *gender = GetBoxMonGender(boxMon);
     }
 }
 
@@ -572,7 +575,7 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
         DecompressAndCopyTileDataToVram(2, gPokenavRibbonsSummaryBg_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(2, menu->tilemapBuffers[0]);
         CopyToBgTilemapBuffer(2, gPokenavRibbonsSummaryBg_Tilemap, 0, 0);
-        CopyPaletteIntoBufferUnfaded(gPokenavRibbonsSummaryBg_Pal, 0x10, 0x20);
+        CopyPaletteIntoBufferUnfaded(gPokenavRibbonsSummaryBg_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         CopyBgTilemapBufferToVram(2);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -582,8 +585,8 @@ static u32 LoopedTask_OpenRibbonsSummaryMenu(s32 state)
             DecompressAndCopyTileDataToVram(1, sRibbonIconsSmall_Gfx, 0, 1, 0);
             SetBgTilemapBuffer(1, menu->tilemapBuffers[1]);
             FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
-            CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, 0x20, 0xA0);
-            CopyPaletteIntoBufferUnfaded(sMonInfo_Pal, 0xA0, 0x20);
+            CopyPaletteIntoBufferUnfaded(sRibbonIcons1_Pal, BG_PLTT_ID(2), 5 * PLTT_SIZE_4BPP);
+            CopyPaletteIntoBufferUnfaded(sMonInfo_Pal, BG_PLTT_ID(10), sizeof(sMonInfo_Pal));
             CopyBgTilemapBufferToVram(1);
             return LT_INC_AND_PAUSE;
         }
@@ -941,8 +944,9 @@ static void ResetSpritesAndDrawMonFrontPic(struct Pokenav_RibbonsSummaryMenu *me
 {
     u16 species;
     u32 personality, otId;
+    u8 gender;
 
-    GetMonSpeciesPersonalityOtId(&species, &personality, &otId);
+    GetMonSpeciesPersonalityOtId(&species, &personality, &otId, &gender);
     ResetAllPicSprites();
     menu->monSpriteId = DrawRibbonsMonFrontPic(MON_SPRITE_X_ON, MON_SPRITE_Y);
     PokenavFillPalette(15, 0);
@@ -960,9 +964,10 @@ static u16 DrawRibbonsMonFrontPic(s32 x, s32 y)
 {
     u16 species, spriteId;
     u32 personality, otId;
+    u8 gender;
 
-    GetMonSpeciesPersonalityOtId(&species, &personality, &otId);
-    spriteId = CreateMonPicSprite(species, otId, personality, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, TAG_NONE);
+    GetMonSpeciesPersonalityOtId(&species, &personality, &otId, &gender);
+    spriteId = CreateMonPicSprite(species, otId, personality, gender, TRUE, MON_SPRITE_X_ON, MON_SPRITE_Y, 15, TAG_NONE);
     gSprites[spriteId].oam.priority = 0;
     return spriteId;
 }
@@ -1154,7 +1159,7 @@ static const struct OamData sOamData_RibbonIconBig =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,

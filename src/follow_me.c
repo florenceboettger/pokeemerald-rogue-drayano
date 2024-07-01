@@ -25,6 +25,9 @@
 #include "constants/map_types.h"
 #include "constants/field_effects.h"
 #include "constants/metatile_behaviors.h"
+
+#include "rogue_followmon.h"
+
 /*
     -FollowMe_StairsMoveHook ?
     -FollowMe_WarpStairsEndHook ?
@@ -238,14 +241,14 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
     u8 newState;
     u8 taskId;
 
-    if(CheckFollowerFlag(FOLLOWER_FLAG_FOLLOW_DURING_SCRIPT))
+    if(CheckFollowerFlag(FOLLOWER_FLAG_FOLLOW_DURING_SCRIPT) && gSaveBlock2Ptr->follower.warpEnd == 0)
         ignoreScriptActive = TRUE;
 
     if (player != npc) //Only when the player moves
         return;
     else if (!gSaveBlock2Ptr->follower.inProgress)
         return;
-    else if (ScriptContext2_IsEnabled() && !ignoreScriptActive)
+    else if (ArePlayerFieldControlsLocked() && !ignoreScriptActive)
         return; //Don't follow during a script
                 
     
@@ -327,7 +330,19 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
     }
 
 RESET:
-    ObjectEventClearHeldMovementIfFinished(follower);
+    switch (state)
+    {
+    case MOVEMENT_ACTION_FACE_DOWN:
+    case MOVEMENT_ACTION_FACE_UP:
+    case MOVEMENT_ACTION_FACE_LEFT:
+    case MOVEMENT_ACTION_FACE_RIGHT:
+        // we want to maintain these states so we have anims playing correctly
+        break;
+    
+    default:
+        ObjectEventClearHeldMovementIfFinished(follower);
+        break;
+    }
 }
 
 static void Task_ReallowPlayerMovement(u8 taskId)
@@ -629,13 +644,14 @@ bool8 FollowMe_IsCollisionExempt(struct ObjectEvent* obstacle, struct ObjectEven
 
 void FollowMe_FollowerToWater(void)
 {
-    if (!gSaveBlock2Ptr->follower.inProgress)
-        return;
+    // RogueNote: ignore this here
+    //if (!gSaveBlock2Ptr->follower.inProgress)
+    //    return;
 
     //Prepare for making the follower do the jump and spawn the surf head
     //right in front of the follower's location.
-    FollowMe(&gObjectEvents[gPlayerAvatar.objectEventId], MOVEMENT_ACTION_JUMP_DOWN, TRUE);
-    gSaveBlock2Ptr->follower.createSurfBlob = 1;
+    //FollowMe(&gObjectEvents[gPlayerAvatar.objectEventId], MOVEMENT_ACTION_JUMP_DOWN, TRUE);
+    //gSaveBlock2Ptr->follower.createSurfBlob = 1;
 }
 
 void FollowMe_BindToSurbBlobOnReloadScreen(void)
@@ -721,11 +737,12 @@ static void SetUpSurfBlobFieldEffect(struct ObjectEvent* npc)
 
 void PrepareFollowerDismountSurf(void)
 {
-    if (!gSaveBlock2Ptr->follower.inProgress)
-        return;
-
-    FollowMe(&gObjectEvents[gPlayerAvatar.objectEventId], MOVEMENT_ACTION_WALK_NORMAL_DOWN, TRUE);
-    gSaveBlock2Ptr->follower.createSurfBlob = 3;
+    // RogueNote: ignore this
+    //if (!gSaveBlock2Ptr->follower.inProgress)
+    //    return;
+//
+    //FollowMe(&gObjectEvents[gPlayerAvatar.objectEventId], MOVEMENT_ACTION_WALK_NORMAL_DOWN, TRUE);
+    //gSaveBlock2Ptr->follower.createSurfBlob = 3;
 }
 
 static void SetSurfDismount(void)
@@ -1005,12 +1022,13 @@ static void Task_FollowerHandleEscalatorFinish(u8 taskId)
         CalculateFollowerEscalatorTrajectoryUp(task);
         gSaveBlock2Ptr->follower.warpEnd = 0;
         gPlayerAvatar.preventStep = TRUE;
+        ObjectEventClearHeldMovementIfActive(follower);
         ObjectEventSetHeldMovement(follower, GetFaceDirectionMovementAction(DIR_EAST));
         if (task->data[2] == 0x6b)
             task->data[0] = 4;
         break;
     case 2:
-        follower->invisible = FALSE;
+        //follower->invisible = FALSE;
         CalculateFollowerEscalatorTrajectoryDown(task);
         task->data[0]++;
         break;
@@ -1030,7 +1048,7 @@ static void Task_FollowerHandleEscalatorFinish(u8 taskId)
         }
         break;
     case 4:
-        follower->invisible = FALSE;
+        //follower->invisible = FALSE;
         CalculateFollowerEscalatorTrajectoryUp(task);
         task->data[0]++;
         break;
@@ -1052,6 +1070,9 @@ static void Task_FollowerHandleEscalatorFinish(u8 taskId)
     case 6:
         if (ObjectEventClearHeldMovementIfFinished(follower))
         {
+            // We get a weird stutter in anim so only make visible when at bottom
+            follower->invisible = FALSE;
+
             gPlayerAvatar.preventStep = FALSE;
             DestroyTask(taskId);
         }
@@ -1076,12 +1097,15 @@ static void CalculateFollowerEscalatorTrajectoryUp(struct Task *task)
 
 bool8 FollowerCanBike(void)
 {
-    if (!gSaveBlock2Ptr->follower.inProgress)
-        return TRUE;
-    else if (gSaveBlock2Ptr->follower.flags & FOLLOWER_FLAG_CAN_BIKE)
-        return TRUE;
-    else
-        return FALSE;
+    // RogueNote: Don't prevent biking
+    return TRUE;
+
+    //if (!gSaveBlock2Ptr->follower.inProgress)
+    //    return TRUE;
+    //else if (gSaveBlock2Ptr->follower.flags & FOLLOWER_FLAG_CAN_BIKE)
+    //    return TRUE;
+    //else
+    //    return FALSE;
 }
 
 void FollowMe_HandleBike(void)
@@ -1193,6 +1217,7 @@ void CreateFollowerAvatar(void)
     player = &gObjectEvents[gPlayerAvatar.objectEventId];
     clone = *GetObjectEventTemplateByLocalIdAndMap(gSaveBlock2Ptr->follower.map.id, gSaveBlock2Ptr->follower.map.number, gSaveBlock2Ptr->follower.map.group);
 
+    clone.localId = gSaveBlock2Ptr->follower.map.id; // if fail to get template, can stomp over otherwise valid NPC
     clone.graphicsId = GetFollowerSprite();
     //clone.graphicsIdUpperByte = GetFollowerSprite() >> 8;
     clone.x = player->currentCoords.x - 7;
@@ -1227,7 +1252,7 @@ static void TurnNPCIntoFollower(u8 localId, u16 followerFlags)
 {
     struct ObjectEvent* follower;
     u8 eventObjId;
-    const u8 *script;
+    //const u8 *script;
     u16 flag;
     
     if (gSaveBlock2Ptr->follower.inProgress)

@@ -25,8 +25,6 @@
 
 extern struct MapPosition gPlayerFacingPosition;
 
-extern const u8 FarawayIsland_Interior_EventScript_HideMewWhenGrassCut[];
-
 extern const u8 gFieldEffectPic_CutGrass[];
 extern const u16 gFieldEffectPal_CutGrass[];
 
@@ -93,7 +91,7 @@ static const struct OamData sOamData_CutGrass =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -191,7 +189,12 @@ bool8 SetUpFieldMove_Cut(void)
                         sHyperCutTiles[6 + (i * 5) + j] = TRUE;
                         ret = TRUE;
                     }
-                    if (MapGridIsImpassableAt(x, y) == TRUE)
+                #ifdef BUGFIX
+                    // Collision has a range 0-3, any value != 0 is impassable
+                    if (MapGridIsImpassableAt(x, y))
+                #else
+                    if (MapGridIsImpassableAt(x, y) == 1)
+                #endif
                     {
                         cutTiles[i * 3 + j] = FALSE;
                     }
@@ -282,14 +285,14 @@ bool8 FldEff_UseCutOnGrass(void)
 
     gTasks[taskId].data[8] = (u32)StartCutGrassFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartCutGrassFieldEffect;
-    IncrementGameStat(GAME_STAT_USED_CUT);
+    //IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
 
 static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_UseCut);
+    ScriptContext_SetupScript(EventScript_UseCut);
 }
 
 bool8 FldEff_UseCutOnTree(void)
@@ -298,7 +301,7 @@ bool8 FldEff_UseCutOnTree(void)
 
     gTasks[taskId].data[8] = (u32)StartCutTreeFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartCutTreeFieldEffect;
-    IncrementGameStat(GAME_STAT_USED_CUT);
+    //IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
 
@@ -578,10 +581,7 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
     FieldEffectStop(&gSprites[sCutGrassSpriteArrayPtr[0]], FLDEFF_CUT_GRASS);
     FREE_AND_SET_NULL(sCutGrassSpriteArrayPtr);
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
-
-    if (IsMewPlayingHideAndSeek() == TRUE)
-        ScriptContext1_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
+    UnlockPlayerFieldControls();
 }
 
 void FixLongGrassMetatilesWindowTop(s16 x, s16 y)
@@ -638,5 +638,5 @@ static void StartCutTreeFieldEffect(void)
 {
     PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

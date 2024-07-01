@@ -47,6 +47,8 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
+#define TAG_SCROLL_ARROW 5112
+
 // Values for registryStatus
 enum {
     UNREGISTERED,
@@ -91,7 +93,7 @@ static void DeleteRegistry_Yes(u8);
 static void DeleteRegistry_No(u8);
 static void ReturnToMainRegistryMenu(u8);
 static void GoToSecretBasePCRegisterMenu(u8);
-static u8 GetSecretBaseOwnerType(u8);
+//static u8 UNUSED GetSecretBaseOwnerType(u8);
 
 static const struct SecretBaseEntranceMetatiles sSecretBaseEntranceMetatiles[] =
 {
@@ -184,7 +186,7 @@ static const struct ListMenuTemplate sRegistryListMenuTemplate =
     .itemVerticalPadding = 0,
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NORMAL,
-    .cursorKind = 0,
+    .cursorKind = CURSOR_BLACK_ARROW,
 };
 
 static void ClearSecretBase(struct SecretBase *secretBase)
@@ -372,8 +374,6 @@ static void SetSecretBaseWarpDestination(void)
 
 static void Task_EnterSecretBase(u8 taskId)
 {
-    u16 secretBaseIdx;
-
     switch (gTasks[taskId].tState)
     {
     case 0:
@@ -412,16 +412,17 @@ static void EnterNewlyCreatedSecretBase_WaitFadeIn(u8 taskId)
     ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_NORTH);
     if (IsWeatherNotFadingIn() == TRUE)
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
 }
 
-static void EnterNewlyCreatedSecretBase_StartFadeIn(void)
+static void UNUSED EnterNewlyCreatedSecretBase_StartFadeIn(void)
 {
-    s16 x, y;
+    s16 x = 0;
+    s16 y = 0;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     HideMapNamePopUpWindow();
     FindMetatileIdMapCoords(&x, &y, METATILE_SecretBase_PC);
     x += MAP_OFFSET;
@@ -436,17 +437,18 @@ static void Task_EnterNewlyCreatedSecretBase(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
-        SetWarpDestination(
-            gSaveBlock1Ptr->location.mapGroup,
-            gSaveBlock1Ptr->location.mapNum,
-            WARP_ID_NONE,
-            GET_BASE_COMPUTER_X(secretBaseGroup),
-            GET_BASE_COMPUTER_Y(secretBaseGroup));
-        WarpIntoMap();
-        gFieldCallback = EnterNewlyCreatedSecretBase_StartFadeIn;
-        SetMainCallback2(CB2_LoadMap);
-        DestroyTask(taskId);
+        AGB_ASSERT(FALSE);
+        //s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
+        //SetWarpDestination(
+        //    gSaveBlock1Ptr->location.mapGroup,
+        //    gSaveBlock1Ptr->location.mapNum,
+        //    WARP_ID_NONE,
+        //    GET_BASE_COMPUTER_X(secretBaseGroup),
+        //    GET_BASE_COMPUTER_Y(secretBaseGroup));
+        //WarpIntoMap();
+        //gFieldCallback = EnterNewlyCreatedSecretBase_StartFadeIn;
+        //SetMainCallback2(CB2_LoadMap);
+        //DestroyTask(taskId);
     }
 }
 
@@ -526,7 +528,7 @@ static void Task_WarpOutOfSecretBase(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        ScriptContext2_Enable();
+        LockPlayerFieldControls();
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
@@ -538,7 +540,7 @@ static void Task_WarpOutOfSecretBase(u8 taskId)
         WarpIntoMap();
         gFieldCallback = FieldCB_DefaultWarpExit;
         SetMainCallback2(CB2_LoadMap);
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         DestroyTask(taskId);
         break;
     }
@@ -643,7 +645,7 @@ void ClearAndLeaveSecretBase(void)
 
 void MoveOutOfSecretBase(void)
 {
-    IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
+    //IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
     ClearAndLeaveSecretBase();
 }
 
@@ -684,7 +686,7 @@ void MoveOutOfSecretBaseFromOutside(void)
     u16 temp;
 
     ClosePlayerSecretBaseEntrance();
-    IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
+    //IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
     temp = gSaveBlock1Ptr->secretBases[0].numSecretBasesReceived;
     ClearSecretBase(&gSaveBlock1Ptr->secretBases[0]);
     gSaveBlock1Ptr->secretBases[0].numSecretBasesReceived = temp;
@@ -734,15 +736,15 @@ void ShowSecretBaseRegistryMenu(void)
 
 static void Task_ShowSecretBaseRegistryMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    ScriptContext2_Enable();
+    u16 *data = (u16*) gTasks[taskId].data;
+    LockPlayerFieldControls();
     tNumBases = GetNumRegisteredSecretBases();
     if (tNumBases != 0)
     {
         tSelectedRow = 0;
         tScrollOffset = 0;
-        ClearDialogWindowAndFrame(0, 0);
-        sRegistryMenu = calloc(1, sizeof(*sRegistryMenu));
+        ClearDialogWindowAndFrame(0, FALSE);
+        sRegistryMenu = AllocZeroed(sizeof(*sRegistryMenu));
         tMainWindowId = AddWindow(&sRegistryWindowTemplates[0]);
         BuildRegistryMenuItems(taskId);
         FinalizeRegistryMenu(taskId);
@@ -774,7 +776,7 @@ static void BuildRegistryMenuItems(u8 taskId)
     }
 
     sRegistryMenu->items[count].name = gText_Cancel;
-    sRegistryMenu->items[count].id = -2;
+    sRegistryMenu->items[count].id = LIST_CANCEL;
     tNumBases = count + 1;
     if (tNumBases < 8)
         tMaxShownItems = tNumBases;
@@ -796,8 +798,8 @@ static void RegistryMenu_OnCursorMove(s32 unused, bool8 flag, struct ListMenu *m
 
 static void FinalizeRegistryMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    SetStandardWindowBorderStyle(tMainWindowId, 0);
+    u16 *data = (u16*) gTasks[taskId].data;
+    SetStandardWindowBorderStyle(tMainWindowId, FALSE);
     tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, tScrollOffset, tSelectedRow);
     AddRegistryMenuScrollArrows(taskId);
     ScheduleBgCopyTilemapToVram(0);
@@ -805,13 +807,13 @@ static void FinalizeRegistryMenu(u8 taskId)
 
 static void AddRegistryMenuScrollArrows(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 188, 12, 148, tNumBases - tMaxShownItems, 0x13f8, 0x13f8, &tScrollOffset);
+    u16 *data = (u16*) gTasks[taskId].data;
+    tArrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 188, 12, 148, tNumBases - tMaxShownItems, TAG_SCROLL_ARROW, TAG_SCROLL_ARROW, &tScrollOffset);
 }
 
 static void HandleRegistryMenuInput(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     s32 input = ListMenu_ProcessInput(tListTaskId);
     ListMenuGetScrollAndRow(tListTaskId, &tScrollOffset, &tSelectedRow);
 
@@ -823,11 +825,11 @@ static void HandleRegistryMenuInput(u8 taskId)
         PlaySE(SE_SELECT);
         DestroyListMenuTask(tListTaskId, NULL, NULL);
         RemoveScrollIndicatorArrowPair(tArrowTaskId);
-        ClearStdWindowAndFrame(tMainWindowId, 0);
+        ClearStdWindowAndFrame(tMainWindowId, FALSE);
         ClearWindowTilemap(tMainWindowId);
         RemoveWindow(tMainWindowId);
         ScheduleBgCopyTilemapToVram(0);
-        free(sRegistryMenu);
+        Free(sRegistryMenu);
         GoToSecretBasePCRegisterMenu(taskId);
         break;
     default:
@@ -841,12 +843,12 @@ static void HandleRegistryMenuInput(u8 taskId)
 static void ShowRegistryMenuActions(u8 taskId)
 {
     struct WindowTemplate template;
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     RemoveScrollIndicatorArrowPair(tArrowTaskId);
     template = sRegistryWindowTemplates[1];
     template.width = GetMaxWidthInMenuTable(sRegistryMenuActions, 2);
     tActionWindowId = AddWindow(&template);
-    SetStandardWindowBorderStyle(tActionWindowId, 0);
+    SetStandardWindowBorderStyle(tActionWindowId, FALSE);
     PrintMenuTable(tActionWindowId, ARRAY_COUNT(sRegistryMenuActions), sRegistryMenuActions);
     InitMenuInUpperLeftCornerNormal(tActionWindowId, ARRAY_COUNT(sRegistryMenuActions), 0);
     ScheduleBgCopyTilemapToVram(0);
@@ -873,7 +875,7 @@ static void HandleRegistryMenuActionsInput(u8 taskId)
 
 static void ShowRegistryMenuDeleteConfirmation(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     ClearStdWindowAndFrame(tMainWindowId, FALSE);
     ClearStdWindowAndFrame(tActionWindowId, FALSE);
     ClearWindowTilemap(tMainWindowId);
@@ -893,8 +895,8 @@ static void ShowRegistryMenuDeleteYesNo(u8 taskId)
 
 void DeleteRegistry_Yes_Callback(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    ClearDialogWindowAndFrame(0, 0);
+    u16 *data = (u16*) gTasks[taskId].data;
+    ClearDialogWindowAndFrame(0, FALSE);
     DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
     gSaveBlock1Ptr->secretBases[tSelectedBaseId].registryStatus = UNREGISTERED;
     BuildRegistryMenuItems(taskId);
@@ -910,8 +912,8 @@ static void DeleteRegistry_Yes(u8 taskId)
 
 static void DeleteRegistry_No(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
-    ClearDialogWindowAndFrame(0, 0);
+    u16 *data = (u16*) gTasks[taskId].data;
+    ClearDialogWindowAndFrame(0, FALSE);
     DestroyListMenuTask(tListTaskId, &tScrollOffset, &tSelectedRow);
     FinalizeRegistryMenu(taskId);
     gTasks[taskId].func = HandleRegistryMenuInput;
@@ -919,9 +921,9 @@ static void DeleteRegistry_No(u8 taskId)
 
 static void ReturnToMainRegistryMenu(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
+    u16 *data = (u16*) gTasks[taskId].data;
     AddRegistryMenuScrollArrows(taskId);
-    ClearStdWindowAndFrame(tActionWindowId, 0);
+    ClearStdWindowAndFrame(tActionWindowId, FALSE);
     ClearWindowTilemap(tActionWindowId);
     RemoveWindow(tActionWindowId);
     ScheduleBgCopyTilemapToVram(0);
@@ -943,7 +945,7 @@ static void GoToSecretBasePCRegisterMenu(u8 taskId)
 #undef tActionWindowId
 #undef tArrowTaskId
 
-static u8 GetSecretBaseOwnerType(u8 secretBaseIdx)
+static u8 UNUSED sGetSecretBaseOwnerType(u8 secretBaseIdx)
 {
     return (gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerId[0] % 5)
          + (gSaveBlock1Ptr->secretBases[secretBaseIdx].gender * 5);
@@ -977,6 +979,135 @@ void GetSecretBaseOwnerAndState(void)
 
 void SecretBasePerStepCallback(u8 taskId)
 {
+    s16 x;
+    s16 y;
+    u8 behavior;
+    u16 tileId;
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    switch (tState)
+    {
+    case 0:
+        sInFriendSecretBase = FALSE;
+        //if (VarGet(VAR_CURRENT_SECRET_BASE))
+        //    sInFriendSecretBase = TRUE;
+        //else
+        //    sInFriendSecretBase = FALSE;
+
+        PlayerGetDestCoords(&tPlayerX, &tPlayerY);
+        tState = 1;
+        break;
+    case 1:
+        // End if player hasn't moved
+        PlayerGetDestCoords(&x, &y);
+        if (x == tPlayerX && y == tPlayerY)
+            return;
+
+        tPlayerX = x;
+        tPlayerY = y;
+        VarSet(VAR_SECRET_BASE_STEP_COUNTER, VarGet(VAR_SECRET_BASE_STEP_COUNTER) + 1);
+        behavior = MapGridGetMetatileBehaviorAt(x, y);
+        tileId = MapGridGetMetatileIdAt(x, y);
+        if (tileId == METATILE_SecretBase_SolidBoard_Top || tileId == METATILE_SecretBase_SolidBoard_Bottom)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SOLID_BOARD);
+        }
+        else if (tileId == METATILE_SecretBase_SmallChair
+              || tileId == METATILE_SecretBase_PokemonChair
+              || tileId == METATILE_SecretBase_HeavyChair
+              || tileId == METATILE_SecretBase_PrettyChair
+              || tileId == METATILE_SecretBase_ComfortChair
+              || tileId == METATILE_SecretBase_RaggedChair
+              || tileId == METATILE_SecretBase_BrickChair
+              || tileId == METATILE_SecretBase_CampChair
+              || tileId == METATILE_SecretBase_HardChair)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_CHAIR);
+        }
+        else if (tileId == METATILE_SecretBase_RedTent_DoorTop
+              || tileId == METATILE_SecretBase_RedTent_Door
+              || tileId == METATILE_SecretBase_BlueTent_DoorTop
+              || tileId == METATILE_SecretBase_BlueTent_Door)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_TENT);
+        }
+        else if ((behavior == MB_IMPASSABLE_NORTHEAST && tileId == METATILE_SecretBase_Stand_CornerRight)
+              || (behavior == MB_IMPASSABLE_NORTHWEST && MapGridGetMetatileIdAt(x, y) == METATILE_SecretBase_Stand_CornerLeft))
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_STAND);
+        }
+        else if (behavior == MB_IMPASSABLE_WEST_AND_EAST && tileId == METATILE_SecretBase_Slide_StairLanding)
+        {
+            if (sInFriendSecretBase == TRUE)
+            {
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ SECRET_BASE_USED_SLIDE);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_DECLINED_SLIDE);
+            }
+        }
+        else if (behavior == MB_SLIDE_SOUTH && tileId == METATILE_SecretBase_Slide_SlideTop)
+        {
+            if (sInFriendSecretBase == TRUE)
+            {
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SLIDE);
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ SECRET_BASE_DECLINED_SLIDE);
+            }
+        }
+        else if (MetatileBehavior_IsSecretBaseGlitterMat(behavior) == TRUE)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_GLITTER_MAT);
+        }
+        else if (MetatileBehavior_IsSecretBaseBalloon(behavior) == TRUE)
+        {
+            PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
+            if (sInFriendSecretBase == TRUE)
+            {
+                switch ((int)MapGridGetMetatileIdAt(x, y))
+                {
+                case METATILE_SecretBase_RedBalloon:
+                case METATILE_SecretBase_BlueBalloon:
+                case METATILE_SecretBase_YellowBalloon:
+                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_BALLOON);
+                    break;
+                case METATILE_SecretBase_MudBall:
+                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_MUD_BALL);
+                    break;
+                }
+            }
+        }
+        else if (MetatileBehavior_IsSecretBaseBreakableDoor(behavior) == TRUE)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_BREAKABLE_DOOR);
+
+            ShatterSecretBaseBreakableDoor(x, y);
+        }
+        else if (MetatileBehavior_IsSecretBaseSoundMat(behavior) == TRUE){
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_NOTE_MAT);
+        }
+        else if (MetatileBehavior_IsSecretBaseJumpMat(behavior) == TRUE)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_JUMP_MAT);
+        }
+        else if (MetatileBehavior_IsSecretBaseSpinMat(behavior) == TRUE)
+        {
+            if (sInFriendSecretBase == TRUE)
+                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SPIN_MAT);
+        }
+        break;
+    case 2:
+        // This state is never reached, and tFldEff is never set
+        if (!FieldEffectActiveListContains(tFldEff))
+            tState = 1;
+        break;
+    }
 }
 
 #undef tStepCb
@@ -1135,7 +1266,7 @@ static u8 TrySaveFriendsSecretBase(struct SecretBase *secretBase, u32 version, u
 
 // Moves the registered secret bases to the beginning of the array, so that
 // they won't be forgotten during record mixing.
-static void SortSecretBasesByRegistryStatus(void)
+static void UNUSED SortSecretBasesByRegistryStatus(void)
 {
     u8 i;
     u8 j;
@@ -1345,7 +1476,7 @@ static void TrySaveRegisteredDuplicates(struct SecretBaseRecordMixer *mixers)
     }
 }
 
-static void SaveRecordMixBases(struct SecretBaseRecordMixer *mixers)
+static void UNUSED SaveRecordMixBases(struct SecretBaseRecordMixer *mixers)
 {
     DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(mixers[0].secretBases, mixers[1].secretBases, mixers[2].secretBases);
     ClearDuplicateOwnedSecretBases(gSaveBlock1Ptr->secretBases, mixers[0].secretBases, mixers[1].secretBases, mixers[2].secretBases);

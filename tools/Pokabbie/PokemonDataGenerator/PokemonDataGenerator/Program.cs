@@ -1,6 +1,10 @@
-﻿using PokemonDataGenerator.OverworldSprites;
+using PokemonDataGenerator.OverworldSprites;
+using PokemonDataGenerator.OverworldSprites.NPC;
+using PokemonDataGenerator.Pokedex;
+using PokemonDataGenerator.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +14,6 @@ namespace PokemonDataGenerator
 	class Program
 	{
 		private static readonly string c_PresetOutputPath = "..\\..\\..\\..\\..\\..\\src\\data\\rogue_presetmons.h";
-		private static readonly string c_ExtraPath = "..\\..\\..\\..\\..\\..\\src\\data\\additional_sets.json";
 
 		static void Main(string[] args)
 		{
@@ -18,27 +21,21 @@ namespace PokemonDataGenerator
 			Console.WriteLine("2 - EX");
 			bool isVanillaVersion = ReadOption(1, 2) == 1;
 
-			Console.WriteLine("1 - Generate Presets");
+			GameDataHelpers.IsVanillaVersion = isVanillaVersion;
+
+			Console.WriteLine("1 - Gather Pokemon data profile");
 			Console.WriteLine("2 - Generate OW Sprites");
 			Console.WriteLine("3 - Generate OW Sprites (DEBUG FAST SET)");
 			Console.WriteLine("4 - OW Sprites Palette Generator");
-			int action = ReadOption(1, 4);
+			Console.WriteLine("5 - Generate Pokedex Lists");
+			Console.WriteLine("6 - Convert NPC sprites");
+			int action = ReadOption(1, 6);
 
 			switch(action)
 			{
 				case 1:
-					Console.WriteLine("==Generating Presets==");
-					if(isVanillaVersion)
-					{
-						MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen3.json", true);
-					}
-					else
-					{
-						MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen7.json", false);
-						MonPresetGenerator.GenerateFromURL(@"https://play.pokemonshowdown.com/data/sets/gen8.json", false);
-						MonPresetGenerator.AdditionalSetsFromPath(c_ExtraPath, false);
-					}
-					MonPresetGenerator.ExportToHeader(c_PresetOutputPath);
+					Console.WriteLine("==Gathering Pokemon Data Profile==");
+					PokemonProfileGenerator.GatherProfiles();
 					break;
 
 				case 2:
@@ -47,11 +44,7 @@ namespace PokemonDataGenerator
 						OverworldSpriteGenerator.s_TargettingVanilla = isVanillaVersion;
 						OverworldSpriteGenerator.s_GenerateShinies = true;// ReadBool("Include Shinies?");
 
-						Console.WriteLine("1 - Collate Sprites");
-						Console.WriteLine("2 - Export Sprites");
-						bool isCollating = ReadOption(1, 2) == 1;
-
-						OverworldSpriteGenerator.GenerateFromURL(isCollating);
+						OverworldSpriteGenerator.GenerateFromURL();
 						break;
 					}
 
@@ -60,13 +53,9 @@ namespace PokemonDataGenerator
 						Console.WriteLine("==Generate OW Sprites (DEBUG FAST SET)==");
 						OverworldSpriteGenerator.s_TargettingDebugSet = true;
 						OverworldSpriteGenerator.s_TargettingVanilla = isVanillaVersion;
-						OverworldSpriteGenerator.s_GenerateShinies = ReadBool("Include Shinies?");
+						OverworldSpriteGenerator.s_GenerateShinies = true;// ReadBool("Include Shinies?");
 
-						Console.WriteLine("1 - Collate Sprites");
-						Console.WriteLine("2 - Export Sprites");
-						bool isCollating = ReadOption(1, 2) == 1;
-
-						OverworldSpriteGenerator.GenerateFromURL(isCollating);
+						OverworldSpriteGenerator.GenerateFromURL();
 						break;
 					}
 
@@ -76,6 +65,15 @@ namespace PokemonDataGenerator
 					SpritePaletteGenerator.GenerateFromLocalData();
 					break;
 
+				case 5:
+					Console.WriteLine("==Generating Pokedex Lists==");
+					PokedexGenerator.GeneratePokedexEntries(isVanillaVersion);
+					break;
+
+				case 6:
+					Console.WriteLine("==Generating NPC sprites==");
+					NpcSpriteSplitter.ExportDirectory(Path.GetFullPath("npc_in"), Path.GetFullPath("npc_out"));
+					break;
 			}
 
 

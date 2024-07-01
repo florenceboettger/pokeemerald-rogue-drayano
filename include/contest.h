@@ -156,7 +156,6 @@ struct Contest
     u8 judgeSpeechBubbleSpriteId;
     s8 applauseLevel;
     u8 prevTurnOrder[CONTESTANT_COUNT];
-    u32 unusedRng;
     u16 moveHistory[CONTEST_NUM_APPEALS][CONTESTANT_COUNT];
     u8 excitementHistory[CONTEST_NUM_APPEALS][CONTESTANT_COUNT];
     u8 applauseMeterSpriteId;
@@ -291,7 +290,7 @@ struct ContestResources
     struct ContestMoveAnimData *moveAnim;
     struct ContestTV *tv;
     struct ContestUnused * unused;
-    u8 * contestBgTilemaps[CONTESTANT_COUNT];
+    u8 *contestBgTilemaps[CONTESTANT_COUNT];
     void * boxBlinkTiles1;
     void * boxBlinkTiles2;
     void * animBgTileBuffer;
@@ -324,7 +323,6 @@ extern u16 gSpecialVar_ContestRank;
 extern u8 gNumLinkContestPlayers;
 extern u8 gHighestRibbonRank;
 extern struct ContestResources *gContestResources;
-extern struct ContestWinner gCurContestWinner;
 extern u8 gCurContestWinnerIsForArtist;
 extern u8 gCurContestWinnerSaveIdx;
 extern u32 gContestRngValue;

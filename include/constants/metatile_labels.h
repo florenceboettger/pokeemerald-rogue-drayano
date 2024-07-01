@@ -204,6 +204,87 @@
 #define METATILE_Fortree_WoodBridge1_Bottom                0x29F
 #define METATILE_Fortree_WoodBridge1_Top                   0x297
 
+// gTileset_GeneralHub
+#define METATILE_GeneralHub_Door_PokeConnect                       0x062
+#define METATILE_GeneralHub_Grass                                  0x001
+#define METATILE_GeneralHub_GrassPath_Centre                       0x1D9
+#define METATILE_GeneralHub_GrassPath_Conn_EastWest_North          0x1E1
+#define METATILE_GeneralHub_GrassPath_Conn_EastWest_South          0x1D1
+#define METATILE_GeneralHub_GrassPath_Conn_NorthEast               0x1E0
+#define METATILE_GeneralHub_GrassPath_Conn_NorthSouth_East         0x1D8
+#define METATILE_GeneralHub_GrassPath_Conn_NorthSouth_West         0x1DA
+#define METATILE_GeneralHub_GrassPath_Conn_NorthWest               0x1E2
+#define METATILE_GeneralHub_GrassPath_Conn_SouthEast               0x1D0
+#define METATILE_GeneralHub_GrassPath_Conn_SouthWest               0x1D2
+#define METATILE_GeneralHub_GrassWarpEast                          0x027
+#define METATILE_GeneralHub_GrassWarpNorth                         0x01E
+#define METATILE_GeneralHub_GrassWarpShadowEast                    0x037
+#define METATILE_GeneralHub_GrassWarpShadowNorth                   0x02E
+#define METATILE_GeneralHub_GrassWarpShadowSouth                   0x036
+#define METATILE_GeneralHub_GrassWarpShadowWest                    0x02F
+#define METATILE_GeneralHub_GrassWarpSouth                         0x026
+#define METATILE_GeneralHub_GrassWarpWest                          0x01F
+#define METATILE_GeneralHub_Grass_NorthDrop                        0x002
+#define METATILE_GeneralHub_MountainRaised_Conn_EastWest_South     0x06C
+#define METATILE_GeneralHub_Mountain_Centre                        0x071
+#define METATILE_GeneralHub_Mountain_Conn_EastWest_North           0x079
+#define METATILE_GeneralHub_Mountain_Conn_EastWest_South           0x069
+#define METATILE_GeneralHub_Mountain_Conn_NorthEast                0x078
+#define METATILE_GeneralHub_Mountain_Conn_NorthSouth_East          0x070
+#define METATILE_GeneralHub_Mountain_Conn_NorthSouth_West          0x072
+#define METATILE_GeneralHub_Mountain_Conn_NorthWest                0x07A
+#define METATILE_GeneralHub_Mountain_Conn_SouthEast                0x068
+#define METATILE_GeneralHub_Mountain_Conn_SouthEast_Inside         0x074
+#define METATILE_GeneralHub_Mountain_Conn_SouthWest                0x06A
+#define METATILE_GeneralHub_Mountain_Conn_SouthWest_Inside         0x089
+#define METATILE_GeneralHub_MuddyTracks                            0x055
+#define METATILE_GeneralHub_Pebbles                                0x04D
+#define METATILE_GeneralHub_Pond_Centre                            0x0A1
+#define METATILE_GeneralHub_Pond_Conn_EastWest_South               0x0B1
+#define METATILE_GeneralHub_Pond_Conn_NorthEast                    0x0C2
+#define METATILE_GeneralHub_Pond_Conn_NorthSouth_East              0x0B8
+#define METATILE_GeneralHub_Pond_Conn_NorthSouth_West              0x0BA
+#define METATILE_GeneralHub_Pond_Conn_NorthWest                    0x0C0
+#define METATILE_GeneralHub_Pond_Conn_SouthEast                    0x0B0
+#define METATILE_GeneralHub_Pond_Conn_SouthWest                    0x0B2
+#define METATILE_GeneralHub_SandPath_Centre                        0x121
+#define METATILE_GeneralHub_SandPath_Conn_EastWest_North           0x129
+#define METATILE_GeneralHub_SandPath_Conn_EastWest_South           0x119
+#define METATILE_GeneralHub_SandPath_Conn_NorthEast                0x128
+#define METATILE_GeneralHub_SandPath_Conn_NorthSouth_East          0x120
+#define METATILE_GeneralHub_SandPath_Conn_NorthSouth_West          0x122
+#define METATILE_GeneralHub_SandPath_Conn_NorthWest                0x12A
+#define METATILE_GeneralHub_SandPath_Conn_SouthEast                0x118
+#define METATILE_GeneralHub_SandPath_Conn_SouthWest                0x11A
+#define METATILE_GeneralHub_StonePath_Centre                       0x109
+#define METATILE_GeneralHub_StonePath_Conn_EastWest_North          0x111
+#define METATILE_GeneralHub_StonePath_Conn_EastWest_South          0x101
+#define METATILE_GeneralHub_StonePath_Conn_NorthEast               0x110
+#define METATILE_GeneralHub_StonePath_Conn_NorthSouth_East         0x108
+#define METATILE_GeneralHub_StonePath_Conn_NorthSouth_West         0x10A
+#define METATILE_GeneralHub_StonePath_Conn_NorthWest               0x112
+#define METATILE_GeneralHub_StonePath_Conn_SouthEast               0x100
+#define METATILE_GeneralHub_StonePath_Conn_SouthWest               0x102
+#define METATILE_GeneralHub_TallGrass                              0x00D
+#define METATILE_GeneralHub_Tree_BottomLeft_Dense                  0x1E4
+#define METATILE_GeneralHub_Tree_BottomLeft_Dense_Overlapped       0x1DC
+#define METATILE_GeneralHub_Tree_BottomLeft_Dense_Overlapped_Alt   0x1F3
+#define METATILE_GeneralHub_Tree_BottomLeft_Sparse                 0x1E6
+#define METATILE_GeneralHub_Tree_BottomLeft_Sparse_Overlapped      0x1DE
+#define METATILE_GeneralHub_Tree_BottomRight_Dense                 0x1E5
+#define METATILE_GeneralHub_Tree_BottomRight_Dense_Overlapped      0x1DD
+#define METATILE_GeneralHub_Tree_BottomRight_Dense_Overlapped_Alt  0x1F2
+#define METATILE_GeneralHub_Tree_BottomRight_Sparse                0x1E7
+#define METATILE_GeneralHub_Tree_BottomRight_Sparse_Overlapped     0x1DF
+#define METATILE_GeneralHub_Tree_TopLeft_CapGrass                  0x1CE
+#define METATILE_GeneralHub_Tree_TopLeft_CapTallGrass              0x1C6
+#define METATILE_GeneralHub_Tree_TopLeft_Dense                     0x1D4
+#define METATILE_GeneralHub_Tree_TopLeft_Sparse                    0x1D6
+#define METATILE_GeneralHub_Tree_TopRight_CapGrass                 0x1CF
+#define METATILE_GeneralHub_Tree_TopRight_CapTallGrass             0x1C7
+#define METATILE_GeneralHub_Tree_TopRight_Dense                    0x1D5
+#define METATILE_GeneralHub_Tree_TopRight_Sparse                   0x1D7
+
 // gTileset_General
 #define METATILE_General_BlueCaveIndent        0x1B0
 #define METATILE_General_BlueCaveOpen          0x1B1
@@ -216,10 +297,12 @@
 #define METATILE_General_Door_PokeCenter       0x061
 #define METATILE_General_Door_PokeMart         0x041
 #define METATILE_General_Grass                 0x001
+#define METATILE_General_Grass_Stone           0x0E0
 #define METATILE_General_Grass_TreeLeft        0x1CE
 #define METATILE_General_Grass_TreeRight       0x1CF
 #define METATILE_General_Grass_TreeUp          0x00E
 #define METATILE_General_LongGrass             0x015
+#define METATILE_General_Mountain_Stone        0x0E1
 #define METATILE_General_MuddySlope_Frame0     0x0E8
 #define METATILE_General_MuddySlope_Frame1     0x0E9
 #define METATILE_General_MuddySlope_Frame2     0x0EA
@@ -233,6 +316,7 @@
 #define METATILE_General_RoughDeepWater        0x14F
 #define METATILE_General_RoughWater            0x14E
 #define METATILE_General_SandPit_Center        0x121
+#define METATILE_General_SandPit_Stone         0x0E2
 #define METATILE_General_SecretBase_TreeLeft   0x026
 #define METATILE_General_SecretBase_TreeRight  0x027
 #define METATILE_General_SecretBase_VineLeft   0x036
@@ -440,6 +524,10 @@
 #define METATILE_RS_MossdeepGym_Switch_Down     0x239
 #define METATILE_RS_MossdeepGym_Switch_Up       0x238
 
+// gTileset_Restaurant
+#define METATILE_Restaurant_KitchenDoorClosed  0x227
+#define METATILE_Restaurant_KitchenDoorOpen    0x217
+
 // gTileset_Rustboro
 #define METATILE_Rustboro_Door_Gray  0x21F
 #define METATILE_Rustboro_Door_Tan   0x22F
@@ -461,7 +549,6 @@
 #define METATILE_SecretBase_BigPlant_BaseRight2         0x2EF
 #define METATILE_SecretBase_BigPlant_TopLeft            0x2E4
 #define METATILE_SecretBase_BigPlant_TopLeftWall        0x2E5
-#define METATILE_SecretBase_BigPlant_TopRight           0x2E6
 #define METATILE_SecretBase_BigPlant_TopRightWall       0x2E6
 #define METATILE_SecretBase_BlueBalloon                 0x33C
 #define METATILE_SecretBase_BlueBrick_Bottom            0x22F

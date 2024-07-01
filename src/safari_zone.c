@@ -56,7 +56,7 @@ void ResetSafariZoneFlag(void)
 
 void EnterSafariMode(void)
 {
-    IncrementGameStat(GAME_STAT_ENTERED_SAFARI_ZONE);
+    //IncrementGameStat(GAME_STAT_ENTERED_SAFARI_ZONE);
     SetSafariZoneFlag();
     ClearAllPokeblockFeeders();
     gNumSafariBalls = gSpecialVar_0x8000;
@@ -85,7 +85,7 @@ bool8 SafariZoneTakeStep(void)
     //sSafariZoneStepCounter--;
     //if (sSafariZoneStepCounter == 0)
     //{
-    //    ScriptContext1_SetupScript(SafariZone_EventScript_TimesUp);
+    //    ScriptContext_SetupScript(SafariZone_EventScript_TimesUp);
     //    return TRUE;
     //}
     return FALSE;
@@ -93,32 +93,39 @@ bool8 SafariZoneTakeStep(void)
 
 void SafariZoneRetirePrompt(void)
 {
-    ScriptContext1_SetupScript(SafariZone_EventScript_RetirePrompt);
+    ScriptContext_SetupScript(SafariZone_EventScript_RetirePrompt);
 }
 
 void CB2_EndSafariBattle(void)
 {
     Rogue_Safari_EndWildBattle();
 
-    sSafariZonePkblkUses += gBattleResults.pokeblockThrows;
-    if (gBattleOutcome == B_OUTCOME_CAUGHT)
-        sSafariZoneCaughtMons++;
-    if (gNumSafariBalls != 0)
+    if(Rogue_UseSafariBattle())
     {
         SetMainCallback2(CB2_ReturnToField);
     }
-    else if (gBattleOutcome == B_OUTCOME_NO_SAFARI_BALLS)
+    else
     {
-        ScriptContext2_RunNewScript(SafariZone_EventScript_OutOfBallsMidBattle);
-        WarpIntoMap();
-        gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
-        SetMainCallback2(CB2_LoadMap);
-    }
-    else if (gBattleOutcome == B_OUTCOME_CAUGHT)
-    {
-        ScriptContext1_SetupScript(SafariZone_EventScript_OutOfBalls);
-        ScriptContext1_Stop();
-        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        sSafariZonePkblkUses += gBattleResults.pokeblockThrows;
+        if (gBattleOutcome == B_OUTCOME_CAUGHT)
+            sSafariZoneCaughtMons++;
+        if (gNumSafariBalls != 0)
+        {
+            SetMainCallback2(CB2_ReturnToField);
+        }
+        else if (gBattleOutcome == B_OUTCOME_NO_SAFARI_BALLS)
+        {
+            RunScriptImmediately(SafariZone_EventScript_OutOfBallsMidBattle);
+            WarpIntoMap();
+            gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
+            SetMainCallback2(CB2_LoadMap);
+        }
+        else if (gBattleOutcome == B_OUTCOME_CAUGHT)
+        {
+            ScriptContext_SetupScript(SafariZone_EventScript_OutOfBalls);
+            ScriptContext_Stop();
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        }
     }
 }
 
@@ -206,26 +213,6 @@ struct Pokeblock *SafariZoneGetActivePokeblock(void)
 
 void SafariZoneActivatePokeblockFeeder(u8 pkblId)
 {
-    s16 x, y;
-    u8 i;
-
-    for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
-    {
-        // Find free entry in sPokeblockFeeders
-        if (sPokeblockFeeders[i].mapNum == 0
-         && sPokeblockFeeders[i].x == 0
-         && sPokeblockFeeders[i].y == 0)
-        {
-            // Initialize Pokeblock feeder
-            GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-            sPokeblockFeeders[i].mapNum = gSaveBlock1Ptr->location.mapNum;
-            sPokeblockFeeders[i].pokeblock = gSaveBlock1Ptr->pokeblocks[pkblId];
-            sPokeblockFeeders[i].stepCounter = 100;
-            sPokeblockFeeders[i].x = x;
-            sPokeblockFeeders[i].y = y;
-            break;
-        }
-    }
 }
 
 static void DecrementFeederStepCounters(void)

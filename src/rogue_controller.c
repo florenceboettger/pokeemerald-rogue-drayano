@@ -1,24 +1,35 @@
 #include "global.h"
 #include "constants/abilities.h"
 #include "constants/battle.h"
+#include "constants/battle_string_ids.h"
 #include "constants/event_objects.h"
 #include "constants/heal_locations.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
+#include "constants/map_types.h"
 #include "constants/rogue.h"
 #include "constants/rgb.h"
+#include "constants/songs.h"
+#include "constants/trainer_types.h"
 #include "constants/weather.h"
 #include "data.h"
 #include "gba/isagbprint.h"
 
 #include "battle.h"
+#include "battle_util.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "event_data.h"
+#include "field_effect.h"
 #include "graphics.h"
 #include "item.h"
+#include "item_menu.h"
+#include "event_object_movement.h"
+#include "fieldmap.h"
+#include "field_player_avatar.h"
 #include "load_save.h"
+#include "malloc.h"
 #include "main.h"
 #include "money.h"
 #include "m4a.h"
@@ -27,6 +38,7 @@
 #include "palette.h"
 #include "play_time.h"
 #include "player_pc.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
@@ -34,10 +46,12 @@
 #include "rtc.h"
 #include "safari_zone.h"
 #include "script.h"
+#include "script_pokemon_util.h"
 #include "siirtc.h"
 #include "strings.h"
 #include "string_util.h"
 #include "text.h"
+#include "trainer_card.h"
 
 #include "rogue.h"
 #include "rogue_assistant.h"
@@ -46,12 +60,26 @@
 #include "rogue_campaign.h"
 #include "rogue_charms.h"
 #include "rogue_controller.h"
+#include "rogue_debug.h"
+#include "rogue_gameshow.h"
+#include "rogue_gifts.h"
 #include "rogue_followmon.h"
+#include "rogue_hub.h"
+#include "rogue_multiplayer.h"
+#include "rogue_player_customisation.h"
+#include "rogue_pokedex.h"
 #include "rogue_popup.h"
 #include "rogue_query.h"
 #include "rogue_quest.h"
+#include "rogue_ridemon.h"
+#include "rogue_safari.h"
+#include "rogue_save.h"
+#include "rogue_settings.h"
 #include "rogue_timeofday.h"
+#include "rogue_trainers.h"
 
+STATIC_ASSERT(sizeof(struct BoxPokemon) == sizeof(struct RogueBoxPokemonFacade), SizeOfRogueBoxPokemonFacade);
+STATIC_ASSERT(sizeof(struct Pokemon) == sizeof(struct RoguePokemonFacade), SizeOfRoguePokemonFacade);
 
 #define ROGUE_TRAINER_COUNT (FLAG_ROGUE_TRAINER_END - FLAG_ROGUE_TRAINER_START + 1)
 #define ROGUE_ITEM_COUNT (FLAG_ROGUE_ITEM_END - FLAG_ROGUE_ITEM_START + 1)
@@ -80,70 +108,52 @@ extern const u8 gText_RogueDebug_X[];
 extern const u8 gText_RogueDebug_Y[];
 #endif
 
-#define LAB_MON_COUNT 3
-
-#define MAX_POCKET_ITEMS  ((max(BAG_TMHM_COUNT,              \
-                            max(BAG_BERRIES_COUNT,           \
-                            max(BAG_ITEMS_COUNT,             \
-                            max(BAG_KEYITEMS_COUNT,          \
-                                BAG_POKEBALLS_COUNT))))) + 1)
-
-#define TOTAL_POCKET_ITEM_COUNT (BAG_TMHM_COUNT + BAG_BERRIES_COUNT + BAG_ITEMS_COUNT + BAG_KEYITEMS_COUNT + BAG_POKEBALLS_COUNT + 1)
-
-// RogueNote: TODO - Modify pocket structure
-
-struct RogueBoxHubData
-{
-    struct Pokemon playerParty[PARTY_SIZE];
-    struct ItemSlot bagItems[TOTAL_POCKET_ITEM_COUNT];
-    struct BerryTree berryTrees[ROGUE_HUB_BERRY_TREE_COUNT];
-};
-
-struct RogueTrainerTemp
-{
-    u32 seedToRestore;
-    u8 allowedType[2];
-    u8 disallowedType[2];
-    u16 customQuerySpeciesCount;
-    const u16* customQuerySpecies;
-    bool8 customQueryProvidesOutput;
-    bool8 allowItemEvos;
-    bool8 allowWeakLegendaries;
-    bool8 allowStrongLegendaries;
-    bool8 forceLegendaries;
-    bool8 preferStrongPresets;
-    bool8 forceStrongPresets;
-    bool8 hasAppliedFallback;
-    u8 queryMonOffset;
-    bool8 hasUsedLeftovers;
-    bool8 hasUsedShellbell;
-#ifdef ROGUE_EXPANSION
-    bool8 hasUsedMegaStone;
-    bool8 hasUsedZMove;
-#endif
-};
+extern const u8 gText_TrainerName_Default[];
 
 struct RouteMonPreview
 {
-    u16 species;
     u8 monSpriteId;
-    bool8 isVisible;
+};
+
+struct RogueCatchingContest
+{
+    u16 winningSpecies;
+    u16 winningScore;
+    u16 itemCountToRestore;
+    u8 activeType;
+    u8 activeStat;
+    u8 spawnsRemaining;
+    u8 isActive : 1;
 };
 
 // Temp data only ever stored in RAM
 struct RogueLocalData
 {
-    bool8 hasQuickLoadPending;
-    bool8 hasValidQuickSave;
-    bool8 hasSaveWarningPending;
-    bool8 hasVersionUpdateMsgPending;
-    struct RogueTrainerTemp trainerTemp;
-    struct RouteMonPreview encounterPreview[ARRAY_COUNT(gRogueRun.wildEncounters)];
-};
-
-struct RogueLabEncounterData
-{
-    struct Pokemon party[LAB_MON_COUNT];
+    struct RouteMonPreview encounterPreview[WILD_ENCOUNTER_GRASS_CAPACITY];
+    struct RogueGameShow gameShow;
+    struct RogueCatchingContest catchingContest;
+    RAND_TYPE rngSeedToRestore;
+    RAND_TYPE rngToRestore;
+    RAND_TYPE rng2ToRestore;
+    u32 totalMoneySpentOnMap;
+    u32 wildBattleCustomMonId;
+    u16 cachedObjIds[OBJ_EVENT_ID_MULTIPLAYER_COUNT];
+    u16 partyRememberedHealth[PARTY_SIZE];
+    u16 wildEncounterHistoryBuffer[3];
+    u16 victoryLapHistoryBuffer[8];
+    u16 recentObjectEventLoadedLayout;
+    bool8 runningToggleActive : 1;
+    bool8 hasQuickLoadPending : 1;
+    bool8 hasValidQuickSave : 1;
+    bool8 hasSaveWarningPending : 1;
+    bool8 hasVersionUpdateMsgPending : 1;
+    bool8 hasNicknameMonMsgPending : 1;
+    bool8 hasBattleEventOccurred : 1;
+    bool8 hasUsePlayerTeamTempSave : 1;
+    bool8 hasUseEnemyTeamTempSave : 1;
+    bool8 hasBattleInputStarted : 1;
+    bool8 hasPendingSnagBattle : 1;
+    bool8 hasPendingRidemonTrappedCheck : 1;
 };
 
 typedef u16 hot_track_dat;
@@ -158,40 +168,38 @@ struct RogueHotTracking
     hot_track_dat triggerAccumulation;
 };
 
+#ifdef ROGUE_FEATURE_HOT_TRACKING
 static struct RogueHotTracking gRogueHotTracking;
+#endif
 
-EWRAM_DATA struct RogueLocalData gRogueLocal = {};
 EWRAM_DATA struct RogueRunData gRogueRun = {};
-EWRAM_DATA struct RogueHubData gRogueHubData = {};
-EWRAM_DATA struct RogueBoxHubData gRogueBoxHubData = {}; // Anything that's too large to fit in the above struct
+
+// Temporary data, that isn't remembered
+EWRAM_DATA struct RogueLocalData gRogueLocal = {};
 EWRAM_DATA struct RogueAdvPath gRogueAdvPath = {};
-EWRAM_DATA struct RogueGlobalData gRogueGlobalData = {};
-EWRAM_DATA struct RogueLabEncounterData gRogueLabEncounterData = {};
-
-bool8 IsSpeciesLegendary(u16 species);
-bool8 IsSpeciesType(u16 species, u8 type);
-bool8 IsLegendaryEnabled(u16 species);
-
 
 static void ResetHotTracking();
 
-static bool8 IsBossTrainer(u16 trainerNum);
-static bool8 IsMiniBossTrainer(u16 trainerNum);
-static bool8 IsAnyBossTrainer(u16 trainerNum);
-
-static u8 CalculateBossLevel(void);
-static u8 CalculatePlayerLevel(void);
 static u8 CalculateWildLevel(u8 variation);
-static u8 CalculateTrainerLevel(u16 trainerNum);
-static u8 GetRoomTypeDifficulty(void);
 
 static bool8 CanLearnMoveByLvl(u16 species, u16 move, s32 level);
-static void ModifyTrainerMonPreset(struct RogueMonPreset* preset);
-void ApplyMonPreset(struct Pokemon* mon, u8 level, const struct RogueMonPreset* preset);
 
 static u8 GetCurrentWildEncounterCount(void);
+static u8 GetCurrentWaterEncounterCount(void);
+static u16 GetWildGrassEncounter(u8 index);
+static u16 GetWildWaterEncounter(u8 index);
+static u16 GetWildEncounterIndexFor(u16 species);
+static void HandleForfeitingInCatchingContest();
 
-static void SwapMons(u8 aIdx, u8 bIdx, struct Pokemon *party);
+void EnableRivalEncounterIfRequired();
+static void ChooseLegendarysForNewAdventure();
+static void ChooseTeamEncountersForNewAdventure();
+static void RememberPartyHeldItems();
+static void RememberPartyHealth();
+static void TryRestorePartyHeldItems(bool8 allowThief);
+static void ClearPlayerTeam();
+static void CheckAndNotifyForFaintedMons();
+
 static void SwapMonItems(u8 aIdx, u8 bIdx, struct Pokemon *party);
 
 static void RandomiseSafariWildEncounters(void);
@@ -201,51 +209,14 @@ static void ResetTrainerBattles(void);
 static void RandomiseEnabledTrainers(void);
 static void RandomiseEnabledItems(void);
 static void RandomiseBerryTrees(void);
+static void RandomiseTRMoves();
 
+static bool8 IsRareWeightedSpecies(u16 species);
 static void RandomiseCharmItems(void);
+static bool8 HasHoneyTreeEncounterPending(void);
+static void ClearHoneyTreePokeblock(void);
 
-static void HistoryBufferPush(u16* buffer, u16 capacity, u16 value);
-static bool8 HistoryBufferContains(u16* buffer, u16 capacity, u16 value);
-
-static void EnsureSafariShinyBufferIsValid()
-{
-    if(gRogueGlobalData.safairShinyBufferHead > ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer))
-    {
-        gRogueGlobalData.safairShinyBufferHead = 0;
-        memset(&gRogueGlobalData.safariShinyBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer));
-
-#ifdef ROGUE_DEBUG
-        gRogueGlobalData.safariShinyBuffer[0] = SPECIES_FLAREON;
-        gRogueGlobalData.safariShinyBuffer[1] = SPECIES_WEEDLE;
-#endif
-    }
-}
-
-static u32 ConsumeSafariShinyBufferIfPresent(u16 species)
-{
-    u8 i;
-
-    EnsureSafariShinyBufferIsValid();
-
-    for(i = 0; i < ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer); ++i)
-    {
-        if(Rogue_GetEggSpecies(gRogueGlobalData.safariShinyBuffer[i]) == Rogue_GetEggSpecies(species))
-        {
-            gRogueGlobalData.safariShinyBuffer[i] = (u16)-1;
-            return gRogueGlobalData.safariShinyPersonality;
-        }
-#ifdef ROGUE_EXPANSION
-        // Support shiny buffering for alternate forms
-        else if(GET_BASE_SPECIES_ID(gRogueGlobalData.safariShinyBuffer[i]) == GET_BASE_SPECIES_ID(species))
-        {
-            gRogueGlobalData.safariShinyBuffer[i] = (u16)-1;
-            return gRogueGlobalData.safariShinyPersonality;
-        }
-#endif
-    }
-
-    return 0;
-}
+static void SetupTrainerBattleInternal(u16 trainerNum);
 
 u16 RogueRandomRange(u16 range, u8 flag)
 {
@@ -255,10 +226,7 @@ u16 RogueRandomRange(u16 range, u8 flag)
     if(range <= 1)
         return 0;
 
-    if(FlagGet(FLAG_SET_SEED_ENABLED) && (flag == 0 || FlagGet(flag)))
-        return res % range;
-    else
-        return Random() % range;
+    return res % range;
 }
 
 bool8 RogueRandomChance(u8 chance, u16 seedFlag)
@@ -271,23 +239,66 @@ bool8 RogueRandomChance(u8 chance, u16 seedFlag)
     return (RogueRandomRange(100, seedFlag) + 1) <= chance;
 }
 
-u16 Rogue_GetStartSeed(void)
+u16 Rogue_GetShinyOdds(u8 shinyRoll)
 {
-    u32 word0 = gSaveBlock1Ptr->dewfordTrends[0].words[0];
-    u32 word1 = gSaveBlock1Ptr->dewfordTrends[0].words[1];
-    u32 offset = 3;
+    u16 baseOdds = 0;
 
-    //if(Rogue_IsRunActive())
-    //{
-    //    offset = gRogueRun.currentRoomIdx * 3;
-    //}
+    switch (shinyRoll)
+    {
+    case SHINY_ROLL_DYNAMIC:
+        baseOdds = 400;
+        break;
+    
+    case SHINY_ROLL_STATIC:
+        baseOdds = 100;
+        break;
+    
+    case SHINY_ROLL_SHINY_LOCKED:
+        baseOdds = 0;
+        break;
 
-    return (u16)(word0 + word1 * offset);
+    default:
+        AGB_ASSERT(FALSE);
+        break;
+    }
+    
+    if(VarGet(VAR_ROGUE_ACTIVE_POKEBLOCK) == ITEM_POKEBLOCK_SHINY)
+        baseOdds /= 2;
+
+    
+    if(IsCurseActive(EFFECT_SNAG_TRAINER_MON))
+        baseOdds = 0;
+
+    return baseOdds;
 }
 
-u16 Rogue_GetShinyOdds(void)
+bool8 Rogue_RollShinyState(u8 shinyRoll)
 {
-    return 100;
+    // Intentionally don't see shiny state
+    u16 shinyOdds = Rogue_GetShinyOdds(shinyRoll);
+    u16 rngValue = Random();
+    return shinyOdds == 0 ? FALSE : (rngValue % shinyOdds) == 0;
+}
+
+
+static u16 GetEncounterChainShinyOdds(u8 count)
+{
+    u16 baseOdds = Rogue_GetShinyOdds(SHINY_ROLL_DYNAMIC);
+
+    // By the time we reach 48 encounters, we want to be at max odds
+    // Don't start increasing shiny rate until we pass 4 encounters
+    if(count <= 4)
+    {
+        return baseOdds;
+    }
+    else
+    {
+        u16 range = ((VarGet(VAR_ROGUE_ACTIVE_POKEBLOCK) == ITEM_POKEBLOCK_SHINY) ? 24 : 48) - 4;
+        u16 t = min(count - 4, range);
+        u16 targetOdds = 16;
+
+        return (targetOdds * t + baseOdds * (range - t)) / range;
+    }
 }
 
 bool8 Rogue_IsRunActive(void)
@@ -295,9 +306,72 @@ bool8 Rogue_IsRunActive(void)
     return FlagGet(FLAG_ROGUE_RUN_ACTIVE);
 }
 
+bool8 Rogue_IsVictoryLapActive(void)
+{
+    return Rogue_IsRunActive() && FlagGet(FLAG_ROGUE_IS_VICTORY_LAP);
+}
+
+bool8 Rogue_InWildSafari(void)
+{
+    return FlagGet(FLAG_ROGUE_WILD_SAFARI);
+}
+
+bool8 Rogue_UseSafariBattle()
+{
+    return Rogue_InWildSafari() || Rogue_IsCatchingContestActive();
+}
+
+bool8 Rogue_CanChangeSafariBall(void)
+{
+    return !Rogue_IsCatchingContestActive();
+}
+
+u8 Rogue_GetCurrentDifficulty(void)
+{
+    return gRogueRun.currentDifficulty;
+}
+
+void Rogue_SetCurrentDifficulty(u8 difficulty)
+{
+    AGB_ASSERT(difficulty <= ROGUE_MAX_BOSS_COUNT);
+    gRogueRun.currentDifficulty = difficulty;
+}
+
 bool8 Rogue_ForceExpAll(void)
 {
-    return FlagGet(FLAG_ROGUE_EXP_ALL);
+    return Rogue_GetConfigToggle(CONFIG_TOGGLE_EXP_ALL);
+}
+
+u16* Rogue_GetVictoryLapHistoryBufferPtr()
+{
+    return gRogueLocal.victoryLapHistoryBuffer;
+}
+u32 Rogue_GetVictoryLapHistoryBufferSize()
+{
+    return ARRAY_COUNT(gRogueLocal.victoryLapHistoryBuffer);
+}
+
+bool8 Rogue_EnableExpGain(void)
+{
+    // Don't give exp in battle sim flat battles
+    if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) != 0 && Rogue_IsBattleSimTrainer(gTrainerBattleOpponent_A))
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 Rogue_EnableAffectionMechanics(void)
+{
+#ifdef ROGUE_EXPANSION
+    return Rogue_GetConfigToggle(CONFIG_TOGGLE_AFFECTION);
+#else
+    return FALSE;
+#endif
+}
+
+bool8 Rogue_ShouldReleaseFaintedMons(void)
+{
+    return Rogue_GetConfigToggle(CONFIG_TOGGLE_RELEASE_MONS);
 }
 
 bool8 Rogue_FastBattleAnims(void)
@@ -307,36 +381,465 @@ bool8 Rogue_FastBattleAnims(void)
         return TRUE;
     }
 
+    return !Rogue_UseKeyBattleAnims();
+}
+
+bool8 InBattleChoosingMoves();
+bool8 InBattleRunningActions();
+
+static u8 GetBattleSceneOption() 
+{
+    if(Rogue_UseKeyBattleAnims())
+        return gSaveBlock2Ptr->optionsBossBattleScene;
+    else if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) != 0)
+        return gSaveBlock2Ptr->optionsTrainerBattleScene;
+    else
+        return gSaveBlock2Ptr->optionsWildBattleScene;
+}
+
+u8 Rogue_GetBattleSpeedScale(bool8 forHealthbar)
+{
+    u8 battleSceneOption = GetBattleSceneOption();
+
+    // Hold L to slow down
+    if(JOY_HELD(L_BUTTON))
+        return 1;
+
+    // We want to speed up all anims until input selection starts
+    if(InBattleChoosingMoves())
+        gRogueLocal.hasBattleInputStarted = TRUE;
+
+    if(gRogueLocal.hasBattleInputStarted)
+    {
+        // Always run at 1x speed here
+        if(InBattleChoosingMoves())
+            return 1;
+
+        // When battle anims are turned off, it's a bit too hard to read text, so force running at normal speed
+        if(!forHealthbar && battleSceneOption == OPTIONS_BATTLE_SCENE_DISABLED && InBattleRunningActions())
+            return 1;
+    }
+
+    // We don't need to speed up health bar anymore as that passively happens now
+    switch (battleSceneOption)
+    {
+    case OPTIONS_BATTLE_SCENE_1X:
+        return forHealthbar ? 1 : 1;
+
+    case OPTIONS_BATTLE_SCENE_2X:
+        return forHealthbar ? 1 : 2;
+
+    case OPTIONS_BATTLE_SCENE_3X:
+        return forHealthbar ? 1 : 3;
+
+    case OPTIONS_BATTLE_SCENE_4X:
+        return forHealthbar ? 1 : 4;
+
+    // Print text at a readable speed still
+    case OPTIONS_BATTLE_SCENE_DISABLED:
+        if(gRogueLocal.hasBattleInputStarted)
+            return forHealthbar ? 10 : 1;
+        else
+            return 4;
+    }
+
+    return 1;
+}
+
+bool8 Rogue_UseKeyBattleAnims(void)
+{
+#if !TESTING
     if(Rogue_IsRunActive())
     {
-        // Force fast anims for non-bosses
-        if(IsAnyBossTrainer(gTrainerBattleOpponent_A))
+        if(Rogue_IsVictoryLapActive())
+            return FALSE;
+
+        // Force slow anims for bosses
+        if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) != 0 && Rogue_IsKeyTrainer(gTrainerBattleOpponent_A))
+            return TRUE;
+
+        // Force slow anims for legendaries
+        if((gBattleTypeFlags & BATTLE_TYPE_LEGENDARY) != 0)
+            return TRUE;
+
+        // If we've encountered a wild shiny or unique mon, we're going to treat it as an important battle
+        if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) == 0 && (IsMonShiny(&gEnemyParty[0]) || gRogueLocal.wildBattleCustomMonId != 0))
+            return TRUE;
+    }
+    else
+    {
+        // First catch is an important battle
+        if(VarGet(VAR_ROGUE_INTRO_STATE) <= ROGUE_INTRO_STATE_REPORT_TO_PROF)
+            return TRUE;
+    }
+#endif
+
+    return FALSE;
+}
+
+bool8 Rogue_GetBattleAnimsEnabled(void)
+{
+    return GetBattleSceneOption() != OPTIONS_BATTLE_SCENE_DISABLED;
+}
+
+bool8 CheckOnlyTheseTrainersEnabled(u32 toggleToCheck);
+
+bool8 Rogue_UseFinalQuestEffects(void)
+{
+    if(RogueQuest_IsQuestUnlocked(QUEST_ID_THE_FINAL_RUN))
+    {
+        if(RoguePokedex_GetDexVariant() != POKEDEX_VARIANT_NATIONAL_MAX)
+            return FALSE;
+
+        if(!CheckOnlyTheseTrainersEnabled(CONFIG_TOGGLE_TRAINER_ROGUE))
+            return FALSE;
+
+        if(Rogue_GetConfigRange(CONFIG_RANGE_GAME_MODE_NUM) != ROGUE_GAME_MODE_STANDARD)
             return FALSE;
 
         return TRUE;
-        //if(
-        //gRogueAdvPath.currentRoomType != ADVPATH_ROOM_BOSS && 
-        ////gRogueAdvPath.currentRoomType != ADVPATH_ROOM_LEGENDARY &&
-        //gRogueAdvPath.currentRoomType != ADVPATH_ROOM_MINIBOSS))
-        //    return TRUE;
     }
 
     return FALSE;
 }
 
+struct RogueGameShow* Rogue_GetGameShow()
+{
+    return &gRogueLocal.gameShow;
+}
+
+static bool8 HasFinalQuestBossAppliedSwap()
+{
+    return gRogueLocal.hasBattleEventOccurred != 0;
+}
+
+bool8 Rogue_IsFinalQuestFinalBoss(void)
+{
+    if(Rogue_UseFinalQuestEffects() && (gBattleTypeFlags & BATTLE_TYPE_TRAINER) != 0 && Rogue_GetCurrentDifficulty() >= ROGUE_FINAL_CHAMP_DIFFICULTY)
+    {
+        return Rogue_IsBossTrainer(gTrainerBattleOpponent_A);
+    }
+
+    return FALSE;
+}
+
+bool8 Rogue_ApplyFinalQuestFinalBossTeamSwap(void)
+{
+    if(Rogue_IsFinalQuestFinalBoss())
+    {
+        if(!HasFinalQuestBossAppliedSwap())
+        {
+            // Only do this once
+            // Swap out team for the "final" mon a custom Wobbuffet
+            u8 i;
+            u32 fixedIVs = GetMonData(&gEnemyParty[0], MON_DATA_HP_IV);
+
+            if(gEnemyPartyCount == PARTY_SIZE)
+            {
+                // Find an empty index which isn't sent out yet
+                // (prefer these to go into the early spots)
+                for(i = 0; i < PARTY_SIZE; ++i)
+                {
+                    if(i == gBattlerPartyIndexes[B_POSITION_OPPONENT_LEFT])
+                        continue;
+
+                    if((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && i == gBattlerPartyIndexes[B_POSITION_OPPONENT_RIGHT])
+                        continue;
+
+                    break;
+                }
+            }
+            else
+            {
+                i = gEnemyPartyCount;
+            }
+
+            // Create custom wobbuffet
+            RogueGift_CreateMon(CUSTOM_MON_WAHEY_WOBBUFFET, &gEnemyParty[i], SPECIES_WOBBUFFET, MAX_LEVEL, fixedIVs);
+
+            // Apply different music ??
+            //PlayBGM();
+
+            gRogueLocal.hasBattleEventOccurred = TRUE;
+
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 Rogue_AssumeFinalQuestFakeChamp(void)
+{
+    // Present in a way that seems like this is the final champ only for us to reveal after that it wasn't
+    return Rogue_UseFinalQuestEffects() && (Rogue_GetCurrentDifficulty() == ROGUE_CHAMP_START_DIFFICULTY && FlagGet(FLAG_ROGUE_FINAL_QUEST_MET_FAKE_CHAMP));
+}
+
+bool8 Rogue_Use100PercEffects(void)
+{
+    u16 mainPerc = RogueQuest_GetQuestCompletePercFor(QUEST_CONST_IS_MAIN_QUEST);
+
+    // TODO - Also consider NG+
+    if(mainPerc == 100 && !Rogue_Use200PercEffects())
+    {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 Rogue_Use200PercEffects(void)
+{
+    u16 completionPerc = RogueQuest_GetDisplayCompletePerc();
+
+    if(completionPerc == 100)
+    {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+extern const struct Song gSongTable[];
+
+u8 Rogue_ModifySoundVolume(struct MusicPlayerInfo *mplayInfo, u8 volume, u16 soundType)
+{
+    // 10 is eqv of 100%
+    u8 audioLevel = 10;
+
+    switch (soundType)
+    {
+    case ROGUE_SOUND_TYPE_CRY:
+        // Don't modify this?
+        break;
+    
+    default:
+        if(mplayInfo == &gMPlayInfo_BGM)
+        {
+            // Fanfares are exempt
+            if(
+                mplayInfo->songHeader == gSongTable[MUS_LEVEL_UP].header ||
+                mplayInfo->songHeader == gSongTable[MUS_OBTAIN_ITEM].header ||
+                mplayInfo->songHeader == gSongTable[MUS_EVOLVED].header ||
+                mplayInfo->songHeader == gSongTable[MUS_OBTAIN_TMHM].header ||
+                mplayInfo->songHeader == gSongTable[MUS_HEAL].header ||
+                mplayInfo->songHeader == gSongTable[MUS_DP_HEAL].header ||
+                mplayInfo->songHeader == gSongTable[MUS_OBTAIN_BADGE].header ||
+                mplayInfo->songHeader == gSongTable[MUS_MOVE_DELETED].header ||
+                mplayInfo->songHeader == gSongTable[MUS_OBTAIN_BERRY].header ||
+                mplayInfo->songHeader == gSongTable[MUS_AWAKEN_LEGEND].header ||
+                mplayInfo->songHeader == gSongTable[MUS_SLOTS_JACKPOT].header ||
+                mplayInfo->songHeader == gSongTable[MUS_SLOTS_WIN].header ||
+                mplayInfo->songHeader == gSongTable[MUS_TOO_BAD].header ||
+                mplayInfo->songHeader == gSongTable[MUS_RG_POKE_FLUTE].header ||
+                mplayInfo->songHeader == gSongTable[MUS_RG_OBTAIN_KEY_ITEM].header ||
+                mplayInfo->songHeader == gSongTable[MUS_RG_DEX_RATING].header ||
+                mplayInfo->songHeader == gSongTable[MUS_OBTAIN_B_POINTS].header ||
+                mplayInfo->songHeader == gSongTable[MUS_OBTAIN_SYMBOL].header ||
+                mplayInfo->songHeader == gSongTable[MUS_REGISTER_MATCH_CALL].header ||
+                mplayInfo->songHeader == gSongTable[MUS_HG_LEVEL_UP].header ||
+                mplayInfo->songHeader == gSongTable[MUS_HG_EVOLVED].header ||
+                mplayInfo->songHeader == gSongTable[MUS_DP_LEVEL_UP].header ||
+                mplayInfo->songHeader == gSongTable[MUS_DP_EVOLVED].header
+            )
+            {
+                // do nothing
+            }
+            else
+            {
+                audioLevel = gSaveBlock2Ptr->optionsSoundChannelBGM;
+            }
+        }
+        else 
+        {
+            if(
+                mplayInfo->songHeader == gSongTable[SE_SELECT].header ||
+                mplayInfo->songHeader == gSongTable[SE_DEX_SCROLL].header ||
+                mplayInfo->songHeader == gSongTable[SE_PIN].header ||
+                mplayInfo->songHeader == gSongTable[SE_WIN_OPEN].header ||
+                mplayInfo->songHeader == gSongTable[SE_BALL].header
+            )
+            {
+                // UI sound effects
+                audioLevel = gSaveBlock2Ptr->optionsSoundChannelSE;
+            }
+            else if(gMain.inBattle)
+            {
+                // Assume all sounds are battle effects
+                audioLevel = gSaveBlock2Ptr->optionsSoundChannelBattleSE;
+            }
+        }
+        break;
+    }
+
+    if(audioLevel != 10)
+    {
+        return (volume * audioLevel) / 10;
+    }
+
+    return volume;
+}
+
+static u16 ModifyBattleSongByMap(u16 songNum, u32 mapFlags)
+{
+    switch (songNum)
+    {
+    case MUS_VS_WILD:
+        if(mapFlags & ROUTE_FLAG_KANTO)
+            return MUS_RG_VS_WILD;
+
+        else if(mapFlags & ROUTE_FLAG_JOHTO)
+            return MUS_HG_VS_WILD;
+
+        else if(mapFlags & ROUTE_FLAG_SINNOH)
+            return MUS_DP_VS_WILD;
+        break;
+
+    case MUS_VICTORY_WILD:
+        if(mapFlags & ROUTE_FLAG_KANTO)
+            return MUS_RG_VICTORY_WILD;
+
+        else if(mapFlags & ROUTE_FLAG_JOHTO)
+            return MUS_HG_VICTORY_WILD;
+
+        else if(mapFlags & ROUTE_FLAG_SINNOH)
+            return MUS_DP_VICTORY_WILD;
+        break;
+
+    case MUS_VS_TRAINER:
+        if(mapFlags & ROUTE_FLAG_KANTO)
+            return MUS_RG_VS_TRAINER;
+
+        else if(mapFlags & ROUTE_FLAG_JOHTO)
+            return MUS_HG_VS_TRAINER;
+
+        else if(mapFlags & ROUTE_FLAG_SINNOH)
+            return MUS_DP_VS_TRAINER;
+        break;
+
+    case MUS_VICTORY_TRAINER:
+        if(mapFlags & ROUTE_FLAG_KANTO)
+            return MUS_RG_VICTORY_TRAINER;
+
+        else if(mapFlags & ROUTE_FLAG_JOHTO)
+            return MUS_HG_VICTORY_TRAINER;
+
+        else if(mapFlags & ROUTE_FLAG_SINNOH)
+            return MUS_DP_VICTORY_TRAINER;
+        break;
+    }
+
+    return songNum;
+}
+
+u16 Rogue_ModifyPlayBGM(u16 songNum)
+{
+    if(Rogue_InWildSafari() || Rogue_IsCatchingContestActive())
+    {
+        songNum = ModifyBattleSongByMap(songNum, ROUTE_FLAG_KANTO);
+    }
+
+    if(Rogue_IsRunActive())
+    {
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE)
+        {
+            u32 mapFlags = gRogueRouteTable.routes[gRogueRun.currentRouteIndex].mapFlags;
+            songNum = ModifyBattleSongByMap(songNum, mapFlags);
+        }
+    }
+    else
+    {
+        if(VarGet(VAR_ROGUE_INTRO_STATE) == ROGUE_INTRO_STATE_LEAVE_LAB || VarGet(VAR_ROGUE_INTRO_STATE) == ROGUE_INTRO_STATE_CATCH_MON)
+        {
+            switch (songNum)
+            {
+            case MUS_LITTLEROOT:
+            case MUS_HG_ELM_LAB:
+                songNum = MUS_HELP;
+                break;
+            }
+        }
+
+        if(VarGet(VAR_ROGUE_SPECIAL_MODE) == ROGUE_SPECIAL_MODE_DECORATING)
+        {
+            switch (songNum)
+            {
+            case MUS_LITTLEROOT:
+                songNum = MUS_DP_UNDERGROUND;
+                break;
+            }
+        }
+
+        switch (songNum)
+        {
+        case MUS_LITTLEROOT:
+            switch(RogueToD_GetSeason())
+            {
+                case SEASON_SPRING:
+                    songNum = MUS_HG_NEW_BARK;
+                    break;
+                case SEASON_SUMMER:
+                    songNum = MUS_DP_SANDGEM_DAY;
+                    break;
+                case SEASON_AUTUMN:
+                    songNum = MUS_DP_FLOAROMA_DAY;
+                    break;
+                case SEASON_WINTER:
+                    songNum = MUS_DP_SNOWPOINT_DAY;
+                    break;
+            }
+            break;
+        }
+    }
+
+    switch (songNum)
+    {
+    //case MUS_EVOLUTION:
+    //    songNum = MUS_HG_EVOLUTION;
+    //    break;
+    }
+
+    return songNum;
+}
+
+u16 Rogue_ModifyPlaySE(u16 songNum)
+{
+    return songNum;
+}
+
+u16 Rogue_ModifyPlayFanfare(u16 songNum)
+{
+    switch (songNum)
+    {
+    case MUS_HEAL:
+        return MUS_DP_HEAL;
+
+    case MUS_LEVEL_UP:
+        return MUS_HG_LEVEL_UP;
+    }
+
+    return songNum;
+}
+
 void Rogue_ModifyExpGained(struct Pokemon *mon, s32* expGain)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
+
+    if(!Rogue_EnableExpGain())
+    {
+        *expGain = 0;
+        return;
+    }
     
     if(Rogue_IsRunActive() && species != SPECIES_NONE)
     {
-        u8 targetLevel = CalculatePlayerLevel();
-        u8 maxLevel = CalculateBossLevel();
+        u8 targetLevel = Rogue_CalculatePlayerMonLvl();
+        u8 maxLevel = Rogue_CalculateBossMonLvl();
         u8 currentLevel = GetMonData(mon, MON_DATA_LEVEL);
 
         if(currentLevel != MAX_LEVEL)
         {
-            u8 growthRate = gBaseStats[species].growthRate; // Was using GROWTH_FAST?
+            u8 growthRate = gRogueSpeciesInfo[species].growthRate; // Was using GROWTH_FAST?
             u32 currLvlExp;
             u32 nextLvlExp;
             u32 lvlExp;
@@ -355,7 +858,7 @@ void Rogue_ModifyExpGained(struct Pokemon *mon, s32* expGain)
             }
             else
             {
-                if(FlagGet(FLAG_ROGUE_CAN_OVERLVL))
+                if(Rogue_GetConfigToggle(CONFIG_TOGGLE_OVER_LVL))
                 {
                     desiredExpPerc = 34;
                 }
@@ -428,19 +931,38 @@ void Rogue_ModifyEVGain(int* multiplier)
     *multiplier = 0;
 }
 
-void Rogue_ModifyCatchRate(u16* catchRate, u16* ballMultiplier)
+void Rogue_ModifyCatchRate(u16 species, u16* catchRate, u16* ballMultiplier)
 { 
-    if(Rogue_IsRunActive())
+    if(GetSafariZoneFlag() || Rogue_UseSafariBattle() || RogueDebug_GetConfigToggle(DEBUG_TOGGLE_INSTANT_CAPTURE))
     {
-#ifdef ROGUE_DEBUG
         *ballMultiplier = 12345; // Masterball equiv
-#else
-        u8 difficulty = gRogueRun.currentDifficulty;
-        
-        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY)
+    }
+    else if(Rogue_IsRunActive())
+    {
+        u16 startMultiplier = *ballMultiplier;
+        u8 difficulty = Rogue_GetCurrentDifficulty();
+        u8 wildEncounterIndex = GetWildEncounterIndexFor(species);
+        u8 speciesCatchCount = 0;
+
+        if(wildEncounterIndex != WILD_ENCOUNTER_TOTAL_CAPACITY)
+            speciesCatchCount = gRogueRun.wildEncounters.catchCounts[wildEncounterIndex];
+
+        if(gBattleTypeFlags & BATTLE_TYPE_ROAMER)
         {
-            // Want to make legendaries hard to catch than other mons in the area
-            difficulty += 1;
+            // Roamers hard to make early captures possible but not impossible
+            difficulty = ROGUE_GYM_MID_DIFFICULTY;
+
+            // If you've have a lot of encounters with the roamer, drop the difficulty
+            if(gRogueRun.wildEncounters.roamer.encounerCount >= 4)
+                difficulty = ROGUE_GYM_MID_DIFFICULTY - 1;
+            else if(gRogueRun.wildEncounters.roamer.encounerCount >= 6)
+                difficulty = ROGUE_GYM_MID_DIFFICULTY - 2;
+
+#ifdef ROGUE_EXPANSION
+            // Quick ball is specifically nerfed for roamers
+            if(gLastUsedItem == ITEM_QUICK_BALL)
+                difficulty += 2;
+#endif
         }
 
         if(difficulty <= 1) // First 2 badges
@@ -451,15 +973,11 @@ void Rogue_ModifyCatchRate(u16* catchRate, u16* ballMultiplier)
         {
             *ballMultiplier = *ballMultiplier * 4;
         }
-        else if(difficulty <= 3)
+        else if(difficulty <= ROGUE_GYM_MID_DIFFICULTY - 1)
         {
             *ballMultiplier = *ballMultiplier * 3;
         }
-        else if(difficulty <= 4)
-        {
-            *ballMultiplier = *ballMultiplier * 2;
-        }
-        else if(difficulty <= 7)
+        else if(difficulty <= ROGUE_ELITE_START_DIFFICULTY - 1)
         {
             // Minimum of 2x multiplier whilst doing gyms?
             *ballMultiplier = *ballMultiplier * 2;
@@ -467,6 +985,18 @@ void Rogue_ModifyCatchRate(u16* catchRate, u16* ballMultiplier)
         else
         {
             // Elite 4 back to normal catch rates
+        }
+
+        // Modify the catch rate based on how many times we've caught this mon
+        if(speciesCatchCount > 2)
+        {
+            // Already caught a few, so use the base multiplier
+            *ballMultiplier = startMultiplier;
+        }
+        else if(speciesCatchCount > 4)
+        {
+            // Now we want to discourage catching more mons
+            *ballMultiplier = max(1, startMultiplier / 2);
         }
 
         // Apply charms
@@ -500,16 +1030,54 @@ void Rogue_ModifyCatchRate(u16* catchRate, u16* ballMultiplier)
             if(perc != 100)
                 *ballMultiplier = ((u32)*ballMultiplier * perc) / 100;
         }
-#endif
 
-        // Equiv to Snorlax
-        if(*catchRate < 25)
-            *catchRate = 25;
+        // After we've caught a few remove the catch rate buff
+        if(speciesCatchCount <= 3)
+        {
+            // Equiv to Snorlax
+            if(*catchRate < 25)
+                *catchRate = 25;
+        }
     }
-    else if(GetSafariZoneFlag())
-    {
-        *ballMultiplier = 12345; // Masterball equiv
-    }
+}
+
+static void ModifyExistingMonToCustomMon(u32 customMonId, struct Pokemon* mon)
+{
+    u32 species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 level = GetMonData(mon, MON_DATA_LEVEL);
+    u32 hpIV = GetMonData(mon, MON_DATA_HP_IV);
+    u32 atkIV = GetMonData(mon, MON_DATA_ATK_IV);
+    u32 defIV = GetMonData(mon, MON_DATA_DEF_IV);
+    u32 speedIV = GetMonData(mon, MON_DATA_SPEED_IV);
+    u32 spAtkIV = GetMonData(mon, MON_DATA_SPATK_IV);
+    u32 spDefIV = GetMonData(mon, MON_DATA_SPDEF_IV);
+    u32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+    u32 isGenderFlag = GetMonData(mon, MON_DATA_GENDER_FLAG);
+    u32 metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
+    u32 metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
+    u8 text[POKEMON_NAME_LENGTH + 1];
+    bool8 hasCustomNickname = FALSE;
+
+    GetMonData(mon, MON_DATA_NICKNAME, text);
+
+    if(StringCompareN(text, RoguePokedex_GetSpeciesName(species), POKEMON_NAME_LENGTH) != 0)
+        hasCustomNickname = TRUE;
+    
+    RogueGift_CreateMon(customMonId, mon, species, level, 0);
+    
+    SetMonData(mon, MON_DATA_HP_IV, &hpIV);
+    SetMonData(mon, MON_DATA_ATK_IV, &atkIV);
+    SetMonData(mon, MON_DATA_DEF_IV, &defIV);
+    SetMonData(mon, MON_DATA_SPEED_IV, &speedIV);
+    SetMonData(mon, MON_DATA_SPATK_IV, &spAtkIV);
+    SetMonData(mon, MON_DATA_SPDEF_IV, &spDefIV);
+    SetMonData(mon, MON_DATA_IS_SHINY, &isShiny);
+    SetMonData(mon, MON_DATA_GENDER_FLAG, &isGenderFlag);
+    SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
+    SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
+
+    if(hasCustomNickname)
+        SetMonData(mon, MON_DATA_NICKNAME, text);
 }
 
 void Rogue_ModifyCaughtMon(struct Pokemon *mon)
@@ -520,21 +1088,18 @@ void Rogue_ModifyCaughtMon(struct Pokemon *mon)
         u16 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
         u32 statusAilment = 0; // STATUS1_NONE
 
+        if(gRogueLocal.wildBattleCustomMonId != 0)
+        {
+            ModifyExistingMonToCustomMon(gRogueLocal.wildBattleCustomMonId, mon);
+            RogueGift_RemoveDynamicCustomMon(gRogueLocal.wildBattleCustomMonId);
+            gRogueLocal.wildBattleCustomMonId = 0;
+        }
+
         hp = max(maxHp / 2, hp);
 
         // Heal up to 1/2 health and remove status effect
         SetMonData(mon, MON_DATA_HP, &hp);
         SetMonData(mon, MON_DATA_STATUS, &statusAilment);
-
-        if(IsMonShiny(mon))
-        {
-            EnsureSafariShinyBufferIsValid();
-            gRogueGlobalData.safariShinyBuffer[gRogueGlobalData.safairShinyBufferHead] = GetMonData(mon, MON_DATA_SPECIES);
-            gRogueGlobalData.safairShinyBufferHead = (gRogueGlobalData.safairShinyBufferHead + 1) % ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer);
-
-            // Only store most recent personality, as u32s are costly and this is the easiest way to ensure shinies
-            gRogueGlobalData.safariShinyPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
-        }
 
         // Apply charms to IVs
         {
@@ -575,130 +1140,283 @@ void Rogue_ModifyCaughtMon(struct Pokemon *mon)
                 SetMonData(mon, MON_DATA_HP_IV + i, &value);
             }
         }
-    }
-}
-
-#define PLAYER_STYLE(prefix, x, y) if(gSaveBlock2Ptr->playerStyle0 == x && gSaveBlock2Ptr->playerStyle1 == y) return prefix ## _ ## x ## _ ## y
-
-const u8* Rogue_ModifyPallete8(const u8* input)
-{
-    // Unused?
-
-    //if(input == &gTrainerBackPic_Brendan[0])
-    //{
-    //    return gTrainerBackPic_RubySapphireBrendan;
-    //}
-
-    return input;
-}
-
-const u16* Rogue_ModifyPallete16(const u16* input)
-{
-    u8 skinStyle = gSaveBlock2Ptr->playerStyle0;
-
-    if(input == &gObjectEventPal_Brendan_0_0[0])
-    {
-        #define PALETTE_FUNC(x, y) PLAYER_STYLE(gObjectEventPal_Brendan, x, y);
-        FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        #undef PALETTE_FUNC
-    }
-
-    if(input == &gObjectEventPal_May_0_0[0])
-    {
-        #define PALETTE_FUNC(x, y) PLAYER_STYLE(gObjectEventPal_May, x, y);
-        FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        #undef PALETTE_FUNC
-    }
-
-    // Shared palettes between red and leaf
-    if(input == &gObjectEventPal_Red_0_0[0])
-    {
-        #define PALETTE_FUNC(x, y) PLAYER_STYLE(gObjectEventPal_Red, x, y);
-        FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        #undef PALETTE_FUNC
-    }
-
-    // Custom palette for Champion Red (Always have default clothes but matching apperance)
-    if(input == &gObjectEventPal_Johto_NPC_Red[0])
-    {
-        if(gSaveBlock2Ptr->playerStyle0 == 0) return gObjectEventPal_Red_0_0;
-        if(gSaveBlock2Ptr->playerStyle0 == 1) return gObjectEventPal_Red_1_0;
-        if(gSaveBlock2Ptr->playerStyle0 == 2) return gObjectEventPal_Red_2_0;
-        if(gSaveBlock2Ptr->playerStyle0 == 3) return gObjectEventPal_Red_3_0;
-        //#define PALETTE_FUNC(x, y) PLAYER_STYLE(gObjectEventPal_Red, x, 0);
-        //FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        //#undef PALETTE_FUNC
-    }
-
-    return input;
-}
-
-const u32* Rogue_ModifyPallete32(const u32* input)
-{
-    u8 skinStyle = gSaveBlock2Ptr->playerStyle0;
-
-    if(input == &gTrainerPalette_Brendan_0_0[0])
-    {
-        #define PALETTE_FUNC(x, y) PLAYER_STYLE(gTrainerPalette_Brendan, x, y);
-        FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        #undef PALETTE_FUNC
-    }
-
-    // Must swap for compressed version
-    //if(input == &gTrainerFrontPic_Brendan[0])
-    //{
-    //    return gTrainerFrontPic_RubySapphireBrendan;
-    //}
-
-
-    if(input == &gTrainerPalette_May_0_0[0])
-    {
-        #define PALETTE_FUNC(x, y) PLAYER_STYLE(gTrainerPalette_May, x, y);
-        FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        #undef PALETTE_FUNC
-    }
-
-    if(input == &gTrainerPalette_Red_Front_0_0[0])
-    {
-        #define PALETTE_FUNC(x, y) PLAYER_STYLE(gTrainerPalette_Red_Front, x, y);
-        FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        #undef PALETTE_FUNC
-    }
     
-    // Custom palette for Champion Red (Always have default clothes but matching apperance)
-    if(input == &gTrainerPalette_ChampionRed[0])
+        // Increment catch counter for in route mons
+        {
+            u16 species = GetMonData(mon, MON_DATA_SPECIES);
+            u8 index = GetWildEncounterIndexFor(species);
+
+            if(index != WILD_ENCOUNTER_TOTAL_CAPACITY && gRogueRun.wildEncounters.catchCounts[index] != 255)
+            {
+                ++gRogueRun.wildEncounters.catchCounts[index];
+            }
+        }
+
+        if(IsCurseActive(EFFECT_SNAG_TRAINER_MON) && FlagGet(FLAG_ROGUE_IN_SNAG_BATTLE))
+        {
+            mon->rogueExtraData.isSafariIllegal = TRUE;
+            SetMonData(mon, MON_DATA_OT_NAME, Rogue_GetTrainerName(gTrainerBattleOpponent_A));
+        }
+
+        // Make sure we log if we end up replacing a fainted mon
+        CheckAndNotifyForFaintedMons();
+    }
+}
+
+void Rogue_OnAcceptCaughtMon(struct Pokemon *mon)
+{
+    if(Rogue_IsRunActive())
     {
-        if(gSaveBlock2Ptr->playerStyle0 == 0) return gTrainerPalette_Red_Front_0_0;
-        if(gSaveBlock2Ptr->playerStyle0 == 1) return gTrainerPalette_Red_Front_1_0;
-        if(gSaveBlock2Ptr->playerStyle0 == 2) return gTrainerPalette_Red_Front_2_0;
-        if(gSaveBlock2Ptr->playerStyle0 == 3) return gTrainerPalette_Red_Front_3_0;
-        //#define PALETTE_FUNC(x, y) PLAYER_STYLE(gTrainerPalette_Red_Front, x, 0);
-        //FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        //#undef PALETTE_FUNC
+        u16 species = GetMonData(mon, MON_DATA_SPECIES);
+
+        VarSet(VAR_ROGUE_TOTAL_RUN_CATCHES, VarGet(VAR_ROGUE_TOTAL_RUN_CATCHES) + 1);
+
+        // Quest notifies
+        if(RoguePokedex_IsSpeciesLegendary(species))
+            RogueQuest_OnTrigger(QUEST_TRIGGER_MON_LEGEND_CAUGHT);
+
+        if(IsMonShiny(mon))
+            RogueQuest_OnTrigger(QUEST_TRIGGER_MON_SHINY_CAUGHT);
+        else
+            RogueQuest_OnTrigger(QUEST_TRIGGER_MON_NON_SHINY_CAUGHT);
+    }
+}
+
+void Rogue_ModifyEggMon(struct Pokemon *mon)
+{
+    u32 eggCyclesLeft = 0;
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &eggCyclesLeft);
+
+    Rogue_PushPopup_AddPokemon(SPECIES_EGG, FALSE, FALSE);
+}
+
+void Rogue_DiscardedCaughtMon(struct Pokemon *mon)
+{
+    if(Rogue_IsRunActive())
+    {
+        // Don't track discarded mons for catching contest unless they're shiny
+        if(Rogue_IsCatchingContestActive() && !IsMonShiny(mon))
+            return;
+
+        RogueSafari_PushLowPriorityMon(mon);
+    }
+}
+
+u16 Rogue_ModifyItemPickupAmount(u16 itemId, u16 amount)
+{
+    if(Rogue_IsRunActive())
+    {
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE || gRogueAdvPath.currentRoomType == ADVPATH_ROOM_TEAM_HIDEOUT)
+        {
+            u8 pocket = ItemId_GetPocket(itemId);
+            amount = 1;
+
+            switch (pocket)
+            {
+            case POCKET_BERRIES:
+                if(RogueHub_HasUpgrade(HUB_UPGRADE_BERRY_FIELD_HIGHER_YEILD2))
+                    amount = 9;
+                else if(RogueHub_HasUpgrade(HUB_UPGRADE_BERRY_FIELD_HIGHER_YEILD1))
+                    amount = 7;
+                else if(RogueHub_HasUpgrade(HUB_UPGRADE_BERRY_FIELD_HIGHER_YEILD0))
+                    amount = 5;
+                else
+                    amount = 3;
+                break;
+
+            case POCKET_ITEMS:
+            case POCKET_MEDICINE:
+                amount = 3;
+                break;
+
+            case POCKET_TM_HM:
+                //if(itemId >= ITEM_TR01 && itemId <= ITEM_TR50)
+                //    amount = 3;
+                //else
+                //    amount = 1;
+                amount = 1;
+                break;
+
+            case POCKET_POKE_BALLS:
+                amount = 3;
+                break;
+            }
+
+            switch (itemId)
+            {
+            case ITEM_MASTER_BALL:
+            case ITEM_ESCAPE_ROPE:
+                amount = 1;
+                break;
+
+            case ITEM_RARE_CANDY:
+                amount = 10;
+                break;
+
+#ifdef ROGUE_EXPANSION
+            case ITEM_ABILITY_CAPSULE:
+            case ITEM_ABILITY_PATCH:
+                amount = 1;
+                break;
+#endif
+            }
+
+            if(Rogue_IsEvolutionItem(itemId) || Rogue_IsFormItem(itemId))
+                amount = 1;
+
+#ifdef ROGUE_EXPANSION
+            if(itemId >= ITEM_LONELY_MINT && itemId <= ITEM_SERIOUS_MINT)
+                amount = 1;
+
+            if(itemId >= ITEM_RED_NECTAR && itemId <= ITEM_PURPLE_NECTAR)
+                amount = 1;
+
+            if((itemId >= ITEM_BUG_TERA_SHARD && itemId <= ITEM_WATER_TERA_SHARD) || itemId == ITEM_STELLAR_TERA_SHARD)
+                amount = 1;
+#endif
+        }
+    }
+    else
+    {
+        u8 pocket = ItemId_GetPocket(itemId);
+
+        switch (pocket)
+        {
+        case POCKET_BERRIES:
+            if(RogueHub_HasUpgrade(HUB_UPGRADE_BERRY_FIELD_HIGHER_YEILD2))
+                amount = 9;
+            else if(RogueHub_HasUpgrade(HUB_UPGRADE_BERRY_FIELD_HIGHER_YEILD1))
+                amount = 7;
+            else if(RogueHub_HasUpgrade(HUB_UPGRADE_BERRY_FIELD_HIGHER_YEILD0))
+                amount = 5;
+            else
+                amount = 3;
+            break;
+        }
     }
 
-    // Palette is shared with red
-    //if(input == &gTrainerPalette_Leaf[0])
-    //{
-    //}
+    return amount;
+}
 
-    if(input == &gTrainerPalette_Red_Back_0_0[0])
+#define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
+
+u8 Rogue_ModifyGenderRatio(u8 genderRatio)
+{
+    if(genderRatio == MON_MALE || genderRatio == MON_FEMALE || genderRatio == MON_GENDERLESS)
     {
-        #define PALETTE_FUNC(x, y) PLAYER_STYLE(gTrainerPalette_Red_Back, x, y);
-        FOREACH_VISUAL_PRESETS(PALETTE_FUNC)
-        #undef PALETTE_FUNC
+        return genderRatio;
     }
 
-    // Must swap for compressed version
-    //if(input == &gTrainerFrontPic_May[0])
-    //{
-    //    return gTrainerFrontPic_RubySapphireMay;
-    //}
+    return PERCENT_FEMALE(50.0);
+}
+
+#undef PERCENT_FEMALE
+
+const void* Rogue_ModifyPaletteLoad(const void* input)
+{
+    if(input == &gObjectEventPal_PlayerPlaceholder[0])
+    {
+        return RoguePlayer_GetOverworldPalette();
+    }
+
+    if(input == &gObjectEventPal_NetPlayerPlaceholder[0])
+    {
+        return RogueNetPlayer_GetOverworldPalette();
+    }
+
+    //if(input == &gObjectEventPal_FollowMon0[0])
+    //    return FollowMon_GetGraphicsForPalSlot(0);
+//
+    //if(input == &gObjectEventPal_FollowMon1[0])
+    //    return FollowMon_GetGraphicsForPalSlot(1);
+//
+    //if(input == &gObjectEventPal_FollowMon2[0])
+    //    return FollowMon_GetGraphicsForPalSlot(2);
+//
+    //if(input == &gObjectEventPal_FollowMon3[0])
+    //    return FollowMon_GetGraphicsForPalSlot(3);
+//
+    //if(input == &gObjectEventPal_FollowMon4[0])
+    //    return FollowMon_GetGraphicsForPalSlot(4);
 
     return input;
 }
 
-#undef PLAYER_STYLE
+bool8 Rogue_ModifyObjectPaletteSlot(u16 graphicsId, u8* palSlot)
+{
+    if(graphicsId >= OBJ_EVENT_GFX_NET_PLAYER_FIRST && graphicsId <= OBJ_EVENT_GFX_NET_PLAYER_LAST)
+    {
+        *palSlot = 8;
+        PatchObjectPalette(0x119C, *palSlot); // OBJ_EVENT_PAL_TAG_NET_PLAYER - todo should def pull this out correctly
+        return TRUE;
+    }
+
+    if(graphicsId == OBJ_EVENT_GFX_FOLLOW_MON_PARTNER)
+    {
+        *palSlot = 1;
+        LoadPalette(FollowMon_GetGraphicsForPalSlot(0), OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+        Rogue_ModifyOverworldPalette(OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+        return TRUE;
+    }
+
+    if(graphicsId >= OBJ_EVENT_GFX_FOLLOW_MON_0 && graphicsId <= OBJ_EVENT_GFX_FOLLOW_MON_3)
+    {
+        *palSlot = 6 + (graphicsId - OBJ_EVENT_GFX_FOLLOW_MON_0);
+        LoadPalette(FollowMon_GetGraphicsForPalSlot(1 + graphicsId - OBJ_EVENT_GFX_FOLLOW_MON_0), OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+        Rogue_ModifyOverworldPalette(OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+        return TRUE;
+    }
+
+    if(graphicsId == OBJ_EVENT_GFX_FOLLOW_MON_4)
+    {
+        *palSlot = 10;
+        LoadPalette(FollowMon_GetGraphicsForPalSlot(1 + graphicsId - OBJ_EVENT_GFX_FOLLOW_MON_0), OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+        Rogue_ModifyOverworldPalette(OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+        return TRUE;
+    }
+
+    if(graphicsId == OBJ_EVENT_GFX_FOLLOW_MON_5)
+    {
+        *palSlot = 1;
+        LoadPalette(FollowMon_GetGraphicsForPalSlot(1 + graphicsId - OBJ_EVENT_GFX_FOLLOW_MON_0), OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+        Rogue_ModifyOverworldPalette(OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 Rogue_ModifyPaletteDecompress(const u32* input, void* buffer)
+{
+    const u16* overrideBuffer = NULL;
+
+    if(input == gTrainerPalette_PlayerFrontPlaceholder)
+    {
+        overrideBuffer = RoguePlayer_GetTrainerFrontPalette();
+    }
+
+    if(input == gTrainerPalette_PlayerBackPlaceholder)
+    {
+        overrideBuffer = RoguePlayer_GetTrainerBackPalette();
+    }
+
+    if(overrideBuffer != NULL)
+    {
+        // Copy over from override buffer into actual output (only really needed if buffer isn't gDecompressBuffer)
+        if(overrideBuffer != buffer)
+        {
+            u8 i;
+            u16* writeBuffer = (u16*)buffer;
+
+            for(i = 0; i < 16; ++i) // assume 16 palette slots (We currently don't have any use cases outside of this anyway)
+                writeBuffer[i] = overrideBuffer[i];
+        }
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
 
 void Rogue_ModifyOverworldPalette(u16 offset, u16 count)
 {
@@ -710,16 +1428,154 @@ void Rogue_ModifyBattlePalette(u16 offset, u16 count)
     RogueToD_ModifyBattlePalette(offset, count);
 }
 
-u16 Rogue_ModifySoundVolume(struct MusicPlayerInfo *mplayInfo, u16 volume)
+extern const u8 gPlaceholder_Gym_PreBattleOpenning[];
+extern const u8 gPlaceholder_Gym_PreBattleTaunt[];
+extern const u8 gPlaceholder_Gym_PostBattleTaunt[];
+extern const u8 gPlaceholder_Gym_PostBattleCloser[];
+
+extern const u8 gPlaceholder_Trainer_PreBattleOpenning[];
+extern const u8 gPlaceholder_Trainer_PreBattleTaunt[];
+extern const u8 gPlaceholder_Trainer_PostBattleTaunt[];
+extern const u8 gPlaceholder_Trainer_PostBattleCloser[];
+
+const u8* Rogue_ModifyFieldMessage(const u8* str)
 {
-    if(mplayInfo == &gMPlayInfo_BGM)
+    const u8* overrideStr = NULL;
+
+    if(Rogue_IsRunActive())
     {
-        return (volume * gSaveBlock2Ptr->optionsSoundChannelBGM) / 10;
+        if(Rogue_IsVictoryLapActive())
+        {
+            u16 trainerNum = VarGet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA);
+
+            if(str == gPlaceholder_Gym_PreBattleOpenning)
+                overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_PRE_BATTLE_OPENNING);
+            else if(str == gPlaceholder_Gym_PreBattleTaunt)
+                overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_PRE_BATTLE_TAUNT);
+            else if(str == gPlaceholder_Gym_PostBattleTaunt)
+                overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_POST_BATTLE_TAUNT);
+            else if(str == gPlaceholder_Gym_PostBattleCloser)
+                overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_POST_BATTLE_CLOSER);
+        }
+        else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
+        {
+            u16 trainerNum;
+
+            // We don't technically have a new room so force the trainer num here
+            if(Rogue_UseFinalQuestEffects() && Rogue_GetCurrentDifficulty() >= ROGUE_FINAL_CHAMP_DIFFICULTY)
+                trainerNum = gRogueRun.bossTrainerNums[ROGUE_FINAL_CHAMP_DIFFICULTY];
+            else
+                trainerNum = gRogueAdvPath.currentRoomParams.perType.boss.trainerNum;
+
+            if(str == gPlaceholder_Gym_PreBattleOpenning)
+                overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_PRE_BATTLE_OPENNING);
+            else if(str == gPlaceholder_Gym_PreBattleTaunt)
+                overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_PRE_BATTLE_TAUNT);
+            else if(str == gPlaceholder_Gym_PostBattleTaunt)
+                overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_POST_BATTLE_TAUNT);
+            else if(str == gPlaceholder_Gym_PostBattleCloser)
+                overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_POST_BATTLE_CLOSER);
+        }
+
+        // Overworld trainer messages
+        if(str == gPlaceholder_Trainer_PreBattleOpenning)
+        {
+            u16 trainerNum = Rogue_GetTrainerNumFromLastInteracted();
+            overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_PRE_BATTLE_OPENNING);
+        }
+        else if(str == gPlaceholder_Trainer_PreBattleTaunt)
+        {
+            u16 trainerNum = Rogue_GetTrainerNumFromLastInteracted();
+            overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_PRE_BATTLE_TAUNT);
+        }
+        else if(str == gPlaceholder_Trainer_PostBattleTaunt)
+        {
+            u16 trainerNum = Rogue_GetTrainerNumFromLastInteracted();
+            overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_POST_BATTLE_TAUNT);
+        }
+        else if(str == gPlaceholder_Trainer_PostBattleCloser)
+        {
+            u16 trainerNum = Rogue_GetTrainerNumFromLastInteracted();
+            overrideStr = Rogue_GetTrainerString(trainerNum, TRAINER_STRING_POST_BATTLE_CLOSER);
+        }
     }
-    else // gMPlayInfo_SE1 -> gMPlayInfo_SE3
+
+    return overrideStr != NULL ? overrideStr : str;
+}
+
+extern const u8* const gBattleStringsTable[];
+extern const u8 sText_Trainer1SentOutPkmn2[];
+
+static const u8 sText_FinalQuestFinalMonSendOut[] = _("Wahey!\nI'm not through yet!");
+
+const u8* Rogue_ModifyBattleMessage(const u8* str)
+{
+    const u8* overrideStr = NULL;
+
+    if(Rogue_ShouldSkipAssignNicknameYesNoMessage())
     {
-        return (volume * gSaveBlock2Ptr->optionsSoundChannelSE) / 10;
+        // Don't display "Would you like to nickname" msg
+        if(str == gBattleStringsTable[STRINGID_GIVENICKNAMECAPTURED - BATTLESTRINGS_TABLE_START])
+            overrideStr = gText_EmptyString2;
     }
+
+    if(Rogue_IsFinalQuestFinalBoss() && HasFinalQuestBossAppliedSwap())
+    {
+        if(str == sText_Trainer1SentOutPkmn2)
+            overrideStr = sText_FinalQuestFinalMonSendOut;
+    }
+
+    return overrideStr != NULL ? overrideStr : str;
+}
+
+void Rogue_ModifyBattleMon(u8 monId, struct BattlePokemon* battleMon, bool8 isPlayer)
+{
+    // Note monId is a relic and is always 0
+
+    if(isPlayer)
+    {
+        if(IsCurseActive(EFFECT_TORMENT_STATUS))
+            battleMon->status2 |= STATUS2_TORMENT;
+    }
+    else
+    {
+        if(IsCharmActive(EFFECT_TORMENT_STATUS))
+            battleMon->status2 |= STATUS2_TORMENT;
+    }
+}
+
+// Base on Vanilla calcs
+static u32 CalculateBattleWinnings(u16 trainerNum)
+{
+    u32 i = 0;
+    u32 lastMonLevel = 0;
+    u32 moneyReward;
+
+    {
+        struct Trainer trainer;
+
+        Rogue_ModifyTrainer(trainerNum, &trainer);
+
+        // Base calcs of player current level cap
+        lastMonLevel = Rogue_CalculatePlayerMonLvl();
+        
+
+        for (; gTrainerMoneyTable[i].classId != 0xFF; i++)
+        {
+            if (gTrainerMoneyTable[i].classId == trainer.trainerClass)
+                break;
+        }
+
+        // Default multiplier is 4
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+            moneyReward = 6 * lastMonLevel * gTrainerMoneyTable[i].value;
+        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            moneyReward = 6 * lastMonLevel * 2 * gTrainerMoneyTable[i].value;
+        else
+            moneyReward = 6 * lastMonLevel * gTrainerMoneyTable[i].value;
+    }
+
+    return moneyReward;
 }
 
 void Rogue_ModifyBattleWinnings(u16 trainerNum, u32* money)
@@ -727,51 +1583,65 @@ void Rogue_ModifyBattleWinnings(u16 trainerNum, u32* money)
     if(Rogue_IsRunActive())
     {
         // Once we've gotten champion we want to give a bit more money 
-        u8 difficulty = gRogueRun.currentDifficulty;
-        u8 difficultyModifier = GetRoomTypeDifficulty();
+        u8 difficulty = Rogue_GetCurrentDifficulty();
+        u8 difficultyModifier = Rogue_GetEncounterDifficultyModifier();
 
-        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
+        // Increase by 20%
+        *money = (CalculateBattleWinnings(trainerNum) * 120) / 100;
+
+        if(Rogue_IsExpTrainer(trainerNum) || Rogue_IsBattleSimTrainer(trainerNum) || Rogue_IsVictoryLapActive())
         {
-            if(IsBossTrainer(trainerNum))
+            *money = 0;
+            return;
+        }
+
+        switch (gRogueAdvPath.currentRoomType)
+        {
+        case ADVPATH_ROOM_BOSS:
             {
-                u8 difficulty = gRogueRun.currentDifficulty;
-                *money = (difficulty + 1) * 500;
+                u8 difficulty = Rogue_GetCurrentDifficulty();
+                *money = (difficulty + 1) * 1000;
+            }
+            break;
+
+        case ADVPATH_ROOM_TEAM_HIDEOUT:
+            if(Rogue_IsKeyTrainer(trainerNum))
+            {
+                u8 difficulty = Rogue_GetCurrentDifficulty();
+                *money = (difficulty + 1) * 1000;
             }
             else
             {
-                // EXP trainer
-                *money = 0;
+                // Give slightly more money here
+                *money *= 2;
             }
+            break;
         }
-        else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_MINIBOSS)
-        {
-            u8 difficulty = gRogueRun.currentDifficulty;
-            *money = (difficulty + 1) * 1000;
-        }
-        else if(FlagGet(FLAG_ROGUE_HARD_ITEMS))
-        {
-            if(difficulty <= 11)
-            {
-                if(difficultyModifier == 2) // Hard
-                    *money = *money / 2;
-                else
-                    *money = *money / 3;
-            }
-            else
-            {
-                // Kinder but not by much ;)
-                if(difficultyModifier != 2) // !Hard
-                    *money = *money / 2;
-            }
-        }
-        else if(!FlagGet(FLAG_ROGUE_EASY_ITEMS))
-        {
-            if(difficulty <= 11)
-            {
-                if(difficultyModifier != 2) // !Hard
-                    *money = *money / 2;
-            }
-        }
+        
+        //if(FlagGet(FLAG_ROGUE_HARD_ITEMS))
+        //{
+        //    if(difficulty <= 11)
+        //    {
+        //        if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_TOUGH) // Hard
+        //            *money = *money / 2;
+        //        else
+        //            *money = *money / 3;
+        //    }
+        //    else
+        //    {
+        //        // Kinder but not by much ;)
+        //        if(difficultyModifier != ADVPATH_SUBROOM_ROUTE_TOUGH) // !Hard
+        //            *money = *money / 2;
+        //    }
+        //}
+        //else if(!FlagGet(FLAG_ROGUE_EASY_ITEMS))
+        //{
+        //    if(difficulty <= 11)
+        //    {
+        //        if(difficultyModifier != ADVPATH_SUBROOM_ROUTE_TOUGH) // !Hard
+        //            *money = *money / 2;
+        //    }
+        //}
 
         // Snap/Floor to multiple of ten
         if(*money > 100)
@@ -788,27 +1658,48 @@ void Rogue_ModifyBattleWinnings(u16 trainerNum, u32* money)
 
 void Rogue_ModifyBattleWaitTime(u16* waitTime, bool8 awaitingMessage)
 {
-    u8 difficulty = Rogue_IsRunActive() ? gRogueRun.currentDifficulty : 0;
+    u8 difficulty = Rogue_IsRunActive() ? Rogue_GetCurrentDifficulty() : 0;
 
-    if(Rogue_FastBattleAnims())
+    // We won't modify absolute wait flags
+    if(*waitTime & B_WAIT_TIME_ABSOLUTE)
     {
-        *waitTime = awaitingMessage ? 8 : 0;
+        *waitTime &= ~B_WAIT_TIME_ABSOLUTE;
     }
-    else if(difficulty < (ROGUE_MAX_BOSS_COUNT - 1)) // Go at default speed for final fight
+    else
     {
-        
-        if(IsMiniBossTrainer(gTrainerBattleOpponent_A))
-            // Go faster, but not quite gym leader slow
-            *waitTime = *waitTime / 4;
-        else
-            // Still run faster and default game because it's way too slow :(
-            *waitTime = *waitTime / 2;
+        if(Rogue_FastBattleAnims())
+        {
+            *waitTime = awaitingMessage ? 8 : 0;
+        }
+        else if(difficulty < ROGUE_FINAL_CHAMP_DIFFICULTY) // Go at default speed for final fight
+        {
+            if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) != 0 && Rogue_IsKeyTrainer(gTrainerBattleOpponent_A))
+            {
+                // Still run faster and default game because it's way too slow :(
+                if(difficulty < ROGUE_ELITE_START_DIFFICULTY)
+                    *waitTime = *waitTime / 4;
+                else
+                    *waitTime = *waitTime / 2;
+            }
+            else
+                // Go faster, but not quite gym leader slow
+                *waitTime = *waitTime / 6;
+        }
+
+        if(!Rogue_GetBattleAnimsEnabled())
+        {
+            // If we don't have anims on wait message for at least a little bit
+            *waitTime = max(4, *waitTime);
+        }
     }
+
+    // Now apply speed scale
+    //*waitTime = max(1, *waitTime / Rogue_GetBattleSpeedScale(FALSE));
 }
 
 s16 Rogue_ModifyBattleSlideAnim(s16 rate)
 {
-    u8 difficulty = Rogue_IsRunActive() ? gRogueRun.currentDifficulty : 0;
+    u8 difficulty = Rogue_IsRunActive() ? Rogue_GetCurrentDifficulty() : 0;
 
     if(Rogue_FastBattleAnims())
     {
@@ -817,14 +1708,154 @@ s16 Rogue_ModifyBattleSlideAnim(s16 rate)
         else
             return rate * 2 + 1;
     }
-    //else if(difficulty == (ROGUE_MAX_BOSS_COUNT - 1))
-    //{
-    //    // Go at default speed for final fight
-    //    return rate * 2;
-    //}
+    else if(difficulty < ROGUE_FINAL_CHAMP_DIFFICULTY)
+    {
+        // Go at default speed for final fight
+        return rate * 2;
+    }
 
     // Still run faster and default game because it's way too slow :(
     return rate;
+}
+
+bool8 Rogue_UseFastLevelUpAnim()
+{
+    return gSaveBlock2Ptr->optionsTextSpeed != OPTIONS_TEXT_SPEED_SLOW;
+}
+
+const u8* Rogue_ModifyOverworldInteractionScript(struct MapPosition *position, u16 metatileBehavior, u8 direction, u8 const* script)
+{
+    u16 specialState = VarGet(VAR_ROGUE_SPECIAL_MODE);
+
+    if(specialState == ROGUE_SPECIAL_MODE_DECORATING)
+    {
+        script = RogueHub_GetDecoratingScriptFor(gMapHeader.mapLayoutId, position, metatileBehavior, direction, script);
+    }
+
+    return script;
+}
+
+u16 Rogue_ModifyOverworldMapWeather(u16 weather)
+{
+    if(gMapHeader.mapType != MAP_TYPE_INDOOR && gMapHeader.mapType != MAP_TYPE_UNDERGROUND)
+    {
+        if(Rogue_IsRunActive())
+        {
+            switch (gRogueAdvPath.currentRoomType)
+            {
+            case ADVPATH_ROOM_ROUTE:
+                return VarGet(VAR_ROGUE_DESIRED_WEATHER);
+            }
+        }
+        else if(VarGet(VAR_ROGUE_INTRO_STATE) < ROGUE_INTRO_STATE_COMPLETE)
+        {
+            // Don't have any special weather until player has completed tutorial
+            return WEATHER_NONE;
+        }
+        else
+        {
+            u16 weatherState = RogueHub_GetWeatherState();
+
+            switch(RogueToD_GetSeason())
+            {
+                case SEASON_SPRING:
+                {
+                    switch (weatherState % 5)
+                    {
+                    case 0:
+                        return WEATHER_RAIN;
+                    case 1:
+                        return WEATHER_RAIN_THUNDERSTORM;
+                    case 2:
+                        return WEATHER_MISTY_FOG;
+
+                    case 3:
+                    case 4:
+                        return WEATHER_NONE;
+                    }
+                }
+                case SEASON_SUMMER:
+                {
+                    switch (weatherState % 5)
+                    {
+                    case 0:
+                        return WEATHER_RAIN_THUNDERSTORM;
+
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        return WEATHER_NONE;
+                    }
+                }
+                case SEASON_AUTUMN:
+                {
+                    switch (weatherState % 6)
+                    {
+                    case 0:
+                        return WEATHER_RAIN;
+                    case 1:
+                        return WEATHER_RAIN_THUNDERSTORM;
+                    case 2:
+                    case 3:
+                        return WEATHER_LEAVES;
+
+                    case 4:
+                    case 5:
+                        return WEATHER_NONE;
+                    }
+                }
+                case SEASON_WINTER:
+                {
+                    switch (weatherState % 6)
+                    {
+                    case 0:
+                    case 1:
+                    case 2:
+                        return WEATHER_SNOW;
+
+                    case 3:
+                        return WEATHER_SHADE;
+
+                    case 4:
+                    case 5:
+                        return WEATHER_NONE;
+                    }
+                }
+                    return WEATHER_SNOW;
+            }
+        }
+    }
+
+    return weather;
+}
+
+const struct Tileset * Rogue_ModifyOverworldTileset(const struct Tileset * tileset)
+{
+    if(Rogue_IsRunActive())
+    {
+        return tileset;
+    }
+    else
+    {
+        return RogueHub_ModifyOverworldTileset(tileset);
+    }
+}
+
+bool8 Rogue_CanRenameMon(struct Pokemon* mon)
+{
+    u32 customMonId;
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID);
+    
+    if(!IsOtherTrainer(otId))
+        return TRUE;
+
+    customMonId = RogueGift_GetCustomMonId(mon);
+
+    if(customMonId)
+        return RogueGift_CanRenameCustomMon(customMonId);
+
+    return FALSE;
 }
 
 u8 SpeciesToGen(u16 species)
@@ -846,10 +1877,20 @@ u8 SpeciesToGen(u16 species)
         return 7;
     if(species >= SPECIES_GROOKEY && species <= SPECIES_CALYREX)
         return 8;
+    // Hisui is classes as gen8
+    if(species >= SPECIES_WYRDEER && species <= SPECIES_ENAMORUS)
+        return 8;
+
+    if(species >= SPECIES_SPRIGATITO && species <= SPECIES_PECHARUNT)
+        return 9;
 
     if(species >= SPECIES_RATTATA_ALOLAN && species <= SPECIES_MAROWAK_ALOLAN)
         return 7;
     if(species >= SPECIES_MEOWTH_GALARIAN && species <= SPECIES_STUNFISK_GALARIAN)
+        return 8;
+
+    // Hisui is classes as gen8
+    if(species >= SPECIES_GROWLITHE_HISUIAN && species <= SPECIES_DECIDUEYE_HISUIAN)
         return 8;
 
     if(species >= SPECIES_BURMY_SANDY_CLOAK && species <= SPECIES_ARCEUS_FAIRY)
@@ -858,9 +1899,18 @@ u8 SpeciesToGen(u16 species)
     // Just treat megas as gen 1 as they are controlled by a different mechanism
     if(species >= SPECIES_VENUSAUR_MEGA && species <= SPECIES_GROUDON_PRIMAL)
         return 1;
+    if(species >= SPECIES_VENUSAUR_GIGANTAMAX && species <= SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX)
+        return 1;
     
     switch(species)
     {
+        case SPECIES_GIRATINA_ORIGIN:
+            return 4;
+
+        case SPECIES_PALKIA_ORIGIN:
+        case SPECIES_DIALGA_ORIGIN:
+            return 8;
+
         case SPECIES_KYUREM_WHITE:
         case SPECIES_KYUREM_BLACK:
             return 5;
@@ -881,6 +1931,9 @@ u8 SpeciesToGen(u16 species)
         case SPECIES_CALYREX_ICE_RIDER:
         case SPECIES_CALYREX_SHADOW_RIDER:
             return 8;
+
+        case SPECIES_ENAMORUS_THERIAN:
+            return 8;
     }
 
     // Alternate forms
@@ -896,14 +1949,17 @@ u8 SpeciesToGen(u16 species)
     if(species >= SPECIES_LYCANROC_MIDNIGHT && species <= SPECIES_LYCANROC_DUSK)
         return 7;
 
-    if(species >= SPECIES_TOXTRICITY_LOW_KEY && species <= SPECIES_ALCREMIE_RAINBOW_SWIRL)
+    if(species >= SPECIES_TOXTRICITY_LOW_KEY && species <= SPECIES_ALCREMIE_STRAWBERRY_RAINBOW_SWIRL)
+        return 8;
+
+    if(species >= SPECIES_ALCREMIE_BERRY_VANILLA_CREAM && species <= SPECIES_ALCREMIE_RIBBON_RAINBOW_SWIRL)
         return 8;
 #endif
     
     return 0;
 }
 
-u8 ItemToGen(u16 item)
+static u8 ItemToGen(u16 item)
 {
     if(!Rogue_IsRunActive() && FlagGet(FLAG_ROGUE_MET_POKABBIE))
     {
@@ -1030,6 +2086,7 @@ u8 ItemToGen(u16 item)
         case ITEM_ADAMANT_ORB:
         case ITEM_LUSTROUS_ORB:
         case ITEM_GRISEOUS_ORB:
+        case ITEM_GRISEOUS_CORE: // <- Always have griseous core avaliable, so can transform as we did in og game
             return 4;
 
         case ITEM_ROTOM_CATALOG:
@@ -1049,6 +2106,21 @@ u8 ItemToGen(u16 item)
             return 7;
 
         case ITEM_REINS_OF_UNITY:
+            return 8;
+        
+        // Hisui items gen8
+        case ITEM_BLACK_AUGURITE:
+        case ITEM_PEAT_BLOCK:
+        case ITEM_ADAMANT_CRYSTAL:
+        case ITEM_LUSTROUS_GLOBE:
+            return 8;
+
+        // Custom items
+        case ITEM_ALOLA_STONE:
+            return 7;
+        case ITEM_GALAR_STONE:
+            return 8;
+        case ITEM_HISUI_STONE:
             return 8;
     };
 
@@ -1077,31 +2149,371 @@ u8 ItemToGen(u16 item)
     return 1;
 }
 
-bool8 IsGenEnabled(u8 gen)
-{
-#ifdef ROGUE_EXPANSION
-    if(gen >= 1 && gen <= 8)
-#else
-    if(gen >= 1 && gen <= 3)
-#endif
-    {
-        u16 maxGen = VarGet(VAR_ROGUE_ENABLED_GEN_LIMIT);
+extern const u16 gRogueBake_EvoItems_Count;
+extern const u16 gRogueBake_FormItems_Count;
 
-        if(maxGen == 0)
+static void SetEvolutionItemFlag(u16 itemId, bool8 state)
+{
+    u16 elem = Rogue_GetEvolutionItemIndex(itemId);
+    u16 idx = elem / 8;
+    u16 bit = elem % 8;
+    u8 bitMask = 1 << bit;
+    
+    AGB_ASSERT(elem < gRogueBake_EvoItems_Count);
+    AGB_ASSERT(idx < ARRAY_COUNT(gRogueRun.activeEvoItemFlags));
+
+    if(state)
+        gRogueRun.activeEvoItemFlags[idx] |= bitMask;
+    else
+        gRogueRun.activeEvoItemFlags[idx] &= ~bitMask;
+}
+
+static bool8 GetEvolutionItemFlag(u16 itemId)
+{
+    u16 elem = Rogue_GetEvolutionItemIndex(itemId);
+    u16 idx = elem / 8;
+    u16 bit = elem % 8;
+    u8 bitMask = 1 << bit;
+
+    AGB_ASSERT(idx < ARRAY_COUNT(gRogueRun.activeEvoItemFlags));
+
+    return (gRogueRun.activeEvoItemFlags[idx] & bitMask) != 0;
+}
+
+static void SetFormItemFlag(u16 itemId, bool8 state)
+{
+    u16 elem = Rogue_GetFormItemIndex(itemId);
+    u16 idx = elem / 8;
+    u16 bit = elem % 8;
+    u8 bitMask = 1 << bit;
+
+    AGB_ASSERT(elem < gRogueBake_FormItems_Count);
+    AGB_ASSERT(idx < ARRAY_COUNT(gRogueRun.activeFormItemFlags));
+
+    if(state)
+        gRogueRun.activeFormItemFlags[idx] |= bitMask;
+    else
+        gRogueRun.activeFormItemFlags[idx] &= ~bitMask;
+}
+
+static bool8 GetFormItemFlag(u16 itemId)
+{
+    u16 elem = Rogue_GetFormItemIndex(itemId);
+    u16 idx = elem / 8;
+    u16 bit = elem % 8;
+    u8 bitMask = 1 << bit;
+
+    AGB_ASSERT(idx < ARRAY_COUNT(gRogueRun.activeFormItemFlags));
+
+    return (gRogueRun.activeFormItemFlags[idx] & bitMask) != 0;
+}
+
+extern const struct RogueItem gRogueItems[];
+
+bool8 Rogue_IsItemEnabled(u16 itemId)
+{
+    // Handle perma banned entries
+    // (There is no scenario in which we will allow these)
+    {
+        if(itemId >= ITEM_ROGUE_ITEM_FIRST && itemId <= ITEM_ROGUE_ITEM_LAST)
         {
-            // Fallback for broken var
-            return TRUE;
+            if(itemId >= ITEM_TR01 && itemId <= ITEM_TR50)
+            {
+                // do nothing, the ID is never set on these and that's intentional as they copy from a template
+            }
+            // Item isn't enabled in this build config / doesn't have any data associated with this ID
+            else if(gRogueItems[itemId - ITEM_ROGUE_ITEM_FIRST].itemId != itemId)
+                return FALSE;
         }
 
-        return gen <= maxGen;
+        if(itemId >= FIRST_MAIL_INDEX && itemId <= LAST_MAIL_INDEX)
+            return FALSE;
+
+        if(itemId >= ITEM_RED_SCARF && itemId <= ITEM_YELLOW_SCARF)
+            return FALSE;
+
+        if(itemId >= ITEM_RED_SHARD && itemId <= ITEM_GREEN_SHARD)
+            return FALSE;
+
+        if(itemId >= ITEM_BLUE_FLUTE && itemId <= ITEM_WHITE_FLUTE)
+            return FALSE;
+
+#ifdef ROGUE_EXPANSION
+        if(itemId >= ITEM_GROWTH_MULCH && itemId <= ITEM_BLACK_APRICORN)
+            return FALSE;
+
+        // Exclude all treasures then turn on the ones we want to use
+        if(itemId >= ITEM_BOTTLE_CAP && itemId <= ITEM_STRANGE_SOUVENIR)
+            return FALSE;
+
+        // These TMs aren't setup
+        if(itemId >= ITEM_TM51 && itemId <= ITEM_TM100)
+            return FALSE;
+
+        // Ignore fossils for now
+        if(itemId >= ITEM_HELIX_FOSSIL && itemId <= ITEM_FOSSILIZED_DINO)
+            return FALSE;
+
+        // Ignore sweets, as they are not used
+        if(itemId >= ITEM_STRAWBERRY_SWEET && itemId <= ITEM_RIBBON_SWEET)
+            return FALSE;
+
+        // No dynamax
+        if(itemId >= ITEM_EXP_CANDY_XS && itemId <= ITEM_DYNAMAX_CANDY)
+            return FALSE;
+
+        // No mochi
+        if(itemId >= ITEM_HEALTH_MOCHI && itemId <= ITEM_FRESH_START_MOCHI)
+            return FALSE;
+#endif
+
+        if(Rogue_IsRunActive())
+        {
+            // Berries are not functional outside of the hub
+            switch (itemId)
+            {
+                case ITEM_DURIN_BERRY:
+                case ITEM_PAMTRE_BERRY:
+                case ITEM_NOMEL_BERRY:
+                case ITEM_BELUE_BERRY:
+                case ITEM_WATMEL_BERRY:
+                case ITEM_SPELON_BERRY:
+                case ITEM_RABUTA_BERRY:
+                case ITEM_CORNN_BERRY:
+                case ITEM_MAGOST_BERRY:
+                    return FALSE;
+
+#ifdef ROGUE_EXPANSION
+                // Specific held items which don't trigger form changes, so won't be caught by the logic below
+                // we don't want unless the mon is avaliable
+                case ITEM_SOUL_DEW:
+                    return Query_IsSpeciesEnabled(SPECIES_LATIAS) || Query_IsSpeciesEnabled(SPECIES_LATIOS);
+
+                case ITEM_ADAMANT_ORB:
+                    return Query_IsSpeciesEnabled(SPECIES_DIALGA);
+
+                case ITEM_LUSTROUS_ORB:
+                    return Query_IsSpeciesEnabled(SPECIES_PALKIA);
+
+                case ITEM_GRISEOUS_ORB:
+                    return Query_IsSpeciesEnabled(SPECIES_GIRATINA);
+#endif
+            }
+        }
+
+        switch (itemId)
+        {
+        case ITEM_REVIVE:
+        case ITEM_MAX_REVIVE:
+            if(Rogue_IsRunActive() && !Rogue_ShouldReleaseFaintedMons())
+            {
+                return TRUE;
+            }
+            return FALSE;
+            break;
+
+#ifdef ROGUE_EXPANSION
+        case ITEM_MAX_MUSHROOMS:
+            return Rogue_IsRunActive() && IsDynamaxEnabled();
+
+        // Only active in hub via quest reward
+        case ITEM_BERSERK_GENE:
+            return !Rogue_IsRunActive();
+#endif
+
+        case ITEM_SACRED_ASH:
+        case ITEM_REVIVAL_HERB:
+        case ITEM_RARE_CANDY:
+        case ITEM_HEART_SCALE:
+        case ITEM_LUCKY_EGG:
+        case ITEM_EXP_SHARE:
+        case ITEM_SHOAL_SALT:
+        case ITEM_SHOAL_SHELL:
+        case ITEM_FLUFFY_TAIL:
+        case ITEM_SOOTHE_BELL:
+        case ITEM_EVERSTONE:
+
+        case ITEM_SMALL_COIN_CASE:
+        case ITEM_LARGE_COIN_CASE:
+
+        case ITEM_PINAP_BERRY:
+        case ITEM_NANAB_BERRY:
+        case ITEM_RAZZ_BERRY:
+        case ITEM_ENIGMA_BERRY:
+        case ITEM_WEPEAR_BERRY:
+        case ITEM_BLUK_BERRY:
+
+        // Berries that may confuse
+        case ITEM_AGUAV_BERRY:
+        case ITEM_WIKI_BERRY:
+        case ITEM_PERSIM_BERRY:
+        case ITEM_IAPAPA_BERRY:
+        case ITEM_MAGO_BERRY:
+        case ITEM_FIGY_BERRY:
+#ifdef ROGUE_EXPANSION
+        case ITEM_ENIGMA_BERRY_E_READER:
+
+        // Not implemented/needed
+        case ITEM_MAX_HONEY:
+        case ITEM_LURE:
+        case ITEM_SUPER_LURE:
+        case ITEM_MAX_LURE:
+        case ITEM_WISHING_PIECE:
+        case ITEM_ARMORITE_ORE:
+        case ITEM_DYNITE_ORE:
+        case ITEM_GALARICA_TWIG:
+        case ITEM_SWEET_HEART:
+        case ITEM_POKE_TOY:
+
+        case ITEM_BIG_BAMBOO_SHOOT:
+        case ITEM_TINY_BAMBOO_SHOOT:
+
+        // Link cable is Rogue's item
+        case ITEM_LINKING_CORD:
+
+        // Exclude all treasures then turn on the ones we want to use
+        //case ITEM_NUGGET:
+        //case ITEM_PEARL:
+        //case ITEM_BIG_PEARL:
+        //case ITEM_STARDUST:
+        //case ITEM_STAR_PIECE:
+
+        // Ignore these, as mons/form swaps currently not enabled
+        case ITEM_PIKASHUNIUM_Z:
+#endif
+            return FALSE;
+        }
     }
 
-    return FALSE;
+    // Run only excludes
+    if(Rogue_IsRunActive())
+    {
+        u8 genLimit = RoguePokedex_GetDexGenLimit();
+
+        if(!Rogue_GetConfigToggle(CONFIG_TOGGLE_EV_GAIN))
+        {
+#if defined(ROGUE_EXPANSION)
+            if(itemId >= ITEM_HP_UP && itemId <= ITEM_CARBOS)
+                return FALSE;
+
+            if(itemId >= ITEM_HEALTH_FEATHER && itemId <= ITEM_SWIFT_FEATHER)
+                return FALSE;
+
+            if(itemId >= ITEM_MACHO_BRACE && itemId <= ITEM_POWER_ANKLET)
+                return FALSE;
+#else
+            if((itemId >= ITEM_HP_UP && itemId <= ITEM_CALCIUM) || itemId == ITEM_ZINC)
+                return FALSE;
+#endif
+        }
+
+#ifdef ROGUE_EXPANSION
+        // Mass exclude mega, Z moves & Tera Shards
+        // Only show tera shards if we have teras enabled
+        if((itemId >= ITEM_BUG_TERA_SHARD && itemId <= ITEM_WATER_TERA_SHARD) || itemId == ITEM_STELLAR_TERA_SHARD)
+        {
+            if(Rogue_IsRunActive())
+                return IsTerastallizeEnabled();
+            else
+                return TRUE;
+        }
+        
+        if(itemId >= ITEM_RED_ORB && itemId <= ITEM_DIANCITE)
+        {
+            if(Rogue_IsRunActive())
+                return IsMegaEvolutionEnabled();
+            else
+                return TRUE;
+        }
+        
+        if(itemId >= ITEM_NORMALIUM_Z && itemId <= ITEM_ULTRANECROZIUM_Z)
+        {
+            if(Rogue_IsRunActive())
+                return IsZMovesEnabled();
+            else
+                return TRUE;
+        }
+
+        // Regional treat (Avoid spawning in multiple)
+        if(itemId >= ITEM_PEWTER_CRUNCHIES && itemId <= ITEM_BIG_MALASADA)
+        {
+            switch(genLimit)
+            {
+                case 1:
+                    if(itemId != ITEM_PEWTER_CRUNCHIES)
+                        return FALSE;
+                    break;
+                case 2:
+                    if(itemId != ITEM_RAGE_CANDY_BAR)
+                        return FALSE;
+                    break;
+                case 3:
+                    if(itemId != ITEM_LAVA_COOKIE)
+                        return FALSE;
+                    break;
+                case 4:
+                    if(itemId != ITEM_OLD_GATEAU)
+                        return FALSE;
+                    break;
+                case 5:
+                    if(itemId != ITEM_CASTELIACONE)
+                        return FALSE;
+                    break;
+                case 6:
+                    if(itemId != ITEM_LUMIOSE_GALETTE)
+                        return FALSE;
+                    break;
+                case 7:
+                    if(itemId != ITEM_SHALOUR_SABLE)
+                        return FALSE;
+                    break;
+                //case 8:
+                default:
+                    if(itemId != ITEM_BIG_MALASADA)
+                        return FALSE;
+                    break;
+            }
+        }
+#endif
+
+        if(Rogue_IsEvolutionItem(itemId))
+        {
+            // Only include the active evo items
+            return GetEvolutionItemFlag(itemId) != FALSE;
+        }
+
+        if(Rogue_IsFormItem(itemId))
+        {
+            // Only include the active form change items
+            return GetFormItemFlag(itemId) != FALSE;
+        }
+
+        if(ItemToGen(itemId) > genLimit)
+            return FALSE;
+    }
+    // Hub only excludes
+    else
+    {
+        if(itemId >= ITEM_TR01 && itemId <= ITEM_TR50)
+            return FALSE;
+    }
+
+    // Only return true if the actual item is valid
+    {
+        struct Item item;
+        Rogue_ModifyItem(itemId, &item);
+
+        // Best entry to check that this item is valid
+        return (item.description != NULL);
+    }
 }
 
 bool8 IsMegaEvolutionEnabled(void)
 {
-#ifdef ROGUE_EXPANSION
+#if TESTING && defined(ROGUE_EXPANSION)
+    // todo - once we have Rogue specific tests, should come up with a good way to make this testable
+    return TRUE;
+#elif defined(ROGUE_EXPANSION)
     if(Rogue_IsRunActive())
         return gRogueRun.megasEnabled; // cached result
     else
@@ -1114,7 +2526,10 @@ bool8 IsMegaEvolutionEnabled(void)
 
 bool8 IsZMovesEnabled(void)
 {
-#ifdef ROGUE_EXPANSION
+#if TESTING && defined(ROGUE_EXPANSION)
+    // todo - once we have Rogue specific tests, should come up with a good way to make this testable
+    return TRUE;
+#elif defined(ROGUE_EXPANSION)
     if(Rogue_IsRunActive())
         return gRogueRun.zMovesEnabled; // cached result
     else
@@ -1126,44 +2541,66 @@ bool8 IsZMovesEnabled(void)
 
 bool8 IsDynamaxEnabled(void)
 {
-#ifdef ROGUE_EXPANSION
-    return FALSE;
+#if TESTING && defined(ROGUE_EXPANSION)
+    // todo - once we have Rogue specific tests, should come up with a good way to make this testable
+    return TRUE;
+#elif defined(ROGUE_EXPANSION)
+    if(Rogue_IsRunActive())
+        return gRogueRun.dynamaxEnabled; // cached result
+    else
+        return CheckBagHasItem(ITEM_DYNAMAX_BAND, 1);
 #else
     return FALSE;
 #endif
 }
 
-static u32 GetPresetMonFlags(u16 species)
+bool8 IsTerastallizeEnabled(void)
 {
-    u32 flags;
-#ifdef ROGUE_EXPANSION
-    u16 species2;;
-#endif
-    
-    flags = gPresetMonTable[species].flags;
-
-#ifdef ROGUE_EXPANSION
-    species2 = GET_BASE_SPECIES_ID(species);
-    if(species2 != species)
-        flags |= gPresetMonTable[species2].flags;
-#endif
-
-    return flags;
-}
-
-bool8 CheckPresetMonFlags(u16 species, u32 flag)
-{
-    return (GetPresetMonFlags(species) & flag) != 0;
-}
-
-#if defined(ROGUE_DEBUG) && defined(ROGUE_DEBUG_PAUSE_PANEL)
-
-bool8 Rogue_ShouldShowMiniMenu(void)
-{
+#if TESTING && defined(ROGUE_EXPANSION)
+    // todo - once we have Rogue specific tests, should come up with a good way to make this testable
     return TRUE;
+#elif defined(ROGUE_EXPANSION)
+    if(Rogue_IsRunActive())
+        return gRogueRun.terastallizeEnabled; // cached result
+    else
+        return CheckBagHasItem(ITEM_TERA_ORB, 1);
+#else
+    return FALSE;
+#endif
 }
 
-u16 Rogue_MiniMenuHeight(void)
+bool8 IsHealingFlaskEnabled(void)
+{
+    return CheckBagHasItem(ITEM_HEALING_FLASK, 1);
+}
+
+static bool8 IsRareShopActiveInternal()
+{
+    u16 itemId;
+
+    for(itemId = ITEM_NONE + 1; itemId < ITEMS_COUNT; ++itemId)
+    {
+        if(ItemId_GetPocket(itemId) == POCKET_STONES)
+        {
+            if(Rogue_IsItemEnabled(itemId))
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static bool8 IsRareShopActive()
+{
+    if(Rogue_IsRunActive())
+        return gRogueRun.rareShopEnabled; // cached result
+    else
+        return TRUE; // just assume it's active when in hub
+}
+
+#if defined(ROGUE_DEBUG)
+
+u16 Debug_MiniMenuHeight(void)
 {
     u16 height = 10;
     return height;
@@ -1188,7 +2625,7 @@ static u8* AppendNumberField(u8* strPointer, const u8* field, u32 num)
     return StringAppend(strPointer, gStringVar1);
 }
 
-u8* Rogue_GetMiniMenuContent(void)
+u8* Debug_GetMiniMenuContent(void)
 {
     u8* strPointer = &gStringVar4[0];
     *strPointer = EOS;
@@ -1206,19 +2643,13 @@ u8* Rogue_GetMiniMenuContent(void)
     //
     if(gDebug_CurrentTab == 0)
     {
-        u8 difficultyLevel = gRogueRun.currentDifficulty;
-        u8 playerLevel = CalculatePlayerLevel();
+        u8 difficultyLevel = Rogue_GetCurrentDifficulty();
+        u8 playerLevel = Rogue_CalculatePlayerMonLvl();
         u8 wildLevel = CalculateWildLevel(0);
 
         strPointer = StringAppend(strPointer, gText_RogueDebug_Header);
-
-        if(FlagGet(FLAG_SET_SEED_ENABLED))
-        {
-            strPointer = AppendNumberField(strPointer, gText_RogueDebug_Seed, Rogue_GetStartSeed());
-        }
-
-        strPointer = AppendNumberField(strPointer, gText_RogueDebug_Save, gSaveBlock1Ptr->rogueSaveVersion);
-        strPointer = AppendNumberField(strPointer, gText_RogueDebug_Room, gRogueRun.currentRoomIdx);
+        strPointer = AppendNumberField(strPointer, gText_RogueDebug_Save, RogueSave_GetVersionId());
+        strPointer = AppendNumberField(strPointer, gText_RogueDebug_Room, gRogueRun.enteredRoomCounter);
         strPointer = AppendNumberField(strPointer, gText_RogueDebug_Difficulty, difficultyLevel);
         strPointer = AppendNumberField(strPointer, gText_RogueDebug_PlayerLvl, playerLevel);
         strPointer = AppendNumberField(strPointer, gText_RogueDebug_WildLvl, wildLevel);
@@ -1231,9 +2662,9 @@ u8* Rogue_GetMiniMenuContent(void)
     else if(gDebug_CurrentTab == 1)
     {
         strPointer = StringAppend(strPointer, gText_RogueDebug_AdvHeader);
-        strPointer = AppendNumberField(strPointer, gText_RogueDebug_AdvCount, gRogueAdvPath.currentColumnCount);
-        strPointer = AppendNumberField(strPointer, gText_RogueDebug_X, gRogueAdvPath.currentNodeX);
-        strPointer = AppendNumberField(strPointer, gText_RogueDebug_Y, gRogueAdvPath.currentNodeY);
+        strPointer = AppendNumberField(strPointer, gText_RogueDebug_AdvCount, gRogueAdvPath.roomCount);
+        //strPointer = AppendNumberField(strPointer, gText_RogueDebug_X, gRogueAdvPath.currentNodeX);
+        //strPointer = AppendNumberField(strPointer, gText_RogueDebug_Y, gRogueAdvPath.currentNodeY);
     }
 #ifdef ROGUE_FEATURE_AUTOMATION
     // Automation tab
@@ -1264,18 +2695,16 @@ u8* Rogue_GetMiniMenuContent(void)
     return gStringVar4;
 }
 
-void Rogue_CreateMiniMenuExtraGFX(void)
-{
-}
-
-void Rogue_RemoveMiniMenuExtraGFX(void)
-{
-}
-
-#else
+#endif
 
 bool8 Rogue_ShouldShowMiniMenu(void)
 {
+    if(RogueDebug_GetConfigToggle(DEBUG_TOGGLE_INFO_PANEL))
+        return TRUE;
+
+    if(GetSafariZoneFlag())
+        return FALSE;
+
     return TRUE;
 }
 
@@ -1283,12 +2712,24 @@ u16 Rogue_MiniMenuHeight(void)
 {
     u16 height = Rogue_IsRunActive() ? 3 : 1;
 
-    if(Rogue_IsActiveCampaignScored())
+#if defined(ROGUE_DEBUG)
+    if(RogueDebug_GetConfigToggle(DEBUG_TOGGLE_INFO_PANEL))
+        return Debug_MiniMenuHeight();
+#endif
+
+    if(GetSafariZoneFlag())
     {
-        ++height;
+        height = 3;
+    }
+    else
+    {
+        if(Rogue_IsActiveCampaignScored())
+        {
+            ++height;
+        }
     }
 
-    return height;
+    return height * 2;
 }
 
 extern const u8 gText_StatusRoute[];
@@ -1296,16 +2737,43 @@ extern const u8 gText_StatusBadges[];
 extern const u8 gText_StatusScore[];
 extern const u8 gText_StatusTimer[];
 extern const u8 gText_StatusClock[];
+extern const u8 gText_StatusSeasonSpring[];
+extern const u8 gText_StatusSeasonSummer[];
+extern const u8 gText_StatusSeasonAutumn[];
+extern const u8 gText_StatusSeasonWinter[];
 
 u8* Rogue_GetMiniMenuContent(void)
 {
     u8* strPointer = &gStringVar4[0];
 
+#if defined(ROGUE_DEBUG)
+    if(RogueDebug_GetConfigToggle(DEBUG_TOGGLE_INFO_PANEL))
+        return Debug_GetMiniMenuContent();
+#endif
+
     *strPointer = EOS;
-        
+
+    // Season stamp
+    switch(RogueToD_GetSeason())
+    {
+        case SEASON_SPRING:
+            strPointer = StringAppend(strPointer, gText_StatusSeasonSpring);
+            break;
+        case SEASON_SUMMER:
+            strPointer = StringAppend(strPointer, gText_StatusSeasonSummer);
+            break;
+        case SEASON_AUTUMN:
+            strPointer = StringAppend(strPointer, gText_StatusSeasonAutumn);
+            break;
+        case SEASON_WINTER:
+            strPointer = StringAppend(strPointer, gText_StatusSeasonWinter);
+            break;
+    }
+
     // Clock
-    ConvertIntToDecimalStringN(gStringVar1, RogueToD_GetHours(), STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, RogueToD_GetHours(), STR_CONV_MODE_RIGHT_ALIGN, 2);
     ConvertIntToDecimalStringN(gStringVar2, RogueToD_GetMinutes(), STR_CONV_MODE_LEADING_ZEROS, 2);
+
     StringExpandPlaceholders(gStringVar3, gText_StatusClock);
     strPointer = StringAppend(strPointer, gStringVar3);
     
@@ -1318,7 +2786,7 @@ u8* Rogue_GetMiniMenuContent(void)
         strPointer = StringAppend(strPointer, gStringVar3);
 
         // Badges
-        ConvertIntToDecimalStringN(gStringVar1, gRogueRun.currentDifficulty, STR_CONV_MODE_RIGHT_ALIGN, 4);
+        ConvertIntToDecimalStringN(gStringVar1, Rogue_GetCurrentDifficulty(), STR_CONV_MODE_RIGHT_ALIGN, 4);
         StringExpandPlaceholders(gStringVar3, gText_StatusBadges);
         strPointer = StringAppend(strPointer, gStringVar3);
     }
@@ -1336,6 +2804,22 @@ u8* Rogue_GetMiniMenuContent(void)
     return gStringVar4;
 }
 
+static u16 GetMenuWildEncounterCount()
+{
+    if(Rogue_IsRideMonSwimming())
+        return GetCurrentWaterEncounterCount();
+
+    return GetCurrentWildEncounterCount();
+}
+
+static u16 GetMenuWildEncounterSpecies(u8 i)
+{
+    if(Rogue_IsRideMonSwimming())
+        return GetWildWaterEncounter(i);
+
+    return GetWildGrassEncounter(i);
+}
+
 void Rogue_CreateMiniMenuExtraGFX(void)
 {
     u8 i;
@@ -1343,29 +2827,39 @@ void Rogue_CreateMiniMenuExtraGFX(void)
     u8 oamPriority = 0; // Render infront of background
     u16 palBuffer[16];
 
+#if defined(ROGUE_DEBUG)
+    // Don't show whilst info panel is visible
+    if(RogueDebug_GetConfigToggle(DEBUG_TOGGLE_INFO_PANEL))
+        return;
+#endif
+
+    // Ensure we have a palette free
+    FieldEffectFreeAllSprites();
+
     if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE || GetSafariZoneFlag())
     {
-        u16 yOffset = 24 + Rogue_MiniMenuHeight() * 16;
+        bool8 isVisible;
+        u16 yOffset = 24 + Rogue_MiniMenuHeight() * 8;
 
         //LoadMonIconPalettes();
 
-        for(i = 0; i < GetCurrentWildEncounterCount(); ++i)
+        for(i = 0; i < GetMenuWildEncounterCount(); ++i)
         {
             //u8 paletteOffset = i;
             u8 paletteOffset = 0; // No palette offset as we're going to greyscale and share anyway
+            u16 targetSpecies = GetMenuWildEncounterSpecies(i);
 
-            if(gRogueLocal.encounterPreview[i].isVisible)
+            isVisible = GetSetPokedexSpeciesFlag(targetSpecies, FLAG_GET_SEEN);
+
+            if(isVisible)
             {
-                gRogueLocal.encounterPreview[i].species = gRogueRun.wildEncounters[i];
-                LoadMonIconPaletteCustomOffset(gRogueLocal.encounterPreview[i].species, paletteOffset);
+                LoadMonIconPaletteCustomOffset(targetSpecies, paletteOffset);
 
-                gRogueLocal.encounterPreview[i].monSpriteId = CreateMonIconCustomPaletteOffset(gRogueLocal.encounterPreview[i].species, SpriteCallbackDummy, (14 + (i % 3) * 32), yOffset + (i / 3) * 32, oamPriority, paletteOffset);
+                gRogueLocal.encounterPreview[i].monSpriteId = CreateMonIconCustomPaletteOffset(targetSpecies, SpriteCallbackDummy, (14 + (i % 3) * 32), yOffset + (i / 3) * 32, oamPriority, paletteOffset);
             }
             else
             {
-                gRogueLocal.encounterPreview[i].species = SPECIES_NONE;
-                LoadMonIconPaletteCustomOffset(gRogueLocal.encounterPreview[i].species, paletteOffset);
-
+                LoadMonIconPaletteCustomOffset(SPECIES_NONE, paletteOffset);
                 gRogueLocal.encounterPreview[i].monSpriteId = CreateMissingMonIcon(SpriteCallbackDummy, (14 + (i % 3) * 32), yOffset + (i / 3) * 32, 0, paletteOffset);
             }
 
@@ -1384,13 +2878,27 @@ void Rogue_RemoveMiniMenuExtraGFX(void)
 {
     u8 i;
 
+#if defined(ROGUE_DEBUG)
+    // Don't show whilst info panel is visible
+    if(RogueDebug_GetConfigToggle(DEBUG_TOGGLE_INFO_PANEL))
+        return;
+#endif
+
     if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE || GetSafariZoneFlag())
     {
-        for(i = 0; i < GetCurrentWildEncounterCount(); ++i)
+        bool8 isVisible;
+
+        for(i = 0; i < GetMenuWildEncounterCount(); ++i)
         {
             u8 paletteOffset = i;
+            u16 targetSpecies = GetMenuWildEncounterSpecies(i);
 
-            FreeMonIconPaletteCustomOffset(GetIconSpeciesNoPersonality(gRogueLocal.encounterPreview[i].species), paletteOffset);
+            isVisible = GetSetPokedexSpeciesFlag(targetSpecies, FLAG_GET_SEEN);
+
+            if(isVisible)
+                FreeMonIconPaletteCustomOffset(GetIconSpeciesNoPersonality(targetSpecies), paletteOffset);
+            else
+                FreeMonIconPaletteCustomOffset(GetIconSpeciesNoPersonality(SPECIES_NONE), paletteOffset);
 
             if(gRogueLocal.encounterPreview[i].monSpriteId != SPRITE_NONE)
                 FreeAndDestroyMonIconSprite(&gSprites[gRogueLocal.encounterPreview[i].monSpriteId]);
@@ -1402,77 +2910,118 @@ void Rogue_RemoveMiniMenuExtraGFX(void)
     }
 }
 
+struct StarterSelectionData
+{
+    u16 species[3];
+    bool8 shinyState[3];
+    u8 count;
+};
+
+static const u8 sStarterTypeTriangles[] = 
+{
+    TYPE_WATER, TYPE_GRASS, TYPE_FIRE,
+    TYPE_BUG, TYPE_ROCK, TYPE_GRASS,
+#ifdef ROGUE_EXPANSION
+    TYPE_FAIRY, TYPE_STEEL, TYPE_FIGHTING,
 #endif
 
+    // dragon, dragon, dragon
+    TYPE_ROCK, TYPE_GRASS, TYPE_FIRE,
+    TYPE_DARK, TYPE_FIGHTING, TYPE_PSYCHIC,
 
+    TYPE_PSYCHIC, TYPE_BUG, TYPE_POISON,
+    // ghost, ghost, ghost
+    TYPE_ICE, TYPE_FIGHTING, TYPE_FLYING,
 
+    TYPE_ELECTRIC, TYPE_GROUND, TYPE_WATER,
+    TYPE_GRASS, TYPE_ICE, TYPE_ROCK,
+    TYPE_POISON, TYPE_GROUND, TYPE_GRASS,
 
-static void SelectStartMons(void)
+    TYPE_FIRE, TYPE_GROUND, TYPE_ICE,
+    TYPE_ROCK, TYPE_FIGHTING, TYPE_PSYCHIC,
+    TYPE_FIGHTING, TYPE_FLYING, TYPE_ROCK,
+
+    TYPE_GROUND, TYPE_ICE, TYPE_STEEL,
+    TYPE_FLYING, TYPE_ROCK, TYPE_GRASS,
+    TYPE_STEEL, TYPE_FIRE, TYPE_ROCK
+};
+
+static struct StarterSelectionData SelectStarterMons(bool8 isSeeded)
 {
-    u8 i, j;
-    bool8 isValid;
-    u16 randIdx;
-    u16 queryCount;
-    u16 species;
+    struct StarterSelectionData starters;
+    u8 i;
+    bool8 isValidTriangle = FALSE;
+    u16 typeTriangleOffset = (isSeeded ? RogueRandom() : Random());
 
-    // Maybe consider compile time caching this query, as it's pretty slow :(
-    RogueQuery_Clear();
-    RogueQuery_Exclude(SPECIES_SUNKERN);
-    RogueQuery_Exclude(SPECIES_SUNFLORA);
-
-    RogueQuery_SpeciesIsValid(TYPE_NONE, TYPE_NONE, TYPE_NONE);
-    RogueQuery_SpeciesExcludeCommon();
-    RogueQuery_SpeciesIsNotLegendary();
-    RogueQuery_TransformToEggSpecies();
-    RogueQuery_EvolveSpecies(2, FALSE); // To force gen3+ mons off
-
-    // Have to use uncollapsed queries as this query is too large otherwise
-    queryCount = RogueQuery_UncollapsedSpeciesSize();
-
-    for(i = 0; i < 3;)
+    while(!isValidTriangle)
     {
-        isValid = TRUE;
-        randIdx = Random() % queryCount;
-        species = RogueQuery_AtUncollapsedIndex(randIdx);
+        u16 triangleCount = ARRAY_COUNT(sStarterTypeTriangles) / 3;
 
-        // Check other starter is not already this
-        for(j = 0; j < i; ++j)
+        typeTriangleOffset = (typeTriangleOffset + 1) % triangleCount;
+        isValidTriangle = TRUE;
+
+        for(i = 0; i < 3; ++i)
         {
-            if(VarGet(VAR_ROGUE_STARTER0 + j) == species)
+            u32 typeFlags = MON_TYPE_VAL_TO_FLAGS(sStarterTypeTriangles[typeTriangleOffset * 3 + i]);
+            RogueMonQuery_Begin();
+
+            RogueMonQuery_IsSpeciesActive();
+            RogueMonQuery_IsBaseSpeciesInCurrentDex(QUERY_FUNC_INCLUDE);
+            RogueMonQuery_EvosContainType(QUERY_FUNC_INCLUDE, typeFlags);
+            RogueMonQuery_IsLegendary(QUERY_FUNC_EXCLUDE);
+
+            RogueMonQuery_TransformIntoEggSpecies();
+            RogueMonQuery_TransformIntoEvos(2, FALSE, FALSE); // to force mons to fit gen settings
+            RogueMonQuery_AnyActiveEvos(QUERY_FUNC_INCLUDE);
+
+            RogueMonQuery_IsOfType(QUERY_FUNC_INCLUDE, typeFlags);
+
+            // Exclude other types in triangle
+            typeFlags = 0;
+            if(i != 0)
+                typeFlags |= MON_TYPE_VAL_TO_FLAGS(sStarterTypeTriangles[typeTriangleOffset * 3 + 0]);
+            if(i != 1)
+                typeFlags |= MON_TYPE_VAL_TO_FLAGS(sStarterTypeTriangles[typeTriangleOffset * 3 + 1]);
+            if(i != 2)
+                typeFlags |= MON_TYPE_VAL_TO_FLAGS(sStarterTypeTriangles[typeTriangleOffset * 3 + 2]);
+
+            RogueMonQuery_IsOfType(QUERY_FUNC_EXCLUDE, typeFlags);
+
+            RogueWeightQuery_Begin();
             {
-                isValid = FALSE;
-                break;
+                RogueWeightQuery_FillWeights(1);
+
+                // No valid starter for this type so exit this triangle here
+                if(!RogueWeightQuery_HasAnyWeights())
+                {
+                    RogueWeightQuery_End();
+                    RogueMonQuery_End();
+
+                    isValidTriangle = FALSE;
+                    break;
+                }
+
+                starters.species[i] = RogueWeightQuery_SelectRandomFromWeights(isSeeded ? RogueRandom() : Random());
+                starters.shinyState[i] = Rogue_RollShinyState(SHINY_ROLL_DYNAMIC);
             }
-        }
+            RogueWeightQuery_End();
 
-        if(isValid)
-        {
-            VarSet(VAR_ROGUE_STARTER0 + i, species);
-            ++i;
+            RogueMonQuery_End();
         }
     }
 
-#ifdef ROGUE_DEBUG
-    VarSet(VAR_ROGUE_STARTER0, SPECIES_EEVEE);
-    VarSet(VAR_ROGUE_STARTER1, SPECIES_CASTFORM);
-#endif
+    return starters;
 }
 
-#define ROGUE_SAVE_VERSION 4    // The version to use for tracking/updating internal save game data
-// ROGUE_COMPAT_VERSION moved to constants/rogue.h
-
-static bool8 IsPreReleaseCompatVersion(u16 version)
+void Rogue_RandomiseStarters()
 {
-    switch (version)
-    {
-    case 3:
-        return TRUE;
-    }
-
-    return FALSE;
+    struct StarterSelectionData starters = SelectStarterMons(FALSE);
+    VarSet(VAR_ROGUE_STARTER0, starters.species[0]);
+    VarSet(VAR_ROGUE_STARTER1, starters.species[1]);
+    VarSet(VAR_ROGUE_STARTER2, starters.species[2]);
 }
 
-static void ClearPokemonHeldItems(void)
+static void UNUSED ClearPokemonHeldItems(void)
 {
     struct BoxPokemon* boxMon;
     u16 boxId, boxPosition;
@@ -1496,59 +3045,10 @@ static void ClearPokemonHeldItems(void)
     }
 }
 
-// Called on NewGame and LoadGame, if new values are added in new releases, put them here
-static void EnsureLoadValuesAreValid(bool8 newGame, u16 saveVersion)
-{
-    // Loading existing save
-    if(!newGame)
-    {
-        if(saveVersion == 0 || saveVersion == 1)
-        {
-            // Soft reset for Quest update (Old save and Pre-release saves)
-            FlagClear(FLAG_ROGUE_UNCOVERRED_POKABBIE);
-            FlagClear(FLAG_ROGUE_MET_POKABBIE);
-            FlagClear(FLAG_IS_CHAMPION);
-
-            VarSet(VAR_ROGUE_ENABLED_GEN_LIMIT, 3);
-            VarSet(VAR_ROGUE_FURTHEST_DIFFICULTY, 0);
-            VarSet(VAR_ROGUE_ADVENTURE_MONEY, 0);
-
-            ClearBerryTrees();
-            SetMoney(&gSaveBlock1Ptr->money, 0);
-            gSaveBlock1Ptr->registeredItem = 0;
-            ClearBag();
-            NewGameInitPCItems();
-            ClearPokemonHeldItems();
-            AddBagItem(ITEM_POKE_BALL, 5);
-            AddBagItem(ITEM_POTION, 1);
-        }
-    }
-
-    // v1.3 new values
-    if(newGame || saveVersion < 3)
-    {
-        VarSet(VAR_ROGUE_REGION_DEX_LIMIT, 0);
-        VarSet(VAR_ROGUE_DESIRED_CAMPAIGN, ROGUE_CAMPAIGN_NONE);
-
-        FlagSet(FLAG_ROGUE_HOENN_ROUTES);
-        FlagSet(FLAG_ROGUE_HOENN_BOSSES);
-
-        FlagSet(FLAG_ROGUE_KANTO_ROUTES);
-        FlagSet(FLAG_ROGUE_JOHTO_ROUTES);
-
-        FlagClear(FLAG_ROGUE_KANTO_BOSSES);
-        FlagClear(FLAG_ROGUE_JOHTO_BOSSES);
-    }
-
-#ifdef ROGUE_DEBUG
-    FlagClear(FLAG_ROGUE_DEBUG_DISABLED);
-#else
-    FlagSet(FLAG_ROGUE_DEBUG_DISABLED);
-#endif
-}
-
 void Rogue_ResetConfigHubSettings(void)
 {
+    // TODO - Replace this??
+
     // Seed settings
     FlagClear(FLAG_SET_SEED_ENABLED);
     FlagSet(FLAG_SET_SEED_ITEMS);
@@ -1556,38 +3056,72 @@ void Rogue_ResetConfigHubSettings(void)
     FlagSet(FLAG_SET_SEED_BOSSES);
     FlagSet(FLAG_SET_SEED_WILDMONS);
     
-    // Basic settings
-    FlagSet(FLAG_ROGUE_EXP_ALL);
-    FlagSet(FLAG_ROGUE_EV_GAIN_ENABLED);
-    FlagClear(FLAG_ROGUE_DOUBLE_BATTLES);
-    FlagClear(FLAG_ROGUE_CAN_OVERLVL);
-    FlagClear(FLAG_ROGUE_EASY_TRAINERS);
-    FlagClear(FLAG_ROGUE_HARD_TRAINERS);
-    FlagClear(FLAG_ROGUE_EASY_ITEMS);
-    FlagClear(FLAG_ROGUE_HARD_ITEMS);
-    FlagClear(FLAG_ROGUE_FORCE_BASIC_BAG);
-
     // Expansion Room settings
     VarSet(VAR_ROGUE_ENABLED_GEN_LIMIT, 3);
     VarSet(VAR_ROGUE_REGION_DEX_LIMIT, 0);
+}
 
-    FlagSet(FLAG_ROGUE_HOENN_ROUTES);
-    FlagSet(FLAG_ROGUE_HOENN_BOSSES);
+static void ChooseRandomPokeballReward()
+{
+    if(VarGet(VAR_ROGUE_FREE_POKE_BALL) == ITEM_NONE)
+    {
+        RogueItemQuery_Begin();
 
-    FlagSet(FLAG_ROGUE_KANTO_ROUTES);
-    FlagSet(FLAG_ROGUE_JOHTO_ROUTES);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_POKE_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_GREAT_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_ULTRA_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_PREMIER_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_LUXURY_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_TIMER_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_REPEAT_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_NEST_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_DIVE_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_NET_BALL);
 
-    FlagClear(FLAG_ROGUE_KANTO_BOSSES);
-    FlagClear(FLAG_ROGUE_JOHTO_BOSSES);
+#ifdef ROGUE_EXPANSION
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_HEAL_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_DUSK_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_QUICK_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_LEVEL_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_LURE_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_MOON_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_FRIEND_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_LOVE_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_FAST_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_HEAVY_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_DREAM_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_BEAST_BALL);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_CHERISH_BALL);
+#endif
+
+        VarSet(VAR_ROGUE_FREE_POKE_BALL, RogueMiscQuery_SelectRandomElement(Random()));
+
+        RogueItemQuery_End();
+    }
 }
 
 void Rogue_OnNewGame(void)
 {
+    RogueSave_ClearData();
+
+    gSaveBlock1Ptr->bagSortMode = ITEM_SORT_MODE_TYPE;
+    gSaveBlock1Ptr->bagCapacityUpgrades = 0;
+
+    RoguePlayer_SetNewGameOutfit();
+    RogueQuest_OnNewGame();
+
+    StringCopy(gSaveBlock2Ptr->playerName, gText_TrainerName_Default);
+    StringCopy(gSaveBlock2Ptr->pokemonHubName, gText_ExpandedPlaceholder_PokemonHub);
+    memset(&gRogueRun.completedBadges[0], TYPE_NONE, sizeof(gRogueRun.completedBadges));
+    
     SetMoney(&gSaveBlock1Ptr->money, 0);
     memset(&gRogueLocal, 0, sizeof(gRogueLocal));
 
     FlagClear(FLAG_ROGUE_RUN_ACTIVE);
-    FlagClear(FLAG_ROGUE_SPECIAL_ENCOUNTER_ACTIVE);
+    FlagClear(FLAG_ROGUE_IS_VICTORY_LAP);
+    FlagClear(FLAG_ROGUE_WILD_SAFARI);
+    FlagClear(FLAG_ROGUE_LVL_TUTORIAL);
+    FlagSet(FLAG_ROGUE_HIDE_WORKBENCHES);
 
     FlagClear(FLAG_ROGUE_PRE_RELEASE_COMPAT_WARNING);
 
@@ -1597,68 +3131,54 @@ void Rogue_OnNewGame(void)
     FlagClear(FLAG_ROGUE_EXPANSION_ACTIVE);
 #endif
 
-    FlagClear(FLAG_ROGUE_RUN_ACTIVE);
     VarSet(VAR_ROGUE_DESIRED_CAMPAIGN, ROGUE_CAMPAIGN_NONE);
 
+    Rogue_ResetSettingsToDefaults();
     Rogue_ResetConfigHubSettings();
+    ChooseRandomPokeballReward();
 
     VarSet(VAR_ROGUE_DIFFICULTY, 0);
     VarSet(VAR_ROGUE_FURTHEST_DIFFICULTY, 0);
     VarSet(VAR_ROGUE_CURRENT_ROOM_IDX, 0);
-    VarSet(VAR_ROGUE_REWARD_MONEY, 0);
     VarSet(VAR_ROGUE_ADVENTURE_MONEY, 0);
     VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
+
+    VarSet(VAR_ROGUE_REGION_DEX_LIMIT, 0);
+    VarSet(VAR_ROGUE_DESIRED_CAMPAIGN, ROGUE_CAMPAIGN_NONE);
 
     FlagSet(FLAG_SYS_B_DASH);
     EnableNationalPokedex();
 
     RogueToD_SetTime(60 * 10);
-
-    // Reset shiny safari
-    gRogueGlobalData.safairShinyBufferHead = 0;
-    memset(&gRogueGlobalData.safariShinyBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer));
+    RogueHub_UpdateWeatherState();
 
     SetLastHealLocationWarp(HEAL_LOCATION_ROGUE_HUB);
 
     ClearBerryTrees();
-    SelectStartMons();
 
-    ResetQuestStateAfter(0);
+    // Plant default berries (these are the free gifts you get)
+    PlantBerryTree(BERRY_TREE_HUB_11, ItemIdToBerryType(ITEM_ORAN_BERRY), BERRY_STAGE_BERRIES, FALSE);
+    PlantBerryTree(BERRY_TREE_HUB_12, ItemIdToBerryType(ITEM_RAWST_BERRY), BERRY_STAGE_BERRIES, FALSE);
+    PlantBerryTree(BERRY_TREE_HUB_13, ItemIdToBerryType(ITEM_CHERI_BERRY), BERRY_STAGE_BERRIES, FALSE);
+    PlantBerryTree(BERRY_TREE_HUB_14, ItemIdToBerryType(ITEM_CHESTO_BERRY), BERRY_STAGE_BERRIES, FALSE);
+    PlantBerryTree(BERRY_TREE_HUB_15, ItemIdToBerryType(ITEM_PECHA_BERRY), BERRY_STAGE_BERRIES, FALSE);
+
     Rogue_ResetCampaignAfter(0);
-
-    EnsureLoadValuesAreValid(TRUE, ROGUE_SAVE_VERSION);
-
-    Rogue_ClearPopupQueue();
+    RogueHub_ClearProgress();
 
 #ifdef ROGUE_DEBUG
-    SetMoney(&gSaveBlock1Ptr->money, 999999);
-
-    AddBagItem(ITEM_RARE_CANDY, 99);
-    //VarSet(VAR_ROGUE_FURTHEST_DIFFICULTY, 13);
-
-    //AddBagItem(ITEM_RARE_CANDY, 99);
-    //AddBagItem(ITEM_RARE_CANDY, 99);
-    //SetMoney(&gSaveBlock1Ptr->money, 60000);
-//
-    //struct Pokemon starterMon;
-    //CreateMon(&starterMon, SPECIES_RAYQUAZA, 100, MAX_PER_STAT_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    //GiveMonToPlayer(&starterMon);
-//
-    //CreateMon(&starterMon, SPECIES_GROUDON, 100, MAX_PER_STAT_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    //GiveMonToPlayer(&starterMon);
-//
-    //CreateMon(&starterMon, SPECIES_KYOGRE, 100, MAX_PER_STAT_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    //GiveMonToPlayer(&starterMon);
-//
-    //CreateMon(&starterMon, SPECIES_DEOXYS, 100, MAX_PER_STAT_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    //GiveMonToPlayer(&starterMon);
-//
-    //CreateMon(&starterMon, SPECIES_LUGIA, 100, MAX_PER_STAT_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    //GiveMonToPlayer(&starterMon);
-//
-    //CreateMon(&starterMon, SPECIES_HO_OH, 100, MAX_PER_STAT_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    //GiveMonToPlayer(&starterMon);
+    FlagClear(FLAG_ROGUE_DEBUG_DISABLED);
+#else
+    FlagSet(FLAG_ROGUE_DEBUG_DISABLED);
 #endif
+
+    memset(gRogueSaveBlock->safariMons, 0, sizeof(gRogueSaveBlock->safariMons));
+    memset(gRogueSaveBlock->dynamicUniquePokemon, 0, sizeof(gRogueSaveBlock->dynamicUniquePokemon));
+    memset(gRogueSaveBlock->daycarePokemon, 0, sizeof(gRogueSaveBlock->daycarePokemon));
+    memset(gRogueSaveBlock->adventureReplay, 0, sizeof(gRogueSaveBlock->adventureReplay));
+    memset(gRogueSaveBlock->monMasteryFlags, 0, sizeof(gRogueSaveBlock->monMasteryFlags));
+
+    Rogue_ClearPopupQueue();
 }
 
 void Rogue_GameClear(void)
@@ -1671,356 +3191,84 @@ void Rogue_SetDefaultOptions(void)
 #ifdef ROGUE_DEBUG
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
 #else
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_SLOW;
+    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
 #endif
-    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
     //gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
-    //gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     //gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     //gSaveBlock2Ptr->regionMapZoom = FALSE;
-}
-
-static void AppendItemsFromPocket(u8 pocket, struct ItemSlot* dst, u16* index)
-{
-    u16 i;
-    u16 writeIdx;
-    u16 itemId;
-    u16 count = gBagPockets[pocket].capacity;
-
-    // Use getters to avoid encryption
-    for (i = 0; i < count; i++)
-    {
-        writeIdx = *index;
-        itemId = gBagPockets[pocket].itemSlots[i].itemId;
-
-        if(itemId != ITEM_NONE)
-        {
-            dst[writeIdx].itemId = itemId;
-            dst[writeIdx].quantity = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
-
-            *index = writeIdx + 1;
-        }
-    }
-}
-
-static void* GetBoxDataPtr(size_t offset)
-{
-    void* baseAddr = &gPokemonStoragePtr->boxes[TOTAL_BOXES_COUNT][0];
-    return baseAddr + offset;
-}
-
-static void* GetBoxDataEndPtr()
-{
-    void* baseAddr = &gPokemonStoragePtr->boxes[ACTUAL_TOTAL_BOXES_COUNT - 1][IN_BOX_COUNT - 1];
-    return baseAddr;
-}
-
-static void FlipEncryptMemory(void* ptr, size_t size, u32 encryptionKey)
-{
-    if(encryptionKey)
-    {
-        size_t i;
-        u8* write;
-        u8* encryptionBytes = (u8*)&encryptionKey;
-
-        for(i = 0; i < size; ++i)
-        {
-            write = (u8*)(ptr) + i;
-            *write = *write ^ encryptionBytes[i % 4];
-        }
-    }
-}
-
-static void SerializeBoxData(size_t* offset, void* src, size_t size, u32 encryptionKey)
-{
-    void* addr = GetBoxDataPtr(*offset);
-    AGB_ASSERT((size_t)addr + size < (size_t)GetBoxDataEndPtr());
-    memcpy(addr, src, size);
-
-    FlipEncryptMemory(addr, size, encryptionKey);
-
-    *offset += size;
-}
-
-static void DeserializeBoxData(size_t* offset, void* dst, size_t size, u32 encryptionKey)
-{
-    void* addr = GetBoxDataPtr(*offset);
-    AGB_ASSERT((size_t)addr + size < (size_t)GetBoxDataEndPtr());
-    memcpy(dst, addr, size);
-
-    FlipEncryptMemory(dst, size, encryptionKey);
-
-    *offset += size;
-}
-
-static void SaveHubStates(void)
-{
-    u8 i;
-    u16 bagItemIdx;
-    u16 pocketId;
-
-    for(i = 0; i < gPlayerPartyCount; ++i)
-    {
-        CopyMon(&gRogueBoxHubData.playerParty[i], &gPlayerParty[i], sizeof(gPlayerParty[i]));
-    }
-    for(; i < PARTY_SIZE; ++i)
-    {
-        ZeroMonData(&gRogueBoxHubData.playerParty[i]);
-    }
-
-    memcpy(&gRogueBoxHubData.berryTrees[0], GetBerryTreeInfo(1), sizeof(struct BerryTree) * ROGUE_HUB_BERRY_TREE_COUNT);
-    
-    // Put all items into a single big list
-    bagItemIdx = 0;
-
-    for(pocketId = 0; pocketId < POCKETS_COUNT; ++pocketId)
-        AppendItemsFromPocket(pocketId, &gRogueBoxHubData.bagItems[0], &bagItemIdx);
-
-    for(; bagItemIdx < TOTAL_POCKET_ITEM_COUNT; ++bagItemIdx)
-    {
-        gRogueBoxHubData.bagItems[bagItemIdx].itemId = ITEM_NONE;
-        gRogueBoxHubData.bagItems[bagItemIdx].quantity = 0;
-    }
-}
-
-static void LoadHubStates(void)
-{
-    u8 i;
-    u16 bagItemIdx;
-
-    for(i = 0; i < PARTY_SIZE; ++i)
-    {
-        CopyMon(&gPlayerParty[i], &gRogueBoxHubData.playerParty[i], sizeof(gPlayerParty[i]));
-    }
-
-    for(i = 0; i < PARTY_SIZE; ++i)
-    {
-        if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
-            break;
-    }
-    gPlayerPartyCount = i;
-
-    memcpy(GetBerryTreeInfo(1), &gRogueBoxHubData.berryTrees[0], sizeof(struct BerryTree) * ROGUE_HUB_BERRY_TREE_COUNT);
-
-    // Restore the bag by just clearing and adding everything back to it
-    ClearBag();
-
-    for(bagItemIdx = 0; bagItemIdx < TOTAL_POCKET_ITEM_COUNT; ++bagItemIdx)
-    {
-        const u16 itemId = gRogueBoxHubData.bagItems[bagItemIdx].itemId;
-        const u16 quantity = gRogueBoxHubData.bagItems[bagItemIdx].quantity;
-
-        if(itemId != ITEM_NONE && quantity != 0)
-        {
-            // Fix for multiple HMs bug
-            if(itemId >= ITEM_HM01 && itemId <= ITEM_HM08)
-                AddBagItem(itemId, 1);
-            else
-                AddBagItem(itemId, quantity);
-        }
-    }
 }
 
 extern const u8 Rogue_QuickSaveLoad[];
 extern const u8 Rogue_QuickSaveVersionWarning[];
 extern const u8 Rogue_QuickSaveVersionUpdate[];
+extern const u8 Rogue_ForceNicknameMon[];
+extern const u8 Rogue_AskNicknameMon[];
+extern const u8 Rogue_Encounter_RestStop_RandomMan[];
+extern const u8 Rogue_EventScript_AttemptSnagBattle[];
+extern const u8 Rogue_Ridemon_PlayerIsTrapped[];
 
-void Rogue_OnSaveGame(void)
+void Rogue_NotifySaveVersionUpdated(u16 fromNumber, u16 toNumber)
 {
-    u8 i;
-    u32 encryptionKey = Random32();
+    if(Rogue_IsRunActive())
+        gRogueLocal.hasSaveWarningPending = TRUE;
+    else
+        gRogueLocal.hasVersionUpdateMsgPending = TRUE;
 
-    gSaveBlock1Ptr->rogueSaveVersion = ROGUE_SAVE_VERSION;
-    gSaveBlock1Ptr->rogueCompatVersion = ROGUE_COMPAT_VERSION;
-
-    gSaveBlock1Ptr->rogueBlock.saveData.rngSeed = gRngRogueValue;
-
-    {
-        size_t offset = 0;
-
-        SerializeBoxData(&offset, &encryptionKey, sizeof(encryptionKey), 0);
-
-        // Serialize more global data
-        {
-            u16 count;
-
-            count = QUEST_CAPACITY;
-            SerializeBoxData(&offset, &count, sizeof(count), encryptionKey);
-            SerializeBoxData(&offset, &gRogueGlobalData.questStates[0], sizeof(struct RogueQuestState) * count, encryptionKey);
-
-            count = ROGUE_CAMPAIGN_COUNT;
-            SerializeBoxData(&offset, &count, sizeof(count), encryptionKey);
-            SerializeBoxData(&offset, &gRogueGlobalData.campaignData[0], sizeof(struct RogueCampaignState) * count, encryptionKey);
-
-            SerializeBoxData(&offset, &gRogueGlobalData.safairShinyBufferHead, sizeof(gRogueGlobalData.safairShinyBufferHead), encryptionKey);
-            SerializeBoxData(&offset, &gRogueGlobalData.safariShinyBuffer[0], sizeof(gRogueGlobalData.safariShinyBuffer[0]) * ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer), encryptionKey);
-            SerializeBoxData(&offset, &gRogueGlobalData.safariShinyPersonality, sizeof(gRogueGlobalData.safariShinyPersonality), encryptionKey);
-
-            {
-                u16 tod = RogueToD_GetTime();
-                SerializeBoxData(&offset, &tod, sizeof(tod), encryptionKey);
-            }
-        }
-
-        // Serialize temporary per-run data
-        SerializeBoxData(&offset, &gRogueBoxHubData, sizeof(gRogueBoxHubData), encryptionKey);
-        SerializeBoxData(&offset, &gRogueAdvPath, sizeof(gRogueAdvPath), encryptionKey);
-        SerializeBoxData(&offset, &gRogueLabEncounterData, sizeof(gRogueLabEncounterData), encryptionKey);
-
-        // Encounter preview
-        {
-            u16 i;
-
-            for(i = 0; i < ARRAY_COUNT(gRogueLocal.encounterPreview); ++i)
-                SerializeBoxData(&offset, &gRogueLocal.encounterPreview[i].isVisible, sizeof(gRogueLocal.encounterPreview[i].isVisible), encryptionKey);
-        }
-
-        SerializeBoxData(&offset, &gRogueHotTracking.triggerCount, sizeof(gRogueHotTracking.triggerCount), encryptionKey);
-        SerializeBoxData(&offset, &gRogueHotTracking.triggerMin, sizeof(gRogueHotTracking.triggerMin), encryptionKey);
-        SerializeBoxData(&offset, &gRogueHotTracking.triggerMax, sizeof(gRogueHotTracking.triggerMax), encryptionKey);
-        SerializeBoxData(&offset, &gRogueHotTracking.triggerAccumulation, sizeof(gRogueHotTracking.triggerAccumulation), encryptionKey);
-
-        // Encode save reload state here
-        gRogueLocal.hasQuickLoadPending = (Rogue_IsRunActive() && !FlagGet(FLAG_ROGUE_RUN_COMPLETED));
-        gRogueLocal.hasValidQuickSave = FlagGet(FLAG_ROGUE_VALID_QUICK_SAVE);
-
-        SerializeBoxData(&offset, &gRogueLocal.hasQuickLoadPending, sizeof(gRogueLocal.hasQuickLoadPending), encryptionKey);
-        SerializeBoxData(&offset, &gRogueLocal.hasValidQuickSave, sizeof(gRogueLocal.hasValidQuickSave), encryptionKey);
-
-        // Clear out otherwise, they'll immediately retrigger
-        gRogueLocal.hasQuickLoadPending = FALSE;
-        gRogueLocal.hasValidQuickSave = FALSE;
-    }
-    
-    memcpy(&gSaveBlock1Ptr->rogueBlock.saveData.runData, &gRogueRun, sizeof(gRogueRun));
-    memcpy(&gSaveBlock1Ptr->rogueBlock.saveData.hubData, &gRogueHubData, sizeof(gRogueHubData));
-
-    FlipEncryptMemory(&gSaveBlock1Ptr->rogueBlock.saveData.runData, sizeof(gRogueRun), encryptionKey);
-    FlipEncryptMemory(&gSaveBlock1Ptr->rogueBlock.saveData.hubData, sizeof(gRogueHubData), encryptionKey);
+    // TODO - Hook up warnings here??
+    //if(IsPreReleaseCompatVersion(gSaveBlock1Ptr->rogueCompatVersion))
+    //    FlagSet(FLAG_ROGUE_PRE_RELEASE_COMPAT_WARNING);
 }
 
-void Rogue_OnLoadGame(void)
+void Rogue_NotifySaveLoaded(void)
 {
-    u8 i;
-    u32 encryptionKey = 0;
+    RogueQuest_OnLoadGame();
+    FollowMon_RecountActiveObjects();
 
-    memset(&gRogueLocal, 0, sizeof(gRogueLocal));
+    gRogueLocal.hasQuickLoadPending = FALSE;
 
-    DebugPrintf("Save Version: %d", gSaveBlock1Ptr->rogueSaveVersion);
-    DebugPrintf("Compat Version: %d", gSaveBlock1Ptr->rogueCompatVersion);
-    DebugPrintf("Debug Save: %s", FlagGet(FLAG_ROGUE_DEBUG_DISABLED) ? "-" : "DEBUG PREVIOUSLY ACTIVE");
-
-    gRngRogueValue = gSaveBlock1Ptr->rogueBlock.saveData.rngSeed;
-
+    if(Rogue_IsRunActive() && !FlagGet(FLAG_ROGUE_RUN_COMPLETED))
     {
-        size_t offset = 0;
-
-        // Pre 1.3
-        if(gSaveBlock1Ptr->rogueSaveVersion < 3)
-        {
-            const u16 questCapacity = _QUEST_LAST_1_2 + 1;
-
-            // This was a very chaotically organised struct, so skip over most thingg
-            // as that's just hub data to restore and we can't load previous versions whilst in a run
-            offset += sizeof(u32); // encryptionKey
-            offset += sizeof(struct Pokemon) * PARTY_SIZE; // playerParty
-            offset += sizeof(struct ItemSlot) * (BAG_ITEMS_COUNT + BAG_KEYITEMS_COUNT + BAG_POKEBALLS_COUNT + BAG_TMHM_COUNT + BAG_BERRIES_COUNT); // bagPocket_POCKET
-            offset += sizeof(struct RogueAdvPath); // advPath
-
-            DeserializeBoxData(&offset, &gRogueGlobalData.questStates[0], sizeof(struct RogueQuestState) * questCapacity, 0);
-            ResetQuestStateAfter(questCapacity);
-            Rogue_ResetCampaignAfter(0);
-        }
-        else
-        {
-            if(gSaveBlock1Ptr->rogueSaveVersion >= 4)
-            {
-                DeserializeBoxData(&offset, &encryptionKey, sizeof(encryptionKey), 0);
-            }
-
-            // Serialize more global data
-            {
-                u16 count;
-                
-                DeserializeBoxData(&offset, &count, sizeof(count), encryptionKey);
-                DeserializeBoxData(&offset, &gRogueGlobalData.questStates[0], sizeof(struct RogueQuestState) * min(count, QUEST_CAPACITY), encryptionKey);
-                ResetQuestStateAfter(count);
-
-                DeserializeBoxData(&offset, &count, sizeof(count), encryptionKey);
-                DeserializeBoxData(&offset, &gRogueGlobalData.campaignData[0], sizeof(struct RogueCampaignState) * min(count, ROGUE_CAMPAIGN_COUNT), encryptionKey);
-                Rogue_ResetCampaignAfter(count);
-
-                DeserializeBoxData(&offset, &gRogueGlobalData.safairShinyBufferHead, sizeof(gRogueGlobalData.safairShinyBufferHead), encryptionKey);
-                DeserializeBoxData(&offset, &gRogueGlobalData.safariShinyBuffer[0], sizeof(gRogueGlobalData.safariShinyBuffer[0]) * ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer), encryptionKey);
-                DeserializeBoxData(&offset, &gRogueGlobalData.safariShinyPersonality, sizeof(gRogueGlobalData.safariShinyPersonality), encryptionKey);
-                EnsureSafariShinyBufferIsValid();
-                
-                {
-                    u16 tod = 0;
-                    DeserializeBoxData(&offset, &tod, sizeof(tod), encryptionKey);
-                    RogueToD_SetTime(tod);
-                }
-            }
-
-            // Serialize temporary per-run data
-            DeserializeBoxData(&offset, &gRogueBoxHubData, sizeof(gRogueBoxHubData), encryptionKey);
-            DeserializeBoxData(&offset, &gRogueAdvPath, sizeof(gRogueAdvPath), encryptionKey);
-            DeserializeBoxData(&offset, &gRogueLabEncounterData, sizeof(gRogueLabEncounterData), encryptionKey);
-            
-            // Encounter preview
-            {
-                u16 i;
-
-                for(i = 0; i < ARRAY_COUNT(gRogueLocal.encounterPreview); ++i)
-                    DeserializeBoxData(&offset, &gRogueLocal.encounterPreview[i].isVisible, sizeof(gRogueLocal.encounterPreview[i].isVisible), encryptionKey);
-            }
-
-            DeserializeBoxData(&offset, &gRogueHotTracking.triggerCount, sizeof(gRogueHotTracking.triggerCount), encryptionKey);
-            DeserializeBoxData(&offset, &gRogueHotTracking.triggerMin, sizeof(gRogueHotTracking.triggerMin), encryptionKey);
-            DeserializeBoxData(&offset, &gRogueHotTracking.triggerMax, sizeof(gRogueHotTracking.triggerMax), encryptionKey);
-            DeserializeBoxData(&offset, &gRogueHotTracking.triggerAccumulation, sizeof(gRogueHotTracking.triggerAccumulation), encryptionKey);
-
-            DeserializeBoxData(&offset, &gRogueLocal.hasQuickLoadPending, sizeof(gRogueLocal.hasQuickLoadPending), encryptionKey);
-            DeserializeBoxData(&offset, &gRogueLocal.hasValidQuickSave, sizeof(gRogueLocal.hasValidQuickSave), encryptionKey);
-        }
+        gRogueLocal.hasQuickLoadPending = TRUE;
     }
 
-    memcpy(&gRogueRun, &gSaveBlock1Ptr->rogueBlock.saveData.runData, sizeof(gRogueRun));
-    memcpy(&gRogueHubData, &gSaveBlock1Ptr->rogueBlock.saveData.hubData, sizeof(gRogueHubData));
+    RogueQuest_OnTrigger(QUEST_TRIGGER_MISC_UPDATE);
+}
 
-    FlipEncryptMemory(&gRogueRun, sizeof(gRogueRun), encryptionKey);
-    FlipEncryptMemory(&gRogueHubData, sizeof(gRogueHubData), encryptionKey);
+bool8 Rogue_IsObjectEventExcludedFromSave(struct ObjectEvent* objectEvent)
+{
+    // Don't save MP objects
+    if(objectEvent->localId >= OBJ_EVENT_ID_MULTIPLAYER_FIRST && objectEvent->localId <= OBJ_EVENT_ID_MULTIPLAYER_LAST)
+        return TRUE;
 
-#ifndef ROGUE_DEBUG
-    if(!FlagGet(FLAG_ROGUE_DEBUG_DISABLED))
-    {
-        // Invalidate quicksave if we've just jumped from a DEBUG build
-        gRogueLocal.hasValidQuickSave = FALSE;
-    }
-#endif
+    // We probably don't need this, as the template should still be setup in the same order they're saved in so this should be fine
+    //if(RogueHub_IsPlayerBaseLayout(gMapHeader.mapLayoutId))
+    //{
+    //    // To avoid scripts being setup incorrectly, always reload the props dynamically
+    //    if(objectEvent->localId != OBJ_EVENT_ID_PLAYER && objectEvent->localId != OBJ_EVENT_ID_FOLLOWER)
+    //        return TRUE;
+    //}
 
-    FlagClear(FLAG_ROGUE_PRE_RELEASE_COMPAT_WARNING);
+    return FALSE;
+}
 
-    if(gSaveBlock1Ptr->rogueCompatVersion != ROGUE_COMPAT_VERSION)
-    {
-        if(Rogue_IsRunActive())
-            gRogueLocal.hasSaveWarningPending = TRUE;
-        else
-            gRogueLocal.hasVersionUpdateMsgPending = TRUE;
+void Rogue_OnSecondPassed(void)
+{
 
-        if(IsPreReleaseCompatVersion(gSaveBlock1Ptr->rogueCompatVersion))
-            FlagSet(FLAG_ROGUE_PRE_RELEASE_COMPAT_WARNING);
+}
 
-        if(gSaveBlock1Ptr->rogueCompatVersion == 4)
-            ResetQuestsFor_1_3_1();
-    }
+void Rogue_OnMinutePassed(void)
+{
+    RogueGift_CountDownDynamicCustomMons();
+}
 
-    EnsureLoadValuesAreValid(FALSE, gSaveBlock1Ptr->rogueSaveVersion);
-    RecalcCharmCurseValues();
-    
-    ResetFollowParterMonObjectEvent();
+void Rogue_OnHourPassed(void)
+{
 
-    Rogue_RemoveNetObjectEvents();
+}
+
+void ForceRunRidemonTrappedCheck()
+{
+    gRogueLocal.hasPendingRidemonTrappedCheck = TRUE;
 }
 
 bool8 Rogue_OnProcessPlayerFieldInput(void)
@@ -2028,30 +3276,65 @@ bool8 Rogue_OnProcessPlayerFieldInput(void)
     if(gRogueLocal.hasSaveWarningPending)
     {
         gRogueLocal.hasSaveWarningPending = FALSE;
-        ScriptContext1_SetupScript(Rogue_QuickSaveVersionWarning);
+        ScriptContext_SetupScript(Rogue_QuickSaveVersionWarning);
         return TRUE;
     }
     else if(gRogueLocal.hasVersionUpdateMsgPending)
     {
         gRogueLocal.hasVersionUpdateMsgPending = FALSE;
-        ScriptContext1_SetupScript(Rogue_QuickSaveVersionUpdate);
+        ScriptContext_SetupScript(Rogue_QuickSaveVersionUpdate);
         return TRUE;
     }
-#ifndef ROGUE_DEBUG
-    else if(gRogueLocal.hasQuickLoadPending)
+    else if(gRogueLocal.hasNicknameMonMsgPending)
+    {
+        gRogueLocal.hasNicknameMonMsgPending = FALSE;
+        if(Rogue_ShouldSkipAssignNicknameYesNoMessage())
+            ScriptContext_SetupScript(Rogue_ForceNicknameMon);
+        else
+            ScriptContext_SetupScript(Rogue_AskNicknameMon);
+        return TRUE;
+    }
+    else if(!RogueDebug_GetConfigToggle(DEBUG_TOGGLE_ALLOW_SAVE_SCUM) && gRogueLocal.hasQuickLoadPending)
     {
         gRogueLocal.hasQuickLoadPending = FALSE;
 
-        if(gRogueLocal.hasValidQuickSave)
-            FlagSet(FLAG_ROGUE_VALID_QUICK_SAVE);
-        else
-            FlagClear(FLAG_ROGUE_VALID_QUICK_SAVE);
+        VarSet(VAR_0x8004, gRogueRun.isQuickSaveValid);
+        gRogueRun.isQuickSaveValid = FALSE;
 
-        ScriptContext1_SetupScript(Rogue_QuickSaveLoad);
+        ScriptContext_SetupScript(Rogue_QuickSaveLoad);
         return TRUE;
     }
-#endif
+    else if(gRogueLocal.hasPendingSnagBattle)
+    {
+        gRogueLocal.hasPendingSnagBattle = FALSE;
+        gSpecialVar_0x800A = RogueRandom() % gEnemyPartyCount;
+        gSpecialVar_0x800B = GetMonData(&gEnemyParty[gSpecialVar_0x800A], MON_DATA_SPECIES);
+        StringCopy_Nickname(gStringVar1, RoguePokedex_GetSpeciesName(gSpecialVar_0x800B));
+        ScriptContext_SetupScript(Rogue_EventScript_AttemptSnagBattle);
+        return TRUE;
+    }
+    else if(gRogueLocal.hasPendingRidemonTrappedCheck && !Rogue_IsRideMonFlying()) // wait until we've landed to run the script
+    {
+        gRogueLocal.hasPendingRidemonTrappedCheck = FALSE;
+
+        if(Rogue_ShouldRunRidemonTrappedScript())
+        {
+            ScriptContext_SetupScript(Rogue_Ridemon_PlayerIsTrapped);
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+    else if(RogueMP_IsActive() && RogueMP_TryExecuteScripts())
+    {
+        // Do nothing here, as we expect any update to be done above
+        return TRUE;
+    }
     else if(FollowMon_ProcessMonInteraction() == TRUE)
+    {
+        return TRUE;
+    }
+    else if(Rogue_HandleRideMonInput() == TRUE)
     {
         return TRUE;
     }
@@ -2078,6 +3361,7 @@ static hot_track_dat HotTrackingLocalRtcToCounter(void)
 
 static void ResetHotTracking()
 {
+#ifdef ROGUE_FEATURE_HOT_TRACKING
     gRogueHotTracking.initSeed = HotTrackingLocalRtcToCounter();
     gRogueHotTracking.rollingSeed = gRogueHotTracking.initSeed;
     gRogueHotTracking.triggerCount = 0;
@@ -2086,13 +3370,15 @@ static void ResetHotTracking()
     gRogueHotTracking.triggerAccumulation = 0;
 
     DebugPrintf("HotTracking init:%d roll:%d", gRogueHotTracking.initSeed, gRogueHotTracking.rollingSeed);
+#endif
 }
 
 static void UpdateHotTracking()
 {
+#ifdef ROGUE_FEATURE_HOT_TRACKING
     hot_track_dat localCounter = HotTrackingLocalRtcToCounter();
-    hot_track_dat seedCounter = localCounter - gRogueHotTracking.initSeed;
     hot_track_dat rollingCounter = localCounter - gRogueHotTracking.rollingSeed;
+    DEBUG_CODE(hot_track_dat seedCounter = localCounter - gRogueHotTracking.initSeed);
 
     if(rollingCounter > 1)
     {
@@ -2110,19 +3396,38 @@ static void UpdateHotTracking()
     {
         gRogueHotTracking.rollingSeed = localCounter;
     }
+#endif
 }
 
 void Rogue_MainInit(void)
 {
+    u32 i;
+
+    for(i = 0; i < OBJ_EVENT_ID_MULTIPLAYER_COUNT; ++i)
+        gRogueLocal.cachedObjIds[i] = OBJECT_EVENTS_COUNT;
+
     ResetHotTracking();
+
+    FollowMon_ClearCachedPartnerSpecies();
+
+    RogueQuery_Init();
+    Rogue_RideMonInit();
     Rogue_AssistantInit();
 
 #ifdef ROGUE_FEATURE_AUTOMATION
     Rogue_AutomationInit();
 #endif
+
+    RogueDebug_MainInit();
 }
 
-void Rogue_MainCB(void)
+void Rogue_MainEarlyCB(void)
+{
+    // Want to process before overworld update
+    Rogue_AssistantMainCB();
+}
+
+void Rogue_MainLateCB(void)
 {
     //Additional 3rd maincallback which is always called
 
@@ -2131,24 +3436,151 @@ void Rogue_MainCB(void)
         UpdateHotTracking();
     }
 
-    Rogue_AssistantMainCB();
-
 #ifdef ROGUE_FEATURE_AUTOMATION
     Rogue_AutomationCallback();
 #endif
+    RogueDebug_MainCB();
 }
 
-void Rogue_OverworldCB(void)
+void Rogue_OverworldCB(u16 newKeys, u16 heldKeys, bool8 inputActive)
 {
+    if(inputActive)
+    {
+        if(!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_UNDERWATER | PLAYER_AVATAR_FLAG_CONTROLLABLE)))
+        {
+            // Update running toggle
+            if(gSaveBlock2Ptr->optionsAutoRunToggle && (newKeys & B_BUTTON) != 0)
+            {
+                gRogueLocal.runningToggleActive = !gRogueLocal.runningToggleActive;
+            }
+        }
+    }
+    
+    START_TIMER(ROGUE_ASSISTANT_CALLBACK);
     Rogue_AssistantOverworldCB();
+    STOP_TIMER(ROGUE_ASSISTANT_CALLBACK);
 }
 
-u16 Rogue_GetHotTrackingData(u16* count, u16* average, u16* min, u16* max)
+void Rogue_OnReturnToField()
 {
+    if(!Rogue_IsRunActive())
+    {
+        RogueHub_ReloadObjectsAndTiles();
+    }
+}
+
+bool8 Rogue_IsCollisionExempt(struct ObjectEvent* obstacle, struct ObjectEvent* collider)
+{
+    if(Rogue_RideMonIsCollisionExempt(obstacle, collider))
+        return TRUE;
+
+    if(FollowMon_IsCollisionExempt(obstacle, collider))
+        return TRUE;
+
+    if (obstacle->localId >= OBJ_EVENT_ID_MULTIPLAYER_FIRST && obstacle->localId <= OBJ_EVENT_ID_MULTIPLAYER_LAST)
+    {
+        // Don't collide in the map screen
+        if(RogueAdv_IsViewingPath()) //Rogue_IsRunActive())
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 Rogue_IsRunningToggledOn()
+{
+    return gRogueLocal.runningToggleActive;
+}
+
+void Rogue_OnSpawnObjectEvent(struct ObjectEvent *objectEvent, u8 objectEventId)
+{
+    if(FollowMon_IsMonObject(objectEvent, TRUE))
+    {
+        FollowMon_OnObjectEventSpawned(objectEvent);
+    }
+
+    if (objectEvent->localId >= OBJ_EVENT_ID_MULTIPLAYER_FIRST && objectEvent->localId <= OBJ_EVENT_ID_MULTIPLAYER_LAST)
+    {
+        gRogueLocal.cachedObjIds[objectEvent->localId - OBJ_EVENT_ID_MULTIPLAYER_FIRST] = objectEventId;
+    }
+}
+
+void Rogue_OnRemoveObjectEvent(struct ObjectEvent *objectEvent)
+{
+    if(FollowMon_IsMonObject(objectEvent, TRUE))
+    {
+        FollowMon_OnObjectEventRemoved(objectEvent);
+    }
+    
+    if (objectEvent->localId >= OBJ_EVENT_ID_MULTIPLAYER_FIRST && objectEvent->localId <= OBJ_EVENT_ID_MULTIPLAYER_LAST)
+    {
+        gRogueLocal.cachedObjIds[objectEvent->localId - OBJ_EVENT_ID_MULTIPLAYER_FIRST] = OBJECT_EVENTS_COUNT;
+    }
+}
+
+void Rogue_OnMovementType_Player(struct Sprite *sprite)
+{
+    //Rogue_UpdateRideMons();
+}
+
+void Rogue_OnObjectEventMovement(u8 objectEventId)
+{
+    Rogue_HandleRideMonMovementIfNeeded(objectEventId);
+}
+
+void Rogue_OnResumeMap()
+{
+}
+
+void Rogue_OnObjectEventsInit()
+{
+    u32 i;
+
+    gRogueLocal.hasPendingRidemonTrappedCheck = TRUE;
+    SetupFollowParterMonObjectEvent();
+
+    // Clear
+    for(i = 0; i < OBJ_EVENT_ID_MULTIPLAYER_COUNT; ++i)
+        gRogueLocal.cachedObjIds[i] = OBJECT_EVENTS_COUNT;
+
+    // Repopulate with existing object events
+    for(i = 0; i < OBJECT_EVENTS_COUNT; ++i)
+    {
+        if(gObjectEvents[i].active && gObjectEvents[i].localId >= OBJ_EVENT_ID_MULTIPLAYER_FIRST && gObjectEvents[i].localId <= OBJ_EVENT_ID_MULTIPLAYER_LAST)
+            gRogueLocal.cachedObjIds[gObjectEvents[i].localId - OBJ_EVENT_ID_MULTIPLAYER_FIRST] = i;
+    }
+}
+
+void Rogue_OnResetAllSprites()
+{
+    Rogue_OnResetRideMonSprites();
+}
+
+bool8 Rogue_TryGetCachedObjectEventId(u32 localId, u8* eventObjectId)
+{
+    if (localId >= OBJ_EVENT_ID_MULTIPLAYER_FIRST && localId <= OBJ_EVENT_ID_MULTIPLAYER_LAST)
+    {
+        *eventObjectId = gRogueLocal.cachedObjIds[localId - OBJ_EVENT_ID_MULTIPLAYER_FIRST];
+        return TRUE;
+    }
+
+    *eventObjectId = OBJECT_EVENTS_COUNT;
+    return FALSE;
+}
+
+void Rogue_GetHotTrackingData(u16* count, u16* average, u16* min, u16* max)
+{
+#ifdef ROGUE_FEATURE_HOT_TRACKING
     *count = gRogueHotTracking.triggerCount;
     *average = gRogueHotTracking.triggerAccumulation / gRogueHotTracking.triggerCount;
     *min = gRogueHotTracking.triggerMin;
     *max = gRogueHotTracking.triggerMax;
+#else
+    *count = 0;
+    *average = 0;
+    *min = 0;
+    *max = 0;
+#endif
 }
 
 
@@ -2161,49 +3593,52 @@ void Rogue_OnLoadMap(void)
         Rogue_ClearPopupQueue();
 
         RandomiseSafariWildEncounters();
-        Rogue_PushPopup(POPUP_MSG_SAFARI_ENCOUNTERS, 0);
+        //Rogue_PushPopup(POPUP_MSG_SAFARI_ENCOUNTERS, 0);
+    }
+    else if(!Rogue_IsRunActive())
+    {
+        // Apply metatiles for the map we're in
+        RogueHub_UpdateWarpStates();
+        RogueHub_ApplyMapMetatiles();
+    }
+}
+
+bool8 Rogue_ShouldSkipReloadMapTileView()
+{
+    if(!Rogue_IsRunActive())
+    {
+        // If actually updated tiles only?
+        return TRUE;
     }
 
-    SetupFollowParterMonObjectEvent();
+    return FALSE;
 }
 
 u16 GetStartDifficulty(void)
 {
-    u16 skipToDifficulty = VarGet(VAR_ROGUE_SKIP_TO_DIFFICULTY);
+    u16 skipToDifficulty = 0;
 
-#ifdef ROGUE_DEBUG
-    if(skipToDifficulty == 8)
+    if(RogueDebug_GetConfigRange(DEBUG_RANGE_START_DIFFICULTY) != 0)
     {
-        skipToDifficulty = ROGUE_MAX_BOSS_COUNT - 1;
+        skipToDifficulty = RogueDebug_GetConfigRange(DEBUG_RANGE_START_DIFFICULTY);
     }
-#endif
 
-    if(skipToDifficulty != 0)
-    {
-        return skipToDifficulty;
-    }
-    
-    return 0;
+    return skipToDifficulty;
 }
 
 static bool8 HasAnyActiveEvos(u16 species)
 {
     u8 i;
     struct Evolution evo;
+    u8 evoCount = Rogue_GetMaxEvolutionCount(species);
 
-    for(i = 0; i < EVOS_PER_MON; ++i)
+    for(i = 0; i < evoCount; ++i)
     {
         Rogue_ModifyEvolution(species, i, &evo);
 
         if(evo.targetSpecies != SPECIES_NONE)
         {
-#ifdef ROGUE_EXPANSION
-            if(evo.method != EVO_MEGA_EVOLUTION &&
-                evo.method != EVO_MOVE_MEGA_EVOLUTION &&
-                evo.method != EVO_PRIMAL_REVERSION
-            )
-#endif
-                return TRUE;
+            return TRUE;
         }
     }
 
@@ -2215,26 +3650,18 @@ static void GiveMonPartnerRibbon(void)
     u8 i;
     u16 species;
     bool8 ribbonSet = TRUE;
-    bool8 hasDisabledEvo = FALSE;
 
     for(i = 0; i < PARTY_SIZE; ++i)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
         if(species != SPECIES_NONE)
         {
-            SetMonData(&gPlayerParty[i], MON_DATA_EFFORT_RIBBON, &ribbonSet);
+            SetMonData(&gPlayerParty[i], MON_DATA_TEMP_PARTNER_RIBBON, &ribbonSet);
 
-            if(!hasDisabledEvo && Rogue_GetEvolutionCount(species) != 0)
-            {
-                if(!HasAnyActiveEvos(species))
-                    hasDisabledEvo = TRUE;
-            }
+            if(Rogue_GetMaxEvolutionCount(species) != 0 && !HasAnyActiveEvos(species))
+                Rogue_PushPopup_UnableToEvolve(i);
         }
     }
-
-    // No need to display popup if haven't unlocked gen settings
-    if(FlagGet(FLAG_ROGUE_MET_POKABBIE) && hasDisabledEvo)
-        Rogue_PushPopup(POPUP_MSG_PARTNER_EVO_WARNING, 0);
 }
 
 bool8 Rogue_IsPartnerMonInTeam(void)
@@ -2243,9 +3670,9 @@ bool8 Rogue_IsPartnerMonInTeam(void)
 
     for(i = 0; i < PARTY_SIZE; ++i)
     {
-        if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
+        if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
         {
-            if(GetMonData(&gPlayerParty[i], MON_DATA_EFFORT_RIBBON))
+            if(GetMonData(&gPlayerParty[i], MON_DATA_TEMP_PARTNER_RIBBON))
                 return TRUE;
         }
     }
@@ -2253,22 +3680,158 @@ bool8 Rogue_IsPartnerMonInTeam(void)
     return FALSE;
 }
 
+static u16 CalculateRewardLvlMonCount()
+{
+    u8 i;
+    u16 validCount = 0;
+
+    for(i = 0; i < gPlayerPartyCount; ++i)
+    {
+        if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) != MAX_LEVEL)
+        {
+            ++validCount;
+        }
+    }
+
+    return validCount;
+}
+
+u16 Rogue_PostRunRewardLvls()
+{
+    u16 lvlCount = 2;
+    u16 targettedMons = CalculateRewardLvlMonCount();
+
+    if(targettedMons == 0)
+    {
+        lvlCount = 0;
+    }
+    else if(targettedMons > 1)
+    {
+        // Only give 1 lvl per mon
+        lvlCount = 1;
+    }
+
+    lvlCount *= (Rogue_GetCurrentDifficulty() + gRogueRun.victoryLapTotalWins);
+
+    if(lvlCount != 0)
+    {
+        u8 i, j;
+        u32 exp;
+        u16 daycareLvls = lvlCount;
+
+        for(i = 0; i < gPlayerPartyCount; ++i)
+        {
+            // Award levels
+            for(j = 0; j < lvlCount; ++j)
+            {
+                if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) != MAX_LEVEL)
+                {
+                    exp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL)].growthRate, GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL) + 1);
+                    SetMonData(&gPlayerParty[i], MON_DATA_EXP, &exp);
+                    CalculateMonStats(&gPlayerParty[i]);
+                }
+                
+                // Increase friendship from these levels
+                AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_GROW_LEVEL);
+            }
+        }
+        
+        // Daycare
+        if(RogueHub_HasUpgrade(HUB_UPGRADE_DAY_CARE_EXP_SHARE2))
+        {
+            daycareLvls = max(1, daycareLvls);
+        }
+        else if(RogueHub_HasUpgrade(HUB_UPGRADE_DAY_CARE_EXP_SHARE1))
+        {
+            daycareLvls = max(1, daycareLvls / 2);
+        }
+        else if(RogueHub_HasUpgrade(HUB_UPGRADE_DAY_CARE_EXP_SHARE0))
+        {
+            daycareLvls = max(1, daycareLvls / 4);
+        }
+        else
+        {
+            daycareLvls = 0;
+        }
+
+        if(daycareLvls != 0)
+        {
+            u8 maxSlots = Rogue_GetCurrentDaycareSlotCount();
+
+            for(i = 0; i < maxSlots; ++i)
+            {
+                struct BoxPokemon* mon = Rogue_GetDaycareBoxMon(i);
+
+                // Award levels
+                for(j = 0; j < daycareLvls; ++j)
+                {
+                    if(GetBoxMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && GetBoxMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
+                    {
+                        exp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[GetBoxMonData(mon, MON_DATA_SPECIES, NULL)].growthRate, GetBoxMonData(mon, MON_DATA_LEVEL, NULL) + 1);
+                        SetBoxMonData(mon, MON_DATA_EXP, &exp);
+                    }
+                    
+                    // don't give friendship for daycare mons
+                }
+            }
+        }
+    }
+
+    return lvlCount;
+}
+
+u16 Rogue_PostRunRewardMoney()
+{
+    u16 amount = 0;
+
+    if(gRogueRun.enteredRoomCounter > 1)
+    {
+        u16 i = gRogueRun.victoryLapTotalWins + gRogueRun.enteredRoomCounter - 1;
+
+        switch (Rogue_GetDifficultyRewardLevel())
+        {
+        case DIFFICULTY_LEVEL_EASY:
+            amount = i * 200;
+            break;
+
+        case DIFFICULTY_LEVEL_AVERAGE:
+            amount = i * 250;
+            break;
+
+        case DIFFICULTY_LEVEL_HARD:
+            amount = i * 300;
+            break;
+        
+        case DIFFICULTY_LEVEL_BRUTAL:
+            amount = i * 350;
+            break;
+        }
+    }
+
+    AddMoney(&gSaveBlock1Ptr->money, amount);
+    return amount;
+}
+
+static struct Pokemon* GetLabMon(u8 slot)
+{
+    AGB_ASSERT(slot < LAB_MON_COUNT);
+    return (struct Pokemon*)&gRogueRun.labParty[slot];
+}
+
 static void ResetFaintedLabMonAtSlot(u16 slot)
 {
     u16 species;
 
-    struct Pokemon* mon = &gRogueLabEncounterData.party[slot];
+    struct Pokemon* mon = GetLabMon(slot);
 
-    if(slot == VarGet(VAR_STARTER_MON))
+    species = VarGet(VAR_ROGUE_STARTER0 + slot);
+
+    if(species == VarGet(VAR_STARTER_SWAP_SPECIES))
     {
         species = SPECIES_SUNKERN;
     }
-    else
-    {
-        species = VarGet(VAR_ROGUE_STARTER0 + slot);
-    }
 
-    CreateMonWithNature(mon, species, 7, USE_RANDOM_IVS, Random() % NUM_NATURES);
+    CreateMonWithNature(mon, species, STARTER_MON_LEVEL, USE_RANDOM_IVS, Random() % NUM_NATURES);
 }
 
 static void InitialiseFaintedLabMons(void)
@@ -2280,47 +3843,104 @@ static void InitialiseFaintedLabMons(void)
     }
 }
 
-static bool8 PartyContainsWeakLegendaryMon(void)
+static u16 GetActiveWeakLegendary(bool8* fromDaycare)
 {
     u16 i;
+    *fromDaycare = FALSE;
+
     for(i = 0; i < gPlayerPartyCount; ++i)
     {
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        if(species != SPECIES_NONE && IsSpeciesLegendary(species))
+        if(species != SPECIES_NONE && RoguePokedex_IsSpeciesLegendary(species))
         {
-            return TRUE;
+            return species;
         }
     }
 
-    return FALSE;
+    for(i = 0; i < Rogue_GetCurrentDaycareSlotCount(); ++i)
+    {
+        u16 species = GetBoxMonData(Rogue_GetDaycareBoxMon(i), MON_DATA_SPECIES);
+        if(species != SPECIES_NONE && RoguePokedex_IsSpeciesLegendary(species))
+        {
+            *fromDaycare = TRUE;
+            return species;
+        }
+    }
+
+    return SPECIES_NONE;
 }
 
-static bool8 PartyContainsStrongLegendaryMon(void)
+static u16 GetActiveStrongLegendary(bool8* fromDaycare)
 {
     u16 i;
+    *fromDaycare = FALSE;
+
     for(i = 0; i < gPlayerPartyCount; ++i)
     {
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
         
-        if(species != SPECIES_NONE && IsSpeciesLegendary(species))
+        if(species != SPECIES_NONE && RoguePokedex_IsSpeciesLegendary(species))
         {
-            if(CheckPresetMonFlags(species, MON_FLAG_STRONG_WILD))
+            if(Rogue_CheckMonFlags(species, MON_FLAG_STRONG_WILD))
             {
-                return TRUE;
+                return species;
             }
         }
     }
 
-    return FALSE;
+    for(i = 0; i < Rogue_GetCurrentDaycareSlotCount(); ++i)
+    {
+        u16 species = GetBoxMonData(Rogue_GetDaycareBoxMon(i), MON_DATA_SPECIES);
+        if(species != SPECIES_NONE && RoguePokedex_IsSpeciesLegendary(species))
+        {
+            if(Rogue_CheckMonFlags(species, MON_FLAG_STRONG_WILD))
+            {
+                *fromDaycare = TRUE;
+                return species;
+            }
+        }
+    }
+
+    return SPECIES_NONE;
+}
+
+static bool8 CanBringInHeldItem(u16 itemId)
+{
+    switch(itemId)
+    {
+        case ITEM_SMALL_COIN_CASE:
+        case ITEM_LARGE_COIN_CASE:
+            return FALSE;
+    }
+
+    return TRUE;
 }
 
 static void BeginRogueRun_ModifyParty(void)
 {
+    u16 starterSpecies = VarGet(VAR_STARTER_SWAP_SPECIES);
+
+    FlagClear(FLAG_ROGUE_HAS_RANDOM_STARTER);
+
+    if(starterSpecies != SPECIES_NONE)
+    {
+        FlagSet(FLAG_ROGUE_HAS_RANDOM_STARTER);
+        ClearPlayerTeam();
+
+        CreateMon(&gEnemyParty[0], starterSpecies, STARTER_MON_LEVEL, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+
+        GiveMonToPlayer(&gEnemyParty[0]);
+        CalculatePlayerPartyCount();
+
+        if(!Rogue_ShouldSkipAssignNickname(&gPlayerParty[0]))
+            gRogueLocal.hasNicknameMonMsgPending = TRUE;
+    }
+
     // Always clear out EVs as we shouldn't have them in the HUB anymore
-    //if(FlagGet(FLAG_ROGUE_EV_GAIN_ENABLED))
     {
         u16 i;
         u16 temp = 0;
+        u32 exp;
         for(i = 0; i < gPlayerPartyCount; ++i)
         {
             u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
@@ -2332,10 +3952,206 @@ static void BeginRogueRun_ModifyParty(void)
                 SetMonData(&gPlayerParty[i], MON_DATA_SPEED_EV, &temp);
                 SetMonData(&gPlayerParty[i], MON_DATA_SPATK_EV, &temp);
                 SetMonData(&gPlayerParty[i], MON_DATA_SPDEF_EV, &temp);
+
+                // Force to starter lvl
+                exp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL)].growthRate, STARTER_MON_LEVEL);
+                SetMonData(&gPlayerParty[i], MON_DATA_EXP, &exp);
+
+                if(starterSpecies != SPECIES_NONE)
+                {
+                    // This mon was just added so it can appear in the safari
+                }
+                else
+                {
+                    // Partner's can't reappear in safari
+                    gPlayerParty[i].rogueExtraData.isSafariIllegal = TRUE;
+                }
+
+                // Adjust item
+                temp = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+                if(!CanBringInHeldItem(temp))
+                {
+                    temp = ITEM_NONE;
+                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &temp);
+                }
+
                 CalculateMonStats(&gPlayerParty[i]);
             }
         }
+
+        // Update daycare mons
+        for(i = 0; i < DAYCARE_SLOT_COUNT; ++i)
+        {
+            struct BoxPokemon* boxMon = Rogue_GetDaycareBoxMon(i);
+            u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+
+            if(species != SPECIES_NONE)
+            {
+                u32 exp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[species].growthRate, STARTER_MON_LEVEL);
+                SetBoxMonData(boxMon, MON_DATA_EXP, &exp);
+                
+                // Adjust item
+                temp = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
+                if(!CanBringInHeldItem(temp))
+                {
+                    temp = ITEM_NONE;
+                    SetBoxMonData(boxMon, MON_DATA_HELD_ITEM, &temp);
+                }
+            }
+
+            gRogueSaveBlock->daycarePokemon[i].isSafariIllegal = TRUE;
+        }
     }
+}
+
+static void BeginRogueRun_ConsiderItems(void)
+{
+    DebugPrintf("Evos: required bits %d, avaliable bits %d", gRogueBake_EvoItems_Count, ARRAY_COUNT(gRogueRun.activeEvoItemFlags) * 8);
+    AGB_ASSERT(gRogueBake_EvoItems_Count < ARRAY_COUNT(gRogueRun.activeEvoItemFlags) * 8);
+
+    memset(&gRogueRun.activeEvoItemFlags, 0, sizeof(gRogueRun.activeEvoItemFlags));
+
+#ifdef ROGUE_EXPANSION
+    DebugPrintf("Forms: required bits %d, avaliable bits %d", gRogueBake_FormItems_Count, ARRAY_COUNT(gRogueRun.activeFormItemFlags) * 8);
+    AGB_ASSERT(gRogueBake_FormItems_Count < ARRAY_COUNT(gRogueRun.activeFormItemFlags) * 8);
+
+    memset(&gRogueRun.activeFormItemFlags, 0, sizeof(gRogueRun.activeFormItemFlags));
+#endif
+
+    // Go through all active evo/forms and figure out what items we want to enable
+    {
+        struct Evolution evo;
+        u16 e, evoCount, species;
+
+        // Always enable these as they have a non mon specific held effect
+        SetEvolutionItemFlag(ITEM_KINGS_ROCK, TRUE);
+        SetEvolutionItemFlag(ITEM_METAL_COAT, TRUE);
+#ifdef ROGUE_EXPANSION
+        SetEvolutionItemFlag(ITEM_RAZOR_CLAW, TRUE);
+#endif
+
+        // Always enable? as we may get an evo curse 
+        //SetEvoFormItemFlag(ITEM_LINK_CABLE, TRUE);
+
+        for(species = SPECIES_NONE + 1; species < NUM_SPECIES; ++species)
+        {
+            if(Query_IsSpeciesEnabled(species))
+            {
+                evoCount = Rogue_GetMaxEvolutionCount(species);
+
+                for(e = 0; e < evoCount; ++e)
+                {
+                    Rogue_ModifyEvolution(species, e, &evo);
+
+                    switch (evo.method)
+                    {
+                    case EVO_ITEM:
+#ifdef ROGUE_EXPANSION
+                    case EVO_ITEM_MALE:
+                    case EVO_ITEM_FEMALE:
+#endif
+                        SetEvolutionItemFlag(evo.param, TRUE);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+#ifdef ROGUE_EXPANSION
+    {
+        struct FormChange form;
+        u16 species, e;
+
+        for (species = SPECIES_NONE + 1; species < NUM_SPECIES; ++species)
+        {
+            if(Query_IsSpeciesEnabled(species))
+            {
+                for (e = 0; TRUE; ++e)
+                {
+                    Rogue_ModifyFormChange(species, e, &form);
+
+                    if(form.method == FORM_CHANGE_TERMINATOR)
+                        break;
+
+                    switch (form.method)
+                    {
+                    case FORM_CHANGE_ITEM_HOLD:
+                    case FORM_CHANGE_ITEM_USE:
+                    case FORM_CHANGE_BEGIN_BATTLE:
+                    case FORM_CHANGE_END_BATTLE:
+                    case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+                    case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+                        if(form.param1 != ITEM_NONE)
+                            SetFormItemFlag(form.param1, TRUE);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+#endif
+}
+
+static bool8 CanEnterWithItem(u16 itemId, bool8 isBasicBagEnabled)
+{
+    u8 pocket;
+    if(!isBasicBagEnabled)
+        return TRUE;
+
+    pocket = GetPocketByItemId(itemId);
+    if(pocket == POCKET_KEY_ITEMS)
+        return TRUE;
+
+    return FALSE;
+}
+
+static void SetupRogueRunBag()
+{
+    u16 i;
+    u16 itemId;
+    u32 quantity;
+    bool8 isBasicBagEnabled = Rogue_GetConfigToggle(CONFIG_TOGGLE_BAG_WIPE);
+
+    SetMoney(&gSaveBlock1Ptr->money, 0);
+    ClearBag();
+
+    // Re-add items
+    for(i = 0; i < BAG_ITEM_CAPACITY; ++i)
+    {
+        itemId = RogueSave_GetHubBagItemIdAt(i);
+        quantity = RogueSave_GetHubBagItemQuantityAt(i);
+        
+        if(itemId != ITEM_NONE && CanEnterWithItem(itemId, isBasicBagEnabled))
+        {
+            switch (itemId)
+            {
+            case ITEM_SMALL_COIN_CASE:
+                AddMoney(&gSaveBlock1Ptr->money, 1000 * quantity);
+                break;
+
+            case ITEM_LARGE_COIN_CASE:
+                AddMoney(&gSaveBlock1Ptr->money, 10000 * quantity);
+                break;
+
+            default:
+                AddBagItem(itemId, quantity);
+                break;
+            }
+        }
+    }
+
+    // Give basic inventory
+    if(isBasicBagEnabled)
+    {
+        AddBagItem(ITEM_POKE_BALL, 5);
+        AddBagItem(ITEM_POTION, 1);
+    }
+
+    RecalcCharmCurseValues();
+
+    // TODO - Rework this??
+    //SetMoney(&gSaveBlock1Ptr->money, VarGet(VAR_ROGUE_ADVENTURE_MONEY));
 }
 
 static void BeginRogueRun(void)
@@ -2343,476 +4159,602 @@ static void BeginRogueRun(void)
     DebugPrint("BeginRogueRun");
     
     memset(&gRogueLocal, 0, sizeof(gRogueLocal));
+    memset(&gRogueRun, 0, sizeof(gRogueRun));
+    memset(&gRogueAdvPath, 0, sizeof(gRogueAdvPath));
+    ClearHoneyTreePokeblock();
     ResetHotTracking();
+
+    RogueGift_EnsureDynamicCustomMonsAreValid();
+    RogueSave_SaveHubStates();
 
 #ifdef ROGUE_EXPANSION
     // Cache the results for the run (Must do before ActiveRun flag is set)
     gRogueRun.megasEnabled = IsMegaEvolutionEnabled();
     gRogueRun.zMovesEnabled = IsZMovesEnabled();
+    gRogueRun.dynamaxEnabled = IsDynamaxEnabled();
+    gRogueRun.terastallizeEnabled = IsTerastallizeEnabled();
     // CheckBagHasItem(ITEM_DYNAMAX_BAND, 1)
 #endif
 
     FlagSet(FLAG_ROGUE_RUN_ACTIVE);
+    FlagClear(FLAG_ROGUE_IS_VICTORY_LAP);
+    FlagClear(FLAG_ROGUE_MYSTERIOUS_SIGN_KNOWN);
+
+    VarSet(VAR_ROGUE_COURIER_ITEM, ITEM_NONE);
+    VarSet(VAR_ROGUE_COURIER_COUNT, 0);
+    FlagClear(FLAG_ROGUE_COURIER_READY);
+
+    gRogueRun.victoryLapTotalWins = 0;
+    Rogue_RefillFlightCharges(FALSE);
 
     Rogue_PreActivateDesiredCampaign();
 
-    if(FlagGet(FLAG_SET_SEED_ENABLED))
+    if(RogueMP_IsActive() && RogueMP_IsClient())
     {
-        gRngRogueValue = Rogue_GetStartSeed();
+        AGB_ASSERT(gRogueMultiplayer != NULL);
+        AGB_ASSERT(gRogueMultiplayer->gameState.adventure.isRunActive);
+        
+        gRogueRun.baseSeed = gRogueMultiplayer->gameState.adventure.baseSeed;
+    }
+    else
+    {
+        struct AdventureReplay const* replay = &gRogueSaveBlock->adventureReplay[ROGUE_ADVENTURE_REPLAY_REMEMBERED];
+
+        if(FlagGet(FLAG_ROGUE_ADVENTURE_REPLAY_ACTIVE) && replay->isValid)
+        {
+            gRogueRun.baseSeed = replay->baseSeed;
+            memcpy(&gRogueSaveBlock->difficultyConfig, &replay->difficultyConfig, sizeof(gRogueSaveBlock->difficultyConfig));
+
+            Rogue_PushPopup_AdventureReplay();
+
+            // TODO - Ban challenges
+            // ACTUALLY DO THIS BEFORE FORGET
+        }
+        else
+        {
+            gRogueRun.baseSeed = Random();
+        }
     }
 
-    gRogueRun.currentRoomIdx = 0;
-    gRogueRun.currentDifficulty = GetStartDifficulty();
-    gRogueRun.currentLevelOffset = 5;
-    gRogueRun.currentRouteIndex = 0;
+    Rogue_SetCurrentDifficulty(GetStartDifficulty());
+    gRogueRun.currentLevelOffset = Rogue_GetModeRules()->initialLevelOffset;
+    gRogueRun.adventureRoomId = ADVPATH_INVALID_ROOM_ID;
     
-    if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+    if(gRogueRun.currentLevelOffset == 0)
     {
-        gRogueRun.currentLevelOffset = 80;
+        // Apply default
+        gRogueRun.currentLevelOffset = 3; // assume STARTER_MON_LEVEL == 5 and first boss level is 10
     }
-    // Will get generated later
-    gRogueAdvPath.currentColumnCount = 0;
-    gRogueAdvPath.currentNodeX = 0;
-    gRogueAdvPath.currentNodeY = 0;
-    gRogueAdvPath.currentRoomType = ADVPATH_ROOM_NONE;
 
+    // Apply some base seed for anything which needs to be randomly setup
+    SeedRogueRng(gRogueRun.baseSeed * 23151 + 29867);
+    
     memset(&gRogueRun.completedBadges[0], TYPE_NONE, sizeof(gRogueRun.completedBadges));
 
-    memset(&gRogueRun.routeHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.routeHistoryBuffer));
-    memset(&gRogueRun.legendaryHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.legendaryHistoryBuffer));
-    memset(&gRogueRun.wildEncounterHistoryBuffer[0], 0, sizeof(u16) * ARRAY_COUNT(gRogueRun.wildEncounterHistoryBuffer));
-    memset(&gRogueRun.miniBossHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.miniBossHistoryBuffer));
-    memset(&gRogueRun.bossHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.bossHistoryBuffer));
-    
-    VarSet(VAR_ROGUE_DIFFICULTY, gRogueRun.currentDifficulty);
+    VarSet(VAR_ROGUE_DIFFICULTY, Rogue_GetCurrentDifficulty());
     VarSet(VAR_ROGUE_CURRENT_ROOM_IDX, 0);
-    VarSet(VAR_ROGUE_REWARD_MONEY, 0);
     VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
+    VarSet(VAR_ROGUE_TOTAL_RUN_CATCHES, 0);
 
     VarSet(VAR_ROGUE_FLASK_HEALS_USED, 0);
-    VarSet(VAR_ROGUE_FLASK_HEALS_MAX, 4);
+    VarSet(VAR_ROGUE_FLASK_HEALS_MAX, 3);
 
-    SaveHubStates();
+    ClearBerryTreeRange(BERRY_TREE_ROUTE_FIRST, BERRY_TREE_ROUTE_LAST);
+    ClearBerryTreeRange(BERRY_TREE_DAYCARE_FIRST, BERRY_TREE_DAYCARE_LAST);
 
-    ClearBerryTrees();
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_BAG_WIPE))
+    {
+        // Clear daycare mons
+        u8 i;
+
+        for(i = 0; i < DAYCARE_SLOT_COUNT; ++i)
+        {
+            struct BoxPokemon* boxMon = Rogue_GetDaycareBoxMon(i);
+            ZeroBoxMonData(boxMon);
+        }
+    }
+
     RandomiseFishingEncounters();
+    RandomiseTRMoves();
     InitialiseFaintedLabMons();
-
-    gRogueHubData.money = GetMoney(&gSaveBlock1Ptr->money);
-    //gRogueHubData.registeredItem = gSaveBlock1Ptr->registeredItem;
-
-    gRogueHubData.playTimeHours = gSaveBlock2Ptr->playTimeHours;
-    gRogueHubData.playTimeMinutes = gSaveBlock2Ptr->playTimeMinutes;
-    gRogueHubData.playTimeSeconds = gSaveBlock2Ptr->playTimeSeconds;
-    gRogueHubData.playTimeVBlanks = gSaveBlock2Ptr->playTimeVBlanks;
-
     PlayTimeCounter_Reset();
     PlayTimeCounter_Start();
 
+    BeginRogueRun_ConsiderItems();
+
+    // After we've decided what items are active, cache the rare shop state
+    gRogueRun.rareShopEnabled = IsRareShopActiveInternal();
+
     BeginRogueRun_ModifyParty();
-
-    if(FlagGet(FLAG_ROGUE_FORCE_BASIC_BAG))
-    {
-        u16 bagItemIdx;
-        
-        ClearBag();
-
-        // Add default items
-        AddBagItem(ITEM_POKE_BALL, 5);
-        AddBagItem(ITEM_POTION, 1);
-        SetMoney(&gSaveBlock1Ptr->money, 0);
-
-        // Add back some of the items we want to keep
-        for(bagItemIdx = 0; bagItemIdx < TOTAL_POCKET_ITEM_COUNT; ++bagItemIdx)
-        {
-            const u16 itemId = gRogueBoxHubData.bagItems[bagItemIdx].itemId;
-            const u16 quantity = gRogueBoxHubData.bagItems[bagItemIdx].quantity;
-
-            if(itemId != ITEM_NONE && quantity != 0)
-            {
-                if(GetPocketByItemId(itemId) == POCKET_KEY_ITEMS)
-                    AddBagItem(itemId, quantity);
-                else if(itemId >= ITEM_HM01 && itemId <= ITEM_HM08)
-                    AddBagItem(itemId, quantity);
-            }
-        }
-    }
-    else
-    {
-        SetMoney(&gSaveBlock1Ptr->money, VarGet(VAR_ROGUE_ADVENTURE_MONEY));
-    }
-
-#ifdef ROGUE_DEBUG
-    AddBagItem(ITEM_ESCAPE_ROPE, 101);
-#endif
-
-    RecalcCharmCurseValues();
+    SetupRogueRunBag();
 
     FlagClear(FLAG_ROGUE_FREE_HEAL_USED);
     FlagClear(FLAG_ROGUE_RUN_COMPLETED);
+    FlagClear(FLAG_ROGUE_FINAL_QUEST_MET_FAKE_CHAMP);
+    FlagClear(FLAG_ROGUE_DYNAMAX_BATTLE);
+    FlagClear(FLAG_ROGUE_TERASTALLIZE_BATTLE);
+    FlagClear(FLAG_ROGUE_IN_SNAG_BATTLE);
 
-    // Enable randoman trader at start
-    if(IsQuestCollected(QUEST_MrRandoman))
-    {
-        FlagClear(FLAG_ROGUE_RANDOM_TRADE_DISABLED);
-    }
-    else
-    {
-        FlagSet(FLAG_ROGUE_RANDOM_TRADE_DISABLED);
-    }
+    FlagSet(FLAG_ROGUE_DAYCARE_PHONE_CHARGED);
+    FlagSet(FLAG_ROGUE_TERA_ORB_CHARGED);
 
     Rogue_PostActivateDesiredCampaign();
 
     FlagClear(FLAG_ROGUE_TRAINERS_WEAK_LEGENDARIES);
     FlagClear(FLAG_ROGUE_TRAINERS_STRONG_LEGENDARIES);
 
-    if(PartyContainsWeakLegendaryMon())
-        FlagSet(FLAG_ROGUE_TRAINERS_WEAK_LEGENDARIES);
+    {
+        bool8 weakSpeciesInDaycare;
+        bool8 strongSpeciesInDaycare;
+        u16 weakSpecies = GetActiveWeakLegendary(&weakSpeciesInDaycare);
+        u16 strongSpecies = GetActiveStrongLegendary(&strongSpeciesInDaycare);
 
-    if(PartyContainsStrongLegendaryMon())
-        FlagSet(FLAG_ROGUE_TRAINERS_STRONG_LEGENDARIES);
+        if(weakSpecies != SPECIES_NONE)
+            FlagSet(FLAG_ROGUE_TRAINERS_WEAK_LEGENDARIES);
+
+        if(strongSpecies != SPECIES_NONE)
+            FlagSet(FLAG_ROGUE_TRAINERS_STRONG_LEGENDARIES);
+
+        if(strongSpecies != SPECIES_NONE)
+            Rogue_PushPopup_StrongPokemonClause(strongSpecies, strongSpeciesInDaycare);
+        else if(weakSpecies != SPECIES_NONE)
+            Rogue_PushPopup_WeakPokemonClause(weakSpecies, weakSpeciesInDaycare);
+
+    }
 
     GiveMonPartnerRibbon();
 
-    QuestNotify_BeginAdventure();
+    // Choose legendaries before trainers so rival can avoid these legends
+    ChooseLegendarysForNewAdventure();
+    ChooseTeamEncountersForNewAdventure();
+
+    // Choose bosses last
+    Rogue_ChooseRivalTrainerForNewAdventure();
+    Rogue_ChooseBossTrainersForNewAdventure();
+    EnableRivalEncounterIfRequired();
+
+    gRogueRun.shrineSpawnDifficulty = 1 + RogueRandomRange(ROGUE_MAX_BOSS_COUNT, 0);
+
+    RogueSafari_CompactEmptyEntries();
+
+    IncrementGameStat(GAME_STAT_TOTAL_RUNS);
+
+    // Trigger before and after as we may have hub/run only quests which are interested in this trigger
+    RogueQuest_OnTrigger(QUEST_TRIGGER_RUN_START);
+    RogueQuest_ActivateQuestsFor(QUEST_CONST_ACTIVE_IN_RUN);
+    RogueQuest_OnTrigger(QUEST_TRIGGER_RUN_START);
+
+
+    Rogue_AddPartySnapshot();
+
+    if(Rogue_ShouldDisableMainQuests())
+        Rogue_PushPopup_MainQuestsDisabled();
+
+    if(Rogue_ShouldDisableChallengeQuests())
+        Rogue_PushPopup_ChallengeQuestsDisabled();
+
+    // Remember adventure replay
+    //
+    gRogueSaveBlock->adventureReplay[ROGUE_ADVENTURE_REPLAY_MOST_RECENT].isValid = TRUE;
+    gRogueSaveBlock->adventureReplay[ROGUE_ADVENTURE_REPLAY_MOST_RECENT].baseSeed = gRogueRun.baseSeed;
+    
+    if(RogueMP_IsActive() && RogueMP_IsClient())
+    {
+        AGB_ASSERT(gRogueMultiplayer != NULL);
+        AGB_ASSERT(gRogueMultiplayer->gameState.adventure.isRunActive);
+        memcpy(&gRogueSaveBlock->adventureReplay[ROGUE_ADVENTURE_REPLAY_MOST_RECENT].difficultyConfig, &gRogueMultiplayer->gameState.hub.difficultyConfig, sizeof(gRogueSaveBlock->difficultyConfig));
+    }
+    else
+    {
+        memcpy(&gRogueSaveBlock->adventureReplay[ROGUE_ADVENTURE_REPLAY_MOST_RECENT].difficultyConfig, &gRogueSaveBlock->difficultyConfig, sizeof(gRogueSaveBlock->difficultyConfig));
+    }
+
+    RogueQuest_CheckQuestRequirements();
+}
+
+static u16 GetRequiredBadgesForEggToHatch(u16 species)
+{
+    // Equiv to egg cyles of 210
+    if(RoguePokedex_IsSpeciesLegendary(species))
+        return ROGUE_MAX_BOSS_COUNT + (ROGUE_MAX_BOSS_COUNT / 2);
+
+    // Badge = 10 egg cyles
+    return gRogueSpeciesInfo[species].eggCycles / 10;
 }
 
 static void EndRogueRun(void)
 {
-    QuestNotify_EndAdventure();
+    HandleForfeitingInCatchingContest();
 
     if(Rogue_IsCampaignActive())
         Rogue_DeactivateActiveCampaign();
 
     FlagClear(FLAG_ROGUE_RUN_ACTIVE);
+    FlagClear(FLAG_ROGUE_IS_VICTORY_LAP);
 
-    //gRogueRun.currentRoomIdx = 0;
     gRogueAdvPath.currentRoomType = ADVPATH_ROOM_NONE;
+    gRogueRun.wildEncounters.roamer.species = SPECIES_NONE;
 
-    // Restore money and give reward here too, as it's a bit easier
-    SetMoney(&gSaveBlock1Ptr->money, gRogueHubData.money);
-    AddMoney(&gSaveBlock1Ptr->money, VarGet(VAR_ROGUE_REWARD_MONEY));
 
-    //gSaveBlock1Ptr->registeredItem = gRogueHubData.registeredItem;
-
-    
-    //gRogueHubData.playTimeHours += gSaveBlock2Ptr->playTimeHours;
-    //gRogueHubData.playTimeMinutes += gSaveBlock2Ptr->playTimeMinutes;
-    //gRogueHubData.playTimeSeconds += gSaveBlock2Ptr->playTimeSeconds;
-    //gRogueHubData.playTimeVBlanks += gSaveBlock2Ptr->playTimeVBlanks;
-
-    gSaveBlock2Ptr->playTimeHours += gRogueHubData.playTimeHours;
-    gSaveBlock2Ptr->playTimeMinutes += gRogueHubData.playTimeMinutes;
-    gSaveBlock2Ptr->playTimeSeconds += gRogueHubData.playTimeSeconds + (gRogueHubData.playTimeVBlanks / 60);
-    gSaveBlock2Ptr->playTimeVBlanks += gRogueHubData.playTimeVBlanks;
-
-    if(gSaveBlock2Ptr->playTimeVBlanks > 60)
+    // We're back from adventure, so any mon we finished or retired with add to the safari
     {
-        gSaveBlock2Ptr->playTimeSeconds += gSaveBlock2Ptr->playTimeVBlanks / 60;
-        gSaveBlock2Ptr->playTimeVBlanks = gSaveBlock2Ptr->playTimeVBlanks % 60;
+        u8 i;
+
+        for(i = 0; i < gPlayerPartyCount; ++i)
+        {
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+            if(species != SPECIES_NONE)
+            {
+                RogueSafari_PushMon(&gPlayerParty[i]);
+            }
+        }
     }
 
-    if(gSaveBlock2Ptr->playTimeSeconds > 60)
+    RogueSave_LoadHubStates();
+    RogueGift_EnsureDynamicCustomMonsAreValid();
+
+    // Trigger before and after as we may have hub/run only quests which are interested in this trigger
+    RogueQuest_OnTrigger(QUEST_TRIGGER_RUN_END);
+    RogueQuest_OnTrigger(QUEST_TRIGGER_MISC_UPDATE);
+    RogueQuest_ActivateQuestsFor(QUEST_CONST_ACTIVE_IN_HUB);
+    RogueQuest_OnTrigger(QUEST_TRIGGER_RUN_END);
+    RogueQuest_OnTrigger(QUEST_TRIGGER_MISC_UPDATE);
+
+    if(Rogue_GetCurrentDifficulty() > 0)
     {
-        gSaveBlock2Ptr->playTimeMinutes += gSaveBlock2Ptr->playTimeSeconds / 60;
-        gSaveBlock2Ptr->playTimeSeconds = gSaveBlock2Ptr->playTimeSeconds % 60;
+        u16 eggSpecies = VarGet(VAR_ROGUE_DAYCARE_EGG_SPECIES);
+
+        // Update the egg we're looking for in the daycare
+        if(eggSpecies != SPECIES_NONE)
+        {
+            u16 eggCounter = VarGet(VAR_ROGUE_DAYCARE_EGG_CYCLES) + Rogue_GetCurrentDifficulty();
+            VarSet(VAR_ROGUE_DAYCARE_EGG_CYCLES, eggCounter);
+
+            if(eggCounter >= GetRequiredBadgesForEggToHatch(eggSpecies))
+            {
+                // Egg has now been cought
+                FlagSet(FLAG_ROGUE_DAYCARE_EGG_READY);
+            }
+        }
+
+        // Give ball guy a random ball
+        ChooseRandomPokeballReward();
+    }
+    else if(Rogue_GetCurrentDifficulty() != ROGUE_MAX_BOSS_COUNT)
+    {
+        // Increment stats
+        IncrementGameStat(GAME_STAT_RUN_LOSSES);
+        IncrementGameStat(GAME_STAT_CURRENT_RUN_LOSS_STREAK);
+        SetGameStat(GAME_STAT_CURRENT_RUN_WIN_STREAK, 0);
+
+        if(GetGameStat(GAME_STAT_CURRENT_RUN_LOSS_STREAK) > GetGameStat(GAME_STAT_LONGEST_RUN_LOSS_STREAK))
+            SetGameStat(GAME_STAT_LONGEST_RUN_LOSS_STREAK, GetGameStat(GAME_STAT_CURRENT_RUN_LOSS_STREAK));
     }
 
-    if(gSaveBlock2Ptr->playTimeMinutes > 60)
-    {
-        gSaveBlock2Ptr->playTimeHours += gSaveBlock2Ptr->playTimeMinutes / 60;
-        gSaveBlock2Ptr->playTimeMinutes = gSaveBlock2Ptr->playTimeMinutes % 60;
-    }
-
-    LoadHubStates();
-
-    // Grow berries based on progress in runs
-    BerryTreeTimeUpdate(90 * gRogueRun.currentRoomIdx);
-
-    // Bug Fix
-    // In past version the bag could glitch out and people could lose access to HMs, so we're going to forcefully give them back here
-    {
-        if(IsQuestCollected(QUEST_Gym1))
-        {
-            if(!CheckBagHasItem(ITEM_HM01_CUT, 1))
-                AddBagItem(ITEM_HM01_CUT, 1);
-        }
-
-        if(IsQuestCollected(QUEST_Gym2))
-        {
-            if(!CheckBagHasItem(ITEM_HM05_FLASH, 1))
-                AddBagItem(ITEM_HM05_FLASH, 1);
-        }
-
-        if(IsQuestCollected(QUEST_Gym3))
-        {
-            if(!CheckBagHasItem(ITEM_HM06_ROCK_SMASH, 1))
-                AddBagItem(ITEM_HM06_ROCK_SMASH, 1);
-        }
-
-        if(IsQuestCollected(QUEST_Gym4))
-        {
-            if(!CheckBagHasItem(ITEM_HM04_STRENGTH, 1))
-                AddBagItem(ITEM_HM04_STRENGTH, 1);
-        }
-
-        if(IsQuestCollected(QUEST_Gym5))
-        {
-            if(!CheckBagHasItem(ITEM_HM08_DIVE, 1))
-                AddBagItem(ITEM_HM08_DIVE, 1);
-        }
-
-        if(IsQuestCollected(QUEST_Gym6))
-        {
-            if(!CheckBagHasItem(ITEM_HM02_FLY, 1))
-                AddBagItem(ITEM_HM02_FLY, 1);
-        }
-
-        if(IsQuestCollected(QUEST_Gym7))
-        {
-            if(!CheckBagHasItem(ITEM_HM07_WATERFALL, 1))
-                AddBagItem(ITEM_HM07_WATERFALL, 1);
-        }
-
-        if(IsQuestCollected(QUEST_Gym8))
-        {
-            if(!CheckBagHasItem(ITEM_HM03_SURF, 1))
-                AddBagItem(ITEM_HM03_SURF, 1);
-        }
-    }
+    RogueQuest_CheckQuestRequirements();
+    RogueHub_UpdateWanderMons();
 }
 
-static u16 GetBossHistoryKey(u16 bossId)
+static u16 SelectLegendarySpecies(u8 legendId)
 {
-    //if(FlagGet(FLAG_ROGUE_RAINBOW_MODE))
-    //    return gRogueBossEncounters.trainers[bossId].incTypes[0];
-    //else
-    //    return bossId;
+    u16 i;
+    u16 species;
+    RogueMonQuery_Begin();
+    RogueMonQuery_Reset(QUERY_FUNC_EXCLUDE);
 
-    // We're gonna always use the trainer's assigned type to prevent dupes
-    // The history buffer will be wiped between stages to allow for types to re-appear later e.g. juan can appear as gym and wallace can appear as champ
-    u16 type = gRogueBossEncounters.trainers[bossId].incTypes[0];
-
-    // None type trainers are unqiue, so we don't care about the type repeat
-    if(type == TYPE_NONE)
-        return NUMBER_OF_MON_TYPES + bossId;
-
-    return type;
-}
-
-static bool8 IsBossEnabled(u16 bossId)
-{
-    const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[bossId];
-    u16 includeFlags = TRAINER_FLAG_NONE;
-    u16 excludeFlags = TRAINER_FLAG_NONE;
-    
-    if(!FlagGet(FLAG_ROGUE_RAINBOW_MODE))
+    // Only include legends which we have valid encounter maps for
+    for(i = 0; i < gRogueLegendaryEncounterInfo.mapCount; ++i)
     {
-        if(FlagGet(FLAG_ROGUE_HOENN_BOSSES))
-            includeFlags |= TRAINER_FLAG_HOENN;
+        species = gRogueLegendaryEncounterInfo.mapTable[i].encounterId;
 
-        if(FlagGet(FLAG_ROGUE_KANTO_BOSSES))
-            includeFlags |= TRAINER_FLAG_KANTO;
-
-        if(FlagGet(FLAG_ROGUE_JOHTO_BOSSES))
-            includeFlags |= TRAINER_FLAG_JOHTO;
-
-        // Use the custom fallback set >:3
-        if(includeFlags == TRAINER_FLAG_NONE)
-        {
-            includeFlags |= TRAINER_FLAG_FALLBACK_REGION;
-        }
-
-        if(gRogueRun.currentDifficulty < 8)
-            excludeFlags |= TRAINER_FLAG_ELITE | TRAINER_FLAG_PRE_CHAMP | TRAINER_FLAG_FINAL_CHAMP;
-        else if(gRogueRun.currentDifficulty < 12)
-            excludeFlags |= TRAINER_FLAG_GYM | TRAINER_FLAG_PRE_CHAMP | TRAINER_FLAG_FINAL_CHAMP;
-        else if(gRogueRun.currentDifficulty < 13)
-            excludeFlags |= TRAINER_FLAG_GYM | TRAINER_FLAG_ELITE | TRAINER_FLAG_FINAL_CHAMP;
-        else if(gRogueRun.currentDifficulty < 14)
-            excludeFlags |= TRAINER_FLAG_GYM | TRAINER_FLAG_ELITE | TRAINER_FLAG_PRE_CHAMP;
+        if(Query_IsSpeciesEnabled(species))
+            RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, species);
     }
-    else
-    {
-        excludeFlags |= TRAINER_FLAG_RAINBOW_EXCLUDE;
 
-        if(gRogueRun.currentDifficulty >= 13)
-            includeFlags |= TRAINER_FLAG_RAINBOW_CHAMP;
+    for(i = 0; i < ADVPATH_LEGEND_COUNT; ++i)
+    {
+        if(gRogueRun.legendarySpecies[i] != SPECIES_NONE)
+            RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, gRogueRun.legendarySpecies[i]);
+    }
+
+    switch (legendId)
+    {
+    case ADVPATH_LEGEND_BOX:
+        RogueMonQuery_IsBoxLegendary(QUERY_FUNC_INCLUDE);
+        break;
+
+    case ADVPATH_LEGEND_MINOR:
+        RogueMonQuery_IsBoxLegendary(QUERY_FUNC_EXCLUDE);
+        break;
+
+    case ADVPATH_LEGEND_ROAMER:
+        RogueMonQuery_IsRoamerLegendary(QUERY_FUNC_INCLUDE);
+        break;
+
+    default:
+        AGB_ASSERT(FALSE);
+        break;
+    }
+
+    RogueWeightQuery_Begin();
+    {
+        RogueWeightQuery_FillWeights(1);
+        if(RogueWeightQuery_HasAnyWeights())
+        {
+            species = RogueWeightQuery_SelectRandomFromWeights(RogueRandom());
+        }
         else
         {
-            // Don't use special trainers for rainbow mode
-            if(gRogueBossEncounters.trainers[bossId].incTypes[0] == TYPE_NONE)
-                return FALSE;
+            AGB_ASSERT(FALSE);
+            species = SPECIES_NONE;
         }
     }
+    RogueWeightQuery_End();
 
-    if(excludeFlags != TRAINER_FLAG_NONE && (trainer->trainerFlags & excludeFlags) != 0)
+    RogueMonQuery_End();
+
+#ifdef ROGUE_DEBUG
+    // Call this to throw asserts early
+    Rogue_GetLegendaryRoomForSpecies(species);
+#endif
+
+    return species;
+}
+
+static void ChooseLegendarysForNewAdventure()
+{
+    bool8 spawnRoamer = RogueRandomChance(50, 0);
+    bool8 spawnMinor = RogueRandomChance(75, 0);
+    bool8 spawnBox = TRUE;
+
+    // Always have 1
+    if(!spawnRoamer && !spawnMinor)
     {
-        return FALSE;
+        if(RogueRandom() % 2)
+            spawnRoamer = TRUE;
+        else
+            spawnMinor = TRUE;
     }
 
-    if(includeFlags == TRAINER_FLAG_NONE || (trainer->trainerFlags & includeFlags) != 0)
+    if(Rogue_GetModeRules()->adventureGenerator == ADV_GENERATOR_GAUNTLET)
     {
-        if(!HistoryBufferContains(&gRogueRun.bossHistoryBuffer[0], ARRAY_COUNT(gRogueRun.bossHistoryBuffer), GetBossHistoryKey(bossId)))
-        {
+        // Gauntlet always generates a minor legendary only
+        spawnRoamer = FALSE;
+        spawnMinor = TRUE;
+        spawnBox = FALSE;
+        
+    }
+
+    // DEBUG - Force all legends to spawn
+    if(RogueDebug_GetConfigToggle(DEBUG_TOGGLE_DEBUG_LEGENDS))
+    {
+        spawnRoamer = TRUE;
+        spawnMinor = TRUE;
+    }
+
+    // Reset
+    memset(&gRogueRun.legendarySpecies, 0, sizeof(gRogueRun.legendarySpecies));
+    memset(&gRogueRun.legendaryDifficulties, ROGUE_MAX_BOSS_COUNT, sizeof(gRogueRun.legendaryDifficulties));
+
+
+    // Prioritise box legend first, then roamer, then finally minor
+
+    if(spawnBox)
+    {
+        gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_BOX] = (Rogue_GetModeRules()->adventureGenerator == ADV_GENERATOR_GAUNTLET) ? 0 : ROGUE_ELITE_START_DIFFICULTY - 1 + RogueRandomRange(3, 0);
+        gRogueRun.legendarySpecies[ADVPATH_LEGEND_BOX] = SelectLegendarySpecies(ADVPATH_LEGEND_BOX);
+    }
+
+    if(spawnRoamer)
+    {
+        gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_ROAMER] = (Rogue_GetModeRules()->adventureGenerator == ADV_GENERATOR_GAUNTLET) ? 0 : 1 + RogueRandomRange(5, 0);
+        gRogueRun.legendarySpecies[ADVPATH_LEGEND_ROAMER] = SelectLegendarySpecies(ADVPATH_LEGEND_ROAMER);
+    }
+
+    if(spawnMinor)
+    {
+        gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_MINOR] = (Rogue_GetModeRules()->adventureGenerator == ADV_GENERATOR_GAUNTLET) ? 0 : 4 + RogueRandomRange(4, 0);
+        gRogueRun.legendarySpecies[ADVPATH_LEGEND_MINOR] = SelectLegendarySpecies(ADVPATH_LEGEND_MINOR);
+    }
+
+    // DEBUG - Force all legends to spawn at specific difficulties
+    if(RogueDebug_GetConfigToggle(DEBUG_TOGGLE_DEBUG_LEGENDS))
+    {
+        gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_ROAMER] = 0;
+        gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_MINOR] = 1;
+        gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_BOX] = 2;
+    }
+
+    if(gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_ROAMER] == gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_MINOR])
+        ++gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_MINOR];
+
+    if(gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_ROAMER] == gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_BOX])
+        ++gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_BOX];
+
+    if(gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_MINOR] == gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_BOX])
+        ++gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_BOX];
+}
+
+static u16 ChooseTeamEncounterNum()
+{
+    u16 i;
+    RogueCustomQuery_Begin();
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_KANTO))
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, TEAM_NUM_KANTO_ROCKET);
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_JOHTO))
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, TEAM_NUM_JOHTO_ROCKET);
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_HOENN))
+    {
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, TEAM_NUM_AQUA);
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, TEAM_NUM_MAGMA);
+    }
+
+#ifdef ROGUE_EXPANSION
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_SINNOH))
+        RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, TEAM_NUM_GALACTIC);
+//
+    //if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_UNOVA))
+    //    filter->trainerFlagsInclude |= TRAINER_FLAG_REGION_UNOVA;
+//
+    //if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_KALOS))
+    //    filter->trainerFlagsInclude |= TRAINER_FLAG_REGION_KALOS;
+//
+    //if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_ALOLA))
+    //    filter->trainerFlagsInclude |= TRAINER_FLAG_REGION_ALOLA;
+//
+    //if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_GALAR))
+    //    filter->trainerFlagsInclude |= TRAINER_FLAG_REGION_GALAR;
+//
+    //if(Rogue_GetConfigToggle(CONFIG_TOGGLE_TRAINER_PALDEA))
+    //    filter->trainerFlagsInclude |= TRAINER_FLAG_REGION_PALDEA;
+#endif
+
+    if(!RogueMiscQuery_AnyActiveElements())
+    {
+        // Enable all teams if we wouldn't have one active now
+        for(i = 0; i < TEAM_NUM_COUNT; ++i)
+            RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, i);
+    }
+
+    RogueWeightQuery_Begin();
+    {
+        RogueWeightQuery_FillWeights(1);
+
+        i = RogueWeightQuery_SelectRandomFromWeights(RogueRandom());
+    }
+    RogueWeightQuery_End();
+
+    RogueCustomQuery_End();
+
+    if(RogueDebug_GetConfigRange(DEBUG_RANGE_FORCED_EVIL_TEAM) != 0)
+    {
+        return RogueDebug_GetConfigRange(DEBUG_RANGE_FORCED_EVIL_TEAM) - 1;
+    }
+
+    return i;
+}
+
+static void ChooseTeamEncountersForNewAdventure()
+{
+    u16 i;
+
+    // Reset
+    memset(&gRogueRun.teamEncounterRooms, 0, sizeof(gRogueRun.teamEncounterRooms));
+    memset(&gRogueRun.teamEncounterDifficulties, ROGUE_MAX_BOSS_COUNT, sizeof(gRogueRun.teamEncounterDifficulties));
+
+    // Select a random active team to encounter this run
+    gRogueRun.teamEncounterNum = ChooseTeamEncounterNum();
+
+    Rogue_ChooseTeamBossTrainerForNewAdventure();
+
+    // Don't place any of these encounters
+    if(Rogue_GetModeRules()->adventureGenerator == ADV_GENERATOR_GAUNTLET)
+        return;
+
+    // Setup maps (There's only 1 per each currently)
+    for(i = 0; i < gRogueTeamEncounterInfo.mapCount; ++i)
+    {
+        if(gRogueTeamEncounterInfo.mapTable[i].encounterId == gRogueRun.teamEncounterNum)
+            gRogueRun.teamEncounterRooms[ADVPATH_TEAM_ENCOUNTER_EARLY] = i;
+        else if(gRogueTeamEncounterInfo.mapTable[i].encounterId == gRogueRun.teamEncounterNum + TEAM_PRE_LEGEND_MAP_OFFSET)
+            gRogueRun.teamEncounterRooms[ADVPATH_TEAM_ENCOUNTER_PRE_LEGEND] = i;
+    }
+
+    // Pre legend matches the difficulty
+    gRogueRun.teamEncounterDifficulties[ADVPATH_TEAM_ENCOUNTER_PRE_LEGEND] = gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_BOX];
+
+    // Early can be anytime from badge 2 to badge 5 (provided there is no legend at that time)
+    while(TRUE)
+    {
+        gRogueRun.teamEncounterDifficulties[ADVPATH_TEAM_ENCOUNTER_EARLY] = 2 + RogueRandomRange(3, 0);
+
+        if(gRogueRun.teamEncounterDifficulties[ADVPATH_TEAM_ENCOUNTER_EARLY] == gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_MINOR])
+            continue;
+        if(gRogueRun.teamEncounterDifficulties[ADVPATH_TEAM_ENCOUNTER_EARLY] == gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_ROAMER])
+            continue;
+
+        break;
+    };
+}
+
+u8 Rogue_GetCurrentLegendaryEncounterId()
+{
+    u8 i;
+
+    for(i = 0; i < ADVPATH_LEGEND_COUNT; ++i)
+    {
+        if(gRogueRun.legendaryDifficulties[i] == Rogue_GetCurrentDifficulty())
+            return i;
+    }
+
+    AGB_ASSERT(FALSE);
+    return 0;
+}
+
+u16 Rogue_GetLegendaryRoomForSpecies(u16 species)
+{
+    u16 i;
+
+    for(i = 0; i < gRogueLegendaryEncounterInfo.mapCount; ++i)
+    {
+        if(gRogueLegendaryEncounterInfo.mapTable[i].encounterId == species)
+            return i;
+    }
+
+    AGB_ASSERT(FALSE);
+    return 0;
+}
+
+u8 Rogue_GetCurrentTeamHideoutEncounterId(void)
+{
+    u8 i;
+
+    for(i = 0; i < ADVPATH_TEAM_ENCOUNTER_COUNT; ++i)
+    {
+        if(gRogueRun.teamEncounterDifficulties[i] == Rogue_GetCurrentDifficulty())
+            return i;
+    }
+
+    AGB_ASSERT(FALSE);
+    return 0;
+}
+
+bool8 Rogue_IsBattleAlphaMon(u16 species)
+{
+    // Roamer legend fight is not an alpha fight
+    if(gRogueRun.legendarySpecies[ADVPATH_LEGEND_MINOR] == species && gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_MINOR] == Rogue_GetCurrentDifficulty())
+        return TRUE;
+
+    if(gRogueRun.legendarySpecies[ADVPATH_LEGEND_BOX] == species && gRogueRun.legendaryDifficulties[ADVPATH_LEGEND_BOX] == Rogue_GetCurrentDifficulty())
+        return TRUE;
+
+    if(Rogue_IsRunActive())
+    {
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_GAMESHOW && species == SPECIES_ELECTRODE)
             return TRUE;
-        }
+
+        if(gRogueLocal.wildBattleCustomMonId != 0)
+            return TRUE;
     }
+    
+    return FALSE;
+}
+
+bool8 Rogue_IsBattleRoamerMon(u16 species)
+{
+    if(gRogueRun.legendarySpecies[ADVPATH_LEGEND_ROAMER] == species)
+        return TRUE;
 
     return FALSE;
 }
 
-static u16 NextBossId()
-{
-    u16 i;
-    u16 randIdx;
-    u16 enabledBossesCount = 0;
-
-    for(i = 0; i < gRogueBossEncounters.count; ++i)
-    {
-        if(IsBossEnabled(i))
-            ++enabledBossesCount;
-    }
-
-    randIdx = RogueRandomRange(enabledBossesCount, OVERWORLD_FLAG);
-    enabledBossesCount = 0;
-
-    for(i = 0; i < gRogueBossEncounters.count; ++i)
-    {
-        if(IsBossEnabled(i))
-        {
-            if(enabledBossesCount == randIdx)
-                return i;
-            else
-                ++enabledBossesCount;
-        }
-    }
-
-    return gRogueBossEncounters.count - 1;
-}
-
-u8 Rogue_SelectBossEncounter(void)
-{
-    u16 bossId = NextBossId();
-
-    HistoryBufferPush(&gRogueRun.bossHistoryBuffer[0], ARRAY_COUNT(gRogueRun.bossHistoryBuffer), GetBossHistoryKey(bossId));
-
-    return bossId;
-}
-
-static bool8 IsLegendaryEncounterEnabled(u16 legendaryId, bool8 applyLegendaryDifficulty)
-{
-    u16 species = gRogueLegendaryEncounterInfo.mapTable[legendaryId].encounterId;
-    u16 maxGen = VarGet(VAR_ROGUE_ENABLED_GEN_LIMIT);
-    bool8 allowStrongSpecies = FALSE;
-
-
-    if(!IsLegendaryEnabled(species))
-    {
-        return FALSE;
-    }
-
-    if(applyLegendaryDifficulty)
-    {
-        allowStrongSpecies = TRUE;
-    }
-    else if(FlagGet(FLAG_ROGUE_EASY_LEGENDARIES))
-    {
-        allowStrongSpecies = TRUE;
-    }
-    else if(FlagGet(FLAG_ROGUE_HARD_LEGENDARIES))
-    {
-        allowStrongSpecies = FALSE;
-    }
-    else
-    {
-        allowStrongSpecies = (gRogueRun.currentDifficulty >= 7);
-    }
-
-
-    if(!allowStrongSpecies)
-    {
-        if(CheckPresetMonFlags(species, MON_FLAG_STRONG_WILD))
-        {
-            // We're not allowed this encounter as it's too strong
-            return FALSE;
-        }
-    }
-
-    if(HistoryBufferContains(&gRogueRun.legendaryHistoryBuffer[0], ARRAY_COUNT(gRogueRun.legendaryHistoryBuffer), legendaryId))
-    {
-        return FALSE;
-    }
-  
-    return TRUE;
-}
-
-static u16 NextLegendaryId(bool8 applyLegendaryDifficulty)
-{
-    u16 i;
-    u16 randIdx;
-    u16 enabledLegendariesCount = 0;
-
-    for(i = 0; i < gRogueLegendaryEncounterInfo.mapCount; ++i)
-    {
-        if(IsLegendaryEncounterEnabled(i, applyLegendaryDifficulty))
-            ++enabledLegendariesCount;
-    }
-
-    if(enabledLegendariesCount == 0)
-    {
-        // We've exhausted all enabled legendary options, so we're going to wipe the buffer and try again
-        memset(&gRogueRun.legendaryHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.legendaryHistoryBuffer));
-        return NextLegendaryId(FALSE);
-    }
-
-    randIdx = RogueRandomRange(enabledLegendariesCount, OVERWORLD_FLAG);
-    enabledLegendariesCount = 0;
-
-    for(i = 0; i < gRogueLegendaryEncounterInfo.mapCount; ++i)
-    {
-        if(IsLegendaryEncounterEnabled(i, applyLegendaryDifficulty))
-        {
-            if(enabledLegendariesCount == randIdx)
-                return i;
-            else
-                ++enabledLegendariesCount;
-        }
-    }
-
-    return gRogueLegendaryEncounterInfo.mapCount - 1;
-}
-
-u8 Rogue_SelectLegendaryEncounterRoom(void)
-{    
-    u16 legendaryId = NextLegendaryId(TRUE);
-
-    HistoryBufferPush(&gRogueRun.legendaryHistoryBuffer[0], ARRAY_COUNT(gRogueRun.legendaryHistoryBuffer), legendaryId);
-
-    return legendaryId;
-}
-
-u8 Rogue_SelectMiniBossEncounterRoom(void)
-{
-    u8 bossId = 0;
-
-    do
-    {
-        bossId = RogueRandomRange(gRogueMiniBossEncounters.count, OVERWORLD_FLAG);
-    }
-    while(HistoryBufferContains(&gRogueRun.miniBossHistoryBuffer[0], ARRAY_COUNT(gRogueRun.miniBossHistoryBuffer), bossId));
-
-    HistoryBufferPush(&gRogueRun.miniBossHistoryBuffer[0], ARRAY_COUNT(gRogueRun.miniBossHistoryBuffer), bossId);
-
-    return bossId;
-}
-
-
-
 void Rogue_SelectMiniBossRewardMons()
 {
     u16 indexA, indexB;
-    u32 startSeed = gRngRogueValue;
+    RAND_TYPE startSeed = gRngRogueValue;
     u8 partySize = CalculateEnemyPartyCount();
 
     if(partySize == 1)
@@ -2838,7 +4780,7 @@ void Rogue_SelectMiniBossRewardMons()
             species = GetMonData(&gEnemyParty[indexA], MON_DATA_SPECIES);
 
             // Accept first non legendary
-            if(!IsSpeciesLegendary(species))
+            if(!RoguePokedex_IsSpeciesLegendary(species))
                 break;
             
             indexA = (indexA + 1) % partySize;
@@ -2855,7 +4797,7 @@ void Rogue_SelectMiniBossRewardMons()
             if(indexB != indexA)
             {
                 // Accept first non legendary
-                if(!IsSpeciesLegendary(species))
+                if(!RoguePokedex_IsSpeciesLegendary(species))
                     break;
             }
             
@@ -2869,7 +4811,7 @@ void Rogue_SelectMiniBossRewardMons()
     gRngRogueValue = startSeed;
 }
 
-static u8 RandomMonType(u16 seedFlag)
+static u8 UNUSED RandomMonType(u16 seedFlag)
 {
     u8 type;
 
@@ -2877,118 +4819,254 @@ static u8 RandomMonType(u16 seedFlag)
     {
         type = RogueRandomRange(NUMBER_OF_MON_TYPES, seedFlag);
     }
-    while(type == TYPE_MYSTERY);
+    while(!IS_STANDARD_TYPE(type));
 
     return type;
 }
 
+static u8 WildDenEncounter_CalculateWeight(u16 index, u16 species, void* data)
+{
+    if(IsRareWeightedSpecies(species))
+    {
+        // Rare species become more common into late game
+        if(Rogue_GetCurrentDifficulty() >= ROGUE_GYM_MID_DIFFICULTY + 1)
+            return 3;
+        else if(Rogue_GetCurrentDifficulty() >= ROGUE_GYM_MID_DIFFICULTY - 1)
+            return 2;
+        else
+            return 1;
+    }
+
+    return 3;
+}
+
 u16 Rogue_SelectWildDenEncounterRoom(void)
 {
-    u16 queryCount;
     u16 species;
 
-    RogueQuery_Clear();
+    RogueMonQuery_Begin();
 
-    RogueQuery_SpeciesIsValid(RandomMonType(FLAG_SET_SEED_WILDMONS), TYPE_NONE, TYPE_NONE);
-    RogueQuery_SpeciesExcludeCommon();
-    RogueQuery_SpeciesIsNotLegendary();
-    RogueQuery_TransformToEggSpecies();
+    RogueMonQuery_IsSpeciesActive();
+    RogueMonQuery_IsLegendary(QUERY_FUNC_EXCLUDE);
+    RogueMonQuery_TransformIntoEggSpecies();
+    RogueMonQuery_TransformIntoEvos(Rogue_CalculatePlayerMonLvl(), TRUE, FALSE);
 
-    if(Rogue_GetActiveCampaign() != ROGUE_CAMPAIGN_LOW_BST)
+    // Remove random entries until we can safely calcualte weights without going over
+    while(RogueWeightQuery_IsOverSafeCapacity())
     {
-        RogueQuery_EvolveSpecies(CalculatePlayerLevel(), TRUE);
+        RogueMiscQuery_FilterByChance(RogueRandom(), QUERY_FUNC_INCLUDE, 50, 1);
     }
 
-    // Have to use uncollapsed queries as this query is too large otherwise
-    queryCount = RogueQuery_UncollapsedSpeciesSize();
+    // Now transform back into egg species, so the spawning should still be deteministic 
+    // (although the type hints could be invalid)
+    if(IsCurseActive(EFFECT_WILD_EGG_SPECIES))
+        RogueMonQuery_TransformIntoEggSpecies();
 
-    do
+    RogueWeightQuery_Begin();
     {
-        species = RogueQuery_AtUncollapsedIndex(RogueRandomRange(queryCount, FLAG_SET_SEED_WILDMONS));
+        RogueWeightQuery_CalculateWeights(WildDenEncounter_CalculateWeight, NULL);
+
+        species = RogueWeightQuery_SelectRandomFromWeights(RogueRandom());
     }
-    while(species == SPECIES_NONE);
+    RogueWeightQuery_End();
+
+    RogueMonQuery_End();
 
     return species;
 }
 
-static bool8 IsRouteEnabled(u16 routeId)
+//static u8 HoneyTree_CalculateWeight(u16 weightIndex, u16 species, void* data)
+//{
+//    u32 weight;
+//    u8 type1 = RoguePokedex_GetSpeciesType(species, 0);
+//    u8 type2 = RoguePokedex_GetSpeciesType(species, 1);
+//
+//    u8 matchingTypes = 0;
+//    if(IS_STANDARD_TYPE(type1) && (gRogueRun.honeyTreePokeblockTypeFlags & MON_TYPE_VAL_TO_FLAGS(type1)))
+//        ++matchingTypes;
+//
+//    if(type1 != type2 && IS_STANDARD_TYPE(type2) && (gRogueRun.honeyTreePokeblockTypeFlags & MON_TYPE_VAL_TO_FLAGS(type2)))
+//        ++matchingTypes;
+//
+//    if(matchingTypes == 2)
+//        weight = 32;
+//    else
+//        weight = 1;
+//
+//    if(IsRareWeightedSpecies(species))
+//    {
+//        weight /= 2;
+//
+//        if(weight == 0)
+//            weight = 1;
+//    }
+//
+//    return weight;
+//}
+
+u16 Rogue_SelectHoneyTreeEncounterRoom(void)
 {
-    const struct RogueRouteEncounter* route = &gRogueRouteTable.routes[routeId];
-    u16 includeFlags = ROUTE_FLAG_NONE;
-    u16 excludeFlags = ROUTE_FLAG_NONE;
-    
-    if(FlagGet(FLAG_ROGUE_HOENN_ROUTES))
-        includeFlags |= ROUTE_FLAG_HOENN;
+    // Intentionally use Random instead of RogueRandom as this may be conditionally rerolled per player
+    // so could break with sacred ash
+    //
+    u16 species;
+    u32 typeFlags;
 
-    if(FlagGet(FLAG_ROGUE_KANTO_ROUTES))
-        includeFlags |= ROUTE_FLAG_KANTO;
+    if(!HasHoneyTreeEncounterPending())
+        return SPECIES_NONE;
 
-    if(FlagGet(FLAG_ROGUE_JOHTO_ROUTES))
-        includeFlags |= ROUTE_FLAG_JOHTO;
+    species = SPECIES_NONE;
+    typeFlags = gRogueRun.honeyTreePokeblockTypeFlags;
 
-    // Use the custom fallback set >:3
-    if(includeFlags == ROUTE_FLAG_NONE)
+    while(species == SPECIES_NONE)
     {
-        includeFlags |= ROUTE_FLAG_FALLBACK_REGION;
-    }
+        RogueMonQuery_Begin();
 
-    if(excludeFlags != ROUTE_FLAG_NONE && (route->mapFlags & excludeFlags) != 0)
-    {
-        return FALSE;
-    }
+        RogueMonQuery_IsSpeciesActive();
 
-    if(includeFlags == ROUTE_FLAG_NONE || (route->mapFlags & includeFlags) != 0)
-    {
-        if(!HistoryBufferContains(&gRogueRun.routeHistoryBuffer[0], ARRAY_COUNT(gRogueRun.routeHistoryBuffer), routeId))
+        // Prefilter to mons of types we're interested in
+        RogueMonQuery_EvosContainType(QUERY_FUNC_INCLUDE, typeFlags);
+        RogueMonQuery_IsLegendary(QUERY_FUNC_EXCLUDE);
+
+        RogueMonQuery_TransformIntoEggSpecies();
+        RogueMonQuery_TransformIntoEvos(Rogue_CalculatePlayerMonLvl(), TRUE, FALSE);
+
+        // Now we've evolved we're only caring about mons of this type
+        //RogueMonQuery_IsOfType(QUERY_FUNC_INCLUDE, typeFlags);
         {
-            return TRUE;
+            // Go through all types 1 by 1 and filter on top, so we only get matching dual types
+            u8 type;
+
+            for(type = 0; type < NUMBER_OF_MON_TYPES; ++type)
+            {
+                u32 currTypeFlag = MON_TYPE_VAL_TO_FLAGS(type);
+
+                if(IS_STANDARD_TYPE(type) && (typeFlags & currTypeFlag))
+                    RogueMonQuery_IsOfType(QUERY_FUNC_INCLUDE, currTypeFlag);
+            }
         }
-    }
 
-    return FALSE;
-}
-
-static u16 NextRouteId()
-{
-    u16 i;
-    u16 randIdx;
-    u16 enabledRoutesCount = 0;
-
-    for(i = 0; i < gRogueRouteTable.routeCount; ++i)
-    {
-        if(IsRouteEnabled(i))
-            ++enabledRoutesCount;
-    }
-
-    if(enabledRoutesCount == 0)
-    {
-        // We've exhausted all enabled route options, so we're going to wipe the buffer and try again
-        memset(&gRogueRun.routeHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.routeHistoryBuffer));
-        return NextRouteId();
-    }
-
-    randIdx = RogueRandomRange(enabledRoutesCount, OVERWORLD_FLAG);
-    enabledRoutesCount = 0;
-
-    for(i = 0; i < gRogueRouteTable.routeCount; ++i)
-    {
-        if(IsRouteEnabled(i))
+        // Remove random entries until we can safely calcualte weights without going over
+        while(RogueWeightQuery_IsOverSafeCapacity())
         {
-            if(enabledRoutesCount == randIdx)
-                return i;
+            RogueMiscQuery_FilterByChance(Random(), QUERY_FUNC_INCLUDE, 50, 1);
+        }
+
+        // Now transform back into egg species, so the spawning should still be deteministic 
+        // (although the type hints could be invalid)
+        if(IsCurseActive(EFFECT_WILD_EGG_SPECIES))
+            RogueMonQuery_TransformIntoEggSpecies();
+
+        RogueWeightQuery_Begin();
+        {
+            RogueWeightQuery_FillWeights(1);
+            //RogueWeightQuery_CalculateWeights(HoneyTree_CalculateWeight, NULL);
+
+            if(RogueWeightQuery_HasAnyWeights())
+            {
+                species = RogueWeightQuery_SelectRandomFromWeights(Random());
+            }
             else
-                ++enabledRoutesCount;
+            {
+                // Randomly remove one of the type flags for the next attempt
+                u8 randType = Random() % NUMBER_OF_MON_TYPES;
+
+                while(!IS_STANDARD_TYPE(randType) || (typeFlags & MON_TYPE_VAL_TO_FLAGS(randType)) == 0)
+                {
+                    randType = Random() % NUMBER_OF_MON_TYPES;
+                }
+
+                typeFlags &= ~MON_TYPE_VAL_TO_FLAGS(randType);
+            }
         }
+        RogueWeightQuery_End();
+
+        RogueMonQuery_End();
     }
 
-    return gRogueRouteTable.routeCount - 1;
+    return species;
 }
 
-u8 Rogue_SelectRouteRoom(void)
+void Rogue_ResetAdventurePathBuffers()
 {
-    u16 routeId = NextRouteId();
+    memset(&gRogueAdvPath.routeHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueAdvPath.routeHistoryBuffer));
+}
 
-    HistoryBufferPush(&gRogueRun.routeHistoryBuffer[0], ARRAY_COUNT(gRogueRun.routeHistoryBuffer), routeId);
+static u8 SelectRouteRoom_CalculateWeight(u16 index, u16 routeId, void* data, bool8 applyDelaySeeds)
+{
+    u8 const roomDelay = 3; // maybe can increase this once added more routes
+    u8 difficulty = *((u8*)data);
+    u16 currentSeed = difficulty % roomDelay;
+    u16 roomSeed = (gRogueRun.baseSeed * 2135 ^ (13890 * routeId)) % roomDelay;
+
+    if(HistoryBufferContains(&gRogueAdvPath.routeHistoryBuffer[0], ARRAY_COUNT(gRogueAdvPath.routeHistoryBuffer), routeId))
+    {
+        // Don't repeat routes on same screen
+        return 0;
+    }
+
+    if(applyDelaySeeds)
+    {
+        if(roomSeed == currentSeed)
+            return 255;
+        else
+            // Don't place routes we've recently seen
+            return 0;
+    }
+    else
+    {
+        return 255;
+    }
+}
+
+static u8 SelectRouteRoom_CalculateWeightDefault(u16 index, u16 routeId, void* data)
+{
+    return SelectRouteRoom_CalculateWeight(index, routeId, data, TRUE);
+}
+
+static u8 SelectRouteRoom_CalculateWeightFallback(u16 index, u16 routeId, void* data)
+{
+    return SelectRouteRoom_CalculateWeight(index, routeId, data, FALSE);
+}
+
+u8 Rogue_SelectRouteRoom(u8 difficulty)
+{
+    u16 routeId;
+
+    RogueCustomQuery_Begin();
+    {
+        u16 i;
+        
+        for(i = 0; i < gRogueRouteTable.routeCount; ++i)
+        {
+            RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, i);
+        }
+
+        RogueWeightQuery_Begin();
+        {
+            RogueWeightQuery_CalculateWeights(SelectRouteRoom_CalculateWeightDefault, &difficulty);
+
+            if(!RogueWeightQuery_HasAnyWeights())
+            {
+                // Fallback and include all routes
+                RogueWeightQuery_CalculateWeights(SelectRouteRoom_CalculateWeightFallback, &difficulty);
+            }
+
+            routeId = RogueWeightQuery_SelectRandomFromWeights(RogueRandom());
+        }
+        RogueWeightQuery_End();
+    }
+    RogueCustomQuery_End();
+
+    // Sanity check that we haven't already placed this route on this path
+    AGB_ASSERT(!HistoryBufferContains(&gRogueAdvPath.routeHistoryBuffer[0], ARRAY_COUNT(gRogueAdvPath.routeHistoryBuffer), routeId));
+
+    HistoryBufferPush(&gRogueAdvPath.routeHistoryBuffer[0], ARRAY_COUNT(gRogueAdvPath.routeHistoryBuffer), routeId);
+
+    if(RogueDebug_GetConfigRange(DEBUG_RANGE_FORCED_ROUTE) != 0)
+    {
+        routeId = RogueDebug_GetConfigRange(DEBUG_RANGE_FORCED_ROUTE) - 1;
+    }
 
     return routeId;
 }
@@ -2999,13 +5077,8 @@ static void ResetSpecialEncounterStates(void)
     // Rayquaza
     VarSet(VAR_SKY_PILLAR_STATE, 2); // Keep in clean layout, but act as is R is has left for G/K cutscene
     //VarSet(VAR_SKY_PILLAR_RAQUAZA_CRY_DONE, 1); // Hide cutscene R
-    FlagClear(FLAG_DEFEATED_RAYQUAZA);
     FlagClear(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL); // Show battle
     FlagSet(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA); // Hide cutscene R
-
-    // Groudon + Kyogre
-    FlagClear(FLAG_DEFEATED_GROUDON);
-    FlagClear(FLAG_DEFEATED_KYOGRE);
 
     // Mew
     FlagClear(FLAG_HIDE_MEW);
@@ -3019,13 +5092,6 @@ static void ResetSpecialEncounterStates(void)
     // Ho-oh + Lugia
     FlagClear(FLAG_CAUGHT_HO_OH);
     FlagClear(FLAG_CAUGHT_LUGIA);
-    FlagClear(FLAG_DEFEATED_HO_OH);
-    FlagClear(FLAG_DEFEATED_LUGIA);
-
-    // Regis
-    FlagClear(FLAG_DEFEATED_REGICE);
-    FlagClear(FLAG_DEFEATED_REGISTEEL);
-    FlagClear(FLAG_DEFEATED_REGIROCK);
 
     // Latis
     //FlagClear(FLAG_DEFEATED_LATIAS_OR_LATIOS);
@@ -3035,122 +5101,27 @@ static void ResetSpecialEncounterStates(void)
     //FlagSet(FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE);
 }
 
-bool8 PartyContainsSpecies(struct Pokemon *party, u8 partyCount, u16 species)
-{
-    u8 i;
-    u16 s;
-    for(i = 0; i < partyCount; ++i)
-    {
-        s = GetMonData(&party[i], MON_DATA_SPECIES);
-
-        if(s == species)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-bool8 PartyContainsBaseSpecies(struct Pokemon *party, u8 partyCount, u16 species)
-{
-    u8 i;
-    u16 s;
-
-#ifdef ROGUE_EXPANSION
-    species = GET_BASE_SPECIES_ID(species);
-#endif
-
-    for(i = 0; i < partyCount; ++i)
-    {
-        s = GetMonData(&party[i], MON_DATA_SPECIES);
-
-#ifdef ROGUE_EXPANSION
-        s = GET_BASE_SPECIES_ID(species);
-#endif
-
-        if(s == species)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-bool8 PartyContainsType(struct Pokemon *party, u8 partyCount, u16 type)
-{
-    u8 i;
-    u16 s;
-    for(i = 0; i < partyCount; ++i)
-    {
-        s = GetMonData(&party[i], MON_DATA_SPECIES);
-
-        if(IsSpeciesType(s, type))
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-bool8 PartyContainsLegendary(struct Pokemon *party, u8 partyCount)
-{
-    u8 i;
-    u16 s;
-    for(i = 0; i < partyCount; ++i)
-    {
-        s = GetMonData(&party[i], MON_DATA_SPECIES);
-
-        if(IsSpeciesLegendary(s))
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-static bool8 IsRareShopActive()
-{
-#ifdef ROGUE_EXPANSION        
-    return IsMegaEvolutionEnabled() || IsZMovesEnabled();
-#else
-    return FALSE;
-#endif
-}
-
-static bool8 IsQuestRewardShopActive()
-{
-    // Apply shop reward items (Only applicable in hb)
-    u16 i, j;
-    u16 itemId;
-    
-    if(Rogue_IsRunActive())
-        return FALSE;
-
-    for(i = QUEST_FIRST; i < QUEST_CAPACITY; ++i)
-    {
-        if(IsQuestCollected(i))
-        {
-            for(j = 0; j < QUEST_MAX_ITEM_SHOP_REWARD_COUNT; ++j)
-            {
-                itemId = gRogueQuests[i].unlockedShopRewards[j];
-                if(itemId != ITEM_NONE)
-                    return TRUE;
-            }
-        }
-    }
-
-    return FALSE;
-}
-
 void Rogue_OnWarpIntoMap(void)
 {
-    u8 difficultyLevel;
     gRogueAdvPath.isOverviewActive = FALSE;
 
+    VarSet(VAR_ROGUE_ACTIVE_POKEBLOCK, ITEM_NONE);
     FlagSet(FLAG_ROGUE_REWARD_ITEM_MART_DISABLED);
     FlagSet(FLAG_ROGUE_RARE_ITEM_MART_DISABLED);
 
     if(IsRareShopActive())
         FlagClear(FLAG_ROGUE_RARE_ITEM_MART_DISABLED);
 
-    if(IsQuestRewardShopActive())
-        FlagClear(FLAG_ROGUE_REWARD_ITEM_MART_DISABLED);
+
+    // Set new safari flag on entering area
+    if(gMapHeader.mapLayoutId == LAYOUT_ROGUE_AREA_SAFARI_ZONE || gMapHeader.mapLayoutId == LAYOUT_ROGUE_AREA_SAFARI_ZONE_TUTORIAL || gMapHeader.mapLayoutId == LAYOUT_ROGUE_INTERIOR_SAFARI_CAVE)
+    {
+        FlagSet(FLAG_ROGUE_WILD_SAFARI);
+        RogueSafari_ResetSpawns();
+    }
+    else
+        FlagClear(FLAG_ROGUE_WILD_SAFARI);
+
 
     if(gMapHeader.mapLayoutId == LAYOUT_ROGUE_HUB_TRANSITION)
     {
@@ -3163,17 +5134,21 @@ void Rogue_OnWarpIntoMap(void)
     {
         gRogueAdvPath.isOverviewActive = TRUE;
     }
-    else if((gMapHeader.mapLayoutId == LAYOUT_ROGUE_HUB || gMapHeader.mapLayoutId == LAYOUT_ROGUE_HUB_ADVENTURE_ENTERANCE) && Rogue_IsRunActive())
+    else if((gMapHeader.mapLayoutId == LAYOUT_ROGUE_AREA_ADVENTURE_ENTRANCE || gMapHeader.mapLayoutId == LAYOUT_ROGUE_HUB_ADVENTURE_ENTERANCE) && Rogue_IsRunActive())
     {
         EndRogueRun();
     }
-    else if(GetSafariZoneFlag())
+    else if(gMapHeader.mapLayoutId == LAYOUT_ROGUE_AREA_SAFARI_ZONE_TUTORIAL)
     {
-        // Reset preview data
-        //memset(&gRogueLocal.encounterPreview[0], 0, sizeof(gRogueLocal.encounterPreview));
-//
-        //RandomiseSafariWildEncounters();
-        //Rogue_PushPopup(POPUP_MSG_SAFARI_ENCOUNTERS, 0);
+        // Generate starters now (Do it now, so config/pokedex settings can be used to limit starters moreso)
+        struct StarterSelectionData starters = SelectStarterMons(FALSE);
+        VarSet(VAR_ROGUE_STARTER0, starters.species[0]);
+        VarSet(VAR_ROGUE_STARTER1, starters.species[1]);
+        VarSet(VAR_ROGUE_STARTER2, starters.species[2]);
+
+        FollowMon_SetGraphics(0, starters.species[0], starters.shinyState[0]);
+        FollowMon_SetGraphics(1, starters.species[1], starters.shinyState[1]);
+        FollowMon_SetGraphics(2, starters.species[2], starters.shinyState[2]);
     }
 
     if(Rogue_IsRunActive())
@@ -3182,14 +5157,92 @@ void Rogue_OnWarpIntoMap(void)
     }
     else
     {
-        RogueToD_AddMinutes(30);
+        u16 specialState = VarGet(VAR_ROGUE_SPECIAL_MODE);
+
+        if(specialState != ROGUE_SPECIAL_MODE_NONE)
+        {
+            if(specialState == ROGUE_SPECIAL_MODE_DECORATING)
+            {
+                // Maintain special state provided we're still in any player home area
+                bool8 inHomeMap = RogueHub_IsPlayerBaseLayout(gMapHeader.mapLayoutId);
+
+                if(!inHomeMap)
+                    VarSet(VAR_ROGUE_SPECIAL_MODE, ROGUE_SPECIAL_MODE_NONE);
+            }
+            else
+            {
+                // Clear map state
+                VarSet(VAR_ROGUE_SPECIAL_MODE, ROGUE_SPECIAL_MODE_NONE);
+            }
+        }
+
+
+        // In the hub, clients just copy host state
+        if(RogueMP_IsActive() && RogueMP_IsClient())
+        {
+            AGB_ASSERT(gRogueMultiplayer != NULL);
+            RogueToD_SetTime(gRogueMultiplayer->gameState.hub.timeOfDay);
+            RogueToD_SetSeason(gRogueMultiplayer->gameState.hub.season);
+        }
+        else
+            RogueToD_AddMinutes(15);
     }
 }
 
+static void TryRandomanSpawn(u8 chance)
+{
+    if(Rogue_GetModeRules()->forceRandomanAlwaysActive || IsCurseActive(EFFECT_RANDOMAN_ALWAYS_SPAWN) || RogueRandomChance(chance, OVERWORLD_FLAG))
+    {
+        // Enable random trader
+        FlagClear(FLAG_ROGUE_RANDOM_TRADE_DISABLED);
+
+        // Update tracking flags
+        FlagSet(FLAG_ROGUE_RANDOM_TRADE_WAS_ACTIVE);
+    }
+    else
+    {
+        FlagSet(FLAG_ROGUE_RANDOM_TRADE_DISABLED);
+
+        FlagClear(FLAG_ROGUE_RANDOM_TRADE_WAS_ACTIVE);
+    }
+}
+
+static void TryOptionalRandomanSpawn()
+{
+    if(IsCurseActive(EFFECT_RANDOMAN_ROUTE_SPAWN))
+    {
+        if(gRogueRun.hasPendingRivalBattle)
+        {
+            // Force off in scenario where rival would be here
+            FlagSet(FLAG_ROGUE_RANDOM_TRADE_DISABLED);
+
+            FlagClear(FLAG_ROGUE_RANDOM_TRADE_WAS_ACTIVE);
+        }
+        else
+        {
+            TryRandomanSpawn(20);
+        }
+    }
+}
 
 void Rogue_OnSetWarpData(struct WarpData *warp)
 {
     if(warp->mapGroup == MAP_GROUP(ROGUE_HUB) && warp->mapNum == MAP_NUM(ROGUE_HUB))
+    {
+        // Warping back to hub must be intentional
+        return;
+    }
+    else if(warp->mapGroup == MAP_GROUP(ROGUE_BOSS_VICTORY_LAP) && warp->mapNum == MAP_NUM(ROGUE_BOSS_VICTORY_LAP))
+    {
+        // Never override this warp
+        return;
+    }
+    else if(warp->mapGroup == MAP_GROUP(ROGUE_BOSS_FINAL) && warp->mapNum == MAP_NUM(ROGUE_BOSS_FINAL))
+    {
+        // Never override this warp
+        return;
+    }
+    else if(warp->mapGroup == MAP_GROUP(ROGUE_AREA_ADVENTURE_ENTRANCE) && warp->mapNum == MAP_NUM(ROGUE_AREA_ADVENTURE_ENTRANCE))
     {
         // Warping back to hub must be intentional
         return;
@@ -3199,6 +5252,26 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
         // Warping back to hub must be intentional
         return;
     }
+    else if(warp->mapGroup == MAP_GROUP(ROGUE_ADVENTURE_PATHS) && warp->mapNum == MAP_NUM(ROGUE_ADVENTURE_PATHS))
+    {
+        // Ensure the run has started if we're trying to directly warp into the paths screen
+        if(!Rogue_IsRunActive())
+        {
+            BeginRogueRun();
+        }
+    }
+    else if(warp->warpId != 0 && warp->mapGroup == gSaveBlock1Ptr->location.mapGroup && warp->mapNum == gSaveBlock1Ptr->location.mapNum)
+    {
+        // Allow warping to non-0 warps within the same ID
+        if(warp->warpId == WARP_ID_MAP_START)
+        {
+            // Warp back to start of map
+            warp->warpId = 0;
+        }
+        return;
+    }
+
+    FlagClear(FLAG_ROGUE_MAP_EVENT);
 
     // Reset preview data
     memset(&gRogueLocal.encounterPreview[0], 0, sizeof(gRogueLocal.encounterPreview));
@@ -3209,20 +5282,15 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
 
         if(warpType == ROGUE_WARP_TO_ADVPATH)
         {
-            if(gRogueRun.currentRoomIdx == 0)
-                QuestNotify_OnExitHubTransition();
         }
         else if(warpType == ROGUE_WARP_TO_ROOM)
         {
-            ++gRogueRun.currentRoomIdx;
+            ++gRogueRun.enteredRoomCounter;
 
-            VarSet(VAR_ROGUE_REWARD_MONEY, VarGet(VAR_ROGUE_REWARD_MONEY) + 250);
+            FlagSet(FLAG_ROGUE_TERA_ORB_CHARGED);
 
-            if(FlagGet(FLAG_ROGUE_HARD_TRAINERS))
-                VarSet(VAR_ROGUE_REWARD_MONEY, VarGet(VAR_ROGUE_REWARD_MONEY) + 100);
-
-            if(FlagGet(FLAG_ROGUE_HARD_ITEMS))
-                VarSet(VAR_ROGUE_REWARD_MONEY, VarGet(VAR_ROGUE_REWARD_MONEY) + 100);
+            // Grow berries based on progress in runs (This will grow in run berries and hub berries)
+            BerryTreeTimeUpdate(120);
 
             VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
 
@@ -3232,15 +5300,9 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
             {
                 case ADVPATH_ROOM_RESTSTOP:
                 {
-                    if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE) || RogueRandomChance(33, OVERWORLD_FLAG))
-                    {
-                        // Enable random trader
-                        FlagClear(FLAG_ROGUE_RANDOM_TRADE_DISABLED);
-                    }
-                    else
-                    {
-                        FlagSet(FLAG_ROGUE_RANDOM_TRADE_DISABLED);
-                    }
+                    FlagSet(FLAG_ROGUE_DAYCARE_PHONE_CHARGED);
+                    FlagSet(FLAG_ROGUE_COURIER_READY);
+                    TryRandomanSpawn(33);
                     break;
                 }
 
@@ -3250,20 +5312,14 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
 
                     gRogueRun.currentRouteIndex = gRogueAdvPath.currentRoomParams.roomIdx;
 
-                    // Legacy feature legendaries were on random routes (Just keep them in as debug shortcut)
-                    #ifdef ROGUE_DEBUG
-                        FlagSet(FLAG_ROGUE_SPECIAL_ENCOUNTER_ACTIVE);
-                    #else
-                        FlagClear(FLAG_ROGUE_SPECIAL_ENCOUNTER_ACTIVE);
-                    #endif
-
                     RandomiseWildEncounters();
                     ResetTrainerBattles();
+                    RandomiseBerryTrees();
                     RandomiseEnabledTrainers();
                     RandomiseEnabledItems();
-                    RandomiseBerryTrees();
+                    TryOptionalRandomanSpawn();
 
-                    if(gRogueRun.currentDifficulty != 0 && RogueRandomChance(weatherChance, OVERWORLD_FLAG))
+                    if(Rogue_GetCurrentDifficulty() != 0 && RogueRandomChance(weatherChance, OVERWORLD_FLAG))
                     {
                         u8 randIdx = RogueRandomRange(ARRAY_COUNT(gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable), OVERWORLD_FLAG);
                         u16 chosenType = gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable[randIdx];
@@ -3271,113 +5327,76 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
 
                         VarSet(VAR_ROGUE_DESIRED_WEATHER, weatherType);
                     }
+
+                    // Push notification for unique mon
+                    {
+                        u8 i;
+                        u32 customMonId;
+                        u16 species;
+                        u16 count = GetCurrentWildEncounterCount();
+
+                        for(i = 0; i < count; ++i)
+                        {
+                            species = GetWildGrassEncounter(i);
+                            customMonId = RogueGift_TryFindEnabledDynamicCustomMonForSpecies(species);
+
+                            if(customMonId)
+                            {
+                                Rogue_PushPopup_UniquePokemonDetected(species);
+                            }
+                        }
+                    }
+                    break;
+                }
+
+                case ADVPATH_ROOM_TEAM_HIDEOUT:
+                {
+                    gRogueRun.currentRouteIndex = gRogueAdvPath.currentRoomParams.roomIdx;
+
+                    ResetTrainerBattles();
+                    RandomiseEnabledTrainers();
+                    RandomiseEnabledItems();
+                    TryOptionalRandomanSpawn();
+
+                    FlagClear(FLAG_ROGUE_TEAM_BOSS_DISABLED);
+
+                    VarSet(VAR_ROGUE_DESIRED_WEATHER, Rogue_GetTrainerWeather(gRogueRun.teamBossTrainerNum));
                     break;
                 }
 
                 case ADVPATH_ROOM_BOSS:
                 {
-                    const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
+                    u16 trainerNum;
+                    trainerNum = gRogueAdvPath.currentRoomParams.perType.boss.trainerNum;
+                    gRogueLocal.rngSeedToRestore = gRngRogueValue;
 
                     gRogueRun.currentLevelOffset = 0;
+                    RandomiseEnabledTrainers();
                     RandomiseEnabledItems();
 
-                    // Mirror trainer
-                    if(trainer->gfxId == OBJ_EVENT_GFX_BRENDAN_ALT)
-                    {
-                        switch(gSaveBlock2Ptr->playerGender)
-                        {
-                            case(STYLE_EMR_BRENDAN):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BRENDAN_ALT);
-                                break;
-                            case(STYLE_EMR_MAY):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_ALT);
-                                break;
+                    VarSet(VAR_OBJ_GFX_ID_0, Rogue_GetTrainerObjectEventGfx(trainerNum));
+                    VarSet(VAR_ROGUE_DESIRED_WEATHER, Rogue_GetTrainerWeather(trainerNum));
 
-                            case(STYLE_RED):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RED_ALT);
-                                break;
-                            case(STYLE_LEAF):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LEAF_ALT);
-                                break;
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, trainerNum);
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1, Rogue_GetTrainerTypeAssignment(trainerNum));
 
-                            case(STYLE_ETHAN):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ETHAN_ALT);
-                                break;
-                            case(STYLE_LYRA):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LYRA_ALT);
-                                break;
-                        };
-                    }
-                    // Rival Trainer
-                    else if(trainer->gfxId == OBJ_EVENT_GFX_MAY_ALT)
-                    {
-                        switch(gSaveBlock2Ptr->playerGender)
-                        {
-                            case(STYLE_EMR_BRENDAN):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_ALT);
-                                break;
-                            case(STYLE_EMR_MAY):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BRENDAN_ALT);
-                                break;
+                    // Restore seed so it's predictable and we can reliably generate gym team in other encounters
+                    gRngRogueValue = gRogueLocal.rngSeedToRestore;
+                    break;
+                }
 
-                            case(STYLE_RED):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LEAF_ALT);
-                                break;
-                            case(STYLE_LEAF):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RED_ALT);
-                                break;
+                case ADVPATH_ROOM_MINIBOSS:
+                {
+                    u16 trainerNum;
+                    trainerNum = gRogueAdvPath.currentRoomParams.perType.miniboss.trainerNum;
 
-                            case(STYLE_ETHAN):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LYRA_ALT);
-                                break;
-                            case(STYLE_LYRA):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ETHAN_ALT);
-                                break;
-                        };
-                    }
-                    else
-                    {
-                        VarSet(VAR_OBJ_GFX_ID_0, trainer->gfxId);
-                    }
+                    RandomiseEnabledItems();
 
-                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, trainer->trainerId);
-                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1, trainer->incTypes[0]);
+                    VarSet(VAR_OBJ_GFX_ID_0, Rogue_GetTrainerObjectEventGfx(trainerNum));
+                    VarSet(VAR_ROGUE_DESIRED_WEATHER, Rogue_GetTrainerWeather(trainerNum));
 
-                    if((trainer->trainerFlags & TRAINER_FLAG_THIRDSLOT_WEATHER) != 0)
-                    {
-                        // No Weather
-                        VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
-                    }
-
-                    // Set weather type
-                    if((trainer->trainerFlags & TRAINER_FLAG_DISABLE_WEATHER) != 0)
-                    {
-                        // No Weather
-                        VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
-                    }
-                    else if(gRogueRun.currentDifficulty == 0 || FlagGet(FLAG_ROGUE_EASY_TRAINERS))
-                    {
-                        // No Weather
-                        VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
-                    }
-                    else if(FlagGet(FLAG_ROGUE_HARD_TRAINERS) && gRogueRun.currentDifficulty > 0)
-                    {
-                        u8 weatherType = gRogueTypeWeatherTable[trainer->incTypes[0]];
-
-                        if((trainer->trainerFlags & TRAINER_FLAG_THIRDSLOT_WEATHER) != 0)
-                            weatherType = gRogueTypeWeatherTable[trainer->incTypes[2]];
-
-                        VarSet(VAR_ROGUE_DESIRED_WEATHER, weatherType);
-                    }
-                    else if(gRogueRun.currentDifficulty > 2)
-                    {
-                        u8 weatherType = gRogueTypeWeatherTable[trainer->incTypes[0]];
-
-                        if((trainer->trainerFlags & TRAINER_FLAG_THIRDSLOT_WEATHER) != 0)
-                            weatherType = gRogueTypeWeatherTable[trainer->incTypes[2]];
-
-                        VarSet(VAR_ROGUE_DESIRED_WEATHER, weatherType);
-                    }
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, trainerNum);
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1, Rogue_GetTrainerTypeAssignment(trainerNum));
                     break;
                 }
 
@@ -3386,9 +5405,12 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
                     u16 species = gRogueLegendaryEncounterInfo.mapTable[gRogueAdvPath.currentRoomParams.roomIdx].encounterId;
                     ResetSpecialEncounterStates();
                     ResetTrainerBattles();
-                    RandomiseEnabledTrainers();
                     VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, species);
-                    FollowMon_SetGraphics(0, species, TRUE);
+                    FollowMon_SetGraphics(
+                        0, 
+                        species,
+                        gRogueAdvPath.currentRoomParams.perType.legendary.shinyState
+                    );
                     break;
                 }
 
@@ -3396,108 +5418,48 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
                 {
                     ResetSpecialEncounterStates();
                     VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, gRogueAdvPath.currentRoomParams.perType.wildDen.species);
-                    FollowMon_SetGraphics(0, gRogueAdvPath.currentRoomParams.perType.wildDen.species, TRUE);
+                    
+                    FollowMon_SetGraphics(
+                        0, 
+                        gRogueAdvPath.currentRoomParams.perType.wildDen.species, 
+                        gRogueAdvPath.currentRoomParams.perType.wildDen.shinyState
+                    );
                     break;
                 }
 
-                case ADVPATH_ROOM_MINIBOSS:
+                case ADVPATH_ROOM_HONEY_TREE:
                 {
-                    const struct RogueTrainerEncounter* trainer = &gRogueMiniBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
+                    ResetSpecialEncounterStates();
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, gRogueAdvPath.currentRoomParams.perType.honeyTree.species);
 
-                    RandomiseEnabledItems(); // We only want this for the item content
+                    RandomiseWildEncounters();
                     
-                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, trainer->trainerId);
-                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1, trainer->incTypes[0]);
+                    FollowMon_SetGraphics(
+                        0, 
+                        gRogueAdvPath.currentRoomParams.perType.honeyTree.species, 
+                        gRogueAdvPath.currentRoomParams.perType.honeyTree.shinyState
+                    );
 
-                    // Mirror trainer
-                    if(trainer->gfxId == OBJ_EVENT_GFX_BRENDAN_ALT)
-                    {
-                        switch(gSaveBlock2Ptr->playerGender)
-                        {
-                            case(STYLE_EMR_BRENDAN):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BRENDAN_ALT);
-                                break;
-                            case(STYLE_EMR_MAY):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_ALT);
-                                break;
-
-                            case(STYLE_RED):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RED_ALT);
-                                break;
-                            case(STYLE_LEAF):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LEAF_ALT);
-                                break;
-
-                            case(STYLE_ETHAN):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ETHAN_ALT);
-                                break;
-                            case(STYLE_LYRA):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LYRA_ALT);
-                                break;
-                        };
-                    }
-                    // Rival Trainer
-                    else if(trainer->gfxId == OBJ_EVENT_GFX_MAY_ALT)
-                    {
-                        switch(gSaveBlock2Ptr->playerGender)
-                        {
-                            case(STYLE_EMR_BRENDAN):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_MAY_ALT);
-                                break;
-                            case(STYLE_EMR_MAY):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BRENDAN_ALT);
-                                break;
-
-                            case(STYLE_RED):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LEAF_ALT);
-                                break;
-                            case(STYLE_LEAF):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RED_ALT);
-                                break;
-
-                            case(STYLE_ETHAN):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LYRA_ALT);
-                                break;
-                            case(STYLE_LYRA):
-                                VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ETHAN_ALT);
-                                break;
-                        };
-                    }
-                    else
-                    {
-                        VarSet(VAR_OBJ_GFX_ID_0, trainer->gfxId);
-                    }
-
-                    // Set weather type
-                    if((trainer->trainerFlags & TRAINER_FLAG_DISABLE_WEATHER) != 0)
-                    {
-                        // No Weather
-                        VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
-                    }
-                    else if(gRogueRun.currentDifficulty == 0 || FlagGet(FLAG_ROGUE_EASY_TRAINERS))
-                    {
-                        // No Weather
-                        VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
-                    }
-                    else if(FlagGet(FLAG_ROGUE_HARD_TRAINERS) || gRogueRun.currentDifficulty > 2)
-                    {
-                        u8 weatherType = gRogueTypeWeatherTable[trainer->incTypes[0]];
-
-                        if((trainer->trainerFlags & TRAINER_FLAG_THIRDSLOT_WEATHER) != 0)
-                            weatherType = gRogueTypeWeatherTable[trainer->incTypes[2]];
-
-                        VarSet(VAR_ROGUE_DESIRED_WEATHER, weatherType);
-                    }
+                    // Only clear the last scattered Pokeblock once we've actually entered the encounter
+                    ClearHoneyTreePokeblock();
                     break;
                 }
 
                 case ADVPATH_ROOM_LAB:
                 {
+                    u8 i;
                     RandomiseCharmItems();
 
-                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, GetMonData(&gRogueLabEncounterData.party[0], MON_DATA_SPECIES));
-                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1, GetMonData(&gRogueLabEncounterData.party[1], MON_DATA_SPECIES));
-                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA2, GetMonData(&gRogueLabEncounterData.party[2], MON_DATA_SPECIES));
+                    // Copy lab mons into enemy party, so we can send mons to the lab whilst being inside the lab
+                    for(i = 0; i < LAB_MON_COUNT; ++i)
+                    {
+                        struct Pokemon* labMon = GetLabMon(i);
+                        CopyMon(&gEnemyParty[i], labMon, sizeof(struct Pokemon));
+                    }
+
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, GetMonData(&gEnemyParty[0], MON_DATA_SPECIES));
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1, GetMonData(&gEnemyParty[1], MON_DATA_SPECIES));
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA2, GetMonData(&gEnemyParty[2], MON_DATA_SPECIES));
                     break;
                 }
 
@@ -3506,31 +5468,303 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
                     RandomiseCharmItems();
                     break;
                 }
+
+                case ADVPATH_ROOM_SHRINE:
+                {
+                    break;
+                }
+
+                case ADVPATH_ROOM_CATCHING_CONTEST:
+                {
+                    break;
+                }
+
+                case ADVPATH_ROOM_BATTLE_SIM:
+                {
+                    break;
+                }
+
+                case ADVPATH_ROOM_SIGN:
+                {
+                    u8 i;
+                    u16 strongestSpecies = SPECIES_NONE;
+                    u16 trainerNum = gRogueRun.bossTrainerNums[Rogue_GetCurrentDifficulty()];
+
+                    SetupTrainerBattleInternal(trainerNum);
+                    Rogue_CreateTrainerParty(trainerNum, gEnemyParty, PARTY_SIZE, TRUE);
+                    gRngRogueValue = gRogueLocal.rngSeedToRestore;
+
+                    for(i = 0; i < PARTY_SIZE; ++i)
+                    {
+                        u16 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
+                        if(species != SPECIES_NONE)
+                        {
+                            if(strongestSpecies == SPECIES_NONE || RoguePokedex_GetSpeciesBST(species) > RoguePokedex_GetSpeciesBST(strongestSpecies))
+                                strongestSpecies = species;
+                        }
+                    }
+
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, GetMonData(&gEnemyParty[0], MON_DATA_SPECIES));
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA1, Rogue_GetTrainerTypeAssignment(trainerNum));
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA2, strongestSpecies);
+                    break;
+                }
             };
 
-    #ifdef ROGUE_DEBUG
-            //VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_LEAVES);
-    #endif
-
             // Update VARs
-            VarSet(VAR_ROGUE_CURRENT_ROOM_IDX, gRogueRun.currentRoomIdx);
-            VarSet(VAR_ROGUE_CURRENT_LEVEL_CAP, CalculateBossLevel());
+            VarSet(VAR_ROGUE_CURRENT_ROOM_IDX, gRogueRun.enteredRoomCounter);
+            VarSet(VAR_ROGUE_CURRENT_LEVEL_CAP, Rogue_CalculateBossMonLvl());
+
+            RogueQuest_OnTrigger(QUEST_TRIGGER_ENTER_ENCOUNTER);
         }
     }
 
-    QuestNotify_OnWarp(warp);
-}
+    gRogueLocal.totalMoneySpentOnMap = 0;
 
+    FollowMon_OnWarp();
+}
 
 void Rogue_ModifyMapHeader(struct MapHeader *mapHeader)
 {
+    // NOTE: This method shouldn't be used
+    // For some reason editing the map header and repointing stuff messes with other collections in the header
+    // e.g. repointing object events messes with the warps for some reason
 }
 
-void Rogue_ModifyObjectEvents(struct MapHeader *mapHeader, struct ObjectEventTemplate *objectEvents, u8* objectEventCount, u8 objectEventCapacity)
+void Rogue_ModifyMapWarpEvent(struct MapHeader *mapHeader, u8 warpId, struct WarpEvent *warp)
 {
-    if(mapHeader->mapLayoutId == LAYOUT_ROGUE_ADVENTURE_PATHS)
+    RogueHub_ModifyMapWarpEvent(mapHeader, warpId, warp);
+}
+
+bool8 Rogue_AcceptMapConnection(struct MapHeader *mapHeader, const struct MapConnection *connection)
+{
+    if(!RogueHub_AcceptMapConnection(mapHeader, connection))
     {
-        RogueAdv_ModifyObjectEvents(mapHeader, objectEvents, objectEventCount, objectEventCapacity);
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 IsHubMapGroup()
+{
+    return gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROGUE_HUB) || gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROGUE_AREA_HOME) || gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROGUE_INTERIOR_HOME);
+}
+
+static bool8 ShouldAdjustRouteObjectEvents()
+{
+    return gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE || gRogueAdvPath.currentRoomType == ADVPATH_ROOM_TEAM_HIDEOUT || gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS;
+}
+
+void Rogue_ModifyObjectEvents(struct MapHeader *mapHeader, bool8 loadingFromSave, struct ObjectEventTemplate *objectEvents, u8* objectEventCount, u8 objectEventCapacity)
+{
+    bool8 isLoadingSameMap = (gRogueLocal.recentObjectEventLoadedLayout == mapHeader->mapLayoutId);
+    gRogueLocal.recentObjectEventLoadedLayout = mapHeader->mapLayoutId;
+
+    // If we're in run and not trying to exit (gRogueAdvPath.currentRoomType isn't wiped at this point)
+    if(Rogue_IsRunActive() && !IsHubMapGroup())
+    {
+        u8 originalObjectCount = *objectEventCount;
+
+        if(mapHeader->mapLayoutId == LAYOUT_ROGUE_ADVENTURE_PATHS)
+        {
+            RogueAdv_ModifyObjectEvents(mapHeader, objectEvents, objectEventCount, objectEventCapacity);
+        }
+        else if(ShouldAdjustRouteObjectEvents() && !loadingFromSave)
+        {
+            u8 write, read;
+            u16 trainerCounter;
+
+            trainerCounter = 0;
+            write = 0;
+            read = 0;
+
+            for(;read < originalObjectCount; ++read)
+            {
+                if(write != read)
+                {
+                    memcpy(&objectEvents[write], &objectEvents[read], sizeof(struct ObjectEventTemplate));
+                }
+
+                // Adjust trainers
+                //
+                if(objectEvents[write].trainerType == TRAINER_TYPE_NORMAL && objectEvents[write].trainerRange_berryTreeId != 0)
+                {
+                    u16 trainerIndex = trainerCounter++;
+                    u16 trainerNum = Rogue_GetDynamicTrainer(trainerIndex);
+
+                    // Don't increment write, if we're not accepting the trainer // RogueRandomChanceTrainer
+                    if(trainerNum != TRAINER_NONE)
+                    {
+                        objectEvents[write].graphicsId = OBJ_EVENT_GFX_DYNAMIC_TRAINER_FIRST + trainerIndex;
+                        objectEvents[write].flagId = 0;//FLAG_ROGUE_TRAINER0 + ;
+
+                        // Accept this trainer
+                        write++;
+                    }
+                }
+                // Adjust items
+                //
+                else if(objectEvents[write].flagId >= FLAG_ROGUE_ITEM_START && objectEvents[write].flagId <= FLAG_ROGUE_ITEM_END)
+                {
+                    // Already decided this earlier
+                    if(!FlagGet(objectEvents[write].flagId))
+                    {
+                        u16 idx = objectEvents[write].flagId - FLAG_ROGUE_ITEM_START;
+                        u16 itemId = VarGet(VAR_ROGUE_ITEM_START + idx);
+
+                        // Default to a greyed out pokeball
+                        objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_POKE_BALL;
+
+                        if(itemId == ITEM_RARE_CANDY)
+                        {
+                            objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_RARE_CANDY;
+                        }
+#ifdef ROGUE_EXPANSION
+                        else if(itemId >= ITEM_LONELY_MINT && itemId <= ITEM_SERIOUS_MINT)
+                        {
+                            objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_MINT;
+                        }
+                        else if((itemId >= ITEM_BUG_TERA_SHARD && itemId <= ITEM_WATER_TERA_SHARD) || itemId == ITEM_STELLAR_TERA_SHARD)
+                        {
+                            objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_TERA_SHARD;
+                        }
+#endif
+                        else if(Rogue_IsEvolutionItem(itemId))
+                        {
+                            objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_EVO_STONE;
+                        }
+                        else
+                        {
+                            
+                            switch (ItemId_GetPocket(itemId))
+                            {
+                            case POCKET_HELD_ITEMS:
+                                objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_HOLD_ITEM;
+                                break;
+
+                            case POCKET_MEDICINE:
+                                objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_MEDICINE;
+                                break;
+
+                            case POCKET_POKE_BALLS:
+                                objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_BALL;
+                                break;
+
+                            case POCKET_TM_HM:
+                                if(itemId >= ITEM_TR01 && itemId <= ITEM_TR50)
+                                    objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_SILVER_TM;
+                                else
+                                    objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_GOLD_TM;
+                                break;
+#ifdef ROGUE_EXPANSION
+                            case POCKET_STONES:
+                                if(itemId >= ITEM_RED_ORB && itemId <= ITEM_DIANCITE)
+                                    objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_MEGA_STONE;
+                                else if(itemId >= ITEM_NORMALIUM_Z && itemId <= ITEM_ULTRANECROZIUM_Z)
+                                    objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_Z_CRYSTAL;
+                                else
+                                    objectEvents[write].graphicsId = OBJ_EVENT_GFX_ITEM_HOLD_ITEM;
+                                break;
+#endif
+                            }
+                        }
+
+                        // Accept this item
+                        write++;
+                    }
+                }
+                else
+                {
+                    // Accept all other types of object
+                    write++;
+                }
+            }
+
+            *objectEventCount = write;
+        }
+
+        // We need to reapply this as pending when loading from a save, as we would've already consumed it here
+        if(loadingFromSave || isLoadingSameMap)
+        {
+            if(!FlagGet(FLAG_ROGUE_RIVAL_DISABLED))
+                gRogueRun.hasPendingRivalBattle = TRUE;
+        }
+
+        // Attempt to find and activate the rival object
+        FlagSet(FLAG_ROGUE_RIVAL_DISABLED);
+
+        // Don't place rival battle on first encounter for first fight, otherwise place at earliest convenience :3
+        if(Rogue_GetCurrentDifficulty() >= 1 || gRogueAdvPath.rooms[gRogueRun.adventureRoomId].coords.x < gRogueAdvPath.pathLength - 1)
+        {
+            if(gRogueRun.hasPendingRivalBattle)
+            {
+                u8 i;
+
+                for(i = 0; i < originalObjectCount; ++i)
+                {
+                    // Found rival, so make visible and clear pending
+                    if(objectEvents[i].flagId == FLAG_ROGUE_RIVAL_DISABLED)
+                    {
+                        const struct RogueTrainer* trainer = Rogue_GetTrainer(gRogueRun.rivalTrainerNum);
+
+                        FlagClear(FLAG_ROGUE_RIVAL_DISABLED);
+                        gRogueRun.hasPendingRivalBattle = FALSE; // TODO - Need to make sure this works when warping within a map e.g. rocket base?
+
+                        if(trainer != NULL)
+                        {
+                            objectEvents[i].graphicsId = trainer->objectEventGfx;
+                        }
+                        break;
+                    }
+                }
+            }
+            // Place randoman where rival would be
+            else if(IsCurseActive(EFFECT_RANDOMAN_ROUTE_SPAWN) && gRogueAdvPath.currentRoomType != ADVPATH_ROOM_RESTSTOP)
+            {
+                u8 i;
+
+                for(i = 0; i < originalObjectCount; ++i)
+                {
+                    // Found rival, so make visible and clear pending
+                    if(objectEvents[i].flagId == FLAG_ROGUE_RIVAL_DISABLED)
+                    {
+                        objectEvents[i].flagId = FLAG_ROGUE_RANDOM_TRADE_DISABLED;
+                        objectEvents[i].graphicsId = OBJ_EVENT_GFX_CONTEST_JUDGE;
+                        objectEvents[i].script = Rogue_Encounter_RestStop_RandomMan;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Look for team boss NPC and update
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_TEAM_HIDEOUT)
+        {
+            u8 i;
+            
+            for(i = 0; i < originalObjectCount; ++i)
+            {
+                // Found rival, so make visible and clear pending
+                if(objectEvents[i].flagId == FLAG_ROGUE_TEAM_BOSS_DISABLED)
+                {
+                    const struct RogueTrainer* trainer = Rogue_GetTrainer(gRogueRun.teamBossTrainerNum);
+
+                    if(trainer != NULL)
+                    {
+                        objectEvents[i].graphicsId = trainer->objectEventGfx;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    else
+    {
+        if(RogueHub_IsPlayerBaseLayout(mapHeader->mapLayoutId))
+        {
+            RogueHub_ModifyPlayerBaseObjectEvents(mapHeader->mapLayoutId, loadingFromSave, objectEvents, objectEventCount, objectEventCapacity);
+        }
     }
 }
 
@@ -3540,16 +5774,22 @@ static void PushFaintedMonToLab(struct Pokemon* srcMon)
     struct Pokemon* destMon;
     u16 i = Random() % (LAB_MON_COUNT + 1);
     
+    if(Rogue_IsCatchingContestActive())
+    {
+        // Don't send temp catching contest mons to the lab
+        return;
+    }
+
     if(i >= LAB_MON_COUNT)
     {
         // Ignore this fainted mon
         return;
     }
 
-    destMon = &gRogueLabEncounterData.party[i];
+    destMon = GetLabMon(i);
     CopyMon(destMon, srcMon, sizeof(*destMon));
 
-    temp = GetMonData(destMon, MON_DATA_MAX_HP) / 2;
+    temp = max(1, GetMonData(destMon, MON_DATA_MAX_HP) / 2);
     SetMonData(destMon, MON_DATA_HP, &temp);
 
     // Wipe EVs
@@ -3565,85 +5805,136 @@ static void PushFaintedMonToLab(struct Pokemon* srcMon)
 
 void Rogue_CopyLabEncounterMonNickname(u16 index, u8* dst)
 {
-    if(index < LAB_MON_COUNT)
+    AGB_ASSERT(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LAB);
+
+    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LAB)
     {
-        GetMonData(&gRogueLabEncounterData.party[index], MON_DATA_NICKNAME, dst);
-        StringGet_Nickname(dst);
+        if(index < LAB_MON_COUNT)
+        {
+            GetMonData(&gEnemyParty[index], MON_DATA_NICKNAME, dst);
+            StringGet_Nickname(dst);
+        }
     }
 }
 
 bool8 Rogue_GiveLabEncounterMon(u16 index)
 {
-    if(gPlayerPartyCount < PARTY_SIZE && index < LAB_MON_COUNT)
-    {
-        CopyMon(&gPlayerParty[gPlayerPartyCount], &gRogueLabEncounterData.party[index], sizeof(gPlayerParty[gPlayerPartyCount]));
+    AGB_ASSERT(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LAB);
 
-        gPlayerPartyCount = CalculatePlayerPartyCount();
-        ResetFaintedLabMonAtSlot(index);
-        return TRUE;
+    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LAB)
+    {
+        if(gPlayerPartyCount < PARTY_SIZE && index < LAB_MON_COUNT)
+        {
+            CopyMon(&gPlayerParty[gPlayerPartyCount], &gEnemyParty[index], sizeof(gPlayerParty[gPlayerPartyCount]));
+
+            // Already in safari from? (Maybe should track index and then wipe here, as we could have higher priority)
+            gPlayerParty[gPlayerPartyCount].rogueExtraData.isSafariIllegal = TRUE;
+
+            gPlayerPartyCount = CalculatePlayerPartyCount();
+            ResetFaintedLabMonAtSlot(index);
+            return TRUE;
+        }
     }
 
     return FALSE;
 }
 
-void RemoveMonAtSlot(u8 slot, bool8 keepItems, bool8 shiftUpwardsParty, bool8 canSendToLab)
+void RemoveMonAtSlot(u8 slot, bool8 keepItems, bool8 compactPartySlots)
 {
     if(slot < gPlayerPartyCount)
     {
         if(GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
         {
-            u32 hp = 0;
-            SetMonData(&gPlayerParty[slot], MON_DATA_HP, &hp);
+            if(keepItems)
+            {
+                u16 heldItem = GetMonData(&gPlayerParty[slot], MON_DATA_HELD_ITEM);
 
-            if(shiftUpwardsParty)
-            {
-                RemoveAnyFaintedMons(keepItems, canSendToLab);
-            }
-            else
-            {
-                if(keepItems)
+                // Try to put held item back in bag
+                if(heldItem != ITEM_NONE && AddBagItem(heldItem, 1))
                 {
-                    // Dead so give back held item
-                    u16 heldItem = GetMonData(&gPlayerParty[slot], MON_DATA_HELD_ITEM);
-                    if(heldItem != ITEM_NONE)
-                        AddBagItem(heldItem, 1);
+                    heldItem = ITEM_NONE;
+                    SetMonData(&gPlayerParty[slot], MON_DATA_HELD_ITEM, &heldItem);
                 }
-
-                if(canSendToLab)
-                    PushFaintedMonToLab(&gPlayerParty[slot]);
-
-                ZeroMonData(&gPlayerParty[slot]);
             }
+
+            // Forget about re-equipping the held item
+            gRogueRun.partyHeldItems[slot] = ITEM_NONE;
+
+            PushFaintedMonToLab(&gPlayerParty[slot]);
+
+            ZeroMonData(&gPlayerParty[slot]);
+
+            if(compactPartySlots)
+            {
+                CompactPartySlots();
+                CalculatePlayerPartyCount();
+            }
+            
+            if(Rogue_IsRunActive())
+                IncrementGameStat(GAME_STAT_POKEMON_RELEASED);
         }
     }
 }
 
-void RemoveAnyFaintedMons(bool8 keepItems, bool8 canSendToLab)
+static void CheckAndNotifyForFaintedMons()
 {
-    bool8 hasValidSpecies;
-    u8 read;
-    u8 write = 0;
-    bool8 hasMonFainted = FALSE;
-
-    // If we're finished, we don't want to release any mons, just check if anything has fainted or not
-    if(Rogue_IsRunActive() && gRogueRun.currentDifficulty >= ROGUE_MAX_BOSS_COUNT)
+    if(Rogue_IsRunActive())
     {
-        for(read = 0; read < PARTY_SIZE; ++read)
-        {
-            hasValidSpecies = GetMonData(&gPlayerParty[read], MON_DATA_SPECIES) != SPECIES_NONE;
+        u8 i;
+        u8 faintedCount = 0;
 
-            if(hasValidSpecies && GetMonData(&gPlayerParty[read], MON_DATA_HP, NULL) != 0)
+        for(i = 0; i < PARTY_SIZE; ++i)
+        {
+            bool8 hasValidSpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE;
+
+            if(hasValidSpecies && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
             {
                 // This mon is alive
             }
             else if(hasValidSpecies)
             {
-                hasMonFainted = TRUE;
-                break;
+                ++faintedCount;
+
+                if(gRogueLocal.partyRememberedHealth[i] != 0) // todo - check this still works
+                {
+                    IncrementGameStat(GAME_STAT_POKEMON_FAINTED);
+                }
             }
         }
+
+        if(faintedCount != 0)
+        {
+            RogueQuest_OnTrigger(QUEST_TRIGGER_MON_FAINTED);
+        }
     }
-    else
+}
+
+void RemoveAnyFaintedMons(bool8 keepItems)
+{
+    bool8 hasValidSpecies;
+    u8 read;
+    u8 write = 0;
+    bool8 skipReleasing = FALSE;
+
+    if(Rogue_IsRunActive())
+    {
+        // If we're finished, we don't want to release any mons, just check if anything has fainted or not
+        if(Rogue_GetCurrentDifficulty() >= ROGUE_MAX_BOSS_COUNT)
+            skipReleasing = TRUE;
+
+        // Don't release any fainted mons for final champ fight
+        if(Rogue_UseFinalQuestEffects() && Rogue_GetCurrentDifficulty() >= ROGUE_FINAL_CHAMP_DIFFICULTY)
+            skipReleasing = TRUE;
+
+        // Leave all mons in party
+        if(Rogue_IsVictoryLapActive())
+            skipReleasing = TRUE;
+    }
+
+    if(!Rogue_ShouldReleaseFaintedMons())
+        skipReleasing = TRUE;
+
+    if(!skipReleasing)
     {
         for(read = 0; read < PARTY_SIZE; ++read)
         {
@@ -3671,29 +5962,164 @@ void RemoveAnyFaintedMons(bool8 keepItems, bool8 canSendToLab)
                     if(heldItem != ITEM_NONE)
                         AddBagItem(heldItem, 1);
                 }
-                else
-                    hasMonFainted = TRUE;
 
-                if(canSendToLab)
-                    PushFaintedMonToLab(&gPlayerParty[read]);
+                // Only push mons if run is active
+                if(Rogue_IsRunActive() && !Rogue_IsVictoryLapActive())
+                {
+                    RogueSafari_PushMon(&gPlayerParty[read]);
+                }
+
+                if(Rogue_IsRunActive())
+                    IncrementGameStat(GAME_STAT_POKEMON_RELEASED);
+
+                PushFaintedMonToLab(&gPlayerParty[read]);
 
                 ZeroMonData(&gPlayerParty[read]);
             }
         }
     }
 
-    if(hasMonFainted)
-    {
-        Rogue_CampaignNotify_OnMonFainted();
-        QuestNotify_OnMonFainted();
-    }
-
     gPlayerPartyCount = CalculatePlayerPartyCount();
 }
 
-void Rogue_Battle_StartTrainerBattle(void)
+struct Pokemon* GetRecordedPlayerPartyPtr();
+struct Pokemon* GetRecordedEnemyPartyPtr();
+
+static void TempSavePlayerTeam()
 {
-    if(FlagGet(FLAG_ROGUE_DOUBLE_BATTLES)) //NoOfApproachingTrainers != 2 
+    u8 i;
+    struct Pokemon* tempParty = GetRecordedPlayerPartyPtr();
+    AGB_ASSERT(!gRogueLocal.hasUsePlayerTeamTempSave);
+
+    for(i = 0; i < PARTY_SIZE; ++i)
+        CopyMon(&tempParty[i], &gPlayerParty[i], sizeof(struct Pokemon));
+
+    gRogueLocal.hasUsePlayerTeamTempSave = TRUE;
+}
+
+static void TempRestorePlayerTeam()
+{
+    u8 i;
+    struct Pokemon* tempParty = GetRecordedPlayerPartyPtr();
+    AGB_ASSERT(gRogueLocal.hasUsePlayerTeamTempSave);
+
+    for(i = 0; i < PARTY_SIZE; ++i)
+        CopyMon(&gPlayerParty[i], &tempParty[i], sizeof(struct Pokemon));
+
+    CalculatePlayerPartyCount();
+    gRogueLocal.hasUsePlayerTeamTempSave = FALSE;
+}
+
+static void ClearPlayerTeam()
+{
+    u8 i;
+
+    for(i = 0; i < PARTY_SIZE; ++i)
+        ZeroMonData(&gPlayerParty[i]);
+
+    CalculatePlayerPartyCount();
+}
+
+static void TempSaveEnemyTeam()
+{
+    u8 i;
+    struct Pokemon* tempParty = GetRecordedEnemyPartyPtr();
+    AGB_ASSERT(!gRogueLocal.hasUseEnemyTeamTempSave);
+
+    for(i = 0; i < PARTY_SIZE; ++i)
+        CopyMon(&tempParty[i], &gEnemyParty[i], sizeof(struct Pokemon));
+
+    gRogueLocal.hasUseEnemyTeamTempSave = TRUE;
+}
+
+static void UNUSED TempRestoreEnemyTeam()
+{
+    u8 i;
+    struct Pokemon* tempParty = GetRecordedEnemyPartyPtr();
+    AGB_ASSERT(gRogueLocal.hasUseEnemyTeamTempSave);
+
+    for(i = 0; i < PARTY_SIZE; ++i)
+        CopyMon(&gEnemyParty[i], &tempParty[i], sizeof(struct Pokemon));
+
+    CalculateEnemyPartyCount();
+    gRogueLocal.hasUseEnemyTeamTempSave = FALSE;
+}
+
+static bool8 AllowBattleGimics(u16 trainerNum, bool8 keyBattlesOnly)
+{
+    if(Rogue_IsRunActive())
+    {
+        // Always enable for key trainer
+        if(Rogue_IsKeyTrainer(trainerNum))
+            return TRUE;
+        else if(!keyBattlesOnly)
+            return RogueRandomChance(33, 0); // Only a chance?
+        else
+            return FALSE;
+    }
+    else
+        return TRUE;
+}
+
+static void SetupTrainerBattleInternal(u16 trainerNum)
+{
+    bool8 shouldDoubleBattle = FALSE;
+    gRogueLocal.hasBattleEventOccurred = FALSE;
+
+    // Apply trainer specific seed
+    // (seed regular RNG so the internal mon stats are always the same)
+    gRogueLocal.rngSeedToRestore = gRngRogueValue;
+    gRogueLocal.rngToRestore = gRngValue;
+    gRogueLocal.rng2ToRestore = gRng2Value;
+    
+    SeedRogueRng(RogueRandom() + (trainerNum ^ RogueRandom()));
+    SeedRng(RogueRandom() + (trainerNum ^ RogueRandom()));
+    SeedRng2(RogueRandom() + (trainerNum ^ RogueRandom()));
+
+    // enable dyanmax for this fight
+    if(IsDynamaxEnabled() && AllowBattleGimics(trainerNum, TRUE))
+        FlagSet(FLAG_ROGUE_DYNAMAX_BATTLE);
+    else
+        FlagClear(FLAG_ROGUE_DYNAMAX_BATTLE);
+
+    // enable tera for this fight
+    if(IsTerastallizeEnabled() && AllowBattleGimics(trainerNum, FALSE))
+        FlagSet(FLAG_ROGUE_TERASTALLIZE_BATTLE);
+    else
+        FlagClear(FLAG_ROGUE_TERASTALLIZE_BATTLE);
+
+    // Only allow one to be active at once, but make it random
+    if(FlagGet(FLAG_ROGUE_DYNAMAX_BATTLE) && FlagGet(FLAG_ROGUE_TERASTALLIZE_BATTLE))
+    {
+        if(RogueRandom() % 2)
+            FlagClear(FLAG_ROGUE_DYNAMAX_BATTLE);
+        else
+            FlagClear(FLAG_ROGUE_TERASTALLIZE_BATTLE);
+    }
+
+    switch(Rogue_GetConfigRange(CONFIG_RANGE_BATTLE_FORMAT))
+    {
+        case BATTLE_FORMAT_SINGLES:
+            shouldDoubleBattle = FALSE;
+            break;
+
+        case BATTLE_FORMAT_DOUBLES:
+            shouldDoubleBattle = TRUE;
+            break;
+
+        case BATTLE_FORMAT_MIXED:
+            shouldDoubleBattle = (RogueRandom() % 2);
+            break;
+
+        default:
+            AGB_ASSERT(FALSE);
+            break;
+    }
+
+    if(Rogue_IsExpTrainer(trainerNum))
+        shouldDoubleBattle = FALSE;
+
+    if(shouldDoubleBattle) //NoOfApproachingTrainers != 2 
     {
         // No need to check opponent party as we force it to 2 below
         if(gPlayerPartyCount >= 2) // gEnemyPartyCount >= 2
@@ -3704,11 +6130,104 @@ void Rogue_Battle_StartTrainerBattle(void)
     }
 }
 
+void Rogue_Battle_StartTrainerBattle(void)
+{
+    gRogueLocal.hasBattleInputStarted = FALSE;
+
+    // Remove soft level cap
+    if(Rogue_IsExpTrainer(gTrainerBattleOpponent_A))
+        gRogueRun.currentLevelOffset = 0;
+
+    SetupTrainerBattleInternal(gTrainerBattleOpponent_A);
+
+    if(!Rogue_IsVictoryLapActive() && Rogue_IsBossTrainer(gTrainerBattleOpponent_A))
+    {
+        Rogue_AddPartySnapshot();
+    }
+
+    RememberPartyHeldItems();
+    RememberPartyHealth();
+
+    if(Rogue_IsBattleSimTrainer(gTrainerBattleOpponent_A))
+    {
+        TempSavePlayerTeam();
+        ClearPlayerTeam();
+    }
+    
+    if(Rogue_IsRunActive())
+    {
+        IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+        IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
+
+        if(Rogue_IsRivalTrainer(gTrainerBattleOpponent_A))
+            IncrementGameStat(GAME_STAT_RIVAL_BATTLES);
+    }
+
+    RogueQuest_OnTrigger(QUEST_TRIGGER_TRAINER_BATTLE_START);
+}
+
+void Rogue_Battle_TrainerTeamReady(void)
+{
+    if(Rogue_IsFinalQuestFinalBoss())
+    {
+        u32 temp;
+        u8 i, j;
+        struct Pokemon* tempPlayerParty = GetRecordedPlayerPartyPtr();
+        struct Pokemon* tempEnemyParty = GetRecordedEnemyPartyPtr();
+
+        // Now swap teams but the player's team keeps it's IVs/EVs and the EnemyTeam keeps it's IVs/EVs
+        TempSavePlayerTeam();
+        TempSaveEnemyTeam();
+
+        // Heal player's mons before swapping them over
+        HealPlayerParty();
+
+        for(i = 0; i < PARTY_SIZE; ++i)
+        {
+            CopyMon(&gEnemyParty[i], &gPlayerParty[i], sizeof(struct Pokemon));
+            CopyMon(&gPlayerParty[i], &tempEnemyParty[i], sizeof(struct Pokemon));
+
+            // Maintain IVs/EVs on swapped mons
+            for(j = 0; j < NUM_STATS; ++j)
+            {
+                temp = GetMonData(&tempPlayerParty[i], MON_DATA_HP_IV + j);
+                SetMonData(&gPlayerParty[i], MON_DATA_HP_IV + j, &temp);
+                temp = GetMonData(&tempPlayerParty[i], MON_DATA_HP_EV + j);
+                SetMonData(&gPlayerParty[i], MON_DATA_HP_EV + j, &temp);
+
+                temp = GetMonData(&tempEnemyParty[i], MON_DATA_HP_IV + j);
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_IV + j, &temp);
+                temp = GetMonData(&tempEnemyParty[i], MON_DATA_HP_EV + j);
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &temp);
+            }
+
+            // Make sure everything is lvl 100
+            temp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[GetMonData(&gPlayerParty[i], MON_DATA_SPECIES)].growthRate, MAX_LEVEL);
+            SetMonData(&gPlayerParty[i], MON_DATA_EXP, &temp);
+    
+            temp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[GetMonData(&gEnemyParty[i], MON_DATA_SPECIES)].growthRate, MAX_LEVEL);
+            SetMonData(&gEnemyParty[i], MON_DATA_EXP, &temp);
+            
+            CalculateMonStats(&gPlayerParty[i]);
+            CalculateMonStats(&gEnemyParty[i]);
+        }
+
+        CalculatePlayerPartyCount();
+        CalculateEnemyPartyCount();
+    }
+
+    // Can restore the seed now
+    gRngRogueValue = gRogueLocal.rngSeedToRestore;
+    gRngValue = gRogueLocal.rngToRestore;
+    gRng2Value = gRogueLocal.rng2ToRestore;
+}
+
 static bool32 IsPlayerDefeated(u32 battleOutcome)
 {
     switch (battleOutcome)
     {
     case B_OUTCOME_LOST:
+    case B_OUTCOME_FORFEITED:
     case B_OUTCOME_DREW:
         return TRUE;
     case B_OUTCOME_WON:
@@ -3744,6 +6263,45 @@ static bool32 DidPlayerCatch(u32 battleOutcome)
     default:
         return FALSE;
     }
+}
+
+static bool32 DidCompleteWildChain(u32 battleOutcome)
+{
+    switch (battleOutcome)
+    {
+    case B_OUTCOME_WON:
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool32 DidFailWildChain(u32 battleOutcome, u16 species)
+{
+    switch (battleOutcome)
+    {
+    // If you catch anything, you end the chain
+    case B_OUTCOME_CAUGHT:
+        return TRUE;
+    }
+
+    // If we fail a battle against the mon we're chaining, end the chain
+    if(GetWildChainSpecies() == species)
+    {
+        switch (battleOutcome)
+        {
+        case B_OUTCOME_LOST:
+        case B_OUTCOME_DREW:
+        case B_OUTCOME_RAN:
+        case B_OUTCOME_PLAYER_TELEPORTED:
+        case B_OUTCOME_MON_FLED:
+        case B_OUTCOME_FORFEITED:
+        case B_OUTCOME_MON_TELEPORTED:
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 const u16 gNatureEvRewardStatTable[NUM_NATURES][NUM_STATS] =
@@ -3807,6 +6365,7 @@ static void MonGainRewardEVs(struct Pokemon *mon)
 
     stat = ItemId_GetSecondaryId(heldItem);
     bonus = ItemId_GetHoldEffectParam(heldItem);
+    totalEVs = 0;
 
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -3855,74 +6414,182 @@ static void MonGainRewardEVs(struct Pokemon *mon)
     }
 }
 
+void EnableRivalEncounterIfRequired()
+{
+    u8 i;
+
+    gRogueRun.hasPendingRivalBattle = FALSE;
+
+    for(i = 0; i < ROGUE_RIVAL_MAX_ROUTE_ENCOUNTERS; ++i)
+    {
+        if(gRogueRun.rivalEncounterDifficulties[i] == Rogue_GetCurrentDifficulty())
+        {
+            gRogueRun.hasPendingRivalBattle = TRUE;
+            return;
+        }
+    }
+}
 
 void Rogue_Battle_EndTrainerBattle(u16 trainerNum)
 {
+    if(Rogue_IsFinalQuestFinalBoss())
+    {
+        TempRestorePlayerTeam();
+    }
+
+    if(Rogue_IsBattleSimTrainer(trainerNum))
+    {
+        TempRestorePlayerTeam();
+    }
+
+    TryRestorePartyHeldItems(FALSE);
+    FlagClear(FLAG_ROGUE_DYNAMAX_BATTLE);
+    FlagClear(FLAG_ROGUE_TERASTALLIZE_BATTLE);
+    CheckAndNotifyForFaintedMons();
+    RogueQuest_OnTrigger(QUEST_TRIGGER_TRAINER_BATTLE_END);
+
     if(Rogue_IsRunActive())
     {
-        bool8 isBossTrainer = IsBossTrainer(trainerNum);
+        bool8 isBossTrainer = Rogue_IsBossTrainer(trainerNum);
 
-        if(isBossTrainer)
+        if(Rogue_IsRivalTrainer(trainerNum) && Rogue_GetCurrentDifficulty() >= ROGUE_CHAMP_START_DIFFICULTY)
         {
-            u8 nextLevel;
-            u8 prevLevel = CalculateBossLevel();
-            const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-            gRogueRun.completedBadges[gRogueRun.currentDifficulty] = trainer->incTypes[0] != TYPE_NONE ? trainer->incTypes[0] : TYPE_MYSTERY;
-
-            ++gRogueRun.currentDifficulty;
-            nextLevel = CalculateBossLevel();
-
-            gRogueRun.currentLevelOffset = nextLevel - prevLevel;
-
-            // Clear the history buffer, as we track based on types
-            // In rainbow mode, the type can only appear once though
-            if(!FlagGet(FLAG_ROGUE_RAINBOW_MODE))
-            {
-                    switch(gRogueRun.currentDifficulty)
-                    {
-                        case 8:
-                        case 12:
-                        case 13:
-                            memset(&gRogueRun.bossHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.bossHistoryBuffer));
-                            break;
-                    }
-            }
-
-            if(gRogueRun.currentDifficulty >= ROGUE_MAX_BOSS_COUNT)
-            {
-                FlagSet(FLAG_IS_CHAMPION);
-                FlagSet(FLAG_ROGUE_RUN_COMPLETED);
-            }
-
-            VarSet(VAR_ROGUE_DIFFICULTY, gRogueRun.currentDifficulty);
-            VarSet(VAR_ROGUE_FURTHEST_DIFFICULTY, max(gRogueRun.currentDifficulty, VarGet(VAR_ROGUE_FURTHEST_DIFFICULTY)));
+            // If we fight rival in champ phase, it must've been a champ fight
+            isBossTrainer = TRUE;
         }
 
-        // Adjust this after the boss reset
-        if(gRogueRun.currentLevelOffset)
+        if(Rogue_IsVictoryLapActive() && IsPlayerDefeated(gBattleOutcome) != TRUE)
         {
-            u8 levelOffsetDelta = 3;
-            
-            if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+            ++gRogueRun.victoryLapTotalWins;
+            Rogue_PushPopup_VictoryLapProgress(Rogue_GetTrainerTypeAssignment(trainerNum), gRogueRun.victoryLapTotalWins);
+
+            VarSet(VAR_TEMP_1, gRogueRun.victoryLapTotalWins);
+
+            if(gRogueRun.victoryLapTotalWins == 5)
             {
-                levelOffsetDelta = 5;
+                if(!CheckBagHasItem(ITEM_BATTLE_ITEM_CURSE, 1))
+                {
+                    AddBagItem(ITEM_BATTLE_ITEM_CURSE, 1);
+                    Rogue_PushPopup_AddItem(ITEM_BATTLE_ITEM_CURSE, 1);
+                }
+            }
+            else if(gRogueRun.victoryLapTotalWins == 15)
+            {
+                if(!CheckBagHasItem(ITEM_HEALING_FLASK, 1))
+                {
+                    AddBagItem(ITEM_HEALING_FLASK, 1);
+                    Rogue_PushPopup_AddItem(ITEM_HEALING_FLASK, 1);
+                }
+            }
+        }
+        else
+        {
+            if (IsPlayerDefeated(gBattleOutcome) != TRUE && isBossTrainer)
+            {
+                u8 nextLevel;
+                u8 prevLevel = Rogue_CalculateBossMonLvl();
+
+                // Update badge for trainer card
+                gRogueRun.completedBadges[Rogue_GetCurrentDifficulty()] = Rogue_GetTrainerTypeAssignment(trainerNum);
+
+                if(gRogueRun.completedBadges[Rogue_GetCurrentDifficulty()] == TYPE_NONE)
+                    gRogueRun.completedBadges[Rogue_GetCurrentDifficulty()] = TYPE_MYSTERY;
+
+                // Increment difficulty
+                Rogue_SetCurrentDifficulty(Rogue_GetCurrentDifficulty() + 1);
+                nextLevel = Rogue_CalculateBossMonLvl();
+                
+                RogueQuest_OnTrigger(QUEST_TRIGGER_EARN_BADGE);
+
+                gRogueRun.currentLevelOffset = nextLevel - prevLevel;
+                gRogueRun.wildEncounters.roamerActiveThisPath = TRUE;
+
+                if(Rogue_GetCurrentDifficulty() >= ROGUE_MAX_BOSS_COUNT)
+                {
+                    // Snapshot HoF team
+                    Rogue_AddPartySnapshot();
+                    UpdateTrainerCardMonIconsFromParty();
+
+                    FlagSet(FLAG_IS_CHAMPION);
+                    FlagSet(FLAG_ROGUE_RUN_COMPLETED);
+                    RogueQuest_SetMonMasteryFlagFromParty();
+                    RogueQuest_OnTrigger(QUEST_TRIGGER_ENTER_HALL_OF_FAME);
+                    RogueQuest_OnTrigger(QUEST_TRIGGER_MISC_UPDATE);
+
+                    // Increment stats
+                    IncrementGameStat(GAME_STAT_RUN_WINS);
+                    IncrementGameStat(GAME_STAT_CURRENT_RUN_WIN_STREAK);
+                    SetGameStat(GAME_STAT_CURRENT_RUN_LOSS_STREAK, 0);
+
+                    if(GetGameStat(GAME_STAT_CURRENT_RUN_WIN_STREAK) > GetGameStat(GAME_STAT_LONGEST_RUN_WIN_STREAK))
+                        SetGameStat(GAME_STAT_LONGEST_RUN_WIN_STREAK, GetGameStat(GAME_STAT_CURRENT_RUN_WIN_STREAK));
+                }
+                else
+                {
+                    IncrementGameStat(GAME_STAT_TOTAL_BADGES);
+
+                    // Increment stats
+                    if(Rogue_GetCurrentDifficulty() <= ROGUE_ELITE_START_DIFFICULTY)
+                        IncrementGameStat(GAME_STAT_GYM_BADGES);
+                    else if(Rogue_GetCurrentDifficulty() <= ROGUE_CHAMP_START_DIFFICULTY)
+                        IncrementGameStat(GAME_STAT_ELITE_BADGES);
+                    else
+                        IncrementGameStat(GAME_STAT_CHAMPION_BADGES);
+                }
+
+                FlagClear(FLAG_ROGUE_MYSTERIOUS_SIGN_KNOWN);
+                VarSet(VAR_ROGUE_DIFFICULTY, Rogue_GetCurrentDifficulty());
+                VarSet(VAR_ROGUE_FURTHEST_DIFFICULTY, max(Rogue_GetCurrentDifficulty(), VarGet(VAR_ROGUE_FURTHEST_DIFFICULTY)));
+
+                EnableRivalEncounterIfRequired();
             }
 
-            // Every trainer battle drops level cap slightly
-            if(gRogueRun.currentLevelOffset < levelOffsetDelta)
-                gRogueRun.currentLevelOffset = 0;
-            else
-                gRogueRun.currentLevelOffset -= levelOffsetDelta;
+            // Don't adjust soft cap for battle sim
+            if(!Rogue_IsBattleSimTrainer(trainerNum))
+            {
+                // Adjust this after the boss reset
+                if(gRogueRun.currentLevelOffset)
+                {
+                    u8 levelOffsetDelta = Rogue_GetModeRules()->levelOffsetInterval;
+                    
+                    if(levelOffsetDelta == 0)
+                    {
+                        // Apply default
+                        levelOffsetDelta = 4;
+                    }
+
+                    // Every trainer battle drops level cap slightly
+                    if(gRogueRun.currentLevelOffset < levelOffsetDelta)
+                        gRogueRun.currentLevelOffset = 0;
+                    else
+                        gRogueRun.currentLevelOffset -= levelOffsetDelta;
+                }
+            }
         }
 
         if (IsPlayerDefeated(gBattleOutcome) != TRUE)
         {
-            QuestNotify_OnTrainerBattleEnd(isBossTrainer);
-            RemoveAnyFaintedMons(FALSE, TRUE);
+            RemoveAnyFaintedMons(FALSE);
+            
+            if(isBossTrainer)
+            {
+                if(IsCurseActive(EFFECT_SNOWBALL_CURSES) && Rogue_GetCurrentDifficulty() < ROGUE_MAX_BOSS_COUNT)
+                {
+                    // Add new curse
+                    u16 tempBuffer[5];
+                    u16 tempBufferCount = 0;
+                    u16 itemId = Rogue_NextCurseItem(tempBuffer, tempBufferCount++);
+
+                    AddBagItem(itemId, 1);
+                    Rogue_PushPopup_AddItem(itemId, 1);
+                }
+            }
+
+            if(IsCurseActive(EFFECT_SNAG_TRAINER_MON) && !Rogue_IsBattleSimTrainer(trainerNum) && !Rogue_IsExpTrainer(trainerNum))
+                gRogueLocal.hasPendingSnagBattle = TRUE;
 
             // Reward EVs based on nature
-            if(FlagGet(FLAG_ROGUE_EV_GAIN_ENABLED))
+            if(Rogue_GetConfigToggle(CONFIG_TOGGLE_EV_GAIN))
             {
                 u16 i;
 
@@ -3936,57 +6603,71 @@ void Rogue_Battle_EndTrainerBattle(u16 trainerNum)
                 }
             }
         }
-        else
-        {
-            QuestNotify_OnMonFainted();
-        }
     }
 }
 
-static void Battle_UpdateEncounterTrackerInternal(u16 wildSpecies)
+void Rogue_Battle_StartWildBattle(void)
 {
-    // Update encounter tracker (For both in run and safari)
-    u8 i;
+    gRogueLocal.hasBattleInputStarted = FALSE;
+    gRogueLocal.hasBattleEventOccurred = FALSE;
+    RememberPartyHeldItems();
+    RememberPartyHealth();
 
-#ifdef ROGUE_EXPANSION
-    wildSpecies = GET_BASE_SPECIES_ID(wildSpecies);
-#endif
+    // enable tera for this fight
+    if(IsTerastallizeEnabled())
+        FlagSet(FLAG_ROGUE_TERASTALLIZE_BATTLE);
 
-    for(i = 0; i < ARRAY_COUNT(gRogueRun.wildEncounters); ++i)
+    RogueQuest_OnTrigger(QUEST_TRIGGER_WILD_BATTLE_START);
+
+    if(Rogue_IsRunActive())
     {
-#ifdef ROGUE_EXPANSION
-        if(GET_BASE_SPECIES_ID(gRogueRun.wildEncounters[i]) == wildSpecies)
-#else
-        if(gRogueRun.wildEncounters[i] == wildSpecies)
-#endif
-        {
-            gRogueLocal.encounterPreview[i].isVisible = TRUE;
-        }
+        IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+        IncrementGameStat(GAME_STAT_WILD_BATTLES);
     }
-}
-
-static void Battle_UpdateEncounterTracker(void)
-{
-    //u16 wildSpecies = gBattleMons[gActiveBattler].species;
-    u16 wildSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_SPECIES);
-    //u16 wildSpecies = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
-
-    Battle_UpdateEncounterTrackerInternal(wildSpecies);
 }
 
 void Rogue_Battle_EndWildBattle(void)
 {
+    u16 wildSpecies = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
+
+    TryRestorePartyHeldItems(TRUE);
+    CheckAndNotifyForFaintedMons();
+    RogueQuest_OnTrigger(QUEST_TRIGGER_WILD_BATTLE_END);
+
+    FlagClear(FLAG_ROGUE_IN_SNAG_BATTLE);
+
+    if(DidCompleteWildChain(gBattleOutcome))
+    {
+        UpdateWildEncounterChain(wildSpecies);
+        DebugPrintf("ShinyOdds n:%d odds:%d", GetWildChainCount(), GetEncounterChainShinyOdds(GetWildChainCount()));
+    }
+    else if(DidFailWildChain(gBattleOutcome, wildSpecies))
+        UpdateWildEncounterChain(SPECIES_NONE);
+
     if(Rogue_IsRunActive())
     {
-        Battle_UpdateEncounterTracker();
+        if(DidPlayerCatch(gBattleOutcome))
+        {
+            IncrementGameStat(GAME_STAT_POKEMON_CAUGHT);
+
+            if(IsMonShiny(&gEnemyParty[0]))
+                IncrementGameStat(GAME_STAT_SHINIES_CAUGHT);
+
+            if(RoguePokedex_IsSpeciesLegendary(wildSpecies))
+                IncrementGameStat(GAME_STAT_LEGENDS_CAUGHT);
+
+            if(Rogue_IsBattleRoamerMon(wildSpecies))
+                IncrementGameStat(GAME_STAT_ROAMERS_CAUGHT);
+        }
 
         if(gRogueRun.currentLevelOffset && !DidPlayerRun(gBattleOutcome))
         {
-            u8 levelOffsetDelta = 3;
+            u8 levelOffsetDelta = Rogue_GetModeRules()->levelOffsetInterval;
             
-            if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+            if(levelOffsetDelta == 0)
             {
-                levelOffsetDelta = 5;
+                // Apply default
+                levelOffsetDelta = 4;
             }
 
             // Don't increase the level caps if we only caught the mon
@@ -4000,407 +6681,164 @@ void Rogue_Battle_EndWildBattle(void)
             }
         }
 
+        if(Rogue_IsBattleRoamerMon(wildSpecies))
+        {
+            if(gBattleOutcome == B_OUTCOME_CAUGHT || gBattleOutcome == B_OUTCOME_WON)
+            {
+                // Roamer is gone
+                gRogueRun.wildEncounters.roamer.species = SPECIES_NONE;
+            }
+            else
+            {
+                if(gRogueRun.wildEncounters.roamer.species != wildSpecies)
+                {
+                    gRogueRun.wildEncounters.roamer.encounerCount = 0;
+                    Rogue_PushPopup_RoamerPokemonActivated(wildSpecies);
+                }
+                else if(gRogueRun.wildEncounters.roamer.encounerCount < 10)
+                    ++gRogueRun.wildEncounters.roamer.encounerCount;
+
+                // Keep track of roamer
+                gRogueRun.wildEncounters.roamer.species = wildSpecies;
+                gRogueRun.wildEncounters.roamer.hpIV = GetMonData(&gEnemyParty[0], MON_DATA_HP_IV);
+                gRogueRun.wildEncounters.roamer.attackIV = GetMonData(&gEnemyParty[0], MON_DATA_ATK_IV);
+                gRogueRun.wildEncounters.roamer.defenseIV = GetMonData(&gEnemyParty[0], MON_DATA_DEF_IV);
+                gRogueRun.wildEncounters.roamer.shinyFlag = GetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY);
+                gRogueRun.wildEncounters.roamer.speedIV = GetMonData(&gEnemyParty[0], MON_DATA_SPEED_IV);
+                gRogueRun.wildEncounters.roamer.spAttackIV = GetMonData(&gEnemyParty[0], MON_DATA_SPATK_IV);
+                gRogueRun.wildEncounters.roamer.spDefenseIV = GetMonData(&gEnemyParty[0], MON_DATA_SPDEF_IV);
+                gRogueRun.wildEncounters.roamer.abilityNum = GetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM);
+                gRogueRun.wildEncounters.roamer.genderFlag = GetMonData(&gEnemyParty[0], MON_DATA_GENDER_FLAG);
+                gRogueRun.wildEncounters.roamer.status = GetMonData(&gEnemyParty[0], MON_DATA_STATUS);
+                gRogueRun.wildEncounters.roamer.hpPerc = (GetMonData(&gEnemyParty[0], MON_DATA_HP) * 100) / GetMonData(&gEnemyParty[0], MON_DATA_MAX_HP);
+            }
+        }
+
         if (IsPlayerDefeated(gBattleOutcome) != TRUE)
         {
-            QuestNotify_OnWildBattleEnd();
-            RemoveAnyFaintedMons(FALSE, TRUE);
-        }
-        else
-        {
-            QuestNotify_OnMonFainted();
+            RemoveAnyFaintedMons(FALSE);
         }
     }
 }
 
 void Rogue_Safari_EndWildBattle(void)
 {
-    Battle_UpdateEncounterTracker();
-}
-
-static bool8 IsBossTrainer(u16 trainerNum)
-{
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
+    if(VarGet(VAR_ROGUE_INTRO_STATE) == ROGUE_INTRO_STATE_CATCH_MON)
     {
-        if(trainerNum == TRAINER_ROGUE_POKEFAN_F)
-            return FALSE;
-        else
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-static bool8 IsMiniBossTrainer(u16 trainerNum)
-{
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_MINIBOSS)
-    {
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
-static bool8 IsAnyBossTrainer(u16 trainerNum)
-{
-    return IsBossTrainer(trainerNum) || IsMiniBossTrainer(trainerNum);
-}
-
-static bool8 UseCompetitiveMoveset(u16 trainerNum, u8 monIdx, u8 totalMonCount)
-{
-    bool8 preferCompetitive = FALSE;
-    bool8 result = FALSE;
-    u8 difficultyLevel = gRogueRun.currentDifficulty;
-    u8 difficultyModifier = GetRoomTypeDifficulty();
-
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY || difficultyModifier == 2) // HARD
-    {
-        // For regular trainers, Last and first mon can have competitive sets
-        preferCompetitive = (monIdx == 0 || monIdx == (totalMonCount - 1));
-    }
-
-#ifdef ROGUE_FEATURE_AUTOMATION
-    if(Rogue_AutomationGetFlag(AUTO_FLAG_TRAINER_FORCE_COMP_MOVESETS))
-    {
-        return TRUE;
-    }
-#endif
-
-    if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-    {
-        return IsAnyBossTrainer(trainerNum);
-    }
-    if(FlagGet(FLAG_ROGUE_EASY_TRAINERS))
-    {
-        return FALSE;
-    }
-    else if(FlagGet(FLAG_ROGUE_HARD_TRAINERS))
-    {
-        if(difficultyLevel == 0) // Last mon has competitive set
-            return (preferCompetitive || IsAnyBossTrainer(trainerNum)) && monIdx == (totalMonCount - 1);
-        else if(difficultyLevel == 1)
-            return (preferCompetitive || IsAnyBossTrainer(trainerNum));
-        else
-            return TRUE;
-    }
-    else
-    {
-        // Start using competitive movesets on 3rd gym
-        if(difficultyLevel == 0) // Last mon has competitive set
-            return FALSE;
-        else if(difficultyLevel == 1)
-            return (preferCompetitive || IsAnyBossTrainer(trainerNum)) && monIdx == (totalMonCount - 1);
-        else
-            return (preferCompetitive || IsAnyBossTrainer(trainerNum));
-    }
-
-    return FALSE;
-}
-
-static void SeedRogueTrainer(u16 seed, u16 trainerNum, u16 offset)
-{
-    gRngRogueValue = seed + trainerNum * 3 + offset * 7;
-}
-
-static void ConfigureTrainer(u16 trainerNum, u8* monsCount)
-{
-    u8 difficultyLevel = gRogueRun.currentDifficulty;
-    u8* forceType = &gRogueLocal.trainerTemp.allowedType[0];
-    u8* disabledType = &gRogueLocal.trainerTemp.disallowedType[0];
-    bool8 attemptForceStrongPresets = FALSE;
-
-    if(IsBossTrainer(trainerNum))
-    {
-        const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-        // Mirror trainer uses custom logic
-        if((trainer->partyFlags & PARTY_FLAG_MIRROR_ANY) != 0)
+        if(gBattleOutcome == B_OUTCOME_CAUGHT)
         {
-            *monsCount = gPlayerPartyCount;
-            return;
-        }
+            u8 i;
 
-        forceType[0] = trainer->incTypes[0];
-        forceType[1] = trainer->incTypes[1];
-
-        disabledType[0] = trainer->excTypes[0];
-        disabledType[1] = trainer->excTypes[1];
-
-        if((trainer->partyFlags & PARTY_FLAG_CUSTOM_QUERY_ANY) != 0)
-        {
-            // Disable query if regional dex is active
-            if(VarGet(VAR_ROGUE_REGION_DEX_LIMIT) == 0 || !(trainer->partyFlags & PARTY_FLAG_REGION_DEX_DISABLE_QUERY) != 0)
+            for(i = 0; i < gSaveBlock1Ptr->objectEventTemplatesCount; ++i)
             {
-                gRogueLocal.trainerTemp.customQuerySpeciesCount = trainer->querySpeciesCount;
-                gRogueLocal.trainerTemp.customQuerySpecies = trainer->querySpecies;
-                gRogueLocal.trainerTemp.customQueryProvidesOutput = (trainer->partyFlags & PARTY_FLAG_CUSTOM_FINAL_QUERY) != 0;
-            }
-        }
+                // Hide all the mons and the NPC
+                if(gSaveBlock1Ptr->objectEventTemplates[i].graphicsId == OBJ_EVENT_GFX_MISC_RUIN_MANIAC || (gSaveBlock1Ptr->objectEventTemplates[i].graphicsId >= OBJ_EVENT_GFX_FOLLOW_MON_FIRST && gSaveBlock1Ptr->objectEventTemplates[i].graphicsId <= OBJ_EVENT_GFX_FOLLOW_MON_LAST))
+                {
+                    RemoveObjectEventByLocalIdAndMap(gSaveBlock1Ptr->objectEventTemplates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                    FlagSet(gSaveBlock1Ptr->objectEventTemplates[i].flagId);
+                }
 
-        if((trainer->partyFlags & PARTY_FLAG_UNIQUE_COVERAGE) != 0 || (trainer->partyFlags & PARTY_FLAG_COUNTER_TYPINGS) != 0)
-        {
-            attemptForceStrongPresets = TRUE;
-        }
-    }
-    else if(IsMiniBossTrainer(trainerNum))
-    {
-        const struct RogueTrainerEncounter* trainer = &gRogueMiniBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-        // Mirror trainer uses custom logic
-        if((trainer->partyFlags & PARTY_FLAG_MIRROR_ANY) != 0)
-        {
-            *monsCount = gPlayerPartyCount;
-            return;
-        }
-
-        forceType[0] = trainer->incTypes[0];
-        forceType[1] = trainer->incTypes[1];
-
-        disabledType[0] = trainer->excTypes[0];
-        disabledType[1] = trainer->excTypes[1];
-
-        if((trainer->partyFlags & PARTY_FLAG_CUSTOM_QUERY_ANY) != 0)
-        {
-            // Disable query if regional dex is active
-            if(VarGet(VAR_ROGUE_REGION_DEX_LIMIT) == 0 || !(trainer->partyFlags & PARTY_FLAG_REGION_DEX_DISABLE_QUERY) != 0)
-            {
-                gRogueLocal.trainerTemp.customQuerySpeciesCount = trainer->querySpeciesCount;
-                gRogueLocal.trainerTemp.customQuerySpecies = trainer->querySpecies;
-                gRogueLocal.trainerTemp.customQueryProvidesOutput = (trainer->partyFlags & PARTY_FLAG_CUSTOM_FINAL_QUERY) != 0;
-            }
-        }
-    }
-    else
-    {
-        switch(trainerNum)
-        {
-            // Specific trainers
-            case TRAINER_ROGUE_AQUA_F:
-            case TRAINER_ROGUE_AQUA_M:
-                forceType[0] = TYPE_DARK;
-
-                if(difficultyLevel > 0)
-                    forceType[1] = TYPE_WATER;
-                break;
-
-            case TRAINER_ROGUE_MAGMA_F:
-            case TRAINER_ROGUE_MAGMA_M:
-                forceType[0] = TYPE_DARK;
-
-                if(difficultyLevel > 0)
-                    forceType[1] = TYPE_FIRE;
-                break;
-        };
-    }
-
-    if(IsAnyBossTrainer(trainerNum)) 
-    {
-        if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-        {
-            *monsCount = 6;
-            gRogueLocal.trainerTemp.allowItemEvos = TRUE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = TRUE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = TRUE;
-            gRogueLocal.trainerTemp.preferStrongPresets = TRUE;
-        }
-        else if(difficultyLevel == 0)
-        {
-            *monsCount = FlagGet(FLAG_ROGUE_HARD_TRAINERS) ? 4 : 3;
-            gRogueLocal.trainerTemp.allowItemEvos = FALSE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FALSE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel == 1)
-        {
-            *monsCount = FlagGet(FLAG_ROGUE_HARD_TRAINERS) ? 5 : 4;
-            gRogueLocal.trainerTemp.allowItemEvos = FALSE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FALSE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel == 2)
-        {
-            *monsCount = FlagGet(FLAG_ROGUE_HARD_TRAINERS) ? 6 : 4;
-            gRogueLocal.trainerTemp.allowItemEvos = FlagGet(FLAG_ROGUE_HARD_TRAINERS);
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FALSE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel <= 5)
-        {
-            *monsCount = FlagGet(FLAG_ROGUE_HARD_TRAINERS) ? 6 : 5;
-            gRogueLocal.trainerTemp.allowItemEvos = TRUE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FlagGet(FLAG_ROGUE_HARD_TRAINERS);
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel <= 6) 
-        {
-            *monsCount = 6;
-            gRogueLocal.trainerTemp.allowItemEvos = TRUE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FlagGet(FLAG_ROGUE_HARD_TRAINERS);
-            gRogueLocal.trainerTemp.preferStrongPresets = FlagGet(FLAG_ROGUE_HARD_TRAINERS);
-        }
-        else if(difficultyLevel <= 7) // From last gym leader we can see ledgendaries
-        {
-            *monsCount = 6;
-            gRogueLocal.trainerTemp.allowItemEvos = TRUE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = TRUE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FlagGet(FLAG_ROGUE_HARD_TRAINERS);
-        }
-        else // From last gym leader we can see ledgendaries
-        {
-            *monsCount = 6;
-            gRogueLocal.trainerTemp.allowItemEvos = TRUE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = TRUE;
-            gRogueLocal.trainerTemp.preferStrongPresets = TRUE;
-        }
-        
-        // We don't want to use strong presets
-        if(IsBossTrainer(trainerNum))
-        {
-            const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-            if((trainer->partyFlags & PARTY_FLAG_STRONG_PRESETS_IGNORE) != 0)
-            {
-                gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-            }
-        }
-        else if(IsMiniBossTrainer(trainerNum))
-        {
-            const struct RogueTrainerEncounter* trainer = &gRogueMiniBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-            // If we somehow get a mini boss early, it should be easy going
-            if(difficultyLevel < 3)
-            {
-                *monsCount /= 2;
-
-                if(*monsCount == 0)
-                    *monsCount = 1;
+                // Move prof just above the player
+                if(gSaveBlock1Ptr->objectEventTemplates[i].graphicsId == OBJ_EVENT_GFX_MISC_PROFESSOR_ELM)
+                {
+                    SetObjEventTemplateCoords(gSaveBlock1Ptr->objectEventTemplates[i].localId, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y - 2);
+                    TryMoveObjectEventToMapCoords(gSaveBlock1Ptr->objectEventTemplates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y - 2);
+                }
             }
 
-            if((trainer->partyFlags & PARTY_FLAG_STRONG_PRESETS_IGNORE) != 0)
+            // Prof may not have been in view, so force it to spawn
+            TrySpawnObjectEvents(gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+
+            VarSet(VAR_ROGUE_INTRO_STATE, VarGet(VAR_ROGUE_INTRO_STATE) + 1);
+        }
+    }
+    else if (gBattleOutcome == B_OUTCOME_CAUGHT)
+    {
+        u8 safariIndex = RogueSafari_GetPendingBattleMonIdx();
+        RogueSafari_ClearSafariMonAtIdx(safariIndex);
+    }
+}
+
+static void RememberPartyHeldItems()
+{
+    if(Rogue_IsRunActive())
+    {
+        u8 i;
+
+        for(i = 0; i < PARTY_SIZE; ++i)
+        {
+            if(i >= gPlayerPartyCount)
+                gRogueRun.partyHeldItems[i] = ITEM_NONE; // account for if we catch a mon
+            else
+                gRogueRun.partyHeldItems[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        }
+    }
+}
+
+static void RememberPartyHealth()
+{
+    if(Rogue_IsRunActive())
+    {
+        u8 i;
+
+        for(i = 0; i < PARTY_SIZE; ++i)
+        {
+            if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
+                gRogueLocal.partyRememberedHealth[i] = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+            else
+                gRogueLocal.partyRememberedHealth[i] = 0;
+        }
+    }
+}
+
+static void TryRestorePartyHeldItems(bool8 allowThief)
+{
+    if(Rogue_IsRunActive())
+    {
+        u8 i;
+        u32 item;
+        u16 successBerryIcon = ITEM_NONE;
+        u16 failBerryIcon = ITEM_NONE;
+
+        for(i = 0; i < gPlayerPartyCount; ++i)
+        {
+            item = gRogueRun.partyHeldItems[i];
+
+            // Ignore fainted mons
+            if(GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
+                continue;
+
+            // We're still holding the same item no need to continue
+            if(GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == item)
+                continue;
+
+            if(item == ITEM_NONE)
             {
-                gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
+                // We previously weren't holding anything but if we're allowed to steal then don't stomp over current held item
+                if(allowThief)
+                    continue;
             }
-        }
-    }
-    else
-    {
-        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
-        {
-            // EXP trainer
-            *monsCount = 1;
-            *forceType = TYPE_NORMAL;
-            gRogueLocal.trainerTemp.allowItemEvos = FALSE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FALSE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel == 0)
-        {
-            *monsCount = 1 + RogueRandomRange(2, FLAG_SET_SEED_TRAINERS);
-            *forceType = TYPE_NORMAL;
-            gRogueLocal.trainerTemp.allowItemEvos = FALSE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FALSE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel == 1)
-        {
-            *monsCount = 1 + RogueRandomRange(2, FLAG_SET_SEED_TRAINERS);
-            *forceType = TYPE_NORMAL;
-            gRogueLocal.trainerTemp.allowItemEvos = FALSE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FALSE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel == 2)
-        {
-            *monsCount = 1 + RogueRandomRange(3, FLAG_SET_SEED_TRAINERS);
-            gRogueLocal.trainerTemp.allowItemEvos = FALSE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FALSE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel <= 7)
-        {
-            *monsCount = 2 + RogueRandomRange(3, FLAG_SET_SEED_TRAINERS);
-            gRogueLocal.trainerTemp.allowItemEvos = FALSE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = FALSE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = FALSE;
-            gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-        }
-        else if(difficultyLevel <= 11)
-        {
-            // Elite 4
-            *monsCount = 2 + RogueRandomRange(3, FLAG_SET_SEED_TRAINERS);
-            gRogueLocal.trainerTemp.allowItemEvos = TRUE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = TRUE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = TRUE;
-            gRogueLocal.trainerTemp.preferStrongPresets = TRUE;
-        }
-        else
-        {
-            // Champion
-            *monsCount = 3 + RogueRandomRange(2, FLAG_SET_SEED_TRAINERS);
-            gRogueLocal.trainerTemp.allowItemEvos = TRUE;
-            gRogueLocal.trainerTemp.allowWeakLegendaries = TRUE;
-            gRogueLocal.trainerTemp.allowStrongLegendaries = TRUE;
-            gRogueLocal.trainerTemp.preferStrongPresets = TRUE;
+
+            // Consume berries but attempt to auto re-equip from bag
+            if(item >= FIRST_BERRY_INDEX && item <= LAST_BERRY_INDEX)
+            {
+                if(RemoveBagItem(item, 1))
+                    successBerryIcon = item;
+                else
+                {
+                    failBerryIcon = item;
+                    item = ITEM_NONE;
+                }
+            }
+
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
         }
 
-        // We fill up the buffer with too many mons, so in higher gen count we're going to randomally select types for trainers to use
-        if(forceType[0] == TYPE_NONE)
-        {
-            forceType[0] = RogueRandomRange(NUMBER_OF_MON_TYPES, FLAG_SET_SEED_TRAINERS);
-            forceType[1] = RogueRandomRange(NUMBER_OF_MON_TYPES, FLAG_SET_SEED_TRAINERS);
-
-            // Normal types techincally most likely
-            if(forceType[0] == TYPE_MYSTERY)
-                forceType[0] = TYPE_NORMAL;
-            if(forceType[1] == TYPE_MYSTERY)
-                forceType[1] = TYPE_NORMAL;
-
-            if(forceType[0] == forceType[1])
-                forceType[1] = TYPE_NONE;
-        }
-    }
-
-    if(FlagGet(FLAG_ROGUE_TRAINERS_WEAK_LEGENDARIES))
-    {
-        gRogueLocal.trainerTemp.allowWeakLegendaries = TRUE;
-    }
-
-    if(FlagGet(FLAG_ROGUE_TRAINERS_STRONG_LEGENDARIES))
-    {
-        gRogueLocal.trainerTemp.allowStrongLegendaries = TRUE;
-    }
-
-    if(FlagGet(FLAG_ROGUE_EASY_TRAINERS))
-    {
-        gRogueLocal.trainerTemp.preferStrongPresets = FALSE;
-    }
-
-    if(attemptForceStrongPresets && gRogueLocal.trainerTemp.preferStrongPresets)
-    {
-        if(!Rogue_GetActiveCampaign() == ROGUE_CAMPAIGN_LOW_BST)
-        {
-            // Temp don't apply this change during the low bst cup as it'll make it harder mid competition
-            // TODO - Remove this check once competition is over
-            gRogueLocal.trainerTemp.forceStrongPresets = TRUE;
-        }
-    }
-
-    if(FlagGet(FLAG_ROGUE_DOUBLE_BATTLES)) 
-    {
-        if(*monsCount < 2 && gPlayerPartyCount >= 2)
-        {
-            *monsCount = 2;
-        }
+        // Make a popup to indicate the berries have or haven't been requiped
+        if(failBerryIcon != ITEM_NONE)
+            Rogue_PushPopup_RequipBerryFail(failBerryIcon);
+        else if(successBerryIcon != ITEM_NONE)
+            Rogue_PushPopup_RequipBerrySuccess(successBerryIcon);
     }
 }
 
@@ -4416,10 +6854,178 @@ bool8 Rogue_AllowItemUse(u16 itemId)
 
 void Rogue_OnItemUse(u16 itemId)
 {
+    // Expected to be called in such a way that we can check the var
+    AGB_ASSERT(itemId == gSpecialVar_ItemId);
+
     if (gMain.inBattle)
     {
-
+        RogueQuest_OnTrigger(QUEST_TRIGGER_BATTLE_ITEM_USED);
     }
+    else
+    {
+        RogueQuest_OnTrigger(QUEST_TRIGGER_FIELD_ITEM_USED);
+    }
+}
+
+void Rogue_OnSpendMoney(u32 money)
+{
+    gRogueLocal.totalMoneySpentOnMap += money;
+}
+
+u32 Rogue_GetTotalSpentOnActiveMap()
+{
+    return gRogueLocal.totalMoneySpentOnMap;
+}
+
+u16 Rogue_GetBagCapacity()
+{
+    if(gSaveBlock1Ptr->bagCapacityUpgrades >= ITEM_BAG_MAX_CAPACITY_UPGRADE)
+        return BAG_ITEM_CAPACITY;
+    else
+    {
+        // Takes into account BAG_ITEM_RESERVED_SLOTS
+        u16 startingSlots = BAG_ITEM_CAPACITY - ITEM_BAG_MAX_CAPACITY_UPGRADE * ITEM_BAG_SLOTS_PER_UPGRADE;
+        u16 slotCount = startingSlots + gSaveBlock1Ptr->bagCapacityUpgrades * ITEM_BAG_SLOTS_PER_UPGRADE;
+        return min(slotCount, BAG_ITEM_CAPACITY);
+    }
+}
+
+u16 Rogue_GetBagPocketAmountPerItem(u8 pocket)
+{
+    return MAX_BAG_ITEM_CAPACITY;
+}
+
+u32 Rogue_CalcBagUpgradeCost()
+{
+    return 500 + 250 * (u32)(gSaveBlock1Ptr->bagCapacityUpgrades);
+}
+
+void Rogue_AddPartySnapshot()
+{
+    AGB_ASSERT(gRogueRun.partySnapshotCount < ARRAY_COUNT(gRogueRun.partySnapshots));
+
+    if(gRogueRun.partySnapshotCount < ARRAY_COUNT(gRogueRun.partySnapshots))
+    {
+        u8 i, s;
+        u8 index = gRogueRun.partySnapshotCount++;
+        memset(&gRogueRun.partySnapshots[index], 0, sizeof(gRogueRun.partySnapshots[index]));
+
+        s = 0;
+
+        for(i = 0; i < PARTY_SIZE; ++i)
+        {
+            if(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
+            {
+                gRogueRun.partySnapshots[index].partySpeciesGfx[s] = FollowMon_GetMonGraphics(&gPlayerParty[i]);
+                gRogueRun.partySnapshots[index].partyPersonalities[s] = (GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY) & ~24); // remove nature part as that might change
+                ++s;
+            }
+        }
+    }
+}
+
+#ifdef ROGUE_DEBUG
+static u16 Debug_RandomActiveSpecies()
+{
+    u16 species;
+    RogueMonQuery_Begin();
+    RogueMonQuery_IsSpeciesActive();
+
+    species = RogueMiscQuery_SelectRandomElement(Random());
+
+    RogueMonQuery_End();
+
+    return species;
+}
+#endif
+
+void Rogue_DebugFillPartySnapshots()
+{
+#ifdef ROGUE_DEBUG
+    u8 i, j, snapshotIndex;
+    gRogueRun.partySnapshotCount = 0;
+
+    for(i = 0; i < ROGUE_MAX_BOSS_COUNT; ++i)
+    {
+        snapshotIndex = gRogueRun.partySnapshotCount++;
+
+        if(i == 0)
+        {
+            gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[0] = SPECIES_CHARMANDER;
+            gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[0] = 123;
+
+            for(j = 1; j < PARTY_SIZE; ++j)
+            {
+                gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[0] = SPECIES_NONE;
+                gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[0] = 0;
+            }
+        }
+        else if(i == 1)
+        {
+            gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[0] = SPECIES_CHARMELEON;
+            gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[0] = 123;
+        }
+        else
+        {
+            gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[0] = SPECIES_CHARIZARD;
+            gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[0] = 123;
+        }
+
+        if(i != 0)
+        {
+            for(j = 1; j < PARTY_SIZE; ++j)
+            {
+                switch (Random() % 6)
+                {
+                case 0:
+                    gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[j] = Debug_RandomActiveSpecies() + ((Random() % 5) ? 0 : FOLLOWMON_SHINY_OFFSET);
+                    gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[j] = Random();
+                    break;
+
+                case 1:
+                    gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[j] = 0;
+                    gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[j] = 0;
+                    break;
+
+                default:
+                    if(gRogueRun.partySnapshots[snapshotIndex - 1].partySpeciesGfx[j] != 0)
+                    {
+                        RogueMonQuery_Begin();
+                        if(gRogueRun.partySnapshots[snapshotIndex - 1].partySpeciesGfx[j] >= FOLLOWMON_SHINY_OFFSET)
+                            RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, gRogueRun.partySnapshots[snapshotIndex - 1].partySpeciesGfx[j] - FOLLOWMON_SHINY_OFFSET);
+                        else
+                            RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, gRogueRun.partySnapshots[snapshotIndex - 1].partySpeciesGfx[j]);
+
+                        RogueMonQuery_TransformIntoEvos(10 * i, TRUE, FALSE);
+
+                        gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[j] = RogueMiscQuery_SelectRandomElement(Random());
+                        gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[j] = gRogueRun.partySnapshots[snapshotIndex - 1].partyPersonalities[j];
+
+                        RogueMonQuery_End();
+                    }
+                    else
+                    {
+                        gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[j] = Debug_RandomActiveSpecies() + ((Random() % 5) ? 0 : FOLLOWMON_SHINY_OFFSET);
+                        gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[j] = Random();
+                    }
+                    break;
+                }
+            }
+        }
+
+        // Force spawn 2 large mons
+        if(i == 4)
+        {
+            u8 randIdx = 1 + Random() % 5;
+            gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[randIdx] = SPECIES_RAYQUAZA + ((Random() % 5) ? 0 : FOLLOWMON_SHINY_OFFSET);
+            gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[randIdx] = Random();
+
+            randIdx = 1 + Random() % 5;
+            gRogueRun.partySnapshots[snapshotIndex].partySpeciesGfx[randIdx] = SPECIES_KYOGRE + ((Random() % 5) ? 0 : FOLLOWMON_SHINY_OFFSET);
+            gRogueRun.partySnapshots[snapshotIndex].partyPersonalities[randIdx] = Random();
+        }
+    }
+#endif
 }
 
 void Rogue_PreBattleSetup(void)
@@ -4436,555 +7042,14 @@ void Rogue_PreBattleSetup(void)
 
 bool8 Rogue_OverrideTrainerItems(u16* items)
 {
-#ifdef ROGUE_FEATURE_AUTOMATION
-    if(TRUE)
-#else
-    if(Rogue_IsRunActive())
-#endif
+    u8 i;
+
+    for (i = 0; i < MAX_TRAINER_ITEMS; i++)
     {
-        u8 i;
-
-        for (i = 0; i < MAX_TRAINER_ITEMS; i++)
-        {
-            items[i] = ITEM_NONE;
-        }
-
-        return TRUE;
+        items[i] = ITEM_NONE;
     }
 
-    return FALSE;
-}
-
-extern const u16* const gRegionalDexSpecies[];
-extern u16 gRegionalDexSpeciesCount[];
-
-static bool8 IsSpeciesEnabledForCustomQuery(u16 species)
-{
-    u16 eggSpecies = Rogue_GetEggSpecies(species);
-    u16 dexLimit = VarGet(VAR_ROGUE_REGION_DEX_LIMIT);
-    u16 maxGen = VarGet(VAR_ROGUE_ENABLED_GEN_LIMIT);
-
-    // Use a specific regional dex
-    if(dexLimit != 0)
-    {
-        u16 i;
-        u16 checkSpecies;
-        const u16 targetDex = dexLimit - 1;
-        
-        for(i = 0; i < gRegionalDexSpeciesCount[targetDex]; ++i)
-        {
-            checkSpecies = Rogue_GetEggSpecies(gRegionalDexSpecies[targetDex][i]);
-
-            if(checkSpecies == eggSpecies)
-                return TRUE;
-        }
-
-        return FALSE;
-    }
-    else
-    {
-        return IsGenEnabled(SpeciesToGen(species));
-    }
-}
-
-
-static void ApplyTrainerQuery(u16 trainerNum)
-{
-    bool8 skipToEnd = FALSE;
-    bool8 isBossTrainer = IsBossTrainer(trainerNum);
-
-    // Query for the current trainer team
-    RogueQuery_Clear();
-
-    if(gRogueLocal.trainerTemp.customQuerySpeciesCount)
-    {
-        // Trainer has provided it's own initial query set
-        u16 i;
-
-        RogueQuery_ExcludeAll();
-
-        for(i = 0; i < gRogueLocal.trainerTemp.customQuerySpeciesCount; ++i)
-        {
-            u16 species = gRogueLocal.trainerTemp.customQuerySpecies[i];
-
-            if(IsSpeciesEnabledForCustomQuery(species))
-            {
-                RogueQuery_Include(species);
-            }
-        }
-
-        RogueQuery_SpeciesIsValid(TYPE_NONE, TYPE_NONE, TYPE_NONE); // Already done early cull above
-        //RogueQuery_SpeciesExcludeCommon(); // We cull gen above (Doesn't entirely work for custom queries as regional dex culls)
-
-        if(gRogueLocal.trainerTemp.forceLegendaries)
-            RogueQuery_SpeciesIsLegendary();
-        else 
-        {
-            if(!gRogueLocal.trainerTemp.allowWeakLegendaries && !gRogueLocal.trainerTemp.allowStrongLegendaries)
-                RogueQuery_SpeciesIsNotLegendary();
-            else if(!gRogueLocal.trainerTemp.allowStrongLegendaries)
-                RogueQuery_SpeciesIsNotStrongLegendary();
-            else if(!gRogueLocal.trainerTemp.allowWeakLegendaries)
-                RogueQuery_SpeciesIsNotWeakLegendary();
-        }
-
-        if(gRogueLocal.trainerTemp.customQueryProvidesOutput)
-        {
-            skipToEnd = TRUE;
-        }
-
-        // We ignore the first type check, as we're using a smaller subset anyway
-        // which are likely all egg species so we only care about the check at the end
-    }
-    else
-    {
-        RogueQuery_SpeciesIsValid(gRogueLocal.trainerTemp.allowedType[0], gRogueLocal.trainerTemp.allowedType[1], TYPE_NONE);
-        RogueQuery_SpeciesExcludeCommon();
-        RogueQuery_Exclude(SPECIES_UNOWN);
-
-        // Apply alternate forms
-        //
-#ifdef ROGUE_EXPANSION
-        {
-            // Deoxys - One of forms
-            if(RogueQuery_CheckIncluded(SPECIES_DEOXYS))
-            {
-                switch(RogueRandomRange(4, FLAG_SET_SEED_TRAINERS))
-                {
-                    case 0:
-                        RogueQuery_Include(SPECIES_DEOXYS);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_ATTACK);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_DEFENSE);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_SPEED);
-                        break;
-
-                    case 1:
-                        RogueQuery_Exclude(SPECIES_DEOXYS);
-                        RogueQuery_Include(SPECIES_DEOXYS_ATTACK);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_DEFENSE);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_SPEED);
-                        break;
-
-                    case 2:
-                        RogueQuery_Exclude(SPECIES_DEOXYS);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_ATTACK);
-                        RogueQuery_Include(SPECIES_DEOXYS_DEFENSE);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_SPEED);
-                        break;
-
-                    case 3:
-                        RogueQuery_Exclude(SPECIES_DEOXYS);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_ATTACK);
-                        RogueQuery_Exclude(SPECIES_DEOXYS_DEFENSE);
-                        RogueQuery_Include(SPECIES_DEOXYS_SPEED);
-                        break;
-                }
-            }
-
-            // Shaymin - One of land or sky forme
-            if(RogueQuery_CheckIncluded(SPECIES_SHAYMIN))
-            {
-                // One of land or sky forme
-                if(RogueRandomRange(2, FLAG_SET_SEED_TRAINERS) == 0)
-                {
-                    RogueQuery_Include(SPECIES_SHAYMIN);
-                    RogueQuery_Exclude(SPECIES_SHAYMIN_SKY);
-                }
-                else
-                {
-                    RogueQuery_Exclude(SPECIES_SHAYMIN);
-                    RogueQuery_Include(SPECIES_SHAYMIN_SKY);
-                }
-            }
-
-            // Arceus - Allow all forms
-            if(isBossTrainer && gRogueRun.currentDifficulty >= 12 && RogueQuery_CheckIncluded(SPECIES_ARCEUS))
-            {
-                RogueQuery_IncludeRange(SPECIES_ARCEUS_FIGHTING, SPECIES_ARCEUS_FAIRY);
-            }
-            else
-            {
-                RogueQuery_Exclude(SPECIES_ARCEUS);
-            }
-            
-
-            // Genies - One of forms
-            if(RogueQuery_CheckIncluded(SPECIES_TORNADUS))
-            {
-                if(RogueRandomRange(2, FLAG_SET_SEED_TRAINERS) == 0)
-                {
-                    RogueQuery_Include(SPECIES_TORNADUS);
-                    RogueQuery_Exclude(SPECIES_TORNADUS_THERIAN);
-                }
-                else
-                {
-                    RogueQuery_Exclude(SPECIES_TORNADUS);
-                    RogueQuery_Include(SPECIES_TORNADUS_THERIAN);
-                }
-            }
-
-            if(RogueQuery_CheckIncluded(SPECIES_THUNDURUS))
-            {
-                if(RogueRandomRange(2, FLAG_SET_SEED_TRAINERS) == 0)
-                {
-                    RogueQuery_Include(SPECIES_TORNADUS);
-                    RogueQuery_Exclude(SPECIES_THUNDURUS_THERIAN);
-                }
-                else
-                {
-                    RogueQuery_Exclude(SPECIES_THUNDURUS);
-                    RogueQuery_Include(SPECIES_THUNDURUS_THERIAN);
-                }
-            }
-
-            if(RogueQuery_CheckIncluded(SPECIES_LANDORUS))
-            {
-                if(RogueRandomRange(2, FLAG_SET_SEED_TRAINERS) == 0)
-                {
-                    RogueQuery_Include(SPECIES_LANDORUS);
-                    RogueQuery_Exclude(SPECIES_LANDORUS_THERIAN);
-                }
-                else
-                {
-                    RogueQuery_Exclude(SPECIES_LANDORUS);
-                    RogueQuery_Include(SPECIES_LANDORUS_THERIAN);
-                }
-            }
-
-            // Kyurem - One of forms
-            if(RogueQuery_CheckIncluded(SPECIES_KYUREM))
-            {
-                switch(RogueRandomRange(3, FLAG_SET_SEED_TRAINERS))
-                {
-                    case 0:
-                        RogueQuery_Include(SPECIES_KYUREM);
-                        RogueQuery_Exclude(SPECIES_KYUREM_WHITE);
-                        RogueQuery_Exclude(SPECIES_KYUREM_BLACK);
-                        break;
-
-                    case 1:
-                        RogueQuery_Exclude(SPECIES_KYUREM);
-                        RogueQuery_Include(SPECIES_KYUREM_WHITE);
-                        RogueQuery_Exclude(SPECIES_KYUREM_BLACK);
-                        break;
-                    case 2:
-
-                        RogueQuery_Exclude(SPECIES_KYUREM);
-                        RogueQuery_Exclude(SPECIES_KYUREM_WHITE);
-                        RogueQuery_Include(SPECIES_KYUREM_BLACK);
-                        break;
-                }
-            }
-
-            // Genesect - Allow all forms
-            if(RogueQuery_CheckIncluded(SPECIES_GENESECT))
-            {
-                RogueQuery_IncludeRange(SPECIES_GENESECT_DOUSE_DRIVE, SPECIES_GENESECT_CHILL_DRIVE);
-            }
-
-            // Hoopa - Allow one of the forms
-            if(RogueQuery_CheckIncluded(SPECIES_HOOPA))
-            {
-                if(RogueRandomRange(2, FLAG_SET_SEED_TRAINERS) == 0)
-                {
-                    RogueQuery_Include(SPECIES_HOOPA);
-                    RogueQuery_Exclude(SPECIES_HOOPA_UNBOUND);
-                }
-                else
-                {
-                    RogueQuery_Exclude(SPECIES_HOOPA);
-                    RogueQuery_Include(SPECIES_HOOPA_UNBOUND);
-                }
-            }
-
-            // Oricorio - Allow all forms
-            if(RogueQuery_CheckIncluded(SPECIES_ORICORIO))
-            {
-                RogueQuery_IncludeRange(SPECIES_ORICORIO_POM_POM, SPECIES_ORICORIO_SENSU);
-            }
-
-            // Lycanroc - Allow all forms
-            if(RogueQuery_CheckIncluded(SPECIES_LYCANROC))
-            {
-                RogueQuery_IncludeRange(SPECIES_LYCANROC_MIDNIGHT, SPECIES_LYCANROC_DUSK);
-            }
-
-            // Necrozma - Allow all forms
-            if(RogueQuery_CheckIncluded(SPECIES_NECROZMA))
-            {
-                RogueQuery_IncludeRange(SPECIES_NECROZMA_DUSK_MANE, SPECIES_NECROZMA_DAWN_WINGS);
-            }
-
-            // Alcreamie - Allow all forms
-            if(RogueQuery_CheckIncluded(SPECIES_ALCREMIE))
-            {
-                RogueQuery_IncludeRange(SPECIES_ALCREMIE_RUBY_CREAM, SPECIES_ALCREMIE_RAINBOW_SWIRL);
-            }
-
-
-            // Urshifu - One of 2 forms
-            if(RogueQuery_CheckIncluded(SPECIES_URSHIFU))
-            {
-                if(RogueRandomRange(2, FLAG_SET_SEED_TRAINERS) == 0)
-                {
-                    RogueQuery_Include(SPECIES_URSHIFU);
-                    RogueQuery_Exclude(SPECIES_URSHIFU_RAPID_STRIKE_STYLE);
-                }
-                else
-                {
-                    RogueQuery_Exclude(SPECIES_URSHIFU);
-                    RogueQuery_Include(SPECIES_URSHIFU_RAPID_STRIKE_STYLE);
-                }
-            }
-
-            // Calyrex - One of forms
-            if(RogueQuery_CheckIncluded(SPECIES_CALYREX))
-            {
-                switch(RogueRandomRange(3, FLAG_SET_SEED_TRAINERS))
-                {
-                    case 0:
-                        RogueQuery_Include(SPECIES_CALYREX);
-                        RogueQuery_Exclude(SPECIES_CALYREX_ICE_RIDER);
-                        RogueQuery_Exclude(SPECIES_CALYREX_SHADOW_RIDER);
-                        break;
-
-                    case 1:
-                        RogueQuery_Exclude(SPECIES_CALYREX);
-                        RogueQuery_Include(SPECIES_CALYREX_ICE_RIDER);
-                        RogueQuery_Exclude(SPECIES_CALYREX_SHADOW_RIDER);
-                        break;
-                    case 2:
-
-                        RogueQuery_Exclude(SPECIES_CALYREX);
-                        RogueQuery_Exclude(SPECIES_CALYREX_ICE_RIDER);
-                        RogueQuery_Include(SPECIES_CALYREX_SHADOW_RIDER);
-                        break;
-                }
-            }
-        }
-#endif
-
-        if(gRogueLocal.trainerTemp.forceLegendaries)
-            RogueQuery_SpeciesIsLegendary();
-        else 
-        {
-            if(!gRogueLocal.trainerTemp.allowWeakLegendaries && !gRogueLocal.trainerTemp.allowStrongLegendaries)
-                RogueQuery_SpeciesIsNotLegendary();
-            else if(!gRogueLocal.trainerTemp.allowStrongLegendaries)
-                RogueQuery_SpeciesIsNotStrongLegendary();
-            else if(!gRogueLocal.trainerTemp.allowWeakLegendaries)
-                RogueQuery_SpeciesIsNotWeakLegendary();
-        }
-    }
-
-    if(!skipToEnd)
-    {
-        RogueQuery_TransformToEggSpecies();
-
-        // Evolve the species to just below the wild encounter level
-        RogueQuery_EvolveSpecies(CalculateTrainerLevel(trainerNum), gRogueLocal.trainerTemp.allowItemEvos);
-
-        if(gRogueLocal.trainerTemp.allowedType[0] != TYPE_NONE)
-        {
-            if(gRogueLocal.trainerTemp.allowedType[1] != TYPE_NONE)
-                RogueQuery_SpeciesOfTypes(&gRogueLocal.trainerTemp.allowedType[0], 2); // 2 types
-            else
-                RogueQuery_SpeciesOfType(gRogueLocal.trainerTemp.allowedType[0]); // 1 type
-        }
-
-        // Disable types
-        if(gRogueLocal.trainerTemp.disallowedType[0] != TYPE_NONE)
-        {
-            if(gRogueLocal.trainerTemp.disallowedType[1] != TYPE_NONE)
-                RogueQuery_SpeciesNotOfTypes(&gRogueLocal.trainerTemp.disallowedType[0], 2); // 2 types
-            else
-                RogueQuery_SpeciesNotOfType(gRogueLocal.trainerTemp.disallowedType[0]); // 1 type
-        }
-    }
-
-//#ifdef ROGUE_EXPANSION
-    if(gRogueLocal.trainerTemp.preferStrongPresets)
-    {
-        u16 maxGen = VarGet(VAR_ROGUE_ENABLED_GEN_LIMIT);
-        u16 targetDex = VarGet(VAR_ROGUE_REGION_DEX_LIMIT);
-
-        // Regional dex and national mode gen prior to gen 2 has strong mons disabled
-        if(gRogueLocal.trainerTemp.forceStrongPresets || (targetDex == 0 && maxGen >= 3))
-        { 
-            RogueQuery_SpeciesIncludeMonFlags(MON_FLAG_STRONG);
-        }
-    }
-//#endif
-
-    if((gRogueLocal.trainerTemp.forceLegendaries || gRogueLocal.trainerTemp.allowStrongLegendaries) && trainerNum == TRAINER_ROGUE_MINI_BOSS_MAXIE)
-    {
-        if(IsSpeciesEnabledForCustomQuery(SPECIES_GROUDON))
-        {
-            RogueQuery_Include(SPECIES_GROUDON);
-        }
-    }
-
-    RogueQuery_CollapseSpeciesBuffer();
-}
-
-static bool8 ApplyFallbackTrainerQuery(u16 trainerNum)
-{
-    bool8 hasFallback = FALSE;
-
-    // Apply a custom fallback but only once
-    if(!gRogueLocal.trainerTemp.hasAppliedFallback)
-    {
-        if(IsBossTrainer(trainerNum))
-        {
-            const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-            if((trainer->partyFlags & PARTY_FLAG_THIRDSLOT_FALLBACK_TYPE) != 0)
-            {
-                gRogueLocal.trainerTemp.allowedType[0] = trainer->incTypes[2];
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-                hasFallback = TRUE;
-            }
-        }
-        else if(IsMiniBossTrainer(trainerNum))
-        {
-            const struct RogueTrainerEncounter* trainer = &gRogueMiniBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-            if((trainer->partyFlags & PARTY_FLAG_THIRDSLOT_FALLBACK_TYPE) != 0)
-            {
-                gRogueLocal.trainerTemp.allowedType[0] = trainer->incTypes[2];
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-                hasFallback = TRUE;
-            }
-        }
-    }
-
-    if(!hasFallback)
-    {
-        switch(gRogueLocal.trainerTemp.allowedType[0])
-        {
-            case TYPE_DARK:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_FIGHTING;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_PSYCHIC;
-                break;
-
-            case TYPE_PSYCHIC:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_GHOST;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-                break;
-
-            case TYPE_STEEL:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_GROUND;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_DRAGON;
-                break;
-
-            case TYPE_FIGHTING:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_ROCK;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-                break;
-
-            case TYPE_GHOST:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_POISON;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_BUG;
-                break;
-
-            case TYPE_DRAGON:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_FIRE;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_WATER;
-                break;
-
-            case TYPE_FIRE:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_GROUND;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-                break;
-
-            case TYPE_FLYING:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_NORMAL;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-                break;
-
-            case TYPE_ICE:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_WATER;
-                gRogueLocal
-                .trainerTemp.allowedType[1] = TYPE_NONE;
-                break;
-
-            case TYPE_NORMAL:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_FIGHTING;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_GHOST;
-                break;
-
-            default:
-                hasFallback = TRUE;
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_NONE;
-                gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-                break;
-        }
-    }
-
-    if(hasFallback && !gRogueLocal.trainerTemp.hasAppliedFallback)
-    {
-        gRogueLocal.trainerTemp.hasAppliedFallback = TRUE;
-        gRogueLocal.trainerTemp.forceLegendaries = FALSE;
-        ApplyTrainerQuery(trainerNum);
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
-void Rogue_PreCreateTrainerParty(u16 trainerNum, bool8* useRogueCreateMon, u8* monsCount)
-{
-#ifdef ROGUE_FEATURE_AUTOMATION
-    if(!Rogue_AutomationGetFlag(AUTO_FLAG_TRAINER_DISABLE_PARTY_GENERATION))
-#else
-    if(Rogue_IsRunActive())
-#endif
-    {        // Reset trainer temp
-        memset(&gRogueLocal.trainerTemp, 0, sizeof(gRogueLocal.trainerTemp));
-        gRogueLocal.trainerTemp.seedToRestore = gRngRogueValue;
-
-        gRogueLocal.trainerTemp.allowedType[0] = TYPE_NONE;
-        gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-
-        gRogueLocal.trainerTemp.disallowedType[0] = TYPE_NONE;
-        gRogueLocal.trainerTemp.disallowedType[1] = TYPE_NONE;
-
-        SeedRogueTrainer(gRngRogueValue, trainerNum, RogueRandom() % 17);
-        ConfigureTrainer(trainerNum, monsCount);
-
-        ApplyTrainerQuery(trainerNum);
-
-#ifdef ROGUE_DEBUG
-        gDebug_TrainerOptionCount = RogueQuery_BufferSize();
-#endif
-
-        *useRogueCreateMon = TRUE;
-        return;
-    }
-
-    *useRogueCreateMon = FALSE;
-}
-
-static void SwapMons(u8 aIdx, u8 bIdx, struct Pokemon *party)
-{
-    if(aIdx != bIdx)
-    {
-        struct Pokemon tempMon;
-        CopyMon(&tempMon, &party[aIdx], sizeof(struct Pokemon));
-
-        CopyMon(&party[aIdx], &party[bIdx], sizeof(struct Pokemon));
-        CopyMon(&party[bIdx], &tempMon, sizeof(struct Pokemon));
-    }
+    return TRUE;
 }
 
 static void SwapMonItems(u8 aIdx, u8 bIdx, struct Pokemon *party)
@@ -4999,583 +7064,18 @@ static void SwapMonItems(u8 aIdx, u8 bIdx, struct Pokemon *party)
     }
 }
 
-// + go to the front - go to the back
-s16 CalulcateMonSortScore(struct Pokemon* mon)
-{
-    s16 score = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    u16 item = GetMonData(mon, MON_DATA_HELD_ITEM);
-
-#ifdef ROGUE_EXPANSION
-    if(((item >= ITEM_VENUSAURITE && item <= ITEM_DIANCITE) || (item >= ITEM_NORMALIUM_Z && item <= ITEM_ULTRANECROZIUM_Z)))
-    {
-        score -= 20;
-    }
-#endif
-
-    if(IsSpeciesLegendary(species))
-    {
-        score -= 20;
-    }
-
-    // Early pri moves
-    //
-    if(MonKnowsMove(mon, MOVE_FAKE_OUT))
-    {
-        score += 1;
-    }
-    if(MonKnowsMove(mon, MOVE_LIGHT_SCREEN))
-    {
-        score += 1;
-    }
-    if(MonKnowsMove(mon, MOVE_REFLECT))
-    {
-        score += 1;
-    }
-    if(MonKnowsMove(mon, MOVE_SPIKES))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_TAUNT))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_TRICK))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_TOXIC))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_BATON_PASS))
-    {
-        score += 1;
-
-        // Only prioritse sub if we want to baton pass out
-        if(MonKnowsMove(mon, MOVE_SUBSTITUTE))
-        {
-            score += 1;
-        }
-    }
-
-#ifdef ROGUE_EXPANSION
-    if(MonKnowsMove(mon, MOVE_U_TURN))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_FLIP_TURN))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_PARTING_SHOT))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_VOLT_SWITCH))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_TOXIC_SPIKES))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_STEALTH_ROCK))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_STICKY_WEB))
-    {
-        score += 1;
-    }
-
-    if(MonKnowsMove(mon, MOVE_TRICK_ROOM))
-    {
-        score += 1;
-    }
-#endif
-
-    return score;
-}
-
-void Rogue_PostCreateTrainerParty(u16 trainerNum, struct Pokemon *party, u8 monsCount)
-{
-    bool8 keepExistingLead = FALSE;
-    bool8 reorganiseParty = TRUE;
-    bool8 clampLeadScore = FALSE;
-
-    if(IsBossTrainer(trainerNum))
-    {
-        const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-        if((trainer->partyFlags & PARTY_FLAG_MIRROR_ANY) != 0)
-        {
-            reorganiseParty = FALSE;
-        }
-
-        if((trainer->partyFlags & PARTY_FLAG_COUNTER_TYPINGS) != 0)
-        {
-            keepExistingLead = TRUE;
-        }
-    }
-    else if(IsMiniBossTrainer(trainerNum))
-    {
-        const struct RogueTrainerEncounter* trainer = &gRogueMiniBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-        if((trainer->partyFlags & PARTY_FLAG_MIRROR_ANY) != 0)
-        {
-            reorganiseParty = FALSE;
-        }
-
-        if((trainer->partyFlags & PARTY_FLAG_COUNTER_TYPINGS) != 0)
-        {
-            keepExistingLead = TRUE;
-        }
-    }
-    else
-    {
-        // Always reoganise hard trainers
-        if(!FlagGet(FLAG_ROGUE_HARD_TRAINERS))
-        {
-            // Basic trainers don't care and can do whatever with their team order
-            reorganiseParty = FALSE;
-        }
-    }
-
-    if(reorganiseParty)
-    {
-        u16 i;
-        s16 scoreA, scoreB;
-        bool8 anySwaps;
-        u16 startIndex = keepExistingLead ? 1 : 0;
-        u16 sortLength = monsCount - 1;
-
-        if(!FlagGet(FLAG_ROGUE_GAUNTLET_MODE) && !FlagGet(FLAG_ROGUE_HARD_TRAINERS) && gRogueRun.currentDifficulty < 8)
-        {
-            // Prior to E4 we don't want to force forward the best lead mon#
-            // We just want to push final mons to the back
-            clampLeadScore = TRUE;
-        }
-
-        // Bubble sort party
-        while(sortLength != 0)
-        {
-            anySwaps = FALSE;
-
-            for(i = startIndex; i < monsCount - 1; ++i)
-            {
-                scoreA = CalulcateMonSortScore(&party[i]);
-                scoreB = CalulcateMonSortScore(&party[i + 1]);
-
-                if(clampLeadScore)
-                {
-                    scoreA = min(scoreA, 0);
-                    scoreB = min(scoreB, 0);
-                }
-                
-                if(scoreB > scoreA)
-                {
-                    anySwaps = TRUE;
-                    SwapMons(i, i + 1, party);
-                }
-            }
-        
-            if(anySwaps)
-                --sortLength;
-            else
-                sortLength = 0;
-        }
-    }
-
-#if defined(ROGUE_DEBUG) && defined(ROGUE_DEBUG_STEAL_TEAM)
-    {
-        u8 i;
-        u16 exp = Rogue_ModifyExperienceTables(1, 100);
-
-        for(i = 0; i < PARTY_SIZE; ++i)
-        {
-            ZeroMonData(&gPlayerParty[i]);
-        }
-
-        gPlayerPartyCount = monsCount;
-
-        for(i = 0; i < gPlayerPartyCount; ++i)
-        {
-            CopyMon(&gPlayerParty[i], &party[i], sizeof(gPlayerParty[i]));
-
-            SetMonData(&gPlayerParty[i], MON_DATA_EXP, &exp);
-            CalculateMonStats(&gPlayerParty[i]);
-        }
-    }
-#endif
-
-    gRngRogueValue = gRogueLocal.trainerTemp.seedToRestore;
-}
-
-static void ApplyCounterTrainerQuery(u16 trainerNum, bool8 isBoss, u8 monIdx)
-{
-    u16 baseType = TYPE_NONE;
-
-    monIdx %= gPlayerPartyCount;
-
-    {
-        u16 species = GetMonData(&gPlayerParty[monIdx], MON_DATA_SPECIES);
-
-        if(gBaseStats[species].type1 != gBaseStats[species].type2)
-        {
-            baseType = RogueRandomRange(2, isBoss ? FLAG_SET_SEED_BOSSES : FLAG_SET_SEED_TRAINERS) == 0 ? gBaseStats[species].type1 : gBaseStats[species].type2;
-        }
-        else
-        {
-            baseType = gBaseStats[species].type1;
-        }
-    }
-
-    gRogueLocal.trainerTemp.allowedType[0] = TYPE_NONE;
-    gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-
-    gRogueLocal.trainerTemp.disallowedType[0] = TYPE_NONE;
-    gRogueLocal.trainerTemp.disallowedType[1] = TYPE_NONE;
-
-    switch(baseType)
-    {
-        case TYPE_NORMAL:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_FIGHTING;
-            break;
-        case TYPE_FIGHTING:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_FLYING;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_PSYCHIC;
-            break;
-        case TYPE_FLYING:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_ELECTRIC;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_ROCK;
-            break;
-        case TYPE_POISON:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_GROUND;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_PSYCHIC;
-            break;
-        case TYPE_GROUND:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_WATER;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_GRASS;
-            break;
-        case TYPE_ROCK:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_FIGHTING;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_GRASS;
-            break;
-        case TYPE_BUG:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_FIRE;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_FLYING;
-            break;
-        case TYPE_GHOST:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_DARK;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_NORMAL;
-            break;
-        case TYPE_STEEL:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_GROUND;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_FIRE;
-            break;
-        case TYPE_FIRE:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_WATER;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_GROUND;
-            break;
-        case TYPE_WATER:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_ELECTRIC;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_GRASS;
-            break;
-        case TYPE_GRASS:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_FIRE;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_FLYING;
-            break;
-        case TYPE_ELECTRIC:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_GROUND;
-            break;
-        case TYPE_PSYCHIC:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_GHOST;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_BUG;
-            break;
-        case TYPE_ICE:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_ROCK;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_STEEL;
-            break;
-        case TYPE_DRAGON:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_ICE;
-#ifdef ROGUE_EXPANSION
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_FAIRY;
-#endif
-            break;
-        case TYPE_DARK:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_FIGHTING;
-            break;
-#ifdef ROGUE_EXPANSION
-        case TYPE_FAIRY:
-            gRogueLocal.trainerTemp.allowedType[0] = TYPE_POISON;
-            gRogueLocal.trainerTemp.allowedType[1] = TYPE_STEEL;
-            break;
-#endif
-        default:
-            gRogueLocal.trainerTemp.allowedType[0] = RogueRandomRange(NUMBER_OF_MON_TYPES, isBoss ? FLAG_SET_SEED_BOSSES : FLAG_SET_SEED_TRAINERS);
-
-            if(gRogueLocal.trainerTemp.allowedType[0] == TYPE_MYSTERY)
-                gRogueLocal.trainerTemp.allowedType[0] = TYPE_NONE;
-            break;
-    };
-
-    ApplyTrainerQuery(trainerNum);
-}
-
-static void ApplyUniqueCoverageTrainerQuery(u16 trainerNum, bool8 isBoss, struct Pokemon *party, u8 monIdx)
-{
-    u16 i;
-    u16 type = RogueRandomRange(NUMBER_OF_MON_TYPES, isBoss ? FLAG_SET_SEED_BOSSES : FLAG_SET_SEED_TRAINERS);
-
-    for(i = 0; i < NUMBER_OF_MON_TYPES; ++i)
-    {
-        type = (type + 1) % NUMBER_OF_MON_TYPES;
-
-        if(type == TYPE_MYSTERY)
-            ++type;
-        
-        if(!PartyContainsType(party, monIdx, type))
-            break;
-    }
-
-    gRogueLocal.trainerTemp.allowedType[0] = type;
-    gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-
-    gRogueLocal.trainerTemp.disallowedType[0] = TYPE_NONE;
-    gRogueLocal.trainerTemp.disallowedType[1] = TYPE_NONE;
-
-    ApplyTrainerQuery(trainerNum);
-
-    // This query has failed so we're going to just pick anything at this point
-    if(RogueQuery_BufferSize() == 0)
-    {
-        gRogueLocal.trainerTemp.allowedType[0] = TYPE_NONE;
-        ApplyTrainerQuery(trainerNum);
-    }
-}
-
-// Base species that is used for duplicate checks
-static u16 GetTrainerQueryBaseSpeciesToCheck(u16 species)
-{
-#ifdef ROGUE_EXPANSION
-    u16 baseSpecies = GET_BASE_SPECIES_ID(species);
-
-    switch (baseSpecies)
-    {
-    case SPECIES_DEOXYS:
-    case SPECIES_SHAYMIN:
-    case SPECIES_ARCEUS:
-    case SPECIES_TORNADUS:
-    case SPECIES_THUNDURUS:
-    case SPECIES_LANDORUS:
-    case SPECIES_KYUREM:
-    case SPECIES_GENESECT:
-    case SPECIES_ORICORIO:
-    case SPECIES_LYCANROC:
-    case SPECIES_NECROZMA:
-    case SPECIES_ALCREMIE:
-    case SPECIES_URSHIFU:
-    case SPECIES_CALYREX:
-        return baseSpecies;
-    }
-
-#endif
-
-    // No need to check against any other base species
-    return SPECIES_NONE;
-}
-
-static u16 NextTrainerSpecies(u16 trainerNum, bool8 isBoss, struct Pokemon *party, u8 monIdx, u8 totalMonCount)
-{
-    u16 species;
-    u16 baseSpecies;
-    u16 randIdx;
-    u16 queryCount;
-    bool8 skipDupeCheck = FALSE;
-    u16 queryCheckIdx = (monIdx - gRogueLocal.trainerTemp.queryMonOffset);
-    u16 maxGen = VarGet(VAR_ROGUE_ENABLED_GEN_LIMIT);
-
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS && !isBoss)
-    {
-        // EXP trainer
-        return SPECIES_CHANSEY;
-    }
-    
-    if(Rogue_GetActiveCampaign() == ROGUE_CAMPAIGN_LATERMANNER)
-    {
-        return SPECIES_FARFETCHD;
-    }
-
-    if(IsBossTrainer(trainerNum))
-    {
-        bool8 preferAceMode = FALSE;
-        const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-        preferAceMode = (gRogueRun.currentDifficulty == 12 && monIdx == 5) || (gRogueRun.currentDifficulty >= 13 && monIdx == 4);
-
-        if((trainer->partyFlags & PARTY_FLAG_THIRDSLOT_ACE_TYPE) != 0) // Ace type
-        {
-            // Pre champ final mon and final champ last 2 mons
-            if(preferAceMode)
-            {
-                bool8 executeAceQuery = TRUE;
-
-                // We are trying to ace type our default type, but we already contain a legendary
-                // Can cause soft locks depending on type/gen so just turn off this feature
-                if(trainer->incTypes[0] == trainer->incTypes[2] && PartyContainsLegendary(party, monIdx))
-                    executeAceQuery = FALSE;
-
-                if(executeAceQuery)
-                {
-                    gRogueLocal.trainerTemp.allowedType[0] = trainer->incTypes[2];
-                    gRogueLocal.trainerTemp.allowedType[1] = TYPE_NONE;
-
-                    // Force legendaries for last mon
-                    queryCheckIdx = 0;
-                    gRogueLocal.trainerTemp.queryMonOffset = monIdx;
-                    gRogueLocal.trainerTemp.forceLegendaries = TRUE;
-                    ApplyTrainerQuery(trainerNum);
-                }
-            }
-        }
-        else if((trainer->partyFlags & PARTY_FLAG_MIRROR_ANY) != 0) // Mirror species
-        {
-            return GetMonData(&gPlayerParty[monIdx], MON_DATA_SPECIES);
-        }
-        else if((trainer->partyFlags & PARTY_FLAG_COUNTER_TYPINGS) != 0) // Counter type
-        {
-            gRogueLocal.trainerTemp.forceLegendaries = preferAceMode && !PartyContainsLegendary(party, monIdx);
-
-            ApplyCounterTrainerQuery(trainerNum, isBoss, monIdx);
-            queryCheckIdx = 0;
-            gRogueLocal.trainerTemp.queryMonOffset = monIdx;
-        }
-        else if((trainer->partyFlags & PARTY_FLAG_UNIQUE_COVERAGE) != 0) // Unique type
-        {
-            gRogueLocal.trainerTemp.forceLegendaries = preferAceMode && !PartyContainsLegendary(party, monIdx);
-
-            ApplyUniqueCoverageTrainerQuery(trainerNum, isBoss, party, monIdx);
-            gRogueLocal.trainerTemp.queryMonOffset = monIdx;
-            queryCheckIdx = 0;
-            skipDupeCheck = (RogueQuery_BufferSize() == 1);
-        }
-    }
-    else if(IsMiniBossTrainer(trainerNum))
-    {
-        const struct RogueTrainerEncounter* trainer = &gRogueMiniBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-        // PARTY_FLAG_THIRDSLOT_ACE_TYPE not supported for mini bosses
-        if((trainer->partyFlags & PARTY_FLAG_MIRROR_ANY) != 0) // Mirror species
-        {
-            return GetMonData(&gPlayerParty[monIdx], MON_DATA_SPECIES);
-        }
-        else if((trainer->partyFlags & PARTY_FLAG_COUNTER_TYPINGS) != 0) // Counter type
-        {
-            ApplyCounterTrainerQuery(trainerNum, isBoss, monIdx);
-            queryCheckIdx = 0;
-            gRogueLocal.trainerTemp.queryMonOffset = monIdx;
-        }
-        else if((trainer->partyFlags & PARTY_FLAG_UNIQUE_COVERAGE) != 0) // Unique type
-        {
-            ApplyUniqueCoverageTrainerQuery(trainerNum, isBoss, party, monIdx);
-            queryCheckIdx = 0;
-            gRogueLocal.trainerTemp.queryMonOffset = monIdx;
-            skipDupeCheck = (RogueQuery_BufferSize() == 1);
-        }
-    }
-
-    queryCount = RogueQuery_BufferSize();
-
-    if(queryCheckIdx >= queryCount || queryCount == 0)
-    {
-        // Apply the fallback query (If we have one)
-        // This will allow for secondary types if we've exhausted the primary one
-        if(ApplyFallbackTrainerQuery(trainerNum))
-        {
-            gRogueLocal.trainerTemp.queryMonOffset = monIdx;
-            queryCheckIdx = 0;
-            queryCount = RogueQuery_BufferSize();
-        }
-    }
-
-#ifdef ROGUE_DEBUG
-    if(queryCount == 0)
-        species = SPECIES_FEEBAS;
-#endif
-
-    // Prevent duplicates, if possible
-    // *Only allow duplicates after we've already seen everything in the query
-    {
-        u8 stuckCount = 0;
-
-        do
-        {
-            randIdx = RogueRandomRange(queryCount, isBoss ? FLAG_SET_SEED_BOSSES : FLAG_SET_SEED_TRAINERS);
-            species = RogueQuery_BufferPtr()[randIdx];
-
-            if(stuckCount++ >= 100)
-            {
-                if(skipDupeCheck == FALSE)
-                {
-                    stuckCount = 0;
-                    skipDupeCheck = TRUE;
-                }
-                else
-                {
-                    // Was unable to find a valid species, so just handle whatever we return
-                    break;
-                }
-            }
-
-            // Check if this base species exists in the party (If it's already there skip adding this mon to the party)
-#ifdef ROGUE_EXPANSION
-            baseSpecies = GetTrainerQueryBaseSpeciesToCheck(species);
-
-            if(baseSpecies != SPECIES_NONE)
-            {
-                if(PartyContainsBaseSpecies(party, monIdx, baseSpecies))
-                {
-                    continue;
-                }
-            }
-#endif
-        }
-        while(!skipDupeCheck && PartyContainsSpecies(party, monIdx, species) && queryCheckIdx < queryCount);
-    }
-
-#ifdef ROGUE_DEBUG
-    if(species == SPECIES_NONE)
-        species = SPECIES_MAGIKARP;
-#endif
-
-    return species;
-}
-
-extern const struct LevelUpMove *const gLevelUpLearnsets[];
-
 static bool8 CanLearnMoveByLvl(u16 species, u16 move, s32 level)
 {
     u16 eggSpecies;
     s32 i;
 
-    for (i = 0; gLevelUpLearnsets[species][i].move != LEVEL_UP_END; i++)
+    for (i = 0; gRoguePokemonProfiles[species].levelUpMoves[i].move != MOVE_NONE; i++)
     {
         u16 moveLevel;
 
-        if(move == gLevelUpLearnsets[species][i].move)
+        if(move == gRoguePokemonProfiles[species].levelUpMoves[i].move)
         {
-            moveLevel = gLevelUpLearnsets[species][i].level;
+            moveLevel = gRoguePokemonProfiles[species].levelUpMoves[i].level;
 
             if (moveLevel > level)
                 return FALSE;
@@ -5598,243 +7098,7 @@ static bool8 CanLearnMoveByLvl(u16 species, u16 move, s32 level)
     }
 }
 
-bool8 SelectNextPreset(u16 species, u16 trainerNum, u8 monIdx, u16 randFlag, struct RogueMonPreset* outPreset)
-{
-    u8 randOffset;
-    u8 i;
-    bool8 isPresetValid;
-    bool8 exactMirrorPlayer = FALSE;
-    u8 presetCount = gPresetMonTable[species].presetCount;
-
-    if(IsBossTrainer(trainerNum))
-    {
-        const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-        if((trainer->partyFlags & PARTY_FLAG_MIRROR_EXACT) != 0)
-        {
-            exactMirrorPlayer = TRUE;
-        }
-    }
-    else if(IsMiniBossTrainer(trainerNum))
-    {
-        const struct RogueTrainerEncounter* trainer = &gRogueMiniBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
-
-        if((trainer->partyFlags & PARTY_FLAG_MIRROR_EXACT) != 0)
-        {
-            exactMirrorPlayer = TRUE;
-        }
-    }
-
-    if(exactMirrorPlayer)
-    {
-        // Populate mon preset based on exact same team
-        outPreset->heldItem = GetMonData(&gPlayerParty[monIdx], MON_DATA_HELD_ITEM);
-        outPreset->abilityNum = GetMonData(&gPlayerParty[monIdx], MON_DATA_ABILITY_NUM);
-
-        for(i = 0; i < MAX_MON_MOVES; ++i)
-        {
-            outPreset->moves[i] = GetMonData(&gPlayerParty[monIdx], MON_DATA_MOVE1 + i);
-        }
-
-        return TRUE;
-    }
-    else if(presetCount != 0)
-    {
-        const struct RogueMonPreset* currPreset;
-        randOffset = presetCount == 1 ? 0 : RogueRandomRange(presetCount, randFlag);
-
-        // Work from random offset and attempt to find the best preset which slots into this team
-        // If none is found, we will use the last option and adjust below
-        for(i = 0; i < presetCount; ++i)
-        {
-            currPreset = &gPresetMonTable[species].presets[((randOffset + i) % presetCount)];
-            isPresetValid = TRUE;
-
-            if(currPreset->heldItem == ITEM_LEFTOVERS && gRogueLocal.trainerTemp.hasUsedLeftovers)
-            {
-                isPresetValid = FALSE;
-            }
-
-            if(currPreset->heldItem == ITEM_SHELL_BELL && gRogueLocal.trainerTemp.hasUsedShellbell)
-            {
-                isPresetValid = FALSE;
-            }
-
-#ifdef ROGUE_EXPANSION
-            if(!IsMegaEvolutionEnabled())
-            {
-                // Special case for primal reversion
-                if(currPreset->heldItem == ITEM_RED_ORB || currPreset->heldItem == ITEM_BLUE_ORB)
-                {
-                    isPresetValid = FALSE;
-                }
-            }
-
-            if(gRogueLocal.trainerTemp.hasUsedMegaStone || !IsMegaEvolutionEnabled())
-            {
-                if(currPreset->heldItem >= ITEM_VENUSAURITE && currPreset->heldItem <= ITEM_DIANCITE)
-                {
-                    isPresetValid = FALSE;
-                }
-            }
-
-            if(gRogueLocal.trainerTemp.hasUsedZMove || !IsZMovesEnabled())
-            {
-                if(currPreset->heldItem >= ITEM_NORMALIUM_Z && currPreset->heldItem <= ITEM_ULTRANECROZIUM_Z)
-                {
-                    isPresetValid = FALSE;
-                }
-            }
-#endif
-
-#ifdef ROGUE_DRAYANO
-            // If the mon has doubles sets, then prefer singles sets for singles and doubles sets for doubles
-            if (CheckPresetMonFlags(species, MON_FLAG_DOUBLES) && (((currPreset->flags & MON_FLAG_DOUBLES) != 0) ^ FlagGet(FLAG_ROGUE_DOUBLE_BATTLES)))
-            {
-                isPresetValid = FALSE;
-            }
-#endif
-
-            if(isPresetValid)
-            {
-                break;
-            }
-        }
-
-        memcpy(outPreset, currPreset, sizeof(struct RogueMonPreset));
-
-        // Swap out limited count items, if they already exist
-        if(!isPresetValid)
-        {
-            if(outPreset->heldItem == ITEM_LEFTOVERS && gRogueLocal.trainerTemp.hasUsedLeftovers)
-            {
-                // Swap left overs to shell bell
-                outPreset->heldItem = ITEM_SHELL_BELL;
-            }
-
-            if(outPreset->heldItem == ITEM_SHELL_BELL && gRogueLocal.trainerTemp.hasUsedShellbell)
-            {
-                // Swap shell bell to NONE (i.e. berry)
-                outPreset->heldItem = ITEM_NONE;
-            }
-
-#ifdef ROGUE_EXPANSION
-            if(!IsMegaEvolutionEnabled())
-            {
-                // Special case for primal reversion
-                if(currPreset->heldItem == ITEM_RED_ORB || currPreset->heldItem == ITEM_BLUE_ORB)
-                {
-                    outPreset->heldItem = ITEM_NONE;
-                }
-            }
-
-            if(gRogueLocal.trainerTemp.hasUsedMegaStone || !IsMegaEvolutionEnabled())
-            {
-                if(currPreset->heldItem >= ITEM_VENUSAURITE && currPreset->heldItem <= ITEM_DIANCITE)
-                {
-                    outPreset->heldItem = ITEM_NONE;
-                }
-            }
-
-            if(gRogueLocal.trainerTemp.hasUsedZMove || !IsZMovesEnabled())
-            {
-                if(currPreset->heldItem >= ITEM_NORMALIUM_Z && currPreset->heldItem <= ITEM_ULTRANECROZIUM_Z)
-                {
-                    outPreset->heldItem = ITEM_NONE;
-                }
-            }
-#endif
-        }
-
-        if(outPreset->heldItem == ITEM_NONE)
-        {
-            // Swap empty item to a berry either lum or sitrus
-            outPreset->heldItem = RogueRandomRange(2, randFlag) == 0 ? ITEM_LUM_BERRY : ITEM_SITRUS_BERRY;
-        }
-        else if(outPreset->heldItem == ITEM_LEFTOVERS)
-        {
-            gRogueLocal.trainerTemp.hasUsedLeftovers = TRUE;
-        }
-        else if(outPreset->heldItem == ITEM_SHELL_BELL)
-        {
-            gRogueLocal.trainerTemp.hasUsedShellbell = TRUE;
-        }
-#ifdef ROGUE_EXPANSION
-        else if(currPreset->heldItem >= ITEM_VENUSAURITE && currPreset->heldItem <= ITEM_DIANCITE)
-        {
-            gRogueLocal.trainerTemp.hasUsedMegaStone = TRUE;
-        }
-        else if(currPreset->heldItem >= ITEM_NORMALIUM_Z && currPreset->heldItem <= ITEM_ULTRANECROZIUM_Z)
-        {
-            gRogueLocal.trainerTemp.hasUsedZMove = TRUE;
-        }
-#endif
-
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
-static bool8 MonPresetHasChoiceItem(struct RogueMonPreset* preset)
-{
-    return preset->heldItem == ITEM_CHOICE_BAND
-#ifdef ROGUE_EXPANSION
-        || preset->heldItem == ITEM_CHOICE_SPECS
-        || preset->heldItem == ITEM_CHOICE_SCARF
-#endif
-    ;
-}
-
-static u8 MonPresetCountMoves(struct RogueMonPreset* preset)
-{
-    u8 i;
-    u8 count = 0;
-
-    for(i = 0; i < MAX_MON_MOVES; ++i)
-    {
-        if(preset->moves[i] != MOVE_NONE)
-            ++count;
-    }
-
-    return count;
-}
-
-static bool8 MonPresetReplaceMove(struct RogueMonPreset* preset, u16 fromMove, u16 toMove)
-{
-    u8 i;
-
-    for(i = 0; i < MAX_MON_MOVES; ++i)
-    {
-        if(preset->moves[i] == fromMove)
-            preset->moves[i] == toMove;
-    }
-}
-
-static void ModifyTrainerMonPreset(struct RogueMonPreset* preset)
-{
-#ifndef ROGUE_EXPANSION
-    // Vanilla only: AI can't use trick
-    if(MonPresetReplaceMove(preset, MOVE_TRICK, MOVE_NONE))
-        preset->allowMissingMoves = TRUE;
-#endif
-
-    // Edge case to handle scarfed ditto
-    if(MonPresetHasChoiceItem(preset) && (MonPresetCountMoves(preset) > 2))
-    {
-        // Need to make sure this mon only has attacking moves
-        u8 i = 0;
-        preset->allowMissingMoves = TRUE;
-
-        for(i = 0; i < MAX_MON_MOVES; ++i)
-        {
-            if(gBattleMoves[preset->moves[i]].power == 0)
-                preset->moves[i] = MOVE_NONE;
-        }
-    }
-}
-
-void ApplyMonPreset(struct Pokemon* mon, u8 level, const struct RogueMonPreset* preset)
+void Rogue_ApplyMonCompetitiveSet(struct Pokemon* mon, u8 level, struct RoguePokemonCompetitiveSet const* preset, struct RoguePokemonCompetitiveSetRules const* rules)
 {
 #ifdef ROGUE_EXPANSION
     u16 const abilityCount = 3;
@@ -5843,88 +7107,99 @@ void ApplyMonPreset(struct Pokemon* mon, u8 level, const struct RogueMonPreset* 
 #endif
     u16 i;
     u16 move;
-    u16 heldItem;
     u8 writeMoveIdx;
     u16 initialMonMoves[MAX_MON_MOVES];
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
     bool8 useMaxHappiness = TRUE;
 
-    // We want to start writing the move from the first free slot and loop back around
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    if(!rules->skipMoves)
     {
-        initialMonMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i);
+        // We want to start writing the move from the first free slot and loop back around
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            initialMonMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i);
 
-        move = MOVE_NONE;
-        SetMonData(mon, MON_DATA_MOVE1 + i, &move);
+            move = MOVE_NONE;
+            SetMonData(mon, MON_DATA_MOVE1 + i, &move);
+        }
     }
 
-    if(preset->abilityNum != ABILITY_NONE)
+    if(!rules->skipAbility)
     {
-        // We need to set the ability index
-        for(i = 0; i < abilityCount; ++i)
+        if(preset->ability != ABILITY_NONE)
         {
-            SetMonData(mon, MON_DATA_ABILITY_NUM, &i);
-
-            if(GetMonAbility(mon) == preset->abilityNum)
+            // We need to set the ability index
+            for(i = 0; i < abilityCount; ++i)
             {
-                // Ability is set
-                break;
+                SetMonData(mon, MON_DATA_ABILITY_NUM, &i);
+
+                if(GetMonAbility(mon) == preset->ability)
+                {
+                    // Ability is set
+                    break;
+                }
+            }
+
+            if(i >= abilityCount)
+            {
+                // We failed to set it, so fall back to default
+                i = 0;
+                SetMonData(mon, MON_DATA_ABILITY_NUM, &i);
             }
         }
-
-        if(i >= abilityCount)
-        {
-            // We failed to set it, so fall back to default
-            i = 0;
-            SetMonData(mon, MON_DATA_ABILITY_NUM, &i);
-        }
     }
 
-    if(preset->heldItem != ITEM_NONE)
+    if(!rules->skipHeldItem)
     {
-        SetMonData(mon, MON_DATA_HELD_ITEM, &preset->heldItem);
+        if(preset->heldItem != ITEM_NONE)
+        {
+            SetMonData(mon, MON_DATA_HELD_ITEM, &preset->heldItem);
+        }
     }
 
     // Teach moves from set that we can learn at this lvl
     writeMoveIdx = 0;
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    if(!rules->skipMoves)
     {
-        move = preset->moves[i]; 
-
-        if(move != MOVE_NONE && CanLearnMoveByLvl(species, move, level))
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if(move == MOVE_FRUSTRATION)
-                useMaxHappiness = FALSE;
+            move = preset->moves[i]; 
 
-            SetMonData(mon, MON_DATA_MOVE1 + writeMoveIdx, &move);
-            SetMonData(mon, MON_DATA_PP1 + writeMoveIdx, &gBattleMoves[move].pp);
-            ++writeMoveIdx;
-        }
-    }
-
-    if(preset->allowMissingMoves)
-    {
-        // Fill the remainer slots with empty moves
-        for (i = writeMoveIdx; i < MAX_MON_MOVES; i++)
-        {
-            move = MOVE_NONE; 
-            SetMonData(mon, MON_DATA_MOVE1 + i, &move);
-            SetMonData(mon, MON_DATA_PP1 + i, &gBattleMoves[move].pp);
-        }
-    }
-    else
-    {
-        // Try to re-teach initial moves to fill out last slots
-        for(i = 0; i < MAX_MON_MOVES && writeMoveIdx < MAX_MON_MOVES; ++i)
-        {
-            move = initialMonMoves[i]; 
-
-            if(move != MOVE_NONE && !MonKnowsMove(mon, move))
+            if(move != MOVE_NONE && CanLearnMoveByLvl(species, move, level))
             {
+                if(move == MOVE_FRUSTRATION)
+                    useMaxHappiness = FALSE;
+
                 SetMonData(mon, MON_DATA_MOVE1 + writeMoveIdx, &move);
                 SetMonData(mon, MON_DATA_PP1 + writeMoveIdx, &gBattleMoves[move].pp);
                 ++writeMoveIdx;
+            }
+        }
+
+        if(rules->allowMissingMoves)
+        {
+            // Fill the remainer slots with empty moves
+            for (i = writeMoveIdx; i < MAX_MON_MOVES; i++)
+            {
+                move = MOVE_NONE; 
+                SetMonData(mon, MON_DATA_MOVE1 + i, &move);
+                SetMonData(mon, MON_DATA_PP1 + i, &gBattleMoves[move].pp);
+            }
+        }
+        else
+        {
+            // Try to re-teach initial moves to fill out last slots
+            for(i = 0; i < MAX_MON_MOVES && writeMoveIdx < MAX_MON_MOVES; ++i)
+            {
+                move = initialMonMoves[i]; 
+
+                if(move != MOVE_NONE && !MonKnowsMove(mon, move))
+                {
+                    SetMonData(mon, MON_DATA_MOVE1 + writeMoveIdx, &move);
+                    SetMonData(mon, MON_DATA_PP1 + writeMoveIdx, &gBattleMoves[move].pp);
+                    ++writeMoveIdx;
+                }
             }
         }
     }
@@ -5932,256 +7207,191 @@ void ApplyMonPreset(struct Pokemon* mon, u8 level, const struct RogueMonPreset* 
     move = useMaxHappiness ? MAX_FRIENDSHIP : 0;
     SetMonData(mon, MON_DATA_FRIENDSHIP, &move);
 
-    if(preset->hiddenPowerType != TYPE_NONE)
+#ifdef ROGUE_EXPANSION
+    if(!rules->skipTeraType)
     {
-        u16 value;
-        bool8 ivStatsOdd[6];
-
-        #define oddHP ivStatsOdd[0]
-        #define oddAtk ivStatsOdd[1]
-        #define oddDef ivStatsOdd[2]
-        #define oddSpeed ivStatsOdd[3]
-        #define oddSpAtk ivStatsOdd[4]
-        #define oddSpDef ivStatsOdd[5]
-
-        oddHP = TRUE;
-        oddAtk = TRUE;
-        oddDef = TRUE;
-        oddSpeed = TRUE;
-        oddSpAtk = TRUE;
-        oddSpDef = TRUE;
-
-        switch(preset->hiddenPowerType)
+        u32 teraType = preset->teraType;
+        if(teraType != TYPE_NONE)
         {
-            case TYPE_FIGHTING:
-                oddDef = FALSE;
-                oddSpeed = FALSE;
-                oddSpAtk = FALSE;
-                oddSpDef = FALSE;
-                break;
-
-            case TYPE_FLYING:
-                oddSpeed = FALSE;
-                oddSpAtk = FALSE;
-                oddSpDef = FALSE;
-                break;
-
-            case TYPE_POISON:
-                oddDef = FALSE;
-                oddSpAtk = FALSE;
-                oddSpDef = FALSE;
-                break;
-
-            case TYPE_GROUND:
-                oddSpAtk = FALSE;
-                oddSpDef = FALSE;
-                break;
-
-            case TYPE_ROCK:
-                oddDef = FALSE;
-                oddSpeed = FALSE;
-                oddSpDef = FALSE;
-                break;
-
-            case TYPE_BUG:
-                oddSpeed = FALSE;
-                oddSpDef = FALSE;
-                break;
-
-            case TYPE_GHOST:
-                oddAtk = FALSE;
-                oddSpDef = FALSE;
-                break;
-
-            case TYPE_STEEL:
-                oddSpDef = FALSE;
-                break;
-
-            case TYPE_FIRE:
-                oddAtk = FALSE;
-                oddSpeed = FALSE;
-                oddSpAtk = FALSE;
-                break;
-
-            case TYPE_WATER:
-                oddSpeed = FALSE;
-                oddSpAtk = FALSE;
-                break;
-
-            case TYPE_GRASS:
-                oddHP = FALSE;
-                oddSpAtk = FALSE;
-                break;
-
-            case TYPE_ELECTRIC:
-                oddSpAtk = FALSE;
-                break;
-
-            case TYPE_PSYCHIC:
-                oddHP = FALSE;
-                oddSpeed = FALSE;
-                break;
-
-            case TYPE_ICE:
-                oddSpeed = FALSE;
-                break;
-
-            case TYPE_DRAGON:
-                oddHP = FALSE;
-                break;
-
-            case TYPE_DARK:
-                break;
+            SetMonData(mon, MON_DATA_TERA_TYPE, &teraType);
         }
+    }
+#endif
 
-        #undef oddHP
-        #undef oddAtk
-        #undef oddDef
-        #undef oddSpeed
-        #undef oddSpAtk
-        #undef oddSpDef
+    if(!rules->skipHiddenPowerType)
+    {
+        u8 hiddenPowerType = preset->hiddenPowerType;
 
-        for(i = 0; i < 6; ++i)
+        if(hiddenPowerType != TYPE_NONE)
         {
-            value = GetMonData(mon, MON_DATA_HP_IV + i);
+            u16 value;
+            bool8 ivStatsOdd[6];
 
-            if((value % 2) == 0) // Current IV is even
+            if(hiddenPowerType == TYPE_MYSTERY)
             {
-                if(ivStatsOdd[i]) // Wants to be odd
+                // Source data didn't provide type so just default to primary type
+                hiddenPowerType = RoguePokedex_GetSpeciesType(species, 0);
+            }
+
+            #define oddHP ivStatsOdd[0]
+            #define oddAtk ivStatsOdd[1]
+            #define oddDef ivStatsOdd[2]
+            #define oddSpeed ivStatsOdd[3]
+            #define oddSpAtk ivStatsOdd[4]
+            #define oddSpDef ivStatsOdd[5]
+
+            oddHP = TRUE;
+            oddAtk = TRUE;
+            oddDef = TRUE;
+            oddSpeed = TRUE;
+            oddSpAtk = TRUE;
+            oddSpDef = TRUE;
+
+            switch(hiddenPowerType)
+            {
+                case TYPE_FIGHTING:
+                    oddDef = FALSE;
+                    oddSpeed = FALSE;
+                    oddSpAtk = FALSE;
+                    oddSpDef = FALSE;
+                    break;
+
+                case TYPE_FLYING:
+                    oddSpeed = FALSE;
+                    oddSpAtk = FALSE;
+                    oddSpDef = FALSE;
+                    break;
+
+                case TYPE_POISON:
+                    oddDef = FALSE;
+                    oddSpAtk = FALSE;
+                    oddSpDef = FALSE;
+                    break;
+
+                case TYPE_GROUND:
+                    oddSpAtk = FALSE;
+                    oddSpDef = FALSE;
+                    break;
+
+                case TYPE_ROCK:
+                    oddDef = FALSE;
+                    oddSpeed = FALSE;
+                    oddSpDef = FALSE;
+                    break;
+
+                case TYPE_BUG:
+                    oddSpeed = FALSE;
+                    oddSpDef = FALSE;
+                    break;
+
+                case TYPE_GHOST:
+                    oddAtk = FALSE;
+                    oddSpDef = FALSE;
+                    break;
+
+                case TYPE_STEEL:
+                    oddSpDef = FALSE;
+                    break;
+
+                case TYPE_FIRE:
+                    oddAtk = FALSE;
+                    oddSpeed = FALSE;
+                    oddSpAtk = FALSE;
+                    break;
+
+                case TYPE_WATER:
+                    oddSpeed = FALSE;
+                    oddSpAtk = FALSE;
+                    break;
+
+                case TYPE_GRASS:
+                    oddHP = FALSE;
+                    oddSpAtk = FALSE;
+                    break;
+
+                case TYPE_ELECTRIC:
+                    oddSpAtk = FALSE;
+                    break;
+
+                case TYPE_PSYCHIC:
+                    oddHP = FALSE;
+                    oddSpeed = FALSE;
+                    break;
+
+                case TYPE_ICE:
+                    oddSpeed = FALSE;
+                    break;
+
+                case TYPE_DRAGON:
+                    oddHP = FALSE;
+                    break;
+
+                case TYPE_DARK:
+                    break;
+            }
+
+            #undef oddHP
+            #undef oddAtk
+            #undef oddDef
+            #undef oddSpeed
+            #undef oddSpAtk
+            #undef oddSpDef
+
+            for(i = 0; i < 6; ++i)
+            {
+                value = GetMonData(mon, MON_DATA_HP_IV + i);
+
+                if((value % 2) == 0) // Current IV is even
                 {
-                    if(value == 0)
-                        value = 1;
-                    else
+                    if(ivStatsOdd[i]) // Wants to be odd
+                    {
+                        if(value == 0)
+                            value = 1;
+                        else
+                            --value;
+                    }
+                }
+                else // Current IV is odd
+                {
+                    if(!ivStatsOdd[i]) // Wants to be even
                         --value;
                 }
+
+                SetMonData(mon, MON_DATA_HP_IV + i, &value);
             }
-            else // Current IV is odd
-            {
-                if(!ivStatsOdd[i]) // Wants to be even
-                    --value;
-            }
-
-            SetMonData(mon, MON_DATA_HP_IV + i, &value);
         }
-    }
-}
-
-
-void Rogue_CreateTrainerMon(u16 trainerNum, struct Pokemon *party, u8 monIdx, u8 totalMonCount)
-{
-    u16 species;
-    u8 level;
-    u8 fixedIV;
-    struct RogueMonPreset preset;
-    u8 difficultyLevel = gRogueRun.currentDifficulty;
-    bool8 isBoss = IsBossTrainer(trainerNum);
-    struct Pokemon *mon = &party[monIdx];
-
-    if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-        difficultyLevel = 13;
-
-    species = NextTrainerSpecies(trainerNum, isBoss, party, monIdx, totalMonCount);
-    level = CalculateTrainerLevel(trainerNum);
-
-    if(FlagGet(FLAG_ROGUE_EASY_TRAINERS))
-        fixedIV = 0;
-    else if(FlagGet(FLAG_ROGUE_HARD_TRAINERS))
-    {
-        if(isBoss)
-        {
-            if(difficultyLevel >= 12)
-                fixedIV = 31;
-            else if(difficultyLevel >= 8)
-                fixedIV = 21;
-            else if(difficultyLevel >= 6)
-                fixedIV = 19;
-            else if(difficultyLevel >= 3)
-                fixedIV = 15;
-            else if(difficultyLevel >= 1)
-                fixedIV = 11;
-            else
-                fixedIV = 5;
-        }
-        else
-        {
-            fixedIV = (difficultyLevel > 8) ? 13 : 5;
-        }
-    }
-    else
-    {
-        if(isBoss)
-        {
-            if(difficultyLevel >= 6)
-                fixedIV = 16;
-            else if(difficultyLevel >= 6)
-                fixedIV = 11;
-            else if(difficultyLevel >= 5)
-                fixedIV = 10;
-            else if(difficultyLevel >= 4)
-                fixedIV = 8;
-            else if(difficultyLevel >= 3)
-                fixedIV = 6;
-            else
-                fixedIV = 0;
-        }
-        else
-        {
-            fixedIV = 0;
-        }
-    }
-
-    if(!FlagGet(FLAG_ROGUE_HARD_TRAINERS) && difficultyLevel != 0 && (!isBoss || difficultyLevel < 4))
-    {
-        // Team average is something like -2, -1, -1, 0
-        level--;
-
-        if(monIdx == 0)
-            level--;
-
-        if(level != 100 && monIdx == totalMonCount - 1)
-            level++;
-    }
-
-#if defined(ROGUE_FEATURE_AUTOMATION)
-    if(Rogue_AutomationGetFlag(AUTO_FLAG_TRAINER_LVL_5))
-#elif defined(ROGUE_DEBUG) && defined(ROGUE_DEBUG_LVL_5_TRAINERS)
-    if(TRUE) // Debug - Force Lvl 5
-#else
-    if(FALSE)
-#endif
-        // Just force the level down so it can be one shotted but do the rest of the calcs corectly
-        CreateMon(mon, species, 5, fixedIV, FALSE, 0, OT_ID_RANDOM_NO_SHINY, 0);
-    else
-        CreateMon(mon, species, level, fixedIV, FALSE, 0, OT_ID_RANDOM_NO_SHINY, 0);
-
-    if(UseCompetitiveMoveset(trainerNum, monIdx, totalMonCount) && SelectNextPreset(species, trainerNum, monIdx, isBoss ? FLAG_SET_SEED_BOSSES : FLAG_SET_SEED_TRAINERS, &preset))
-    {
-        ModifyTrainerMonPreset(&preset);
-        ApplyMonPreset(mon, level, &preset);
     }
 }
 
 static u8 GetCurrentWildEncounterCount()
 {    
-    u16 count = 6;
-    u8 difficultyModifier = GetRoomTypeDifficulty();
+    u16 count = 0;
 
-    if(GetSafariZoneFlag())
+    if(Rogue_IsRunActive())
     {
-        count = 6;
-    }
-    else
-    {
-        u8 difficultyModifier = GetRoomTypeDifficulty();
-        if(difficultyModifier == 2) // Hard route
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_HONEY_TREE)
         {
-            // Less encounters
-            count = 2;
+            count = 1;
         }
-        else if(difficultyModifier == 1) // Avg route
+        else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE)
         {
-            // Slightly less encounters
-            count = 4;
+            u8 difficultyModifier = Rogue_GetEncounterDifficultyModifier();
+            count = 5;
+
+            if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_TOUGH) // Hard route
+            {
+                // Less encounters
+                count = 2;
+            }
+            else if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_AVERAGE) // Avg route
+            {
+                // Slightly less encounters
+                count = 3;
+            }
+        }
+        else
+        {
+            return 0;
         }
 
         // Apply charms
@@ -6198,100 +7408,290 @@ static u8 GetCurrentWildEncounterCount()
 
         // Clamp
         count = max(count, 1);
-        count = min(count, ARRAY_COUNT(gRogueRun.wildEncounters));
+        count = min(count, WILD_ENCOUNTER_GRASS_CAPACITY);
+
+        // Move count down if we have haven't actually managed to spawn in enough unique encounters
+        while(count != 0 && GetWildGrassEncounter(count - 1) == SPECIES_NONE)
+        {
+            count--;
+        }
+    }
+    else if(GetSafariZoneFlag())
+    {
+        count = 6;
     }
 
     return count;
+}
+
+static u8 GetCurrentWaterEncounterCount(void)
+{
+    u16 count = 0;
+
+    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE)
+    {
+        u8 difficultyModifier = Rogue_GetEncounterDifficultyModifier();
+        count = 2;
+
+        if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_TOUGH) // Hard route
+        {
+            // Less encounters
+            count = 1;
+        }
+        else if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_AVERAGE) // Avg route
+        {
+            // Slightly less encounters
+            count = 1;
+        }
+
+        // Apply charms
+        {
+            u16 decValue = GetCurseValue(EFFECT_WILD_ENCOUNTER_COUNT);
+
+            count += GetCharmValue(EFFECT_WILD_ENCOUNTER_COUNT);
+
+            if(decValue > count)
+                count = 0;
+            else
+                count -= decValue;
+        }
+
+        // Clamp
+        count = max(count, 1);
+        count = min(count, WILD_ENCOUNTER_WATER_CAPACITY);
+
+        // Move count down if we have haven't actually managed to spawn in enough unique encounters
+        while(count != 0 && GetWildWaterEncounter(count - 1) == SPECIES_NONE)
+        {
+            count--;
+        }
+    }
+
+    return count;
+}
+
+static u16 GetWildGrassEncounter(u8 index)
+{
+    AGB_ASSERT(index < WILD_ENCOUNTER_GRASS_CAPACITY);
+
+    if(index < WILD_ENCOUNTER_GRASS_CAPACITY)
+    {
+        return gRogueRun.wildEncounters.species[index];
+    }
+
+    return SPECIES_NONE;
+}
+
+static u16 GetWildWaterEncounter(u8 index)
+{
+    AGB_ASSERT(index < WILD_ENCOUNTER_WATER_CAPACITY);
+
+    if(index < WILD_ENCOUNTER_WATER_CAPACITY)
+    {
+        return gRogueRun.wildEncounters.species[WILD_ENCOUNTER_GRASS_CAPACITY + index];
+    }
+
+    return SPECIES_NONE;
+}
+
+static u16 GetWildEncounterIndexFor(u16 species)
+{
+    u8 i;
+    u16 checkSpecies;
+
+#ifdef ROGUE_EXPANSION
+    species = GET_BASE_SPECIES_ID(species);
+#endif
+
+    for(i = 0; i < WILD_ENCOUNTER_TOTAL_CAPACITY; ++i)
+    {
+        checkSpecies = gRogueRun.wildEncounters.species[i];
+
+#ifdef ROGUE_EXPANSION
+        checkSpecies = GET_BASE_SPECIES_ID(checkSpecies);
+#endif
+
+        if(species == checkSpecies)
+        {
+            return i;
+        }
+    }
+
+    return WILD_ENCOUNTER_TOTAL_CAPACITY;
 }
 
 void Rogue_ModifyWildMonHeldItem(u16* itemId)
 {
     if(Rogue_IsRunActive())
     {
-        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY || gRogueAdvPath.currentRoomType == ADVPATH_ROOM_WILD_DEN)
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY || gRogueAdvPath.currentRoomType == ADVPATH_ROOM_WILD_DEN || gRogueAdvPath.currentRoomType == ADVPATH_ROOM_CATCHING_CONTEST)
         {
             *itemId = 0;
             return;
         }
 
-        if(!IsGenEnabled(ItemToGen(*itemId)))
+        if(!Rogue_IsItemEnabled(*itemId))
         {
             *itemId = 0;
         }
-        else
-        {
-            // Banned Items
-            switch (*itemId)
-            {
-            case ITEM_SACRED_ASH:
-            case ITEM_REVIVAL_HERB:
-            case ITEM_REVIVE:
-            case ITEM_MAX_REVIVE:
-            case ITEM_RARE_CANDY:
-            case ITEM_HEART_SCALE:
-            case ITEM_LUCKY_EGG:
-                *itemId = 0;
-                break;
-            }
-        }
-
     }
-    else if(GetSafariZoneFlag())
+    else if(GetSafariZoneFlag() || Rogue_InWildSafari())
     {
         *itemId = 0;
     }
 
 }
 
-void Rogue_CreateWildMon(u8 area, u16* species, u8* level, u32* forcePersonality)
+static bool8 IsChainSpeciesValidForSpawning(u8 area, u16 species)
 {
-    // Note: Don't seed individual encounters
-    if(Rogue_IsRunActive() || GetSafariZoneFlag())
+    u8 i;
+
+    if(species == SPECIES_NONE)
+        return FALSE;
+
+    if(area == 1) //WILD_AREA_WATER)
     {
+        u16 count = GetCurrentWaterEncounterCount();
+
+        for(i = 0; i < count; ++i)
+        {
+            if(GetWildWaterEncounter(i) == species)
+                return TRUE;
+        }
+    }
+    else
+    {
+        u16 count = GetCurrentWildEncounterCount();
+
+        for(i = 0; i < count; ++i)
+        {
+            if(GetWildGrassEncounter(i) == species)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static u16 GetChainSpawnOdds(u8 encounterCount)
+{
+    return 10 - min(encounterCount, 9);
+}
+
+static bool8 ForceChainSpeciesSpawn(u8 area)
+{
+    if(GetWildChainCount() > 1 && IsChainSpeciesValidForSpawning(area, GetWildChainSpecies()))
+    {
+        // We're allow to spawn the chain species in for this area
+        return ((Random() % GetChainSpawnOdds(GetWildChainCount())) == 0);
+    }
+
+    return FALSE;
+}
+
+static bool8 ForceRoamerMonSpawn()
+{
+    if(gRogueRun.wildEncounters.roamer.species != SPECIES_NONE && gRogueRun.wildEncounters.roamerActiveThisPath)
+    {
+        // % chance to force roamer to spawn, but it's only once per path at most
+        if(Random() % 100 < 7)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+void Rogue_CreateWildMon(u8 area, u16* species, u8* level, bool8* forceShiny)
+{
+    if(Rogue_InWildSafari())
+    {
+        *species = SPECIES_ABRA;
+        *level = STARTER_MON_LEVEL;
+        *forceShiny = FALSE;
+        return;
+    }
+
+    // Note: Don't seed individual encounters
+    else if(Rogue_IsRunActive() || GetSafariZoneFlag())
+    {
+        u16 shinyOdds = Rogue_GetShinyOdds(SHINY_ROLL_DYNAMIC);
+
         if(GetSafariZoneFlag())
             *level  = CalculateWildLevel(3);
         else
             *level  = CalculateWildLevel(6);
 
-        if(area == 1) //WILD_AREA_WATER)
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_CATCHING_CONTEST)
         {
-            const u16 count = ARRAY_COUNT(gRogueRun.fishingEncounters);
-            u16 randIdx = Random() % count; 
+            // Speculative check
+            if(gRogueLocal.catchingContest.isActive && gRogueLocal.catchingContest.spawnsRemaining != 0)
+            {
+                if(!RogueMiscQuery_AnyActiveElements())
+                    gRogueLocal.catchingContest.spawnsRemaining = 0;
+            }
 
-            *species = gRogueRun.fishingEncounters[randIdx];
+            if(gRogueLocal.catchingContest.isActive && gRogueLocal.catchingContest.spawnsRemaining != 0)
+            {
+                u8 stats[NUM_STATS];
+
+                *species = RogueMiscQuery_SelectRandomElement(RogueRandom());
+                *level = Rogue_CalculatePlayerMonLvl();
+                --gRogueLocal.catchingContest.spawnsRemaining;
+
+                // Update score
+                RoguePokedex_GetSpeciesStatArray(*species, stats, ARRAY_COUNT(stats));
+
+                if(stats[gRogueLocal.catchingContest.activeStat] > gRogueLocal.catchingContest.winningScore)
+                {
+                    gRogueLocal.catchingContest.winningSpecies = *species;
+                    gRogueLocal.catchingContest.winningScore = stats[gRogueLocal.catchingContest.activeStat];
+                }
+            }
+            else
+            {
+                *species = SPECIES_NONE;
+            }
+        }
+        else if(ForceChainSpeciesSpawn(area))
+        {
+            *species = GetWildChainSpecies();
+            shinyOdds = GetEncounterChainShinyOdds(GetWildChainCount());
+        }
+        else if(area == 1) //WILD_AREA_WATER)
+        {
+            u16 randIdx = Random() % GetCurrentWaterEncounterCount(); 
+
+            *species = GetWildWaterEncounter(randIdx);
         }
         else
         {
-            u8 difficultyModifier = GetRoomTypeDifficulty();
             u16 count = GetCurrentWildEncounterCount();
-            u16 historyBufferCount = ARRAY_COUNT(gRogueRun.wildEncounterHistoryBuffer);
+            u16 historyBufferCount = ARRAY_COUNT(gRogueLocal.wildEncounterHistoryBuffer);
             u16 randIdx;
             
+            if(ForceRoamerMonSpawn())
+            {
+                *species = gRogueRun.wildEncounters.roamer.species;
+                *forceShiny = gRogueRun.wildEncounters.roamer.shinyFlag;
+                gRogueRun.wildEncounters.roamerActiveThisPath = FALSE;
+                return;
+            }
+
             do
             {
                 // Prevent recent duplicates when on a run (Don't use this in safari mode though)
                 randIdx = Random() % count; 
-                *species = gRogueRun.wildEncounters[randIdx];
+                *species = GetWildGrassEncounter(randIdx);
 
                 if(Rogue_GetActiveCampaign() == ROGUE_CAMPAIGN_LATERMANNER)
                     break;
             }
-            while(!GetSafariZoneFlag() && (count > historyBufferCount) && HistoryBufferContains(&gRogueRun.wildEncounterHistoryBuffer[0], historyBufferCount, *species));
+            while(!GetSafariZoneFlag() && (count > historyBufferCount) && HistoryBufferContains(&gRogueLocal.wildEncounterHistoryBuffer[0], historyBufferCount, *species));
 
-            HistoryBufferPush(&gRogueRun.wildEncounterHistoryBuffer[0], historyBufferCount, *species);
+            HistoryBufferPush(&gRogueLocal.wildEncounterHistoryBuffer[0], historyBufferCount, *species);
         }
 
-        // This method gets called for repel and intimidate
-        // Only update tracker if repel is active otherwise update tracker when enter battle
-        if(VarGet(VAR_REPEL_STEP_COUNT) != 0)
-        {
-            Battle_UpdateEncounterTrackerInternal(*species);
-        }
-
-        if(GetSafariZoneFlag())
-        {
-            *forcePersonality = ConsumeSafariShinyBufferIfPresent(*species);
-        }
+        *forceShiny = (shinyOdds == 0) ? FALSE : (Random() % shinyOdds) == 0;
     }
 }
 
@@ -6300,17 +7700,48 @@ u16 Rogue_SelectRandomWildMon(void)
     if(Rogue_IsRunActive() || GetSafariZoneFlag())
     {
         u16 count = GetCurrentWildEncounterCount();
-        return gRogueRun.wildEncounters[Random() % count];
+        if(count != 0)
+            return GetWildGrassEncounter(Random() % count);
     }
 
     return SPECIES_NONE;
 }
 
+bool8 Rogue_PreferTraditionalWildMons(void)
+{
+    if(Rogue_IsRunActive())
+    {
+        return !Rogue_GetConfigToggle(CONFIG_TOGGLE_OVERWORLD_MONS);
+    }
+
+    return FALSE;
+}
+
 bool8 Rogue_AreWildMonEnabled(void)
 {
-    if(Rogue_IsRunActive() || GetSafariZoneFlag())
+    if(Rogue_PreferTraditionalWildMons())
+    {
+        return FALSE;
+    }
+
+    if(Rogue_IsRunActive())
+    {
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_CATCHING_CONTEST)
+        {
+            return gRogueLocal.catchingContest.isActive ? TRUE : FALSE;
+        }
+
+        return GetCurrentWildEncounterCount() > 0;
+    }
+
+    if(GetSafariZoneFlag())
     {
         return GetCurrentWildEncounterCount() > 0;
+    }
+
+    if(Rogue_InWildSafari() && gMapHeader.mapLayoutId != LAYOUT_ROGUE_INTERIOR_SAFARI_CAVE)
+    {
+        return TRUE;
     }
 
     return FALSE;
@@ -6318,462 +7749,955 @@ bool8 Rogue_AreWildMonEnabled(void)
 
 void Rogue_CreateEventMon(u16* species, u8* level, u16* itemId)
 {
-    *level = CalculateWildLevel(3);
+    if(Rogue_InWildSafari())
+    {
+        // Thrown away later, so doesn't matter too much
+        *level = STARTER_MON_LEVEL;
+    }
+    else
+    {
+        *level = CalculateWildLevel(3);
+    }
 }
 
-void Rogue_ModifyEventMon(struct Pokemon* mon)
+static void FillWithRoamerState(struct Pokemon* mon, u8 level)
 {
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_WILD_DEN)
-    {
-        u16 presetIndex;
-        u16 species = GetMonData(mon, MON_DATA_SPECIES);
-        u8 presetCount = gPresetMonTable[species].presetCount;
-        u16 statA = (Random() % 6);
-        u16 statB = (statA + 1 + (Random() % 5)) % 6;
-        u16 temp = 31;
+    u32 temp;
 
-        if(presetCount != 0)
+    ZeroMonData(mon);
+    CreateMon(mon, gRogueRun.wildEncounters.roamer.species, level, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
+
+    temp = gRogueRun.wildEncounters.roamer.hpIV;
+    SetMonData(mon, MON_DATA_HP_IV, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.attackIV;
+    SetMonData(mon, MON_DATA_ATK_IV, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.defenseIV;
+    SetMonData(mon, MON_DATA_DEF_IV, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.shinyFlag;
+    SetMonData(mon, MON_DATA_IS_SHINY, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.speedIV;
+    SetMonData(mon, MON_DATA_SPEED_IV, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.spAttackIV;
+    SetMonData(mon, MON_DATA_SPATK_IV, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.spDefenseIV;
+    SetMonData(mon, MON_DATA_SPDEF_IV, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.abilityNum;
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.genderFlag;
+    SetMonData(mon, MON_DATA_GENDER_FLAG, &temp);
+
+    temp = gRogueRun.wildEncounters.roamer.status;
+    SetMonData(mon, MON_DATA_STATUS, &temp);
+
+    temp = (((u32)gRogueRun.wildEncounters.roamer.hpPerc) * GetMonData(mon, MON_DATA_MAX_HP)) / 100;
+    if(temp <= 0)
+        temp = 1;
+    SetMonData(mon, MON_DATA_HP, &temp);
+}
+
+static void TryApplyCustomMon(u16 species, struct Pokemon* mon)
+{
+    if(Rogue_IsRunActive())
+    {
+        switch (gRogueAdvPath.currentRoomType)
         {
-            presetIndex = Random() % presetCount;
-            ApplyMonPreset(mon, GetMonData(mon, MON_DATA_LEVEL), &gPresetMonTable[species].presets[presetIndex]);
+        case ADVPATH_ROOM_ROUTE:
+        case ADVPATH_ROOM_WILD_DEN:
+        case ADVPATH_ROOM_LEGENDARY:
+            // Allow these
+            break;
+        
+        default:
+            // Don't allow any
+            return;
         }
 
-        // Bump 2 of the IVs to max
-        SetMonData(mon, MON_DATA_HP_IV + statA, &temp);
-        SetMonData(mon, MON_DATA_HP_IV + statB, &temp);
+        // If we're here, we're allowed to apply unique species
 
-        // Clear held item
-        temp = 0;
-        SetMonData(mon, MON_DATA_HELD_ITEM, &temp);
-    }
-    else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY)
-    {
-        u8 i;
-        u16 moveId;
-
-        // Replace roar with hidden power to avoid pokemon roaring itself out of battle
-        for (i = 0; i < MAX_MON_MOVES; i++)
+        // Only a chance to apply
+        if((Random() % 2) == 0)
         {
-            moveId = GetMonData(mon, MON_DATA_MOVE1 + i);
-            if(moveId == MOVE_ROAR || moveId == MOVE_TELEPORT)
+            u32 customMonId = RogueGift_TryFindEnabledDynamicCustomMonForSpecies(species);
+
+            if(customMonId != 0)
             {
-                moveId = MOVE_HIDDEN_POWER;
-                SetMonData(mon, MON_DATA_MOVE1 + i, &moveId);
-                SetMonData(mon, MON_DATA_PP1 + i, &gBattleMoves[moveId].pp);
+                // Make sure shiny state isn't changed
+                u32 shinyState = GetMonData(mon, MON_DATA_IS_SHINY);
+
+                ModifyExistingMonToCustomMon(customMonId, mon);
+
+                SetMonData(mon, MON_DATA_IS_SHINY, &shinyState);
+
+                gRogueLocal.wildBattleCustomMonId = customMonId;
             }
+        }
+    }
+}
+
+void Rogue_ModifyWildMon(struct Pokemon* mon)
+{
+    gRogueLocal.wildBattleCustomMonId = 0;
+
+    if(Rogue_InWildSafari())
+    {
+        if(VarGet(VAR_ROGUE_INTRO_STATE) == ROGUE_INTRO_STATE_CATCH_MON)
+        {
+            // Do nothing in intro i.e. generate IVs moves etc normally
+
+            // If player has tried to be smart and thrown away pokeball, silently give them another ;)
+            if(!CheckBagHasItem(ITEM_POKE_BALL, 1))
+            {
+                AddBagItem(ITEM_POKE_BALL, 1);
+                Rogue_ClearPopupQueue();
+            }
+            return;
+        }
+        else
+        {
+            struct RogueSafariMon* safariMon = RogueSafari_GetPendingBattleMon();
+
+            AGB_ASSERT(safariMon != NULL);
+            if(safariMon != NULL)
+            {
+                u8 text[POKEMON_NAME_LENGTH + 1];
+                u16 eggSpecies = Rogue_GetEggSpecies(safariMon->species);
+
+                RogueSafari_CopyFromSafariMon(safariMon, &mon->box);
+
+                // Make baby form
+                if(eggSpecies != safariMon->species)
+                {
+                    SetMonData(mon, MON_DATA_SPECIES, &eggSpecies);
+                    GetMonData(mon, MON_DATA_NICKNAME, text);
+
+                    if(StringCompareN(text, RoguePokedex_GetSpeciesName(safariMon->species), POKEMON_NAME_LENGTH) == 0)
+                    {
+                        // Doesn't have a nickname so update to match species name
+                        StringCopy_Nickname(text, RoguePokedex_GetSpeciesName(eggSpecies));
+                        SetMonData(mon, MON_DATA_NICKNAME, text);
+                    }
+                }
+
+                if(safariMon->customMonLookup != 0)
+                {
+                    u8 idx = safariMon->customMonLookup - 1;
+                    u32 customMonId = gRogueSaveBlock->safariMonCustomIds[idx];
+
+                    if(customMonId & OTID_FLAG_DYNAMIC_CUSTOM_MON)
+                    {
+                        AGB_ASSERT(customMonId & OTID_FLAG_CUSTOM_MON);
+                        AGB_ASSERT(customMonId & OTID_FLAG_DYNAMIC_CUSTOM_MON);
+                        ModifyExistingMonToCustomMon(customMonId, mon);
+                    }
+                    else
+                    {
+                        // This must be exotic
+                        ModifyExistingMonToCustomMon(customMonId, mon);
+                    }
+                }
+
+                CalculateMonStats(mon);
+            }
+        }
+    }
+    else if(Rogue_IsRunActive())
+    {
+        u16 species = GetMonData(mon, MON_DATA_SPECIES);
+
+        if(IsCurseActive(EFFECT_SNAG_TRAINER_MON) && FlagGet(FLAG_ROGUE_IN_SNAG_BATTLE))
+        {
+            // Save values to restore
+            u8 slot = 0;
+            u8 genderFlag = GetMonData(&gEnemyParty[gSpecialVar_0x800A], MON_DATA_GENDER_FLAG);
+            u8 shinyFlag = GetMonData(&gEnemyParty[gSpecialVar_0x800A], MON_DATA_IS_SHINY);
+            u8 abilityNum = GetMonData(&gEnemyParty[gSpecialVar_0x800A], MON_DATA_ABILITY_NUM);
+            u8 nature = GetNature(&gEnemyParty[gSpecialVar_0x800A]);
+            u16 move1 = GetMonData(&gEnemyParty[gSpecialVar_0x800A], MON_DATA_MOVE1);
+            u16 move2 = GetMonData(&gEnemyParty[gSpecialVar_0x800A], MON_DATA_MOVE2);
+            u16 move3 = GetMonData(&gEnemyParty[gSpecialVar_0x800A], MON_DATA_MOVE3);
+            u16 move4 = GetMonData(&gEnemyParty[gSpecialVar_0x800A], MON_DATA_MOVE4);
+
+            // Recreate mon to use a custom OtID
+            CreateMon(
+                mon,
+                GetMonData(mon, MON_DATA_SPECIES),
+                GetMonData(mon, MON_DATA_LEVEL),
+                USE_RANDOM_IVS,
+                0,
+                0,
+                OT_ID_RANDOM_NO_SHINY,
+                0
+            );
+
+            // Copy over some of the data from the mon the trainer actually used
+            SetMonData(mon, MON_DATA_GENDER_FLAG, &genderFlag);
+            SetMonData(mon, MON_DATA_IS_SHINY, &shinyFlag);
+            SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
+            SetNature(mon, nature);
+
+            slot = 0;
+            if(move1 != MOVE_NONE)
+                SetMonMoveSlot(mon, move1, slot++);
+            if(move2 != MOVE_NONE)
+                SetMonMoveSlot(mon, move2, slot++);
+            if(move3 != MOVE_NONE)
+                SetMonMoveSlot(mon, move3, slot++);
+            if(move4 != MOVE_NONE)
+                SetMonMoveSlot(mon, move4, slot++);
+        }
+        else if(species == gRogueRun.wildEncounters.roamer.species)
+        {
+            FillWithRoamerState(mon, GetMonData(mon, MON_DATA_LEVEL));
+
+            // TODO - Consider interaction for roamer 
+            //TryApplyCustomMon(species, mon);
+        }
+        else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_GAMESHOW)
+        {
+            RogueGift_CreateMon(CUSTOM_MON_WAHEY_ELECTRODE, mon, SPECIES_ELECTRODE, GetMonData(mon, MON_DATA_LEVEL), 31);
+        }
+        else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_WILD_DEN)
+        {
+            u16 presetIndex;
+            u16 presetCount = gRoguePokemonProfiles[species].competitiveSetCount;
+            u16 statA = (Random() % 6);
+            u16 statB = (statA + 1 + (Random() % 5)) % 6;
+            u16 temp = 31;
+
+            if(presetCount != 0)
+            {
+                struct RoguePokemonCompetitiveSetRules rules;
+                memset(&rules, 0, sizeof(rules));
+
+                presetIndex = Random() % presetCount;
+                Rogue_ApplyMonCompetitiveSet(mon, GetMonData(mon, MON_DATA_LEVEL), &gRoguePokemonProfiles[species].competitiveSets[presetIndex], &rules);
+            }
+
+            // Clear friendship
+            temp = 0;
+            SetMonData(mon, MON_DATA_FRIENDSHIP, &temp);
+
+            // Bump 2 of the IVs to max
+            SetMonData(mon, MON_DATA_HP_IV + statA, &temp);
+            SetMonData(mon, MON_DATA_HP_IV + statB, &temp);
+
+            // Clear held item
+            temp = 0;
+            SetMonData(mon, MON_DATA_HELD_ITEM, &temp);
+            
+            TryApplyCustomMon(species, mon);
+        }
+        else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY)
+        {
+            u8 i;
+            u16 moveId;
+
+            // TODO - Consider interaction for roamer 
+            //TryApplyCustomMon(species, mon);
+
+            // Replace roar with hidden power to avoid pokemon roaring itself out of battle
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                moveId = GetMonData(mon, MON_DATA_MOVE1 + i);
+                if( moveId == MOVE_ROAR || 
+                    moveId == MOVE_WHIRLWIND || 
+                    moveId == MOVE_EXPLOSION ||
+                    moveId == MOVE_SELF_DESTRUCT || 
+                    moveId == MOVE_TELEPORT)
+                {
+                    moveId = MOVE_HIDDEN_POWER;
+                    SetMonData(mon, MON_DATA_MOVE1 + i, &moveId);
+                    SetMonData(mon, MON_DATA_PP1 + i, &gBattleMoves[moveId].pp);
+                }
+            }
+        }
+        else
+        {
+            TryApplyCustomMon(species, mon);
         }
     }
 }
 
 void Rogue_ModifyScriptMon(struct Pokemon* mon)
 {
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_MINIBOSS)
-    {
-        u32 temp;
-        u16 species = GetMonData(mon, MON_DATA_SPECIES);
-        u16 statA = (Random() % 6);
-        u16 statB = (statA + 1 + (Random() % 5)) % 6;
-
-        // Apply the miniboss preset for this mon
-        {
-            u8 i;
-            u8 target;
-            u8 partySize = CalculateEnemyPartyCount();
-
-            // Find the matching species
-            for(i = 0; i < partySize; ++i)
-            {
-                if(species == GetMonData(&gEnemyParty[i], MON_DATA_SPECIES))
-                    break;
-            }
-
-            target = i;
-
-            if(target != partySize)
-            {
-                struct RogueMonPreset customPreset;
-                customPreset.heldItem = GetMonData(&gEnemyParty[target], MON_DATA_HELD_ITEM);
-                customPreset.abilityNum = GetMonData(&gEnemyParty[target], MON_DATA_ABILITY_NUM);
-
-                for(i = 0; i < MAX_MON_MOVES; ++i)
-                    customPreset.moves[i] = GetMonData(&gEnemyParty[target], MON_DATA_MOVE1 + i);
-
-                ApplyMonPreset(mon, CalculatePlayerLevel(), &customPreset);
-            }
-        }
-
-        // Bump 2 of the IVs to max
-        temp = 31;
-        SetMonData(mon, MON_DATA_HP_IV + statA, &temp);
-        SetMonData(mon, MON_DATA_HP_IV + statB, &temp);
-
-        // Clear held item
-        temp = 0;
-        SetMonData(mon, MON_DATA_HELD_ITEM, &temp);
-
-        // Set to the correct level
-        temp = Rogue_ModifyExperienceTables(gBaseStats[species].growthRate, CalculatePlayerLevel());
-        SetMonData(mon, MON_DATA_EXP, &temp);
-        CalculateMonStats(mon);
-
-        temp = GetMonData(mon, MON_DATA_LEVEL);
-        SetMonData(mon, MON_DATA_MET_LEVEL, &temp);
-    }
-}
-
-static bool8 ApplyRandomMartChanceCallback(u16 itemId, u16 chance)
-{
-    // Always use rogue random so this is seeded correctly
-    u16 res = 1 + (RogueRandom() % 100);
-
-    return res <= chance;
-}
-
-static void ApplyRandomMartChanceQuery(u16 chance)
-{
-    u32 startSeed = gRngRogueValue;
-
-    if(chance >= 100)
-        return;
-
-    RogueQuery_CustomItems(ApplyRandomMartChanceCallback, chance);
-
-    gRngRogueValue = startSeed;
-}
-
-static void ApplyMartCapacity(u16 capacity)
-{
-    u16 randIdx;
-    u32 startSeed = gRngRogueValue;
-
-    while(RogueQuery_BufferSize() > capacity)
-    {
-        randIdx = RogueRandom() % RogueQuery_BufferSize();
-        RogueQuery_PopCollapsedIndex(randIdx);
-    }
-
-    gRngRogueValue = startSeed;
-}
-
-const u16* Rogue_CreateMartContents(u16 itemCategory, u16* minSalePrice)
-{
-    u16 difficulty;
-    u16 itemCapacity = 0; // MAX is 0
-    
     if(Rogue_IsRunActive())
-        difficulty = gRogueRun.currentDifficulty;
-    else
-        difficulty = VarGet(VAR_ROGUE_FURTHEST_DIFFICULTY);
-
-    if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-        difficulty = 13;
-
-    RogueQuery_Clear();
-    RogueQuery_ItemsIsValid();
-    RogueQuery_ItemsExcludeCommon();
-
-    RogueQuery_ItemsNotInPocket(POCKET_KEY_ITEMS);
-
-    if(itemCategory != ROGUE_SHOP_BERRIES)
     {
-        RogueQuery_ItemsNotInPocket(POCKET_BERRIES);
-    }
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_MINIBOSS)
+        {
+            u32 temp;
+            u16 species = GetMonData(mon, MON_DATA_SPECIES);
+            u16 statA = (Random() % 6);
+            u16 statB = (statA + 1 + (Random() % 5)) % 6;
 
-    // Just sell PP max rather than be fiddly with price
-    RogueQuery_Exclude(ITEM_PP_UP);
-
-#ifdef ROGUE_EXPANSION
-    RogueQuery_ItemsExcludeRange(ITEM_SEA_INCENSE, ITEM_PURE_INCENSE);
-
-    // Merchants can't sell plates
-    RogueQuery_ItemsExcludeRange(ITEM_FLAME_PLATE, ITEM_FAIRY_MEMORY);
-
-    // Not allowed to buy these items in the hub
-    if(!Rogue_IsRunActive())
-    {
-        RogueQuery_ItemsExcludeRange(ITEM_HEALTH_FEATHER, ITEM_SWIFT_FEATHER);
-        RogueQuery_ItemsExcludeRange(ITEM_HP_UP, ITEM_CARBOS);
-    }
-#else
-    // Not allowed to buy these items in the hub
-    if(!Rogue_IsRunActive())
-    {
-        // These items aren't next to each other in vanilla
-        RogueQuery_ItemsExcludeRange(ITEM_HP_UP, ITEM_CALCIUM);
-        RogueQuery_Exclude(ITEM_ZINC);
-    }
-#endif
-
-    switch(itemCategory)
-    {
-        case ROGUE_SHOP_GENERAL:
-            RogueQuery_ItemsMedicine();
-
-            RogueQuery_Include(ITEM_REPEL);
-            RogueQuery_Include(ITEM_SUPER_REPEL);
-            RogueQuery_Include(ITEM_MAX_REPEL);
-
-            RogueQuery_ItemsInPriceRange(10, 300 + difficulty * 400);
-
-            if(difficulty < 4)
+            // Apply the miniboss preset for this mon
             {
-                RogueQuery_Exclude(ITEM_FULL_HEAL);
-            }
-            else if(Rogue_IsRunActive())
-            {
-                RogueQuery_Include(ITEM_ESCAPE_ROPE);
-            }
+                u8 i;
+                u8 target;
+                u8 partySize = CalculateEnemyPartyCount();
 
-            RogueQuery_Exclude(ITEM_FRESH_WATER);
-            RogueQuery_Exclude(ITEM_SODA_POP);
-            RogueQuery_Exclude(ITEM_LEMONADE);
-            RogueQuery_Exclude(ITEM_MOOMOO_MILK);
-            RogueQuery_Exclude(ITEM_ENERGY_POWDER);
-            RogueQuery_Exclude(ITEM_ENERGY_ROOT);
-            RogueQuery_Exclude(ITEM_HEAL_POWDER);
-            RogueQuery_Exclude(ITEM_LAVA_COOKIE);
-            RogueQuery_Exclude(ITEM_BERRY_JUICE);
-#ifdef ROGUE_EXPANSION
-            RogueQuery_ItemsExcludeRange(ITEM_PEWTER_CRUNCHIES, ITEM_BIG_MALASADA);
-#endif
-            break;
-
-        case ROGUE_SHOP_BALLS:
-            RogueQuery_ItemsInPocket(POCKET_POKE_BALLS);
-
-            if(difficulty <= 0)
-            {
-                RogueQuery_ItemsInPriceRange(10, 200);
-            }
-            else if(difficulty <= 1)
-            {
-                RogueQuery_ItemsInPriceRange(10, 600);
-            }
-            else if(difficulty <= 2)
-            {
-                RogueQuery_ItemsInPriceRange(10, 1000);
-            }
-            else if(difficulty >= 11)
-            {
-                RogueQuery_ItemsInPriceRange(10, 60000);
-            }
-            else //if(difficulty <= 3)
-            {
-                RogueQuery_ItemsInPriceRange(10, 2000);
-            }
-
-            RogueQuery_Exclude(ITEM_PREMIER_BALL);
-            break;
-
-        case ROGUE_SHOP_TMS:
-            RogueQuery_ItemsInPocket(POCKET_TM_HM);
-            RogueQuery_ItemsExcludeRange(ITEM_HM01, ITEM_HM08);
-
-            if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-            {
-                // Do nothing
-            }
-            else if(Rogue_IsRunActive())
-            {
-                if(difficulty <= 7)
-                    itemCapacity = 5 + difficulty * 2;
-            }
-            else
-            {
-                RogueQuery_ItemsInPriceRange(10, 1000 + difficulty * 810);
-            }
-
-            break;
-
-        case ROGUE_SHOP_BATTLE_ENHANCERS:
-            RogueQuery_ItemsBattleEnchancer();
-            RogueQuery_ItemsNotRareHeldItem();
-            RogueQuery_ItemsInPriceRange(10, 60000);
-            
-            if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-            {
-                // Do nothing
-            }
-            else if(Rogue_IsRunActive())
-            {
-                if(difficulty <= 7)
-                    itemCapacity = 10 + 4 * difficulty;
-            }
-
-            if(Rogue_IsRunActive())
-                *minSalePrice = 1500;
-            else
-                *minSalePrice = 1500;
-
-            break;
-
-        case ROGUE_SHOP_HELD_ITEMS:
-            RogueQuery_ItemsHeldItem();
-            RogueQuery_ItemsNotRareHeldItem();
-            RogueQuery_ItemsInPriceRange(10, 60000);
-
-            if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-            {
-                // Do nothing
-            }
-            else if(Rogue_IsRunActive())
-            {
-                if(difficulty <= 7)
-                    itemCapacity = 4 + 4 * difficulty;
-            }
-            else if(difficulty <= 5)
-            {
-                // Remove contents 
-                RogueQuery_ItemsInPriceRange(10, 11);
-            }
-
-            if(Rogue_IsRunActive())
-                *minSalePrice = 1500;
-            else
-                *minSalePrice = 2000;
-            break;
-
-        case ROGUE_SHOP_RARE_HELD_ITEMS:
-            RogueQuery_ItemsRareHeldItem();
-            RogueQuery_ItemsInPriceRange(10, 60000);
-
-            if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-            {
-                // Do nothing
-            }
-            else if(Rogue_IsRunActive())
-            {
-                if(difficulty <= 7)
-                    itemCapacity = 4 + 1 * difficulty;
-            }
-            else
-            {
-#ifdef ROGUE_EXPANSION
-                if(!IsQuestCollected(QUEST_MegaEvo))
-                    RogueQuery_ItemsExcludeRange(ITEM_VENUSAURITE, ITEM_DIANCITE);
-
-                if(!IsQuestCollected(QUEST_ZMove))
-                    RogueQuery_ItemsExcludeRange(ITEM_NORMALIUM_Z, ITEM_ULTRANECROZIUM_Z);
-#endif
-            }
-
-            if(Rogue_IsRunActive())
-                *minSalePrice = 1500;
-            else
-                *minSalePrice = 3000;
-            break;
-
-        case ROGUE_SHOP_QUEST_REWARDS:
-            RogueQuery_ExcludeAll();
-
-            // Will include below
-
-            *minSalePrice = 2000;
-            break;
-
-        case ROGUE_SHOP_BERRIES:
-            {
-                // Include berries from collected quests
-                u16 i, j;
-                RogueQuery_ExcludeAll();
-
-                for(i = QUEST_FIRST; i < QUEST_CAPACITY; ++i)
+                // Find the matching species
+                for(i = 0; i < partySize; ++i)
                 {
-                    if(IsQuestCollected(i))
-                    {
-                        for(j = 0; j < QUEST_MAX_REWARD_COUNT; ++j)
-                        {
-                            if(gRogueQuests[i].rewards[j].type == QUEST_REWARD_NONE)
-                            {
-                                break;
-                            }
-                            else if(gRogueQuests[i].rewards[j].type == QUEST_REWARD_GIVE_ITEM)
-                            {
-                                u16 itemId = gRogueQuests[i].rewards[j].params[0];
-                                if(itemId >= FIRST_BERRY_INDEX && itemId <= LAST_BERRY_INDEX)
-                                {
-                                    RogueQuery_Include(itemId);
-                                }
-                            }
-                        }
-                    }
+                    if(species == GetMonData(&gEnemyParty[i], MON_DATA_SPECIES))
+                        break;
                 }
 
-                *minSalePrice = 2000;
+                target = i;
+
+                if(target != partySize)
+                {
+                    struct RoguePokemonCompetitiveSetRules rules;
+                    struct RoguePokemonCompetitiveSet customPreset;
+
+                    memset(&rules, 0, sizeof(rules));
+                    customPreset.heldItem = GetMonData(&gEnemyParty[target], MON_DATA_HELD_ITEM);
+                    customPreset.ability = GetMonAbility(&gEnemyParty[target]);
+                    customPreset.nature = GetNature(&gEnemyParty[target]);
+                    customPreset.hiddenPowerType = CalcMonHiddenPowerType(&gEnemyParty[target]);
+
+                    for(i = 0; i < MAX_MON_MOVES; ++i)
+                        customPreset.moves[i] = GetMonData(&gEnemyParty[target], MON_DATA_MOVE1 + i);
+
+                    Rogue_ApplyMonCompetitiveSet(mon, Rogue_CalculatePlayerMonLvl(), &customPreset, &rules);
+                }
             }
-            break;
 
-            
-        case ROGUE_SHOP_CHARMS:
-            {
-                // Include berries from collected quests
-                u16 i, j;
-                RogueQuery_ExcludeAll();
+            // Bump 2 of the IVs to max
+            temp = 31;
+            SetMonData(mon, MON_DATA_HP_IV + statA, &temp);
+            SetMonData(mon, MON_DATA_HP_IV + statB, &temp);
 
-                #ifdef ROGUE_DEBUG
-                // Normally we only can buy curse items
-                RogueQuery_IncludeRange(FIRST_ITEM_CHARM, LAST_ITEM_CHARM);
-                #endif
+            // Clear held item
+            temp = 0;
+            SetMonData(mon, MON_DATA_HELD_ITEM, &temp);
 
-                RogueQuery_IncludeRange(FIRST_ITEM_CURSE, LAST_ITEM_CURSE);
-            }
-            *minSalePrice = 0;
-            break;
-    };
+            // Set to the correct level
+            temp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[species].growthRate, Rogue_CalculatePlayerMonLvl());
+            SetMonData(mon, MON_DATA_EXP, &temp);
+            CalculateMonStats(mon);
 
-    // Apply shop reward items (Only applicable in hb)
+            temp = GetMonData(mon, MON_DATA_LEVEL);
+            SetMonData(mon, MON_DATA_MET_LEVEL, &temp);
+        }
+    }
+}
+
+void Rogue_ModifyGiveMon(struct Pokemon* mon)
+{
     if(!Rogue_IsRunActive())
     {
-        u16 i, j;
-        u16 itemId;
-
-        for(i = QUEST_FIRST; i < QUEST_CAPACITY; ++i)
+        if(gMapHeader.mapLayoutId == LAYOUT_ROGUE_AREA_RIDE_TRAINING)
         {
-            for(j = 0; j < QUEST_MAX_ITEM_SHOP_REWARD_COUNT; ++j)
+            if(GetMonData(mon, MON_DATA_SPECIES) == SPECIES_STANTLER)
             {
-                itemId = gRogueQuests[i].unlockedShopRewards[j];
-                if(itemId == ITEM_NONE)
-                    break;
+                // The stantler you are given by the clown
+                u32 temp;
 
-                // Always put reward items in the reward shop (Not allowed in other shops)
-                if(itemCategory == ROGUE_SHOP_QUEST_REWARDS && IsQuestCollected(i))
-                    RogueQuery_Include(itemId);
-                else
-                    RogueQuery_Exclude(itemId);
+                ZeroMonData(mon);
+                RogueGift_CreateMon(CUSTOM_MON_CLOWN_STANTLER, mon, SPECIES_STANTLER, STARTER_MON_LEVEL, USE_RANDOM_IVS);
+
+                temp = 0;
+                SetMonData(mon, MON_DATA_GENDER_FLAG, &temp);
             }
         }
     }
 
-    RogueQuery_CollapseItemBuffer();
+    // Clear popup data on catch
+    mon->rogueExtraData.lastPopupLevel = GetMonData(mon, MON_DATA_LEVEL) - 1;
+    mon->rogueExtraData.hasPendingEvo = FALSE;
+}
 
-    if(itemCapacity != 0)
+struct BoxPokemon* Rogue_GetDaycareBoxMon(u8 slot)
+{
+    AGB_ASSERT(slot < DAYCARE_SLOT_COUNT);
+    return (struct BoxPokemon*)&gRogueSaveBlock->daycarePokemon[slot].boxMonFacade;
+}
+
+u8 Rogue_GetCurrentDaycareSlotCount()
+{
+    if(RogueHub_HasUpgrade(HUB_UPGRADE_DAY_CARE_CAPACITY1))
+        return 3;
+    else if(RogueHub_HasUpgrade(HUB_UPGRADE_DAY_CARE_CAPACITY0))
+        return 2;
+    else
+        return 1;
+}
+
+void Rogue_SwapMonInDaycare(struct Pokemon* partyMon, u8 daycareSlot)
+{
+    u16 species;
+    u8 wasSafariIllegal = (GetMonData(partyMon, MON_DATA_SPECIES) == SPECIES_NONE) ? FALSE : partyMon->rogueExtraData.isSafariIllegal;
+    struct BoxPokemon* daycareMon = (struct BoxPokemon*)&gRogueSaveBlock->daycarePokemon[daycareSlot].boxMonFacade;
+    struct BoxPokemon temp = *daycareMon;
+
+    AGB_ASSERT(daycareSlot < DAYCARE_SLOT_COUNT);
+
+    *daycareMon = partyMon->box;
+    BoxMonRestorePP(daycareMon);
+
+    ZeroMonData(partyMon);
+    BoxMonToMon(&temp, partyMon);
+
+    if(Rogue_IsRunActive())
     {
-        //u16 maxGen = VarGet(VAR_ROGUE_ENABLED_GEN_LIMIT);
-
-        //if(maxGen > 3)
-        //{
-        //    // Increase capacity by a little bit to accomadate for extra items when in higher gens
-        //    itemCapacity += (maxGen - 3) * 2;
-        //}
-
-        ApplyMartCapacity(itemCapacity);
+        partyMon->rogueExtraData.isSafariIllegal = gRogueSaveBlock->daycarePokemon[daycareSlot].isSafariIllegal;
+        gRogueSaveBlock->daycarePokemon[daycareSlot].isSafariIllegal = wasSafariIllegal;
     }
 
-    if(RogueQuery_BufferSize() == 0)
+    species = GetMonData(partyMon, MON_DATA_SPECIES);
+
+    if(Rogue_IsRunActive() && species != SPECIES_NONE)
     {
-        // If we don't have anything then just use this (Really unlucky to happen)
-        RogueQuery_Include(ITEM_TINY_MUSHROOM);
-        RogueQuery_CollapseItemBuffer();
+        // Scale level so it just lags behind the player
+        u8 level = GetMonData(partyMon, MON_DATA_LEVEL);
+        u8 targetLevel = Rogue_CalculatePlayerMonLvl();
+
+        if(targetLevel < 5)
+            targetLevel = 1;
+        else
+            targetLevel -= 5;
+
+        if(level < targetLevel)
+        {
+            u32 exp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[species].growthRate, targetLevel);
+            SetMonData(partyMon, MON_DATA_EXP, &exp);
+        }
+
+        // Always recalc for safety
+        CalculateMonStats(partyMon);
     }
 
-    return RogueQuery_BufferPtr();
+    CompactPartySlots();
+    CalculatePlayerPartyCount();
+}
+
+static const u8 sText_EmptyDaycareSlot[] = _("Empty / -");
+static const u8 sText_DaycareSlotSpacing[] = _(" / ");
+
+void Rogue_DaycareMultichoiceCallback(struct MenuAction* outList, u8* outCount, u8 listCapacity)
+{
+    u8 i;
+    u16 species;
+    struct BoxPokemon* mon;
+    u8* str;
+    u8* stringVars[] =
+    {
+        gStringVar1,
+        gStringVar2,
+        gStringVar3
+    };
+
+    for(i = 0; i < Rogue_GetCurrentDaycareSlotCount(); ++i)
+    {
+        mon = Rogue_GetDaycareBoxMon(i);
+        species = GetBoxMonData(mon, MON_DATA_SPECIES);
+
+        if(species == SPECIES_NONE)
+        {
+            outList[i].text = sText_EmptyDaycareSlot;
+        }
+        else
+        {
+            GetBoxMonData(mon, MON_DATA_NICKNAME, stringVars[i]);
+
+            str = StringAppend(stringVars[i], sText_DaycareSlotSpacing);
+            str = StringAppend(str, RoguePokedex_GetSpeciesName(species));
+
+            outList[i].text = stringVars[i];
+        }
+    }
+
+    *outCount = i;
+}
+
+void Rogue_BeginCatchingContest(u8 type, u8 stat)
+{
+    gRogueLocal.catchingContest.activeType = type;
+    gRogueLocal.catchingContest.activeStat = stat;
+    gRogueLocal.catchingContest.winningSpecies = SPECIES_NONE;
+    gRogueLocal.catchingContest.winningScore = 0;
+    gRogueLocal.catchingContest.spawnsRemaining = 10 + Random() % 20;
+    gRogueLocal.catchingContest.isActive = TRUE;
+
+    // Take player team
+    TempSavePlayerTeam();
+    ClearPlayerTeam();
+
+    // Temporarily take pokeballs away
+    gRogueLocal.catchingContest.itemCountToRestore = CountTotalItemQuantityInBag(ITEM_CATCHING_CONTEST_POKEBALL);
+
+    RogueMonQuery_Begin();
+
+    RogueMonQuery_IsSpeciesActive();
+
+    // Prefilter to mons of types we're interested in
+    RogueMonQuery_EvosContainType(QUERY_FUNC_INCLUDE, MON_TYPE_VAL_TO_FLAGS(type));
+    RogueMonQuery_IsLegendary(QUERY_FUNC_EXCLUDE);
+
+    RogueMonQuery_TransformIntoEggSpecies();
+    RogueMonQuery_TransformIntoEvos(Rogue_CalculatePlayerMonLvl(), TRUE, FALSE);
+
+    // Now we've evolved we're only caring about mons of this type
+    RogueMonQuery_IsOfType(QUERY_FUNC_INCLUDE, MON_TYPE_VAL_TO_FLAGS(type));
+
+    // Now transform back into egg species, so the spawning should still be deteministic 
+    // (although the type hints could be invalid)
+    if(IsCurseActive(EFFECT_WILD_EGG_SPECIES))
+        RogueMonQuery_TransformIntoEggSpecies();
+
+    SetupFollowParterMonObjectEvent();
+}
+
+void Rogue_EndCatchingContest()
+{
+    while(gRogueLocal.catchingContest.spawnsRemaining != 0)
+    {
+        // Force spawn remaining mons
+        u8 area = 0;
+        u16 species = 0; 
+        u8 level = 0; 
+        bool8 forceShiny = FALSE;
+        Rogue_CreateWildMon(area, &species, &level, &forceShiny);
+    }
+
+    // Re-add pokeballs we had when entering
+    while(TRUE)
+    {
+        if(!RemoveBagItem(ITEM_CATCHING_CONTEST_POKEBALL, 1))
+            break;
+    }
+    if(gRogueLocal.catchingContest.itemCountToRestore)
+        AddBagItem(ITEM_CATCHING_CONTEST_POKEBALL, gRogueLocal.catchingContest.itemCountToRestore);
+
+    gRogueLocal.catchingContest.isActive = FALSE;
+
+    // Store caught mon for later
+    CopyMon(&gEnemyParty[0], &gPlayerParty[0], sizeof(struct Pokemon));
+
+    // Hack to hide follower
+    ZeroMonData(&gPlayerParty[0]);
+    SetupFollowParterMonObjectEvent();
+
+    // Give back player team
+    TempRestorePlayerTeam();
+
+    RogueMonQuery_End();
+
+    SetupFollowParterMonObjectEvent();
+}
+
+static void HandleForfeitingInCatchingContest()
+{
+    if(gRogueLocal.catchingContest.isActive)
+    {
+        // Handle forfeiting mid catching contest
+        TempRestorePlayerTeam();
+        RogueMonQuery_End();
+        gRogueLocal.catchingContest.isActive = FALSE;
+    }
+}
+
+bool8 Rogue_IsCatchingContestActive()
+{
+    return Rogue_IsRunActive() && gRogueLocal.catchingContest.isActive;
+}
+
+void Rogue_GetCatchingContestResults(u16* caughtSpecies, bool8* didWin, u16* winningSpecies)
+{
+    u8 stats[NUM_STATS];
+
+    *caughtSpecies = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
+    *winningSpecies = gRogueLocal.catchingContest.winningSpecies;
+    *didWin = FALSE;
+
+    if(*caughtSpecies != SPECIES_NONE)
+    {
+        RoguePokedex_GetSpeciesStatArray(*caughtSpecies, stats, ARRAY_COUNT(stats));
+
+        if(stats[gRogueLocal.catchingContest.activeStat] >= gRogueLocal.catchingContest.winningScore)
+        {
+            *didWin = TRUE;
+        }
+    }
+}
+
+void Rogue_OpenMartQuery(u16 itemCategory, u16* minSalePrice)
+{
+    bool8 applyRandomChance = FALSE;
+    bool8 applyPriceRange = TRUE;
+    u16 randomChanceMinimum = 0;
+    u16 maxPriceRange = 65000;
+    u16 difficulty = Rogue_GetModeRules()->forceFullShopInventory ? ROGUE_FINAL_CHAMP_DIFFICULTY : Rogue_GetCurrentDifficulty();
+    u16 originalItemCategory = itemCategory;
+
+    gRogueLocal.rngSeedToRestore = gRngRogueValue;
+
+    if(itemCategory == ROGUE_SHOP_COURIER)
+    {
+        u16 range = IsRareShopActive() ? 5 : 4;
+
+        switch (RogueRandomRange(range, 0))
+        {
+        case 0:
+            itemCategory = ROGUE_SHOP_TMS;
+            break;
+        case 1:
+            itemCategory = ROGUE_SHOP_BALLS;
+            break;
+        case 2:
+            itemCategory = ROGUE_SHOP_BATTLE_ENHANCERS;
+            break;
+        case 3:
+            itemCategory = ROGUE_SHOP_HELD_ITEMS;
+            break;
+        case 4:
+            itemCategory = ROGUE_SHOP_RARE_HELD_ITEMS;
+            break;
+        
+        default:
+            AGB_ASSERT(FALSE);
+            itemCategory = ROGUE_SHOP_TMS;
+            break;
+        }
+
+        difficulty = ROGUE_FINAL_CHAMP_DIFFICULTY;
+    }
+
+    RogueItemQuery_Begin();
+    RogueItemQuery_IsItemActive();
+
+    RogueItemQuery_IsStoredInPocket(QUERY_FUNC_EXCLUDE, POCKET_KEY_ITEMS);
+
+    switch (itemCategory)
+    {
+    case ROGUE_SHOP_GENERAL:
+        RogueItemQuery_IsGeneralShopItem(QUERY_FUNC_INCLUDE);
+        {
+            u8 pocket;
+            for(pocket = POCKET_NONE + 1; pocket <= POCKET_KEY_ITEMS; ++pocket)
+            {
+                switch (pocket)
+                {
+                // Allow these pockets
+                case POCKET_ITEMS:
+                case POCKET_MEDICINE:
+                    break;
+
+                default:
+                    RogueItemQuery_IsStoredInPocket(QUERY_FUNC_EXCLUDE, pocket);
+                    break;
+                }
+            }
+        }
+        
+        if(Rogue_IsRunActive())
+        {
+            maxPriceRange =  300 + difficulty * 400;
+        }
+        else
+        {
+            if(!RogueHub_HasUpgrade(HUB_UPGRADE_MARTS_GENERAL_STOCK))
+            {
+                maxPriceRange = 1200;
+                RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_FULL_HEAL);
+            }
+        }
+        break;
+
+    case ROGUE_SHOP_BALLS:
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_INCLUDE, POCKET_POKE_BALLS);
+        *minSalePrice = 100;
+        
+        if(Rogue_IsRunActive())
+        {
+            maxPriceRange =  300 + difficulty * 400;
+
+            if(difficulty <= 0)
+                maxPriceRange = 200;
+            else if(difficulty <= 1)
+                maxPriceRange = 600;
+            else if(difficulty <= 2)
+                maxPriceRange = 1000;
+            else if(difficulty < 11)
+                maxPriceRange = 2000;
+        }
+        else
+        {
+            if(!RogueHub_HasUpgrade(HUB_UPGRADE_MARTS_POKE_BALLS_STOCK))
+            {
+                RogueItemQuery_InPriceRange(QUERY_FUNC_INCLUDE, 10, 600);
+                RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_ULTRA_BALL);
+            }
+        }
+        break;
+
+    case ROGUE_SHOP_TMS:
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_INCLUDE, POCKET_TM_HM);
+        *minSalePrice = 0;
+        applyRandomChance = TRUE;
+
+        if(!Rogue_IsRunActive())
+        {
+            if(!RogueHub_HasUpgrade(HUB_UPGRADE_MARTS_TMS_STOCK))
+            {
+#ifdef ROGUE_EXPANSION
+                maxPriceRange = 15000;
+#else
+                maxPriceRange = 8000;
+#endif
+            }
+        }
+        break;
+
+    case ROGUE_SHOP_BATTLE_ENHANCERS:
+        RogueItemQuery_IsGeneralShopItem(QUERY_FUNC_EXCLUDE);
+
+#ifdef ROGUE_EXPANSION
+        // Mints are in treat shop
+        RogueMiscQuery_EditRange(QUERY_FUNC_EXCLUDE, ITEM_LONELY_MINT, ITEM_SERIOUS_MINT);
+#endif
+        {
+            u8 pocket;
+            for(pocket = POCKET_NONE + 1; pocket <= POCKET_KEY_ITEMS; ++pocket)
+            {
+                switch (pocket)
+                {
+                // Allow these pockets
+                case POCKET_ITEMS:
+                case POCKET_MEDICINE:
+                    break;
+
+                default:
+                    RogueItemQuery_IsStoredInPocket(QUERY_FUNC_EXCLUDE, pocket);
+                    break;
+                }
+            }
+        }
+        applyRandomChance = TRUE;
+        randomChanceMinimum = 50;
+        break;
+
+    case ROGUE_SHOP_HELD_ITEMS:
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_INCLUDE, POCKET_HELD_ITEMS);
+        *minSalePrice = 0;
+        applyRandomChance = TRUE;
+        break;
+
+    case ROGUE_SHOP_RARE_HELD_ITEMS:
+#ifdef ROGUE_EXPANSION
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_INCLUDE, POCKET_STONES);
+        applyRandomChance = TRUE;
+#else
+        AGB_ASSERT(FALSE);
+#endif
+        break;
+
+    case ROGUE_SHOP_QUEST_REWARDS:
+        AGB_ASSERT(FALSE);
+        break;
+
+    case ROGUE_SHOP_BERRIES:
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_INCLUDE, POCKET_BERRIES);
+        if(Rogue_IsRunActive())
+            *minSalePrice = 1000;
+        else
+            *minSalePrice = 2500;
+        applyRandomChance = TRUE;
+        break;
+
+    case ROGUE_SHOP_TREATS:
+        // Pokeblock and mints
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_INCLUDE, POCKET_POKEBLOCK);
+
+        if(Rogue_IsRunActive())
+        {
+            // No need to sell these in run
+            RogueMiscQuery_EditRange(QUERY_FUNC_EXCLUDE, ITEM_POKEBLOCK_HP, ITEM_POKEBLOCK_SPDEF);
+        }
+        else
+        {
+            // In Vanilla this shop only sells pokeblock
+#ifdef ROGUE_EXPANSION
+            if(!RogueHub_HasUpgrade(HUB_UPGRADE_MARKET_TREAT_SHOP_STOCK))
+                RogueMiscQuery_EditRange(QUERY_FUNC_EXCLUDE, FIRST_ITEM_POKEBLOCK, LAST_ITEM_POKEBLOCK);
+#endif
+        }
+        
+
+#ifdef ROGUE_EXPANSION
+        RogueMiscQuery_EditRange(QUERY_FUNC_INCLUDE, ITEM_LONELY_MINT, ITEM_SERIOUS_MINT);
+#endif
+
+        *minSalePrice = 1500;
+        maxPriceRange = 10000;
+        applyRandomChance = TRUE;
+        break;
+
+    case ROGUE_SHOP_CURSES:
+        RogueItemQuery_Reset(QUERY_FUNC_EXCLUDE);
+        RogueMiscQuery_EditRange(QUERY_FUNC_INCLUDE, FIRST_ITEM_CURSE, LAST_ITEM_CURSE);
+        applyPriceRange = FALSE;
+        break;
+
+    case ROGUE_SHOP_CHARMS:
+        RogueItemQuery_Reset(QUERY_FUNC_EXCLUDE);
+        RogueMiscQuery_EditRange(QUERY_FUNC_INCLUDE, FIRST_ITEM_CHARM, LAST_ITEM_CHARM);
+        applyPriceRange = FALSE;
+        break;
+    
+    default:
+        AGB_ASSERT(FALSE);
+        break;
+    }
+
+    if(Rogue_GetModeRules()->forceFullShopInventory)
+    {
+        applyRandomChance = FALSE;
+    }
+    
+    if(originalItemCategory == ROGUE_SHOP_COURIER)
+    {
+        applyRandomChance = FALSE;
+    }
+
+    // Run only items
+    //if(!Rogue_IsRunActive())
+    //{
+    //    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_ESCAPE_ROPE);
+    //}
+
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_TINY_MUSHROOM);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_BIG_MUSHROOM);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_PEARL);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_BIG_PEARL);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_STARDUST);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_STAR_PIECE);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_NUGGET);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_ENERGY_POWDER);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_ENERGY_ROOT);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_HEAL_POWDER);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_BERRY_JUICE);
+
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_MOOMOO_MILK);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_SODA_POP);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_FRESH_WATER);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_LEMONADE);
+
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_LAVA_COOKIE);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_PREMIER_BALL);
+
+#ifdef ROGUE_EXPANSION
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_PEWTER_CRUNCHIES);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_RAGE_CANDY_BAR);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_LAVA_COOKIE);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_OLD_GATEAU);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_CASTELIACONE);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_LUMIOSE_GALETTE);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_SHALOUR_SABLE);
+    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_BIG_MALASADA);
+#endif
+
+    // Remove quests unlocks
+    if(!Rogue_IsRunActive() && !RogueDebug_GetConfigToggle(DEBUG_TOGGLE_DEBUG_SHOPS))
+    {
+        u16 questId, i, rewardCount;
+        struct RogueQuestReward const* reward;
+
+        for(questId = 0; questId < QUEST_ID_COUNT; ++questId)
+        {
+            if(!RogueQuest_HasCollectedRewards(questId))
+            {
+                // TODO - If this is slow probably want to break this out to only check items or quests which definately have shop items as rewards
+                rewardCount = RogueQuest_GetRewardCount(questId);
+
+                for(i = 0; i < rewardCount; ++i)
+                {
+                    reward = RogueQuest_GetReward(questId, i);
+                    if(reward->type == QUEST_REWARD_SHOP_ITEM)
+                    {
+                        RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, reward->perType.shopItem.item);
+                    }
+                }
+            }
+        }
+    }
+
+    // Remove EV items
+    if(!Rogue_IsRunActive() || !Rogue_GetConfigToggle(CONFIG_TOGGLE_EV_GAIN))
+    {
+        RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_HP_UP);
+        RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_PROTEIN);
+        RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_IRON);
+        RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_CALCIUM);
+        RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_ZINC);
+        RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_CARBOS);
+#ifdef ROGUE_EXPANSION
+        RogueMiscQuery_EditRange(QUERY_FUNC_EXCLUDE, ITEM_HP_UP, ITEM_CARBOS);
+#endif
+    }
+
+#ifdef ROGUE_EXPANSION
+    //Always exclude feathers from shop
+    RogueMiscQuery_EditRange(QUERY_FUNC_EXCLUDE, ITEM_HEALTH_FEATHER, ITEM_SWIFT_FEATHER);
+#endif
+
+    // Only show items with a valid price
+    if(RogueDebug_GetConfigToggle(DEBUG_TOGGLE_DEBUG_SHOPS))
+    {
+        *minSalePrice = 0;
+    }
+    else
+    {
+        if(applyPriceRange)
+            RogueItemQuery_InPriceRange(QUERY_FUNC_INCLUDE, 10, maxPriceRange);
+
+        if(Rogue_IsRunActive())
+        {
+            // Always allow to always buy revives if players have this on
+            if(itemCategory == ROGUE_SHOP_GENERAL && !Rogue_ShouldReleaseFaintedMons())
+                RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_REVIVE);
+
+            if(applyRandomChance)
+            {
+                u8 chance = 100;
+
+                if(difficulty < ROGUE_ELITE_START_DIFFICULTY)
+                {
+                    chance = 10 + 5 * difficulty;
+                }
+                else if(difficulty < ROGUE_CHAMP_START_DIFFICULTY)
+                {
+                    chance = 60 + 10 * (difficulty - ROGUE_ELITE_START_DIFFICULTY);
+                }
+
+                chance = max(randomChanceMinimum, chance);
+
+                if(chance < 100)
+                    RogueMiscQuery_FilterByChance(RogueRandom(), QUERY_FUNC_INCLUDE, chance, 1);
+            }
+        }
+    }
+}
+
+void Rogue_CloseMartQuery()
+{
+    RogueItemQuery_End();
+    gRngRogueValue = gRogueLocal.rngSeedToRestore;
 }
 
 static void ApplyTutorMoveCapacity(u8* count, u16* moves, u16 capacity)
 {
     u16 i;
     u16 randIdx;
-    u32 startSeed = gRngRogueValue;
+    RAND_TYPE startSeed = gRngRogueValue;
 
     while(*count > capacity)
     {
@@ -6804,27 +8728,29 @@ void Rogue_ModifyTutorMoves(struct Pokemon* mon, u8 tutorType, u8* count, u8* hi
     
         if(Rogue_IsRunActive())
         {
-            difficulty = gRogueRun.currentDifficulty;
+            difficulty = Rogue_GetCurrentDifficulty();
 
-            if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-                difficulty = 13;
+            //if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+            //    difficulty = 13;
 
             if(difficulty < 8)
                 capacity = 3 + difficulty * 1;
         }
         else
         {
-            capacity = 5;
+            // TODO - Reimplement moves maybe?
 
-            if(IsQuestCollected(QUEST_NoFainting2) && IsQuestCollected(QUEST_NoFainting3))
-                capacity = 0;
-            else if(IsQuestCollected(QUEST_NoFainting2) || IsQuestCollected(QUEST_NoFainting3))
-                capacity += 5;
+            //capacity = 5;
+//
+            //if(IsQuestCollected(QUEST_NoFainting2) && IsQuestCollected(QUEST_NoFainting3))
+            //    capacity = 0;
+            //else if(IsQuestCollected(QUEST_NoFainting2) || IsQuestCollected(QUEST_NoFainting3))
+            //    capacity += 5;
         }
 
-#ifdef ROGUE_DEBUG
+        // TEMP
         capacity = 0;
-#endif
+
         if(capacity != 0)
         {
             ApplyTutorMoveCapacity(count, moves, capacity);
@@ -6850,105 +8776,357 @@ void Rogue_ModifyTutorMoves(struct Pokemon* mon, u8 tutorType, u8* count, u8* hi
     }
 }
 
-static bool8 ContainsSpecies(u16 *party, u8 partyCount, u16 species)
+void Rogue_CorrectMonDetails(struct Pokemon* party, u8 count)
 {
     u8 i;
-    u16 s;
-    for(i = 0; i < partyCount; ++i)
-    {
-        s = party[i];
 
-        if(s == species)
+    for(i = 0; i < count; ++i)
+    {
+        Rogue_CorrectBoxMonDetails(&party[i].box);
+    }
+}
+
+void Rogue_CorrectBoxMonDetails(struct BoxPokemon* mon)
+{
+    // Ensure OT details are updated for all slots, as they can change
+    u32 otId = GetBoxMonData(mon, MON_DATA_OT_ID, NULL);
+
+    if(!IsOtherTrainer(otId))
+    {
+        u16 gender = RoguePlayer_GetTextVariantId();
+
+        SetBoxMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
+        SetBoxMonData(mon, MON_DATA_OT_GENDER, &gender);
+    }
+}
+
+static bool8 IsRareWeightedSpecies(u16 species)
+{
+    if(RoguePokedex_GetSpeciesBST(species) >= 500)
+    {
+        if(Rogue_GetMaxEvolutionCount(species) == 0)
             return TRUE;
     }
 
     return FALSE;
 }
 
-static u16 NextWildSpecies(u16 * party, u8 monIdx)
+static u8 RandomiseWildEncounters_CalculateWeight(u16 index, u16 species, void* data)
 {
-    u16 species;
-    u16 randIdx;
-    u16 queryCount = RogueQuery_BufferSize();
-
-    if(Rogue_GetActiveCampaign() == ROGUE_CAMPAIGN_LATERMANNER)
+#ifdef ROGUE_EXPANSION
+    switch (species)
     {
-        return SPECIES_FARFETCHD;
+    case SPECIES_DEERLING:
+    case SPECIES_SAWSBUCK:
+        if(RogueToD_GetSeason() != SEASON_SPRING)
+            return 0;
+        break;
+
+    case SPECIES_DEERLING_SUMMER:
+    case SPECIES_SAWSBUCK_SUMMER:
+        if(RogueToD_GetSeason() != SEASON_SUMMER)
+            return 0;
+        break;
+
+    case SPECIES_DEERLING_AUTUMN:
+    case SPECIES_SAWSBUCK_AUTUMN:
+        if(RogueToD_GetSeason() != SEASON_AUTUMN)
+            return 0;
+        break;
+
+    case SPECIES_DEERLING_WINTER:
+    case SPECIES_SAWSBUCK_WINTER:
+        if(RogueToD_GetSeason() != SEASON_WINTER)
+            return 0;
+        break;
+
+    case SPECIES_LYCANROC:
+        if(RogueToD_IsNight() || RogueToD_IsDusk())
+            return 0;
+        break;
+
+    case SPECIES_LYCANROC_MIDNIGHT:
+        if(!RogueToD_IsNight())
+            return 0;
+        break;
+
+    case SPECIES_LYCANROC_DUSK:
+        if(!RogueToD_IsDusk())
+            return 0;
+        break;
+
+    case SPECIES_ROCKRUFF:
+        if(RogueToD_IsDusk())
+            return 0;
+        break;
+
+    case SPECIES_ROCKRUFF_OWN_TEMPO:
+        if(!RogueToD_IsDusk())
+            return 0;
+        break;
+
+    default:
+        break;
     }
 
-    // Prevent duplicates, if possible
-    do
-    {
-        randIdx = RogueRandomRange(queryCount, FLAG_SET_SEED_WILDMONS);
-        species = RogueQuery_BufferPtr()[randIdx];
-    }
-    while(ContainsSpecies(party, monIdx, species) && monIdx < queryCount);
+#endif
 
-    return species;
+    if(IsRareWeightedSpecies(species))
+    {
+        // Rare species become more common into late game
+        if(Rogue_GetCurrentDifficulty() >= ROGUE_GYM_MID_DIFFICULTY + 1)
+            return 3;
+        else if(Rogue_GetCurrentDifficulty() >= ROGUE_GYM_MID_DIFFICULTY - 1)
+            return 2;
+        else
+            return 1;
+    }
+
+    return 3;
+}
+
+static u8 RandomiseWildEncounters_CalculateInitialWeight(u16 index, u16 species, void* data)
+{
+    // For the 1st encounter, we ensure we will have a mon of that typ
+    u8 typeHint = *((u8*)data);
+
+    if(RoguePokedex_GetSpeciesType(species, 0) == typeHint || RoguePokedex_GetSpeciesType(species, 1) == typeHint)
+        return RandomiseWildEncounters_CalculateWeight(index, species, NULL);
+    else
+        return 0;
+}
+
+static void BeginWildEncounterQuery()
+{
+    u8 maxlevel = CalculateWildLevel(0);
+    u32 typeFlags = 0;
+
+    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE)
+    {
+        typeFlags = Rogue_GetTypeFlagsFromArray(
+            &gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable[0], 
+            ARRAY_COUNT(gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable)
+        );
+    }
+    else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_HONEY_TREE)
+    {
+        u8 type;
+
+        do
+        {
+            type = RogueRandom() % NUMBER_OF_MON_TYPES;
+        }
+        while(!IS_STANDARD_TYPE(type));
+
+        typeFlags = MON_TYPE_VAL_TO_FLAGS(type);
+    }
+    else
+    {
+        AGB_ASSERT(FALSE);
+    }
+
+    RogueMonQuery_Begin();
+
+    RogueMonQuery_IsSpeciesActive();
+
+    // Prefilter to mons of types we're interested in
+    RogueMonQuery_EvosContainType(QUERY_FUNC_INCLUDE, typeFlags);
+    RogueMonQuery_IsLegendary(QUERY_FUNC_EXCLUDE);
+
+    RogueMonQuery_TransformIntoEggSpecies();
+    RogueMonQuery_TransformIntoEvos(maxlevel - min(6, maxlevel - 1), FALSE, FALSE);
+
+    // Now we've evolved we're only caring about mons of this type
+    RogueMonQuery_IsOfType(QUERY_FUNC_INCLUDE, typeFlags);
+
+    // Now transform back into egg species, so the spawning should still be deteministic 
+    // (although the type hints could be invalid)
+    if(IsCurseActive(EFFECT_WILD_EGG_SPECIES))
+        RogueMonQuery_TransformIntoEggSpecies();
+
+    // Remove random entries until we can safely calcualte weights without going over
+    while(RogueWeightQuery_IsOverSafeCapacity())
+    {
+        RogueMiscQuery_FilterByChance(RogueRandom(), QUERY_FUNC_INCLUDE, 50, WILD_ENCOUNTER_GRASS_CAPACITY);
+    }
+}
+
+static void EndWildEncounterQuery()
+{
+    RogueMonQuery_End();
 }
 
 static void RandomiseWildEncounters(void)
 {
-    u8 maxlevel = CalculateWildLevel(0);
-
-    // Query for the current route type
-    RogueQuery_Clear();
-
-    RogueQuery_SpeciesIsValid(
-        gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable[0], 
-        gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable[1],
-        gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable[2]
-        );
-    RogueQuery_SpeciesExcludeCommon();
-    RogueQuery_SpeciesIsNotLegendary();
-    RogueQuery_TransformToEggSpecies();
-
-    if(Rogue_GetActiveCampaign() != ROGUE_CAMPAIGN_LOW_BST)
-    {
-        // Evolve the species to just below the wild encounter level
-        RogueQuery_EvolveSpecies(maxlevel - min(6, maxlevel - 1), FALSE);
-    }
-
-    RogueQuery_SpeciesOfTypes(gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable, ARRAY_COUNT(gRogueRouteTable.routes[gRogueRun.currentRouteIndex].wildTypeTable));
-
-    RogueQuery_CollapseSpeciesBuffer();
-
+    BeginWildEncounterQuery();
     {
         u8 i;
+        u8 typeHint = Rogue_GetTypeForHintForRoom(&gRogueAdvPath.rooms[gRogueRun.adventureRoomId]);
+        RogueWeightQuery_Begin();
 
-#ifdef ROGUE_DEBUG
-        gDebug_WildOptionCount = RogueQuery_BufferSize();
-#endif
+        // Initial query will only allow mons of type hint
+        RogueWeightQuery_CalculateWeights(RandomiseWildEncounters_CalculateInitialWeight, &typeHint);
 
-        for(i = 0; i < ARRAY_COUNT(gRogueRun.wildEncounters); ++i)
+        for(i = 0; i < WILD_ENCOUNTER_GRASS_CAPACITY; ++i)
         {
-            gRogueLocal.encounterPreview[i].isVisible = FALSE;
-            gRogueRun.wildEncounters[i] = NextWildSpecies(&gRogueRun.wildEncounters[0], i);
+            if(i == 0)
+            {
+                if(RogueWeightQuery_HasAnyWeights())
+                {
+                    // We actually have a mon of this type
+                    gRogueRun.wildEncounters.species[i] = RogueWeightQuery_SelectRandomFromWeightsWithUpdate(RogueRandom(), 0);
+
+                    // Reroll query to allow anything now
+                    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, gRogueRun.wildEncounters.species[i]);
+                    RogueWeightQuery_CalculateWeights(RandomiseWildEncounters_CalculateWeight, NULL);
+                    continue;
+                }
+                else
+                {
+                    // Reroll query to allow anything and fallback to below (Can hit here if no mon of hint type e.g. gen 1 on dark hint route)
+                    RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, gRogueRun.wildEncounters.species[i]);
+                    RogueWeightQuery_CalculateWeights(RandomiseWildEncounters_CalculateWeight, NULL);
+                }
+            }
+
+            if(RogueWeightQuery_HasAnyWeights())
+                gRogueRun.wildEncounters.species[i] = RogueWeightQuery_SelectRandomFromWeightsWithUpdate(RogueRandom(), 0);
+            else
+                gRogueRun.wildEncounters.species[i] = SPECIES_NONE;
+
+            gRogueRun.wildEncounters.catchCounts[i] = 0;
+        }
+
+        RogueWeightQuery_End();
+    }
+    EndWildEncounterQuery();
+}
+
+bool8 Rogue_CanScatterPokeblock(u16 itemId)
+{
+    if(Rogue_IsRunActive())
+    {
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_HONEY_TREE)
+        {
+            if(itemId != ITEM_POKEBLOCK_SHINY)
+                return TRUE;
+        }
+        else
+            return VarGet(VAR_ROGUE_ACTIVE_POKEBLOCK) == ITEM_NONE && GetCurrentWildEncounterCount() > 0;
+    }
+
+    return FALSE;
+}
+
+bool8 Rogue_RerollSingleWildSpecies(u8 type)
+{
+    bool8 success = FALSE;
+
+    BeginWildEncounterQuery();
+    RogueMonQuery_IsOfType(QUERY_FUNC_INCLUDE, MON_TYPE_VAL_TO_FLAGS(type));
+
+    {
+        RogueWeightQuery_Begin();
+        RogueWeightQuery_FillWeights(1);
+
+        if(RogueWeightQuery_HasAnyWeights())
+        {
+            u16 species = RogueWeightQuery_SelectRandomFromWeights(Random());
+            u8 index = Random() % GetCurrentWildEncounterCount();
+
+            gRogueRun.wildEncounters.species[index] = species;
+            success = TRUE;
+        }
+        else
+        {
+            success = FALSE;
+        }
+
+        RogueWeightQuery_End();
+    }
+
+    EndWildEncounterQuery();
+
+    return success;
+}
+
+static bool8 HasHoneyTreeEncounterPending()
+{
+    return gRogueRun.honeyTreePokeblockTypeFlags != 0;
+}
+
+static void ClearHoneyTreePokeblock()
+{
+    gRogueRun.honeyTreePokeblockTypeFlags = 0;
+}
+
+bool8 Rogue_TryAddHoneyTreePokeblock(u16 itemId)
+{
+    // Shiny pokeblock isn't supported by honey tree atm for balance concerns
+    if(itemId >= FIRST_ITEM_POKEBLOCK && itemId <= LAST_ITEM_POKEBLOCK && itemId != ITEM_POKEBLOCK_SHINY)
+    {
+        //u16 itemId = FIRST_ITEM_POKEBLOCK + i;
+        u8 type = ItemId_GetSecondaryId(itemId);
+        u32 mask = MON_TYPE_VAL_TO_FLAGS(type);
+
+        if(mask != 0)
+        {
+            if((gRogueRun.honeyTreePokeblockTypeFlags & mask) == 0)
+            {
+                gRogueRun.honeyTreePokeblockTypeFlags |= mask;
+                return 1;
+            }
+
+            return 2;
         }
     }
+
+    return 0;
+}
+
+static u8 RandomiseFishingEncounters_CalculateWeight(u16 index, u16 species, void* data)
+{
+    if(IsRareWeightedSpecies(species))
+        return 1;
+
+    return 10;
 }
 
 static void RandomiseFishingEncounters(void)
 {
-    RogueQuery_Clear();
+    RogueMonQuery_Begin();
 
-    RogueQuery_SpeciesIsValid(TYPE_WATER, TYPE_NONE, TYPE_NONE);
-    RogueQuery_SpeciesExcludeCommon();
-    RogueQuery_SpeciesIsNotLegendary();
+    RogueMonQuery_IsSpeciesActive();
 
-    RogueQuery_TransformToEggSpecies();
-    RogueQuery_SpeciesOfType(TYPE_WATER);
+    // Prefilter to mons of types we're interested in
+    RogueMonQuery_EvosContainType(QUERY_FUNC_INCLUDE, MON_TYPE_VAL_TO_FLAGS(TYPE_WATER));
+    RogueMonQuery_IsLegendary(QUERY_FUNC_EXCLUDE);
 
-    RogueQuery_CollapseSpeciesBuffer();
+    RogueMonQuery_TransformIntoEggSpecies();
+
+    // Now we've evolved we're only caring about mons of this type
+    RogueMonQuery_IsOfType(QUERY_FUNC_INCLUDE, MON_TYPE_VAL_TO_FLAGS(TYPE_WATER));
 
     {
         u8 i;
+        RogueWeightQuery_Begin();
 
-        for(i = 0; i < ARRAY_COUNT(gRogueRun.fishingEncounters); ++i)
+        RogueWeightQuery_CalculateWeights(RandomiseFishingEncounters_CalculateWeight, NULL);
+
+        for(i = 0; i < WILD_ENCOUNTER_WATER_CAPACITY; ++i)
         {
-            gRogueRun.fishingEncounters[i] = NextWildSpecies(&gRogueRun.fishingEncounters[0], i);
+            if(RogueWeightQuery_HasAnyWeights())
+                gRogueRun.wildEncounters.species[WILD_ENCOUNTER_GRASS_CAPACITY + i] = RogueWeightQuery_SelectRandomFromWeightsWithUpdate(RogueRandom(), 0);
+            else
+                gRogueRun.wildEncounters.species[WILD_ENCOUNTER_GRASS_CAPACITY + i] = SPECIES_NONE;
+
+            gRogueRun.wildEncounters.catchCounts[WILD_ENCOUNTER_GRASS_CAPACITY + i] = 0;
         }
+
+        RogueWeightQuery_End();
     }
+
+    RogueMonQuery_End();
 }
 
 void Rogue_SafariTypeForMap(u8* outArray, u8 arraySize)
@@ -7001,81 +9179,8 @@ void Rogue_SafariTypeForMap(u8* outArray, u8 arraySize)
 
 static void RandomiseSafariWildEncounters(void)
 {
-    u8 types[3];
-    u8 maxlevel = CalculateWildLevel(0);
-    u16 targetGen = VarGet(VAR_ROGUE_SAFARI_GENERATION);
-    u16 dexLimit = VarGet(VAR_ROGUE_REGION_DEX_LIMIT);
-    u16 maxGen = VarGet(VAR_ROGUE_ENABLED_GEN_LIMIT);
-
-    Rogue_SafariTypeForMap(&types[0], ARRAY_COUNT(types));
-
-    // Temporarily remove the gen limit for the safari encounters
-    VarSet(VAR_ROGUE_REGION_DEX_LIMIT, 0);
-    VarSet(VAR_ROGUE_ENABLED_GEN_LIMIT, 255);
-
-    // Query for the current zone
-    RogueQuery_Clear();
-    RogueQuery_SpeciesIsValid(types[0], types[1], types[2]);
-
-    if(targetGen == 0)
-    {
-        RogueQuery_SpeciesExcludeCommon();
-    }
-
-    if(!IsQuestCollected(QUEST_CollectorLegend))
-    {
-        RogueQuery_SpeciesIsNotLegendary();
-    }
-
-    RogueQuery_SpeciesInPokedex();
-
-    RogueQuery_TransformToEggSpecies();
-    RogueQuery_EvolveSpecies(2, FALSE); // To force gen3+ mons off if needed
-
-    if(targetGen != 0)
-    {
-        RogueQuery_SpeciesInGeneration(targetGen);
-    }
-
-    if(types[2] == TYPE_NONE)
-        RogueQuery_SpeciesOfTypes(&types[0], 2);
-    else
-        RogueQuery_SpeciesOfTypes(&types[0], 3);
-
-    RogueQuery_CollapseSpeciesBuffer();
-
-    // Restore the gen limit
-    VarSet(VAR_ROGUE_REGION_DEX_LIMIT, dexLimit);
-    VarSet(VAR_ROGUE_ENABLED_GEN_LIMIT, maxGen);
-
-    {
-        u8 i;
-        u16 randIdx;
-        u16 queryCount = RogueQuery_BufferSize();
-
-#ifdef ROGUE_DEBUG
-        gDebug_WildOptionCount = queryCount;
-#endif
-
-        if(queryCount == 0)
-        {
-            for(i = 0; i < ARRAY_COUNT(gRogueRun.wildEncounters); ++i)
-            {
-                // Just encounter self, as we don't have a great fallback?
-                gRogueRun.wildEncounters[i] = Rogue_GetEggSpecies(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES));
-            }
-        }
-        else
-        {
-            for(i = 0; i < ARRAY_COUNT(gRogueRun.wildEncounters); ++i)
-            {
-                gRogueRun.wildEncounters[i] = NextWildSpecies(&gRogueRun.wildEncounters[0], i);
-            }
-        }
-    }
-
-    gRogueRun.fishingEncounters[0] = SPECIES_MAGIKARP;
-    gRogueRun.fishingEncounters[1] = SPECIES_FEEBAS;
+    // No longer supported code path
+    AGB_ASSERT(FALSE);
 }
 
 static void ResetTrainerBattles(void)
@@ -7088,12 +9193,54 @@ static void ResetTrainerBattles(void)
     }
 }
 
+static bool8 RogueRandomChanceTrainer();
+
+static void RandomiseEnabledTrainers()
+{
+    u16 i;
+    u16 activeTrainers = 0;
+    u16 trainerBuffer[ROGUE_TRAINER_COUNT];
+
+    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_TEAM_HIDEOUT)
+        Rogue_ChooseTeamHideoutTrainers(trainerBuffer, ARRAY_COUNT(trainerBuffer));
+    else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
+        Rogue_ChooseSpectatorTrainers(trainerBuffer, ARRAY_COUNT(trainerBuffer));
+    else
+        Rogue_ChooseRouteTrainers(trainerBuffer, ARRAY_COUNT(trainerBuffer));
+
+    for(i = 0; i < ROGUE_MAX_ACTIVE_TRAINER_COUNT; ++i)
+    {
+        if(RogueRandomChanceTrainer())
+        {
+            Rogue_SetDynamicTrainer(i, trainerBuffer[i]);
+            ++activeTrainers;
+        }
+        else
+            Rogue_SetDynamicTrainer(i, TRAINER_NONE);
+    }
+
+    // May only limited number of trainers active
+    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
+    {
+        while(activeTrainers > 12)
+        {
+            i = RogueRandom() % ROGUE_MAX_ACTIVE_TRAINER_COUNT;
+
+            if(Rogue_GetDynamicTrainer(i) != TRAINER_NONE)
+            {
+                Rogue_SetDynamicTrainer(i, TRAINER_NONE);
+                --activeTrainers;
+            }
+        }
+    }
+}
+
 u8 GetLeadMonLevel(void);
 
 static u8 CalculateWildLevel(u8 variation)
 {
     u8 wildLevel;
-    u8 playerLevel = CalculatePlayerLevel();
+    u8 playerLevel = Rogue_CalculatePlayerMonLvl();
 
     if(GetSafariZoneFlag())
     {
@@ -7128,112 +9275,136 @@ static u8 CalculateWildLevel(u8 variation)
         return wildLevel;
 }
 
-static u8 CalculateBossLevelForDifficulty(u8 difficulty)
+u8 Rogue_GetEncounterDifficultyModifier()
 {
-    if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+    switch (gRogueAdvPath.currentRoomType)
     {
-        return MAX_LEVEL;
+    case ADVPATH_ROOM_ROUTE:
+        return gRogueAdvPath.currentRoomParams.perType.route.difficulty;
+    
+    case ADVPATH_ROOM_TEAM_HIDEOUT:
+        return ADVPATH_SUBROOM_ROUTE_TOUGH;
     }
 
-    // Gym leaders lvs 15 -> 85
-    if(difficulty <= 7)
-    {
-        return min(100, 15 + 10 * difficulty);
-    }
-    else
-    {
-        // Both champions are lvl 100
-        difficulty -= 7; // (1 - 6)
-        return min(100, 85 + 3 * difficulty);
-    }
+    return ADVPATH_SUBROOM_ROUTE_AVERAGE;
 }
 
-static u8 CalculateBossLevel()
+u16 Rogue_GetTRMove(u16 trNumber)
 {
-    u8 currLevel = gRogueRun.currentDifficulty;
-    return CalculateBossLevelForDifficulty(currLevel);
+    if(trNumber < NUM_TECHNICAL_RECORDS && Rogue_IsRunActive())
+        return gRogueRun.dynamicTRMoves[trNumber];
+
+    // Return dud moves for item pricing calcs etc.
+    return MOVE_SPLASH;
 }
 
-static u8 CalculatePlayerLevel(void)
+static u8 TRMove_CalculateWeight(u16 index, u16 move, void* data)
 {
-    return CalculateBossLevel() - gRogueRun.currentLevelOffset;
+    // We're specifically going to use moves which would be Tutor moves i.e. ignore moves like growl or splash
+    u16 usage = gRoguePokemonSpecialMoveUsages[move];
+
+    // If we don't have comp usage, the chance is impossible
+    if(usage == 0)
+        return 0;
+
+    if(usage >= 300)
+        return 5;
+    if(usage >= 200)
+        return 4;
+    if(usage >= 100)
+        return 3;
+    if(usage >= 50)
+        return 2;
+
+    return 1;
 }
 
-static u8 CalculateTrainerLevel(u16 trainerNum)
+static void RandomiseTRMoves()
 {
-    u8 level;
-#ifdef ROGUE_FEATURE_AUTOMATION
-    if(!Rogue_AutomationGetFlag(AUTO_FLAG_TRAINER_DISABLE_PARTY_GENERATION))
-#else
-    if(IsBossTrainer(trainerNum))
-#endif
+    RogueMoveQuery_Begin();
+    RogueMoveQuery_Reset(QUERY_FUNC_INCLUDE);
+
+    RogueMoveQuery_IsTM(QUERY_FUNC_EXCLUDE);
+    RogueMoveQuery_IsHM(QUERY_FUNC_EXCLUDE);
+
+    RogueWeightQuery_Begin();
     {
-        level = CalculatePlayerLevel();
-    }
-    else
-    {
-        u8 prevBossLevel;
-        u8 nextBossLevel;
-        u8 difficultyLevel = gRogueRun.currentDifficulty;
-        u8 difficultyModifier = GetRoomTypeDifficulty();
+        u8 i;
+        RogueWeightQuery_CalculateWeights(TRMove_CalculateWeight, NULL);
 
-        if(difficultyLevel == 0)
+        for(i = 0; i < NUM_TECHNICAL_RECORDS; ++i)
         {
-            prevBossLevel = 5;
-            nextBossLevel = CalculatePlayerLevel();
-        }
-        else
-        {
-            prevBossLevel = CalculateBossLevelForDifficulty(difficultyModifier - 1);
-            nextBossLevel = CalculatePlayerLevel();
-        }
-
-        prevBossLevel = min(prevBossLevel, nextBossLevel);
-
-        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
-        {
-            // Not boss trainer so must be EXP trainer
-            level = 5;
-        }
-        else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_MINIBOSS || gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY)
-        {
-            level = CalculatePlayerLevel() - 5;
-        }
-        else if(difficultyModifier == 0) // Easy
-        {
-            level = prevBossLevel;
-        }
-        else if(difficultyModifier == 2) // Hard
-        {
-            level =  nextBossLevel - 5;
-        }
-        else
-        {
-            level =  nextBossLevel - 10;
+            AGB_ASSERT(RogueWeightQuery_HasAnyWeights());
+            gRogueRun.dynamicTRMoves[i] = RogueWeightQuery_SelectRandomFromWeightsWithUpdate(RogueRandom(), 0);
+            AGB_ASSERT(gRogueRun.dynamicTRMoves[i] != MOVE_NONE);
         }
     }
+    RogueWeightQuery_End();
 
-    // Trainers shouldn't ever be weaker than this
-    return max(5, level);
-}
-
-static u8 GetRoomTypeDifficulty(void)
-{
-    return (gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE ? gRogueAdvPath.currentRoomParams.perType.route.difficulty : 1);
+    RogueMoveQuery_End();
 }
 
 static bool8 RogueRandomChanceTrainer()
 {
-    u8 difficultyLevel = gRogueRun.currentDifficulty;
-    u8 difficultyModifier = GetRoomTypeDifficulty();
+    u8 difficultyLevel = Rogue_GetCurrentDifficulty();
+    u8 difficultyModifier = Rogue_GetEncounterDifficultyModifier();
     s32 chance = 4 * (difficultyLevel + 1);
 
-    if(difficultyModifier == 0) // Easy
-        chance = max(5, chance - 20);
-    else if(difficultyModifier == 2) // Hard
-        chance = max(15, chance - 15); // Trainers are hard so slightly less frequent, but harder
+    if(Rogue_GetModeRules()->disableRouteTrainers)
+    {
+        return FALSE;
+    }
+
+    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
+    {
+        // Scale with badge count
+        switch (difficultyLevel)
+        {
+        case 0:
+            chance = 1;
+            break;
+        
+        case 1:
+            chance = 5;
+            break;
+        
+        case 2:
+            chance = 10;
+            break;
+        
+        case 3:
+            chance = 20;
+            break;
+        
+        case 4:
+            chance = 35;
+            break;
+        
+        case 5:
+            chance = 55;
+            break;
+
+        case 6:
+            chance = 80;
+            break;
+
+        default:
+            chance = 100;
+            break;
+        }
+    }
+    else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_TEAM_HIDEOUT)
+    {
+        // We want a good number of trainers in the hideout
+        chance = max(66, chance);
+    }
     else
-        chance = max(10, chance);
+    {
+        if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_CALM)
+            chance = max(5, chance - 20); // Trainers are fewer
+        else
+            chance = max(15, chance); // Trainers are harder on tough routes
+    }
 
     return RogueRandomChance(chance, FLAG_SET_SEED_TRAINERS);
 }
@@ -7241,232 +9412,146 @@ static bool8 RogueRandomChanceTrainer()
 static bool8 RogueRandomChanceItem()
 {
     s32 chance;
-    u8 difficultyModifier = GetRoomTypeDifficulty();
+    u8 difficultyModifier = Rogue_GetEncounterDifficultyModifier();
 
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
-    {
-        // Use to give healing items in gym rooms
-        chance = 0;
-    }
+    if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_CALM)
+        chance = 65;
+    else if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_TOUGH)
+        chance = 95;
     else
-    {
-        u8 difficultyLevel = gRogueRun.currentDifficulty;
-        
-        if(FlagGet(FLAG_ROGUE_EASY_ITEMS))
-        {
-            chance = max(15, 75 - min(50, 4 * difficultyLevel));
-        }
-        else if(FlagGet(FLAG_ROGUE_HARD_ITEMS))
-        {
-            chance = max(5, 30 - min(28, 2 * difficultyLevel));
-        }
-        else
-        {
-            chance = max(10, 55 - min(50, 4 * difficultyLevel));
-        }
-    }
-
-    if(!FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
-    {
-        if(difficultyModifier == 0) // Easy
-            chance = max(10, chance - 25);
-        else if(difficultyModifier == 2) // Hard
-            chance = min(100, chance + 25);
-    }
+        chance = 80;
 
     return RogueRandomChance(chance, FLAG_SET_SEED_ITEMS);
 }
 
 static bool8 RogueRandomChanceBerry()
 {
-    u8 chance;
-    u8 difficultyLevel = gRogueRun.currentDifficulty;
-
-    if(FlagGet(FLAG_ROGUE_EASY_ITEMS))
-    {
-        chance = max(15, 95 - min(85, 7 * difficultyLevel));
-    }
-    else if(FlagGet(FLAG_ROGUE_HARD_ITEMS))
-    {
-        chance = max(5, 50 - min(48, 5 * difficultyLevel));
-    }
-    else
-    {
-        chance = max(10, 70 - min(65, 5 * difficultyLevel));
-    }
+    u8 difficultyLevel = Rogue_GetCurrentDifficulty();
+    u8 chance = max(10, 70 - min(65, 5 * difficultyLevel));
 
     return RogueRandomChance(chance, FLAG_SET_SEED_ITEMS);
 }
 
-static void RandomiseEnabledTrainers(void)
+static u8 RouteItems_CalculateWeight(u16 index, u16 itemId, void* data)
 {
-    u16 i;
+    u8 pocket = ItemId_GetPocket(itemId);
+    u8 weight;
 
-    if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+    switch (pocket)
     {
-        for(i = 0; i < ROGUE_TRAINER_COUNT; ++i)
-        {
-            // Set flag to hide
-            FlagSet(FLAG_ROGUE_TRAINER_START + i);
-        }
-    }
-    else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY)
-    {
-        u16 randTrainer = RogueRandomRange(6, FLAG_SET_SEED_TRAINERS);
+    case POCKET_TM_HM:
+        weight = 3;
+        break;
 
-        // Only enable 1 trainer for legendary room
-        for(i = 0; i < ROGUE_TRAINER_COUNT; ++i)
-        {
-            if(i == randTrainer)
-            {
-                // Clear flag to show
-                FlagClear(FLAG_ROGUE_TRAINER_START + i);
-            }
-            else
-            {
-                // Set flag to hide
-                FlagSet(FLAG_ROGUE_TRAINER_START + i);
-            }
-        }
+    case POCKET_HELD_ITEMS:
+        weight = 3;
+        break;
+
+    case POCKET_STONES:
+        weight = 6;
+        break;
+
+    case POCKET_MEDICINE:
+    case POCKET_ITEMS:
+        weight = 20;
+        break;
+    
+    default:
+        weight = 10;
+        break;
     }
-    else
+
+    return weight;
+}
+
+u8 GetCurrentDropRarity()
+{
+    switch (gRogueAdvPath.currentRoomType)
     {
-        for(i = 0; i < ROGUE_TRAINER_COUNT; ++i)
-        {
-            if(RogueRandomChanceTrainer())
-            {
-                // Clear flag to show
-                FlagClear(FLAG_ROGUE_TRAINER_START + i);
-            }
-            else
-            {
-                // Set flag to hide
-                FlagSet(FLAG_ROGUE_TRAINER_START + i);
-            }
-        }
+    case ADVPATH_ROOM_ROUTE:
+        return gRogueRouteTable.routes[gRogueRun.currentRouteIndex].dropRarity;
+    
+    case ADVPATH_ROOM_TEAM_HIDEOUT:
+        return 3;
     }
+
+    return 0;
 }
 
 static void RandomiseItemContent(u8 difficultyLevel)
 {
-    u16 queryCount;
-    u8 difficultyModifier = GetRoomTypeDifficulty();
-    u8 dropRarity = gRogueRouteTable.routes[gRogueRun.currentRouteIndex].dropRarity;
+    u8 difficultyModifier = Rogue_GetEncounterDifficultyModifier();
+    u8 dropRarity = GetCurrentDropRarity();
 
-    if(FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+    if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_CALM) // Easy
     {
-        // Give us 1 room of basic items
-        if(gRogueRun.currentRoomIdx > 1)
-        {
-            dropRarity += 10;
-        }
+        if(dropRarity != 0)
+            --dropRarity;
     }
-    else
+    else if(difficultyModifier == ADVPATH_SUBROOM_ROUTE_TOUGH) // Hard
     {
-        if(difficultyModifier == 0) // Easy
-        {
-            if(dropRarity != 0)
-                --dropRarity;
-        }
-        else if(difficultyModifier == 2) // Hard
-        {
-            if(dropRarity != 0)
-                ++dropRarity;
-        }
+        if(dropRarity != 0)
+            ++dropRarity;
     }
 
-    // Queue up random items
-    RogueQuery_Clear();
-
-    RogueQuery_ItemsIsValid();
-    RogueQuery_ItemsNotInPocket(POCKET_KEY_ITEMS);
-    RogueQuery_ItemsNotInPocket(POCKET_BERRIES);
-
-    RogueQuery_ItemsExcludeCommon();
-
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_MINIBOSS)
+    RogueItemQuery_Begin();
     {
-        RogueQuery_ItemsInPriceRange(1000 + 500 * difficultyLevel, 2000 + 1600 * difficultyLevel);
-#ifdef ROGUE_EXPANSION
-        RogueQuery_ItemsExcludeRange(ITEM_TINY_MUSHROOM, ITEM_STRANGE_SOUVENIR);
-#else
-        RogueQuery_ItemsExcludeRange(ITEM_TINY_MUSHROOM, ITEM_HEART_SCALE);
-#endif
-        RogueQuery_Include(ITEM_MASTER_BALL);
-        RogueQuery_Include(ITEM_ESCAPE_ROPE);
-        RogueQuery_Include(ITEM_RARE_CANDY);
-    }
-    else
-    {
-        RogueQuery_ItemsInPriceRange(50 + 100 * (difficultyLevel + dropRarity), 300 + 800 * (difficultyLevel + dropRarity));
+        RogueItemQuery_IsItemActive();
 
-        if(!FlagGet(FLAG_ROGUE_GAUNTLET_MODE))
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_EXCLUDE, POCKET_KEY_ITEMS);
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_EXCLUDE, POCKET_BERRIES);
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_EXCLUDE, POCKET_POKEBLOCK);
+
+        RogueMiscQuery_EditElement(QUERY_FUNC_EXCLUDE, ITEM_PREMIER_BALL);
+
+        RogueItemQuery_InPriceRange(QUERY_FUNC_INCLUDE, 50 + 100 * (difficultyLevel + dropRarity), 300 + 800 * (difficultyLevel + dropRarity));
+
+        if(difficultyLevel <= 1)
         {
-            if(difficultyLevel <= 1)
+            //RogueItemQuery_IsStoredInPocket(QUERY_FUNC_EXCLUDE, POCKET_BERRIES);
+        }
+
+        if(difficultyLevel <= 3)
+        {
+            RogueItemQuery_IsHeldItem(QUERY_FUNC_EXCLUDE);
+        }
+
+        if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_TEAM_HIDEOUT)
+        {
+            // Allow rare candies and escape ropes in hideouts
+            RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_RARE_CANDY);
+            RogueMiscQuery_EditElement(QUERY_FUNC_INCLUDE, ITEM_ESCAPE_ROPE);
+        }
+
+        RogueWeightQuery_Begin();
+        {
+            u8 i;
+            u16 itemId;
+
+            RogueWeightQuery_CalculateWeights(RouteItems_CalculateWeight, NULL);
+
+            for(i = 0; i < ROGUE_ITEM_COUNT; ++i)
             {
-                RogueQuery_ItemsNotInPocket(POCKET_TM_HM);
-            }
-
-            if(difficultyLevel <= 3)
-            {
-                RogueQuery_ItemsNotHeldItem();
-                RogueQuery_ItemsNotRareHeldItem();
+                // Make unlikely to get this item again, but not impossible
+                itemId = RogueWeightQuery_SelectRandomFromWeightsWithUpdate(RogueRandom(), 1);
+                VarSet(VAR_ROGUE_ITEM_START + i, itemId);
             }
         }
-    }
+        RogueWeightQuery_End();
 
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_BOSS)
-    {
-        RogueQuery_ItemsMedicine();
     }
-
-    RogueQuery_CollapseItemBuffer();
-    queryCount = RogueQuery_BufferSize();
-
-#ifdef ROGUE_DEBUG
-    gDebug_ItemOptionCount = queryCount;
-#endif
-
-    
-    if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_MINIBOSS)
-    {
-        // Only need to set 2, but try to make them unique
-        VarSet(VAR_ROGUE_ITEM0, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        do
-        {
-            VarSet(VAR_ROGUE_ITEM1, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        }
-        while(queryCount >= 2 && VarGet(VAR_ROGUE_ITEM0) == VarGet(VAR_ROGUE_ITEM1));
-    }
-    else
-    {
-        // These VARs aren't sequential
-        VarSet(VAR_ROGUE_ITEM0, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM1, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM2, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM3, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM4, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM5, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM6, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM7, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM8, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM9, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM10, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM11, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM12, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM13, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM14, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM15, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM16, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM17, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-        VarSet(VAR_ROGUE_ITEM18, RogueQuery_BufferPtr()[RogueRandomRange(queryCount, FLAG_SET_SEED_ITEMS)]);
-    }
+    RogueItemQuery_End();
 }
 
 static void RandomiseEnabledItems(void)
 {
     s32 i;
-    u8 difficultyLevel = gRogueRun.currentDifficulty;
+    u8 difficultyLevel = Rogue_GetCurrentDifficulty();
+
+    if(Rogue_GetModeRules()->forceEndGameRouteItems)
+    {
+        difficultyLevel = ROGUE_MAX_BOSS_COUNT - 1;
+    }
 
     for(i = 0; i < ROGUE_ITEM_COUNT; ++i)
     {
@@ -7509,53 +9594,37 @@ static void RandomiseCharmItems(void)
 
 static void RandomiseBerryTrees(void)
 {
-    s32 i;
-
-    for (i = 0; i < BERRY_TREES_COUNT; i++)
+    RogueItemQuery_Begin();
     {
-        if(RogueRandomChanceBerry())
-        {
-            u16 berryItem;
-            u16 berry;
+        RogueItemQuery_IsItemActive();
+        RogueItemQuery_IsStoredInPocket(QUERY_FUNC_INCLUDE, POCKET_BERRIES);
 
-            do
+        RogueWeightQuery_Begin();
+        {
+            u8 i, berryNum;
+            u16 itemId;
+
+            // The higher this number the less likely a berry repeats
+            RogueWeightQuery_FillWeights(4);
+
+            for(i = BERRY_TREE_ROUTE_FIRST; i <= BERRY_TREE_ROUTE_LAST; ++i)
             {
-                berryItem = FIRST_BERRY_INDEX + RogueRandomRange(BERRY_COUNT, FLAG_SET_SEED_ITEMS);
+                if(RogueRandomChanceBerry())
+                {
+                    // Make unlikely to get this item again, but not impossible
+                    itemId = RogueWeightQuery_SelectRandomFromWeightsWithUpdate(RogueRandom(), 1);
+                    berryNum = ItemIdToBerryType(itemId);
+
+                    PlantBerryTree(i, berryNum, BERRY_STAGE_BERRIES, FALSE);
+                }
+                else
+                {
+                    RemoveBerryTree(i);
+                }
             }
-            while(berryItem >= FIRST_USELESS_BERRY_INDEX && berryItem <= LAST_USELESS_BERRY_INDEX);
-
-            berry = ItemIdToBerryType(berryItem);
-            PlantBerryTree(i, berry, BERRY_STAGE_BERRIES, FALSE);
         }
-        else
-        {
-            RemoveBerryTree(i);
-        }
+        RogueWeightQuery_End();
+
     }
-}
-
-static void HistoryBufferPush(u16* buffer, u16 capacity, u16 value)
-{
-    u16 i;
-    u16 j;
-    for(i = 1; i < capacity; ++i)
-    {
-        // Reverse to avoid stomping on top of old values
-        j = capacity - i - 1;
-        buffer[j] = buffer[j - 1];
-    }
-
-    buffer[0] = value;
-}
-
-static bool8 HistoryBufferContains(u16* buffer, u16 capacity, u16 value)
-{
-    u16 i;
-    for(i = 0; i < capacity; ++i)
-    {
-        if(buffer[i] == value)
-            return TRUE;
-    }
-
-    return FALSE;
+    RogueItemQuery_End();
 }

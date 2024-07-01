@@ -1,7 +1,11 @@
 #ifndef GUARD_CONSTANTS_GLOBAL_H
 #define GUARD_CONSTANTS_GLOBAL_H
 
-#include "constants/battle_config.h"
+#include "config/battle.h"
+#include "config/debug.h"
+#include "config/item.h"
+#include "config/pokemon.h"
+#include "config/overworld.h"
 
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
 // In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
@@ -38,23 +42,31 @@
 #define FRONTIER_PARTY_SIZE         3
 #define FRONTIER_DOUBLES_PARTY_SIZE 4
 #define FRONTIER_MULTI_PARTY_SIZE   2
-#define MAX_FRONTIER_PARTY_SIZE     FRONTIER_DOUBLES_PARTY_SIZE
+#define MAX_FRONTIER_PARTY_SIZE    (max(FRONTIER_PARTY_SIZE,        \
+                                    max(FRONTIER_DOUBLES_PARTY_SIZE,\
+                                        FRONTIER_MULTI_PARTY_SIZE)))
 #define UNION_ROOM_PARTY_SIZE       2
 
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT 2
-#define POKEBLOCKS_COUNT 40
 #define OBJECT_EVENTS_COUNT 16
 #define MAIL_COUNT (10 + PARTY_SIZE)
-#define SECRET_BASES_COUNT 20
-#define TV_SHOWS_COUNT 25
+#define SECRET_BASES_COUNT 5 // Originally 20 (5 is likely more than enough for rogue)
 #define POKE_NEWS_COUNT 16
+
 #define PC_ITEMS_COUNT 50
-#define BAG_ITEMS_COUNT 30
-#define BAG_KEYITEMS_COUNT 30
-#define BAG_POKEBALLS_COUNT 16
-#define BAG_TMHM_COUNT 64
-#define BAG_BERRIES_COUNT 46
+#define BAG_ITEM_CAPACITY (450) //236 from old slots + 40 * 2 from pokeblock + 158 * 15 from secret bases
+
+// These slots will be shared between charms & key items
+#define BAG_ITEM_RESERVED_SLOTS 50
+
+// Old capacities
+//#define BAG_ITEMS_COUNT 30
+//#define BAG_KEYITEMS_COUNT 30
+//#define BAG_POKEBALLS_COUNT 16
+//#define BAG_TMHM_COUNT 64
+//#define BAG_BERRIES_COUNT 46
+
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
 #define DECOR_MAX_SECRET_BASE 16
 #define DECOR_MAX_PLAYERS_HOUSE 12
@@ -66,6 +78,7 @@
 #define GIFT_RIBBONS_COUNT 11
 #define SAVED_TRENDS_COUNT 5
 #define PYRAMID_BAG_ITEMS_COUNT 10
+#define MAX_REGISTERED_ITEMS 4
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.
@@ -82,6 +95,7 @@
 
 #define TRAINER_ID_LENGTH 4
 #define MAX_MON_MOVES 4
+#define ALL_MOVES_MASK ((1 << MAX_MON_MOVES) - 1)
 
 #define CONTESTANT_COUNT 4
 #define CONTEST_CATEGORY_COOL     0
@@ -92,10 +106,9 @@
 #define CONTEST_CATEGORIES_COUNT  5
 
 // string lengths
-#define ITEM_NAME_LENGTH 14
-#define ROGUE_ITEM_NAME_LENGTH 16
-#define ROGUE_ITEM_DESC_LENGTH 64
+#define ITEM_NAME_LENGTH 16 // increased
 #define POKEMON_NAME_LENGTH 10
+#define POKEMON_NAME_BUFFER_SIZE max(20, POKEMON_NAME_LENGTH + 1) // Frequently used buffer size. Larger than necessary
 #define PLAYER_NAME_LENGTH 7
 #define MAIL_WORDS_COUNT 9
 #define EASY_CHAT_BATTLE_WORDS_COUNT 6
@@ -111,6 +124,13 @@
 #define WONDER_CARD_BODY_TEXT_LINES 4
 #define WONDER_NEWS_BODY_TEXT_LINES 10
 #define TYPE_NAME_LENGTH 6
+#if B_EXPANDED_ABILITY_NAMES == TRUE
+#define ABILITY_NAME_LENGTH 16
+#else
+#define ABILITY_NAME_LENGTH 12
+#endif
+#define TRAINER_NAME_LENGTH 10
+#define POKEMON_HUB_NAME_LENGTH 15
 
 #define MAX_STAMP_CARD_STAMPS 7
 
@@ -146,6 +166,24 @@
 #define OPTIONS_BATTLE_STYLE_SHIFT 0
 #define OPTIONS_BATTLE_STYLE_SET 1
 
+#define OPTIONS_BATTLE_SCENE_1X         0
+#define OPTIONS_BATTLE_SCENE_2X         1
+#define OPTIONS_BATTLE_SCENE_3X         2
+#define OPTIONS_BATTLE_SCENE_4X         3
+#define OPTIONS_BATTLE_SCENE_DISABLED   4
+#define OPTIONS_BATTLE_SCENE_COUNT      5
+
+#define OPTIONS_HEALTH_BEEP_OFF        0
+#define OPTIONS_HEALTH_BEEP_3_BEEPS    1
+#define OPTIONS_HEALTH_BEEP_LOOPING    2
+#define OPTIONS_HEALTH_BEEP_COUNT      3
+
+#define OPTIONS_NICKNAME_MODE_ASK           0
+#define OPTIONS_NICKNAME_MODE_ALWAYS        1
+#define OPTIONS_NICKNAME_MODE_NEVER         2
+#define OPTIONS_NICKNAME_RANDOM             3
+#define OPTIONS_NICKNAME_COUNT              4
+
 #define DIR_NONE        0
 #define DIR_SOUTH       1
 #define DIR_NORTH       2
@@ -165,7 +203,8 @@
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
 
-#define SIDEWAYS_STAIRS_IMPLEMENTED         FALSE
+#define SIDEWAYS_STAIRS_IMPLEMENTED         TRUE
+#define FOLLOW_ME_IMPLEMENTED               TRUE
 #define POST_BATTLE_FOLLOWER_FIX            FALSE   //if you experience the follower de-syncing with the player after battle, set to TRUE
 
 #endif // GUARD_CONSTANTS_GLOBAL_H

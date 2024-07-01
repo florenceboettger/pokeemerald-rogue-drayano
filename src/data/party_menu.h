@@ -1,9 +1,3 @@
-enum {
-    TAG_POKEBALL = 1200,
-    TAG_POKEBALL_SMALL,
-    TAG_STATUS_ICONS,
-};
-
 static const struct BgTemplate sPartyMenuBgTemplates[] =
 {
     {
@@ -35,12 +29,6 @@ static const struct BgTemplate sPartyMenuBgTemplates[] =
     },
 };
 
-enum
-{
-    PARTY_BOX_LEFT_COLUMN,
-    PARTY_BOX_RIGHT_COLUMN
-};
-
 static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
 {
     [PARTY_BOX_LEFT_COLUMN] =
@@ -53,7 +41,8 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
             64, 20,  8,  8, // Gender
             38, 37, 24,  8, // HP
             53, 37, 24,  8, // Max HP
-            24, 35, 48,  3  // HP bar
+            24, 35, 48,  3, // HP bar
+            24, 20, 32,  8, // Evolution Indicator
         },
         12, 34, 64, 16      // Description text (e.g. NO USE)
     },
@@ -67,7 +56,8 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
              62, 12,  8,  8, // Gender
             102, 12, 24,  8, // HP
             117, 12, 24,  8, // Max HP
-             88, 10, 48,  3  // HP bar
+             88, 10, 48,  3, // HP bar
+             22, 12, 32,  8, // Evolution Indicator
         },
         77, 4, 64, 16        // Description text
     },
@@ -134,7 +124,7 @@ static const u8 sFontColorTable[][3] =
 
 static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
 {
-    {
+    { // Party mon 1
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 3,
@@ -143,7 +133,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 3,
         .baseBlock = 0x63,
     },
-    {
+    { // Party mon 2
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 1,
@@ -152,7 +142,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 4,
         .baseBlock = 0xA9,
     },
-    {
+    { // Party mon 3
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 4,
@@ -161,7 +151,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 5,
         .baseBlock = 0xDF,
     },
-    {
+    { // Party mon 4
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 7,
@@ -170,7 +160,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 6,
         .baseBlock = 0x115,
     },
-    {
+    { // Party mon 5
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 10,
@@ -179,7 +169,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 7,
         .baseBlock = 0x14B,
     },
-    {
+    { // Party mon 6
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 13,
@@ -188,7 +178,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
         .paletteNum = 8,
         .baseBlock = 0x181,
     },
-    {
+    [WIN_MSG] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -202,7 +192,7 @@ static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
 
 static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
 {
-    {
+    { // Party mon 1
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -211,7 +201,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 3,
         .baseBlock = 0x63,
     },
-    {
+    { // Party mon 2
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 8,
@@ -220,7 +210,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 4,
         .baseBlock = 0xA9,
     },
-    {
+    { // Party mon 3
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 1,
@@ -229,7 +219,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 5,
         .baseBlock = 0xEF,
     },
-    {
+    { // Party mon 4
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 5,
@@ -238,7 +228,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 6,
         .baseBlock = 0x125,
     },
-    {
+    { // Party mon 5
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 9,
@@ -247,7 +237,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 7,
         .baseBlock = 0x15B,
     },
-    {
+    { // Party mon 6
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 13,
@@ -256,7 +246,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
         .paletteNum = 8,
         .baseBlock = 0x191,
     },
-    {
+    [WIN_MSG] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -270,7 +260,7 @@ static const struct WindowTemplate sDoublePartyMenuWindowTemplate[] =
 
 static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
 {
-    {
+    { // Party mon 1
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -279,7 +269,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 3,
         .baseBlock = 0x63,
     },
-    {
+    { // Party mon 2
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 8,
@@ -288,7 +278,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 4,
         .baseBlock = 0xA9,
     },
-    {
+    { // Party mon 3
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 2,
@@ -297,7 +287,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 5,
         .baseBlock = 0xEF,
     },
-    {
+    { // Party mon 4
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 5,
@@ -306,7 +296,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 6,
         .baseBlock = 0x125,
     },
-    {
+    { // Party mon 5
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 9,
@@ -315,7 +305,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 7,
         .baseBlock = 0x15B,
     },
-    {
+    { // Party mon 6
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 12,
@@ -324,7 +314,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
         .paletteNum = 8,
         .baseBlock = 0x191,
     },
-    {
+    [WIN_MSG] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 15,
@@ -338,7 +328,7 @@ static const struct WindowTemplate sMultiPartyMenuWindowTemplate[] =
 
 static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
 {
-    {
+    { // Party mon 1
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 2,
@@ -347,7 +337,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 3,
         .baseBlock = 0x63,
     },
-    {
+    { // Party mon 2
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 3,
@@ -356,7 +346,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 5,
         .baseBlock = 0xA9,
     },
-    {
+    { // Party mon 3
         .bg = 0,
         .tilemapLeft = 12,
         .tilemapTop = 6,
@@ -365,7 +355,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 6,
         .baseBlock = 0xDF,
     },
-    {
+    { // Party mon 4
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 11,
@@ -374,7 +364,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 4,
         .baseBlock = 0x115,
     },
-    {
+    { // Party mon 5
         .bg = 2,
         .tilemapLeft = 12,
         .tilemapTop = 12,
@@ -383,7 +373,7 @@ static const struct WindowTemplate sShowcaseMultiPartyMenuWindowTemplate[] =
         .paletteNum = 7,
         .baseBlock = 0x16B,
     },
-    {
+    { // Party mon 6
         .bg = 2,
         .tilemapLeft = 12,
         .tilemapTop = 15,
@@ -494,6 +484,28 @@ static const struct WindowTemplate sAlreadyHoldingOneMsgWindowTemplate =
     .baseBlock = 0x299,
 };
 
+static const struct WindowTemplate sOrderWhichApplianceMsgWindowTemplate =
+{
+    .bg = 2,
+    .tilemapLeft = 1,
+    .tilemapTop = 15,
+    .width = 14,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x299,
+};
+
+//static const struct WindowTemplate sOrderWhichDeoxysFormMsgWindowTemplate =
+//{
+//    .bg = 2,
+//    .tilemapLeft = 1,
+//    .tilemapTop = 15,
+//    .width = 14,
+//    .height = 4,
+//    .paletteNum = 15,
+//    .baseBlock = 0x299,
+//};
+
 static const struct WindowTemplate sItemGiveTakeWindowTemplate =
 {
     .bg = 2,
@@ -523,6 +535,39 @@ static const struct WindowTemplate sMoveSelectWindowTemplate =
     .tilemapTop = 11,
     .width = 10,
     .height = 8,
+    .paletteNum = 14,
+    .baseBlock = 0x2E9,
+};
+
+static const struct WindowTemplate sCatalogSelectWindowTemplate =
+{
+    .bg = 2,
+    .tilemapLeft = 17,
+    .tilemapTop = 5,
+    .width = 12,
+    .height = 14,
+    .paletteNum = 14,
+    .baseBlock = 0x2E9,
+};
+
+static const struct WindowTemplate sMeteoriteSelectWindowTemplate =
+{
+    .bg = 2,
+    .tilemapLeft = 18,
+    .tilemapTop = 5,
+    .width = 11,
+    .height = 10,
+    .paletteNum = 14,
+    .baseBlock = 0x2E9,
+};
+
+static const struct WindowTemplate sZygardeCubeSelectWindowTemplate =
+{
+    .bg = 2,
+    .tilemapLeft = 18,
+    .tilemapTop = 13,
+    .width = 11,
+    .height = 6,
     .paletteNum = 14,
     .baseBlock = 0x2E9,
 };
@@ -636,7 +681,37 @@ static const u8 *const sActionStringTable[] =
     [PARTY_MSG_DO_WHAT_WITH_ITEM]      = gText_DoWhatWithItem,
     [PARTY_MSG_DO_WHAT_WITH_MAIL]      = gText_DoWhatWithMail,
     [PARTY_MSG_ALREADY_HOLDING_ONE]    = gText_AlreadyHoldingOne,
+    [PARTY_MSG_WHICH_APPLIANCE]        = gText_WhichAppliance,
+    [PARTY_MSG_WHICH_DEOXYS_FORM]      = gText_WhichForm,
+    [PARTY_MSG_CHOOSE_SECOND_FUSION]   = gText_NextFusionMon,
 };
+
+static const u8 sText_NatureStatsNeutral[] = _("{FONT_SMALL_NARROW}- -");
+
+static const u8 sText_NatureStatsLonely[] = _("{FONT_SMALL_NARROW}+Atk -Def");
+static const u8 sText_NatureStatsBrave[] = _("{FONT_SMALL_NARROW}+Atk -Speed");
+static const u8 sText_NatureStatsAdamant[] = _("{FONT_SMALL_NARROW}+Atk -SpAtk");
+static const u8 sText_NatureStatsNaughty[] = _("{FONT_SMALL_NARROW}+Atk -SpDef");
+
+static const u8 sText_NatureStatsBold[] = _("{FONT_SMALL_NARROW}+Def -Atk");
+static const u8 sText_NatureStatsRelaxed[] = _("{FONT_SMALL_NARROW}+Def -Speed");
+static const u8 sText_NatureStatsImpish[] = _("{FONT_SMALL_NARROW}+Def -SpAtk");
+static const u8 sText_NatureStatsLax[] = _("{FONT_SMALL_NARROW}+Def -SpDef");
+
+static const u8 sText_NatureStatsTimid[] = _("{FONT_SMALL_NARROW}+Speed -Atk");
+static const u8 sText_NatureStatsHasty[] = _("{FONT_SMALL_NARROW}+Speed -Def");
+static const u8 sText_NatureStatsJolly[] = _("{FONT_SMALL_NARROW}+Speed -SpAtk");
+static const u8 sText_NatureStatsNaive[] = _("{FONT_SMALL_NARROW}+Speed -SpDef");
+
+static const u8 sText_NatureStatsModest[] = _("{FONT_SMALL_NARROW}+SpAtk -Atk");
+static const u8 sText_NatureStatsMild[] = _("{FONT_SMALL_NARROW}+SpAtk -Def");
+static const u8 sText_NatureStatsQuiet[] = _("{FONT_SMALL_NARROW}+SpAtk -Speed");
+static const u8 sText_NatureStatsRash[] = _("{FONT_SMALL_NARROW}+SpAtk -SpDef");
+
+static const u8 sText_NatureStatsCalm[] = _("{FONT_SMALL_NARROW}+SpDef -Atk");
+static const u8 sText_NatureStatsGentle[] = _("{FONT_SMALL_NARROW}+SpDef -Def");
+static const u8 sText_NatureStatsSassy[] = _("{FONT_SMALL_NARROW}+SpDef -Speed");
+static const u8 sText_NatureStatsCareful[] = _("{FONT_SMALL_NARROW}+SpDef -SpAtk");
 
 static const u8 *const sDescriptionStringTable[] =
 {
@@ -653,6 +728,33 @@ static const u8 *const sDescriptionStringTable[] =
     [PARTYBOX_DESC_LEARNED]    = gText_Learned,
     [PARTYBOX_DESC_HAVE]       = gText_Have,
     [PARTYBOX_DESC_DONT_HAVE]  = gText_DontHave,
+
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_HARDY]     = sText_NatureStatsNeutral,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_LONELY]    = sText_NatureStatsLonely,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_BRAVE]     = sText_NatureStatsBrave,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_ADAMANT]   = sText_NatureStatsAdamant,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_NAUGHTY]   = sText_NatureStatsNaughty,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_BOLD]      = sText_NatureStatsBold,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_DOCILE]    = sText_NatureStatsNeutral,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_RELAXED]   = sText_NatureStatsRelaxed,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_IMPISH]    = sText_NatureStatsImpish,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_LAX]       = sText_NatureStatsLax,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_TIMID]     = sText_NatureStatsTimid,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_HASTY]     = sText_NatureStatsHasty,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_SERIOUS]   = sText_NatureStatsNeutral,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_JOLLY]     = sText_NatureStatsJolly,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_NAIVE]     = sText_NatureStatsNaive,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_MODEST]    = sText_NatureStatsModest,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_MILD]      = sText_NatureStatsMild,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_QUIET]     = sText_NatureStatsQuiet,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_BASHFUL]   = sText_NatureStatsNeutral,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_RASH]      = sText_NatureStatsRash,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_CALM]      = sText_NatureStatsCalm,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_GENTLE]    = sText_NatureStatsGentle,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_SASSY]     = sText_NatureStatsSassy,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_CAREFUL]   = sText_NatureStatsCareful,
+    [PARTYBOX_DESC_FIRST_NATURE + NATURE_QUIRKY]    = sText_NatureStatsNeutral,
+
 };
 
 static const u16 sUnusedData[] =
@@ -662,53 +764,6 @@ static const u16 sUnusedData[] =
     0x0073, 0x015f, 0x0035, 0x00bc, 0x00c9, 0x007e, 0x013d, 0x014c, 0x0103, 0x0107, 0x0122, 0x009c, 0x00d5, 0x00a8, 0x00d3, 0x011d,
     0x0121, 0x013b, 0x000f, 0x0013, 0x0039, 0x0046, 0x0094, 0x00f9, 0x007f, 0x0123,
 };
-
-enum
-{
-    MENU_SUMMARY,
-    MENU_SWITCH,
-    MENU_CANCEL1,
-    MENU_ITEM,
-    MENU_GIVE,
-    MENU_TAKE_ITEM,
-    MENU_MAIL,
-    MENU_TAKE_MAIL,
-    MENU_READ,
-    MENU_CANCEL2,
-    MENU_SHIFT,
-    MENU_SEND_OUT,
-    MENU_ENTER,
-    MENU_NO_ENTRY,
-    MENU_STORE,
-    MENU_REGISTER,
-    MENU_TRADE1,
-    MENU_TRADE2,
-    MENU_TOSS,
-    MENU_RELEASE,
-    MENU_RELEASE_FIELD,
-    MENU_FIELD_MOVES,
-};
-
-enum
-{
-    FIELD_MOVE_CUT,
-    FIELD_MOVE_FLASH,
-    FIELD_MOVE_ROCK_SMASH,
-    FIELD_MOVE_STRENGTH,
-    FIELD_MOVE_SURF,
-    FIELD_MOVE_FLY,
-    FIELD_MOVE_DIVE,
-    FIELD_MOVE_WATERFALL,
-    FIELD_MOVE_TELEPORT,
-    FIELD_MOVE_DIG,
-    FIELD_MOVE_SECRET_POWER,
-    FIELD_MOVE_MILK_DRINK,
-    FIELD_MOVE_SOFT_BOILED,
-    FIELD_MOVE_SWEET_SCENT,
-};
-
-// What a weird choice of table termination;
-#define FIELD_MOVE_TERMINATOR MOVE_SWORDS_DANCE
 
 struct
 {
@@ -735,8 +790,25 @@ struct
     [MENU_TRADE1] = {gText_Trade4, CursorCb_Trade1},
     [MENU_TRADE2] = {gText_Trade4, CursorCb_Trade2},
     [MENU_TOSS] = {gMenuText_Toss, CursorCb_Toss},
+    [MENU_CATALOG_BULB] = {gText_LightBulb, CursorCb_CatalogBulb},
+    [MENU_CATALOG_OVEN] = {gText_MicrowaveOven, CursorCb_CatalogOven},
+    [MENU_CATALOG_WASHING] = {gText_WashingMachine, CursorCb_CatalogWashing},
+    [MENU_CATALOG_FRIDGE] = {gText_Refrigerator, CursorCb_CatalogFridge},
+    [MENU_CATALOG_FAN] = {gText_ElectricFan, CursorCb_CatalogFan},
+    [MENU_CATALOG_MOWER] = {gText_LawnMower, CursorCb_CatalogMower},
+    [MENU_METEORITE_NORMAL] = {gText_MeteoriteNormal, CursorCb_MeteoriteNormal},
+    [MENU_METEORITE_ATTACK] = {gText_MeteoriteAttack, CursorCb_MeteoriteAttack},
+    [MENU_METEORITE_DEFENCE] = {gText_MeteoriteDefense, CursorCb_MeteoriteDefense},
+    [MENU_METEORITE_SPEED] = {gText_MeteoriteSpeed, CursorCb_MeteoriteSpeed},
+    [MENU_CHANGE_FORM] = {gText_ChangeForm, CursorCb_ChangeForm},
+    [MENU_CHANGE_ABILITY] = {gText_ChangeAbility, CursorCb_ChangeAbility},
     [MENU_RELEASE] = {gText_Release, CursorCb_Release},
     [MENU_RELEASE_FIELD] = {gText_Release, CursorCb_ReleaseField},
+    [MENU_RENAME] = {gText_Rename, CursorCb_RenameField},
+    [MENU_RELEARN_MOVE] = {gText_RelearnMove, CursorCb_RelearnMoves},
+    [MENU_EVOLVE] = {gText_Evolve, CursorCb_Evolve},
+    [MENU_CYCLE_SUBMENU] = {gText_CycleSubMenu, CursorCb_CycleSubMenu},
+    [MENU_POKEDEX] = {gText_PokedexEntry, CursorCb_Pokedex},
     [MENU_FIELD_MOVES + FIELD_MOVE_CUT] = {gMoveNames[MOVE_CUT], CursorCb_FieldMove},
     [MENU_FIELD_MOVES + FIELD_MOVE_FLASH] = {gMoveNames[MOVE_FLASH], CursorCb_FieldMove},
     [MENU_FIELD_MOVES + FIELD_MOVE_ROCK_SMASH] = {gMoveNames[MOVE_ROCK_SMASH], CursorCb_FieldMove},
@@ -767,26 +839,9 @@ static const u8 sPartyMenuAction_TradeSummaryCancel1[] = {MENU_TRADE1, MENU_SUMM
 static const u8 sPartyMenuAction_TradeSummaryCancel2[] = {MENU_TRADE2, MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_TakeItemTossCancel[] = {MENU_TAKE_ITEM, MENU_TOSS, MENU_CANCEL1};
 static const u8 sPartyMenuAction_ReleaseSummaryCancel[] = {MENU_RELEASE, MENU_SUMMARY, MENU_CANCEL1};
-
-// IDs for the action lists that appear when a party mon is selected
-enum
-{
-    ACTIONS_NONE,
-    ACTIONS_SWITCH,
-    ACTIONS_SHIFT,
-    ACTIONS_SEND_OUT,
-    ACTIONS_ENTER,
-    ACTIONS_NO_ENTRY,
-    ACTIONS_STORE,
-    ACTIONS_SUMMARY_ONLY,
-    ACTIONS_ITEM,
-    ACTIONS_MAIL,
-    ACTIONS_REGISTER,
-    ACTIONS_TRADE,
-    ACTIONS_SPIN_TRADE,
-    ACTIONS_TAKEITEM_TOSS,
-    ACTIONS_RELEASE
-};
+static const u8 sPartyMenuAction_RotomCatalog[] = {MENU_CATALOG_BULB, MENU_CATALOG_OVEN, MENU_CATALOG_WASHING, MENU_CATALOG_FRIDGE, MENU_CATALOG_FAN, MENU_CATALOG_MOWER, MENU_CANCEL1};
+static const u8 sPartyMenuAction_ZygardeCube[] = {MENU_CHANGE_FORM, MENU_CHANGE_ABILITY, MENU_CANCEL1};
+static const u8 sPartyMenuAction_Meteorite[] = {MENU_METEORITE_NORMAL, MENU_METEORITE_ATTACK, MENU_METEORITE_DEFENCE, MENU_METEORITE_SPEED, MENU_CANCEL1};
 
 static const u8 *const sPartyMenuActions[] =
 {
@@ -804,6 +859,9 @@ static const u8 *const sPartyMenuActions[] =
     [ACTIONS_TRADE]         = sPartyMenuAction_TradeSummaryCancel1,
     [ACTIONS_SPIN_TRADE]    = sPartyMenuAction_TradeSummaryCancel2,
     [ACTIONS_TAKEITEM_TOSS] = sPartyMenuAction_TakeItemTossCancel,
+    [ACTIONS_ROTOM_CATALOG] = sPartyMenuAction_RotomCatalog,
+    [ACTIONS_ZYGARDE_CUBE]  = sPartyMenuAction_ZygardeCube,
+    [ACTIONS_METEORITE]     = sPartyMenuAction_Meteorite,
     [ACTIONS_RELEASE]       = sPartyMenuAction_ReleaseSummaryCancel,
 };
 
@@ -823,22 +881,38 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_TRADE]         = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel1),
     [ACTIONS_SPIN_TRADE]    = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel2),
     [ACTIONS_TAKEITEM_TOSS] = ARRAY_COUNT(sPartyMenuAction_TakeItemTossCancel),
+    [ACTIONS_ROTOM_CATALOG] = ARRAY_COUNT(sPartyMenuAction_RotomCatalog),
+    [ACTIONS_ZYGARDE_CUBE]  = ARRAY_COUNT(sPartyMenuAction_ZygardeCube),
+    [ACTIONS_METEORITE]     = ARRAY_COUNT(sPartyMenuAction_Meteorite),
     [ACTIONS_RELEASE]       = ARRAY_COUNT(sPartyMenuAction_ReleaseSummaryCancel),
 };
 
-static const u16 sFieldMoves[] =
+static const u16 sFieldMoves[FIELD_MOVES_COUNT + 1] =
 {
-    //MOVE_CUT, MOVE_FLASH, MOVE_ROCK_SMASH, MOVE_STRENGTH, MOVE_SURF, MOVE_FLY, MOVE_DIVE, MOVE_WATERFALL, MOVE_TELEPORT,
-    //MOVE_DIG, MOVE_SECRET_POWER, MOVE_SWEET_SCENT
-    // RogueNote: these are the only valid options for field moves
-    MOVE_MILK_DRINK, MOVE_SOFT_BOILED, FIELD_MOVE_TERMINATOR
+    [FIELD_MOVE_CUT]          = MOVE_CUT,
+    [FIELD_MOVE_FLASH]        = MOVE_FLASH,
+    [FIELD_MOVE_ROCK_SMASH]   = MOVE_ROCK_SMASH,
+    [FIELD_MOVE_STRENGTH]     = MOVE_STRENGTH,
+    [FIELD_MOVE_SURF]         = MOVE_SURF,
+    [FIELD_MOVE_FLY]          = MOVE_FLY,
+    [FIELD_MOVE_DIVE]         = MOVE_DIVE,
+    [FIELD_MOVE_WATERFALL]    = MOVE_WATERFALL,
+    [FIELD_MOVE_TELEPORT]     = MOVE_TELEPORT,
+    [FIELD_MOVE_DIG]          = MOVE_DIG,
+    [FIELD_MOVE_SECRET_POWER] = MOVE_SECRET_POWER,
+    [FIELD_MOVE_MILK_DRINK]   = MOVE_MILK_DRINK,
+    [FIELD_MOVE_SOFT_BOILED]  = MOVE_SOFT_BOILED,
+    [FIELD_MOVE_SWEET_SCENT]  = MOVE_SWEET_SCENT,
+    // NOTE: This value is used as the terminal value for the table. There's no reason to do this, as the size of the table is known.
+    //       Whichever move shares this value (MOVE_SWORDS_DANCE by default) if present will be treated as the end of the array rather than a field move.
+    [FIELD_MOVES_COUNT]       = FIELD_MOVES_COUNT
 };
 
 struct
 {
     bool8 (*fieldMoveFunc)(void);
     u8 msgId;
-} static const sFieldMoveCursorCallbacks[] =
+} static const sFieldMoveCursorCallbacks[FIELD_MOVES_COUNT] =
 {
     [FIELD_MOVE_CUT]          = {SetUpFieldMove_Cut,         PARTY_MSG_NOTHING_TO_CUT},
     [FIELD_MOVE_FLASH]        = {SetUpFieldMove_Flash,       PARTY_MSG_CANT_USE_HERE},
@@ -860,8 +934,8 @@ static const u8 *const sUnionRoomTradeMessages[] =
 {
     [UR_TRADE_MSG_NOT_MON_PARTNER_WANTS - 1]       = gText_NotPkmnOtherTrainerWants,
     [UR_TRADE_MSG_NOT_EGG - 1]                     = gText_ThatIsntAnEgg,
-    [UR_TRADE_MSG_MON_CANT_BE_TRADED_1 - 1]        = gText_PkmnCantBeTradedNow,
-    [UR_TRADE_MSG_MON_CANT_BE_TRADED_2 - 1]        = gText_PkmnCantBeTradedNow,
+    [UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW - 1]      = gText_PkmnCantBeTradedNow,
+    [UR_TRADE_MSG_MON_CANT_BE_TRADED - 1]          = gText_PkmnCantBeTraded,
     [UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED - 1] = gText_OtherTrainersPkmnCantBeTraded,
     [UR_TRADE_MSG_EGG_CANT_BE_TRADED -1]           = gText_EggCantBeTradedNow,
     [UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON - 1]     = gText_OtherTrainerCantAcceptPkmn,
@@ -877,7 +951,7 @@ static const struct OamData sOamData_HeldItem =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -909,23 +983,23 @@ static const union AnimCmd *const sSpriteAnimTable_HeldItem[] =
 
 static const struct SpriteSheet sSpriteSheet_HeldItem =
 {
-    sHeldItemGfx, sizeof(sHeldItemGfx), 0xd750
+    .data = sHeldItemGfx, .size = sizeof(sHeldItemGfx), .tag = TAG_HELD_ITEM
 };
 
 static const struct SpritePalette sSpritePalette_HeldItem =
 {
-    sHeldItemPalette, 0xd750
+    .data = sHeldItemPalette, .tag = TAG_HELD_ITEM
 };
 
 static const struct SpriteTemplate sSpriteTemplate_HeldItem =
 {
-    0xd750,
-    0xd750,
-    &sOamData_HeldItem,
-    sSpriteAnimTable_HeldItem,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
+    .tileTag = TAG_HELD_ITEM,
+    .paletteTag = TAG_HELD_ITEM,
+    .oam = &sOamData_HeldItem,
+    .anims = sSpriteAnimTable_HeldItem,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 static const struct OamData sOamData_MenuPokeball =
@@ -933,7 +1007,7 @@ static const struct OamData sOamData_MenuPokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -990,7 +1064,7 @@ static const struct OamData sOamData_MenuPokeballSmall =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -1071,7 +1145,7 @@ static const struct OamData sOamData_StatusCondition =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
@@ -1125,7 +1199,7 @@ static const union AnimCmd sSpriteAnim_StatusFaint[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Blank[] =
+static const union AnimCmd sSpriteAnim_StatusFrostbite[] =
 {
     ANIMCMD_FRAME(28, 0),
     ANIMCMD_END
@@ -1140,7 +1214,7 @@ static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
     sSpriteAnim_StatusBurn,
     sSpriteAnim_StatusPokerus,
     sSpriteAnim_StatusFaint,
-    sSpriteAnim_Blank
+    sSpriteAnim_StatusFrostbite
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
@@ -1153,7 +1227,7 @@ static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
     gStatusPal_Icons, TAG_STATUS_ICONS
 };
 
-static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
+const struct SpriteTemplate gSpriteTemplate_StatusIcons =
 {
     .tileTag = TAG_STATUS_ICONS,
     .paletteTag = TAG_STATUS_ICONS,
@@ -1174,8 +1248,136 @@ static const u8 *const sUnused_StatStrings[] =
     gText_Speed2
 };
 
-static const u16 sTMHMMoves[] =
+static const u16 sRotomFormChangeMoves[5] =
 {
+    MOVE_HYDRO_PUMP,
+    MOVE_BLIZZARD,
+    MOVE_OVERHEAT,
+    MOVE_AIR_SLASH,
+    MOVE_LEAF_STORM,
+};
+
+static const u16 sTMHMMoves[NUM_TECHNICAL_MACHINES] =
+{
+#ifdef ROGUE_EXPANSION
+    [ITEM_TM01 - ITEM_TM01] = MOVE_RETURN,
+    [ITEM_TM02 - ITEM_TM01] = MOVE_DOUBLE_TEAM,
+    [ITEM_TM03 - ITEM_TM01] = MOVE_FACADE,
+
+    [ITEM_TM04 - ITEM_TM01] = MOVE_OVERHEAT,
+    [ITEM_TM05 - ITEM_TM01] = MOVE_FLARE_BLITZ,
+    [ITEM_TM06 - ITEM_TM01] = MOVE_SUNNY_DAY,
+
+    [ITEM_TM07 - ITEM_TM01] = MOVE_SURF,
+    [ITEM_TM08 - ITEM_TM01] = MOVE_AQUA_JET,
+    [ITEM_TM09 - ITEM_TM01] = MOVE_RAIN_DANCE,
+
+    [ITEM_TM10 - ITEM_TM01] = MOVE_LEAF_STORM,
+    [ITEM_TM11 - ITEM_TM01] = MOVE_SOLAR_BLADE,
+    [ITEM_TM12 - ITEM_TM01] = MOVE_GRASSY_TERRAIN,
+
+    [ITEM_TM13 - ITEM_TM01] = MOVE_THUNDER_WAVE,
+    [ITEM_TM14 - ITEM_TM01] = MOVE_THUNDER,
+    [ITEM_TM15 - ITEM_TM01] = MOVE_VOLT_SWITCH,
+
+    [ITEM_TM16 - ITEM_TM01] = MOVE_ICE_BEAM,
+    [ITEM_TM17 - ITEM_TM01] = MOVE_FREEZE_DRY,
+    [ITEM_TM18 - ITEM_TM01] = MOVE_HAIL,
+
+    [ITEM_TM19 - ITEM_TM01] = MOVE_BRICK_BREAK,
+    [ITEM_TM20 - ITEM_TM01] = MOVE_BULK_UP,
+    [ITEM_TM21 - ITEM_TM01] = MOVE_AURA_SPHERE,
+
+    [ITEM_TM22 - ITEM_TM01] = MOVE_SLUDGE_BOMB,
+    [ITEM_TM23 - ITEM_TM01] = MOVE_CROSS_POISON,
+    [ITEM_TM24 - ITEM_TM01] = MOVE_TOXIC_SPIKES,
+
+    [ITEM_TM25 - ITEM_TM01] = MOVE_EARTHQUAKE,
+    [ITEM_TM26 - ITEM_TM01] = MOVE_EARTH_POWER,
+
+    [ITEM_TM27 - ITEM_TM01] = MOVE_AERIAL_ACE,
+    [ITEM_TM28 - ITEM_TM01] = MOVE_TAILWIND,
+
+    [ITEM_TM29 - ITEM_TM01] = MOVE_PSYCHIC,
+    [ITEM_TM30 - ITEM_TM01] = MOVE_CALM_MIND,
+    [ITEM_TM31 - ITEM_TM01] = MOVE_TRICK_ROOM,
+
+    [ITEM_TM32 - ITEM_TM01] = MOVE_U_TURN,
+    [ITEM_TM33 - ITEM_TM01] = MOVE_TAIL_GLOW,
+
+    [ITEM_TM34 - ITEM_TM01] = MOVE_STONE_EDGE,
+    [ITEM_TM35 - ITEM_TM01] = MOVE_STEALTH_ROCK,
+    [ITEM_TM36 - ITEM_TM01] = MOVE_SANDSTORM,
+
+    [ITEM_TM37 - ITEM_TM01] = MOVE_SHADOW_BALL,
+    [ITEM_TM38 - ITEM_TM01] = MOVE_SHADOW_SNEAK,
+    [ITEM_TM39 - ITEM_TM01] = MOVE_CONFUSE_RAY,
+
+    [ITEM_TM40 - ITEM_TM01] = MOVE_DARK_PULSE,
+    [ITEM_TM41 - ITEM_TM01] = MOVE_NASTY_PLOT,
+
+    [ITEM_TM42 - ITEM_TM01] = MOVE_DRAGON_DANCE,
+    [ITEM_TM43 - ITEM_TM01] = MOVE_DRACO_METEOR,
+    [ITEM_TM44 - ITEM_TM01] = MOVE_OUTRAGE,
+
+    [ITEM_TM45 - ITEM_TM01] = MOVE_IRON_HEAD,
+    [ITEM_TM46 - ITEM_TM01] = MOVE_IRON_DEFENSE,
+    [ITEM_TM47 - ITEM_TM01] = MOVE_FLASH_CANNON,
+
+    [ITEM_TM48 - ITEM_TM01] = MOVE_DAZZLING_GLEAM,
+    [ITEM_TM49 - ITEM_TM01] = MOVE_PLAY_ROUGH,
+    [ITEM_TM50 - ITEM_TM01] = MOVE_MISTY_TERRAIN,
+
+    //[ITEM_TM51 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM52 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM53 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM54 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM55 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM56 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM57 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM58 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM59 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM60 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM61 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM62 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM63 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM64 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM65 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM66 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM67 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM68 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM69 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM70 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM71 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM72 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM73 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM74 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM75 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM76 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM77 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM78 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM79 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM80 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM81 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM82 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM83 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM84 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM85 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM86 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM87 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM88 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM89 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM90 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM91 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM92 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM93 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM94 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM95 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM96 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM97 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM98 - ITEM_TM01] = MOVE_NONE, // Todo
+    //[ITEM_TM99 - ITEM_TM01] = MOVE_NONE, // Todo
+#else
     [ITEM_TM01 - ITEM_TM01] = MOVE_FOCUS_PUNCH,
     [ITEM_TM02 - ITEM_TM01] = MOVE_DRAGON_CLAW,
     [ITEM_TM03 - ITEM_TM01] = MOVE_WATER_PULSE,
@@ -1226,56 +1428,9 @@ static const u16 sTMHMMoves[] =
     [ITEM_TM48 - ITEM_TM01] = MOVE_SKILL_SWAP,
     [ITEM_TM49 - ITEM_TM01] = MOVE_SNATCH,
     [ITEM_TM50 - ITEM_TM01] = MOVE_OVERHEAT,
-    [ITEM_TM51 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM52 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM53 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM54 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM55 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM56 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM57 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM58 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM59 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM60 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM61 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM62 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM63 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM64 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM65 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM66 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM67 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM68 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM69 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM70 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM71 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM72 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM73 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM74 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM75 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM76 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM77 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM78 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM79 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM80 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM81 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM82 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM83 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM84 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM85 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM86 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM87 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM88 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM89 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM90 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM91 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM92 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM93 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM94 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM95 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM96 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM97 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM98 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM99 - ITEM_TM01] = MOVE_NONE, // Todo
-    [ITEM_TM100 - ITEM_TM01] = MOVE_NONE, // Todo
+#endif
+
+#ifndef ROGUE_FEATURE_REMOVE_HIDDEN_MACHINES
     [ITEM_HM01 - ITEM_TM01] = MOVE_CUT,
     [ITEM_HM02 - ITEM_TM01] = MOVE_FLY,
     [ITEM_HM03 - ITEM_TM01] = MOVE_SURF,
@@ -1284,4 +1439,5 @@ static const u16 sTMHMMoves[] =
     [ITEM_HM06 - ITEM_TM01] = MOVE_ROCK_SMASH,
     [ITEM_HM07 - ITEM_TM01] = MOVE_WATERFALL,
     [ITEM_HM08 - ITEM_TM01] = MOVE_DIVE,
+#endif
 };

@@ -76,7 +76,7 @@ script Rogue_Adventure_ScottIntro
     applymovement(NPC_INTRO_SCOTT, Rogue_Adventure_ScottIntroMovement0)
     waitmovement(0)
 
-    msgbox(format("SCOTT: Hey {PLAYER}!\pLooks like you got yourself a partner POKéMON, so you're all ready to go on an Adventure!\pBefore you head off you should take this."))
+    msgbox(format("SCOTT: Hey {PLAYER}!\pLooks like you got yourself a partner Pokémon, so you're all ready to go on an Adventure!\pBefore you head off you should take this."))
 
     call(Rogue_Adventure_ScottGiveQuestLog)
 
@@ -150,25 +150,25 @@ script Rogue_Adventure_SpeakScott
             msgbox(format("SCOTT: Hey {PLAYER}!\pI have some Quest Rewards for you!"))
             while(var(VAR_RESULT) == TRUE)
             {
-                if(var(VAR_0x8000) == QUEST_REWARD_CUSTOM_TEXT)
-                {
-                    playfanfare(MUS_OBTAIN_ITEM)
-                }
-                else
-                {
-                    playse(SE_SHOP)
-                }
+                //if(var(VAR_0x8000) == QUEST_REWARD_CUSTOM_TEXT)
+                //{
+                //    playfanfare(MUS_OBTAIN_ITEM)
+                //}
+                //else
+                //{
+                //    playse(SE_SHOP)
+                //}
 
                 msgbox("{STR_VAR_3}")
                 
-                if(var(VAR_0x8000) == QUEST_REWARD_CUSTOM_TEXT)
-                {
-                    waitfanfare
-                }
-                else
-                {
-                    waitse
-                }
+                //if(var(VAR_0x8000) == QUEST_REWARD_CUSTOM_TEXT)
+                //{
+                //    waitfanfare
+                //}
+                //else
+                //{
+                //    waitse
+                //}
 
                 nextquestreward
             }
@@ -259,7 +259,7 @@ script Rogue_Adventure_StartGauntlet
             msgbox(format("Feel free to speak with me again, if you change your mind."), MSGBOX_DEFAULT)
 
         case 2: // Info
-            msgbox(format("In GAUNTLET adventures, you will get given a few routes to capture POKéMON and collect items.\pAfter that you will fight every BOSS back to back with no chance to get any more POKéMON or items.\pThis is a high stakes mode intended for faster more difficult battles, although almost all Quests are disabled in this mode."), MSGBOX_DEFAULT)
+            msgbox(format("In GAUNTLET adventures, you will get given a few routes to capture Pokémon and collect items.\pAfter that you will fight every BOSS back to back with no chance to get any more Pokémon or items.\pThis is a high stakes mode intended for faster more difficult battles, although almost all Quests are disabled in this mode."), MSGBOX_DEFAULT)
 
         case MULTI_B_PRESSED:
             msgbox(format("Feel free to speak with me again, if you change your mind."), MSGBOX_DEFAULT)
@@ -284,7 +284,6 @@ script Rogue_Adventure_StartRainbow
     {
         case 0: // Yes
             call(Rogue_ResetAdventureFlags)
-            setflag(FLAG_ROGUE_RAINBOW_MODE)
             call(Rogue_StartAdventureCommon)
 
         case 1: // No
@@ -302,14 +301,13 @@ script Rogue_Adventure_StartRainbow
 
 script Rogue_ResetAdventureFlags
 {
-    clearflag(FLAG_ROGUE_DOUBLE_BATTLES)
+    //clearflag(FLAG_ROGUE_DOUBLE_BATTLES)
     clearflag(FLAG_ROGUE_GAUNTLET_MODE)
-    clearflag(FLAG_ROGUE_RAINBOW_MODE)
 }
 
 script Rogue_StartAdventureCommon
 {
-    special(Rogue_AnyNewQuestsPending)
+    //special(Rogue_AnyNewQuestsPending)
 
     if(var(VAR_RESULT) == TRUE)
     {
@@ -320,29 +318,6 @@ script Rogue_StartAdventureCommon
         }
     }
 
-    // Enable double battles (post game feature)
-    if(flag(FLAG_ROGUE_MET_POKABBIE))
-    {
-        message(format("Which battle-style would you like to play?"))
-        waitmessage
-
-        multichoice(20, 8, MULTI_BATTLE_MODE, NO)
-
-        switch(var(VAR_RESULT))
-        {
-            case 0: // Singles
-                clearflag(FLAG_ROGUE_DOUBLE_BATTLES)
-                setvar(VAR_RESULT, YES)
-
-            case 1: // Dobules
-                setflag(FLAG_ROGUE_DOUBLE_BATTLES)
-                setvar(VAR_RESULT, YES)
-
-            case MULTI_B_PRESSED:
-                setvar(VAR_RESULT, NO)
-        }
-    }
-
     getpartysize
 
     if(flag(FLAG_ROGUE_GAUNTLET_MODE))
@@ -350,23 +325,23 @@ script Rogue_StartAdventureCommon
         // You can carry 6 mons into gauntlet mode
         setvar(VAR_RESULT, YES)
     }
-    elif(flag(FLAG_ROGUE_DOUBLE_BATTLES))
-    {
-        if(var(VAR_RESULT) > 2)
-        {
-            msgbox(format("Looks like you have too many POKéMON.\pYou can only take in 2 POKéMON into this mode.\nYou should use the PC to deposit some before I can let you on an adventure."), MSGBOX_DEFAULT)
-            setvar(VAR_RESULT, NO)
-        }
-        else
-        {
-            setvar(VAR_RESULT, YES)
-        }
-    }
+    //elif(flag(FLAG_ROGUE_DOUBLE_BATTLES))
+    //{
+    //    if(var(VAR_RESULT) > 2)
+    //    {
+    //        msgbox(format("Looks like you have too many Pokémon.\pYou can only take in 2 Pokémon into this mode.\nYou should use the PC to deposit some before I can let you on an adventure."), MSGBOX_DEFAULT)
+    //        setvar(VAR_RESULT, NO)
+    //    }
+    //    else
+    //    {
+    //        setvar(VAR_RESULT, YES)
+    //    }
+    //}
     else
     {
         if(var(VAR_RESULT) > 1)
         {
-            msgbox(format("Looks like you have too many POKéMON.\pYou can only take in 1 POKéMON into this mode.\nYou should use the PC to deposit some before I can let you on an adventure."), MSGBOX_DEFAULT)
+            msgbox(format("Looks like you have too many Pokémon.\pYou can only take in 1 Pokémon into this mode.\nYou should use the PC to deposit some before I can let you on an adventure."), MSGBOX_DEFAULT)
             setvar(VAR_RESULT, NO)
         }
         else
@@ -492,19 +467,52 @@ script Rogue_ReturnAdventureCommon
         //turnobject(NPC_INTRO_SCOTT, DIR_SOUTH)
     }
 
-    buffernumberstring(STR_VAR_1, VAR_ROGUE_REWARD_MONEY)
+    special(Rogue_RunRewardMoney)
+    copyvar(VAR_0x8000, VAR_RESULT)
 
-    message(format("You recieve ¥{STR_VAR_1}"))
-    playfanfare(MUS_OBTAIN_ITEM)
-    waitmessage
-    waitfanfare
+    special(Rogue_RunRewardLvls)
+    copyvar(VAR_0x8001, VAR_RESULT)
 
-    if(var(VAR_ROGUE_INTRO_STATE) == 6)
+    if(var(VAR_0x8000) != 0 || var(VAR_0x8001) != 0)
     {
-        bufferitemname(STR_VAR_2, ITEM_RARE_CANDY)
+        msgbox(format("Your rewards for this time are..."))
 
-        msgbox(format("Since you're back from your first adventure, you should speak to Scott and collect any rewards for Quests you've completed."), MSGBOX_DEFAULT)
-        msgbox(format("Quests will often reward you with {STR_VAR_2}.\pBy leveling up your PARTNER with these you will gain the option to skip over GYM badges in future Adventures."), MSGBOX_DEFAULT)
+        if(var(VAR_0x8000) != 0)
+        {
+            buffernumberstring(STR_VAR_1, VAR_0x8000)
+
+            message(format("You received ¥{STR_VAR_1}"))
+            playfanfare(MUS_OBTAIN_ITEM)
+            waitmessage
+            waitfanfare
+        }
+
+        if(var(VAR_0x8001) != 0)
+        {
+            if(var(VAR_0x8001) == 1)
+            {
+                message(format("Party received 1 LVL"))
+            }
+            else
+            {
+                buffernumberstring(STR_VAR_1, VAR_0x8001)
+                message(format("Party received {STR_VAR_1} LVLs"))
+            }
+
+            playfanfare(FANFARE_LEVEL_UP)
+            waitmessage
+            waitfanfare
+            
+            if(!flag(FLAG_ROGUE_LVL_TUTORIAL))
+            {
+                msgbox(format("Ah!\nIs this the first time your party has leveled up in the HUB?\pThese LVLs don't work entirely the same as they do whilst out on Adventures.\pPOKéMON will not naturally learn moves or evolve whilst in the HUB.\pYou will need to find specialist NPCs who will be able to help out, once your Pokémon has reached the correct level.\pAny levels you gain in the HUB will be temporarily reset when you embark on Adventures.\pThe HUB level will be restored once you return."))
+                setflag(FLAG_ROGUE_LVL_TUTORIAL)
+            }
+        }
+    }
+    else
+    {
+        msgbox(format("Looks like there aren't any rewards for this Adventure."))
     }
 
     clearflag(FLAG_ROGUE_LEFT_ON_RUN)

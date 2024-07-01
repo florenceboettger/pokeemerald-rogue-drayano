@@ -164,7 +164,7 @@ static const match_call_text_data_t sMrStoneTextScripts[] = {
     { MatchCall_Text_MrStone2,  FLAG_ENABLE_MR_STONE_POKENAV,        0xFFFF },
     { MatchCall_Text_MrStone3,  FLAG_DELIVERED_STEVEN_LETTER,        0xFFFF },
     { MatchCall_Text_MrStone4,  FLAG_RECEIVED_EXP_SHARE,             0xFFFF },
-    { MatchCall_Text_MrStone5,  FLAG_RECEIVED_HM04,                  0xFFFF },
+    { MatchCall_Text_MrStone5,  FLAG_RECEIVED_HM_STRENGTH,           0xFFFF },
     { MatchCall_Text_MrStone6,  FLAG_DEFEATED_PETALBURG_GYM,         0xFFFF },
     { MatchCall_Text_MrStone7,  FLAG_RECEIVED_CASTFORM,              0xFFFF },
     { MatchCall_Text_MrStone8,  FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 0xFFFF },
@@ -227,7 +227,7 @@ static const match_call_text_data_t sMomTextScripts[] = {
 static const struct MatchCallStructNPC sMomMatchCallHeader =
 {
     .type = MC_TYPE_NPC,
-    .mapSec = MAPSEC_LITTLEROOT_TOWN,
+    .mapSec = MAPSEC_POKEMON_HUB,
     .flag = FLAG_ENABLE_MOM_MATCH_CALL,
     .desc = gText_MomMatchCallDesc,
     .name = gText_MomMatchCallName,
@@ -260,7 +260,7 @@ static const match_call_text_data_t sMayTextScripts[] = {
     { MatchCall_Text_May2,  FLAG_DEFEATED_DEWFORD_GYM,           0xFFFF },
     { MatchCall_Text_May3,  FLAG_DELIVERED_DEVON_GOODS,          0xFFFF },
     { MatchCall_Text_May4,  FLAG_HIDE_MAUVILLE_CITY_WALLY,       0xFFFF },
-    { MatchCall_Text_May5,  FLAG_RECEIVED_HM04,                  0xFFFF },
+    { MatchCall_Text_May5,  FLAG_RECEIVED_HM_STRENGTH,           0xFFFF },
     { MatchCall_Text_May6,  FLAG_DEFEATED_LAVARIDGE_GYM,         0xFFFF },
     { MatchCall_Text_May7,  FLAG_DEFEATED_PETALBURG_GYM,         0xFFFF },
     { MatchCall_Text_May8,  FLAG_RECEIVED_CASTFORM,              0xFFFF },
@@ -289,7 +289,7 @@ static const match_call_text_data_t sBrendanTextScripts[] = {
     { MatchCall_Text_Brendan2,  FLAG_DEFEATED_DEWFORD_GYM,           0xFFFF },
     { MatchCall_Text_Brendan3,  FLAG_DELIVERED_DEVON_GOODS,          0xFFFF },
     { MatchCall_Text_Brendan4,  FLAG_HIDE_MAUVILLE_CITY_WALLY,       0xFFFF },
-    { MatchCall_Text_Brendan5,  FLAG_RECEIVED_HM04,                  0xFFFF },
+    { MatchCall_Text_Brendan5,  FLAG_RECEIVED_HM_STRENGTH,           0xFFFF },
     { MatchCall_Text_Brendan6,  FLAG_DEFEATED_LAVARIDGE_GYM,         0xFFFF },
     { MatchCall_Text_Brendan7,  FLAG_DEFEATED_PETALBURG_GYM,         0xFFFF },
     { MatchCall_Text_Brendan8,  FLAG_RECEIVED_CASTFORM,              0xFFFF },
@@ -394,7 +394,7 @@ static const match_call_text_data_t sBrawlyTextScripts[] = {
 static const struct MatchCallStructTrainer sBrawlyMatchCallHeader =
 {
     .type = MC_TYPE_LEADER,
-    .mapSec = MAPSEC_DEWFORD_TOWN,
+    .mapSec = MAPSEC_OTHER_POKEMON_HUB,
     .flag = FLAG_ENABLE_BRAWLY_MATCH_CALL,
     .rematchTableIdx = REMATCH_BRAWLY,
     .desc = gText_BrawlyMatchCallDesc,
@@ -835,14 +835,12 @@ static bool32 MatchCall_IsRematchable_NPC(match_call_t matchCall)
 
 static bool32 MatchCall_IsRematchable_Trainer(match_call_t matchCall)
 {
-    if (matchCall.trainer->rematchTableIdx >= REMATCH_ELITE_FOUR_ENTRIES)
-        return FALSE;
-    return gSaveBlock1Ptr->trainerRematches[matchCall.trainer->rematchTableIdx] ? TRUE : FALSE;
+    return FALSE;
 }
 
 static bool32 MatchCall_IsRematchable_Wally(match_call_t matchCall)
 {
-    return gSaveBlock1Ptr->trainerRematches[matchCall.wally->rematchTableIdx] ? TRUE : FALSE;
+    return FALSE;
 }
 
 static bool32 MatchCall_IsRematchable_Rival(match_call_t matchCall)
@@ -1015,19 +1013,6 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
     }
     else
     {
-        if (FlagGet(FLAG_SYS_GAME_CLEAR))
-        {
-            do
-            {
-                if (gSaveBlock1Ptr->trainerRematches[idx])
-                    i += 2;
-                else if (CountBattledRematchTeams(idx) >= 2)
-                    i += 3;
-                else
-                    i++;
-            } while (0);
-        }
-
         StringExpandPlaceholders(dest, textData[i].text);
     }
 }
@@ -1080,9 +1065,6 @@ static void MatchCall_GetNameAndDesc_Birch(match_call_t matchCall, const u8 **de
 
 static void MatchCall_GetNameAndDescByRematchIdx(u32 idx, const u8 **desc, const u8 **name)
 {
-    const struct Trainer *trainer = gTrainers + GetTrainerIdxByRematchIdx(idx);
-    *desc = gTrainerClassNames[trainer->trainerClass];
-    *name = trainer->trainerName;
 }
 
 const u8 *MatchCall_GetOverrideFlavorText(u32 idx, u32 offset)

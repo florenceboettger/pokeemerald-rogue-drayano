@@ -1,7 +1,10 @@
 
 
-// Make sure to bump ROGUE_COMPAT_VERSION in rogue_controller.c when changing this
-const u8 gText_RogueVersion[] = _("v1.3.2a");
+// When changing this, make sure to:
+// -bump ROGUE_SAVE_VERSION in rogue_save.c
+// -update SAVE_VER_ID_X_Y_Z enum in rogue_save.h
+// -update RogueSave_GetVersionIdFor()
+const u8 gText_RogueVersion[] = _("v2.0.p240629");
 
 #if defined(ROGUE_DRAYANO)
 const u8 gText_RogueVersionPrefix[] = _("Rebalanced");
@@ -11,55 +14,43 @@ const u8 gText_RogueVersionPrefix[] = _("EX");
 const u8 gText_RogueVersionPrefix[] = _("Vanilla");
 #endif
 
-const u8 gText_RogueVersionSpacer[] = _(" - ");
-
 #if defined(ROGUE_FEATURE_AUTOMATION)
 const u8 gText_RogueVersionSuffix[] = _("(AUTOMATION)");
 #elif defined(ROGUE_DEBUG)
+const u8 gText_RogueVersionSpacer[] = _(" - ");
 const u8 gText_RogueVersionSuffix[] = _("(DEBUG)");
 #else
-const u8 gText_RogueVersionSuffix[] = _("The Regional Update");
+const u8 gText_RogueVersionSpacer[] = _("");
+const u8 gText_RogueVersionSuffix[] = _(""); // no subtitle for 2.0
 #endif
 
 // UI String
 //
-const u8 gText_StatusRoute[] = _("ROUTE: {STR_VAR_1}\n");
-const u8 gText_StatusBadges[] = _("BADGES: {STR_VAR_1}\n");
-const u8 gText_StatusScore[] = _("SCORE: {STR_VAR_1}\n");
-const u8 gText_StatusTimer[] = _("TIMER: {STR_VAR_1}:{STR_VAR_2}\n");
-const u8 gText_StatusClock[] = _("CLOCK: {STR_VAR_1}:{STR_VAR_2}\n");
+const u8 gText_StatusRoute[] = _("Route: {STR_VAR_1}\n");
+const u8 gText_StatusBadges[] = _("Badges: {STR_VAR_1}\n");
+const u8 gText_StatusScore[] = _("Score: {STR_VAR_1}\n");
+const u8 gText_StatusTimer[] = _("Timer: {STR_VAR_1}:{STR_VAR_2}\n");
+const u8 gText_StatusClock[] = _("{STR_VAR_1}:{STR_VAR_2}\n");
+const u8 gText_StatusSeasonSpring[] = _("·Spring·");
+const u8 gText_StatusSeasonSummer[] = _("·Summer·");
+const u8 gText_StatusSeasonAutumn[] = _("·Autumn·");
+const u8 gText_StatusSeasonWinter[] = _("·Winter·");
 
 // Colours aren't exact as they'll be used in battle UI
-const u8 gText_MoveEffective[] = _("{COLOR RED}Neutral");
-const u8 gText_MoveNoEffect[] = _("{COLOR TRANSPARENT}No Effect...");
-const u8 gText_MoveSuperEffective[] = _("{COLOR LIGHT_GRAY}Effective!");
-const u8 gText_MoveNotVeryEffective[] = _("{COLOR GREEN}Not Effective");
+const u8 gText_MoveEffective[] = _("{COLOR BLUE}{SHADOW DYNAMIC_COLOR6}Neutral");
+const u8 gText_MoveNoEffect[] = _("{COLOR TRANSPARENT}{SHADOW BLUE}No Effect…");
+const u8 gText_MoveSuperEffective[] = _("{COLOR GREEN}{SHADOW DYNAMIC_COLOR6}Effective!");
+const u8 gText_MoveNotVeryEffective[] = _("{COLOR WHITE}{SHADOW DYNAMIC_COLOR6}Not Effective");
+const u8 gText_MoveSlash[] = _("{COLOR BLUE}{SHADOW DYNAMIC_COLOR6}·");
+const u8 gText_MoveShortEffective[] = _("{COLOR BLUE}{SHADOW DYNAMIC_COLOR6}Neutrl");
+const u8 gText_MoveShortNoEffect[] = _("{COLOR TRANSPARENT}{SHADOW BLUE}No Efct");
+const u8 gText_MoveShortSuperEffective[] = _("{COLOR GREEN}{SHADOW DYNAMIC_COLOR6}Effect");
+const u8 gText_MoveShortNotVeryEffective[] = _("{COLOR WHITE}{SHADOW DYNAMIC_COLOR6}NtEfct");
 
 
 // Trainers
 //
-const u8 gText_TrainerNameChallenger[] = _("CHALLENGER");
-const u8 gText_TrainerNameGrunt[] = _("GRUNT");
-
-const u8 gText_TrainerName_TateLiza[] = _("LIZA");
-const u8 gText_TrainerName_Anabel[] = _("ANABEL");
-
-const u8 gText_TrainerName_Brock[] = _("BROCK");
-const u8 gText_TrainerName_Misty[] = _("MISTY");
-const u8 gText_TrainerName_LtSurge[] = _("LT. SURGE");
-const u8 gText_TrainerName_Erika[] = _("ERIKA");
-const u8 gText_TrainerName_Koga[] = _("KOGA");
-const u8 gText_TrainerName_Sabrina[] = _("SABRINA");
-const u8 gText_TrainerName_Blaine[] = _("BLAINE");
-const u8 gText_TrainerName_Giovanni[] = _("GIOVANNI");
-
-const u8 gText_TrainerName_Lorelei[] = _("LORELEI");
-const u8 gText_TrainerName_Bruno[] = _("BRUNO");
-const u8 gText_TrainerName_Agatha[] = _("AGATHA");
-const u8 gText_TrainerName_Lance[] = _("LANCE");
-
-const u8 gText_TrainerName_Blue[] = _("BLUE");
-const u8 gText_TrainerName_ProfOak[] = _("PROF. OAK");
+const u8 gText_TrainerName_Default[] = _("Rogue");
 
 const u8 gText_TrainerName_Brendan[] = _("BRENDAN");
 const u8 gText_TrainerName_May[] = _("MAY");
@@ -68,24 +59,6 @@ const u8 gText_TrainerName_Leaf[] = _("LEAF");
 const u8 gText_TrainerName_Ethan[] = _("ETHAN");
 const u8 gText_TrainerName_Lyra[] = _("LYRA");
 
-const u8 gText_TrainerName_Falkner[] = _("FALKNER");
-const u8 gText_TrainerName_Bugsy[] = _("BUGSY");
-const u8 gText_TrainerName_Whitney[] = _("WHITNEY");
-const u8 gText_TrainerName_Morty[] = _("MORTY");
-const u8 gText_TrainerName_Chuck[] = _("CHUCK");
-const u8 gText_TrainerName_Jasmine[] = _("JASMINE");
-const u8 gText_TrainerName_Pryce[] = _("PRYCE");
-const u8 gText_TrainerName_Clair[] = _("CLAIR");
-
-const u8 gText_TrainerName_Will[] = _("WILL");
-const u8 gText_TrainerName_Karen[] = _("KAREN");
-
-const u8 gText_TrainerName_Kate[] = _("KATE");
-const u8 gText_TrainerName_Raven[] = _("RAVEN");
-const u8 gText_TrainerName_Erma[] = _("ERMA");
-const u8 gText_TrainerName_Tails[] = _("TMK4");
-const u8 gText_TrainerName_Pokabbie[] = _("POKABBIE'S DITTO");
-
 // Items
 //
 const u8 gText_EscapeRopeDesc[] = _(
@@ -93,43 +66,82 @@ const u8 gText_EscapeRopeDesc[] = _(
     "instantly from\n"
     "most encounters.");
 
-
-// Quest Log
+// Difficulty/Config lab settings
 //
-const u8 gText_QuestLogTitleOverview[] = _("QUESTS");
-const u8 gText_QuestLogTitleDesc[] = _("DESCRIPTION");
-const u8 gText_QuestLogTitleRewards[] = _("REWARDS");
-const u8 gText_QuestLogTitlePinned[] = _("Pinned");
-const u8 gText_QuestLogTitleActive[] = _("In progress");
-const u8 gText_QuestLogTitleInactive[] = _("Inactive");
-const u8 gText_QuestLogTitleComplete[] = _("Complete");
-const u8 gText_QuestLogTitleTodo[] = _("To do");
-const u8 gText_QuestLogTitleRepeatable[] = _("Repeatable");
-const u8 gText_QuestLogTitleNew[] = _("New!");
-const u8 gText_QuestLogTitleStatus[] = _("Status:");
-const u8 gText_QuestLogMarkerRepeatable[] = _("REPEATABLE");
-const u8 gText_QuestLogMarkerInactive[] = _("{COLOR RED}{SHADOW LIGHT_RED}INACTIVE");
-const u8 gText_QuestLogStatusIncomplete[] = _("{COLOR RED}{SHADOW LIGHT_RED}INCOMPLETE");
-const u8 gText_QuestLogStatusComplete[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}COMPLETE");
-const u8 gText_QuestLogStatusCollection[] = _("{COLOR BLUE}{SHADOW LIGHT_BLUE}READY TO COLLECT");
-const u8 gText_QuestLogStatusCollected[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}ALREADY COLLECTED");
-const u8 gText_QuestLogTitleRewardMoney[] = _("¥{STR_VAR_1}");
-const u8 gText_QuestLogTitleRewardPokemon[] = _("{STR_VAR_1}");
-const u8 gText_QuestLogTitleRewardShinyPokemon[] = _("Shiny {STR_VAR_1}");
-const u8 gText_QuestLogTitleQuestUnlocks[] = _("Unlocks new Quests");
-const u8 gText_QuestLogPromptOverview[] = _("Select a Category");
-const u8 gText_QuestLogPromptCategory[] = _("Select a Quest");
-const u8 gText_QuestLogPromptPinQuest[] = _("Pin this Quest?");
-const u8 gText_QuestLogPromptUnpinQuest[] = _("Unpin this Quest?");
-const u8 gText_QuestLogOverviewCompleted[] = _("Completed:");
-const u8 gText_QuestLogOverviewUnlocked[] = _("Unlocked:");
-const u8 gText_QuestLogOverviewRewardsToCollect[] = _("{COLOR BLUE}{SHADOW LIGHT_BLUE}PENDING REWARDS");
-const u8 gText_QuestLogBack[] = _("Back");
 
-const u8 gText_QuestRewardGive[] = _("Received {STR_VAR_1}!");
-const u8 gText_QuestRewardGiveMon[] = _("Received a {STR_VAR_1}!");
-const u8 gText_QuestRewardGiveShinyMon[] = _("Received a Shiny {STR_VAR_1}!");
-const u8 gText_QuestRewardGiveMoney[] = _("Received ¥{STR_VAR_1}!");
+//{COLOR DARK_GRAY}{SHADOW DARK_GRAY} <default> orange tint
+//{COLOR GREEN}{SHADOW LIGHT_GREEN} no tint
+//{COLOR RED}{SHADOW LIGHT_RED} red tint
+//{COLOR LIGHT_BLUE}{SHADOW BLUE} green tint
+const u8 gText_16Spaces[] = _("                ");
+const u8 gText_32Spaces[] = _("                                ");
+
+const u8 gText_DifficultySettings[] = _("Difficulty Settings");
+const u8 gText_DifficultyArrowLeft[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}{LEFT_ARROW}");
+const u8 gText_DifficultyArrowRight[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}{RIGHT_ARROW}");
+
+const u8 gText_DifficultyDoesntAffectReward[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}(rewards unaffected)");
+const u8 gText_DifficultyRewardLevel[] = _("{FONT_SMALL}{COLOR GREEN}{SHADOW LIGHT_GREEN}Reward Level: ");
+
+const u8 gText_DifficultyPreset[] = _("Difficulty");
+
+// Colours on the Settings Screen are out of order and wild
+//LIGHT_BLUE = green
+//BLUE = light green
+//LIGHT_RED = red
+//RED = light red
+//DARK_GRAY = light yellow
+//LIGHT_GRAY = dark yellow
+//LIGHT_GREEN = light grey
+const u8 gText_DifficultyPresetEasy[] = _("{COLOR LIGHT_BLUE}{SHADOW BLUE}Easy");
+const u8 gText_DifficultyPresetMedium[] = _("{COLOR LIGHT_BLUE}{SHADOW LIGHT_GREEN}Average");
+const u8 gText_DifficultyPresetHard[] = _("{COLOR LIGHT_RED}{SHADOW LIGHT_GREEN}Hard");
+const u8 gText_DifficultyPresetBrutal[] = _("{COLOR LIGHT_RED}{SHADOW RED}Brutal");
+const u8 gText_DifficultyPresetCustom[] = _("{COLOR DARK_GRAY}{SHADOW LIGHT_GREEN}Custom");
+
+const u8 gText_DifficultyEnabled[] = _("{COLOR LIGHT_BLUE}{SHADOW BLUE}Enabled  ");
+const u8 gText_DifficultyDisabled[] = _("{COLOR LIGHT_RED}{SHADOW LIGHT_GREEN}Disabled");
+const u8 gText_DifficultyModeActive[] = _("{COLOR LIGHT_BLUE}{SHADOW BLUE}Active!");
+
+const u8 gText_DifficultyExpAll[] = _("Exp. All");
+const u8 gText_DifficultyOverLvl[] = _("Over Level");
+const u8 gText_DifficultyEVGain[] = _("EV Gain");
+const u8 gText_DifficultyOverworldMons[] = _("Visible Wild {PKMN}");
+const u8 gText_DifficultyBagWipe[] = _("Fresh Start");
+const u8 gText_DifficultySwitchMode[] = _("Switch Mode");
+
+const u8 gText_DifficultyTrainers[] = _("Trainers");
+const u8 gText_DifficultyItems[] = _("Items");
+const u8 gText_DifficultyLegendaries[] = _("Legendaries");
+
+const u8 gText_DifficultyCustomDesc[] = _(
+    "{COLOR GREEN}{SHADOW LIGHT_GREEN}"
+    "Edit individual controls and tune the\n"
+    "difficulty to your liking."
+);
+
+const u8 gText_AdventureCustomDesc[] = _(
+    "{COLOR GREEN}{SHADOW LIGHT_GREEN}"
+    "Edit individual controls and tune the\n"
+    "adventure to your liking."
+);
+
+const u8 gText_DifficultyTrainersDesc[] = _(
+    "{COLOR GREEN}{SHADOW LIGHT_GREEN}"
+    "Adjusts quality, quantity and strength\n"
+    "of all Trainer's {PKMN}."
+);
+
+const u8 gText_DifficultyItemsDesc[] = _(
+    "{COLOR GREEN}{SHADOW LIGHT_GREEN}"
+    "TODO. This needs a rework..."
+);
+
+const u8 gText_DifficultyLegendariesDesc[] = _(
+    "{COLOR GREEN}{SHADOW LIGHT_GREEN}"
+    "Decreases quality and quantity of\n"
+    "Legendary {PKMN} encounters."
+);
 
 // Campaigns
 //
@@ -143,24 +155,6 @@ const u8 gText_Campaign_AutoBattler[] = _("Auto Battler");
 const u8 gText_Campaign_LaterManner[] = _("LaterManner Mode");
 const u8 gText_Campaign_PokeballLimit[] = _("Limited Capture");
 const u8 gText_Campaign_OneHp[] = _("One Hit Mode");
-
-// Popups
-//
-const u8 gText_Popup_QuestComplete[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Quest Completed!");
-const u8 gText_Popup_QuestFail[] = _("{COLOR RED}{SHADOW LIGHT_RED}Quest Failed");
-const u8 gText_Popup_LegendaryClause[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Clause Activated!");
-const u8 gText_Popup_None[] = _("");
-
-const u8 gPopupText_WeakLegendaryClause[] = _("{COLOR BLUE}{SHADOW LIGHT_BLUE}Basic Legendary");
-const u8 gPopupText_StrongLegendaryClause[] = _("{COLOR RED}{SHADOW LIGHT_RED}Strong Legendary");
-
-const u8 gPopupText_CampaignNoneScore[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Campaign Active!");
-const u8 gPopupText_CampaignHighScore[] = _("{COLOR BLUE}{SHADOW LIGHT_BLUE}Aim for High Score!");
-const u8 gPopupText_CampaignLowScore[] = _("{COLOR RED}{SHADOW LIGHT_RED}Aim for Low Score!");
-
-const u8 gPopupText_SafariArea[] = _("{COLOR BLUE}{SHADOW LIGHT_BLUE}Safari Area");
-
-const u8 gPopupText_StarterWarning[] = _("{COLOR BLUE}{SHADOW LIGHT_BLUE}Unable to evolve\npartner in gen");
 
 // Debug
 //

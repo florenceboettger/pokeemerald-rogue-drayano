@@ -2,7 +2,7 @@ BerryTreeScript::
 	special ObjectEventInteractionGetBerryTreeData
 	switch VAR_0x8004
 	case BERRY_STAGE_SPARKLING, BerryTree_EventScript_Sparkling
-	case BERRY_STAGE_NO_BERRY, Rogue_BerryTree_CheckBerry
+	case BERRY_STAGE_NO_BERRY, Rogue_BerryTree_CheckSoil
 	case BERRY_STAGE_PLANTED, BerryTree_EventScript_CheckBerryStage1
 	case BERRY_STAGE_SPROUTED, BerryTree_EventScript_CheckBerryStage2
 	case BERRY_STAGE_TALLER, BerryTree_EventScript_CheckBerryStage3
@@ -22,7 +22,7 @@ BerryTree_EventScript_CheckSoil::
 	lock
 	faceplayer
 	specialvar VAR_RESULT, PlayerHasBerries
-	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
+	goto_if_eq VAR_RESULT, TRUE, Rogue_BerryTree_WantToPlant
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	waitbuttonpress
@@ -42,7 +42,7 @@ BerryTree_EventScript_ChooseBerryToPlant::
 	waitstate
 	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
 	removeitem VAR_ITEM_ID
-	call BerryTree_EventScript_PlantBerry
+	call Rogue_BerryTree_PlantBerry
 
 BerryTree_EventScript_CancelPlanting::
 	release
@@ -110,21 +110,18 @@ BerryTree_EventScript_PickBerry::
 	goto_if_eq VAR_0x8004, 0, BerryTree_EventScript_BerryPocketFull
 	special IncrementDailyPickedBerries
 	special ObjectEventInteractionRemoveBerryTree
-	msgbox BerryTree_Text_PickedTheBerry, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_BERRY
-	waitmessage
-	call Rogue_BerryTree_PickedUpBerry
-	waitbuttonpress
-	message BerryTree_Text_PutAwayBerry
-	waitmessage
-	waitbuttonpress
+	@ msgbox BerryTree_Text_PickedTheBerry, MSGBOX_DEFAULT
+	@ playfanfare MUS_OBTAIN_BERRY
+	@ waitmessage
+	@ call Rogue_BerryTree_PickedUpBerry
+	@ waitbuttonpress
+	@ message BerryTree_Text_PutAwayBerry
+	@ waitmessage
+	@ waitbuttonpress
 	release
 	end
 
 BerryTree_EventScript_BerryPocketFull::
-	message BerryTree_Text_BerryPocketFull
-	waitmessage
-	waitbuttonpress
 	release
 	end
 
@@ -138,7 +135,7 @@ BerryTree_EventScript_CancelPickingBerry::
 BerryTree_EventScript_ItemUsePlantBerry::
 	lockall
 	special ObjectEventInteractionGetBerryTreeData
-	call BerryTree_EventScript_PlantBerry
+	call Rogue_BerryTree_PlantBerry
 	releaseall
 	end
 
@@ -185,7 +182,7 @@ BerryTree_Text_ItsSoftLoamySoil:
 
 BerryTree_Text_WantToPlant:
 	.string "It's soft, loamy soil.\n"
-	.string "Want to plant a BERRY?$"
+	.string "Want to plant a Berry?$"
 
 BerryTree_Text_PlantedOneBerry:
 	.string "{PLAYER} planted one {STR_VAR_1} in\n"
@@ -226,8 +223,8 @@ BerryTree_Text_PutAwayBerry:
 	.string "in the BAG's BERRIES POCKET.$"
 
 BerryTree_Text_BerryPocketFull:
-	.string "The BAG's BERRIES POCKET is full.\p"
-	.string "The {STR_VAR_1} couldn't be taken.$"
+	.string "The BAG is too full to take the\n"
+	.string "{STR_VAR_1}.$"
 
 BerryTree_Text_BerryLeftUnpicked:
 	.string "{PLAYER} left the {STR_VAR_1}\n"

@@ -30,6 +30,7 @@ struct InitialPlayerAvatarState
 {
     u8 transitionFlags;
     u8 direction;
+    bool8 maintainDirection;
 };
 
 struct LinkPlayerObjectEvent
@@ -60,6 +61,7 @@ void Overworld_ResetStateAfterTeleport(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 void ResetGameStats(void);
 void IncrementGameStat(u8 index);
+void IncrementGameStatBy(u8 index, u32 amount);
 u32 GetGameStat(u8 index);
 void SetGameStat(u8 index, u32 value);
 void ApplyNewEncryptionKeyToGameStats(u32 newKey);
@@ -67,7 +69,8 @@ void LoadObjEventTemplatesFromHeader(void);
 void LoadSaveblockObjEventScripts(void);
 void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y);
 void SetObjEventTemplateMovementType(u8 localId, u8 movementType);
-const struct MapLayout *GetMapLayout(void);
+void SetObjEventTemplateDirection(u8 localId, u8 dir);
+const struct MapLayout *GetMapLayout(u16 mapLayoutId);
 void ApplyCurrentWarp(void);
 struct MapHeader const *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
 struct MapHeader const *const GetDestinationWarpMapHeader(void);
@@ -94,6 +97,7 @@ bool8 SetDiveWarpDive(u16 x, u16 y);
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum);
 void ResetInitialPlayerAvatarState(void);
 void StoreInitialPlayerAvatarState(void);
+void StoreInitialPlayerAvatarStateForReloadWarp(void);
 bool32 Overworld_IsBikingAllowed(void);
 void SetDefaultFlashLevel(void);
 void SetFlashLevel(s32 flashLevel);
