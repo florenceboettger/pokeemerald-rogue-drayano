@@ -338,7 +338,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     {
     #ifdef ROGUE_DRAYANO
         .power = 100,
-        .zMovePower = 185,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_4
             .power = 90,
@@ -7252,7 +7251,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     {
     #ifdef ROGUE_DRAYANO
         .power = 85,
-        .zMovePower = 160,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 80,
@@ -7433,7 +7431,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     {
     #ifdef ROGUE_DRAYANO
         .power = 90,
-        .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_6
             .power = 85,
@@ -10285,7 +10282,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     {
     #ifdef ROGUE_DRAYANO
         .power = 75,
-        .zMovePower = 140,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_7
             .power = 65,
@@ -12070,8 +12066,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_ALWAYS_CRIT,
         .power = 50,
         .pp = 5,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .zMovePower = 100,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 80,
@@ -12153,8 +12147,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     #ifdef ROGUE_DRAYANO
         .power = 80,
         .pp = 10,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .zMovePower = 160,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 60,
@@ -12183,8 +12175,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     #ifdef ROGUE_DRAYANO
         .power = 90,
         .pp = 5,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 60,
@@ -12215,8 +12205,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     #ifdef ROGUE_DRAYANO
         .power = 90,
         .pp = 5,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_THAW_USER,
-        .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 60,
@@ -12246,8 +12234,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .power = 95,
         .accuracy = 100,
         .pp = 5,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 80,
@@ -12274,8 +12260,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     #ifdef ROGUE_DRAYANO
             .power = 95,
             .accuracy = 100,
-            .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-            .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 80,
@@ -12311,8 +12295,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .power = 95,
         .accuracy = 100,
         .pp = 5,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 100,
@@ -12342,8 +12324,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .power = 95,
         .accuracy = 100,
         .pp = 5,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 100,
@@ -12372,8 +12352,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .power = 95,
         .accuracy = 100,
         .pp = 5,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
-        .zMovePower = 175,
     #else
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .power = 120,
