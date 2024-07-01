@@ -13,6 +13,8 @@ u16 RogueRandomRange(u16 range, u8 seedFlag);
 bool8 RogueRandomChance(u8 chance, u16 seedFlag);
 u16 Rogue_GetStartSeed(void);
 
+u16 Rogue_GetShinyOdds(void);
+
 void RemoveMonAtSlot(u8 slot, bool8 keepItems, bool8 shiftUpwardsParty, bool8 canSendToLab);
 void RemoveAnyFaintedMons(bool8 keepItems, bool8 canSendToLab);
 
@@ -31,7 +33,11 @@ const u8* Rogue_ModifyPallete8(const u8* input);
 const u16* Rogue_ModifyPallete16(const u16* input);
 const u32* Rogue_ModifyPallete32(const u32* input);
 
+void Rogue_ModifyOverworldPalette(u16 offset, u16 count);
+void Rogue_ModifyBattlePalette(u16 offset, u16 count);
+
 bool8 Rogue_ShouldShowMiniMenu(void);
+u16 Rogue_MiniMenuHeight(void);
 u8* Rogue_GetMiniMenuContent(void);
 void Rogue_CreateMiniMenuExtraGFX(void);
 void Rogue_RemoveMiniMenuExtraGFX(void);
@@ -56,13 +62,16 @@ bool8 Rogue_OnProcessPlayerFieldInput(void);
 bool8 Rogue_IsPartnerMonInTeam(void);
 
 void Rogue_MainInit(void);
-void Rogue_MainCallback(void);
+void Rogue_MainCB(void);
+void Rogue_OverworldCB(void);
 
 u16 Rogue_GetHotTrackingData(u16* count, u16* average, u16* min, u16* max);
 
 void Rogue_OnLoadMap(void);
 void Rogue_OnWarpIntoMap(void);
 void Rogue_OnSetWarpData(struct WarpData *warp);
+void Rogue_ModifyMapHeader(struct MapHeader *mapHeader);
+void Rogue_ModifyObjectEvents(struct MapHeader *mapHeader, struct ObjectEventTemplate *objectEvents, u8* objectEventCount, u8 objectEventCapacity);
 u8 Rogue_SelectRouteRoom(void);
 u8 Rogue_SelectBossEncounter(void);
 u8 Rogue_SelectLegendaryEncounterRoom(void);
@@ -77,6 +86,9 @@ void Rogue_Battle_EndTrainerBattle(u16 trainerNum);
 void Rogue_Battle_EndWildBattle(void);
 void Rogue_Safari_EndWildBattle(void);
 
+bool8 Rogue_AllowItemUse(u16 itemId);
+void Rogue_OnItemUse(u16 itemId);
+
 void Rogue_PreBattleSetup(void);
 bool8 Rogue_OverrideTrainerItems(u16* items);
 void Rogue_PreCreateTrainerParty(u16 trainerNum, bool8* useRogueCreateMon, u8* monsCount);
@@ -86,6 +98,7 @@ void Rogue_CreateTrainerMon(u16 trainerNum, struct Pokemon *party, u8 monIdx, u8
 void Rogue_ModifyWildMonHeldItem(u16* itemId);
 void Rogue_CreateWildMon(u8 area, u16* species, u8* level, u32* forcePersonality);
 u16 Rogue_SelectRandomWildMon(void);
+bool8 Rogue_AreWildMonEnabled(void);
 void Rogue_CreateEventMon(u16* species, u8* level, u16* itemId);
 void Rogue_SafariTypeForMap(u8* outArray, u8 arraySize);
 void Rogue_ModifyEventMon(struct Pokemon* mon);

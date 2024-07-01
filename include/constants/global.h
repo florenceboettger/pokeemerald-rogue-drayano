@@ -93,6 +93,8 @@
 
 // string lengths
 #define ITEM_NAME_LENGTH 14
+#define ROGUE_ITEM_NAME_LENGTH 16
+#define ROGUE_ITEM_DESC_LENGTH 64
 #define POKEMON_NAME_LENGTH 10
 #define PLAYER_NAME_LENGTH 7
 #define MAIL_WORDS_COUNT 9
@@ -162,5 +164,8 @@
 #define CONNECTION_EAST     4
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
+
+#define SIDEWAYS_STAIRS_IMPLEMENTED         FALSE
+#define POST_BATTLE_FOLLOWER_FIX            FALSE   //if you experience the follower de-syncing with the player after battle, set to TRUE
 
 #endif // GUARD_CONSTANTS_GLOBAL_H

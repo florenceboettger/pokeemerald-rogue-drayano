@@ -1,23 +1,6 @@
 #ifndef GUARD_ROGUE_H
 #define GUARD_ROGUE_H
 
-enum RogueAdvPathRoomType
-{
-    ADVPATH_ROOM_NONE,
-    ADVPATH_ROOM_ROUTE,
-    ADVPATH_ROOM_RESTSTOP,
-    ADVPATH_ROOM_LEGENDARY,
-    ADVPATH_ROOM_MINIBOSS,
-    ADVPATH_ROOM_WILD_DEN,
-    ADVPATH_ROOM_GAMESHOW,
-    ADVPATH_ROOM_GRAVEYARD,
-    ADVPATH_ROOM_LAB,
-    ADVPATH_ROOM_COUNT,
-
-    // Special cases are excluded from count
-    ADVPATH_ROOM_BOSS,
-};
-
 struct RogueAdvPathRoomParams
 {
     u8 roomIdx;
@@ -52,6 +35,30 @@ struct RogueAdvPath
     u8 justGenerated : 1;
     struct RogueAdvPathRoomParams currentRoomParams;
     struct RogueAdvPathNode nodes[ROGUE_MAX_ADVPATH_ROWS * ROGUE_MAX_ADVPATH_COLUMNS];
+};
+
+struct RogueAdvPathGenerator // Attach to mode Difficult Option???
+{
+   u8 minLength;
+   u8 maxLength;
+   u16 roomWeights[ADVPATH_ROOM_WEIGHT_COUNT];
+   u16 subRoomWeights[ADVPATH_SUBROOM_WEIGHT_COUNT];
+};
+
+
+struct RogueAdventurePhase
+{
+    u8 levelCap;
+    u8 levelStep;
+    u16 bossTrainerFlagsInclude;
+    u16 bossTrainerFlagsExclude;
+    struct RogueAdvPathGenerator pathGenerator;
+};
+
+struct RogueAdventureSettings
+{
+    const struct RogueAdventurePhase* phases;
+    u8 phaseCount;
 };
 
 struct RogueQuestReward
@@ -127,6 +134,7 @@ struct RogueRunData
     u8 megasEnabled : 1;
     u8 zMovesEnabled : 1;
 #endif
+    u8 completedBadges[ROGUE_MAX_BOSS_COUNT];
     u16 wildEncounters[9];
     u16 fishingEncounters[2];
     u16 routeHistoryBuffer[12];
@@ -206,7 +214,6 @@ struct RogueTrainerEncounter
 {
     u16 gfxId;
     u16 trainerId;
-    u16 victorySetFlag;
     u16 trainerFlags;
     u16 partyFlags;
     u16 querySpeciesCount;
@@ -248,6 +255,16 @@ struct RogueMonPresetCollection
     const u16* moves;
 };
 
+struct RogueAssistantHeader
+{
+    u32 inCommCapacity;
+    u32 outCommCapacity;
+    u8* inCommBuffer;
+    u8* outCommBuffer;
+};
+
+extern const struct RogueAssistantHeader gRogueAssistantHeader;
+
 #ifdef ROGUE_FEATURE_AUTOMATION
 struct RogueAutomationHeader
 {
@@ -258,7 +275,16 @@ struct RogueAutomationHeader
 extern const struct RogueAutomationHeader gRogueAutomationHeader;
 #endif
 
-extern const struct SpeciesTable gRogueSpeciesTable[];
+struct PokemonObjectEventInfo
+{
+    const u32* defaultPic;
+    const u32* shinyPic;
+    u8 width;
+    u8 height;
+    u8 defaultPaletteOffset;
+    u8 shinyPaletteOffset;
+};
+
 extern const struct RogueRouteData gRogueRouteTable;
 extern const struct RogueEncounterData gRogueLegendaryEncounterInfo;
 extern const struct RogueEncounterData gRogueRestStopEncounterInfo;
@@ -268,6 +294,8 @@ extern const struct RogueMonPresetCollection gPresetMonTable[NUM_SPECIES];
 extern const struct RogueQuestConstants gRogueQuests[QUEST_CAPACITY + 1];
 extern const u8 gRogueTypeWeatherTable[];
 extern const struct RogueEncounterMap gRogueTypeToEliteRoom[];
+
+extern const struct RogueAdventureSettings gRogueAdventureSettings[];
 
 
 #endif  // GUARD_ROGUE_H

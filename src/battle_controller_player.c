@@ -19,6 +19,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokeball.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "random.h"
 #include "recorded_battle.h"
@@ -1732,27 +1733,135 @@ static void MoveSelectionDisplayPpNumber(void)
     moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(txtPtr)++ = CHAR_SLASH;
-    ConvertIntToDecimalStringN(txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2); // ?
 
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
+static u8 GetMoveDisplayTyping(u16 move)
+{
+    u8 moveType;
+    if(move == MOVE_HIDDEN_POWER)
+        return CalcMonHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+
+#ifdef ROGUE_EXPANSION
+    SetTypeBeforeUsingMove(move, gActiveBattler);
+#endif
+    
+    GET_MOVE_TYPE(move, moveType);
+    
+    return moveType;
+}
+
+#define TYPE_x0     0
+#define TYPE_x0_25  5
+#define TYPE_x0_50  10
+#define TYPE_x1     20
+#define TYPE_x2     40
+#define TYPE_x4     80
+
+int GetMovePower(u16 move, u8 moveType, u16 defType1, u16 defType2, u16 defAbility, u16 mode);
+
+extern const u8 gText_MoveEffective[];
+extern const u8 gText_MoveNoEffect[];
+extern const u8 gText_MoveSuperEffective[];
+extern const u8 gText_MoveNotVeryEffective[];
+
 static void MoveSelectionDisplayMoveType(void)
 {
     u8 *txtPtr;
+#ifdef ROGUE_EXPANSION
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
+#else
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
+#endif
     u16 move = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
+    u8 displayType = GetMoveDisplayTyping(move);
 
-    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
-    *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
-    *(txtPtr)++ = EXT_CTRL_CODE_FONT;
-    *(txtPtr)++ = FONT_NORMAL;
+    txtPtr = gDisplayedStringBattle;
+    txtPtr = StringCopy(txtPtr, gTypeNames[displayType]);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP);
 
-    if(move == MOVE_HIDDEN_POWER)
-        StringCopy(txtPtr, gTypeNames[CalcMonHiddenPowerType(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]])]);
+    txtPtr = gDisplayedStringBattle;
+    //*(txtPtr)++ = CHAR_SPACER;
+    //*(txtPtr)++ = CHAR_SPACER;
+    //*(txtPtr)++ = CHAR_SLASH;
+    //*(txtPtr)++ = CHAR_NEWLINE;
+
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].power == 0)
+    {
+        // -
+        *(txtPtr)++ = CHAR_HYPHEN;
+        *(txtPtr)++ = EOS;
+    }
     else
-        StringCopy(txtPtr, gTypeNames[gBattleMoves[move].type]);
+    {
+        u8 opposingBattler;
+        u8 opposingPosition = BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler));
+        u16 opposingSpecies = gBattleMons[GetBattlerAtPosition(opposingPosition)].species;
+        
+        if(opposingSpecies == SPECIES_NONE)
+        {
+            opposingPosition = BATTLE_PARTNER(opposingPosition);
+            opposingSpecies = gBattleMons[GetBattlerAtPosition(opposingPosition)].species;
+        }
 
+        opposingBattler = GetBattlerAtPosition(opposingPosition);
+
+        //if(GetSetPokedexFlag(SpeciesToNationalPokedexNum(opposingSpecies), FLAG_GET_CAUGHT))
+        //{
+        //    // ???
+        //    *(txtPtr)++ = CHAR_QUESTION_MARK;
+        //    *(txtPtr)++ = CHAR_QUESTION_MARK;
+        //    *(txtPtr)++ = CHAR_QUESTION_MARK;
+        //    *(txtPtr)++ = EOS;
+        //}
+        //else
+        {
+            u8 type1;
+            u8 type2;
+            int typeEffect;
+            u16 ability = 0;
+#ifdef ROGUE_EXPANSION
+            struct Pokemon *illusionMon = GetIllusionMonPtr(opposingBattler);
+
+            if(illusionMon != NULL)
+            {
+                u16 species = GetMonData(illusionMon, MON_DATA_SPECIES);
+                type1 = gBaseStats[species].type1;
+                type2 = gBaseStats[species].type2;
+                //ability = GetMonAbility(illusionMon);
+            }
+            else
+#endif
+            {
+                type1 = gBattleMons[opposingBattler].type1;
+                type2 = gBattleMons[opposingBattler].type2;
+                //ability = GetBattlerAbility(opposingBattler);
+            }
+
+            typeEffect = GetMovePower(move, displayType, type1, type2, ability, 0);
+
+            if(typeEffect == TYPE_x0)
+            {
+                txtPtr = StringCopy(txtPtr, gText_MoveNoEffect);
+            }
+            else if(typeEffect == TYPE_x1)
+            {
+                txtPtr = StringCopy(txtPtr, gText_MoveEffective);
+            }
+            else if(typeEffect < TYPE_x1)
+            {
+                txtPtr = StringCopy(txtPtr, gText_MoveNotVeryEffective);
+            }
+            else //if(typeEffect > TYPE_x1)
+            {
+                txtPtr = StringCopy(txtPtr, gText_MoveSuperEffective);
+            }
+        }
+    }
+
+    *(txtPtr)++ = EOS;
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
@@ -2134,7 +2243,7 @@ static u32 CopyPlayerMonData(u8 monId, u8 *dst)
         size = 1;
         break;
     case REQUEST_COOL_RIBBON_BATTLE:
-        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_COOL_RIBBON);
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_BEAUTY_RIBBON);
         size = 1;
         break;
     case REQUEST_BEAUTY_RIBBON_BATTLE:
@@ -2395,7 +2504,7 @@ static void SetPlayerMonData(u8 monId)
         SetMonData(&gPlayerParty[monId], MON_DATA_SHEEN, &gBattleResources->bufferA[gActiveBattler][3]);
         break;
     case REQUEST_COOL_RIBBON_BATTLE:
-        SetMonData(&gPlayerParty[monId], MON_DATA_COOL_RIBBON, &gBattleResources->bufferA[gActiveBattler][3]);
+        SetMonData(&gPlayerParty[monId], MON_DATA_BEAUTY_RIBBON, &gBattleResources->bufferA[gActiveBattler][3]);
         break;
     case REQUEST_BEAUTY_RIBBON_BATTLE:
         SetMonData(&gPlayerParty[monId], MON_DATA_BEAUTY_RIBBON, &gBattleResources->bufferA[gActiveBattler][3]);

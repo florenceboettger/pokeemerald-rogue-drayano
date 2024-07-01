@@ -7,6 +7,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/rogue.h"
+#include "constants/rgb.h"
 #include "constants/weather.h"
 #include "data.h"
 #include "gba/isagbprint.h"
@@ -20,6 +21,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "money.h"
+#include "m4a.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "palette.h"
@@ -38,20 +40,21 @@
 #include "text.h"
 
 #include "rogue.h"
+#include "rogue_assistant.h"
 #include "rogue_automation.h"
 #include "rogue_adventurepaths.h"
 #include "rogue_campaign.h"
 #include "rogue_charms.h"
 #include "rogue_controller.h"
+#include "rogue_followmon.h"
 #include "rogue_popup.h"
 #include "rogue_query.h"
 #include "rogue_quest.h"
+#include "rogue_timeofday.h"
+
 
 #define ROGUE_TRAINER_COUNT (FLAG_ROGUE_TRAINER_END - FLAG_ROGUE_TRAINER_START + 1)
 #define ROGUE_ITEM_COUNT (FLAG_ROGUE_ITEM_END - FLAG_ROGUE_ITEM_START + 1)
-
-// 8 badges, 4 elite, 2 champion
-#define BOSS_COUNT 14
 
 #ifdef ROGUE_DEBUG
 EWRAM_DATA u8 gDebug_CurrentTab = 0;
@@ -249,6 +252,9 @@ u16 RogueRandomRange(u16 range, u8 flag)
     // Always use rogue random to avoid seeding issues based on flag
     u16 res = RogueRandom();
 
+    if(range <= 1)
+        return 0;
+
     if(FlagGet(FLAG_SET_SEED_ENABLED) && (flag == 0 || FlagGet(flag)))
         return res % range;
     else
@@ -277,6 +283,11 @@ u16 Rogue_GetStartSeed(void)
     //}
 
     return (u16)(word0 + word1 * offset);
+}
+
+u16 Rogue_GetShinyOdds(void)
+{
+    return 100;
 }
 
 bool8 Rogue_IsRunActive(void)
@@ -689,6 +700,28 @@ const u32* Rogue_ModifyPallete32(const u32* input)
 
 #undef PLAYER_STYLE
 
+void Rogue_ModifyOverworldPalette(u16 offset, u16 count)
+{
+    RogueToD_ModifyOverworldPalette(offset, count);
+}
+
+void Rogue_ModifyBattlePalette(u16 offset, u16 count)
+{
+    RogueToD_ModifyBattlePalette(offset, count);
+}
+
+u16 Rogue_ModifySoundVolume(struct MusicPlayerInfo *mplayInfo, u16 volume)
+{
+    if(mplayInfo == &gMPlayInfo_BGM)
+    {
+        return (volume * gSaveBlock2Ptr->optionsSoundChannelBGM) / 10;
+    }
+    else // gMPlayInfo_SE1 -> gMPlayInfo_SE3
+    {
+        return (volume * gSaveBlock2Ptr->optionsSoundChannelSE) / 10;
+    }
+}
+
 void Rogue_ModifyBattleWinnings(u16 trainerNum, u32* money)
 {
     if(Rogue_IsRunActive())
@@ -761,7 +794,7 @@ void Rogue_ModifyBattleWaitTime(u16* waitTime, bool8 awaitingMessage)
     {
         *waitTime = awaitingMessage ? 8 : 0;
     }
-    else if(difficulty < (BOSS_COUNT - 1)) // Go at default speed for final fight
+    else if(difficulty < (ROGUE_MAX_BOSS_COUNT - 1)) // Go at default speed for final fight
     {
         
         if(IsMiniBossTrainer(gTrainerBattleOpponent_A))
@@ -784,7 +817,7 @@ s16 Rogue_ModifyBattleSlideAnim(s16 rate)
         else
             return rate * 2 + 1;
     }
-    //else if(difficulty == (BOSS_COUNT - 1))
+    //else if(difficulty == (ROGUE_MAX_BOSS_COUNT - 1))
     //{
     //    // Go at default speed for final fight
     //    return rate * 2;
@@ -1130,6 +1163,12 @@ bool8 Rogue_ShouldShowMiniMenu(void)
     return TRUE;
 }
 
+u16 Rogue_MiniMenuHeight(void)
+{
+    u16 height = 10;
+    return height;
+}
+
 static u8* AppendNumberField(u8* strPointer, const u8* field, u32 num)
 {
     u8 pow = 2;
@@ -1237,33 +1276,63 @@ void Rogue_RemoveMiniMenuExtraGFX(void)
 
 bool8 Rogue_ShouldShowMiniMenu(void)
 {
-    return Rogue_IsRunActive();
+    return TRUE;
 }
+
+u16 Rogue_MiniMenuHeight(void)
+{
+    u16 height = Rogue_IsRunActive() ? 3 : 1;
+
+    if(Rogue_IsActiveCampaignScored())
+    {
+        ++height;
+    }
+
+    return height;
+}
+
+extern const u8 gText_StatusRoute[];
+extern const u8 gText_StatusBadges[];
+extern const u8 gText_StatusScore[];
+extern const u8 gText_StatusTimer[];
+extern const u8 gText_StatusClock[];
 
 u8* Rogue_GetMiniMenuContent(void)
 {
-    u8 difficultyLevel = gRogueRun.currentDifficulty;
+    u8* strPointer = &gStringVar4[0];
 
-    ConvertIntToDecimalStringN(gStringVar1, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_RIGHT_ALIGN, 4);
-    ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar3, gText_RogueHourMinute);
-
-    ConvertIntToDecimalStringN(gStringVar2, difficultyLevel, STR_CONV_MODE_RIGHT_ALIGN, 4);
+    *strPointer = EOS;
+        
+    // Clock
+    ConvertIntToDecimalStringN(gStringVar1, RogueToD_GetHours(), STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, RogueToD_GetMinutes(), STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringExpandPlaceholders(gStringVar3, gText_StatusClock);
+    strPointer = StringAppend(strPointer, gStringVar3);
     
+    if(Rogue_IsRunActive())
+    {
+        // Run time
+        ConvertIntToDecimalStringN(gStringVar1, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+        StringExpandPlaceholders(gStringVar3, gText_StatusTimer);
+        strPointer = StringAppend(strPointer, gStringVar3);
+
+        // Badges
+        ConvertIntToDecimalStringN(gStringVar1, gRogueRun.currentDifficulty, STR_CONV_MODE_RIGHT_ALIGN, 4);
+        StringExpandPlaceholders(gStringVar3, gText_StatusBadges);
+        strPointer = StringAppend(strPointer, gStringVar3);
+    }
+
+    // Score
     if(Rogue_IsActiveCampaignScored())
     {
         ConvertIntToDecimalStringN(gStringVar1, Rogue_GetCampaignScore(), STR_CONV_MODE_RIGHT_ALIGN, 6);
 
-        StringExpandPlaceholders(gStringVar4, gText_RogueCampaignProgress);
+        StringExpandPlaceholders(gStringVar3, gText_StatusScore);
+        strPointer = StringAppend(strPointer, gStringVar3);
     }
-    else
-    {
-        ConvertIntToDecimalStringN(gStringVar1, gRogueRun.currentRoomIdx, STR_CONV_MODE_RIGHT_ALIGN, 5);
 
-        StringExpandPlaceholders(gStringVar4, gText_RogueRoomProgress);
-    }
-    
-
+    *(strPointer - 1) = EOS; // Remove trailing \n
     return gStringVar4;
 }
 
@@ -1276,6 +1345,8 @@ void Rogue_CreateMiniMenuExtraGFX(void)
 
     if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_ROUTE || GetSafariZoneFlag())
     {
+        u16 yOffset = 24 + Rogue_MiniMenuHeight() * 16;
+
         //LoadMonIconPalettes();
 
         for(i = 0; i < GetCurrentWildEncounterCount(); ++i)
@@ -1288,14 +1359,14 @@ void Rogue_CreateMiniMenuExtraGFX(void)
                 gRogueLocal.encounterPreview[i].species = gRogueRun.wildEncounters[i];
                 LoadMonIconPaletteCustomOffset(gRogueLocal.encounterPreview[i].species, paletteOffset);
 
-                gRogueLocal.encounterPreview[i].monSpriteId = CreateMonIconCustomPaletteOffset(gRogueLocal.encounterPreview[i].species, SpriteCallbackDummy, (14 + (i % 3) * 32), 72 + (i / 3) * 32, oamPriority, paletteOffset);
+                gRogueLocal.encounterPreview[i].monSpriteId = CreateMonIconCustomPaletteOffset(gRogueLocal.encounterPreview[i].species, SpriteCallbackDummy, (14 + (i % 3) * 32), yOffset + (i / 3) * 32, oamPriority, paletteOffset);
             }
             else
             {
                 gRogueLocal.encounterPreview[i].species = SPECIES_NONE;
                 LoadMonIconPaletteCustomOffset(gRogueLocal.encounterPreview[i].species, paletteOffset);
 
-                gRogueLocal.encounterPreview[i].monSpriteId = CreateMissingMonIcon(SpriteCallbackDummy, (14 + (i % 3) * 32), 72 + (i / 3) * 32, 0, paletteOffset);
+                gRogueLocal.encounterPreview[i].monSpriteId = CreateMissingMonIcon(SpriteCallbackDummy, (14 + (i % 3) * 32), yOffset + (i / 3) * 32, 0, paletteOffset);
             }
 
             // Have to grey out icon as I can't figure out why custom palette offsets still seem to be stomping over each other
@@ -1541,6 +1612,8 @@ void Rogue_OnNewGame(void)
     FlagSet(FLAG_SYS_B_DASH);
     EnableNationalPokedex();
 
+    RogueToD_SetTime(60 * 10);
+
     // Reset shiny safari
     gRogueGlobalData.safairShinyBufferHead = 0;
     memset(&gRogueGlobalData.safariShinyBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer));
@@ -1782,6 +1855,11 @@ void Rogue_OnSaveGame(void)
             SerializeBoxData(&offset, &gRogueGlobalData.safairShinyBufferHead, sizeof(gRogueGlobalData.safairShinyBufferHead), encryptionKey);
             SerializeBoxData(&offset, &gRogueGlobalData.safariShinyBuffer[0], sizeof(gRogueGlobalData.safariShinyBuffer[0]) * ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer), encryptionKey);
             SerializeBoxData(&offset, &gRogueGlobalData.safariShinyPersonality, sizeof(gRogueGlobalData.safariShinyPersonality), encryptionKey);
+
+            {
+                u16 tod = RogueToD_GetTime();
+                SerializeBoxData(&offset, &tod, sizeof(tod), encryptionKey);
+            }
         }
 
         // Serialize temporary per-run data
@@ -1875,6 +1953,13 @@ void Rogue_OnLoadGame(void)
                 DeserializeBoxData(&offset, &gRogueGlobalData.safairShinyBufferHead, sizeof(gRogueGlobalData.safairShinyBufferHead), encryptionKey);
                 DeserializeBoxData(&offset, &gRogueGlobalData.safariShinyBuffer[0], sizeof(gRogueGlobalData.safariShinyBuffer[0]) * ARRAY_COUNT(gRogueGlobalData.safariShinyBuffer), encryptionKey);
                 DeserializeBoxData(&offset, &gRogueGlobalData.safariShinyPersonality, sizeof(gRogueGlobalData.safariShinyPersonality), encryptionKey);
+                EnsureSafariShinyBufferIsValid();
+                
+                {
+                    u16 tod = 0;
+                    DeserializeBoxData(&offset, &tod, sizeof(tod), encryptionKey);
+                    RogueToD_SetTime(tod);
+                }
             }
 
             // Serialize temporary per-run data
@@ -1932,6 +2017,10 @@ void Rogue_OnLoadGame(void)
 
     EnsureLoadValuesAreValid(FALSE, gSaveBlock1Ptr->rogueSaveVersion);
     RecalcCharmCurseValues();
+    
+    ResetFollowParterMonObjectEvent();
+
+    Rogue_RemoveNetObjectEvents();
 }
 
 bool8 Rogue_OnProcessPlayerFieldInput(void)
@@ -1962,6 +2051,10 @@ bool8 Rogue_OnProcessPlayerFieldInput(void)
         return TRUE;
     }
 #endif
+    else if(FollowMon_ProcessMonInteraction() == TRUE)
+    {
+        return TRUE;
+    }
 
     return FALSE;
 }
@@ -2022,13 +2115,14 @@ static void UpdateHotTracking()
 void Rogue_MainInit(void)
 {
     ResetHotTracking();
+    Rogue_AssistantInit();
 
 #ifdef ROGUE_FEATURE_AUTOMATION
     Rogue_AutomationInit();
 #endif
 }
 
-void Rogue_MainCallback(void)
+void Rogue_MainCB(void)
 {
     //Additional 3rd maincallback which is always called
 
@@ -2037,9 +2131,16 @@ void Rogue_MainCallback(void)
         UpdateHotTracking();
     }
 
+    Rogue_AssistantMainCB();
+
 #ifdef ROGUE_FEATURE_AUTOMATION
     Rogue_AutomationCallback();
 #endif
+}
+
+void Rogue_OverworldCB(void)
+{
+    Rogue_AssistantOverworldCB();
 }
 
 u16 Rogue_GetHotTrackingData(u16* count, u16* average, u16* min, u16* max)
@@ -2062,6 +2163,8 @@ void Rogue_OnLoadMap(void)
         RandomiseSafariWildEncounters();
         Rogue_PushPopup(POPUP_MSG_SAFARI_ENCOUNTERS, 0);
     }
+
+    SetupFollowParterMonObjectEvent();
 }
 
 u16 GetStartDifficulty(void)
@@ -2071,7 +2174,7 @@ u16 GetStartDifficulty(void)
 #ifdef ROGUE_DEBUG
     if(skipToDifficulty == 8)
     {
-        skipToDifficulty = BOSS_COUNT - 1;
+        skipToDifficulty = ROGUE_MAX_BOSS_COUNT - 1;
     }
 #endif
 
@@ -2273,6 +2376,8 @@ static void BeginRogueRun(void)
     gRogueAdvPath.currentNodeY = 0;
     gRogueAdvPath.currentRoomType = ADVPATH_ROOM_NONE;
 
+    memset(&gRogueRun.completedBadges[0], TYPE_NONE, sizeof(gRogueRun.completedBadges));
+
     memset(&gRogueRun.routeHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.routeHistoryBuffer));
     memset(&gRogueRun.legendaryHistoryBuffer[0], (u16)-1, sizeof(u16) * ARRAY_COUNT(gRogueRun.legendaryHistoryBuffer));
     memset(&gRogueRun.wildEncounterHistoryBuffer[0], 0, sizeof(u16) * ARRAY_COUNT(gRogueRun.wildEncounterHistoryBuffer));
@@ -2283,6 +2388,9 @@ static void BeginRogueRun(void)
     VarSet(VAR_ROGUE_CURRENT_ROOM_IDX, 0);
     VarSet(VAR_ROGUE_REWARD_MONEY, 0);
     VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_NONE);
+
+    VarSet(VAR_ROGUE_FLASK_HEALS_USED, 0);
+    VarSet(VAR_ROGUE_FLASK_HEALS_MAX, 4);
 
     SaveHubStates();
 
@@ -2328,29 +2436,19 @@ static void BeginRogueRun(void)
                     AddBagItem(itemId, quantity);
             }
         }
-
-#ifdef ROGUE_DEBUG
-        AddBagItem(ITEM_ESCAPE_ROPE, 101);
-#endif
     }
     else
     {
         SetMoney(&gSaveBlock1Ptr->money, VarGet(VAR_ROGUE_ADVENTURE_MONEY));
     }
 
+#ifdef ROGUE_DEBUG
+    AddBagItem(ITEM_ESCAPE_ROPE, 101);
+#endif
+
     RecalcCharmCurseValues();
 
     FlagClear(FLAG_ROGUE_FREE_HEAL_USED);
-
-    FlagClear(FLAG_BADGE01_GET);
-    FlagClear(FLAG_BADGE02_GET);
-    FlagClear(FLAG_BADGE03_GET);
-    FlagClear(FLAG_BADGE04_GET);
-    FlagClear(FLAG_BADGE05_GET);
-    FlagClear(FLAG_BADGE06_GET);
-    FlagClear(FLAG_BADGE07_GET);
-    FlagClear(FLAG_BADGE08_GET);
-
     FlagClear(FLAG_ROGUE_RUN_COMPLETED);
 
     // Enable randoman trader at start
@@ -2900,7 +2998,7 @@ static void ResetSpecialEncounterStates(void)
     // Special states
     // Rayquaza
     VarSet(VAR_SKY_PILLAR_STATE, 2); // Keep in clean layout, but act as is R is has left for G/K cutscene
-    VarSet(VAR_SKY_PILLAR_RAQUAZA_CRY_DONE, 1); // Hide cutscene R
+    //VarSet(VAR_SKY_PILLAR_RAQUAZA_CRY_DONE, 1); // Hide cutscene R
     FlagClear(FLAG_DEFEATED_RAYQUAZA);
     FlagClear(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL); // Show battle
     FlagSet(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA); // Hide cutscene R
@@ -3076,6 +3174,15 @@ void Rogue_OnWarpIntoMap(void)
 //
         //RandomiseSafariWildEncounters();
         //Rogue_PushPopup(POPUP_MSG_SAFARI_ENCOUNTERS, 0);
+    }
+
+    if(Rogue_IsRunActive())
+    {
+        RogueToD_AddMinutes(60);
+    }
+    else
+    {
+        RogueToD_AddMinutes(30);
     }
 }
 
@@ -3276,10 +3383,12 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
 
                 case ADVPATH_ROOM_LEGENDARY:
                 {
+                    u16 species = gRogueLegendaryEncounterInfo.mapTable[gRogueAdvPath.currentRoomParams.roomIdx].encounterId;
                     ResetSpecialEncounterStates();
                     ResetTrainerBattles();
                     RandomiseEnabledTrainers();
-                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, gRogueLegendaryEncounterInfo.mapTable[gRogueAdvPath.currentRoomParams.roomIdx].encounterId);
+                    VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, species);
+                    FollowMon_SetGraphics(0, species, TRUE);
                     break;
                 }
 
@@ -3287,6 +3396,7 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
                 {
                     ResetSpecialEncounterStates();
                     VarSet(VAR_ROGUE_SPECIAL_ENCOUNTER_DATA, gRogueAdvPath.currentRoomParams.perType.wildDen.species);
+                    FollowMon_SetGraphics(0, gRogueAdvPath.currentRoomParams.perType.wildDen.species, TRUE);
                     break;
                 }
 
@@ -3391,7 +3501,7 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
                     break;
                 }
 
-                case ADVPATH_ROOM_GRAVEYARD:
+                case ADVPATH_ROOM_DARK_DEAL:
                 {
                     RandomiseCharmItems();
                     break;
@@ -3402,20 +3512,6 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
             //VarSet(VAR_ROGUE_DESIRED_WEATHER, WEATHER_LEAVES);
     #endif
 
-            
-            // Ensure we have all badges by this point
-            if(gRogueRun.currentDifficulty >= 8)
-            {
-                FlagSet(FLAG_BADGE01_GET);
-                FlagSet(FLAG_BADGE02_GET);
-                FlagSet(FLAG_BADGE03_GET);
-                FlagSet(FLAG_BADGE04_GET);
-                FlagSet(FLAG_BADGE05_GET);
-                FlagSet(FLAG_BADGE06_GET);
-                FlagSet(FLAG_BADGE07_GET);
-                FlagSet(FLAG_BADGE08_GET);
-            }
-            
             // Update VARs
             VarSet(VAR_ROGUE_CURRENT_ROOM_IDX, gRogueRun.currentRoomIdx);
             VarSet(VAR_ROGUE_CURRENT_LEVEL_CAP, CalculateBossLevel());
@@ -3423,6 +3519,19 @@ void Rogue_OnSetWarpData(struct WarpData *warp)
     }
 
     QuestNotify_OnWarp(warp);
+}
+
+
+void Rogue_ModifyMapHeader(struct MapHeader *mapHeader)
+{
+}
+
+void Rogue_ModifyObjectEvents(struct MapHeader *mapHeader, struct ObjectEventTemplate *objectEvents, u8* objectEventCount, u8 objectEventCapacity)
+{
+    if(mapHeader->mapLayoutId == LAYOUT_ROGUE_ADVENTURE_PATHS)
+    {
+        RogueAdv_ModifyObjectEvents(mapHeader, objectEvents, objectEventCount, objectEventCapacity);
+    }
 }
 
 static void PushFaintedMonToLab(struct Pokemon* srcMon)
@@ -3517,7 +3626,7 @@ void RemoveAnyFaintedMons(bool8 keepItems, bool8 canSendToLab)
     bool8 hasMonFainted = FALSE;
 
     // If we're finished, we don't want to release any mons, just check if anything has fainted or not
-    if(Rogue_IsRunActive() && gRogueRun.currentDifficulty >= BOSS_COUNT)
+    if(Rogue_IsRunActive() && gRogueRun.currentDifficulty >= ROGUE_MAX_BOSS_COUNT)
     {
         for(read = 0; read < PARTY_SIZE; ++read)
         {
@@ -3759,16 +3868,12 @@ void Rogue_Battle_EndTrainerBattle(u16 trainerNum)
             u8 prevLevel = CalculateBossLevel();
             const struct RogueTrainerEncounter* trainer = &gRogueBossEncounters.trainers[gRogueAdvPath.currentRoomParams.roomIdx];
 
+            gRogueRun.completedBadges[gRogueRun.currentDifficulty] = trainer->incTypes[0] != TYPE_NONE ? trainer->incTypes[0] : TYPE_MYSTERY;
+
             ++gRogueRun.currentDifficulty;
             nextLevel = CalculateBossLevel();
 
             gRogueRun.currentLevelOffset = nextLevel - prevLevel;
-
-            if(trainer->victorySetFlag)
-            {
-                // Set any extra flags
-                FlagSet(trainer->victorySetFlag);
-            }
 
             // Clear the history buffer, as we track based on types
             // In rainbow mode, the type can only appear once though
@@ -3784,7 +3889,7 @@ void Rogue_Battle_EndTrainerBattle(u16 trainerNum)
                     }
             }
 
-            if(gRogueRun.currentDifficulty >= BOSS_COUNT)
+            if(gRogueRun.currentDifficulty >= ROGUE_MAX_BOSS_COUNT)
             {
                 FlagSet(FLAG_IS_CHAMPION);
                 FlagSet(FLAG_ROGUE_RUN_COMPLETED);
@@ -4296,6 +4401,24 @@ static void ConfigureTrainer(u16 trainerNum, u8* monsCount)
         {
             *monsCount = 2;
         }
+    }
+}
+
+bool8 Rogue_AllowItemUse(u16 itemId)
+{
+    //if (gMain.inBattle)
+    //{
+    //    return FALSE;
+    //}
+
+    return TRUE;
+}
+
+void Rogue_OnItemUse(u16 itemId)
+{
+    if (gMain.inBattle)
+    {
+
     }
 }
 
@@ -6183,6 +6306,16 @@ u16 Rogue_SelectRandomWildMon(void)
     return SPECIES_NONE;
 }
 
+bool8 Rogue_AreWildMonEnabled(void)
+{
+    if(Rogue_IsRunActive() || GetSafariZoneFlag())
+    {
+        return GetCurrentWildEncounterCount() > 0;
+    }
+
+    return FALSE;
+}
+
 void Rogue_CreateEventMon(u16* species, u8* level, u16* itemId)
 {
     *level = CalculateWildLevel(3);
@@ -6212,6 +6345,23 @@ void Rogue_ModifyEventMon(struct Pokemon* mon)
         // Clear held item
         temp = 0;
         SetMonData(mon, MON_DATA_HELD_ITEM, &temp);
+    }
+    else if(gRogueAdvPath.currentRoomType == ADVPATH_ROOM_LEGENDARY)
+    {
+        u8 i;
+        u16 moveId;
+
+        // Replace roar with hidden power to avoid pokemon roaring itself out of battle
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            moveId = GetMonData(mon, MON_DATA_MOVE1 + i);
+            if(moveId == MOVE_ROAR || moveId == MOVE_TELEPORT)
+            {
+                moveId = MOVE_HIDDEN_POWER;
+                SetMonData(mon, MON_DATA_MOVE1 + i, &moveId);
+                SetMonData(mon, MON_DATA_PP1 + i, &gBattleMoves[moveId].pp);
+            }
+        }
     }
 }
 

@@ -209,8 +209,8 @@ gSpecials::
 	def_special Rogue_BufferCampaignName
 	def_special Rogue_CheckMonCombo
 	def_special Rogue_ApplyMonCombo
+	def_special Rogue_GetFollowMonSpecies
 	def_special RogueAdv_ApplyAdventureMetatiles
-	def_special RogueAdv_UpdateObjectGFX
 	def_special RogueAdv_GetNodeParams
 	def_special RogueAdv_ExecuteNodeAction
 	def_special GetFirstFreePokeblockSlot
@@ -369,6 +369,7 @@ gSpecials::
 	def_special SetSootopolisGymCrackedIceMetatiles
 	def_special ShakeCamera
 	def_special StartGroudonKyogreBattle
+	def_special BattleSetup_StartWildBattle
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
 	def_special SetTrainerFacingDirection

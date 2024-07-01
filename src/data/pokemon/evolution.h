@@ -113,9 +113,9 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
                                        {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
                                        {EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON},
                                        {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON},
-                                       {EVO_SPECIFIC_MAP, MAP_PETALBURG_WOODS, SPECIES_LEAFEON},
+                                       {EVO_SPECIFIC_MAP, MAP_ROGUE_MANAGER, SPECIES_LEAFEON},
                                        {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
-                                       {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_GLACEON},
+                                       {EVO_SPECIFIC_MAP, MAP_ROGUE_MANAGER, SPECIES_GLACEON},
                                        {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON},
                                     #ifdef ROGUE_DRAYANO
                                        {EVO_ITEM, ITEM_SHINY_STONE, SPECIES_SYLVEON}
@@ -586,7 +586,7 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_CHARJABUG]             = {{EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_VIKAVOLT},
                                        {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_VIKAVOLT}},
 #endif
-    [SPECIES_CRABRAWLER]            = {{EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_CRABOMINABLE}},
+    [SPECIES_CRABRAWLER]            = {{EVO_SPECIFIC_MAP, MAP_ROGUE_MANAGER, SPECIES_CRABOMINABLE}},
     [SPECIES_CUTIEFLY]              = {{EVO_LEVEL, 25, SPECIES_RIBOMBEE}},
     [SPECIES_ROCKRUFF]              = {{EVO_LEVEL_DAY, 25, SPECIES_LYCANROC},
                                        {EVO_LEVEL_NIGHT, 25, SPECIES_LYCANROC_MIDNIGHT}

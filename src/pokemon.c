@@ -54,6 +54,7 @@
 #include "constants/battle_config.h"
 
 #include "rogue_controller.h"
+#include "rogue_timeofday.h"
 
 struct SpeciesItem
 {
@@ -3210,28 +3211,9 @@ void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFix
 
 void CreateMonForcedShiny(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 otIdType, u32 fixedOtId)
 {
-    u32 lhs;
-    u32 personality;
-    u32 OtId;
-
-    if(otIdType == OT_ID_PLAYER_ID)
-    {
-        OtId = gSaveBlock2Ptr->playerTrainerId[0]
-              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-    }
-    else if (otIdType == OT_ID_PRESET)
-    {
-        OtId = fixedOtId;
-    }
-    
-    // Attempt first to calculate a valid shiny PID
-    // By setting to 0 and then generating a value for the low half which will end up being used as the shiny value
-    lhs = HIHALF(OtId) ^ LOHALF(OtId);
-    personality = ((lhs << 16) & 0xFFFF0000) + ((Random() % SHINY_ODDS) & 0xFFFF);
-
-    CreateMon(mon, species, level, fixedIV, TRUE, personality, otIdType, fixedOtId);
+    u8 shiny = 1;
+    CreateMon(mon, species, level, fixedIV, FALSE, 0, otIdType, fixedOtId);
+    SetMonData(mon, MON_DATA_IS_SHINY, &shiny);
 }
 
 void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
@@ -3255,13 +3237,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     // Determine original trainer ID
     if (otIdType == OT_ID_RANDOM_NO_SHINY)
     {
-        u32 shinyValue;
-        do
-        {
-            // Choose random OT IDs until one that results in a non-shiny Pokémon
-            value = Random32();
-            shinyValue = GET_SHINY_VALUE(value, personality);
-        } while (shinyValue < SHINY_ODDS);
+        value = Random32();
     }
     else if (otIdType == OT_ID_PRESET)
     {
@@ -3308,6 +3284,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
     value = ITEM_POKE_BALL;
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
+
+    value = 0;
+    SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &value);
 
     {
         u16 gender = gSaveBlock2Ptr->playerGender % 2;
@@ -3835,30 +3814,29 @@ void CreateEventLegalEnemyMon(void)
     u16 species = VarGet(gSpecialVar_0x8004);
     u8 level = gSpecialVar_0x8005;
     u16 itemId = gSpecialVar_0x8006;
+    bool8 isShiny = VarGet(gSpecialVar_0x8007) != 0;
 
     Rogue_CreateEventMon(&species, &level, &itemId);
 
     ZeroEnemyPartyMons();
     CreateEventLegalMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
 
-    // RogueNote: Replace roar with hidden power to avoid pokemon roaring itself out of battle
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    if (itemId >= ITEMS_COUNT)
     {
-        moveId = GetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i);
-        if(moveId == MOVE_ROAR || moveId == MOVE_TELEPORT)
-        {
-            moveId = MOVE_HIDDEN_POWER;
-            SetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i, &moveId);
-            SetMonData(&gEnemyParty[0], MON_DATA_PP1 + i, &gBattleMoves[moveId].pp);
-        }
+        SetWildMonHeldItem();
     }
-
-    if (itemId)
+    else if (itemId != ITEM_NONE)
     {
         u8 heldItem[2];
         heldItem[0] = itemId;
         heldItem[1] = itemId >> 8;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
+    }
+
+    if(isShiny)
+    {
+        u8 shiny = 1;
+        SetMonData(&gEnemyParty[0], MON_DATA_IS_SHINY, &shiny);
     }
 
     Rogue_ModifyEventMon(&gEnemyParty[0]);
@@ -4724,8 +4702,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_ABILITY_NUM:
         retVal = substruct3->abilityNum;
         break;
-    case MON_DATA_COOL_RIBBON:
-        retVal = substruct3->coolRibbon;
+    case MON_DATA_IS_SHINY:
+        retVal = substruct3->isShiny;
         break;
     case MON_DATA_BEAUTY_RIBBON:
         retVal = substruct3->beautyRibbon;
@@ -4816,7 +4794,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = 0;
         if (substruct0->species && !substruct3->isEgg)
         {
-            retVal += substruct3->coolRibbon;
             retVal += substruct3->beautyRibbon;
             retVal += substruct3->cuteRibbon;
             retVal += substruct3->smartRibbon;
@@ -4840,7 +4817,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         if (substruct0->species && !substruct3->isEgg)
         {
             retVal = substruct3->championRibbon
-                | (substruct3->coolRibbon << 1)
                 | (substruct3->beautyRibbon << 4)
                 | (substruct3->cuteRibbon << 7)
                 | (substruct3->smartRibbon << 10)
@@ -5108,8 +5084,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_ABILITY_NUM:
         SET8(substruct3->abilityNum);
         break;
-    case MON_DATA_COOL_RIBBON:
-        SET8(substruct3->coolRibbon);
+    case MON_DATA_IS_SHINY:
+        SET8(substruct3->isShiny);
         break;
     case MON_DATA_BEAUTY_RIBBON:
         SET8(substruct3->beautyRibbon);
@@ -6545,28 +6521,23 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = currentEvo.targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && friendship >= 220)
+                if ((RogueToD_IsDay() || RogueToD_IsDawn()) && friendship >= 220)
                     targetSpecies = currentEvo.targetSpecies;
                 break;
             case EVO_LEVEL_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && currentEvo.param <= level)
+                if ((RogueToD_IsDay() || RogueToD_IsDawn()) && currentEvo.param <= level)
                     targetSpecies = currentEvo.targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && friendship >= 220)
+                if ((RogueToD_IsNight() || RogueToD_IsDusk()) && friendship >= 220)
                     targetSpecies = currentEvo.targetSpecies;
                 break;
             case EVO_LEVEL_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && currentEvo.param <= level)
+                if ((RogueToD_IsNight() || RogueToD_IsDusk()) && currentEvo.param <= level)
                     targetSpecies = currentEvo.targetSpecies;
                 break;
             case EVO_ITEM_HOLD_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && heldItem == currentEvo.param)
+                if ((RogueToD_IsNight() || RogueToD_IsDusk()) && heldItem == currentEvo.param)
                 {
                     heldItem = 0;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -6574,8 +6545,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 }
                 break;
             case EVO_ITEM_HOLD_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && heldItem == currentEvo.param)
+                if ((RogueToD_IsDay() || RogueToD_IsDawn()) && heldItem == currentEvo.param)
                 {
                     heldItem = 0;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -6583,8 +6553,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 }
                 break;
             case EVO_LEVEL_DUSK:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 17 && gLocalTime.hours < 18 && currentEvo.param <= level)
+                if (RogueToD_IsDusk() && currentEvo.param <= level)
                     targetSpecies = currentEvo.targetSpecies;
                 break;
             case EVO_LEVEL:
@@ -7773,58 +7742,41 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId)
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    return GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
+    bool8 shiny = GetMonData(mon, MON_DATA_IS_SHINY, 0);
+    u8 gender = GetMonGender(mon);
+    return GetMonSpritePalFromSpecies(species, gender, shiny);
 }
 
-const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
+const u32 *GetMonSpritePalFromSpecies(u16 species, u8 gender, bool8 shiny)
 {
     u32 shinyValue;
 
     if (species > NUM_SPECIES)
-        return gMonPaletteTable[SPECIES_NONE].data;
+        species = SPECIES_NONE;
 
-    shinyValue = GET_SHINY_VALUE(otId, personality);
-    if (shinyValue < SHINY_ODDS)
-    {
-        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
-            return gMonShinyPaletteTableFemale[species].data;
-        else
-            return gMonShinyPaletteTable[species].data;
-    }
-    else
-    {
-        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
-            return gMonPaletteTableFemale[species].data;
-        else
-            return gMonPaletteTable[species].data;
-    }
+    return GetMonSpritePalStructFromSpecies(species, gender, shiny)->data;
 }
 
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    return GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+    bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, 0);
+    u8 gender = GetMonGender(mon);
+    return GetMonSpritePalStructFromSpecies(species, gender, isShiny);
 }
 
-const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality)
+const struct CompressedSpritePalette *GetMonSpritePalStructFromSpecies(u16 species, u8 gender, bool8 isShiny)
 {
-    u32 shinyValue;
-
-    shinyValue = GET_SHINY_VALUE(otId, personality);
-    if (shinyValue < SHINY_ODDS)
+    if (isShiny)
     {
-        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && gender == MON_FEMALE)
             return &gMonShinyPaletteTableFemale[species];
         else
             return &gMonShinyPaletteTable[species];
     }
     else
     {
-        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && gender == MON_FEMALE)
             return &gMonPaletteTableFemale[species];
         else
             return &gMonPaletteTable[species];
@@ -7979,43 +7931,19 @@ void SetWildMonHeldItem(void)
             
             rnd = Random() % 100;
             species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, 0);
-            if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
+            if (gBaseStats[species].itemCommon == gBaseStats[species].itemRare && gBaseStats[species].itemCommon != ITEM_NONE)
             {
-                s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
-                if (alteringCaveId != 0)
-                {
-                    // In active Altering Cave, use special item list
-                    if (rnd < chanceNotRare)
-                        continue;
-                    heldItem = sAlteringCaveWildMonHeldItems[alteringCaveId].item;
-                }
-                else
-                {
-                    // In inactive Altering Cave, use normal items
-                    if (rnd < chanceNoItem)
-                        continue;
-                    if (rnd < chanceNotRare)
-                        heldItem = gBaseStats[species].itemCommon;
-                    else
-                        heldItem = gBaseStats[species].itemRare;
-                }
+                // Both held items are the same, 100% chance to hold item
+                heldItem = gBaseStats[species].itemCommon;
             }
             else
             {
-                if (gBaseStats[species].itemCommon == gBaseStats[species].itemRare && gBaseStats[species].itemCommon != ITEM_NONE)
-                {
-                    // Both held items are the same, 100% chance to hold item
+                if (rnd < chanceNoItem)
+                    continue;
+                if (rnd < chanceNotRare)
                     heldItem = gBaseStats[species].itemCommon;
-                }
                 else
-                {
-                    if (rnd < chanceNoItem)
-                        continue;
-                    if (rnd < chanceNotRare)
-                        heldItem = gBaseStats[species].itemCommon;
-                    else
-                        heldItem = gBaseStats[species].itemRare;
-                }
+                    heldItem = gBaseStats[species].itemRare;
             }
         }
 
@@ -8029,18 +7957,7 @@ void SetWildMonHeldItem(void)
 
 bool8 IsMonShiny(struct Pokemon *mon)
 {
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    return IsShinyOtIdPersonality(otId, personality);
-}
-
-bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
-{
-    bool8 retVal = FALSE;
-    u32 shinyValue = GET_SHINY_VALUE(otId, personality);
-    if (shinyValue < SHINY_ODDS)
-        retVal = TRUE;
-    return retVal;
+    return GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 }
 
 const u8 *GetTrainerPartnerName(void)

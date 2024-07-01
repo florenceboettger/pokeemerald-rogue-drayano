@@ -26,6 +26,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
 #include "util.h"
+#include "follow_me.h"
 #include "constants/field_effects.h"
 #include "constants/event_object_movement.h"
 #include "constants/metatile_behaviors.h"
@@ -772,16 +773,34 @@ void FieldEffectScript_LoadTiles(u8 **script)
 
 void FieldEffectScript_LoadFadedPalette(u8 **script)
 {
+    u8 palIndex;
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
-    LoadSpritePalette(palette);
+    bool8 freshLoad = IndexOfSpritePaletteTag(palette->tag) == 0xFF;
+
+    palIndex = LoadSpritePalette(palette);
+
+    if(palIndex != 0xFF && freshLoad)
+    {
+        Rogue_ModifyOverworldPalette(0x100 + palIndex * 16, 1);
+    }
+
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
     (*script) += 4;
 }
 
 void FieldEffectScript_LoadPalette(u8 **script)
 {
+    u8 palIndex;
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
-    LoadSpritePalette(palette);
+    bool8 freshLoad = IndexOfSpritePaletteTag(palette->tag) == 0xFF;
+
+    palIndex = LoadSpritePalette(palette);
+
+    if(palIndex != 0xFF && freshLoad)
+    {
+        Rogue_ModifyOverworldPalette(0x100 + palIndex * 16, 1);
+    }
+
     (*script) += 4;
 }
 
@@ -931,7 +950,9 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
 {
-    const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+    // TODO - Fixup shinyness
+    u8 gender = GetGenderFromSpeciesAndPersonality(species, personality);
+    const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromSpecies(species, gender, FALSE);
     u16 spriteId = CreateMonPicSprite(species, otId, personality, 1, x, y, 0, spritePalette->tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
@@ -1553,6 +1574,7 @@ static bool8 FallWarpEffect_End(struct Task *task)
     UnfreezeObjectEvents();
     InstallCameraPanAheadCallback();
     DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
+    FollowMe_WarpSetEnd();
     return FALSE;
 }
 
@@ -1604,6 +1626,9 @@ static bool8 EscalatorWarpOut_WaitForPlayer(struct Task *task)
         task->tState++;
         task->data[2] = 0;
         task->data[3] = 0;
+
+        EscalatorMoveFollower(task->data[1]);
+
         if ((u8)task->tGoingUp == FALSE)
         {
             task->tState = 4; // jump to EscalatorWarpOut_Down_Ride
@@ -3054,6 +3079,9 @@ static void SurfFieldEffect_JumpOnSurfBlob(struct Task *task)
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         ObjectEventClearHeldMovementIfFinished(objectEvent);
         ObjectEventSetHeldMovement(objectEvent, GetJumpSpecialMovementAction(objectEvent->movementDirection));
+
+        FollowMe_FollowerToWater();
+
         gFieldEffectArguments[0] = task->tDestX;
         gFieldEffectArguments[1] = task->tDestY;
         gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;

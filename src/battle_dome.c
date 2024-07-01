@@ -38,6 +38,7 @@
 #include "constants/abilities.h"
 #include "constants/songs.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_move_effects.h"
 #include "constants/rgb.h"
 
 #include "rogue_controller.h"
@@ -2743,20 +2744,27 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
 #define TYPE_x2     40
 #define TYPE_x4     80
 
-static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
+#ifdef ROGUE_EXPANSION
+static u16 GetMoveAwareTypeModifier(u16 move, u8 atkType, u8 defType)
 {
-    int defType1, defType2, defAbility, moveType;
+    if (gBattleMoves[move].effect == EFFECT_FREEZE_DRY && defType == TYPE_WATER)
+        return UQ_4_12(2.0);
+
+    return GetTypeModifier(atkType, defType);
+}
+#endif
+
+int GetMovePower(u16 move, u8 moveType, u16 defType1, u16 defType2, u16 defAbility, u16 mode)
+{
     int i = 0;
     int typePower = TYPE_x1;
 
     if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].power == 0)
         return 0;
 
-    defType1 = gBaseStats[targetSpecies].type1;
-    defType2 = gBaseStats[targetSpecies].type2;
-    defAbility = gBaseStats[targetSpecies].abilities[0];
-    moveType = gBattleMoves[move].type;
-
+    if(moveType == TYPE_NONE)
+        moveType = gBattleMoves[move].type;
+    
     if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
         // They likely meant to return here, as 8 is the number of points normally used in this mode for moves with no effect.
@@ -2764,15 +2772,14 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
         if (mode == EFFECTIVENESS_MODE_BAD)
         {
             typePower = 8;
-        #ifdef BUGFIX
-            return;
-        #endif
+            return typePower;
         }
     }
     else
     {
-        u32 typeEffectiveness1 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType1) * 2) * 5;
-        u32 typeEffectiveness2 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType2) * 2) * 5;
+#ifdef ROGUE_EXPANSION
+        u32 typeEffectiveness1 = UQ_4_12_TO_INT(GetMoveAwareTypeModifier(move, moveType, defType1) * 2) * 5;
+        u32 typeEffectiveness2 = UQ_4_12_TO_INT(GetMoveAwareTypeModifier(move, moveType, defType2) * 2) * 5;
 
         typePower = (typeEffectiveness1 * typePower) / 10;
         if (defType2 != defType1)
@@ -2780,7 +2787,42 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
 
         if (defAbility == ABILITY_WONDER_GUARD && typeEffectiveness1 != TYPE_x1 && typeEffectiveness2 != TYPE_x1)
             typePower = 0;
+#else
+        // Calculate a "type power" value to determine the benefit of using this type move against the target.
+        // This value will then be used to get the number of points to assign to the move.
+        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
+        {
+            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
+            {
+                i += 3;
+                continue;
+            }
+            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+            {
+                // BUG: the value of TYPE_x2 does not exist in gTypeEffectiveness, so if defAbility is ABILITY_WONDER_GUARD, the conditional always fails
+                #ifndef BUGFIX
+                    #define WONDER_GUARD_EFFECTIVENESS TYPE_x2
+                #else
+                    #define WONDER_GUARD_EFFECTIVENESS TYPE_MUL_SUPER_EFFECTIVE
+                #endif
+                if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == WONDER_GUARD_EFFECTIVENESS) || defAbility != ABILITY_WONDER_GUARD)
+                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+                if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
+                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == WONDER_GUARD_EFFECTIVENESS) || defAbility != ABILITY_WONDER_GUARD)
+                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
+            }
+            i += 3;
+        }
+#endif
     }
+
+    return typePower;
+}
+
+static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
+{
+    int typePower = GetMovePower(move, TYPE_NONE, gBaseStats[targetSpecies].type1, gBaseStats[targetSpecies].type2, gBaseStats[targetSpecies].abilities[0], mode);
 
     switch (mode)
     {

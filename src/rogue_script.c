@@ -20,6 +20,7 @@
 #include "rogue.h"
 #include "rogue_campaign.h"
 #include "rogue_charms.h"
+#include "rogue_followmon.h"
 #include "rogue_script.h"
 #include "rogue_popup.h"
 #include "rogue_quest.h"
@@ -760,11 +761,14 @@ static u16 GetSpeciesComboOutput(u16 speciesA, u16 speciesB, bool8 getItem)
     if(CheckSpeciesCombo(speciesA, speciesB, SPECIES_KYUREM, SPECIES_ZEKROM))
         return getItem ? ITEM_DNA_SPLICERS : SPECIES_KYUREM_BLACK;
 
-    if(CheckSpeciesCombo(speciesA, speciesB, SPECIES_ZYGARDE, SPECIES_ZYGARDE))
-        return getItem ? ITEM_ZYGARDE_CUBE : SPECIES_ZYGARDE_10_POWER_CONSTRUCT;
+    if(CheckSpeciesCombo(speciesA, speciesB, SPECIES_ZYGARDE_COMPLETE, SPECIES_ZYGARDE_COMPLETE))
+        return getItem ? ITEM_ZYGARDE_CUBE : SPECIES_ZYGARDE_10;
 
-    if(CheckSpeciesCombo(speciesA, speciesB, SPECIES_ZYGARDE_10_POWER_CONSTRUCT, SPECIES_ZYGARDE_10_POWER_CONSTRUCT))
-        return getItem ? ITEM_ZYGARDE_CUBE : SPECIES_ZYGARDE_50_POWER_CONSTRUCT;
+    if(CheckSpeciesCombo(speciesA, speciesB, SPECIES_ZYGARDE_10, SPECIES_ZYGARDE_10))
+        return getItem ? ITEM_ZYGARDE_CUBE : SPECIES_ZYGARDE;
+
+    if(CheckSpeciesCombo(speciesA, speciesB, SPECIES_ZYGARDE, SPECIES_ZYGARDE))
+        return getItem ? ITEM_ZYGARDE_CUBE : SPECIES_ZYGARDE_COMPLETE;
 
     if(CheckSpeciesCombo(speciesA, speciesB, SPECIES_NECROZMA, SPECIES_SOLGALEO))
         return getItem ? ITEM_N_SOLARIZER : SPECIES_NECROZMA_DUSK_MANE;
@@ -812,4 +816,14 @@ void Rogue_ApplyMonCombo(void)
     {
         gSpecialVar_Result = FALSE;
     }
+}
+
+void Rogue_GetFollowMonSpecies(void)
+{
+    u16 species;
+    bool8 isShiny;
+    FollowMon_GetSpeciesFromLastInteracted(&species, &isShiny);
+
+    gSpecialVar_0x800A = species;
+    gSpecialVar_0x800B = isShiny;
 }

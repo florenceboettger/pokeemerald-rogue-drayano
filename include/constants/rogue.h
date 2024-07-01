@@ -12,11 +12,11 @@
 // Debugging defines
 // Override these when debugging
 //
-//#define ROGUE_DEBUG
+#define ROGUE_DEBUG
 //#define ROGUE_DEBUG_PAUSE_PANEL
 //#define ROGUE_DEBUG_STEAL_TEAM
-//#define ROGUE_DEBUG_LVL_5_TRAINERS
-//#define ROGUE_DEBUG_LOGGING
+#define ROGUE_DEBUG_LVL_5_TRAINERS
+#define ROGUE_DEBUG_LOGGING
 #else
 
 // Automation defines
@@ -38,8 +38,8 @@
 
 #define ROGUE_HUB_BERRY_TREE_COUNT 20
 
-#define ROGUE_MAX_ADVPATH_ROWS 7
-#define ROGUE_MAX_ADVPATH_COLUMNS 7
+#define ROGUE_MAX_ADVPATH_ROWS 14
+#define ROGUE_MAX_ADVPATH_COLUMNS 14
 
 
 // Items
@@ -55,42 +55,37 @@
 #define ROGUE_SHOP_BERRIES              9
 #define ROGUE_SHOP_CHARMS               10
 
-// Old replacement-style items
-#define ITEM_LINK_CABLE ITEM_EXP_SHARE
+#define ITEM_LINK_CABLE                 (ITEM_ROGUE_ITEM_FIRST + 0)
+#define ITEM_QUEST_LOG                  (ITEM_ROGUE_ITEM_FIRST + 1)
+#define ITEM_HEALING_FLASK              (ITEM_ROGUE_ITEM_FIRST + 2)
 
-#ifdef ROGUE_EXPANSION
-#define ITEM_QUEST_LOG ITEM_KEY_TO_ROOM_1
-#else
-#define ITEM_QUEST_LOG ITEM_ROOM_1_KEY
-#endif
+// TODO - Classify these as dynamic items, to be wiped every patch (Allows easily moving them around)
+#define ITEM_SHOP_PRICE_CHARM           (ITEM_ROGUE_ITEM_FIRST + 50)
+#define ITEM_FLINCH_CHARM               (ITEM_ROGUE_ITEM_FIRST + 51)
+#define ITEM_CRIT_CHARM                 (ITEM_ROGUE_ITEM_FIRST + 52)
+#define ITEM_SHED_SKIN_CHARM            (ITEM_ROGUE_ITEM_FIRST + 53)
+#define ITEM_WILD_IV_CHARM              (ITEM_ROGUE_ITEM_FIRST + 54)
+#define ITEM_CATCHING_CHARM             (ITEM_ROGUE_ITEM_FIRST + 55)
+#define ITEM_GRACE_CHARM                (ITEM_ROGUE_ITEM_FIRST + 56)
+#define ITEM_WILD_ENCOUNTER_CHARM       (ITEM_ROGUE_ITEM_FIRST + 57)
+#define ITEM_MOVE_PRIORITY_CHARM        (ITEM_ROGUE_ITEM_FIRST + 58)
+#define ITEM_ENDURE_CHARM               (ITEM_ROGUE_ITEM_FIRST + 59)
 
-
-#define ITEM_SHOP_PRICE_CHARM           ITEM_ROGUE_ITEM0
-#define ITEM_FLINCH_CHARM               ITEM_ROGUE_ITEM1
-#define ITEM_CRIT_CHARM                 ITEM_ROGUE_ITEM2
-#define ITEM_SHED_SKIN_CHARM            ITEM_ROGUE_ITEM3
-#define ITEM_WILD_IV_CHARM              ITEM_ROGUE_ITEM4
-#define ITEM_CATCHING_CHARM             ITEM_ROGUE_ITEM5
-#define ITEM_GRACE_CHARM                ITEM_ROGUE_ITEM6
-#define ITEM_WILD_ENCOUNTER_CHARM       ITEM_ROGUE_ITEM7
-#define ITEM_MOVE_PRIORITY_CHARM        ITEM_ROGUE_ITEM8
-#define ITEM_ENDURE_CHARM               ITEM_ROGUE_ITEM9
-
-#define ITEM_SHOP_PRICE_CURSE           ITEM_ROGUE_ITEM20
-#define ITEM_FLINCH_CURSE               ITEM_ROGUE_ITEM21
-#define ITEM_CRIT_CURSE                 ITEM_ROGUE_ITEM22
-#define ITEM_SHED_SKIN_CURSE            ITEM_ROGUE_ITEM23
-#define ITEM_WILD_IV_CURSE              ITEM_ROGUE_ITEM24
-#define ITEM_CATCHING_CURSE             ITEM_ROGUE_ITEM25
-#define ITEM_GRACE_CURSE                ITEM_ROGUE_ITEM26
-#define ITEM_WILD_ENCOUNTER_CURSE       ITEM_ROGUE_ITEM27
-#define ITEM_PARTY_CURSE                ITEM_ROGUE_ITEM28
-#define ITEM_EVERSTONE_CURSE            ITEM_ROGUE_ITEM29
-#define ITEM_BATTLE_ITEM_CURSE          ITEM_ROGUE_ITEM30
-#define ITEM_SPECIES_CLAUSE_CURSE       ITEM_ROGUE_ITEM31
-#define ITEM_ITEM_SHUFFLE_CURSE         ITEM_ROGUE_ITEM32
-#define ITEM_MOVE_PRIORITY_CURSE        ITEM_ROGUE_ITEM33
-#define ITEM_ENDURE_CURSE               ITEM_ROGUE_ITEM34
+#define ITEM_SHOP_PRICE_CURSE           (ITEM_ROGUE_ITEM_FIRST + 60)
+#define ITEM_FLINCH_CURSE               (ITEM_ROGUE_ITEM_FIRST + 61)
+#define ITEM_CRIT_CURSE                 (ITEM_ROGUE_ITEM_FIRST + 62)
+#define ITEM_SHED_SKIN_CURSE            (ITEM_ROGUE_ITEM_FIRST + 63)
+#define ITEM_WILD_IV_CURSE              (ITEM_ROGUE_ITEM_FIRST + 64)
+#define ITEM_CATCHING_CURSE             (ITEM_ROGUE_ITEM_FIRST + 65)
+#define ITEM_GRACE_CURSE                (ITEM_ROGUE_ITEM_FIRST + 66)
+#define ITEM_WILD_ENCOUNTER_CURSE       (ITEM_ROGUE_ITEM_FIRST + 67)
+#define ITEM_PARTY_CURSE                (ITEM_ROGUE_ITEM_FIRST + 68)
+#define ITEM_EVERSTONE_CURSE            (ITEM_ROGUE_ITEM_FIRST + 69)
+#define ITEM_BATTLE_ITEM_CURSE          (ITEM_ROGUE_ITEM_FIRST + 70)
+#define ITEM_SPECIES_CLAUSE_CURSE       (ITEM_ROGUE_ITEM_FIRST + 71)
+#define ITEM_ITEM_SHUFFLE_CURSE         (ITEM_ROGUE_ITEM_FIRST + 72)
+#define ITEM_MOVE_PRIORITY_CURSE        (ITEM_ROGUE_ITEM_FIRST + 73)
+#define ITEM_ENDURE_CURSE               (ITEM_ROGUE_ITEM_FIRST + 74)
 
 #define FIRST_ITEM_CHARM        ITEM_SHOP_PRICE_CHARM
 #define LAST_ITEM_CHARM         ITEM_ENDURE_CHARM
@@ -105,6 +100,42 @@
 #define ROUTE_FLAG_KANTO                  (1 << 2)
 #define ROUTE_FLAG_JOHTO                  (1 << 3)
 #define ROUTE_FLAG_FALLBACK_REGION        (1 << 4) // If the player unselects all route expansions, use this custom fallback set
+
+// Adventure
+//
+#define ROGUE_ADV_STANDARD      0
+#define ROGUE_ADV_RAINBOW       1
+#define ROGUE_ADV_GAUNTLET      2
+
+// AdvPath
+//
+#define ADVPATH_ROOM_NONE       0
+#define ADVPATH_ROOM_ROUTE      1
+#define ADVPATH_ROOM_RESTSTOP   2
+#define ADVPATH_ROOM_LEGENDARY  3
+#define ADVPATH_ROOM_MINIBOSS   4
+#define ADVPATH_ROOM_WILD_DEN   5
+#define ADVPATH_ROOM_GAMESHOW   6
+#define ADVPATH_ROOM_DARK_DEAL  7
+#define ADVPATH_ROOM_LAB        8
+
+#define ADVPATH_ROOM_BOSS       9
+
+#define ADVPATH_ROOM_COUNT      10
+
+
+#define ADVPATH_SUBROOM_ROUTE_CALM          0
+#define ADVPATH_SUBROOM_ROUTE_AVERAGE       1
+#define ADVPATH_SUBROOM_ROUTE_TOUGH         2
+#define ADVPATH_SUBROOM_RESTSTOP_BATTLE     3
+#define ADVPATH_SUBROOM_RESTSTOP_SHOP       4
+#define ADVPATH_SUBROOM_RESTSTOP_FULL       5
+
+#define ADVPATH_SUBROOM_COUNT 6
+
+
+#define ADVPATH_ROOM_WEIGHT_COUNT       (ADVPATH_ROOM_LAB + 1) // Ignore boss room
+#define ADVPATH_SUBROOM_WEIGHT_COUNT    ADVPATH_SUBROOM_COUNT
 
 // Trainers
 //
@@ -239,6 +270,9 @@
 #define TRAINER_ROGUE_MINI_BOSS_NOLAND       TRAINER_NOLAND
 #define TRAINER_ROGUE_MINI_BOSS_ANABEL       TRAINER_ANABEL
 
+// 8 badges, 4 elite, 2 champion
+#define ROGUE_MAX_BOSS_COUNT 14
+
 // Mon Preset flags
 //
 #define MON_FLAG_NONE                   0
@@ -364,6 +398,10 @@
 #define POPUP_MSG_CAMPAIGN_ANNOUNCE             3
 #define POPUP_MSG_SAFARI_ENCOUNTERS             4
 #define POPUP_MSG_PARTNER_EVO_WARNING           5
+
+// Misc.
+//
+#define FOLLOWMON_SHINY_OFFSET 10000
 
 #include "rogue_quests.h"
 
