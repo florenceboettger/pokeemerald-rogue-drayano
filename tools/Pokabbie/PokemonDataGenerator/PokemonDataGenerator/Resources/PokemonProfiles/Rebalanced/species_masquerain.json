@@ -1,0 +1,257 @@
+{
+    "Species": "SPECIES_MASQUERAIN",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_WHIRLWIND",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_WATER_GUN",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SWEET_SCENT",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SOAK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_GUST",
+            "Level": 17
+        },
+        {
+            "Move": "MOVE_SCARY_FACE",
+            "Level": 22
+        },
+        {
+            "Move": "MOVE_AIR_CUTTER",
+            "Level": 22
+        },
+        {
+            "Move": "MOVE_STUN_SPORE",
+            "Level": 26
+        },
+        {
+            "Move": "MOVE_AIR_SLASH",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_GIGA_DRAIN",
+            "Level": 38
+        },
+        {
+            "Move": "MOVE_BUG_BUZZ",
+            "Level": 44
+        },
+        {
+            "Move": "MOVE_QUIVER_DANCE",
+            "Level": 52
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_AGILITY",
+        "MOVE_HURRICANE",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_ICE_BEAM",
+        "MOVE_POUNCE",
+        "MOVE_WATER_PULSE",
+        "MOVE_U_TURN",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_AIR_SLASH",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_SURF",
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_SHADOW_BALL",
+        "MOVE_MUD_SHOT",
+        "MOVE_FOUL_PLAY",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_ACROBATICS",
+        "MOVE_LIQUIDATION",
+        "MOVE_TERA_BLAST",
+        "MOVE_FLY",
+        "MOVE_TAILWIND",
+        "MOVE_RAIN_DANCE",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HELPING_HAND",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_LUNGE",
+        "MOVE_BLIZZARD",
+        "MOVE_SCARY_FACE",
+        "MOVE_ENERGY_BALL",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_AIR_CUTTER",
+        "MOVE_BUG_BUZZ",
+        "MOVE_WATERFALL",
+        "MOVE_SWIFT",
+        "MOVE_SUNNY_DAY",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_BUG_BITE",
+        "MOVE_DEFOG",
+        "MOVE_PSYCH_UP",
+        "MOVE_HYPER_BEAM",
+        "MOVE_BATON_PASS",
+        "MOVE_TAKE_DOWN",
+        "MOVE_WEATHER_BALL",
+        "MOVE_MUD_SLAP",
+        "MOVE_CHILLING_WATER",
+        "MOVE_ROOST",
+        "MOVE_LEECH_LIFE",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_HAZE",
+        "MOVE_DIVE",
+        "MOVE_PSYBEAM",
+        "MOVE_THIEF",
+        "MOVE_STICKY_WEB"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_STICKY_WEB",
+                "MOVE_ROOST",
+                "MOVE_U_TURN",
+                "MOVE_DEFOG"
+            ],
+            "Ability": "ABILITY_INTIMIDATE",
+            "Item": "ITEM_ROCKY_HELMET",
+            "Nature": "NATURE_IMPISH",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6NU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_QUIVER_DANCE",
+                "MOVE_BUG_BUZZ",
+                "MOVE_AIR_SLASH",
+                "MOVE_ICE_BEAM"
+            ],
+            "Ability": "ABILITY_INTIMIDATE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Quiver Dance",
+            "SourceTiers": [
+                "GEN6PU",
+                "GEN6ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_QUIVER_DANCE",
+                "MOVE_BUG_BUZZ",
+                "MOVE_STICKY_WEB",
+                "MOVE_AIR_SLASH"
+            ],
+            "Ability": "ABILITY_INTIMIDATE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_STICKY_WEB",
+                "MOVE_BUG_BUZZ",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_QUIVER_DANCE"
+            ],
+            "Ability": "ABILITY_INTIMIDATE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Sticky Web Lead",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_AIR_SLASH",
+                "MOVE_BUG_BUZZ",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_STICKY_WEB"
+            ],
+            "Ability": "ABILITY_INTIMIDATE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BUG_BUZZ",
+                "MOVE_AIR_SLASH",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_STICKY_WEB"
+            ],
+            "Ability": "ABILITY_INTIMIDATE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_STICKY_WEB",
+                "MOVE_BUG_BUZZ",
+                "MOVE_HURRICANE",
+                "MOVE_U_TURN"
+            ],
+            "Ability": "ABILITY_INTIMIDATE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9NU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_STICKY_WEB",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_BUG_BUZZ",
+                "MOVE_HURRICANE"
+            ],
+            "Ability": "ABILITY_INTIMIDATE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9PU"
+            ]
+        }
+    ]
+}

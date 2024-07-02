@@ -560,6 +560,7 @@ namespace PokemonDataGenerator.Pokedex
 			public string Nature;
 			public string HiddenPower;
 			public string TeraType;
+			public string Name;
 			public List<string> SourceTiers = new List<string>();
 
 			public bool IsCompatibleWith(PokemonCompetitiveSet other)
@@ -591,6 +592,7 @@ namespace PokemonDataGenerator.Pokedex
 			{
 				PokemonCompetitiveSet output = new PokemonCompetitiveSet();
 				output.SourceTiers.Add(sourceTier);
+				output.Name = json["name"].Value<string>();
 
 				string ability = json["ability"].Value<string>();
 				if (ability != "No Ability")
@@ -756,7 +758,7 @@ namespace PokemonDataGenerator.Pokedex
 			return false;
 		}
 
-		public static void GatherProfiles()
+		public static void GatherProfiles(bool isRebalanced)
 		{
 			List<PokemonProfile> profiles = new List<PokemonProfile>();
 			Dictionary<string, string> redirectedSpecies = new Dictionary<string, string>();
@@ -1021,7 +1023,7 @@ namespace PokemonDataGenerator.Pokedex
 						continue;
 					}
 
-					PokemonProfile profile = GatherProfileFor(speciesName);
+					PokemonProfile profile = GatherProfileFor(speciesName, isRebalanced);
 					profiles.Add(profile);
 				}
 				catch (AggregateException e)
@@ -1046,9 +1048,9 @@ namespace PokemonDataGenerator.Pokedex
 			ExportProfiles(profiles, redirectedSpecies, Path.Combine(GameDataHelpers.RootDirectory, "src\\data\\rogue_pokemon_profiles.h"));
 		}
 
-		private static PokemonProfile GatherProfileFor(string speciesName)
+		private static PokemonProfile GatherProfileFor(string speciesName, bool isRebalanced)
 		{
-			string manualPath = ContentCache.GetWriteableCachePath($"res://PokemonProfiles//{(GameDataHelpers.IsVanillaVersion ? "Vanilla" : "EX")}/{speciesName}.json");
+			string manualPath = ContentCache.GetWriteableCachePath($"res://PokemonProfiles//{ (isRebalanced ? "Rebalanced" : (GameDataHelpers.IsVanillaVersion ? "Vanilla" : "EX")) }/{speciesName}.json");
 			string cachePath = ContentCache.GetWriteableCachePath($"pokemon_profiles/{(GameDataHelpers.IsVanillaVersion ? "Vanilla" : "EX")}/{speciesName}.json");
 			PokemonProfile outputProfile;
 

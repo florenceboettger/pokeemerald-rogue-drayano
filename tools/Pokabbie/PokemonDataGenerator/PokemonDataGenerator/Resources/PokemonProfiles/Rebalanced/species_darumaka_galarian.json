@@ -1,0 +1,119 @@
+{
+    "Species": "SPECIES_DARUMAKA_GALARIAN",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_POWDER_SNOW",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_TAUNT",
+            "Level": 4
+        },
+        {
+            "Move": "MOVE_BITE",
+            "Level": 8
+        },
+        {
+            "Move": "MOVE_AVALANCHE",
+            "Level": 12
+        },
+        {
+            "Move": "MOVE_WORK_UP",
+            "Level": 16
+        },
+        {
+            "Move": "MOVE_ICE_FANG",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_HEADBUTT",
+            "Level": 24
+        },
+        {
+            "Move": "MOVE_ICE_PUNCH",
+            "Level": 28
+        },
+        {
+            "Move": "MOVE_UPROAR",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_BELLY_DRUM",
+            "Level": 36
+        },
+        {
+            "Move": "MOVE_BLIZZARD",
+            "Level": 40
+        },
+        {
+            "Move": "MOVE_THRASH",
+            "Level": 44
+        },
+        {
+            "Move": "MOVE_SUPERPOWER",
+            "Level": 48
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_TAUNT",
+        "MOVE_ICE_BEAM",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_HEAT_WAVE",
+        "MOVE_U_TURN",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_DIG",
+        "MOVE_RETURN",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_ROCK_TOMB",
+        "MOVE_ROUND",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_GYRO_BALL",
+        "MOVE_TOXIC",
+        "MOVE_MEGA_PUNCH",
+        "MOVE_FLING",
+        "MOVE_FRUSTRATION",
+        "MOVE_SUBSTITUTE",
+        "MOVE_FIRE_BLAST",
+        "MOVE_GRASS_KNOT",
+        "MOVE_UPROAR",
+        "MOVE_FLAME_WHEEL",
+        "MOVE_PROTECT",
+        "MOVE_FOCUS_ENERGY",
+        "MOVE_MEGA_KICK",
+        "MOVE_SLEEP_TALK",
+        "MOVE_BRICK_BREAK",
+        "MOVE_BLIZZARD",
+        "MOVE_THIEF",
+        "MOVE_ATTRACT",
+        "MOVE_ICE_FANG",
+        "MOVE_SUNNY_DAY",
+        "MOVE_WORK_UP",
+        "MOVE_FIRE_FANG",
+        "MOVE_SUPERPOWER",
+        "MOVE_TAKE_DOWN",
+        "MOVE_AVALANCHE",
+        "MOVE_HAMMER_ARM",
+        "MOVE_YAWN",
+        "MOVE_FACADE",
+        "MOVE_FIRE_SPIN",
+        "MOVE_ENDURE",
+        "MOVE_OVERHEAT",
+        "MOVE_REST",
+        "MOVE_FLAMETHROWER",
+        "MOVE_WILL_O_WISP",
+        "MOVE_ENCORE",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_INCINERATE",
+        "MOVE_POWER_UP_PUNCH",
+        "MOVE_SNORE",
+        "MOVE_FREEZE_DRY"
+    ],
+    "CompetitiveSets": []
+}

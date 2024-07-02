@@ -1,0 +1,47 @@
+{
+    "Species": "SPECIES_TOXEL",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_GROWL",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ACID",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_FLAIL",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_BELCH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_NUZZLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_TEARFUL_LOOK",
+            "Level": 1
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_RETURN",
+        "MOVE_FACADE",
+        "MOVE_FRUSTRATION",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ENCORE",
+        "MOVE_METAL_SOUND",
+        "MOVE_CHARM",
+        "MOVE_SLEEP_TALK",
+        "MOVE_TOXIC",
+        "MOVE_ENDEAVOR"
+    ],
+    "CompetitiveSets": []
+}

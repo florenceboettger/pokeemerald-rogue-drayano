@@ -1,0 +1,133 @@
+{
+    "Species": "SPECIES_DELIBIRD",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_PRESENT",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_DRILL_PECK",
+            "Level": 25
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_AGILITY",
+        "MOVE_WATER_PULSE",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_ICE_BEAM",
+        "MOVE_SPIKES",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_AIR_SLASH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_FOUL_PLAY",
+        "MOVE_ACROBATICS",
+        "MOVE_FLY",
+        "MOVE_AURORA_VEIL",
+        "MOVE_AURORA_BEAM",
+        "MOVE_SNOWSCAPE",
+        "MOVE_TAILWIND",
+        "MOVE_COUNTER",
+        "MOVE_FLING",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_TRIPLE_AXEL",
+        "MOVE_STRENGTH",
+        "MOVE_AERIAL_ACE",
+        "MOVE_MEMENTO",
+        "MOVE_SUBSTITUTE",
+        "MOVE_FAKE_OUT",
+        "MOVE_HELPING_HAND",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_ICE_SHARD",
+        "MOVE_DRILL_RUN",
+        "MOVE_BRICK_BREAK",
+        "MOVE_RAPID_SPIN",
+        "MOVE_BLIZZARD",
+        "MOVE_CUT",
+        "MOVE_THIEF",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_REVERSAL",
+        "MOVE_AIR_CUTTER",
+        "MOVE_BODY_SLAM",
+        "MOVE_SWIFT",
+        "MOVE_DESTINY_BOND",
+        "MOVE_GUNK_SHOT",
+        "MOVE_ENDEAVOR",
+        "MOVE_BATON_PASS",
+        "MOVE_HYPER_BEAM",
+        "MOVE_TAKE_DOWN",
+        "MOVE_WEATHER_BALL",
+        "MOVE_ICE_SPINNER",
+        "MOVE_AVALANCHE",
+        "MOVE_SPLASH",
+        "MOVE_CHILLING_WATER",
+        "MOVE_SEED_BOMB",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_TRAILBLAZE",
+        "MOVE_HAZE",
+        "MOVE_ICICLE_SPEAR",
+        "MOVE_FEATHER_DANCE",
+        "MOVE_FREEZE_DRY"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_RAPID_SPIN",
+                "MOVE_ICY_WIND",
+                "MOVE_DESTINY_BOND"
+            ],
+            "Ability": "ABILITY_VITAL_SPIRIT",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Spikes Lead",
+            "SourceTiers": [
+                "GEN6PU",
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_RAPID_SPIN",
+                "MOVE_MEMENTO",
+                "MOVE_FREEZE_DRY"
+            ],
+            "Ability": "ABILITY_VITAL_SPIRIT",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Suicide Lead",
+            "SourceTiers": [
+                "GEN8ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_RAPID_SPIN",
+                "MOVE_SPIKES",
+                "MOVE_DESTINY_BOND",
+                "MOVE_FREEZE_DRY"
+            ],
+            "Ability": "ABILITY_VITAL_SPIRIT",
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9ZU"
+            ]
+        }
+    ]
+}

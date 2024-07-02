@@ -1,0 +1,171 @@
+{
+    "Species": "SPECIES_PIGNITE",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_ARM_THRUST",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_EMBER",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ENDURE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_DEFENSE_CURL",
+            "Level": 13
+        },
+        {
+            "Move": "MOVE_FLAME_CHARGE",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_SMOG",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_ROLLOUT",
+            "Level": 23
+        },
+        {
+            "Move": "MOVE_TAKE_DOWN",
+            "Level": 28
+        },
+        {
+            "Move": "MOVE_HEAT_CRASH",
+            "Level": 31
+        },
+        {
+            "Move": "MOVE_ASSURANCE",
+            "Level": 36
+        },
+        {
+            "Move": "MOVE_FLAMETHROWER",
+            "Level": 39
+        },
+        {
+            "Move": "MOVE_HEAD_SMASH",
+            "Level": 44
+        },
+        {
+            "Move": "MOVE_ROAR",
+            "Level": 47
+        },
+        {
+            "Move": "MOVE_FLARE_BLITZ",
+            "Level": 52
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_TAUNT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_HEAT_WAVE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_DIG",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_FIRE_PLEDGE",
+        "MOVE_ROCK_TOMB",
+        "MOVE_COACHING",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_WILL_O_WISP",
+        "MOVE_GYRO_BALL",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_HEAVY_SLAM",
+        "MOVE_TERA_BLAST",
+        "MOVE_BULLDOZE",
+        "MOVE_FLING",
+        "MOVE_SUBSTITUTE",
+        "MOVE_FIRE_BLAST",
+        "MOVE_GRASS_KNOT",
+        "MOVE_THRASH",
+        "MOVE_ROAR",
+        "MOVE_EARTHQUAKE",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_BRICK_BREAK",
+        "MOVE_HEAT_CRASH",
+        "MOVE_FLAME_CHARGE",
+        "MOVE_REVERSAL",
+        "MOVE_SCARY_FACE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_BODY_SLAM",
+        "MOVE_BULK_UP",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_TEMPER_FLARE",
+        "MOVE_ENDEAVOR",
+        "MOVE_SUPERPOWER",
+        "MOVE_TAKE_DOWN",
+        "MOVE_KNOCK_OFF",
+        "MOVE_MUD_SLAP",
+        "MOVE_YAWN",
+        "MOVE_FACADE",
+        "MOVE_FIRE_SPIN",
+        "MOVE_ENDURE",
+        "MOVE_LOW_KICK",
+        "MOVE_CURSE",
+        "MOVE_FLAMETHROWER",
+        "MOVE_OVERHEAT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_POISON_JAB",
+        "MOVE_REST",
+        "MOVE_TRAILBLAZE",
+        "MOVE_WILD_CHARGE",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_STONE_EDGE",
+        "MOVE_LOW_SWEEP"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_SUPERPOWER",
+                "MOVE_ROAR",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_BLAZE",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_CAREFUL",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_SUPERPOWER",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_THICK_FAT",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Tank",
+            "SourceTiers": [
+                "GEN6ZU"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,145 @@
+{
+    "Species": "SPECIES_SKIDDO",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_GROWTH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_VINE_WHIP",
+            "Level": 7
+        },
+        {
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": 9
+        },
+        {
+            "Move": "MOVE_LEECH_SEED",
+            "Level": 12
+        },
+        {
+            "Move": "MOVE_RAZOR_LEAF",
+            "Level": 13
+        },
+        {
+            "Move": "MOVE_WORRY_SEED",
+            "Level": 16
+        },
+        {
+            "Move": "MOVE_SYNTHESIS",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_TAKE_DOWN",
+            "Level": 22
+        },
+        {
+            "Move": "MOVE_BULLDOZE",
+            "Level": 26
+        },
+        {
+            "Move": "MOVE_SEED_BOMB",
+            "Level": 30
+        },
+        {
+            "Move": "MOVE_BULK_UP",
+            "Level": 34
+        },
+        {
+            "Move": "MOVE_DOUBLE_EDGE",
+            "Level": 38
+        },
+        {
+            "Move": "MOVE_HORN_LEECH",
+            "Level": 42
+        },
+        {
+            "Move": "MOVE_LEAF_BLADE",
+            "Level": 45
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_DIG",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_SURF",
+        "MOVE_MUD_SHOT",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_TERA_BLAST",
+        "MOVE_BULLDOZE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_DEFENSE_CURL",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_ROAR",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_LEAF_STORM",
+        "MOVE_BRICK_BREAK",
+        "MOVE_BULLET_SEED",
+        "MOVE_ENERGY_BALL",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_BODY_SLAM",
+        "MOVE_BULK_UP",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_SUNNY_DAY",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_GRASSY_TERRAIN",
+        "MOVE_ENDEAVOR",
+        "MOVE_TAKE_DOWN",
+        "MOVE_MUD_SLAP",
+        "MOVE_SEED_BOMB",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_WILD_CHARGE",
+        "MOVE_TRAILBLAZE",
+        "MOVE_ROLLOUT",
+        "MOVE_MILK_DRINK"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_BULK_UP",
+                "MOVE_HORN_LEECH",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_BRICK_BREAK"
+            ],
+            "Ability": "ABILITY_SAP_SIPPER",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Bulk Up",
+            "SourceTiers": [
+                "GEN6LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BULK_UP",
+                "MOVE_HORN_LEECH",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_ZEN_HEADBUTT"
+            ],
+            "Ability": "ABILITY_SAP_SIPPER",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_CAREFUL",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Bulk Up",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        }
+    ]
+}

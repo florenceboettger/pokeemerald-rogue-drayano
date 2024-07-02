@@ -1,0 +1,71 @@
+{
+    "Species": "SPECIES_MELTAN",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_THUNDER_SHOCK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_HARDEN",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": 8
+        },
+        {
+            "Move": "MOVE_HEADBUTT",
+            "Level": 16
+        },
+        {
+            "Move": "MOVE_THUNDER_WAVE",
+            "Level": 24
+        },
+        {
+            "Move": "MOVE_ACID_ARMOR",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_FLASH_CANNON",
+            "Level": 40
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_RETURN",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_ROUND",
+        "MOVE_SLEEP_TALK",
+        "MOVE_STEEL_BEAM",
+        "MOVE_GYRO_BALL",
+        "MOVE_TOXIC",
+        "MOVE_THUNDERBOLT",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_FACADE",
+        "MOVE_FRUSTRATION",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_SUBSTITUTE",
+        "MOVE_PROTECT",
+        "MOVE_SNORE",
+        "MOVE_FLASH_CANNON"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_ACID_ARMOR",
+                "MOVE_REST",
+                "MOVE_FLASH_CANNON",
+                "MOVE_THUNDERBOLT"
+            ],
+            "Ability": "ABILITY_MAGNET_PULL",
+            "Item": "ITEM_LEFTOVERS",
+            "Nature": "NATURE_BOLD",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Magnet Pull",
+            "SourceTiers": [
+                "GEN8ZU"
+            ]
+        }
+    ]
+}

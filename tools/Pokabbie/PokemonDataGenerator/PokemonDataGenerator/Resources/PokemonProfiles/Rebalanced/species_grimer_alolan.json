@@ -1,0 +1,228 @@
+{
+    "Species": "SPECIES_GRIMER_ALOLAN",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_POUND",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_POISON_GAS",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_HARDEN",
+            "Level": 4
+        },
+        {
+            "Move": "MOVE_BITE",
+            "Level": 7
+        },
+        {
+            "Move": "MOVE_DISABLE",
+            "Level": 12
+        },
+        {
+            "Move": "MOVE_ACID_SPRAY",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_POISON_FANG",
+            "Level": 18
+        },
+        {
+            "Move": "MOVE_MINIMIZE",
+            "Level": 21
+        },
+        {
+            "Move": "MOVE_TOXIC",
+            "Level": 26
+        },
+        {
+            "Move": "MOVE_KNOCK_OFF",
+            "Level": 29
+        },
+        {
+            "Move": "MOVE_CRUNCH",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_SCREECH",
+            "Level": 37
+        },
+        {
+            "Move": "MOVE_GUNK_SHOT",
+            "Level": 40
+        },
+        {
+            "Move": "MOVE_ACID_ARMOR",
+            "Level": 43
+        },
+        {
+            "Move": "MOVE_BELCH",
+            "Level": 46
+        },
+        {
+            "Move": "MOVE_MEMENTO",
+            "Level": 48
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_RECYCLE",
+        "MOVE_TAUNT",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PURSUIT",
+        "MOVE_CLEAR_SMOG",
+        "MOVE_ROCK_TOMB",
+        "MOVE_MUD_SHOT",
+        "MOVE_STOCKPILE",
+        "MOVE_TOXIC",
+        "MOVE_SNARL",
+        "MOVE_DARK_PULSE",
+        "MOVE_TERA_BLAST",
+        "MOVE_HEX",
+        "MOVE_FLING",
+        "MOVE_RAIN_DANCE",
+        "MOVE_FIRE_BLAST",
+        "MOVE_METRONOME",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT",
+        "MOVE_DYNAMIC_PUNCH",
+        "MOVE_SCARY_FACE",
+        "MOVE_VENOSHOCK",
+        "MOVE_SWIFT",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SWALLOW",
+        "MOVE_THUNDERBOLT",
+        "MOVE_SWAGGER",
+        "MOVE_THUNDER",
+        "MOVE_MUD_SLAP",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_FACADE",
+        "MOVE_MEAN_LOOK",
+        "MOVE_REST",
+        "MOVE_CURSE",
+        "MOVE_THIEF",
+        "MOVE_STONE_EDGE",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_DIG",
+        "MOVE_ACID_SPRAY",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_SHADOW_BALL",
+        "MOVE_CRUNCH",
+        "MOVE_IMPRISON",
+        "MOVE_SPIT_UP",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SPITE",
+        "MOVE_SLEEP_TALK",
+        "MOVE_BRICK_BREAK",
+        "MOVE_EXPLOSION",
+        "MOVE_BODY_SLAM",
+        "MOVE_GUNK_SHOT",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_HYPER_BEAM",
+        "MOVE_TAKE_DOWN",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SANDSTORM",
+        "MOVE_MIMIC",
+        "MOVE_POISON_JAB",
+        "MOVE_ASSURANCE",
+        "MOVE_ENDURE",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_FLAMETHROWER",
+        "MOVE_SNORE"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_PURSUIT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_POISON_JAB",
+                "MOVE_SHADOW_SNEAK"
+            ],
+            "Ability": "ABILITY_POISON_TOUCH",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Pursuit Trap",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK",
+                "MOVE_KNOCK_OFF",
+                "MOVE_POISON_JAB"
+            ],
+            "Ability": "ABILITY_POISON_TOUCH",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "RestTalk",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_KNOCK_OFF",
+                "MOVE_POISON_JAB",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_PURSUIT"
+            ],
+            "Ability": "ABILITY_POISON_TOUCH",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_KNOCK_OFF",
+                "MOVE_GUNK_SHOT",
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_SLEEP_TALK"
+            ],
+            "Ability": "ABILITY_POISON_TOUCH",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": "TYPE_GRASS",
+            "Name": "Wallbreaker",
+            "SourceTiers": [
+                "GEN9LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_KNOCK_OFF",
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_GUNK_SHOT",
+                "MOVE_POISON_JAB"
+            ],
+            "Ability": "ABILITY_POISON_TOUCH",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9LC"
+            ]
+        }
+    ]
+}

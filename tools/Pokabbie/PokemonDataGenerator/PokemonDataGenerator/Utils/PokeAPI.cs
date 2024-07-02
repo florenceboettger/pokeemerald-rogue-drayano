@@ -528,6 +528,7 @@ namespace PokemonDataGenerator.Utils
 							foreach (var currentSetKvp in speciesSetGroupKvp.Value.Value<JObject>())
 							{
 								var currentSet = currentSetKvp.Value.Value<JObject>();
+								currentSet.Add("name", currentSetKvp.Key);
 
 								tierOutput.Add(currentSet);
 							}

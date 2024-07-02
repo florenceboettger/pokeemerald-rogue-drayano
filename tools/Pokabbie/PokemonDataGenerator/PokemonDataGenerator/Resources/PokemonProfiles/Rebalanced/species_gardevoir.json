@@ -1,0 +1,1340 @@
+{
+    "Species": "SPECIES_GARDEVOIR",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_DAZZLING_GLEAM",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_CONFUSION",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_DOUBLE_TEAM",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_CHARM",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_HEALING_WISH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_HEAL_PULSE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_DISARMING_VOICE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_MISTY_TERRAIN",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_MYSTICAL_FIRE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_HYPNOSIS",
+            "Level": 9
+        },
+        {
+            "Move": "MOVE_DRAINING_KISS",
+            "Level": 12
+        },
+        {
+            "Move": "MOVE_TELEPORT",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_PSYBEAM",
+            "Level": 18
+        },
+        {
+            "Move": "MOVE_LIFE_DEW",
+            "Level": 23
+        },
+        {
+            "Move": "MOVE_WISH",
+            "Level": 28
+        },
+        {
+            "Move": "MOVE_CALM_MIND",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_PSYCHIC",
+            "Level": 42
+        },
+        {
+            "Move": "MOVE_MOONBLAST",
+            "Level": 49
+        },
+        {
+            "Move": "MOVE_DREAM_EATER",
+            "Level": 56
+        },
+        {
+            "Move": "MOVE_FUTURE_SIGHT",
+            "Level": 63
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_CALM_MIND",
+        "MOVE_TAUNT",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_ICE_BEAM",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_DISARMING_VOICE",
+        "MOVE_PSYCHIC_TERRAIN",
+        "MOVE_VACUUM_WAVE",
+        "MOVE_TERA_BLAST",
+        "MOVE_TRIPLE_AXEL",
+        "MOVE_FLING",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TRICK",
+        "MOVE_GRASS_KNOT",
+        "MOVE_METRONOME",
+        "MOVE_HELPING_HAND",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_CHARM",
+        "MOVE_ENERGY_BALL",
+        "MOVE_SWIFT",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_GRAVITY",
+        "MOVE_SUNNY_DAY",
+        "MOVE_PSYCH_UP",
+        "MOVE_THUNDERBOLT",
+        "MOVE_MISTY_EXPLOSION",
+        "MOVE_FACADE",
+        "MOVE_MISTY_TERRAIN",
+        "MOVE_REST",
+        "MOVE_SKILL_SWAP",
+        "MOVE_ENCORE",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_THIEF",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_FUTURE_SIGHT",
+        "MOVE_SHADOW_BALL",
+        "MOVE_IMPRISON",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_REFLECT",
+        "MOVE_DISABLE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DRAINING_KISS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_CONFUSE_RAY",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_BODY_SLAM",
+        "MOVE_TRICK_ROOM",
+        "MOVE_DESTINY_BOND",
+        "MOVE_HYPER_VOICE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_KNOCK_OFF",
+        "MOVE_WILL_O_WISP",
+        "MOVE_ENDURE",
+        "MOVE_AURA_SPHERE",
+        "MOVE_PSYBEAM",
+        "MOVE_STORED_POWER",
+        "MOVE_PSYSHOCK"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wallbreaker",
+            "SourceTiers": [
+                "GEN6OU",
+                "GEN7MONOTYPE",
+                "GEN7MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wallbreaker",
+            "SourceTiers": [
+                "GEN6OU",
+                "GEN7MONOTYPE",
+                "GEN7MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_CALM_MIND"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6OU",
+                "GEN6MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_HEALING_WISH",
+                "MOVE_TRICK"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Scarf",
+            "SourceTiers": [
+                "GEN6UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_MOONBLAST",
+                "MOVE_PSYSHOCK",
+                "MOVE_SUBSTITUTE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_LEFTOVERS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Calm Mind",
+            "SourceTiers": [
+                "GEN6UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYSHOCK",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_TRICK"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Specs",
+            "SourceTiers": [
+                "GEN6UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYSHOCK",
+                "MOVE_PSYCHIC",
+                "MOVE_CALM_MIND"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK_ROOM",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_QUIET",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Trick Room Sweeper",
+            "SourceTiers": [
+                "GEN6DOUBLESOU",
+                "GEN7DOUBLESOU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Special Sweeper",
+            "SourceTiers": [
+                "GEN6DOUBLESOU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK_ROOM",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_QUIET",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Trick Room Sweeper",
+            "SourceTiers": [
+                "GEN6DOUBLESOU",
+                "GEN7DOUBLESOU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Special Sweeper",
+            "SourceTiers": [
+                "GEN6DOUBLESOU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_CALM_MIND",
+                "MOVE_PSYSHOCK"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6DOUBLESOU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_TAUNT",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Mega Wallbreaker",
+            "SourceTiers": [
+                "GEN6BATTLESPOTSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYSHOCK",
+                "MOVE_TRICK",
+                "MOVE_DESTINY_BOND"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Scarf",
+            "SourceTiers": [
+                "GEN6BATTLESPOTSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_TAUNT",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Mega Wallbreaker",
+            "SourceTiers": [
+                "GEN6BATTLESPOTSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_TAUNT"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6BATTLESPOTSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_PSYSHOCK",
+                "MOVE_TRICK"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6BATTLESPOTSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_SHADOW_BALL",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Mega Gardevoir",
+            "SourceTiers": [
+                "GEN6BATTLESPOTDOUBLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_SHADOW_BALL"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Scarf",
+            "SourceTiers": [
+                "GEN6BATTLESPOTDOUBLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_SHADOW_BALL"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Specs",
+            "SourceTiers": [
+                "GEN6BATTLESPOTDOUBLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_SHADOW_BALL",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Mega Gardevoir",
+            "SourceTiers": [
+                "GEN6BATTLESPOTDOUBLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PROTECT",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK_ROOM"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6VGC2016"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_BEAM",
+                "MOVE_PSYCHIC",
+                "MOVE_ICY_WIND",
+                "MOVE_ENCORE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Modest Icy Wind",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_ENCORE",
+                "MOVE_PSYSHOCK",
+                "MOVE_HYPER_BEAM"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Fast",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PROTECT",
+                "MOVE_ENCORE",
+                "MOVE_DISABLE",
+                "MOVE_HYPER_VOICE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Encore + Disable",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_ENCORE",
+                "MOVE_DISABLE",
+                "MOVE_HYPER_VOICE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_QUIET",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Trick Room",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_BEAM",
+                "MOVE_PSYCHIC",
+                "MOVE_ICY_WIND",
+                "MOVE_ENCORE"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Modest Icy Wind",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_ENCORE",
+                "MOVE_PSYSHOCK",
+                "MOVE_HYPER_BEAM"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Fast",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PROTECT",
+                "MOVE_ENCORE",
+                "MOVE_DISABLE",
+                "MOVE_HYPER_VOICE"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Encore + Disable",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_ENCORE",
+                "MOVE_DISABLE",
+                "MOVE_HYPER_VOICE"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_QUIET",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Trick Room",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_HYPER_BEAM",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_PSYCHIC"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN61V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WISH",
+                "MOVE_PROTECT",
+                "MOVE_HYPER_VOICE",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wish + Protect (Psychic)",
+            "SourceTiers": [
+                "GEN6MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_HEALING_WISH"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Revenge Killer (Fairy)",
+            "SourceTiers": [
+                "GEN6MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WISH",
+                "MOVE_PROTECT",
+                "MOVE_HYPER_VOICE",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wish + Protect (Psychic)",
+            "SourceTiers": [
+                "GEN6MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYSHOCK",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_PSYCHIC"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_PSYSHOCK",
+                "MOVE_HYPER_VOICE",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive Support",
+            "SourceTiers": [
+                "GEN7OU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_PSYSHOCK",
+                "MOVE_HYPER_VOICE",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive Support",
+            "SourceTiers": [
+                "GEN7OU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_CALM_MIND",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7OU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PSYSHOCK",
+                "MOVE_MOONBLAST",
+                "MOVE_WILL_O_WISP",
+                "MOVE_HEALING_WISH"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Scarf",
+            "SourceTiers": [
+                "GEN7RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PSYSHOCK",
+                "MOVE_MOONBLAST",
+                "MOVE_SHADOW_BALL",
+                "MOVE_TRICK"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Specs",
+            "SourceTiers": [
+                "GEN7RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYSHOCK",
+                "MOVE_PSYCHIC",
+                "MOVE_SHADOW_BALL"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PROTECT",
+                "MOVE_PSYSHOCK",
+                "MOVE_PSYCHIC"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7DOUBLESOU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PROTECT",
+                "MOVE_TRICK_ROOM",
+                "MOVE_PSYSHOCK"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7BATTLESPOTDOUBLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_PSYCHIC",
+                "MOVE_MOONBLAST",
+                "MOVE_TRICK_ROOM"
+            ],
+            "Ability": "ABILITY_TELEPATHY",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_QUIET",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7BATTLESPOTDOUBLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_QUIET",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Trick Room",
+            "SourceTiers": [
+                "GEN7VGC2018"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_QUIET",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Trick Room",
+            "SourceTiers": [
+                "GEN7VGC2018"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PROTECT",
+                "MOVE_TRICK_ROOM",
+                "MOVE_PSYSHOCK"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_BOLD",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7VGC2018"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_BEAM",
+                "MOVE_CALM_MIND",
+                "MOVE_HYPER_VOICE",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Speedy Bulky",
+            "SourceTiers": [
+                "GEN71V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_BEAM",
+                "MOVE_CALM_MIND",
+                "MOVE_HYPER_VOICE",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Speedy Bulky",
+            "SourceTiers": [
+                "GEN71V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_BEAM",
+                "MOVE_CALM_MIND",
+                "MOVE_WILL_O_WISP",
+                "MOVE_HYPER_VOICE"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN71V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYCHIC",
+                "MOVE_PSYSHOCK",
+                "MOVE_CALM_MIND"
+            ],
+            "Ability": "ABILITY_PIXILATE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK",
+                "MOVE_HEALING_WISH"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Scarf",
+            "SourceTiers": [
+                "GEN8RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_SHADOW_BALL"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Specs",
+            "SourceTiers": [
+                "GEN8RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK",
+                "MOVE_MYSTICAL_FIRE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_TAUNT"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Taunt 3 Attacks",
+            "SourceTiers": [
+                "GEN8NATIONALDEX"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_ICY_WIND",
+                "MOVE_MYSTICAL_FIRE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8BATTLESTADIUMSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_EXPANDING_FORCE",
+                "MOVE_TRICK_ROOM",
+                "MOVE_MOONBLAST"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8VGC2020"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_TRICK",
+                "MOVE_DISABLE",
+                "MOVE_PSYSHOCK"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Scarf",
+            "SourceTiers": [
+                "GEN81V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PROTECT",
+                "MOVE_ENCORE",
+                "MOVE_DISABLE",
+                "MOVE_MOONBLAST"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_LEFTOVERS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Encore + Disable",
+            "SourceTiers": [
+                "GEN81V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_DISABLE",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN81V1"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_HEALING_WISH",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_ENERGY_BALL"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Revenge Killer (Fairy)",
+            "SourceTiers": [
+                "GEN8MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_ENERGY_BALL",
+                "MOVE_PSYCHIC"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Scarf (Psychic)",
+            "SourceTiers": [
+                "GEN8MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_ENERGY_BALL",
+                "MOVE_EXPANDING_FORCE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK",
+                "MOVE_HEALING_WISH"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": "TYPE_FAIRY",
+            "Name": "Choice Scarf",
+            "SourceTiers": [
+                "GEN9RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_TRICK",
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_PSYCHIC"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_HYPER_VOICE",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_MYSTICAL_FIRE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_GARDEVOIRITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive",
+            "SourceTiers": [
+                "GEN9NATIONALDEX"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PSYSHOCK",
+                "MOVE_MOONBLAST",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_VACUUM_WAVE"
+            ],
+            "Ability": "ABILITY_TRACE",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Specs (Psychic)",
+            "SourceTiers": [
+                "GEN9MONOTYPE"
+            ]
+        }
+    ]
+}

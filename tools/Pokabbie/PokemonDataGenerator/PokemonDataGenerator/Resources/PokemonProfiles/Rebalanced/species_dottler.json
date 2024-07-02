@@ -1,0 +1,66 @@
+{
+    "Species": "SPECIES_DOTTLER",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_CONFUSION",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_LIGHT_SCREEN",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_REFLECT",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_STRUGGLE_BUG",
+            "Level": 1
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_CALM_MIND",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_RETURN",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_GUARD_SWAP",
+        "MOVE_ROUND",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PSYCHIC_TERRAIN",
+        "MOVE_FUTURE_SIGHT",
+        "MOVE_IMPRISON",
+        "MOVE_TOXIC",
+        "MOVE_PAYBACK",
+        "MOVE_WONDER_ROOM",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_REFLECT",
+        "MOVE_TRICK",
+        "MOVE_FRUSTRATION",
+        "MOVE_SUBSTITUTE",
+        "MOVE_MAGIC_ROOM",
+        "MOVE_ALLY_SWITCH",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_SLEEP_TALK",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_ENERGY_BALL",
+        "MOVE_BUG_BUZZ",
+        "MOVE_ATTRACT",
+        "MOVE_TRICK_ROOM",
+        "MOVE_BODY_PRESS",
+        "MOVE_SAFEGUARD",
+        "MOVE_POWER_SWAP",
+        "MOVE_LEECH_LIFE",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_SKILL_SWAP",
+        "MOVE_SNORE",
+        "MOVE_STORED_POWER",
+        "MOVE_PSYSHOCK"
+    ],
+    "CompetitiveSets": []
+}

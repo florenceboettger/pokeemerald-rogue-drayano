@@ -1,0 +1,134 @@
+{
+    "Species": "SPECIES_LINOONE_GALARIAN",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_NIGHT_SLASH",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_SAND_ATTACK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_PIN_MISSILE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_LEER",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_LICK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SWITCHEROO",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_BABY_DOLL_EYES",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SNARL",
+            "Level": 9
+        },
+        {
+            "Move": "MOVE_HEADBUTT",
+            "Level": 12
+        },
+        {
+            "Move": "MOVE_HONE_CLAWS",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_FURY_SWIPES",
+            "Level": 18
+        },
+        {
+            "Move": "MOVE_REST",
+            "Level": 23
+        },
+        {
+            "Move": "MOVE_TAKE_DOWN",
+            "Level": 28
+        },
+        {
+            "Move": "MOVE_SCARY_FACE",
+            "Level": 33
+        },
+        {
+            "Move": "MOVE_COUNTER",
+            "Level": 38
+        },
+        {
+            "Move": "MOVE_TAUNT",
+            "Level": 43
+        },
+        {
+            "Move": "MOVE_DOUBLE_EDGE",
+            "Level": 48
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_TAUNT",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_ICE_BEAM",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_RETURN",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_DIG",
+        "MOVE_SURF",
+        "MOVE_ROUND",
+        "MOVE_SHADOW_BALL",
+        "MOVE_MUD_SHOT",
+        "MOVE_TOXIC",
+        "MOVE_SNARL",
+        "MOVE_LASH_OUT",
+        "MOVE_PAYBACK",
+        "MOVE_SCREECH",
+        "MOVE_FLING",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TRICK",
+        "MOVE_SHADOW_CLAW",
+        "MOVE_THROAT_CHOP",
+        "MOVE_SUBSTITUTE",
+        "MOVE_FRUSTRATION",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HELPING_HAND",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_BLIZZARD",
+        "MOVE_THIEF",
+        "MOVE_SCARY_FACE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_ATTRACT",
+        "MOVE_BODY_SLAM",
+        "MOVE_FAKE_TEARS",
+        "MOVE_PIN_MISSILE",
+        "MOVE_SWIFT",
+        "MOVE_GUNK_SHOT",
+        "MOVE_SUNNY_DAY",
+        "MOVE_IRON_TAIL",
+        "MOVE_WORK_UP",
+        "MOVE_RETALIATE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_THUNDERBOLT",
+        "MOVE_BODY_PRESS",
+        "MOVE_THUNDER",
+        "MOVE_SEED_BOMB",
+        "MOVE_FACADE",
+        "MOVE_ASSURANCE",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_WHIRLPOOL",
+        "MOVE_SNORE",
+        "MOVE_HYPER_VOICE"
+    ],
+    "CompetitiveSets": []
+}

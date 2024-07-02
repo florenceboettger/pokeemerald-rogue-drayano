@@ -1,0 +1,233 @@
+{
+    "Species": "SPECIES_RESHIRAM",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_DRAGON_BREATH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ANCIENT_POWER",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_FIRE_FANG",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_NOBLE_ROAR",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SLASH",
+            "Level": 8
+        },
+        {
+            "Move": "MOVE_CRUNCH",
+            "Level": 16
+        },
+        {
+            "Move": "MOVE_EXTRASENSORY",
+            "Level": 24
+        },
+        {
+            "Move": "MOVE_DRAGON_PULSE",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_FLAMETHROWER",
+            "Level": 40
+        },
+        {
+            "Move": "MOVE_FUSION_FLARE",
+            "Level": 48
+        },
+        {
+            "Move": "MOVE_HYPER_VOICE",
+            "Level": 56
+        },
+        {
+            "Move": "MOVE_FIRE_BLAST",
+            "Level": 64
+        },
+        {
+            "Move": "MOVE_IMPRISON",
+            "Level": 72
+        },
+        {
+            "Move": "MOVE_OUTRAGE",
+            "Level": 80
+        },
+        {
+            "Move": "MOVE_BLUE_FLARE",
+            "Level": 88
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_SCORCHING_SANDS",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_SCALE_SHOT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_BREAKING_SWIPE",
+        "MOVE_HEAT_WAVE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_DRAGON_TAIL",
+        "MOVE_ROCK_TOMB",
+        "MOVE_SHADOW_BALL",
+        "MOVE_EARTH_POWER",
+        "MOVE_DRAGON_CHEER",
+        "MOVE_CRUNCH",
+        "MOVE_IMPRISON",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_DRACO_METEOR",
+        "MOVE_FLY",
+        "MOVE_TERA_BLAST",
+        "MOVE_TAILWIND",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_FLING",
+        "MOVE_RAIN_DANCE",
+        "MOVE_REFLECT",
+        "MOVE_SHADOW_CLAW",
+        "MOVE_SUBSTITUTE",
+        "MOVE_FIRE_BLAST",
+        "MOVE_ROAR",
+        "MOVE_EARTHQUAKE",
+        "MOVE_HELPING_HAND",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT",
+        "MOVE_DRAGON_DANCE",
+        "MOVE_SLEEP_TALK",
+        "MOVE_HEAT_CRASH",
+        "MOVE_FLAME_CHARGE",
+        "MOVE_SCARY_FACE",
+        "MOVE_BODY_SLAM",
+        "MOVE_SWIFT",
+        "MOVE_SUNNY_DAY",
+        "MOVE_FIRE_FANG",
+        "MOVE_HYPER_BEAM",
+        "MOVE_OUTRAGE",
+        "MOVE_BODY_PRESS",
+        "MOVE_TAKE_DOWN",
+        "MOVE_WEATHER_BALL",
+        "MOVE_ROOST",
+        "MOVE_FACADE",
+        "MOVE_FIRE_SPIN",
+        "MOVE_ENDURE",
+        "MOVE_OVERHEAT",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_FLAMETHROWER",
+        "MOVE_REST",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_WILL_O_WISP",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_STONE_EDGE",
+        "MOVE_HYPER_VOICE",
+        "MOVE_DRAGON_CLAW"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_BLUE_FLARE",
+                "MOVE_DRACO_METEOR",
+                "MOVE_ROOST",
+                "MOVE_STONE_EDGE"
+            ],
+            "Ability": "ABILITY_TURBOBLAZE",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Roost + 3 attacks",
+            "SourceTiers": [
+                "GEN6UBERS"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BLUE_FLARE",
+                "MOVE_DRACO_METEOR",
+                "MOVE_ROOST",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Ability": "ABILITY_TURBOBLAZE",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Life Orb",
+            "SourceTiers": [
+                "GEN7UBERS"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BLUE_FLARE",
+                "MOVE_DRACO_METEOR",
+                "MOVE_ROOST",
+                "MOVE_STONE_EDGE"
+            ],
+            "Ability": "ABILITY_TURBOBLAZE",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Life Orb",
+            "SourceTiers": [
+                "GEN8UBERS"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DRACO_METEOR",
+                "MOVE_BLUE_FLARE",
+                "MOVE_EARTH_POWER",
+                "MOVE_SHADOW_BALL"
+            ],
+            "Ability": "ABILITY_TURBOBLAZE",
+            "Item": "ITEM_ASSAULT_VEST",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8BATTLESTADIUMSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DRAGON_DANCE",
+                "MOVE_FLARE_BLITZ",
+                "MOVE_OUTRAGE",
+                "MOVE_ROOST"
+            ],
+            "Ability": "ABILITY_TURBOBLAZE",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Dragon Dance",
+            "SourceTiers": [
+                "GEN8ANYTHINGGOES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BLUE_FLARE",
+                "MOVE_EARTH_POWER",
+                "MOVE_DRAGON_PULSE",
+                "MOVE_FUSION_FLARE"
+            ],
+            "Ability": "ABILITY_TURBOBLAZE",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9NATIONALDEXAG"
+            ]
+        }
+    ]
+}

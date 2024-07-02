@@ -1,0 +1,500 @@
+{
+    "Species": "SPECIES_GLALIE",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_FREEZE_DRY",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_HEADBUTT",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_LEER",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_DOUBLE_TEAM",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_POWDER_SNOW",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ASTONISH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SHEER_COLD",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ICE_SHARD",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_PROTECT",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_ICY_WIND",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_FROST_BREATH",
+            "Level": 30
+        },
+        {
+            "Move": "MOVE_BITE",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_ICE_FANG",
+            "Level": 40
+        },
+        {
+            "Move": "MOVE_SNOWSCAPE",
+            "Level": 47
+        },
+        {
+            "Move": "MOVE_WEATHER_BALL",
+            "Level": 54
+        },
+        {
+            "Move": "MOVE_CRUNCH",
+            "Level": 61
+        },
+        {
+            "Move": "MOVE_BLIZZARD",
+            "Level": 68
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_TAUNT",
+        "MOVE_WATER_PULSE",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_ICE_BEAM",
+        "MOVE_SPIKES",
+        "MOVE_SUPER_FANG",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_RETURN",
+        "MOVE_ROCK_TOMB",
+        "MOVE_SHADOW_BALL",
+        "MOVE_GYRO_BALL",
+        "MOVE_CRUNCH",
+        "MOVE_FOUL_PLAY",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_IRON_HEAD",
+        "MOVE_DARK_PULSE",
+        "MOVE_ROCK_SMASH",
+        "MOVE_SNOWSCAPE",
+        "MOVE_BULLDOZE",
+        "MOVE_HEX",
+        "MOVE_TERA_BLAST",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_RAIN_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SPITE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_HELPING_HAND",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_BLIZZARD",
+        "MOVE_EXPLOSION",
+        "MOVE_SCARY_FACE",
+        "MOVE_ICE_FANG",
+        "MOVE_BODY_SLAM",
+        "MOVE_FAKE_TEARS",
+        "MOVE_HYPER_BEAM",
+        "MOVE_TAKE_DOWN",
+        "MOVE_WEATHER_BALL",
+        "MOVE_ICE_SPINNER",
+        "MOVE_AVALANCHE",
+        "MOVE_CHILLING_WATER",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_TRAILBLAZE",
+        "MOVE_ICICLE_SPEAR"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_EXPLOSION",
+                "MOVE_SUPER_FANG",
+                "MOVE_FREEZE_DRY"
+            ],
+            "Ability": "ABILITY_ICE_BODY",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wrecking Ball",
+            "SourceTiers": [
+                "GEN6UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_EXPLOSION",
+                "MOVE_SUPER_FANG",
+                "MOVE_FREEZE_DRY"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wrecking Ball",
+            "SourceTiers": [
+                "GEN6UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_FREEZE_DRY",
+                "MOVE_ICE_SHARD",
+                "MOVE_SPIKES"
+            ],
+            "Ability": "ABILITY_INNER_FOCUS",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wallbreaker",
+            "SourceTiers": [
+                "GEN6RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_FREEZE_DRY",
+                "MOVE_ICE_SHARD",
+                "MOVE_SPIKES"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wallbreaker",
+            "SourceTiers": [
+                "GEN6RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_ICE_SHARD",
+                "MOVE_EARTHQUAKE",
+                "MOVE_FREEZE_DRY",
+                "MOVE_RETURN"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_TAUNT",
+                "MOVE_EXPLOSION",
+                "MOVE_FREEZE_DRY"
+            ],
+            "Ability": "ABILITY_INNER_FOCUS",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Spikes Lead",
+            "SourceTiers": [
+                "GEN6PU",
+                "GEN6ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_ICE_BEAM",
+                "MOVE_TAUNT",
+                "MOVE_FREEZE_DRY"
+            ],
+            "Ability": "ABILITY_INNER_FOCUS",
+            "Item": "ITEM_NEVER_MELT_ICE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive Spikes",
+            "SourceTiers": [
+                "GEN6ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PROTECT",
+                "MOVE_SUBSTITUTE",
+                "MOVE_SHEER_COLD",
+                "MOVE_FROST_BREATH"
+            ],
+            "Ability": "ABILITY_MOODY",
+            "Item": "ITEM_LEFTOVERS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Welcome to Crystal Lake (Moody Booster)",
+            "SourceTiers": [
+                "GEN6BATTLESPOTSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_EARTHQUAKE",
+                "MOVE_ICE_SHARD",
+                "MOVE_EXPLOSION",
+                "MOVE_RETURN"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_RETURN",
+                "MOVE_FREEZE_DRY",
+                "MOVE_EARTHQUAKE"
+            ],
+            "Ability": "ABILITY_INNER_FOCUS",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive Spiker",
+            "SourceTiers": [
+                "GEN7UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_RETURN",
+                "MOVE_FREEZE_DRY",
+                "MOVE_EARTHQUAKE"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive Spiker",
+            "SourceTiers": [
+                "GEN7UU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_ICE_SHARD",
+                "MOVE_EARTHQUAKE",
+                "MOVE_SPIKES"
+            ],
+            "Ability": "ABILITY_INNER_FOCUS",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wallbreaker",
+            "SourceTiers": [
+                "GEN7RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_ICE_SHARD",
+                "MOVE_EARTHQUAKE",
+                "MOVE_SPIKES"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wallbreaker",
+            "SourceTiers": [
+                "GEN7RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_ICE_SHARD",
+                "MOVE_EARTHQUAKE",
+                "MOVE_SPIKES",
+                "MOVE_DOUBLE_EDGE"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7RU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_EXPLOSION"
+            ],
+            "Ability": "ABILITY_ICE_BODY",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Spikes",
+            "SourceTiers": [
+                "GEN7NU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_EXPLOSION"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Spikes",
+            "SourceTiers": [
+                "GEN7NU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_EARTHQUAKE",
+                "MOVE_EXPLOSION",
+                "MOVE_ICE_SHARD",
+                "MOVE_SPIKES"
+            ],
+            "Ability": "ABILITY_REFRIGERATE",
+            "Item": "ITEM_GLALITITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7NU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_TAUNT",
+                "MOVE_ICE_BEAM",
+                "MOVE_EXPLOSION"
+            ],
+            "Ability": "ABILITY_INNER_FOCUS",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Suicide Lead",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PROTECT",
+                "MOVE_SUBSTITUTE",
+                "MOVE_FREEZE_DRY",
+                "MOVE_SHEER_COLD"
+            ],
+            "Ability": "ABILITY_MOODY",
+            "Item": "ITEM_LEFTOVERS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Moody Sweeper",
+            "SourceTiers": [
+                "GEN7BATTLESPOTSINGLES",
+                "GEN7BATTLESPOTSINGLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PROTECT",
+                "MOVE_SUBSTITUTE",
+                "MOVE_TAUNT",
+                "MOVE_FROST_BREATH"
+            ],
+            "Ability": "ABILITY_MOODY",
+            "Item": "ITEM_LEFTOVERS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Moody Sweeper",
+            "SourceTiers": [
+                "GEN7ANYTHINGGOES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_TAUNT",
+                "MOVE_FREEZE_DRY",
+                "MOVE_EXPLOSION"
+            ],
+            "Ability": "ABILITY_INNER_FOCUS",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Suicide Lead",
+            "SourceTiers": [
+                "GEN8ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_TAUNT",
+                "MOVE_EARTHQUAKE",
+                "MOVE_FREEZE_DRY"
+            ],
+            "Ability": "ABILITY_INNER_FOCUS",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9ZU"
+            ]
+        }
+    ]
+}

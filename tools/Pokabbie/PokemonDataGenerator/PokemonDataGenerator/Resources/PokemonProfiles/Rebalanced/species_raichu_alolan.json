@@ -1,0 +1,456 @@
+{
+    "Species": "SPECIES_RAICHU_ALOLAN",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_PSYCHIC",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_THUNDER_SHOCK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_THUNDER_WAVE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_THUNDER",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_AGILITY",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_DOUBLE_TEAM",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_LIGHT_SCREEN",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SWEET_KISS",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_CHARM",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SPARK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_IRON_TAIL",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_FEINT",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_NASTY_PLOT",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_DISCHARGE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ELECTRO_BALL",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_PLAY_NICE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_NUZZLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_THUNDERBOLT",
+            "Level": 5
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_AGILITY",
+        "MOVE_CALM_MIND",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_DIG",
+        "MOVE_SURF",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_PSYCHIC_TERRAIN",
+        "MOVE_TERA_BLAST",
+        "MOVE_FLY",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_FLING",
+        "MOVE_RAIN_DANCE",
+        "MOVE_REFLECT",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ELECTRO_BALL",
+        "MOVE_ELECTROWEB",
+        "MOVE_FAKE_OUT",
+        "MOVE_GRASS_KNOT",
+        "MOVE_ELECTRIC_TERRAIN",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_CHARM",
+        "MOVE_DRAINING_KISS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_BRICK_BREAK",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_REVERSAL",
+        "MOVE_NASTY_PLOT",
+        "MOVE_BODY_SLAM",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_SWIFT",
+        "MOVE_ENDEAVOR",
+        "MOVE_HYPER_BEAM",
+        "MOVE_THUNDERBOLT",
+        "MOVE_THUNDER",
+        "MOVE_TAKE_DOWN",
+        "MOVE_KNOCK_OFF",
+        "MOVE_CHARGE",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_RISING_VOLTAGE",
+        "MOVE_SKILL_SWAP",
+        "MOVE_TRAILBLAZE",
+        "MOVE_ENCORE",
+        "MOVE_WILD_CHARGE",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_THIEF",
+        "MOVE_STORED_POWER",
+        "MOVE_PSYSHOCK"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_THUNDERBOLT",
+                "MOVE_PSYSHOCK",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_PSYCHIUM_Z",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Nasty Plot",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_NASTY_PLOT",
+                "MOVE_PSYCHIC",
+                "MOVE_PSYSHOCK"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_ALORAICHIUM_Z",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_FAKE_OUT",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_ENCORE"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": "TYPE_ICE",
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7BATTLESPOTDOUBLES"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_THUNDERBOLT",
+                "MOVE_PSYCHIC",
+                "MOVE_PROTECT"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_PSYCHIUM_Z",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive Support",
+            "SourceTiers": [
+                "GEN7VGC2017"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_THUNDERBOLT",
+                "MOVE_PSYSHOCK",
+                "MOVE_PSYCHIC"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_ALORAICHIUM_Z",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7VGC2017"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_PSYCHIC",
+                "MOVE_CALM_MIND",
+                "MOVE_THUNDER_WAVE"
+            ],
+            "Ability": null,
+            "Item": null,
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Wallbreaker",
+            "SourceTiers": [
+                "GEN7LETSGOOU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_THUNDERBOLT",
+                "MOVE_CALM_MIND",
+                "MOVE_FAKE_OUT"
+            ],
+            "Ability": null,
+            "Item": null,
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7LETSGOOU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_PSYCHIC",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_GRASS_KNOT"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive",
+            "SourceTiers": [
+                "GEN7MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_PSYCHIC",
+                "MOVE_NASTY_PLOT",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_ALORAICHIUM_Z",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Stoked Sparksurfer (Electric)",
+            "SourceTiers": [
+                "GEN7MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_PSYCHIC",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_GRASS_KNOT"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_ALORAICHIUM_Z",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_RISING_VOLTAGE",
+                "MOVE_GRASS_KNOT",
+                "MOVE_PSYCHIC",
+                "MOVE_NASTY_PLOT"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_MODEST",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8NU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_RISING_VOLTAGE",
+                "MOVE_PSYCHIC",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_KNOCK_OFF"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Terrain Sweeper (Electric)",
+            "SourceTiers": [
+                "GEN8MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_RISING_VOLTAGE",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_GRASS_KNOT"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8MONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_RISING_VOLTAGE",
+                "MOVE_PSYCHIC",
+                "MOVE_GRASS_KNOT",
+                "MOVE_FOCUS_BLAST"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Terrain Sweeper (Electric)",
+            "SourceTiers": [
+                "GEN8NATIONALDEXMONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_RISING_VOLTAGE",
+                "MOVE_PSYCHIC",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_GRASS_KNOT"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8NATIONALDEXMONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_PSYCHIC",
+                "MOVE_PSYSHOCK"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_PSYCHIC",
+                "MOVE_RISING_VOLTAGE",
+                "MOVE_GRASS_KNOT"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_PSYCHIUM_Z",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Surge Surfer (Electric)",
+            "SourceTiers": [
+                "GEN9NATIONALDEXMONOTYPE"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_RISING_VOLTAGE",
+                "MOVE_PSYSHOCK",
+                "MOVE_GRASS_KNOT",
+                "MOVE_NASTY_PLOT"
+            ],
+            "Ability": "ABILITY_SURGE_SURFER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9NATIONALDEXMONOTYPE"
+            ]
+        }
+    ]
+}

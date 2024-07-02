@@ -1,0 +1,121 @@
+{
+    "Species": "SPECIES_GOOMY",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ABSORB",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_WATER_GUN",
+            "Level": 5
+        },
+        {
+            "Move": "MOVE_DRAGON_BREATH",
+            "Level": 10
+        },
+        {
+            "Move": "MOVE_PROTECT",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_FLAIL",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_WATER_PULSE",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_RAIN_DANCE",
+            "Level": 30
+        },
+        {
+            "Move": "MOVE_DRAGON_PULSE",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_CURSE",
+            "Level": 41
+        },
+        {
+            "Move": "MOVE_BODY_SLAM",
+            "Level": 45
+        },
+        {
+            "Move": "MOVE_MUDDY_WATER",
+            "Level": 50
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_WATER_PULSE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_BODY_SLAM",
+        "MOVE_SURF",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_SUNNY_DAY",
+        "MOVE_MUD_SHOT",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_LIFE_DEW",
+        "MOVE_OUTRAGE",
+        "MOVE_DRACO_METEOR",
+        "MOVE_THUNDERBOLT",
+        "MOVE_TAKE_DOWN",
+        "MOVE_TERA_BLAST",
+        "MOVE_CHILLING_WATER",
+        "MOVE_COUNTER",
+        "MOVE_RAIN_DANCE",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_REST",
+        "MOVE_CURSE",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_PROTECT",
+        "MOVE_CHARM",
+        "MOVE_SLEEP_TALK",
+        "MOVE_WATERFALL",
+        "MOVE_MUDDY_WATER"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_DRACO_METEOR",
+                "MOVE_SLUDGE_WAVE",
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK"
+            ],
+            "Ability": "ABILITY_GOOEY",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_BOLD",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Gooey Pivot",
+            "SourceTiers": [
+                "GEN6LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DRAGON_PULSE",
+                "MOVE_SLUDGE_WAVE",
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK"
+            ],
+            "Ability": "ABILITY_SAP_SIPPER",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_BOLD",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Sap Sipper",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        }
+    ]
+}

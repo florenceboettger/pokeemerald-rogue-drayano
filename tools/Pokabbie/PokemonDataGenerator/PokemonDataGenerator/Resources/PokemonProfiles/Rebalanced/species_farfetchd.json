@@ -1,0 +1,172 @@
+{
+    "Species": "SPECIES_FARFETCHD",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_SAND_ATTACK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_PECK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_LEER",
+            "Level": 5
+        },
+        {
+            "Move": "MOVE_FURY_CUTTER",
+            "Level": 10
+        },
+        {
+            "Move": "MOVE_CUT",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_AERIAL_ACE",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_AIR_CUTTER",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_KNOCK_OFF",
+            "Level": 30
+        },
+        {
+            "Move": "MOVE_FALSE_SWIPE",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_SLASH",
+            "Level": 40
+        },
+        {
+            "Move": "MOVE_SWORDS_DANCE",
+            "Level": 45
+        },
+        {
+            "Move": "MOVE_AIR_SLASH",
+            "Level": 50
+        },
+        {
+            "Move": "MOVE_LEAF_BLADE",
+            "Level": 55
+        },
+        {
+            "Move": "MOVE_AGILITY",
+            "Level": 60
+        },
+        {
+            "Move": "MOVE_BRAVE_BIRD",
+            "Level": 65
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_AGILITY",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_LEAF_BLADE",
+        "MOVE_AIR_SLASH",
+        "MOVE_U_TURN",
+        "MOVE_ROUND",
+        "MOVE_COVET",
+        "MOVE_FIRST_IMPRESSION",
+        "MOVE_ACROBATICS",
+        "MOVE_FLY",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SKY_ATTACK",
+        "MOVE_THROAT_CHOP",
+        "MOVE_GUST",
+        "MOVE_SUBSTITUTE",
+        "MOVE_UPROAR",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_HELPING_HAND",
+        "MOVE_NIGHT_SLASH",
+        "MOVE_PROTECT",
+        "MOVE_FOCUS_ENERGY",
+        "MOVE_SIMPLE_BEAM",
+        "MOVE_SLEEP_TALK",
+        "MOVE_SNORE",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_BRICK_BREAK",
+        "MOVE_FLAIL",
+        "MOVE_THIEF",
+        "MOVE_REVENGE",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_ATTRACT",
+        "MOVE_BODY_SLAM",
+        "MOVE_SWIFT",
+        "MOVE_FEINT",
+        "MOVE_SUNNY_DAY",
+        "MOVE_IRON_TAIL",
+        "MOVE_WORK_UP",
+        "MOVE_FALSE_SWIPE",
+        "MOVE_RETALIATE",
+        "MOVE_BATON_PASS",
+        "MOVE_FINAL_GAMBIT",
+        "MOVE_ROOST",
+        "MOVE_FACADE",
+        "MOVE_POISON_JAB",
+        "MOVE_ENDURE",
+        "MOVE_REST",
+        "MOVE_CURSE",
+        "MOVE_STEEL_WING",
+        "MOVE_FEATHER_DANCE",
+        "MOVE_BRUTAL_SWING"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_LEAF_BLADE",
+                "MOVE_QUICK_ATTACK"
+            ],
+            "Ability": "ABILITY_DEFIANT",
+            "Item": "ITEM_LEEK",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Swords Dance",
+            "SourceTiers": [
+                "GEN6PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_FIRST_IMPRESSION",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_LEAF_BLADE",
+                "MOVE_KNOCK_OFF"
+            ],
+            "Ability": "ABILITY_DEFIANT",
+            "Item": "ITEM_LEEK",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "All-out Attacker",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_FIRST_IMPRESSION"
+            ],
+            "Ability": "ABILITY_DEFIANT",
+            "Item": "ITEM_LEEK",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "All-Out Attacker",
+            "SourceTiers": [
+                "GEN8ZU"
+            ]
+        }
+    ]
+}

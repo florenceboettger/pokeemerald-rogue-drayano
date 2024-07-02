@@ -1,0 +1,116 @@
+{
+    "Species": "SPECIES_BEAUTIFLY",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_GUST",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_ABSORB",
+            "Level": 12
+        },
+        {
+            "Move": "MOVE_STUN_SPORE",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_MORNING_SUN",
+            "Level": 17
+        },
+        {
+            "Move": "MOVE_AIR_CUTTER",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_MEGA_DRAIN",
+            "Level": 22
+        },
+        {
+            "Move": "MOVE_SILVER_WIND",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_ATTRACT",
+            "Level": 27
+        },
+        {
+            "Move": "MOVE_WHIRLWIND",
+            "Level": 30
+        },
+        {
+            "Move": "MOVE_GIGA_DRAIN",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_BUG_BUZZ",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_RAGE",
+            "Level": 37
+        },
+        {
+            "Move": "MOVE_QUIVER_DANCE",
+            "Level": 40
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_GIGA_IMPACT",
+        "MOVE_U_TURN",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_RETURN",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_LASER_FOCUS",
+        "MOVE_ROUND",
+        "MOVE_SHADOW_BALL",
+        "MOVE_ACROBATICS",
+        "MOVE_TERA_BLAST",
+        "MOVE_FLY",
+        "MOVE_INFESTATION",
+        "MOVE_TAILWIND",
+        "MOVE_FRUSTRATION",
+        "MOVE_DOUBLE_TEAM",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ELECTROWEB",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_CONFIDE",
+        "MOVE_THIEF",
+        "MOVE_ENERGY_BALL",
+        "MOVE_ATTRACT",
+        "MOVE_VENOSHOCK",
+        "MOVE_SUNNY_DAY",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_BUG_BITE",
+        "MOVE_DEFOG",
+        "MOVE_HYPER_BEAM",
+        "MOVE_SWAGGER",
+        "MOVE_SAFEGUARD",
+        "MOVE_ROOST",
+        "MOVE_SIGNAL_BEAM",
+        "MOVE_FACADE",
+        "MOVE_REST",
+        "MOVE_SNORE"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_QUIVER_DANCE",
+                "MOVE_BUG_BUZZ",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_ROOST"
+            ],
+            "Ability": "ABILITY_SWARM",
+            "Item": "ITEM_BUGINIUM_Z",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": "TYPE_FIGHTING",
+            "TeraType": null,
+            "Name": "Quiver Dance",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        }
+    ]
+}

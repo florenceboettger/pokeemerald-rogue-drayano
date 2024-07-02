@@ -1,0 +1,190 @@
+{
+    "Species": "SPECIES_ZEBSTRIKA",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_THUNDER_WAVE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_CHARGE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SHOCK_WAVE",
+            "Level": 11
+        },
+        {
+            "Move": "MOVE_FLAME_CHARGE",
+            "Level": 18
+        },
+        {
+            "Move": "MOVE_SPARK",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_STOMP",
+            "Level": 31
+        },
+        {
+            "Move": "MOVE_DISCHARGE",
+            "Level": 36
+        },
+        {
+            "Move": "MOVE_AGILITY",
+            "Level": 42
+        },
+        {
+            "Move": "MOVE_WILD_CHARGE",
+            "Level": 47
+        },
+        {
+            "Move": "MOVE_THRASH",
+            "Level": 53
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_AGILITY",
+        "MOVE_TAUNT",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SCREECH",
+        "MOVE_BULLDOZE",
+        "MOVE_TERA_BLAST",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_RAIN_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ELECTRO_BALL",
+        "MOVE_ELECTROWEB",
+        "MOVE_ROAR",
+        "MOVE_SMART_STRIKE",
+        "MOVE_ELECTRIC_TERRAIN",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT",
+        "MOVE_UPROAR",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_SLEEP_TALK",
+        "MOVE_DOUBLE_KICK",
+        "MOVE_FLAME_CHARGE",
+        "MOVE_BODY_SLAM",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_SWIFT",
+        "MOVE_FEINT",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ENDEAVOR",
+        "MOVE_BATON_PASS",
+        "MOVE_HYPER_BEAM",
+        "MOVE_SAND_ATTACK",
+        "MOVE_TAKE_DOWN",
+        "MOVE_THUNDER",
+        "MOVE_SUPERCELL_SLAM",
+        "MOVE_THUNDERBOLT",
+        "MOVE_CHARGE",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_LOW_KICK",
+        "MOVE_OVERHEAT",
+        "MOVE_REST",
+        "MOVE_TRAILBLAZE",
+        "MOVE_WILD_CHARGE",
+        "MOVE_FLAMETHROWER"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_THUNDERBOLT",
+                "MOVE_OVERHEAT",
+                "MOVE_HIDDEN_POWER"
+            ],
+            "Ability": "ABILITY_SAP_SIPPER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": "TYPE_ICE",
+            "TeraType": null,
+            "Name": "All-Out Attacker",
+            "SourceTiers": [
+                "GEN6PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_OVERHEAT",
+                "MOVE_THUNDERBOLT",
+                "MOVE_WILD_CHARGE"
+            ],
+            "Ability": "ABILITY_LIGHTNING_ROD",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_OVERHEAT",
+                "MOVE_HIDDEN_POWER"
+            ],
+            "Ability": "ABILITY_SAP_SIPPER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": "TYPE_GRASS",
+            "TeraType": null,
+            "Name": "All-out Attacker",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_OVERHEAT",
+                "MOVE_HIDDEN_POWER"
+            ],
+            "Ability": "ABILITY_LIGHTNING_ROD",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": "TYPE_ICE",
+            "TeraType": null,
+            "Name": "Offensive Pivot",
+            "SourceTiers": [
+                "GEN7ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_OVERHEAT",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_WILD_CHARGE",
+                "MOVE_THUNDERBOLT"
+            ],
+            "Ability": "ABILITY_SAP_SIPPER",
+            "Item": "ITEM_CHOICE_BAND",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7ZU"
+            ]
+        }
+    ]
+}

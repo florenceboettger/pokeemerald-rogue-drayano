@@ -1,0 +1,134 @@
+{
+    "Species": "SPECIES_PONYTA_GALARIAN",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": 5
+        },
+        {
+            "Move": "MOVE_CONFUSION",
+            "Level": 10
+        },
+        {
+            "Move": "MOVE_FAIRY_WIND",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_AGILITY",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_PSYBEAM",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_STOMP",
+            "Level": 30
+        },
+        {
+            "Move": "MOVE_HEAL_PULSE",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_TAKE_DOWN",
+            "Level": 41
+        },
+        {
+            "Move": "MOVE_DAZZLING_GLEAM",
+            "Level": 45
+        },
+        {
+            "Move": "MOVE_PSYCHIC",
+            "Level": 50
+        },
+        {
+            "Move": "MOVE_HEALING_WISH",
+            "Level": 55
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_AGILITY",
+        "MOVE_CALM_MIND",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_RETURN",
+        "MOVE_ROUND",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_FUTURE_SIGHT",
+        "MOVE_IMPRISON",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_TOXIC",
+        "MOVE_HORN_DRILL",
+        "MOVE_FRUSTRATION",
+        "MOVE_SUBSTITUTE",
+        "MOVE_THRASH",
+        "MOVE_ALLY_SWITCH",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT",
+        "MOVE_CHARM",
+        "MOVE_SLEEP_TALK",
+        "MOVE_DOUBLE_KICK",
+        "MOVE_BOUNCE",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_ATTRACT",
+        "MOVE_BODY_SLAM",
+        "MOVE_SWIFT",
+        "MOVE_IRON_TAIL",
+        "MOVE_FACADE",
+        "MOVE_ENDURE",
+        "MOVE_LOW_KICK",
+        "MOVE_REST",
+        "MOVE_MORNING_SUN",
+        "MOVE_WILD_CHARGE",
+        "MOVE_SNORE",
+        "MOVE_STORED_POWER",
+        "MOVE_HYPNOSIS"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_PSYCHIC",
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_MORNING_SUN"
+            ],
+            "Ability": "ABILITY_PASTEL_VEIL",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Calm Mind",
+            "SourceTiers": [
+                "GEN8LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_PSYCHIC",
+                "MOVE_MORNING_SUN",
+                "MOVE_CALM_MIND"
+            ],
+            "Ability": "ABILITY_PASTEL_VEIL",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8LC"
+            ]
+        }
+    ]
+}

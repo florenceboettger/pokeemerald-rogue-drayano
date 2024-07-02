@@ -1,0 +1,36 @@
+{
+    "Species": "SPECIES_SNOM",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_POWDER_SNOW",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_STRUGGLE_BUG",
+            "Level": 1
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_LUNGE",
+        "MOVE_MIRROR_COAT",
+        "MOVE_POUNCE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_RETURN",
+        "MOVE_BUG_BUZZ",
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_BUG_BITE",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_TOXIC",
+        "MOVE_TERA_BLAST",
+        "MOVE_FAIRY_WIND",
+        "MOVE_FACADE",
+        "MOVE_FRUSTRATION",
+        "MOVE_REST",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT",
+        "MOVE_ICICLE_SPEAR",
+        "MOVE_SLEEP_TALK"
+    ],
+    "CompetitiveSets": []
+}

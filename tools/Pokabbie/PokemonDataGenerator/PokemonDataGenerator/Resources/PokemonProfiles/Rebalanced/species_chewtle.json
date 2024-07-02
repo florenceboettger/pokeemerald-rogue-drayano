@@ -1,0 +1,95 @@
+{
+    "Species": "SPECIES_CHEWTLE",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_WATER_GUN",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_BITE",
+            "Level": 7
+        },
+        {
+            "Move": "MOVE_PROTECT",
+            "Level": 14
+        },
+        {
+            "Move": "MOVE_HEADBUTT",
+            "Level": 21
+        },
+        {
+            "Move": "MOVE_COUNTER",
+            "Level": 28
+        },
+        {
+            "Move": "MOVE_JAW_LOCK",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_LIQUIDATION",
+            "Level": 42
+        },
+        {
+            "Move": "MOVE_BODY_SLAM",
+            "Level": 49
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_BRICK_BREAK",
+        "MOVE_WATER_PULSE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SCARY_FACE",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_ICE_FANG",
+        "MOVE_BODY_SLAM",
+        "MOVE_SURF",
+        "MOVE_DRAGON_TAIL",
+        "MOVE_RETURN",
+        "MOVE_MUD_SHOT",
+        "MOVE_CRUNCH",
+        "MOVE_FALSE_SWIPE",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_TOXIC",
+        "MOVE_TAKE_DOWN",
+        "MOVE_LIQUIDATION",
+        "MOVE_TERA_BLAST",
+        "MOVE_CHILLING_WATER",
+        "MOVE_RAIN_DANCE",
+        "MOVE_FACADE",
+        "MOVE_POISON_JAB",
+        "MOVE_ENDURE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_REST",
+        "MOVE_SHELL_SMASH",
+        "MOVE_FRUSTRATION",
+        "MOVE_GASTRO_ACID",
+        "MOVE_WHIRLPOOL",
+        "MOVE_PROTECT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_WATERFALL"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_SHELL_SMASH",
+                "MOVE_LIQUIDATION",
+                "MOVE_CRUNCH",
+                "MOVE_ICE_FANG"
+            ],
+            "Ability": "ABILITY_STRONG_JAW",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": "TYPE_DARK",
+            "Name": "Shell Smash",
+            "SourceTiers": [
+                "GEN9LC"
+            ]
+        }
+    ]
+}
