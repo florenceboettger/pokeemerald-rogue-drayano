@@ -1420,6 +1420,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_MEGA_EVOLUTIONS
     [SPECIES_PIDGEOT_MEGA] =
     {
+        PIDGEOT_MISC_INFO,
     #ifdef ROGUE_DRAYANO
         .baseHP        = 83,
         .baseAttack    = 60,
@@ -1428,7 +1429,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpAttack  = 180,
         .baseSpDefense = 85,
     #else
-        PIDGEOT_MISC_INFO,
         .baseHP        = 83,
         .baseAttack    = 80,
         .baseDefense   = 80,
