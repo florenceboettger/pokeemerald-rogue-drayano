@@ -152,7 +152,7 @@ with sets_path.open('r', encoding='utf8') as f:
                         hp_match = re.search(r"Hidden Power (?P<name>\w*)", move)
                         newmove = ""
                         if hp_match != None:
-                            new_set["HiddenPower"] = "TYPE" + re.sub(r"( )|(-)", "_", hp_match.group("name")).upper()
+                            new_set["HiddenPower"] = "TYPE_" + re.sub(r"( )|(-)", "_", hp_match.group("name")).upper()
                             newmove = "MOVE_HIDDEN_POWER"
                             new_moves[mon]["extra"].append("MOVE_HIDDEN_POWER")
                         else:

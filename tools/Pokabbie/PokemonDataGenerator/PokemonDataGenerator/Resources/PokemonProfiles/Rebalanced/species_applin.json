@@ -11,14 +11,14 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_RECYCLE",
         "MOVE_POUNCE",
-        "MOVE_ROLLOUT",
         "MOVE_DEFENSE_CURL",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_LEAF_STORM",
+        "MOVE_ROLLOUT",
         "MOVE_SUCKER_PUNCH",
-        "MOVE_TERA_BLAST"
+        "MOVE_RECYCLE",
+        "MOVE_TERA_BLAST",
+        "MOVE_LEAF_STORM",
+        "MOVE_HIDDEN_POWER"
     ],
     "CompetitiveSets": []
 }

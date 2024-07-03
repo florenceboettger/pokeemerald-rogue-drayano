@@ -2880,7 +2880,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         ICON(Skrelp, 2),
         .footprint = gMonFootprint_Skrelp,
         LEARNSETS(Skrelp),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_DRAGALGE}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 48, SPECIES_DRAGALGE}),
+    #endif
     },
 
     [SPECIES_DRAGALGE] =
@@ -4407,7 +4411,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         ICON(Noibat, 2),
         .footprint = gMonFootprint_Noibat,
         LEARNSETS(Noibat),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_NOIVERN}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 48, SPECIES_NOIVERN}),
+    #endif
     },
 
     [SPECIES_NOIVERN] =

@@ -1693,7 +1693,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         ICON(Combee, 0),
         .footprint = gMonFootprint_Combee,
         LEARNSETS(Combee),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 21, SPECIES_VESPIQUEN}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 21, SPECIES_VESPIQUEN}),
+    #endif
     },
 
     [SPECIES_VESPIQUEN] =
@@ -1710,7 +1714,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .evYield_Defense = 1,
         .evYield_SpDefense = 1,
         .itemRare = ITEM_POISON_BARB,
+    #ifdef ROGUE_DRAYANO
+        .genderRatio = PERCENT_FEMALE(12.5),
+    #else
         .genderRatio = MON_FEMALE,
+    #endif
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
@@ -2547,7 +2555,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         ICON(Glameow, 0),
         .footprint = gMonFootprint_Glameow,
         LEARNSETS(Glameow),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_PURUGLY}),
+    #else        
         .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_PURUGLY}),
+    #endif
     },
 
     [SPECIES_PURUGLY] =
@@ -3169,7 +3181,11 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         ICON(Riolu, 2),
         .footprint = gMonFootprint_Riolu,
         LEARNSETS(Riolu),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_MOVE, MOVE_AURA_SPHERE, SPECIES_LUCARIO}),
+    #else
         .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_LUCARIO}),
+    #endif
     },
 
 #define LUCARIO_MISC_INFO                                       \

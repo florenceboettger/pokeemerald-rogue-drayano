@@ -1925,8 +1925,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Kirlia, 1),
         .footprint = gMonFootprint_Kirlia,
         LEARNSETS(Kirlia),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GARDEVOIR},
+                                {EVO_ITEM, ITEM_DAWN_STONE, SPECIES_GALLADE}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GARDEVOIR},
                                 {EVO_ITEM_MALE, ITEM_DAWN_STONE, SPECIES_GALLADE}),
+    #endif
     },
 
 #define GARDEVOIR_MISC_INFO                                 \
@@ -2030,12 +2035,18 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     },
 #endif //P_MEGA_EVOLUTIONS
 
+#ifdef ROGUE_DRAYANO
+    #define GALLADE_GENDER PERCENT_FEMALE(50)
+#else
+    #define GALLADE_GENDER MON_MALE
+#endif
+
 #if P_GEN_4_CROSS_EVOS
 #define GALLADE_MISC_INFO                                   \
         .types = { TYPE_PSYCHIC, TYPE_FIGHTING },           \
         .catchRate = 45,                                    \
         .evYield_Attack = 3,                                \
-        .genderRatio = MON_MALE,                            \
+        .genderRatio = GALLADE_GENDER,                      \
         .eggCycles = 20,                                    \
         .friendship = 35,                                   \
         .growthRate = GROWTH_SLOW,                          \
@@ -3455,7 +3466,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Aron, 2),
         .footprint = gMonFootprint_Aron,
         LEARNSETS(Aron),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_LAIRON}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_LAIRON}),
+    #endif
     },
 
     [SPECIES_LAIRON] =
@@ -3504,7 +3519,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Lairon, 2),
         .footprint = gMonFootprint_Lairon,
         LEARNSETS(Lairon),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_AGGRON}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_AGGRON}),
+    #endif
     },
 
 #define AGGRON_MISC_INFO                                        \
@@ -3659,7 +3678,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Meditite, 0),
         .footprint = gMonFootprint_Meditite,
         LEARNSETS(Meditite),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_MEDICHAM}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_MEDICHAM}),
+    #endif
     },
 
 #define MEDICHAM_MISC_INFO                                          \
@@ -4615,7 +4638,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Wailmer, 2),
         .footprint = gMonFootprint_Wailmer,
         LEARNSETS(Wailmer),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_WAILORD}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_WAILORD}),
+    #endif
     },
 
     [SPECIES_WAILORD] =
@@ -5104,7 +5131,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Trapinch, 0),
         .footprint = gMonFootprint_Trapinch,
         LEARNSETS(Trapinch),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_VIBRAVA}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_VIBRAVA}),
+#endif
     },
 
     [SPECIES_VIBRAVA] =
@@ -6132,7 +6163,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Lileep, 2),
         .footprint = gMonFootprint_Lileep,
         LEARNSETS(Lileep),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_CRADILY}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CRADILY}),
+    #endif
     },
 
     [SPECIES_CRADILY] =
@@ -6230,7 +6265,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Anorith, 0),
         .footprint = gMonFootprint_Anorith,
         LEARNSETS(Anorith),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ARMALDO}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ARMALDO}),
+    #endif
     },
 
     [SPECIES_ARMALDO] =
@@ -6658,7 +6697,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Shuppet, 0),
         .footprint = gMonFootprint_Shuppet,
         LEARNSETS(Shuppet),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_BANETTE}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_BANETTE}),
+    #endif
     },
 
 #define BANETTE_MISC_INFO                                           \
@@ -6818,7 +6861,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Duskull, 0),
         .footprint = gMonFootprint_Duskull,
         LEARNSETS(Duskull),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_DUSCLOPS}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_DUSCLOPS}),
+    #endif
     },
 
     [SPECIES_DUSCLOPS] =
@@ -7260,47 +7307,38 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Snorunt, 2),
         .footprint = gMonFootprint_Snorunt,
         LEARNSETS(Snorunt),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_GLALIE},
+                                {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_GLALIE},
                                 {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}),
+    #endif
     },
 
 #ifdef ROGUE_DRAYANO
-#define GLALIE_MISC_INFO                                    \
-        .types = { TYPE_ICE, TYPE_ROCK },                   \
-        .catchRate = 75,                                    \
-        .evYield_HP = 2,                                    \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 20,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_MEDIUM_FAST,                   \
-        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_MINERAL },\
-        .bodyColor = BODY_COLOR_GRAY,                       \
-        .speciesName = _("Glalie"),                         \
-        .natDexNum = NATIONAL_DEX_GLALIE,                   \
-        .categoryName = _("Face"),                          \
-        .footprint = gMonFootprint_Glalie,                  \
-        LEARNSETS(Glalie),                                  \
-        .formSpeciesIdTable = sGlalieFormSpeciesIdTable,    \
-        .formChangeTable = sGlalieFormChangeTable
-#else    
-#define GLALIE_MISC_INFO                                    \
-        .types = { TYPE_ICE, TYPE_ICE },                    \
-        .catchRate = 75,                                    \
-        .evYield_HP = 2,                                    \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 20,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_MEDIUM_FAST,                   \
-        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_MINERAL },\
-        .bodyColor = BODY_COLOR_GRAY,                       \
-        .speciesName = _("Glalie"),                         \
-        .natDexNum = NATIONAL_DEX_GLALIE,                   \
-        .categoryName = _("Face"),                          \
-        .footprint = gMonFootprint_Glalie,                  \
-        LEARNSETS(Glalie),                                  \
-        .formSpeciesIdTable = sGlalieFormSpeciesIdTable,    \
-        .formChangeTable = sGlalieFormChangeTable
+    #define GLALIE_TYPE { TYPE_ICE, TYPE_ROCK }
+#else
+    #define GLALIE_TYPE { TYPE_ICE, TYPE_ROCK }
 #endif
+
+#define GLALIE_MISC_INFO                                    \
+        .types = GLALIE_TYPE,                                \
+        .catchRate = 75,                                    \
+        .evYield_HP = 2,                                    \
+        .genderRatio = PERCENT_FEMALE(50),                  \
+        .eggCycles = 20,                                    \
+        .friendship = STANDARD_FRIENDSHIP,                  \
+        .growthRate = GROWTH_MEDIUM_FAST,                   \
+        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_MINERAL },\
+        .bodyColor = BODY_COLOR_GRAY,                       \
+        .speciesName = _("Glalie"),                         \
+        .natDexNum = NATIONAL_DEX_GLALIE,                   \
+        .categoryName = _("Face"),                          \
+        .footprint = gMonFootprint_Glalie,                  \
+        LEARNSETS(Glalie),                                  \
+        .formSpeciesIdTable = sGlalieFormSpeciesIdTable,    \
+        .formChangeTable = sGlalieFormChangeTable
 
     [SPECIES_GLALIE] =
     {
@@ -7406,6 +7444,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 110,
         .baseSpAttack  = 110,
         .baseSpDefense = 70,
+        .genderRatio = PERCENT_FEMALE(50),
     #else
         .baseHP        = 70,
         .baseAttack    = 80,
@@ -7413,12 +7452,12 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpeed     = 110,
         .baseSpAttack  = 80,
         .baseSpDefense = 70,
+        .genderRatio = MON_FEMALE,
     #endif
         .types = { TYPE_ICE, TYPE_GHOST },
         .catchRate = 75,
         .expYield = 168,
         .evYield_Speed = 2,
-        .genderRatio = MON_FEMALE,
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
@@ -7507,7 +7546,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Spheal, 2),
         .footprint = gMonFootprint_Spheal,
         LEARNSETS(Spheal),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 226, SPECIES_SEALEO}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_SEALEO}),
+    #endif
     },
 
     [SPECIES_SEALEO] =
@@ -7555,7 +7598,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         ICON(Sealeo, 2),
         .footprint = gMonFootprint_Sealeo,
         LEARNSETS(Sealeo),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_WALREIN}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 44, SPECIES_WALREIN}),
+    #endif
     },
 
     [SPECIES_WALREIN] =

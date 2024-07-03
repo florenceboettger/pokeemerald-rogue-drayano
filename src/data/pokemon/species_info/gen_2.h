@@ -1756,7 +1756,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         ICON(Azurill, 0),
         .footprint = gMonFootprint_Azurill,
         LEARNSETS(Azurill),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_MARILL}),
+    #else
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_MARILL}),
+    #endif
     },
 #endif //P_GEN_3_CROSS_EVOS
 
@@ -2029,7 +2033,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_INFILTRATOR, ABILITY_WIND_RIDER},
+        .abilities = {ABILITY_WIND_RIDER, ABILITY_INFILTRATOR, ABILITY_AERILATE},
     #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_INFILTRATOR},
     #endif
@@ -2091,7 +2095,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_INFILTRATOR, ABILITY_WIND_RIDER},
+        .abilities = {ABILITY_WIND_RIDER, ABILITY_INFILTRATOR, ABILITY_AERILATE},
     #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_INFILTRATOR},
     #endif
@@ -2153,7 +2157,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_INFILTRATOR, ABILITY_WIND_RIDER},
+        .abilities = {ABILITY_WIND_RIDER, ABILITY_INFILTRATOR, ABILITY_AERILATE},
     #else
         .abilities = {ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_INFILTRATOR},
     #endif
@@ -4763,7 +4767,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         ICON(Slugma, 0),
         .footprint = gMonFootprint_Slugma,
         LEARNSETS(Slugma),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_MAGCARGO}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_MAGCARGO}),
+    #endif
     },
 
     [SPECIES_MAGCARGO] =

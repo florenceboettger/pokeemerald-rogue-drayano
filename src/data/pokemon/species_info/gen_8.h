@@ -4596,7 +4596,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         ICON(Dreepy, 0),
         .footprint = gMonFootprint_Dreepy,
         LEARNSETS(Dreepy),
+    #ifdef ROGUE_DRAYANO
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DRAKLOAK}),
+    #else
+        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_DRAKLOAK}),
+        #endif
     },
 
     [SPECIES_DRAKLOAK] =
@@ -4644,7 +4648,11 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         ICON(Drakloak, 0),
         .footprint = gMonFootprint_Drakloak,
         LEARNSETS(Drakloak),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 56, SPECIES_DRAGAPULT}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_DRAGAPULT}),
+    #endif
     },
 
     [SPECIES_DRAGAPULT] =

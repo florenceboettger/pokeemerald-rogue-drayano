@@ -6208,7 +6208,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         PALETTES(Ponyta),
         ICON(Ponyta, 3),
         LEARNSETS(Ponyta),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_RAPIDASH}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_RAPIDASH}),
+    #endif
     },
 
     [SPECIES_RAPIDASH] =
@@ -6270,7 +6274,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         PALETTES(PonytaGalarian),
         ICON(PonytaGalarian, 2),
         LEARNSETS(PonytaGalarian),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_RAPIDASH_GALARIAN}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_RAPIDASH_GALARIAN}),
+    #endif
     },
 
     [SPECIES_RAPIDASH_GALARIAN] =
@@ -11324,7 +11332,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
                                 {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
                                 {EVO_SPECIFIC_MAP, MAP_NONE, SPECIES_GLACEON},
                                 {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON},
-                                {EVO_FRIENDSHIP_MOVE_TYPE, TYPE_FAIRY, SPECIES_SYLVEON}),
+                            #ifdef ROGUE_DRAYANO
+                                {EVO_ITEM, ITEM_SHINY_STONE, SPECIES_SYLVEON}
+                            #else
+                                {EVO_FRIENDSHIP_MOVE_TYPE, TYPE_FAIRY, SPECIES_SYLVEON}
+                            #endif
+                            ),
     },
 
 #if P_GIGANTAMAX_FORMS

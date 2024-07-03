@@ -31,21 +31,21 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_RETURN",
         "MOVE_PROTECT",
-        "MOVE_STEEL_BEAM",
-        "MOVE_SUBSTITUTE",
-        "MOVE_REST",
-        "MOVE_FRUSTRATION",
-        "MOVE_ENDURE",
-        "MOVE_IRON_DEFENSE",
-        "MOVE_FACADE",
         "MOVE_ROUND",
-        "MOVE_SNORE",
-        "MOVE_SLEEP_TALK",
-        "MOVE_TOXIC",
+        "MOVE_IRON_DEFENSE",
         "MOVE_THUNDERBOLT",
-        "MOVE_GYRO_BALL"
+        "MOVE_GYRO_BALL",
+        "MOVE_SNORE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_FACADE",
+        "MOVE_FRUSTRATION",
+        "MOVE_STEEL_BEAM",
+        "MOVE_ENDURE",
+        "MOVE_RETURN",
+        "MOVE_TOXIC",
+        "MOVE_SLEEP_TALK",
+        "MOVE_REST"
     ],
     "CompetitiveSets": [
         {

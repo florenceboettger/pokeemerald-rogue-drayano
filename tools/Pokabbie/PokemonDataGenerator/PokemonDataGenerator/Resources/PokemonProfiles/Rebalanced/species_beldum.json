@@ -7,14 +7,14 @@
         }
     ],
     "TutorMoves": [
+        "MOVE_HEADBUTT",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_TAKE_DOWN",
+        "MOVE_TERA_BLAST",
         "MOVE_IRON_HEAD",
         "MOVE_ZEN_HEADBUTT",
         "MOVE_STEEL_BEAM",
-        "MOVE_IRON_DEFENSE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HEADBUTT",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TERA_BLAST"
+        "MOVE_HIDDEN_POWER"
     ],
     "CompetitiveSets": [
         {

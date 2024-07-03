@@ -848,8 +848,12 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         ICON(Charjabug, 1),
         .footprint = gMonFootprint_Charjabug,
         LEARNSETS(Charjabug),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_VIKAVOLT})
+    #else
         .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_VIKAVOLT},
                                 {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_VIKAVOLT}),
+    #endif
     },
 
     [SPECIES_VIKAVOLT] =
@@ -1273,8 +1277,14 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FRONT_PIC(Rockruff, 37, 39),
         BACK_PIC(Rockruff, 64, 56),
         .backAnimId = BACK_ANIM_V_STRETCH,
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_SUN_STONE, SPECIES_LYCANROC_MIDDAY},
+                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_LYCANROC_MIDNIGHT},
+                                {EVO_ITEM, ITEM_DUSK_STONE, SPECIES_LYCANROC_DUSK}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL_DAY, 25, SPECIES_LYCANROC_MIDDAY},
                                 {EVO_LEVEL_NIGHT, 25, SPECIES_LYCANROC_MIDNIGHT}),
+    #endif
     },
 
     [SPECIES_ROCKRUFF_OWN_TEMPO] =
@@ -1284,7 +1294,13 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FRONT_PIC(Rockruff, 40, 48),
         BACK_PIC(Rockruff, 64, 56),
         //.backAnimId = BACK_ANIM_NONE,
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_SUN_STONE, SPECIES_LYCANROC_MIDDAY},
+                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_LYCANROC_MIDNIGHT},
+                                {EVO_ITEM, ITEM_DUSK_STONE, SPECIES_LYCANROC_DUSK}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL_DUSK, 25, SPECIES_LYCANROC_DUSK}),
+    #endif
     },
 
 #ifdef ROGUE_DRAYANO
@@ -2072,7 +2088,11 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         ICON(Salandit, 2),
         .footprint = gMonFootprint_Salandit,
         LEARNSETS(Salandit),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_SALAZZLE}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 33, SPECIES_SALAZZLE}),
+    #endif
     },
 
     [SPECIES_SALAZZLE] =
@@ -2088,7 +2108,11 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .expYield = 168,
         .evYield_Speed = 2,
         .itemRare = ITEM_SMOKE_BALL,
+    #ifdef ROGUE_DRAYANO
+        .genderRatio = PERCENT_FEMALE(12.5),
+    #else
         .genderRatio = MON_FEMALE,
+    #endif
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,

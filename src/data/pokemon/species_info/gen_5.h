@@ -5337,7 +5337,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Vanillite, 0),
         .footprint = gMonFootprint_Vanillite,
         LEARNSETS(Vanillite),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 29, SPECIES_VANILLISH}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_VANILLISH}),
+    #endif
     },
 
     [SPECIES_VANILLISH] =
@@ -5792,7 +5796,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Karrablast, 0),
         .footprint = gMonFootprint_Karrablast,
         LEARNSETS(Karrablast),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_METAL_COAT, SPECIES_ESCAVALIER}),
+    #else
         .evolutions = EVOLUTION({EVO_TRADE_SPECIFIC_MON, SPECIES_SHELMET, SPECIES_ESCAVALIER}),
+    #endif
     },
 
     [SPECIES_ESCAVALIER] =
@@ -6674,7 +6682,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Elgyem, 0),
         .footprint = gMonFootprint_Elgyem,
         LEARNSETS(Elgyem),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_BEHEEYEM}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_BEHEEYEM}),
+    #endif
     },
 
     [SPECIES_BEHEEYEM] =
@@ -6776,7 +6788,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Litwick, 2),
         .footprint = gMonFootprint_Litwick,
         LEARNSETS(Litwick),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 27, SPECIES_LAMPENT}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 41, SPECIES_LAMPENT}),
+    #endif
     },
 
     [SPECIES_LAMPENT] =
@@ -7252,7 +7268,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Shelmet, 1),
         .footprint = gMonFootprint_Shelmet,
         LEARNSETS(Shelmet),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_REAPER_CLOTH, SPECIES_ACCELGOR}),
+    #else
         .evolutions = EVOLUTION({EVO_TRADE_SPECIFIC_MON, SPECIES_KARRABLAST, SPECIES_ACCELGOR}),
+    #endif
     },
 
     [SPECIES_ACCELGOR] =
@@ -7461,7 +7481,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Mienfoo, 1),
         .footprint = gMonFootprint_Mienfoo,
         LEARNSETS(Mienfoo),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 41, SPECIES_MIENSHAO}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_MIENSHAO}),
+    #endif
     },
 
     [SPECIES_MIENSHAO] =
@@ -7619,7 +7643,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Golett, 0),
         .footprint = gMonFootprint_Golett,
         LEARNSETS(Golett),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_GOLURK}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 43, SPECIES_GOLURK}),
+    #endif
     },
 
     [SPECIES_GOLURK] =
@@ -7727,7 +7755,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Pawniard, 0),
         .footprint = gMonFootprint_Pawniard,
         LEARNSETS(Pawniard),
+    #ifdef ROGUE_DRAYANO
         .evolutions = EVOLUTION({EVO_LEVEL, 52, SPECIES_BISHARP}),
+    #else
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_BISHARP}),
+    #endif
     },
 
     [SPECIES_BISHARP] =
@@ -7927,8 +7959,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Rufflet, 2),
         .footprint = gMonFootprint_Rufflet,
         LEARNSETS(Rufflet),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_BRAVIARY},
+                                {EVO_NONE, 0, SPECIES_BRAVIARY_HISUIAN}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 54, SPECIES_BRAVIARY},
                                 {EVO_NONE, 0, SPECIES_BRAVIARY_HISUIAN}),
+    #endif
     },
 
 #define BRAVIARY_MISC_INFO                                      \
@@ -8070,7 +8107,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Vullaby, 0),
         .footprint = gMonFootprint_Vullaby,
         LEARNSETS(Vullaby),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_MANDIBUZZ}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 54, SPECIES_MANDIBUZZ}),
+    #endif
     },
 
     [SPECIES_MANDIBUZZ] =
@@ -8282,7 +8323,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Deino, 2),
         .footprint = gMonFootprint_Deino,
         LEARNSETS(Deino),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_ZWEILOUS}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_ZWEILOUS}),
+    #endif
     },
 
     [SPECIES_ZWEILOUS] =
@@ -8330,7 +8375,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Zweilous, 2),
         .footprint = gMonFootprint_Zweilous,
         LEARNSETS(Zweilous),
+    #ifdef ROGUE_DRAYANO
+        .evolutions = EVOLUTION({EVO_LEVEL, 58, SPECIES_HYDREIGON}),
+    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 64, SPECIES_HYDREIGON}),
+    #endif
     },
 
     [SPECIES_HYDREIGON] =

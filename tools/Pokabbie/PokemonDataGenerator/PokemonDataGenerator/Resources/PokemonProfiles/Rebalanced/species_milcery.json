@@ -51,21 +51,21 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_RETURN",
         "MOVE_PROTECT",
-        "MOVE_SUBSTITUTE",
-        "MOVE_REST",
-        "MOVE_FRUSTRATION",
-        "MOVE_ENDURE",
         "MOVE_HELPING_HAND",
-        "MOVE_TERA_BLAST",
         "MOVE_BABY_DOLL_EYES",
+        "MOVE_SUBSTITUTE",
+        "MOVE_LAST_RESORT",
         "MOVE_FACADE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_SLEEP_TALK",
+        "MOVE_FRUSTRATION",
+        "MOVE_TERA_BLAST",
+        "MOVE_ENDURE",
+        "MOVE_RETURN",
         "MOVE_TOXIC",
+        "MOVE_SLEEP_TALK",
         "MOVE_STORED_POWER",
-        "MOVE_LAST_RESORT"
+        "MOVE_REST",
+        "MOVE_HIDDEN_POWER"
     ],
     "CompetitiveSets": []
 }
