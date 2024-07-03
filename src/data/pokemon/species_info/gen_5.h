@@ -71,7 +71,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS },
-        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CONTRARY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_MULTISCALE, ABILITY_CONTRARY},
+    #else
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CONTRARY},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Snivy"),
         .cryId = CRY_SNIVY,
@@ -110,7 +114,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 83,
         .baseSpAttack  = 60,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_GRASS, TYPE_DRAGON },
+    #else
         .types = { TYPE_GRASS, TYPE_GRASS },
+    #endif
         .catchRate = 45,
         .expYield = 145,
         .evYield_Speed = 2,
@@ -119,7 +127,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS },
-        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CONTRARY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_MULTISCALE, ABILITY_CONTRARY},
+    #else
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CONTRARY},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Servine"),
         .cryId = CRY_SERVINE,
@@ -152,6 +164,15 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_SERPERIOR] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 80,
+        .baseAttack    = 76,
+        .baseDefense   = 95,
+        .baseSpeed     = 113,
+        .baseSpAttack  = 76,
+        .baseSpDefense = 95,
+        .types = { TYPE_GRASS, TYPE_DRAGON },
+    #else
         .baseHP        = 75,
         .baseAttack    = 75,
         .baseDefense   = 95,
@@ -159,6 +180,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpAttack  = 75,
         .baseSpDefense = 95,
         .types = { TYPE_GRASS, TYPE_GRASS },
+    #endif
         .catchRate = 45,
         .expYield = 238,
         .evYield_Speed = 3,
@@ -167,7 +189,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS },
-        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CONTRARY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_MULTISCALE, ABILITY_CONTRARY},
+    #else
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CONTRARY},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Serperior"),
         .cryId = CRY_SERPERIOR,
@@ -216,7 +242,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_THICK_FAT },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_THICK_FAT, ABILITY_SHEER_FORCE},
+    #else
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_THICK_FAT},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Tepig"),
         .cryId = CRY_TEPIG,
@@ -255,7 +285,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 55,
         .baseSpAttack  = 70,
         .baseSpDefense = 55,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_FIRE, TYPE_GROUND },
+    #else
         .types = { TYPE_FIRE, TYPE_FIGHTING },
+    #endif
         .catchRate = 45,
         .expYield = 146,
         .evYield_Attack = 2,
@@ -264,7 +298,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_THICK_FAT },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_THICK_FAT, ABILITY_SHEER_FORCE},
+    #else
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_THICK_FAT},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Pignite"),
         .cryId = CRY_PIGNITE,
@@ -297,6 +335,15 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_EMBOAR] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 115,
+        .baseAttack    = 125,
+        .baseDefense   = 80,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 80,
+        .types = { TYPE_FIRE, TYPE_GROUND },
+    #else
         .baseHP        = 110,
         .baseAttack    = 123,
         .baseDefense   = 65,
@@ -304,6 +351,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpAttack  = 100,
         .baseSpDefense = 65,
         .types = { TYPE_FIRE, TYPE_FIGHTING },
+    #endif
         .catchRate = 45,
         .expYield = 238,
         .evYield_Attack = 3,
@@ -312,7 +360,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_RECKLESS },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_RECKLESS, ABILITY_MOLD_BREAKER},
+    #else
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_RECKLESS},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
         .speciesName = _("Emboar"),
@@ -347,12 +399,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_OSHAWOTT
     [SPECIES_OSHAWOTT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 55,
+        .baseAttack    = 63,
+        .baseDefense   = 45,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 45,
+    #else
         .baseHP        = 55,
         .baseAttack    = 55,
         .baseDefense   = 45,
         .baseSpeed     = 45,
         .baseSpAttack  = 63,
         .baseSpDefense = 45,
+    #endif
         .types = { TYPE_WATER, TYPE_WATER },
         .catchRate = 45,
         .expYield = 62,
@@ -362,7 +423,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_SHELL_ARMOR, ABILITY_SUPER_LUCK},
+    #else
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Oshawott"),
         .cryId = CRY_OSHAWOTT,
@@ -395,6 +460,15 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_DEWOTT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 83,
+        .baseDefense   = 60,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 60,
+        .types = { TYPE_WATER, TYPE_FIGHTING },
+    #else
         .baseHP        = 75,
         .baseAttack    = 75,
         .baseDefense   = 60,
@@ -402,6 +476,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpAttack  = 83,
         .baseSpDefense = 60,
         .types = { TYPE_WATER, TYPE_WATER },
+    #endif
         .catchRate = 45,
         .expYield = 145,
         .evYield_SpAttack = 2,
@@ -410,7 +485,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_SHELL_ARMOR, ABILITY_SUPER_LUCK},
+    #else
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Dewott"),
         .cryId = CRY_DEWOTT,
@@ -466,6 +545,15 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_SAMUROTT] =
     {
         SAMUROTT_MISC_INFO,
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 95,
+        .baseAttack    = 110,
+        .baseDefense   = 85,
+        .baseSpeed     = 70,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 70,
+        .types = { TYPE_WATER, TYPE_FIGHTING },
+    #else
         .baseHP        = 95,
         .baseAttack    = 100,
         .baseDefense   = 85,
@@ -473,8 +561,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpAttack  = 108,
         .baseSpDefense = 70,
         .types = { TYPE_WATER, TYPE_WATER },
+    #endif
         .evYield_SpAttack = 3,
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_SHELL_ARMOR, ABILITY_SUPER_LUCK},
+    #else
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHELL_ARMOR},
+    #endif
         .weight = 946,
         .description = POKEDEX_DESC_STRING(
             "One swing of the seamitars attached\n"
@@ -578,12 +671,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_WATCHOG] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 95,
+        .baseDefense   = 75,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 60,
         .baseAttack    = 85,
         .baseDefense   = 69,
         .baseSpeed     = 77,
         .baseSpAttack  = 60,
         .baseSpDefense = 69,
+    #endif
         .types = { TYPE_NORMAL, TYPE_NORMAL },
         .catchRate = 255,
         .expYield = 147,
@@ -723,12 +825,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_STOUTLAND] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 95,
+        .baseAttack    = 115,
+        .baseDefense   = 90,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 85,
         .baseAttack    = P_UPDATED_STATS >= GEN_6 ? 110 : 100,
         .baseDefense   = 90,
         .baseSpeed     = 80,
         .baseSpAttack  = 45,
         .baseSpDefense = 90,
+    #endif
         .types = { TYPE_NORMAL, TYPE_NORMAL },
         .catchRate = 45,
         .expYield = 225,
@@ -1261,12 +1372,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_PIDOVE
     [SPECIES_PIDOVE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 36,
+        .baseDefense   = 50,
+        .baseSpeed     = 43,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 30,
+    #else
         .baseHP        = 50,
         .baseAttack    = 55,
         .baseDefense   = 50,
         .baseSpeed     = 43,
         .baseSpAttack  = 36,
         .baseSpDefense = 30,
+    #endif
         .types = { TYPE_NORMAL, TYPE_FLYING },
         .catchRate = 255,
         .expYield = 53,
@@ -1276,7 +1396,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
-        .abilities = { ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_UNAWARE},
+    #else
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Pidove"),
         .cryId = CRY_PIDOVE,
@@ -1309,12 +1433,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_TRANQUILL] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 50,
+        .baseDefense   = 65,
+        .baseSpeed     = 66,
+        .baseSpAttack  = 77,
+        .baseSpDefense = 42,
+    #else
         .baseHP        = 62,
         .baseAttack    = 77,
         .baseDefense   = 62,
         .baseSpeed     = 65,
         .baseSpAttack  = 50,
         .baseSpDefense = 42,
+    #endif
         .types = { TYPE_NORMAL, TYPE_FLYING },
         .catchRate = 120,
         .expYield = 125,
@@ -1324,7 +1457,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
-        .abilities = { ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_UNAWARE},
+    #else
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Tranquill"),
         .cryId = CRY_TRANQUILL,
@@ -1357,12 +1494,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_UNFEZANT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 80,
+        .baseAttack    = 65,
+        .baseDefense   = 80,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 55,
+    #else
         .baseHP        = 80,
         .baseAttack    = P_UPDATED_STATS >= GEN_6 ? 115 : 105,
         .baseDefense   = 80,
         .baseSpeed     = 93,
         .baseSpAttack  = 65,
         .baseSpDefense = 55,
+    #endif
         .types = { TYPE_NORMAL, TYPE_FLYING },
         .catchRate = 45,
         .expYield = 220,
@@ -1372,7 +1518,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
-        .abilities = { ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_UNAWARE},
+    #else
+        .abilities = {ABILITY_BIG_PECKS, ABILITY_SUPER_LUCK, ABILITY_RIVALRY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Unfezant"),
         .cryId = CRY_UNFEZANT,
@@ -1664,7 +1814,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseAttack    = 45,
         .baseDefense   = 43,
         .baseSpeed     = 72,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 65,
+    #else
         .baseSpAttack  = 55,
+    #endif
         .baseSpDefense = 43,
         .types = { TYPE_PSYCHIC, TYPE_FLYING },
         .catchRate = 190,
@@ -1709,12 +1863,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_SWOOBAT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 57,
+        .baseDefense   = 63,
+        .baseSpeed     = 114,
+        .baseSpAttack  = 86,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 67,
         .baseAttack    = 57,
         .baseDefense   = 55,
         .baseSpeed     = 114,
         .baseSpAttack  = 77,
         .baseSpDefense = 55,
+    #endif
         .types = { TYPE_PSYCHIC, TYPE_FLYING },
         .catchRate = 45,
         .expYield = 149,
@@ -2708,12 +2871,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_WHIMSICOTT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 67,
+        .baseDefense   = 85,
+        .baseSpeed     = 116,
+        .baseSpAttack  = 87,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 60,
         .baseAttack    = 67,
         .baseDefense   = 85,
         .baseSpeed     = 116,
         .baseSpAttack  = 77,
         .baseSpDefense = 75,
+    #endif
         .types = COTTONEE_FAMILY_TYPES,
         .catchRate = 75,
         .expYield = 168,
@@ -2827,12 +2999,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_LILLIGANT] =
     {
         LILLIGANT_MISC_INFO,
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 60,
+        .baseDefense   = 75,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 115,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 70,
         .baseAttack    = 60,
         .baseDefense   = 75,
         .baseSpeed     = 90,
         .baseSpAttack  = 110,
         .baseSpDefense = 75,
+    #endif
         .types = { TYPE_GRASS, TYPE_GRASS },
         .evYield_SpAttack = 2,
         .abilities = { ABILITY_CHLOROPHYLL, ABILITY_OWN_TEMPO, ABILITY_LEAF_GUARD },
@@ -2902,6 +3083,37 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #endif //P_FAMILY_PETILIL
 
 #if P_FAMILY_BASCULIN
+#ifdef ROGUE_DRAYANO
+#define BASCULIN_MISC_INFO                                      \
+        .baseHP        = 90,                                    \
+        .baseAttack    = 92,                                    \
+        .baseDefense   = 65,                                    \
+        .baseSpeed     = 98,                                    \
+        .baseSpAttack  = 90,                                    \
+        .baseSpDefense = 55,                                    \
+        .types = { TYPE_WATER, TYPE_WATER },                    \
+        .catchRate = 190,                                       \
+        .expYield = 161,                                        \
+        .evYield_Speed = 2,                                     \
+        .genderRatio = PERCENT_FEMALE(50),                      \
+        .eggCycles = 40,                                        \
+        .friendship = STANDARD_FRIENDSHIP,                      \
+        .growthRate = GROWTH_MEDIUM_FAST,                       \
+        .eggGroups = { EGG_GROUP_WATER_2, EGG_GROUP_WATER_2 },  \
+        .bodyColor = BODY_COLOR_GREEN,                          \
+        .speciesName = _("Basculin"),                           \
+        .cryId = CRY_BASCULIN,                                  \
+        .natDexNum = NATIONAL_DEX_BASCULIN,                     \
+        .height = 10,                                           \
+        .weight = 180,                                          \
+        .pokemonScale = 316,                                    \
+        .pokemonOffset = 7,                                     \
+        .trainerScale = 257,                                    \
+        .trainerOffset = 0,                                     \
+        .enemyMonElevation = 6,                                 \
+        .footprint = gMonFootprint_Basculin,                    \
+        .formSpeciesIdTable = sBasculinFormSpeciesIdTable
+#else
 #define BASCULIN_MISC_INFO                                      \
         .baseHP        = 70,                                    \
         .baseAttack    = 92,                                    \
@@ -2931,6 +3143,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .enemyMonElevation = 6,                                 \
         .footprint = gMonFootprint_Basculin,                    \
         .formSpeciesIdTable = sBasculinFormSpeciesIdTable
+#endif
 
     [SPECIES_BASCULIN_RED_STRIPED] =
     {
@@ -3468,12 +3681,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_MARACTUS
     [SPECIES_MARACTUS] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 75,
+        .baseAttack    = 106,
+        .baseDefense   = 72,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 86,
+        .baseSpDefense = 81,
+    #else
         .baseHP        = 75,
         .baseAttack    = 86,
         .baseDefense   = 67,
         .baseSpeed     = 60,
         .baseSpAttack  = 106,
         .baseSpDefense = 67,
+    #endif
         .types = { TYPE_GRASS, TYPE_GRASS },
         .catchRate = 255,
         .expYield = 161,
@@ -3484,7 +3706,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_SEED_SOWER, ABILITY_CHLOROPHYLL, ABILITY_STORM_DRAIN },
+    #else
         .abilities = { ABILITY_WATER_ABSORB, ABILITY_CHLOROPHYLL, ABILITY_STORM_DRAIN },
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Maractus"),
         .cryId = CRY_MARACTUS,
@@ -3567,12 +3793,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_CRUSTLE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 105,
+        .baseDefense   = 125,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 70,
         .baseAttack    = P_UPDATED_STATS >= GEN_7 ? 105 : 95,
         .baseDefense   = 125,
         .baseSpeed     = 45,
         .baseSpAttack  = 65,
         .baseSpDefense = 75,
+    #endif
         .types = { TYPE_BUG, TYPE_ROCK },
         .catchRate = 75,
         .expYield = 170,
@@ -3799,7 +4034,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpDefense = 65,
         .types = { TYPE_GHOST, TYPE_GHOST },
         .itemRare = ITEM_SPELL_TAG,
-        .abilities = { ABILITY_MUMMY, ABILITY_NONE },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MUMMY, ABILITY_NONE, ABILITY_CURSED_BODY},
+    #else
+        .abilities = {ABILITY_MUMMY, ABILITY_NONE},
+    #endif
         .description = POKEDEX_DESC_STRING(
             "These Pokémon arose from the spirits\n"
             "of people interred in graves in past ages.\n"
@@ -3821,12 +4060,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_COFAGRIGUS] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 68,
+        .baseAttack    = 40,
+        .baseDefense   = 145,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 105,
+    #else
         .baseHP        = 58,
         .baseAttack    = 50,
         .baseDefense   = 145,
         .baseSpeed     = 30,
         .baseSpAttack  = 95,
         .baseSpDefense = 105,
+    #endif
         .types = { TYPE_GHOST, TYPE_GHOST },
         .catchRate = 90,
         .expYield = 169,
@@ -3837,7 +4085,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_AMORPHOUS },
-        .abilities = { ABILITY_MUMMY, ABILITY_NONE },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MUMMY, ABILITY_NONE, ABILITY_STURDY},
+    #else
+        .abilities = {ABILITY_MUMMY, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Cofagrigus"),
         .cryId = CRY_COFAGRIGUS,
@@ -3878,7 +4130,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpAttack  = 30,
         .baseSpDefense = 65,
         .types = { TYPE_GROUND, TYPE_GHOST },
-        .abilities = { ABILITY_WANDERING_SPIRIT, ABILITY_NONE },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MUMMY, ABILITY_NONE, ABILITY_CURSED_BODY},
+    #else
+        .abilities = {ABILITY_MUMMY, ABILITY_NONE},
+    #endif
         .description = POKEDEX_DESC_STRING(
             "A clay slab with cursed engravings\n"
             "took possession of a Yamask. The\n"
@@ -3901,12 +4157,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_RUNERIGUS] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 68,
+        .baseAttack    = 105,
+        .baseDefense   = 145,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 105,
+    #else
         .baseHP        = 58,
         .baseAttack    = 95,
         .baseDefense   = 145,
         .baseSpeed     = 30,
         .baseSpAttack  = 50,
         .baseSpDefense = 105,
+    #endif
         .types = { TYPE_GROUND, TYPE_GHOST },
         .catchRate = 90,
         .expYield = 169,
@@ -3916,7 +4181,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_AMORPHOUS },
-        .abilities = { ABILITY_WANDERING_SPIRIT, ABILITY_NONE },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_WANDERING_SPIRIT, ABILITY_NONE, ABILITY_SOLID_ROCK},
+    #else
+        .abilities = {ABILITY_WANDERING_SPIRIT, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Runerigus"),
         .cryId = CRY_RUNERIGUS,
@@ -4146,12 +4415,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_TRUBBISH
     [SPECIES_TRUBBISH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 50,
+        .baseDefense   = 62,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 62,
+    #else
         .baseHP        = 50,
         .baseAttack    = 50,
         .baseDefense   = 62,
         .baseSpeed     = 65,
         .baseSpAttack  = 40,
         .baseSpDefense = 62,
+    #endif
         .types = { TYPE_POISON, TYPE_POISON },
         .catchRate = 190,
         .expYield = 66,
@@ -4193,6 +4471,37 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GARBODOR}),
     },
 
+#ifdef ROGUE_DRAYANO
+#define GARBODOR_MISC_INFO                                                      \
+        .baseHP        = 100,                                                   \
+        .baseAttack    = 95,                                                    \
+        .baseDefense   = 82,                                                    \
+        .baseSpeed     = 75,                                                    \
+        .baseSpAttack  = 60,                                                    \
+        .baseSpDefense = 82,                                                    \
+        .types = { TYPE_POISON, TYPE_POISON },                                  \
+        .catchRate = 60,                                                        \
+        .expYield = 166,                                                        \
+        .evYield_Attack = 2,                                                    \
+        .itemCommon = ITEM_SILK_SCARF,                                          \
+        .itemRare = ITEM_BLACK_SLUDGE,                                          \
+        .genderRatio = PERCENT_FEMALE(50),                                      \
+        .eggCycles = 20,                                                        \
+        .friendship = STANDARD_FRIENDSHIP,                                      \
+        .growthRate = GROWTH_MEDIUM_FAST,                                       \
+        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },                  \
+        .abilities = {ABILITY_STENCH, ABILITY_TOXIC_DEBRIS, ABILITY_AFTERMATH}, \
+        .bodyColor = BODY_COLOR_GREEN,                                          \
+        .noFlip = TRUE,                                                         \
+        .speciesName = _("Garbodor"),                                           \
+        .cryId = CRY_GARBODOR,                                                  \
+        .natDexNum = NATIONAL_DEX_GARBODOR,                                     \
+        .categoryName = _("Trash Heap"),                                        \
+        .footprint = gMonFootprint_Garbodor,                                    \
+        LEARNSETS(Garbodor),                                                    \
+        .formSpeciesIdTable = sGarbodorFormSpeciesIdTable,                      \
+        .formChangeTable = sGarbodorFormChangeTable
+#else
 #define GARBODOR_MISC_INFO                                                      \
         .baseHP        = 80,                                                    \
         .baseAttack    = 95,                                                    \
@@ -4222,6 +4531,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         LEARNSETS(Garbodor),                                                    \
         .formSpeciesIdTable = sGarbodorFormSpeciesIdTable,                      \
         .formChangeTable = sGarbodorFormChangeTable
+#endif
 
     [SPECIES_GARBODOR] =
     {
@@ -4495,12 +4805,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_CINCCINO] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 80,
+        .baseAttack    = 100,
+        .baseDefense   = 60,
+        .baseSpeed     = 115,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 75,
         .baseAttack    = 95,
         .baseDefense   = 60,
         .baseSpeed     = 115,
         .baseSpAttack  = 65,
         .baseSpDefense = 60,
+    #endif
         .types = { TYPE_NORMAL, TYPE_NORMAL },
         .catchRate = 60,
         .expYield = 165,
@@ -4551,7 +4870,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 45,
         .baseSpAttack  = 55,
         .baseSpDefense = 65,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_PSYCHIC, TYPE_DARK },
+    #else
         .types = { TYPE_PSYCHIC, TYPE_PSYCHIC },
+    #endif
         .catchRate = 200,
         .expYield = 58,
         .evYield_SpDefense = 1,
@@ -4599,7 +4922,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 55,
         .baseSpAttack  = 75,
         .baseSpDefense = 85,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_PSYCHIC, TYPE_DARK },
+    #else
         .types = { TYPE_PSYCHIC, TYPE_PSYCHIC },
+    #endif
         .catchRate = 100,
         .expYield = 137,
         .evYield_SpDefense = 2,
@@ -4647,7 +4974,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 65,
         .baseSpAttack  = 95,
         .baseSpDefense = 110,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_PSYCHIC, TYPE_DARK },
+    #else
         .types = { TYPE_PSYCHIC, TYPE_PSYCHIC },
+    #endif
         .catchRate = 50,
         .expYield = 221,
         .evYield_SpDefense = 3,
@@ -4854,7 +5185,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FLYING },
-        .abilities = { ABILITY_KEEN_EYE, ABILITY_BIG_PECKS, ABILITY_HYDRATION },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_BIG_PECKS, ABILITY_HYDRATION},
+    #else
+        .abilities = {ABILITY_KEEN_EYE, ABILITY_BIG_PECKS, ABILITY_HYDRATION},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Ducklett"),
         .cryId = CRY_DUCKLETT,
@@ -4887,12 +5222,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_SWANNA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 82,
+        .baseAttack    = 63,
+        .baseDefense   = 65,
+        .baseSpeed     = 98,
+        .baseSpAttack  = 109,
+        .baseSpDefense = 83,
+    #else
         .baseHP        = 75,
         .baseAttack    = 87,
         .baseDefense   = 63,
         .baseSpeed     = 98,
         .baseSpAttack  = 87,
         .baseSpDefense = 63,
+    #endif
         .types = { TYPE_WATER, TYPE_FLYING },
         .catchRate = 45,
         .expYield = 166,
@@ -4902,7 +5246,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FLYING },
-        .abilities = { ABILITY_KEEN_EYE, ABILITY_BIG_PECKS, ABILITY_HYDRATION },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_BIG_PECKS, ABILITY_HYDRATION},
+    #else
+        .abilities = {ABILITY_KEEN_EYE, ABILITY_BIG_PECKS, ABILITY_HYDRATION},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Swanna"),
         .cryId = CRY_SWANNA,
@@ -4936,12 +5284,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_VANILLITE
     [SPECIES_VANILLITE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 36,
+        .baseAttack    = 44,
+        .baseDefense   = 50,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 36,
         .baseAttack    = 50,
         .baseDefense   = 50,
         .baseSpeed     = 44,
         .baseSpAttack  = 65,
         .baseSpDefense = 60,
+    #endif
         .types = { TYPE_ICE, TYPE_ICE },
         .catchRate = 255,
         .expYield = 61,
@@ -4985,12 +5342,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_VANILLISH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 51,
+        .baseAttack    = 59,
+        .baseDefense   = 65,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 75,
+    #else
         .baseHP        = 51,
         .baseAttack    = 65,
         .baseDefense   = 65,
         .baseSpeed     = 59,
         .baseSpAttack  = 80,
         .baseSpDefense = 75,
+    #endif
         .types = { TYPE_ICE, TYPE_ICE },
         .catchRate = 120,
         .expYield = 138,
@@ -5034,6 +5400,15 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_VANILLUXE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 71,
+        .baseAttack    = 79,
+        .baseDefense   = 85,
+        .baseSpeed     = 95,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 95,
+        .types = { TYPE_ICE, TYPE_FAIRY },
+    #else
         .baseHP        = 71,
         .baseAttack    = 95,
         .baseDefense   = 85,
@@ -5041,6 +5416,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpAttack  = 110,
         .baseSpDefense = 95,
         .types = { TYPE_ICE, TYPE_ICE },
+    #endif
         .catchRate = 45,
         .expYield = 241,
         .evYield_SpAttack = 3,
@@ -5173,6 +5549,44 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_SAWSBUCK_WINTER}),
     },
 
+#ifdef ROGUE_DRAYANO
+#define SAWSBUCK_MISC_INFO                                                              \
+        .baseHP        = 85,                                                            \
+        .baseAttack    = 110,                                                           \
+        .baseDefense   = 70,                                                            \
+        .baseSpeed     = 95,                                                            \
+        .baseSpAttack  = 60,                                                            \
+        .baseSpDefense = 70,                                                            \
+        .types = { TYPE_NORMAL, TYPE_GRASS },                                           \
+        .catchRate = 75,                                                                \
+        .expYield = 166,                                                                \
+        .evYield_Attack = 2,                                                            \
+        .genderRatio = PERCENT_FEMALE(50),                                              \
+        .eggCycles = 20,                                                                \
+        .friendship = STANDARD_FRIENDSHIP,                                              \
+        .growthRate = GROWTH_MEDIUM_FAST,                                               \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },                              \
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_SAP_SIPPER, ABILITY_SERENE_GRACE }, \
+        .bodyColor = BODY_COLOR_BROWN,                                                  \
+        .speciesName = _("Sawsbuck"),                                                   \
+        .cryId = CRY_SAWSBUCK,                                                          \
+        .natDexNum = NATIONAL_DEX_SAWSBUCK,                                             \
+        .categoryName = _("Season"),                                                    \
+        .height = 19,                                                                   \
+        .weight = 925,                                                                  \
+        .pokemonScale = 256,                                                            \
+        .pokemonOffset = 1,                                                             \
+        .trainerScale = 326,                                                            \
+        .trainerOffset = 4,                                                             \
+        .frontPicYOffset = 0,                                                           \
+        .frontAnimFrames = sAnims_Sawsbuck,                                             \
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,                                        \
+        .backPicYOffset = 5,                                                            \
+        .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,                                         \
+        .footprint = gMonFootprint_Sawsbuck,                                            \
+        LEARNSETS(Sawsbuck),                                                            \
+        .formSpeciesIdTable = sSawsbuckFormSpeciesIdTable
+#else
 #define SAWSBUCK_MISC_INFO                                                              \
         .baseHP        = 80,                                                            \
         .baseAttack    = 100,                                                           \
@@ -5209,6 +5623,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .footprint = gMonFootprint_Sawsbuck,                                            \
         LEARNSETS(Sawsbuck),                                                            \
         .formSpeciesIdTable = sSawsbuckFormSpeciesIdTable
+#endif
 
     [SPECIES_SAWSBUCK_SPRING] =
     {
@@ -5271,12 +5686,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_EMOLGA
     [SPECIES_EMOLGA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 60,
+        .baseAttack    = 90,
+        .baseDefense   = 60,
+        .baseSpeed     = 103,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 55,
         .baseAttack    = 75,
         .baseDefense   = 60,
         .baseSpeed     = 103,
         .baseSpAttack  = 75,
         .baseSpDefense = 60,
+    #endif
         .types = { TYPE_ELECTRIC, TYPE_FLYING },
         .catchRate = 200,
         .expYield = 150,
@@ -5336,7 +5760,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG },
-        .abilities = { ABILITY_SWARM, ABILITY_SHED_SKIN, ABILITY_NO_GUARD },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_NO_GUARD, ABILITY_SHED_SKIN, ABILITY_SWARM},
+    #else
+        .abilities = {ABILITY_SWARM, ABILITY_SHED_SKIN, ABILITY_NO_GUARD},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Karrablast"),
         .cryId = CRY_KARRABLAST,
@@ -5384,7 +5812,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG },
-        .abilities = { ABILITY_SWARM, ABILITY_SHELL_ARMOR, ABILITY_OVERCOAT },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_NO_GUARD, ABILITY_SHELL_ARMOR, ABILITY_OVERCOAT},
+    #else
+        .abilities = {ABILITY_SWARM, ABILITY_SHELL_ARMOR, ABILITY_OVERCOAT},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Escavalier"),
         .cryId = CRY_ESCAVALIER,
@@ -5535,7 +5967,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS },
-        .abilities = { ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_DAMP },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_WATER_BUBBLE},
+    #else
+        .abilities = {ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_DAMP},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Frillish"),
         .cryId = CRY_FRILLISH,
@@ -5587,7 +6023,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS },
-        .abilities = { ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_DAMP },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_WATER_BUBBLE},
+    #else
+        .abilities = {ABILITY_WATER_ABSORB, ABILITY_CURSED_BODY, ABILITY_DAMP},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Jellicent"),
         .cryId = CRY_JELLICENT,
@@ -5722,12 +6162,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_GALVANTULA] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 92,
+        .baseDefense   = 60,
+        .baseSpeed     = 108,
+        .baseSpAttack  = 103,
+        .baseSpDefense = 60,
+    #else
         .baseHP        = 70,
         .baseAttack    = 77,
         .baseDefense   = 60,
         .baseSpeed     = 108,
         .baseSpAttack  = 97,
         .baseSpDefense = 60,
+    #endif
         .types = { TYPE_BUG, TYPE_ELECTRIC },
         .catchRate = 75,
         .expYield = 165,
@@ -5886,7 +6335,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },
-        .abilities = { ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_LEVITATE},
+    #else
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
         .speciesName = _("Klink"),
@@ -5936,7 +6389,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },
-        .abilities = { ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_LEVITATE},
+    #else
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
         .speciesName = _("Klang"),
@@ -5986,7 +6443,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },
-        .abilities = { ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_LEVITATE},
+    #else
+        .abilities = {ABILITY_PLUS, ABILITY_MINUS, ABILITY_CLEAR_BODY},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
         .speciesName = _("Klinklang"),
@@ -6620,6 +7081,15 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_BEARTIC] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 105,
+        .baseAttack    = 130,
+        .baseDefense   = 80,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 80,
+        .types = { TYPE_ICE, TYPE_FIGHTING },
+    #else
         .baseHP        = 95,
         .baseAttack    = P_UPDATED_STATS >= GEN_7 ? 130 : 110,
         .baseDefense   = 80,
@@ -6627,6 +7097,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpAttack  = 70,
         .baseSpDefense = 80,
         .types = { TYPE_ICE, TYPE_ICE },
+    #endif
         .catchRate = 60,
         .expYield = 177,
         .evYield_Attack = 2,
@@ -6635,7 +7106,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_SLUSH_RUSH, ABILITY_SWIFT_SWIM },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_SLUSH_RUSH, ABILITY_TOUGH_CLAWS},
+    #else
+        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_SLUSH_RUSH, ABILITY_SWIFT_SWIM},
+    #endif
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Beartic"),
         .cryId = CRY_BEARTIC,
@@ -6669,6 +7144,14 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_CRYOGONAL
     [SPECIES_CRYOGONAL] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 80,
+        .baseAttack    = 50,
+        .baseDefense   = 50,
+        .baseSpeed     = 105,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 135,
+    #else
         .baseAttack    = 50,
         .baseSpeed     = 105,
         .baseSpAttack  = 95,
@@ -6680,6 +7163,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             .baseHP        = 70,
             .baseDefense   = 30,
         #endif
+    #endif
         .types = { TYPE_ICE, TYPE_ICE },
         .catchRate = 25,
         .expYield = 180,
@@ -6779,7 +7263,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpeed     = 145,
         .baseSpAttack  = 100,
         .baseSpDefense = 60,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_BUG, TYPE_DARK },
+    #else
         .types = { TYPE_BUG, TYPE_BUG },
+    #endif
         .catchRate = 75,
         .expYield = 173,
         .evYield_Speed = 2,
@@ -6788,7 +7276,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG },
-        .abilities = { ABILITY_HYDRATION, ABILITY_STICKY_HOLD, ABILITY_UNBURDEN },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_INFILTRATOR, ABILITY_STICKY_HOLD, ABILITY_UNBURDEN},
+    #else
+        .abilities = {ABILITY_HYDRATION, ABILITY_STICKY_HOLD, ABILITY_UNBURDEN},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Accelgor"),
         .cryId = CRY_ACCELGOR,
@@ -6847,12 +7339,20 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseAttack    = 66,
         .baseDefense   = 84,
         .baseSpeed     = 32,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 90,
+    #else
         .baseSpAttack  = 81,
+    #endif
         .baseSpDefense = 99,
         .types = { TYPE_GROUND, TYPE_ELECTRIC },
         .itemRare = ITEM_SOFT_SAND,
         .friendship = 70,
-        .abilities = { ABILITY_STATIC, ABILITY_LIMBER, ABILITY_SAND_VEIL },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_STATIC, ABILITY_DRY_SKIN, ABILITY_SAND_VEIL},
+    #else
+        .abilities = {ABILITY_STATIC, ABILITY_LIMBER, ABILITY_SAND_VEIL},
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .weight = 110,
         .description = POKEDEX_DESC_STRING(
@@ -6877,14 +7377,22 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     {
         STUNFISK_MISC_INFO,
         .baseHP        = 109,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 90,
+    #else
         .baseAttack    = 81,
+    #endif
         .baseDefense   = 99,
         .baseSpeed     = 32,
         .baseSpAttack  = 66,
         .baseSpDefense = 84,
         .types = { TYPE_GROUND, TYPE_STEEL },
         .friendship = STANDARD_FRIENDSHIP,
-        .abilities = { ABILITY_MIMICRY, ABILITY_NONE },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MIMICRY, ABILITY_DRY_SKIN, ABILITY_ARENA_TRAP},
+    #else
+        .abilities = {ABILITY_MIMICRY, ABILITY_NONE},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .weight = 205,
         .description = POKEDEX_DESC_STRING(
@@ -7007,12 +7515,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_DRUDDIGON
     [SPECIES_DRUDDIGON] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 120,
+        .baseDefense   = 90,
+        .baseSpeed     = 41,
+        .baseSpAttack  = 60,
+        .baseSpDefense = 90,
+    #else
         .baseHP        = 77,
         .baseAttack    = 120,
         .baseDefense   = 90,
         .baseSpeed     = 48,
         .baseSpAttack  = 60,
         .baseSpDefense = 90,
+    #endif
         .types = { TYPE_DRAGON, TYPE_DRAGON },
         .catchRate = 45,
         .expYield = 170,
@@ -7107,12 +7624,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_GOLURK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 115,
+        .baseAttack    = 125,
+        .baseDefense   = 85,
+        .baseSpeed     = 55,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 85,
+    #else
         .baseHP        = 89,
         .baseAttack    = 124,
         .baseDefense   = 80,
         .baseSpeed     = 55,
         .baseSpAttack  = 55,
         .baseSpDefense = 80,
+    #endif
         .types = { TYPE_GROUND, TYPE_GHOST },
         .catchRate = 90,
         .expYield = 169,
@@ -7308,7 +7834,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseHP        = 95,
         .baseAttack    = 110,
         .baseDefense   = 95,
+    #ifdef ROGUE_DRAYANO
+        .baseSpeed     = 65,
+    #else
         .baseSpeed     = 55,
+    #endif
         .baseSpAttack  = 40,
         .baseSpDefense = 95,
         .types = { TYPE_NORMAL, TYPE_NORMAL },
@@ -7594,12 +8124,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #if P_FAMILY_HEATMOR
     [SPECIES_HEATMOR] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 85,
+        .baseAttack    = 105,
+        .baseDefense   = 66,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 97,
+        .baseSpDefense = 66,
+    #else
         .baseHP        = 85,
         .baseAttack    = 97,
         .baseDefense   = 66,
         .baseSpeed     = 65,
         .baseSpAttack  = 105,
         .baseSpDefense = 66,
+    #endif
         .types = { TYPE_FIRE, TYPE_FIRE },
         .catchRate = 90,
         .expYield = 169,
@@ -7609,7 +8148,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_GLUTTONY, ABILITY_FLASH_FIRE, ABILITY_WHITE_SMOKE },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_MOLD_BREAKER, ABILITY_FLASH_FIRE, ABILITY_WHITE_SMOKE},
+    #else
+        .abilities = {ABILITY_GLUTTONY, ABILITY_FLASH_FIRE, ABILITY_WHITE_SMOKE},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Heatmor"),
         .cryId = CRY_HEATMOR,
@@ -7658,7 +8201,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG },
-        .abilities = { ABILITY_SWARM, ABILITY_HUSTLE, ABILITY_TRUANT },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_HEATPROOF, ABILITY_HUSTLE, ABILITY_TRUANT},
+    #else
+        .abilities = {ABILITY_SWARM, ABILITY_HUSTLE, ABILITY_TRUANT},
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Durant"),
         .cryId = CRY_DURANT,
@@ -8723,12 +9270,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_MELOETTA_PIROUETTE] =
     {
         MELOETTA_MISC_INFO,
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 100,
+        .baseAttack    = 77,
+        .baseDefense   = 90,
+        .baseSpeed     = 128,
+        .baseSpAttack  = 128,
+        .baseSpDefense = 77,
+    #else
         .baseHP        = 100,
         .baseAttack    = 128,
         .baseDefense   = 90,
         .baseSpeed     = 128,
         .baseSpAttack  = 77,
         .baseSpDefense = 77,
+    #endif
         .types = { TYPE_NORMAL, TYPE_FIGHTING },
         .evYield_Attack = 1,
         .evYield_Defense = 1,

@@ -79,40 +79,38 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AERIAL_ACE",
+        "MOVE_RETURN",
+        "MOVE_FLY",
+        "MOVE_WORK_UP",
+        "MOVE_HEAT_WAVE",
+        "MOVE_U_TURN",
         "MOVE_ATTRACT",
         "MOVE_BOOMBURST",
-        "MOVE_CONFIDE",
-        "MOVE_DEFOG",
-        "MOVE_DOUBLE_TEAM",
-        "MOVE_ECHOED_VOICE",
-        "MOVE_ENDEAVOR",
-        "MOVE_FACADE",
-        "MOVE_FLY",
-        "MOVE_FRUSTRATION",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HEAT_WAVE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_LASER_FOCUS",
-        "MOVE_PROTECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_RETURN",
-        "MOVE_ROOST",
-        "MOVE_ROUND",
-        "MOVE_SKY_ATTACK",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNORE",
-        "MOVE_STEEL_WING",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
         "MOVE_SWAGGER",
-        "MOVE_TAILWIND",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_CONFIDE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ECHOED_VOICE",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
         "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ROOST",
+        "MOVE_FRUSTRATION",
+        "MOVE_LASER_FOCUS",
         "MOVE_THIEF",
-        "MOVE_U_TURN",
-        "MOVE_WORK_UP"
+        "MOVE_FACADE",
+        "MOVE_STEEL_WING",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_TAILWIND",
+        "MOVE_SKY_ATTACK"
     ],
     "CompetitiveSets": [
         {
@@ -267,6 +265,23 @@
             "SourceTiers": [
                 "GEN7MONOTYPE"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_EXTREME_SPEED",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_U_TURN",
+                "MOVE_ROOST"
+            ],
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Ability": "ABILITY_SCRAPPY",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7RU"
+            ],
+            "Name": "Physical Pivot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

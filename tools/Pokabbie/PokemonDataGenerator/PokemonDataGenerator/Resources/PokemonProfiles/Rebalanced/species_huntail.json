@@ -75,49 +75,47 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AQUA_TAIL",
-        "MOVE_ATTRACT",
-        "MOVE_BIND",
-        "MOVE_BLIZZARD",
-        "MOVE_BOUNCE",
-        "MOVE_CONFIDE",
-        "MOVE_DOUBLE_TEAM",
-        "MOVE_FACADE",
-        "MOVE_FRUSTRATION",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_ICE_BEAM",
-        "MOVE_ICY_WIND",
-        "MOVE_INFESTATION",
-        "MOVE_PROTECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
         "MOVE_RETURN",
-        "MOVE_ROCK_TOMB",
-        "MOVE_ROUND",
-        "MOVE_SHELL_SMASH",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNATCH",
-        "MOVE_SNORE",
+        "MOVE_DOUBLE_TEAM",
         "MOVE_SNOWSCAPE",
-        "MOVE_SUBSTITUTE",
         "MOVE_SUPER_FANG",
-        "MOVE_SURF",
+        "MOVE_BIND",
+        "MOVE_ATTRACT",
+        "MOVE_ROCK_TOMB",
+        "MOVE_BOUNCE",
+        "MOVE_SHELL_SMASH",
         "MOVE_SWAGGER",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_CONFIDE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SURF",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_ICE_BEAM",
+        "MOVE_SLEEP_TALK",
+        "MOVE_WATERFALL",
+        "MOVE_RAIN_DANCE",
         "MOVE_TERA_BLAST",
-        "MOVE_WATER_PULSE",
-        "MOVE_WATERFALL"
+        "MOVE_PROTECT",
+        "MOVE_SNATCH",
+        "MOVE_FRUSTRATION",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_BLIZZARD",
+        "MOVE_INFESTATION"
     ],
     "CompetitiveSets": [
         {
             "Moves": [
                 "MOVE_SHELL_SMASH",
-                "MOVE_WATERFALL",
-                "MOVE_SUCKER_PUNCH",
-                "MOVE_ICE_BEAM"
+                "MOVE_LIQUIDATION",
+                "MOVE_ICE_BEAM",
+                "MOVE_SUCKER_PUNCH"
             ],
-            "Ability": "ABILITY_WATER_VEIL",
+            "Ability": "ABILITY_INTIMIDATE",
             "Item": "ITEM_WHITE_HERB",
             "Nature": "NATURE_NAUGHTY",
             "HiddenPower": null,
@@ -212,6 +210,23 @@
             "SourceTiers": [
                 "GEN7ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SHELL_SMASH",
+                "MOVE_LIQUIDATION",
+                "MOVE_ICE_FANG",
+                "MOVE_CRUNCH"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_INTIMIDATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7ZU"
+            ],
+            "Name": "Shell Smash",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

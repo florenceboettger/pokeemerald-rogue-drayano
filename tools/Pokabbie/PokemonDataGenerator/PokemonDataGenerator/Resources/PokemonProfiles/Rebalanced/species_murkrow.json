@@ -1,0 +1,282 @@
+{
+    "Species": "SPECIES_MURKROW",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_PECK",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ASTONISH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_GUST",
+            "Level": 5
+        },
+        {
+            "Move": "MOVE_HAZE",
+            "Level": 11
+        },
+        {
+            "Move": "MOVE_WING_ATTACK",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_NIGHT_SHADE",
+            "Level": 21
+        },
+        {
+            "Move": "MOVE_ASSURANCE",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_TAUNT",
+            "Level": 31
+        },
+        {
+            "Move": "MOVE_MEAN_LOOK",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_FOUL_PLAY",
+            "Level": 40
+        },
+        {
+            "Move": "MOVE_SUCKER_PUNCH",
+            "Level": 50
+        },
+        {
+            "Move": "MOVE_TORMENT",
+            "Level": 55
+        },
+        {
+            "Move": "MOVE_QUASH",
+            "Level": 60
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_PURSUIT",
+        "MOVE_PERISH_SONG",
+        "MOVE_WHIRLWIND",
+        "MOVE_FLY",
+        "MOVE_ENDURE",
+        "MOVE_HEX",
+        "MOVE_HEAT_WAVE",
+        "MOVE_U_TURN",
+        "MOVE_SNARL",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_TAKE_DOWN",
+        "MOVE_NASTY_PLOT",
+        "MOVE_UPROAR",
+        "MOVE_MUD_SLAP",
+        "MOVE_SHADOW_BALL",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_CALM_MIND",
+        "MOVE_DARK_PULSE",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SPITE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_FEATHER_DANCE",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HYPER_BEAM",
+        "MOVE_REST",
+        "MOVE_AIR_SLASH",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_LASH_OUT",
+        "MOVE_HURRICANE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_SCARY_FACE",
+        "MOVE_TERA_BLAST",
+        "MOVE_AIR_CUTTER",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_SCREECH",
+        "MOVE_FLATTER",
+        "MOVE_ROOST",
+        "MOVE_DRILL_PECK",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_CONFUSE_RAY",
+        "MOVE_TAILWIND",
+        "MOVE_SKY_ATTACK"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_HEAT_WAVE",
+                "MOVE_PURSUIT"
+            ],
+            "Ability": "ABILITY_SUPER_LUCK",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Life Orb",
+            "SourceTiers": [
+                "GEN6PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_ROOST",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_PURSUIT"
+            ],
+            "Ability": "ABILITY_PRANKSTER",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_PURSUIT",
+                "MOVE_HIDDEN_POWER"
+            ],
+            "Ability": "ABILITY_SUPER_LUCK",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": "TYPE_FIGHTING",
+            "TeraType": null,
+            "Name": "Physically Based Attacker",
+            "SourceTiers": [
+                "GEN6ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DARK_PULSE",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "Ability": "ABILITY_SUPER_LUCK",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_NAIVE",
+            "HiddenPower": "TYPE_FIGHTING",
+            "TeraType": null,
+            "Name": "Specially Based Attacker",
+            "SourceTiers": [
+                "GEN6ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DEFOG",
+                "MOVE_FOUL_PLAY",
+                "MOVE_HAZE",
+                "MOVE_ROOST"
+            ],
+            "Ability": "ABILITY_PRANKSTER",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_CALM",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_ROOST",
+                "MOVE_DEFOG",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_FOUL_PLAY"
+            ],
+            "Ability": "ABILITY_PRANKSTER",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_TAILWIND",
+                "MOVE_QUASH",
+                "MOVE_FOUL_PLAY",
+                "MOVE_HAZE"
+            ],
+            "Ability": "ABILITY_PRANKSTER",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_CALM",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7VGC2017"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DARK_PULSE",
+                "MOVE_U_TURN",
+                "MOVE_THUNDER_WAVE",
+                "MOVE_HURRICANE"
+            ],
+            "Ability": "ABILITY_PRANKSTER",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_TAILWIND",
+                "MOVE_HAZE",
+                "MOVE_PROTECT"
+            ],
+            "Item": "ITEM_FOCUS_SASH",
+            "Ability": "ABILITY_PRANKSTER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7DOUBLESOU"
+            ],
+            "Name": "Lead Supporter",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FOUL_PLAY",
+                "MOVE_TAILWIND",
+                "MOVE_TAUNT",
+                "MOVE_PROTECT"
+            ],
+            "Item": "ITEM_EVIOLITE",
+            "Ability": "ABILITY_PRANKSTER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7DOUBLESOU"
+            ],
+            "Name": "Bulky Supporter",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        }
+    ]
+}

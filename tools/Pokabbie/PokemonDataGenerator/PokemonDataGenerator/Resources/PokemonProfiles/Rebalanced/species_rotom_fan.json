@@ -67,48 +67,41 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AIR_SLASH",
-        "MOVE_CHARGE",
-        "MOVE_CHARGE_BEAM",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_DARK_PULSE",
-        "MOVE_DEFOG",
-        "MOVE_EERIE_IMPULSE",
         "MOVE_ELECTRIC_TERRAIN",
-        "MOVE_ELECTRO_BALL",
-        "MOVE_ELECTROWEB",
         "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FOUL_PLAY",
-        "MOVE_HELPING_HAND",
-        "MOVE_HEX",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_VOICE",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_NASTY_PLOT",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_PAIN_SPLIT",
-        "MOVE_POLTERGEIST",
-        "MOVE_PROTECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REFLECT",
-        "MOVE_REST",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SPITE",
-        "MOVE_STORED_POWER",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
         "MOVE_SWIFT",
-        "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
         "MOVE_THUNDER",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_THUNDERBOLT",
-        "MOVE_TRICK",
-        "MOVE_UPROAR",
+        "MOVE_HELPING_HAND",
         "MOVE_VOLT_SWITCH",
-        "MOVE_WILL_O_WISP"
+        "MOVE_CHARGE_BEAM",
+        "MOVE_NASTY_PLOT",
+        "MOVE_SHADOW_BALL",
+        "MOVE_REFLECT",
+        "MOVE_FOUL_PLAY",
+        "MOVE_POLTERGEIST",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_WILL_O_WISP",
+        "MOVE_DARK_PULSE",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_SPITE",
+        "MOVE_DEFOG",
+        "MOVE_ELECTROWEB",
+        "MOVE_REST",
+        "MOVE_AIR_SLASH",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_HYPER_VOICE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_STORED_POWER",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_TOXIC"
     ],
     "CompetitiveSets": [
         {
@@ -131,11 +124,11 @@
         {
             "Moves": [
                 "MOVE_VOLT_SWITCH",
-                "MOVE_AIR_SLASH",
-                "MOVE_WILL_O_WISP",
+                "MOVE_HURRICANE",
+                "MOVE_THUNDERBOLT",
                 "MOVE_TRICK"
             ],
-            "Ability": "ABILITY_LEVITATE",
+            "Ability": "ABILITY_MOTOR_DRIVE",
             "Item": "ITEM_CHOICE_SCARF",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -183,11 +176,11 @@
         {
             "Moves": [
                 "MOVE_VOLT_SWITCH",
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_WILL_O_WISP",
                 "MOVE_DEFOG"
             ],
-            "Ability": "ABILITY_LEVITATE",
+            "Ability": "ABILITY_MOTOR_DRIVE",
             "Item": "ITEM_IAPAPA_BERRY",
             "Nature": "NATURE_BOLD",
             "HiddenPower": null,
@@ -217,11 +210,11 @@
         {
             "Moves": [
                 "MOVE_VOLT_SWITCH",
-                "MOVE_AIR_SLASH",
-                "MOVE_WILL_O_WISP",
+                "MOVE_HURRICANE",
+                "MOVE_PAIN_SPLIT",
                 "MOVE_DEFOG"
             ],
-            "Ability": "ABILITY_LEVITATE",
+            "Ability": "ABILITY_MOTOR_DRIVE",
             "Item": "ITEM_WIKI_BERRY",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -252,10 +245,10 @@
             "Moves": [
                 "MOVE_DEFOG",
                 "MOVE_VOLT_SWITCH",
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_WILL_O_WISP"
             ],
-            "Ability": "ABILITY_LEVITATE",
+            "Ability": "ABILITY_MOTOR_DRIVE",
             "Item": "ITEM_HEAVY_DUTY_BOOTS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -269,10 +262,10 @@
             "Moves": [
                 "MOVE_NASTY_PLOT",
                 "MOVE_THUNDERBOLT",
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_SUBSTITUTE"
             ],
-            "Ability": "ABILITY_LEVITATE",
+            "Ability": "ABILITY_MOTOR_DRIVE",
             "Item": "ITEM_HEAVY_DUTY_BOOTS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -315,6 +308,57 @@
             "SourceTiers": [
                 "GEN9PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_DISCHARGE",
+                "MOVE_HURRICANE",
+                "MOVE_PAIN_SPLIT"
+            ],
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Ability": "ABILITY_MOTOR_DRIVE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8PU"
+            ],
+            "Name": "Nasty Plot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_DEFOG",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_HURRICANE",
+                "MOVE_TOXIC"
+            ],
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Ability": "ABILITY_MOTOR_DRIVE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8PU"
+            ],
+            "Name": "Utility",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_HURRICANE",
+                "MOVE_THUNDERBOLT",
+                "MOVE_TRICK"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_MOTOR_DRIVE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8PU"
+            ],
+            "Name": "Choice Scarf",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

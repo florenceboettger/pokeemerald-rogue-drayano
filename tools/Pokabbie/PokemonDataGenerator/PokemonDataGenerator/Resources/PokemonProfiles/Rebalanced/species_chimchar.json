@@ -1,0 +1,187 @@
+{
+    "Species": "SPECIES_CHIMCHAR",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_SCRATCH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_LEER",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_EMBER",
+            "Level": 7
+        },
+        {
+            "Move": "MOVE_TAUNT",
+            "Level": 9
+        },
+        {
+            "Move": "MOVE_FURY_SWIPES",
+            "Level": 15
+        },
+        {
+            "Move": "MOVE_FLAME_WHEEL",
+            "Level": 17
+        },
+        {
+            "Move": "MOVE_NASTY_PLOT",
+            "Level": 23
+        },
+        {
+            "Move": "MOVE_TORMENT",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_FACADE",
+            "Level": 31
+        },
+        {
+            "Move": "MOVE_FIRE_SPIN",
+            "Level": 33
+        },
+        {
+            "Move": "MOVE_ACROBATICS",
+            "Level": 39
+        },
+        {
+            "Move": "MOVE_SLACK_OFF",
+            "Level": 41
+        },
+        {
+            "Move": "MOVE_FLAMETHROWER",
+            "Level": 47
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_ROCK_CLIMB",
+        "MOVE_DIG",
+        "MOVE_FIRE_PLEDGE",
+        "MOVE_VACUUM_WAVE",
+        "MOVE_ENDURE",
+        "MOVE_HELPING_HAND",
+        "MOVE_HEAT_WAVE",
+        "MOVE_U_TURN",
+        "MOVE_FAKE_OUT",
+        "MOVE_FAKE_TEARS",
+        "MOVE_UPROAR",
+        "MOVE_ROCK_TOMB",
+        "MOVE_LOW_KICK",
+        "MOVE_GUNK_SHOT",
+        "MOVE_WILL_O_WISP",
+        "MOVE_COUNTER",
+        "MOVE_TEMPER_FLARE",
+        "MOVE_BULK_UP",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_FLING",
+        "MOVE_OVERHEAT",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SHADOW_CLAW",
+        "MOVE_STEALTH_ROCK",
+        "MOVE_REST",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_AGILITY",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_LOW_SWEEP",
+        "MOVE_THIEF",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SWITCHEROO",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_BURNING_JEALOUSY",
+        "MOVE_BRICK_BREAK",
+        "MOVE_FIRE_BLAST",
+        "MOVE_ENCORE",
+        "MOVE_METRONOME",
+        "MOVE_DOUBLE_KICK",
+        "MOVE_SWIFT",
+        "MOVE_TAKE_DOWN",
+        "MOVE_ENDEAVOR",
+        "MOVE_KNOCK_OFF",
+        "MOVE_POISON_JAB",
+        "MOVE_MUD_SLAP",
+        "MOVE_POWER_UP_PUNCH",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_FOCUS_ENERGY",
+        "MOVE_SLEEP_TALK",
+        "MOVE_TERA_BLAST",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PSYCH_UP",
+        "MOVE_FLAME_CHARGE"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_STEALTH_ROCK",
+                "MOVE_TAUNT",
+                "MOVE_FAKE_OUT",
+                "MOVE_FIRE_BLAST"
+            ],
+            "Ability": "ABILITY_BLAZE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Lead",
+            "SourceTiers": [
+                "GEN6LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_FIRE_PUNCH",
+                "MOVE_FAKE_OUT",
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_POWER_UP_PUNCH"
+            ],
+            "Ability": "ABILITY_IRON_FIST",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_OVERHEAT",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_STEALTH_ROCK"
+            ],
+            "Ability": "ABILITY_BLAZE",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_HASTY",
+            "HiddenPower": "TYPE_GRASS",
+            "TeraType": null,
+            "Name": "Suicide Lead",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_FIRE_PUNCH",
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_FAKE_OUT",
+                "MOVE_U_TURN"
+            ],
+            "Ability": "ABILITY_IRON_FIST",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        }
+    ]
+}

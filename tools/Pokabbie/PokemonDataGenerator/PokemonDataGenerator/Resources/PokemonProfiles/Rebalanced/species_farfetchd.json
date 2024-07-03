@@ -2,119 +2,135 @@
     "Species": "SPECIES_FARFETCHD",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_SAND_ATTACK",
-            "Level": 1
+            "Move": "MOVE_BRAVE_BIRD",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_POISON_JAB",
+            "Level": "1"
         },
         {
             "Move": "MOVE_PECK",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SAND_ATTACK",
+            "Level": "1"
         },
         {
             "Move": "MOVE_LEER",
-            "Level": 5
+            "Level": "1"
         },
         {
             "Move": "MOVE_FURY_CUTTER",
-            "Level": 10
+            "Level": "1"
         },
         {
-            "Move": "MOVE_CUT",
-            "Level": 15
+            "Move": "MOVE_FURY_ATTACK",
+            "Level": "7"
         },
         {
             "Move": "MOVE_AERIAL_ACE",
-            "Level": 20
-        },
-        {
-            "Move": "MOVE_AIR_CUTTER",
-            "Level": 25
+            "Level": "9"
         },
         {
             "Move": "MOVE_KNOCK_OFF",
-            "Level": 30
-        },
-        {
-            "Move": "MOVE_FALSE_SWIPE",
-            "Level": 35
+            "Level": "13"
         },
         {
             "Move": "MOVE_SLASH",
-            "Level": 40
+            "Level": "19"
+        },
+        {
+            "Move": "MOVE_AIR_CUTTER",
+            "Level": "21"
         },
         {
             "Move": "MOVE_SWORDS_DANCE",
-            "Level": 45
+            "Level": "24"
         },
         {
-            "Move": "MOVE_AIR_SLASH",
-            "Level": 50
-        },
-        {
-            "Move": "MOVE_LEAF_BLADE",
-            "Level": 55
+            "Move": "MOVE_BRICK_BREAK",
+            "Level": "27"
         },
         {
             "Move": "MOVE_AGILITY",
-            "Level": 60
+            "Level": "31"
+        },
+        {
+            "Move": "MOVE_NIGHT_SLASH",
+            "Level": "33"
+        },
+        {
+            "Move": "MOVE_ACROBATICS",
+            "Level": "37"
+        },
+        {
+            "Move": "MOVE_FEINT",
+            "Level": "43"
+        },
+        {
+            "Move": "MOVE_FALSE_SWIPE",
+            "Level": "45"
+        },
+        {
+            "Move": "MOVE_AIR_SLASH",
+            "Level": "49"
         },
         {
             "Move": "MOVE_BRAVE_BIRD",
-            "Level": 65
+            "Level": "55"
+        },
+        {
+            "Move": "MOVE_SACRED_SWORD",
+            "Level": "60"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_CLOSE_COMBAT",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_HEAT_WAVE",
-        "MOVE_LEAF_BLADE",
-        "MOVE_AIR_SLASH",
-        "MOVE_U_TURN",
-        "MOVE_ROUND",
-        "MOVE_COVET",
-        "MOVE_FIRST_IMPRESSION",
-        "MOVE_ACROBATICS",
         "MOVE_FLY",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_SKY_ATTACK",
-        "MOVE_THROAT_CHOP",
-        "MOVE_GUST",
-        "MOVE_SUBSTITUTE",
-        "MOVE_UPROAR",
-        "MOVE_SOLAR_BLADE",
-        "MOVE_HELPING_HAND",
-        "MOVE_NIGHT_SLASH",
-        "MOVE_PROTECT",
-        "MOVE_FOCUS_ENERGY",
-        "MOVE_SIMPLE_BEAM",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNORE",
-        "MOVE_BRAVE_BIRD",
-        "MOVE_BRICK_BREAK",
-        "MOVE_FLAIL",
-        "MOVE_THIEF",
-        "MOVE_REVENGE",
-        "MOVE_QUICK_ATTACK",
-        "MOVE_ATTRACT",
-        "MOVE_BODY_SLAM",
-        "MOVE_SWIFT",
-        "MOVE_FEINT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_IRON_TAIL",
-        "MOVE_WORK_UP",
-        "MOVE_FALSE_SWIPE",
-        "MOVE_RETALIATE",
-        "MOVE_BATON_PASS",
-        "MOVE_FINAL_GAMBIT",
-        "MOVE_ROOST",
-        "MOVE_FACADE",
-        "MOVE_POISON_JAB",
-        "MOVE_ENDURE",
-        "MOVE_REST",
         "MOVE_CURSE",
-        "MOVE_STEEL_WING",
+        "MOVE_ENDURE",
+        "MOVE_LEAF_BLADE",
+        "MOVE_SWIFT",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_WORK_UP",
+        "MOVE_REVENGE",
+        "MOVE_HEAT_WAVE",
+        "MOVE_SIMPLE_BEAM",
+        "MOVE_U_TURN",
+        "MOVE_ATTRACT",
+        "MOVE_UPROAR",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_IRON_TAIL",
+        "MOVE_FINAL_GAMBIT",
+        "MOVE_RETALIATE",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_BRUTAL_SWING",
+        "MOVE_FLAIL",
+        "MOVE_SUBSTITUTE",
         "MOVE_FEATHER_DANCE",
-        "MOVE_BRUTAL_SWING"
+        "MOVE_REST",
+        "MOVE_SUNNY_DAY",
+        "MOVE_GUST",
+        "MOVE_THROAT_CHOP",
+        "MOVE_FOCUS_ENERGY",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT",
+        "MOVE_COVET",
+        "MOVE_ROOST",
+        "MOVE_FIRST_IMPRESSION",
+        "MOVE_BODY_SLAM",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_STEEL_WING",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_SKY_ATTACK"
     ],
     "CompetitiveSets": [
         {
@@ -167,6 +183,40 @@
             "SourceTiers": [
                 "GEN8ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_FIRST_IMPRESSION",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_LEAF_BLADE",
+                "MOVE_SACRED_SWORD"
+            ],
+            "Item": "ITEM_LEEK",
+            "Ability": "ABILITY_SUPER_LUCK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "All-Out Attacker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_SACRED_SWORD",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_KNOCK_OFF"
+            ],
+            "Item": "ITEM_LEEK",
+            "Ability": "ABILITY_SUPER_LUCK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8PU"
+            ],
+            "Name": "Swords Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

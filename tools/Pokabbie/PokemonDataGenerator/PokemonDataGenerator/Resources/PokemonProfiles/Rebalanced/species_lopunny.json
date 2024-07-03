@@ -2,142 +2,178 @@
     "Species": "SPECIES_LOPUNNY",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_POUND",
-            "Level": 1
+            "Move": "MOVE_MEGA_KICK",
+            "Level": "0"
         },
         {
-            "Move": "MOVE_DEFENSE_CURL",
-            "Level": 1
+            "Move": "MOVE_MEGA_KICK",
+            "Level": "1"
         },
         {
-            "Move": "MOVE_SPLASH",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_MIRROR_COAT",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_MAGIC_COAT",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_BABY_DOLL_EYES",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_AFTER_YOU",
-            "Level": 12
-        },
-        {
-            "Move": "MOVE_QUICK_ATTACK",
-            "Level": 16
-        },
-        {
-            "Move": "MOVE_DOUBLE_KICK",
-            "Level": 20
-        },
-        {
-            "Move": "MOVE_CHARM",
-            "Level": 24
-        },
-        {
-            "Move": "MOVE_BATON_PASS",
-            "Level": 28
-        },
-        {
-            "Move": "MOVE_HEADBUTT",
-            "Level": 32
-        },
-        {
-            "Move": "MOVE_AGILITY",
-            "Level": 36
-        },
-        {
-            "Move": "MOVE_ENTRAINMENT",
-            "Level": 40
-        },
-        {
-            "Move": "MOVE_FLATTER",
-            "Level": 44
-        },
-        {
-            "Move": "MOVE_BOUNCE",
-            "Level": 48
+            "Move": "MOVE_RETURN",
+            "Level": "1"
         },
         {
             "Move": "MOVE_HEALING_WISH",
-            "Level": 52
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_BOUNCE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ROTOTILLER",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_MIRROR_COAT",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_MAGIC_COAT",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_DEFENSE_CURL",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SPLASH",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_POUND",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_FORESIGHT",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ENDURE",
+            "Level": "6"
+        },
+        {
+            "Move": "MOVE_BABY_DOLL_EYES",
+            "Level": "13"
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": "16"
+        },
+        {
+            "Move": "MOVE_JUMP_KICK",
+            "Level": "23"
+        },
+        {
+            "Move": "MOVE_BATON_PASS",
+            "Level": "26"
+        },
+        {
+            "Move": "MOVE_BLAZE_KICK",
+            "Level": "30"
+        },
+        {
+            "Move": "MOVE_AGILITY",
+            "Level": "33"
+        },
+        {
+            "Move": "MOVE_DIZZY_PUNCH",
+            "Level": "36"
+        },
+        {
+            "Move": "MOVE_MACH_PUNCH",
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_AFTER_YOU",
+            "Level": "43"
+        },
+        {
+            "Move": "MOVE_CHARM",
+            "Level": "46"
+        },
+        {
+            "Move": "MOVE_HIGH_HORSEPOWER",
+            "Level": "50"
+        },
+        {
+            "Move": "MOVE_ENTRAINMENT",
+            "Level": "53"
+        },
+        {
+            "Move": "MOVE_BOUNCE",
+            "Level": "56"
+        },
+        {
+            "Move": "MOVE_DOUBLE_EDGE",
+            "Level": "60"
+        },
+        {
+            "Move": "MOVE_HEALING_WISH",
+            "Level": "63"
         },
         {
             "Move": "MOVE_HIGH_JUMP_KICK",
-            "Level": 56
+            "Level": "66"
         }
     ],
     "TutorMoves": [
-        "MOVE_THUNDER_PUNCH",
-        "MOVE_AGILITY",
-        "MOVE_CLOSE_COMBAT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_ICE_BEAM",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_U_TURN",
-        "MOVE_RETURN",
-        "MOVE_THUNDER_WAVE",
+        "MOVE_ENCORE",
         "MOVE_DIG",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_COSMIC_POWER",
-        "MOVE_ROUND",
-        "MOVE_FIRE_PUNCH",
-        "MOVE_ICE_PUNCH",
-        "MOVE_SHADOW_BALL",
-        "MOVE_ACROBATICS",
+        "MOVE_SWIFT",
+        "MOVE_PLAY_ROUGH",
         "MOVE_PAYBACK",
-        "MOVE_TRIPLE_AXEL",
-        "MOVE_MEGA_PUNCH",
-        "MOVE_FLING",
-        "MOVE_RAIN_DANCE",
-        "MOVE_FRUSTRATION",
-        "MOVE_SUBSTITUTE",
-        "MOVE_GRASS_KNOT",
-        "MOVE_UPROAR",
-        "MOVE_FAKE_OUT",
         "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_CHARM",
-        "MOVE_MEGA_KICK",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SWITCHEROO",
-        "MOVE_BRICK_BREAK",
-        "MOVE_BLIZZARD",
-        "MOVE_BOUNCE",
-        "MOVE_REVERSAL",
+        "MOVE_THUNDER",
+        "MOVE_WORK_UP",
+        "MOVE_U_TURN",
+        "MOVE_FAKE_OUT",
         "MOVE_ATTRACT",
         "MOVE_FAKE_TEARS",
-        "MOVE_SWIFT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_IRON_TAIL",
-        "MOVE_WORK_UP",
-        "MOVE_RETALIATE",
-        "MOVE_HYPER_BEAM",
-        "MOVE_BATON_PASS",
-        "MOVE_THUNDERBOLT",
-        "MOVE_THUNDER",
-        "MOVE_MUD_SPORT",
-        "MOVE_FACADE",
-        "MOVE_ASSURANCE",
-        "MOVE_ENDURE",
+        "MOVE_UPROAR",
         "MOVE_LOW_KICK",
-        "MOVE_REST",
-        "MOVE_AURA_SPHERE",
-        "MOVE_ENCORE",
+        "MOVE_IRON_TAIL",
+        "MOVE_SHADOW_BALL",
         "MOVE_POWER_UP_PUNCH",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_RETALIATE",
         "MOVE_FOCUS_BLAST",
+        "MOVE_ROUND",
         "MOVE_SNORE",
         "MOVE_BRUTAL_SWING",
+        "MOVE_REVERSAL",
+        "MOVE_FLING",
+        "MOVE_COSMIC_POWER",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_ICE_PUNCH",
+        "MOVE_ICE_BEAM",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_TRIPLE_AXEL",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
         "MOVE_HYPER_VOICE",
-        "MOVE_LOW_SWEEP"
+        "MOVE_RAIN_DANCE",
+        "MOVE_ASSURANCE",
+        "MOVE_PROTECT",
+        "MOVE_FRUSTRATION",
+        "MOVE_LOW_SWEEP",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_SWITCHEROO",
+        "MOVE_AURA_SPHERE",
+        "MOVE_MEGA_PUNCH",
+        "MOVE_BLIZZARD",
+        "MOVE_BRICK_BREAK"
     ],
     "CompetitiveSets": [
         {
@@ -159,23 +195,6 @@
         },
         {
             "Moves": [
-                "MOVE_LOW_KICK",
-                "MOVE_RETURN",
-                "MOVE_FAKE_OUT",
-                "MOVE_HEALING_WISH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive",
-            "SourceTiers": [
-                "GEN6UBERS"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_HIGH_JUMP_KICK",
                 "MOVE_RETURN",
                 "MOVE_FAKE_OUT",
@@ -206,63 +225,6 @@
             "Name": "Substitute",
             "SourceTiers": [
                 "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_RETURN",
-                "MOVE_FAKE_OUT",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "All-Out Attacker",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_RETURN",
-                "MOVE_SUBSTITUTE",
-                "MOVE_ENCORE"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Substitute",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_RETURN",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6OU",
-                "GEN6BATTLESPOTSINGLES",
-                "GEN6MONOTYPE",
-                "GEN6MONOTYPE",
-                "GEN7OU",
-                "GEN7BATTLESPOTSINGLES",
-                "GEN7BATTLESPOTDOUBLES"
             ]
         },
         {
@@ -303,23 +265,6 @@
         {
             "Moves": [
                 "MOVE_FAKE_OUT",
-                "MOVE_RETURN",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Physical Attacker",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
                 "MOVE_GIGA_IMPACT",
                 "MOVE_HIGH_JUMP_KICK",
                 "MOVE_ICE_PUNCH"
@@ -347,56 +292,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Adamant",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_GIGA_IMPACT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Jolly",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_GIGA_IMPACT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_THUNDER_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Adamant",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN61V1"
             ]
@@ -441,24 +336,7 @@
                 "MOVE_FAKE_OUT",
                 "MOVE_RETURN",
                 "MOVE_HIGH_JUMP_KICK",
-                "MOVE_HEALING_WISH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Healing Wish",
-            "SourceTiers": [
-                "GEN7UBERS"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FRUSTRATION",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_FAKE_OUT",
-                "MOVE_ICE_PUNCH"
+                "MOVE_MACH_PUNCH"
             ],
             "Ability": "ABILITY_LIMBER",
             "Item": "ITEM_LOPUNNITE",
@@ -478,40 +356,6 @@
                 "MOVE_ENCORE"
             ],
             "Ability": "ABILITY_LIMBER",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "PuP + Encore",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FRUSTRATION",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_FAKE_OUT",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "All-out Attacker",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FRUSTRATION",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_POWER_UP_PUNCH",
-                "MOVE_ENCORE"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
             "Item": "ITEM_LOPUNNITE",
             "Nature": "NATURE_JOLLY",
             "HiddenPower": null,
@@ -558,23 +402,6 @@
         {
             "Moves": [
                 "MOVE_FAKE_OUT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_RETURN",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
                 "MOVE_RETURN",
                 "MOVE_HIGH_JUMP_KICK",
                 "MOVE_ENCORE"
@@ -585,40 +412,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Fake Out Support",
-            "SourceTiers": [
-                "GEN7VGC2018"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_RETURN",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_ENCORE"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Fake Out Support",
-            "SourceTiers": [
-                "GEN7VGC2018"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_RETURN",
-                "MOVE_MUD_SPORT"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7VGC2018"
             ]
@@ -642,40 +435,6 @@
         },
         {
             "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_GIGA_IMPACT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_ENCORE"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Hyper Offense",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_GIGA_IMPACT",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_RETURN",
                 "MOVE_HIGH_JUMP_KICK",
                 "MOVE_POWER_UP_PUNCH",
@@ -687,40 +446,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Power-Up Punch + Encore",
-            "SourceTiers": [
-                "GEN7MONOTYPE"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_RETURN",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_POWER_UP_PUNCH",
-                "MOVE_ENCORE"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Power-Up Punch + Encore",
-            "SourceTiers": [
-                "GEN7MONOTYPE"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_FAKE_OUT",
-                "MOVE_RETURN",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_SCRAPPY",
-            "Item": "ITEM_LOPUNNITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7MONOTYPE"
             ]
@@ -810,6 +535,23 @@
             "SourceTiers": [
                 "GEN8NATIONALDEXMONOTYPE"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_MACH_PUNCH",
+                "MOVE_U_TURN",
+                "MOVE_RETURN",
+                "MOVE_CLOSE_COMBAT"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_LIMBER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Offensive Pivot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

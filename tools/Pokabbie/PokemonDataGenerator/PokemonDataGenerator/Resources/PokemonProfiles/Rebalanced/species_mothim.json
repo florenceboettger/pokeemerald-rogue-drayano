@@ -1,0 +1,158 @@
+{
+    "Species": "SPECIES_MOTHIM",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_QUIVER_DANCE",
+            "Level": 0
+        },
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_PROTECT",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_BUG_BITE",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_HIDDEN_POWER",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_CONFUSION",
+            "Level": 23
+        },
+        {
+            "Move": "MOVE_GUST",
+            "Level": 26
+        },
+        {
+            "Move": "MOVE_POISON_POWDER",
+            "Level": 29
+        },
+        {
+            "Move": "MOVE_PSYBEAM",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_CAMOUFLAGE",
+            "Level": 35
+        },
+        {
+            "Move": "MOVE_SILVER_WIND",
+            "Level": 38
+        },
+        {
+            "Move": "MOVE_AIR_SLASH",
+            "Level": 41
+        },
+        {
+            "Move": "MOVE_PSYCHIC",
+            "Level": 44
+        },
+        {
+            "Move": "MOVE_LUNGE",
+            "Level": 47
+        },
+        {
+            "Move": "MOVE_BUG_BUZZ",
+            "Level": 50
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_RETURN",
+        "MOVE_DOUBLE_TEAM",
+        "MOVE_U_TURN",
+        "MOVE_ATTRACT",
+        "MOVE_SKILL_SWAP",
+        "MOVE_DREAM_EATER",
+        "MOVE_SHADOW_BALL",
+        "MOVE_SWAGGER",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_VENOSHOCK",
+        "MOVE_CONFIDE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_ELECTROWEB",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HYPER_BEAM",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SAFEGUARD",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_HURRICANE",
+        "MOVE_TERA_BLAST",
+        "MOVE_TAILWIND",
+        "MOVE_PSYCH_UP",
+        "MOVE_FRUSTRATION",
+        "MOVE_ROOST",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SIGNAL_BEAM",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_ENERGY_BALL",
+        "MOVE_INFESTATION"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_BUG_BUZZ",
+                "MOVE_AIR_SLASH",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_U_TURN"
+            ],
+            "Ability": "ABILITY_TINTED_LENS",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_RASH",
+            "HiddenPower": "TYPE_GROUND",
+            "TeraType": null,
+            "Name": "Choice Specs",
+            "SourceTiers": [
+                "GEN6PU",
+                "GEN6ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SUBSTITUTE",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_BUG_BUZZ",
+                "MOVE_AIR_SLASH"
+            ],
+            "Ability": "ABILITY_TINTED_LENS",
+            "Item": "ITEM_LEFTOVERS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Substitute + Quiver Dance",
+            "SourceTiers": [
+                "GEN6ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_BUG_BUZZ",
+                "MOVE_HURRICANE",
+                "MOVE_U_TURN",
+                "MOVE_ENERGY_BALL"
+            ],
+            "Ability": "ABILITY_COMPOUND_EYES",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_RASH",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Choice Specs",
+            "SourceTiers": [
+                "GEN7PU"
+            ]
+        }
+    ]
+}

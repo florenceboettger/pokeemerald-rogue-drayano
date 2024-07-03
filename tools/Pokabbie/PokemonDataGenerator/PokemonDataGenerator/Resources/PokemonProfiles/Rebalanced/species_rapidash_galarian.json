@@ -3,119 +3,122 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_PSYCHO_CUT",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_TACKLE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_TAIL_WHIP",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_GROWL",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_CONFUSION",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_QUICK_ATTACK",
-            "Level": 1
+            "Move": "MOVE_PSYCHO_CUT",
+            "Level": "1"
         },
         {
             "Move": "MOVE_MEGAHORN",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_CONFUSION",
+            "Level": "1"
         },
         {
             "Move": "MOVE_FAIRY_WIND",
-            "Level": 15
+            "Level": "15"
         },
         {
             "Move": "MOVE_AGILITY",
-            "Level": 20
+            "Level": "20"
         },
         {
             "Move": "MOVE_PSYBEAM",
-            "Level": 25
+            "Level": "25"
         },
         {
             "Move": "MOVE_STOMP",
-            "Level": 30
+            "Level": "30"
         },
         {
             "Move": "MOVE_HEAL_PULSE",
-            "Level": 35
+            "Level": "35"
         },
         {
             "Move": "MOVE_TAKE_DOWN",
-            "Level": 43
+            "Level": "43"
+        },
+        {
+            "Move": "MOVE_JUMP_KICK",
+            "Level": "46"
         },
         {
             "Move": "MOVE_DAZZLING_GLEAM",
-            "Level": 49
+            "Level": "49"
         },
         {
             "Move": "MOVE_PSYCHIC",
-            "Level": 56
+            "Level": "56"
         },
         {
             "Move": "MOVE_HEALING_WISH",
-            "Level": 63
+            "Level": "63"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_CALM_MIND",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_MEGAHORN",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
-        "MOVE_ROUND",
-        "MOVE_MYSTICAL_FIRE",
-        "MOVE_FUTURE_SIGHT",
-        "MOVE_PSYCHIC_TERRAIN",
-        "MOVE_IMPRISON",
-        "MOVE_HIGH_HORSEPOWER",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_TOXIC",
-        "MOVE_WONDER_ROOM",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_THROAT_CHOP",
-        "MOVE_FRUSTRATION",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SMART_STRIKE",
-        "MOVE_PAY_DAY",
-        "MOVE_MAGIC_ROOM",
-        "MOVE_ALLY_SWITCH",
-        "MOVE_PSYCHIC",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHO_CUT",
         "MOVE_CHARM",
-        "MOVE_SLEEP_TALK",
-        "MOVE_DRILL_RUN",
-        "MOVE_BOUNCE",
-        "MOVE_EXPANDING_FORCE",
-        "MOVE_ATTRACT",
-        "MOVE_BODY_SLAM",
-        "MOVE_TRICK_ROOM",
-        "MOVE_SWIFT",
-        "MOVE_IRON_TAIL",
-        "MOVE_HYPER_BEAM",
-        "MOVE_BATON_PASS",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
-        "MOVE_LOW_KICK",
+        "MOVE_SWIFT",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_BATON_PASS",
+        "MOVE_ALLY_SWITCH",
+        "MOVE_ATTRACT",
         "MOVE_MISTY_TERRAIN",
-        "MOVE_MORNING_SUN",
-        "MOVE_REST",
-        "MOVE_WILD_CHARGE",
+        "MOVE_LOW_KICK",
+        "MOVE_IRON_TAIL",
+        "MOVE_SMART_STRIKE",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_BOUNCE",
+        "MOVE_CALM_MIND",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_PSYCHIC_TERRAIN",
         "MOVE_SNORE",
-        "MOVE_STORED_POWER"
+        "MOVE_ROUND",
+        "MOVE_DRILL_RUN",
+        "MOVE_PAY_DAY",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_MAGIC_ROOM",
+        "MOVE_FUTURE_SIGHT",
+        "MOVE_THROAT_CHOP",
+        "MOVE_SLEEP_TALK",
+        "MOVE_STORED_POWER",
+        "MOVE_WONDER_ROOM",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_WILD_CHARGE",
+        "MOVE_FRUSTRATION",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_IMPRISON",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_MORNING_SUN",
+        "MOVE_TOXIC",
+        "MOVE_HIGH_HORSEPOWER"
     ],
     "CompetitiveSets": [
         {

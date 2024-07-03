@@ -3,127 +3,142 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_PHANTOM_FORCE",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_GUST",
-            "Level": 1
+            "Move": "MOVE_PHANTOM_FORCE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_CONSTRICT",
+            "Level": "1"
         },
         {
             "Move": "MOVE_MINIMIZE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_FOCUS_ENERGY",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_ASTONISH",
-            "Level": 1
+            "Level": "1"
         },
         {
-            "Move": "MOVE_STRENGTH_SAP",
-            "Level": 1
+            "Move": "MOVE_GUST",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ASTONISH",
+            "Level": "4"
+        },
+        {
+            "Move": "MOVE_GUST",
+            "Level": "8"
+        },
+        {
+            "Move": "MOVE_FOCUS_ENERGY",
+            "Level": "13"
         },
         {
             "Move": "MOVE_PAYBACK",
-            "Level": 12
+            "Level": "16"
         },
         {
-            "Move": "MOVE_HEX",
-            "Level": 16
-        },
-        {
-            "Move": "MOVE_SHADOW_BALL",
-            "Level": 20
+            "Move": "MOVE_OMINOUS_WIND",
+            "Level": "20"
         },
         {
             "Move": "MOVE_STOCKPILE",
-            "Level": 24
-        },
-        {
-            "Move": "MOVE_SPIT_UP",
-            "Level": 24
+            "Level": "25"
         },
         {
             "Move": "MOVE_SWALLOW",
-            "Level": 24
+            "Level": "25"
         },
         {
-            "Move": "MOVE_SELF_DESTRUCT",
-            "Level": 31
+            "Move": "MOVE_SPIT_UP",
+            "Level": "25"
         },
         {
-            "Move": "MOVE_DESTINY_BOND",
-            "Level": 36
+            "Move": "MOVE_HEX",
+            "Level": "27"
+        },
+        {
+            "Move": "MOVE_AIR_SLASH",
+            "Level": "34"
+        },
+        {
+            "Move": "MOVE_SHADOW_BALL",
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_AMNESIA",
+            "Level": "46"
         },
         {
             "Move": "MOVE_BATON_PASS",
-            "Level": 42
+            "Level": "52"
         },
         {
-            "Move": "MOVE_TAILWIND",
-            "Level": 48
+            "Move": "MOVE_EXTRASENSORY",
+            "Level": "56"
         },
         {
             "Move": "MOVE_EXPLOSION",
-            "Level": 54
+            "Level": "60"
+        },
+        {
+            "Move": "MOVE_HURRICANE",
+            "Level": "65"
         }
     ],
     "TutorMoves": [
-        "MOVE_CALM_MIND",
-        "MOVE_PHANTOM_FORCE",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_PAIN_SPLIT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_AIR_SLASH",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_SHADOW_BALL",
-        "MOVE_GYRO_BALL",
-        "MOVE_IMPRISON",
-        "MOVE_ACROBATICS",
         "MOVE_FLY",
-        "MOVE_HEX",
-        "MOVE_TERA_BLAST",
-        "MOVE_TAILWIND",
-        "MOVE_FLING",
-        "MOVE_DISABLE",
-        "MOVE_RAIN_DANCE",
+        "MOVE_CURSE",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_THUNDER",
+        "MOVE_HELPING_HAND",
         "MOVE_TRICK",
-        "MOVE_AERIAL_ACE",
-        "MOVE_AMNESIA",
+        "MOVE_STRENGTH_SAP",
+        "MOVE_WEATHER_BALL",
+        "MOVE_GYRO_BALL",
+        "MOVE_SKILL_SWAP",
+        "MOVE_KNOCK_OFF",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_CALM_MIND",
+        "MOVE_WILL_O_WISP",
+        "MOVE_TEMPER_FLARE",
+        "MOVE_FLING",
         "MOVE_SPITE",
         "MOVE_SUBSTITUTE",
-        "MOVE_HELPING_HAND",
-        "MOVE_ICY_WIND",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHIC",
-        "MOVE_SLEEP_TALK",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_AIR_CUTTER",
-        "MOVE_BODY_SLAM",
         "MOVE_TRICK_ROOM",
-        "MOVE_SWIFT",
-        "MOVE_SUNNY_DAY",
         "MOVE_DEFOG",
-        "MOVE_TEMPER_FLARE",
         "MOVE_HYPER_BEAM",
-        "MOVE_BATON_PASS",
-        "MOVE_THUNDERBOLT",
-        "MOVE_THUNDER",
-        "MOVE_WEATHER_BALL",
-        "MOVE_KNOCK_OFF",
-        "MOVE_FACADE",
-        "MOVE_WILL_O_WISP",
-        "MOVE_ENDURE",
+        "MOVE_GIGA_IMPACT",
         "MOVE_REST",
-        "MOVE_CURSE",
-        "MOVE_SKILL_SWAP",
-        "MOVE_FLAMETHROWER",
+        "MOVE_AERIAL_ACE",
         "MOVE_HAZE",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_DISABLE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_STORED_POWER",
+        "MOVE_TERA_BLAST",
+        "MOVE_AIR_CUTTER",
+        "MOVE_PROTECT",
         "MOVE_PSYBEAM",
+        "MOVE_PSYCHIC",
+        "MOVE_BODY_SLAM",
         "MOVE_THIEF",
-        "MOVE_STORED_POWER"
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_IMPRISON",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_FLAMETHROWER",
+        "MOVE_TAILWIND"
     ],
     "CompetitiveSets": [
         {
@@ -417,6 +432,23 @@
         },
         {
             "Moves": [
+                "MOVE_HEX",
+                "MOVE_WILL_O_WISP",
+                "MOVE_DEFOG",
+                "MOVE_STRENGTH_SAP"
+            ],
+            "Ability": "ABILITY_AFTERMATH",
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Nature": "NATURE_BOLD",
+            "HiddenPower": null,
+            "TeraType": "TYPE_FAIRY",
+            "Name": "Defog",
+            "SourceTiers": [
+                "GEN9NU"
+            ]
+        },
+        {
+            "Moves": [
                 "MOVE_CALM_MIND",
                 "MOVE_SHADOW_BALL",
                 "MOVE_THUNDERBOLT",
@@ -482,6 +514,23 @@
             "SourceTiers": [
                 "GEN9NATIONALDEXAG"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_STRENGTH_SAP",
+                "MOVE_SHADOW_BALL",
+                "MOVE_AIR_SLASH",
+                "MOVE_FLAMETHROWER"
+            ],
+            "Item": "ITEM_FLAME_ORB",
+            "Ability": "ABILITY_FLARE_BOOST",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Flare Boost",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

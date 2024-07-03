@@ -1594,7 +1594,7 @@
         ]
     },
 
-    "Farfetch’d": {
+    "Farfetchd": {
         "movesets": {
             "gen7pu": {
                 "All-Out Attacker": {
@@ -1640,7 +1640,7 @@
         ]
     },
     
-    "Farfetch'd-Galar": {
+    "Farfetchd-Galar": {
         "extra_moves": [
             "Close Combat",
             "Drill Run",
@@ -5901,7 +5901,9 @@
                         "Earth Power",
                         "Slack Off",
                         "Power Gem"
-                    ]
+                    ],
+                    "item": "Leftovers",
+                    "ability": "Solid Rock"
                 }
             },
             "gen8zu": {
@@ -6105,7 +6107,9 @@
                         "Outrage",
                         "Brave Bird",
                         "Play Rough"
-                    ]
+                    ],
+                    "item": "Life Orb",
+                    "ability": "Natural Cure"
                 }
             }
         },
@@ -6761,7 +6765,9 @@
                         "Zen Headbutt",
                         "Iron Head",
                         "Headbutt"
-                    ]
+                    ],
+                    "item": "Eviolite",
+                    "ability": "Clear Body"
                 }
             }
         },
@@ -11322,7 +11328,7 @@
         ]
     },
 
-    "Flabébé": {
+    "Flabebe": {
         "movesets": {
             "gen7lc": {
                 "Calm Mind": {
@@ -12748,7 +12754,7 @@
         ]
     },
 
-    "Sirfetch'd": {
+    "Sirfetchd": {
         "movesets": {
             "gen8ru": {
                 "Swords Dance": {

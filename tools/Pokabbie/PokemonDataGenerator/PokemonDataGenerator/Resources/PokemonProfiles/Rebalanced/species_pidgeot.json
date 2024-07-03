@@ -95,39 +95,37 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AERIAL_ACE",
+        "MOVE_RETURN",
+        "MOVE_FLY",
+        "MOVE_DOUBLE_TEAM",
+        "MOVE_WORK_UP",
+        "MOVE_HEAT_WAVE",
+        "MOVE_U_TURN",
         "MOVE_ATTRACT",
         "MOVE_BRAVE_BIRD",
-        "MOVE_CONFIDE",
-        "MOVE_DEFOG",
-        "MOVE_DOUBLE_TEAM",
-        "MOVE_FACADE",
-        "MOVE_FLY",
-        "MOVE_FRUSTRATION",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HEAT_WAVE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_LASER_FOCUS",
-        "MOVE_PROTECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_RETURN",
-        "MOVE_ROOST",
-        "MOVE_ROUND",
-        "MOVE_SKY_ATTACK",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNORE",
-        "MOVE_STEEL_WING",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
         "MOVE_SWAGGER",
-        "MOVE_TAILWIND",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_CONFIDE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
         "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_FRUSTRATION",
+        "MOVE_LASER_FOCUS",
         "MOVE_THIEF",
-        "MOVE_U_TURN",
-        "MOVE_UPROAR",
-        "MOVE_WORK_UP"
+        "MOVE_FACADE",
+        "MOVE_STEEL_WING",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_SKY_ATTACK"
     ],
     "CompetitiveSets": [
         {
@@ -236,23 +234,6 @@
             "Moves": [
                 "MOVE_HURRICANE",
                 "MOVE_HEAT_WAVE",
-                "MOVE_PROTECT",
-                "MOVE_HIDDEN_POWER"
-            ],
-            "Ability": "ABILITY_NO_GUARD",
-            "Item": "ITEM_PIDGEOTITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_ICE",
-            "TeraType": null,
-            "Name": "Specially Offensive",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HURRICANE",
-                "MOVE_HEAT_WAVE",
                 "MOVE_ROOST",
                 "MOVE_DEFOG"
             ],
@@ -270,41 +251,6 @@
             "Moves": [
                 "MOVE_HURRICANE",
                 "MOVE_HEAT_WAVE",
-                "MOVE_ROOST",
-                "MOVE_DEFOG"
-            ],
-            "Ability": "ABILITY_NO_GUARD",
-            "Item": "ITEM_PIDGEOTITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Storm Bringer (Normal)",
-            "SourceTiers": [
-                "GEN6MONOTYPE"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HURRICANE",
-                "MOVE_HEAT_WAVE",
-                "MOVE_ROOST",
-                "MOVE_U_TURN"
-            ],
-            "Ability": "ABILITY_NO_GUARD",
-            "Item": "ITEM_PIDGEOTITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6MONOTYPE",
-                "GEN7MONOTYPE"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HURRICANE",
-                "MOVE_HEAT_WAVE",
                 "MOVE_U_TURN",
                 "MOVE_ROOST"
             ],
@@ -315,24 +261,6 @@
             "TeraType": null,
             "Name": "Special Attacker",
             "SourceTiers": [
-                "GEN7UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HURRICANE",
-                "MOVE_HEAT_WAVE",
-                "MOVE_U_TURN",
-                "MOVE_ROOST"
-            ],
-            "Ability": "ABILITY_NO_GUARD",
-            "Item": "ITEM_PIDGEOTITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Special Attacker",
-            "SourceTiers": [
-                "GEN7UU",
                 "GEN7UU"
             ]
         },
@@ -340,7 +268,7 @@
             "Moves": [
                 "MOVE_DEFOG",
                 "MOVE_ROOST",
-                "MOVE_BRAVE_BIRD",
+                "MOVE_AIR_SLASH",
                 "MOVE_U_TURN"
             ],
             "Ability": "ABILITY_BIG_PECKS",
@@ -355,46 +283,12 @@
         },
         {
             "Moves": [
-                "MOVE_HURRICANE",
-                "MOVE_HEAT_WAVE",
-                "MOVE_TAILWIND",
-                "MOVE_ROOST"
-            ],
-            "Ability": "ABILITY_NO_GUARD",
-            "Item": "ITEM_PIDGEOTITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTDOUBLES"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_FEATHER_DANCE",
                 "MOVE_HURRICANE",
                 "MOVE_ROOST",
                 "MOVE_WORK_UP"
             ],
             "Ability": "ABILITY_BIG_PECKS",
-            "Item": "ITEM_PIDGEOTITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Feather Dance",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FEATHER_DANCE",
-                "MOVE_HURRICANE",
-                "MOVE_ROOST",
-                "MOVE_WORK_UP"
-            ],
-            "Ability": "ABILITY_NO_GUARD",
             "Item": "ITEM_PIDGEOTITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -423,20 +317,20 @@
         },
         {
             "Moves": [
-                "MOVE_HEAT_WAVE",
                 "MOVE_HURRICANE",
-                "MOVE_ROOST",
-                "MOVE_DEFOG"
+                "MOVE_HEAT_WAVE",
+                "MOVE_TAILWIND",
+                "MOVE_ROOST"
             ],
-            "Ability": "ABILITY_NO_GUARD",
             "Item": "ITEM_PIDGEOTITE",
-            "Nature": "NATURE_TIMID",
+            "Ability": "ABILITY_BIG_PECKS",
             "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
-                "GEN7MONOTYPE"
-            ]
+                "GEN7BATTLESPOTDOUBLES"
+            ],
+            "Name": "Showdown Usage",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

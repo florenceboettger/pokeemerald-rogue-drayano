@@ -3,94 +3,118 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_QUICK_ATTACK",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_TAIL_WHIP",
-            "Level": 4
+            "Level": "1"
         },
         {
             "Move": "MOVE_CHARGE",
-            "Level": 8
+            "Level": "5"
         },
         {
             "Move": "MOVE_SHOCK_WAVE",
-            "Level": 11
+            "Level": "8"
         },
         {
             "Move": "MOVE_THUNDER_WAVE",
-            "Level": 15
+            "Level": "11"
         },
         {
             "Move": "MOVE_FLAME_CHARGE",
-            "Level": 18
+            "Level": "14"
+        },
+        {
+            "Move": "MOVE_PURSUIT",
+            "Level": "17"
         },
         {
             "Move": "MOVE_SPARK",
-            "Level": 22
+            "Level": "20"
         },
         {
             "Move": "MOVE_STOMP",
-            "Level": 25
+            "Level": "23"
+        },
+        {
+            "Move": "MOVE_NUZZLE",
+            "Level": "26"
+        },
+        {
+            "Move": "MOVE_FLAME_WHEEL",
+            "Level": "30"
         },
         {
             "Move": "MOVE_DISCHARGE",
-            "Level": 29
+            "Level": "33"
+        },
+        {
+            "Move": "MOVE_BOUNCE",
+            "Level": "37"
         },
         {
             "Move": "MOVE_AGILITY",
-            "Level": 33
+            "Level": "40"
         },
         {
             "Move": "MOVE_WILD_CHARGE",
-            "Level": 35
+            "Level": "44"
+        },
+        {
+            "Move": "MOVE_HIGH_HORSEPOWER",
+            "Level": "47"
         },
         {
             "Move": "MOVE_THRASH",
-            "Level": 40
+            "Level": "51"
+        },
+        {
+            "Move": "MOVE_LUNGE",
+            "Level": "54"
+        },
+        {
+            "Move": "MOVE_FLARE_BLITZ",
+            "Level": "58"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_CHARGE_BEAM",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_SCREECH",
-        "MOVE_TERA_BLAST",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_RAIN_DANCE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_ELECTRO_BALL",
-        "MOVE_ELECTROWEB",
-        "MOVE_SMART_STRIKE",
-        "MOVE_UPROAR",
         "MOVE_ELECTRIC_TERRAIN",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_VOLT_SWITCH",
-        "MOVE_SLEEP_TALK",
         "MOVE_DOUBLE_KICK",
-        "MOVE_FLAME_CHARGE",
-        "MOVE_BODY_SLAM",
-        "MOVE_EERIE_IMPULSE",
-        "MOVE_SWIFT",
-        "MOVE_FEINT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_ENDEAVOR",
-        "MOVE_BATON_PASS",
-        "MOVE_THUNDERBOLT",
-        "MOVE_SAND_ATTACK",
-        "MOVE_TAKE_DOWN",
-        "MOVE_THUNDER",
-        "MOVE_SUPERCELL_SLAM",
-        "MOVE_CHARGE",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_THUNDER",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_TAKE_DOWN",
+        "MOVE_UPROAR",
+        "MOVE_ENDEAVOR",
         "MOVE_LOW_KICK",
+        "MOVE_SMART_STRIKE",
+        "MOVE_SUPERCELL_SLAM",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ELECTROWEB",
         "MOVE_REST",
-        "MOVE_WILD_CHARGE",
+        "MOVE_ELECTRO_BALL",
+        "MOVE_SAND_ATTACK",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_SCREECH",
+        "MOVE_FEINT",
+        "MOVE_BODY_SLAM",
         "MOVE_TRAILBLAZE",
+        "MOVE_LOW_SWEEP",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
         "MOVE_FLAMETHROWER"
     ],
     "CompetitiveSets": [
@@ -132,13 +156,13 @@
             "Moves": [
                 "MOVE_WILD_CHARGE",
                 "MOVE_VOLT_SWITCH",
-                "MOVE_FLAME_CHARGE",
+                "MOVE_FLARE_BLITZ",
                 "MOVE_HIDDEN_POWER"
             ],
             "Ability": "ABILITY_SAP_SIPPER",
             "Item": "ITEM_LIFE_ORB",
             "Nature": "NATURE_NAIVE",
-            "HiddenPower": "TYPE_GRASS",
+            "HiddenPower": "TYPEGRASS",
             "TeraType": null,
             "Name": "All-out Attacker",
             "SourceTiers": [

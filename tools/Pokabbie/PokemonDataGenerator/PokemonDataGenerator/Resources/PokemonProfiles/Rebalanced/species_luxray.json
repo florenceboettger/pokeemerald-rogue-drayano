@@ -87,52 +87,45 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_BODY_SLAM",
-        "MOVE_CHARGE",
-        "MOVE_CHARGE_BEAM",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_CRUNCH",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_EERIE_IMPULSE",
-        "MOVE_ELECTRIC_TERRAIN",
-        "MOVE_ELECTRO_BALL",
-        "MOVE_ELECTROWEB",
         "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FAKE_TEARS",
-        "MOVE_FIRE_FANG",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_ICE_FANG",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHIC_FANGS",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_ROAR",
-        "MOVE_SCARY_FACE",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNARL",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SUPERCELL_SLAM",
-        "MOVE_SUPERPOWER",
         "MOVE_SWIFT",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
-        "MOVE_THROAT_CHOP",
         "MOVE_THUNDER",
-        "MOVE_THUNDER_FANG",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_THUNDERBOLT",
-        "MOVE_TRAILBLAZE",
         "MOVE_VOLT_SWITCH",
-        "MOVE_WILD_CHARGE"
+        "MOVE_HELPING_HAND",
+        "MOVE_FIRE_FANG",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_SNARL",
+        "MOVE_FAKE_TEARS",
+        "MOVE_TAKE_DOWN",
+        "MOVE_NASTY_PLOT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_SUPERCELL_SLAM",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_DARK_PULSE",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ELECTROWEB",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HYPER_BEAM",
+        "MOVE_REST",
+        "MOVE_ELECTRO_BALL",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THROAT_CHOP",
+        "MOVE_AGILITY",
+        "MOVE_ICE_FANG",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_TRAILBLAZE",
+        "MOVE_BODY_SLAM",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_CONFUSE_RAY",
+        "MOVE_SUPERPOWER"
     ],
     "CompetitiveSets": [
         {
@@ -205,8 +198,8 @@
         },
         {
             "Moves": [
-                "MOVE_WILD_CHARGE",
-                "MOVE_FACADE",
+                "MOVE_VOLT_TACKLE",
+                "MOVE_CRUNCH",
                 "MOVE_SUPERPOWER",
                 "MOVE_VOLT_SWITCH"
             ],
@@ -256,10 +249,10 @@
         },
         {
             "Moves": [
+                "MOVE_VOLT_TACKLE",
                 "MOVE_FACADE",
-                "MOVE_WILD_CHARGE",
-                "MOVE_SUPERPOWER",
-                "MOVE_CRUNCH"
+                "MOVE_PLAY_ROUGH",
+                "MOVE_SUCKER_PUNCH"
             ],
             "Ability": "ABILITY_GUTS",
             "Item": "ITEM_FLAME_ORB",
@@ -321,6 +314,40 @@
             "SourceTiers": [
                 "GEN9ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_THUNDERBOLT",
+                "MOVE_DARK_PULSE",
+                "MOVE_VOLT_SWITCH"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_INTIMIDATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Nasty Plot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_CRUNCH",
+                "MOVE_NUZZLE",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_VOLT_TACKLE"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_INTIMIDATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Nuzzle Utility",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

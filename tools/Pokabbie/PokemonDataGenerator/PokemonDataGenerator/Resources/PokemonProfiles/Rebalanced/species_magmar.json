@@ -2,121 +2,131 @@
     "Species": "SPECIES_MAGMAR",
     "LevelUpMoves": [
         {
+            "Move": "MOVE_SMOG",
+            "Level": "1"
+        },
+        {
             "Move": "MOVE_LEER",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_EMBER",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_EMBER",
+            "Level": "5"
         },
         {
             "Move": "MOVE_SMOKESCREEN",
-            "Level": 1
+            "Level": "8"
         },
         {
-            "Move": "MOVE_SMOG",
-            "Level": 1
+            "Move": "MOVE_FEINT_ATTACK",
+            "Level": "12"
+        },
+        {
+            "Move": "MOVE_FIRE_SPIN",
+            "Level": "15"
         },
         {
             "Move": "MOVE_CLEAR_SMOG",
-            "Level": 12
+            "Level": "19"
         },
         {
-            "Move": "MOVE_FLAME_WHEEL",
-            "Level": 16
+            "Move": "MOVE_FLAME_BURST",
+            "Level": "22"
         },
         {
             "Move": "MOVE_CONFUSE_RAY",
-            "Level": 20
-        },
-        {
-            "Move": "MOVE_SCARY_FACE",
-            "Level": 24
+            "Level": "26"
         },
         {
             "Move": "MOVE_FIRE_PUNCH",
-            "Level": 28
+            "Level": "29"
+        },
+        {
+            "Move": "MOVE_AURA_SPHERE",
+            "Level": "33"
         },
         {
             "Move": "MOVE_LAVA_PLUME",
-            "Level": 34
-        },
-        {
-            "Move": "MOVE_LOW_KICK",
-            "Level": 40
-        },
-        {
-            "Move": "MOVE_FLAMETHROWER",
-            "Level": 46
+            "Level": "36"
         },
         {
             "Move": "MOVE_SUNNY_DAY",
-            "Level": 52
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_SLUDGE_BOMB",
+            "Level": "43"
+        },
+        {
+            "Move": "MOVE_FLAMETHROWER",
+            "Level": "47"
+        },
+        {
+            "Move": "MOVE_SCALD",
+            "Level": "50"
+        },
+        {
+            "Move": "MOVE_MOONBLAST",
+            "Level": "54"
         },
         {
             "Move": "MOVE_FIRE_BLAST",
-            "Level": 58
-        },
-        {
-            "Move": "MOVE_HYPER_BEAM",
-            "Level": 64
+            "Level": "60"
         }
     ],
     "TutorMoves": [
-        "MOVE_THUNDER_PUNCH",
-        "MOVE_TAUNT",
-        "MOVE_SCORCHING_SANDS",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_FOCUS_PUNCH",
-        "MOVE_FOLLOW_ME",
-        "MOVE_HEAT_WAVE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_BELCH",
-        "MOVE_ACID_SPRAY",
-        "MOVE_BELLY_DRUM",
-        "MOVE_FIRE_PUNCH",
-        "MOVE_WILL_O_WISP",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_TERA_BLAST",
-        "MOVE_FLING",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_UPROAR",
-        "MOVE_MACH_PUNCH",
+        "MOVE_ROCK_CLIMB",
         "MOVE_METRONOME",
         "MOVE_ROAR",
-        "MOVE_HELPING_HAND",
-        "MOVE_PSYCHIC",
-        "MOVE_DYNAMIC_PUNCH",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_BRICK_BREAK",
-        "MOVE_HEAT_CRASH",
-        "MOVE_FLAME_CHARGE",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_SCARY_FACE",
-        "MOVE_BODY_SLAM",
-        "MOVE_SLUDGE_BOMB",
-        "MOVE_SUNNY_DAY",
-        "MOVE_TEMPER_FLARE",
-        "MOVE_HYPER_BEAM",
-        "MOVE_TAKE_DOWN",
-        "MOVE_KNOCK_OFF",
-        "MOVE_BURNING_JEALOUSY",
-        "MOVE_CROSS_CHOP",
-        "MOVE_FACADE",
-        "MOVE_FIRE_SPIN",
-        "MOVE_ENDURE",
-        "MOVE_LOW_KICK",
         "MOVE_CURSE",
-        "MOVE_FLAMETHROWER",
-        "MOVE_OVERHEAT",
-        "MOVE_FLARE_BLITZ",
+        "MOVE_ENDURE",
+        "MOVE_HELPING_HAND",
+        "MOVE_TAUNT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_BELLY_DRUM",
+        "MOVE_TAKE_DOWN",
+        "MOVE_UPROAR",
+        "MOVE_KNOCK_OFF",
+        "MOVE_LOW_KICK",
         "MOVE_POISON_JAB",
-        "MOVE_REST",
+        "MOVE_CROSS_CHOP",
+        "MOVE_WILL_O_WISP",
+        "MOVE_MACH_PUNCH",
         "MOVE_FOCUS_BLAST",
+        "MOVE_TEMPER_FLARE",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_FLING",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_OVERHEAT",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_ACID_SPRAY",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_BELCH",
+        "MOVE_SCORCHING_SANDS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_SCARY_FACE",
+        "MOVE_DYNAMIC_PUNCH",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_FOLLOW_ME",
+        "MOVE_BURNING_JEALOUSY",
+        "MOVE_BODY_SLAM",
+        "MOVE_LOW_SWEEP",
         "MOVE_THIEF",
-        "MOVE_LOW_SWEEP"
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_HEAT_CRASH",
+        "MOVE_BRICK_BREAK",
+        "MOVE_FLAME_CHARGE"
     ],
     "CompetitiveSets": [
         {
@@ -186,6 +196,23 @@
             "SourceTiers": [
                 "GEN6ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_FIRE_BLAST",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_MACH_PUNCH"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_VITAL_SPIRIT",
+            "HiddenPower": "TYPEGRASS",
+            "SourceTiers": [
+                "GEN8ZU"
+            ],
+            "Name": "Life Orb Attacker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

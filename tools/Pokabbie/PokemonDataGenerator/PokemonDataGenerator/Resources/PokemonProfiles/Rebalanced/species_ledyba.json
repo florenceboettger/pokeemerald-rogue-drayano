@@ -3,110 +3,113 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_TACKLE",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_SUPERSONIC",
-            "Level": 5
+            "Level": "5"
         },
         {
             "Move": "MOVE_SWIFT",
-            "Level": 8
+            "Level": "8"
         },
         {
             "Move": "MOVE_LIGHT_SCREEN",
-            "Level": 12
+            "Level": "12"
         },
         {
             "Move": "MOVE_REFLECT",
-            "Level": 12
+            "Level": "12"
         },
         {
             "Move": "MOVE_SAFEGUARD",
-            "Level": 12
+            "Level": "12"
         },
         {
             "Move": "MOVE_MACH_PUNCH",
-            "Level": 15
+            "Level": "15"
         },
         {
             "Move": "MOVE_SILVER_WIND",
-            "Level": 19
+            "Level": "19"
         },
         {
             "Move": "MOVE_COMET_PUNCH",
-            "Level": 22
+            "Level": "22"
         },
         {
             "Move": "MOVE_BATON_PASS",
-            "Level": 26
+            "Level": "26"
         },
         {
             "Move": "MOVE_AGILITY",
-            "Level": 29
+            "Level": "29"
         },
         {
             "Move": "MOVE_BUG_BUZZ",
-            "Level": 33
+            "Level": "33"
         },
         {
             "Move": "MOVE_AIR_SLASH",
-            "Level": 36
+            "Level": "36"
         },
         {
             "Move": "MOVE_DOUBLE_EDGE",
-            "Level": 40
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_METEOR_MASH",
+            "Level": "44"
         }
     ],
     "TutorMoves": [
-        "MOVE_THUNDER_PUNCH",
-        "MOVE_FOCUS_PUNCH",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_U_TURN",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_ROUND",
-        "MOVE_ICE_PUNCH",
-        "MOVE_ACROBATICS",
-        "MOVE_SCREECH",
-        "MOVE_TERA_BLAST",
-        "MOVE_INFESTATION",
+        "MOVE_ENCORE",
         "MOVE_FLY",
+        "MOVE_DOUBLE_TEAM",
+        "MOVE_BIDE",
+        "MOVE_ENDURE",
+        "MOVE_U_TURN",
+        "MOVE_ATTRACT",
+        "MOVE_UPROAR",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SMART_STRIKE",
         "MOVE_DIZZY_PUNCH",
         "MOVE_COUNTER",
+        "MOVE_SWAGGER",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_INFESTATION",
         "MOVE_FLING",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_REFLECT",
-        "MOVE_FRUSTRATION",
-        "MOVE_DOUBLE_TEAM",
-        "MOVE_AERIAL_ACE",
-        "MOVE_SILVER_WIND",
+        "MOVE_CONFIDE",
+        "MOVE_DRAIN_PUNCH",
         "MOVE_SUBSTITUTE",
         "MOVE_SWORDS_DANCE",
-        "MOVE_UPROAR",
-        "MOVE_PROTECT",
-        "MOVE_BIDE",
-        "MOVE_SLEEP_TALK",
-        "MOVE_CONFIDE",
-        "MOVE_BRICK_BREAK",
-        "MOVE_THIEF",
-        "MOVE_ATTRACT",
-        "MOVE_BUG_BUZZ",
-        "MOVE_TAILWIND",
-        "MOVE_SUNNY_DAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_BUG_BITE",
-        "MOVE_SWAGGER",
-        "MOVE_SAFEGUARD",
-        "MOVE_KNOCK_OFF",
-        "MOVE_ROOST",
-        "MOVE_FACADE",
-        "MOVE_ENDURE",
         "MOVE_REST",
-        "MOVE_ENCORE",
+        "MOVE_ICE_PUNCH",
+        "MOVE_AERIAL_ACE",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
         "MOVE_PSYBEAM",
-        "MOVE_SNORE"
+        "MOVE_SCREECH",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_ROOST",
+        "MOVE_FRUSTRATION",
+        "MOVE_LUNGE",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_MEGA_PUNCH",
+        "MOVE_BUG_BITE",
+        "MOVE_BRICK_BREAK",
+        "MOVE_TAILWIND"
     ],
     "CompetitiveSets": [
         {
@@ -125,6 +128,40 @@
             "SourceTiers": [
                 "GEN7LC"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_DUAL_WINGBEAT",
+                "MOVE_MACH_PUNCH",
+                "MOVE_BUG_BITE"
+            ],
+            "Item": "ITEM_EVIOLITE",
+            "Ability": "ABILITY_TECHNICIAN",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7LC"
+            ],
+            "Name": "Swords Dance (Technician)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_U_TURN",
+                "MOVE_MACH_PUNCH",
+                "MOVE_METEOR_MASH",
+                "MOVE_ICE_PUNCH"
+            ],
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Ability": "ABILITY_IRON_FIST",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7LC"
+            ],
+            "Name": "Iron Fist Pivot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

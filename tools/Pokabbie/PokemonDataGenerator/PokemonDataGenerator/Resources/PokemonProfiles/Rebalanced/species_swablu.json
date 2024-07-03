@@ -75,47 +75,42 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ACROBATICS",
-        "MOVE_AERIAL_ACE",
-        "MOVE_AGILITY",
-        "MOVE_ASTONISH",
-        "MOVE_BODY_SLAM",
-        "MOVE_BRAVE_BIRD",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_DEFOG",
-        "MOVE_DISARMING_VOICE",
-        "MOVE_DRAGON_CHEER",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_DRAGON_RUSH",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_ENDEAVOR",
-        "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FEATHER_DANCE",
+        "MOVE_RETURN",
         "MOVE_FLY",
-        "MOVE_HAZE",
-        "MOVE_HEAT_WAVE",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_PLAY_ROUGH",
         "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
+        "MOVE_HEAT_WAVE",
+        "MOVE_DRAGON_RUSH",
+        "MOVE_ENDEAVOR",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_FEATHER_DANCE",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_HAZE",
+        "MOVE_ICE_BEAM",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_AGILITY",
+        "MOVE_SLEEP_TALK",
         "MOVE_HURRICANE",
         "MOVE_HYPER_VOICE",
-        "MOVE_ICE_BEAM",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_PROTECT",
         "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_RETURN",
-        "MOVE_ROOST",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWIFT",
-        "MOVE_TAILWIND",
-        "MOVE_TAKE_DOWN",
         "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ROOST",
+        "MOVE_TRAILBLAZE",
+        "MOVE_BODY_SLAM",
         "MOVE_THIEF",
-        "MOVE_TRAILBLAZE"
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_DRAGON_CHEER",
+        "MOVE_TAILWIND"
     ],
     "CompetitiveSets": [
         {
@@ -134,6 +129,23 @@
             "SourceTiers": [
                 "GEN6LC"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_ROOST",
+                "MOVE_COTTON_GUARD",
+                "MOVE_AGILITY"
+            ],
+            "Item": "ITEM_EVIOLITE",
+            "Ability": "ABILITY_NATURAL_CURE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7LC"
+            ],
+            "Name": "Cotton Guard",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

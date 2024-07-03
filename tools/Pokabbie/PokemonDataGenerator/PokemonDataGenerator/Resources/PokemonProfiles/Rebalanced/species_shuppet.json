@@ -1,0 +1,140 @@
+{
+    "Species": "SPECIES_SHUPPET",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_ASTONISH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SCREECH",
+            "Level": 4
+        },
+        {
+            "Move": "MOVE_NIGHT_SHADE",
+            "Level": 7
+        },
+        {
+            "Move": "MOVE_SPITE",
+            "Level": 10
+        },
+        {
+            "Move": "MOVE_WILL_O_WISP",
+            "Level": 16
+        },
+        {
+            "Move": "MOVE_SHADOW_SNEAK",
+            "Level": 19
+        },
+        {
+            "Move": "MOVE_HEX",
+            "Level": 22
+        },
+        {
+            "Move": "MOVE_CURSE",
+            "Level": 26
+        },
+        {
+            "Move": "MOVE_SHADOW_BALL",
+            "Level": 30
+        },
+        {
+            "Move": "MOVE_ROLE_PLAY",
+            "Level": 34
+        },
+        {
+            "Move": "MOVE_SUCKER_PUNCH",
+            "Level": 38
+        },
+        {
+            "Move": "MOVE_TRICK",
+            "Level": 42
+        },
+        {
+            "Move": "MOVE_PHANTOM_FORCE",
+            "Level": 48
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_RETURN",
+        "MOVE_ENCORE",
+        "MOVE_METRONOME",
+        "MOVE_POUNCE",
+        "MOVE_ENDURE",
+        "MOVE_THUNDER",
+        "MOVE_HELPING_HAND",
+        "MOVE_WORK_UP",
+        "MOVE_TAUNT",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_NASTY_PLOT",
+        "MOVE_SKILL_SWAP",
+        "MOVE_KNOCK_OFF",
+        "MOVE_GUNK_SHOT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_CALM_MIND",
+        "MOVE_FOUL_PLAY",
+        "MOVE_POLTERGEIST",
+        "MOVE_DARK_PULSE",
+        "MOVE_DESTINY_BOND",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_REST",
+        "MOVE_DISABLE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_SLEEP_TALK",
+        "MOVE_LASH_OUT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_THUNDERBOLT",
+        "MOVE_SCARY_FACE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_PSYBEAM",
+        "MOVE_PSYCHIC",
+        "MOVE_PSYCH_UP",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_IMPRISON",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_CONFUSE_RAY"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_KNOCK_OFF",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_DESTINY_BOND"
+            ],
+            "Ability": "ABILITY_FRISK",
+            "Item": "ITEM_FOCUS_SASH",
+            "Nature": "NATURE_BRAVE",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Offensive Trick Room",
+            "SourceTiers": [
+                "GEN6LC",
+                "GEN7LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_RETURN",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_KNOCK_OFF",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_FRISK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7LC"
+            ],
+            "Name": "Poltergeist Wallbreaker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        }
+    ]
+}

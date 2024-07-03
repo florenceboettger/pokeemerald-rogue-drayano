@@ -878,14 +878,14 @@ namespace PokemonDataGenerator.Pokedex
 							{
 								redirectSpecies = "SPECIES_FURFROU";
 							}
-							else if (speciesName.StartsWith("SPECIES_PUMPKABOO_"))
+							/*else if (speciesName.StartsWith("SPECIES_PUMPKABOO_"))
 							{
 								redirectSpecies = "SPECIES_PUMPKABOO";
 							}
 							else if (speciesName.StartsWith("SPECIES_GOURGEIST_"))
 							{
 								redirectSpecies = "SPECIES_GOURGEIST";
-							}
+							}*/
 							else if (speciesName.StartsWith("SPECIES_SILVALLY_"))
 							{
 								redirectSpecies = "SPECIES_SILVALLY";

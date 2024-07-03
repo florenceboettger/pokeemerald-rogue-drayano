@@ -3,131 +3,140 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_AQUA_TAIL",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_TACKLE",
-            "Level": 1
+            "Move": "MOVE_AQUA_TAIL",
+            "Level": "1"
         },
         {
-            "Move": "MOVE_WATER_GUN",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_ABSORB",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_DRAGON_BREATH",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_POISON_TAIL",
-            "Level": 1
+            "Move": "MOVE_OUTRAGE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_FEINT",
-            "Level": 1
+            "Level": "1"
         },
         {
-            "Move": "MOVE_ACID_SPRAY",
-            "Level": 1
+            "Move": "MOVE_TACKLE",
+            "Level": "1"
         },
         {
-            "Move": "MOVE_TEARFUL_LOOK",
-            "Level": 1
+            "Move": "MOVE_BUBBLE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ABSORB",
+            "Level": "1"
         },
         {
             "Move": "MOVE_PROTECT",
-            "Level": 15
+            "Level": "1"
         },
         {
-            "Move": "MOVE_FLAIL",
-            "Level": 20
+            "Move": "MOVE_ABSORB",
+            "Level": "5"
         },
         {
-            "Move": "MOVE_WATER_PULSE",
-            "Level": 25
+            "Move": "MOVE_PROTECT",
+            "Level": "9"
+        },
+        {
+            "Move": "MOVE_BIDE",
+            "Level": "13"
+        },
+        {
+            "Move": "MOVE_DRAGON_BREATH",
+            "Level": "18"
         },
         {
             "Move": "MOVE_RAIN_DANCE",
-            "Level": 30
+            "Level": "25"
         },
         {
-            "Move": "MOVE_CURSE",
-            "Level": 43
+            "Move": "MOVE_FLAIL",
+            "Level": "28"
         },
         {
             "Move": "MOVE_BODY_SLAM",
-            "Level": 49
+            "Level": "32"
         },
         {
             "Move": "MOVE_MUDDY_WATER",
-            "Level": 58
+            "Level": "37"
+        },
+        {
+            "Move": "MOVE_RECOVER",
+            "Level": "42"
+        },
+        {
+            "Move": "MOVE_DRAGON_PULSE",
+            "Level": "47"
         },
         {
             "Move": "MOVE_POWER_WHIP",
-            "Level": 67
+            "Level": "50"
+        },
+        {
+            "Move": "MOVE_HYDRO_PUMP",
+            "Level": "52"
+        },
+        {
+            "Move": "MOVE_OUTRAGE",
+            "Level": "55"
         }
     ],
     "TutorMoves": [
-        "MOVE_THUNDER_PUNCH",
-        "MOVE_WATER_PULSE",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_ICE_BEAM",
-        "MOVE_FOCUS_PUNCH",
-        "MOVE_BREAKING_SWIPE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_ROCK_SLIDE",
-        "MOVE_ACID_SPRAY",
-        "MOVE_DRAGON_TAIL",
-        "MOVE_SURF",
-        "MOVE_FIRE_PUNCH",
-        "MOVE_MUD_SHOT",
-        "MOVE_DRAGON_CHEER",
-        "MOVE_SKITTER_SMACK",
-        "MOVE_TOXIC",
-        "MOVE_DRACO_METEOR",
-        "MOVE_POISON_TAIL",
-        "MOVE_TERA_BLAST",
-        "MOVE_BULLDOZE",
-        "MOVE_COUNTER",
-        "MOVE_RAIN_DANCE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_EARTHQUAKE",
-        "MOVE_PROTECT",
         "MOVE_CHARM",
-        "MOVE_SLEEP_TALK",
-        "MOVE_ACID_ARMOR",
-        "MOVE_MUDDY_WATER",
-        "MOVE_BLIZZARD",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_STOMPING_TANTRUM",
-        "MOVE_BODY_SLAM",
+        "MOVE_DRAGON_CLAW",
         "MOVE_SLUDGE_BOMB",
-        "MOVE_SUNNY_DAY",
-        "MOVE_IRON_TAIL",
-        "MOVE_SCALD",
-        "MOVE_HYPER_BEAM",
-        "MOVE_OUTRAGE",
-        "MOVE_BODY_PRESS",
-        "MOVE_THUNDER",
-        "MOVE_TAKE_DOWN",
-        "MOVE_THUNDERBOLT",
-        "MOVE_WEATHER_BALL",
-        "MOVE_KNOCK_OFF",
-        "MOVE_CHILLING_WATER",
-        "MOVE_FACADE",
-        "MOVE_ENDURE",
-        "MOVE_REST",
         "MOVE_CURSE",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_FLAMETHROWER",
-        "MOVE_SLUDGE_WAVE",
+        "MOVE_ENDURE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_THUNDER",
+        "MOVE_BULLDOZE",
+        "MOVE_WEATHER_BALL",
+        "MOVE_DRAGON_TAIL",
+        "MOVE_WATER_PULSE",
+        "MOVE_TAKE_DOWN",
+        "MOVE_KNOCK_OFF",
+        "MOVE_BODY_PRESS",
+        "MOVE_IRON_TAIL",
+        "MOVE_DRAGON_CHEER",
+        "MOVE_CHILLING_WATER",
+        "MOVE_COUNTER",
         "MOVE_FOCUS_BLAST",
+        "MOVE_ACID_ARMOR",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SURF",
+        "MOVE_EARTHQUAKE",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HYPER_BEAM",
+        "MOVE_REST",
+        "MOVE_ICE_BEAM",
+        "MOVE_ACID_SPRAY",
+        "MOVE_SCALD",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_DRACO_METEOR",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_SLEEP_TALK",
         "MOVE_WATERFALL",
-        "MOVE_DRAGON_CLAW"
+        "MOVE_THUNDERBOLT",
+        "MOVE_TERA_BLAST",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_MUD_SHOT",
+        "MOVE_TOXIC",
+        "MOVE_POISON_TAIL",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_BLIZZARD",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_FLAMETHROWER",
+        "MOVE_BREAKING_SWIPE",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": [
         {
@@ -305,7 +314,7 @@
             "Moves": [
                 "MOVE_DRAGON_PULSE",
                 "MOVE_SLUDGE_BOMB",
-                "MOVE_THUNDERBOLT",
+                "MOVE_HYDRO_PUMP",
                 "MOVE_FLAMETHROWER"
             ],
             "Ability": "ABILITY_SAP_SIPPER",
@@ -589,6 +598,23 @@
             "SourceTiers": [
                 "GEN9NATIONALDEXAG"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SURF",
+                "MOVE_RECOVER",
+                "MOVE_SLUDGE_WAVE",
+                "MOVE_TOXIC"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_SAP_SIPPER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7RU"
+            ],
+            "Name": "Toxic Staller",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

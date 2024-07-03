@@ -95,40 +95,35 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ACROBATICS",
-        "MOVE_AGILITY",
-        "MOVE_AIR_SLASH",
-        "MOVE_BATON_PASS",
-        "MOVE_BUG_BUZZ",
         "MOVE_DIG",
-        "MOVE_DUAL_WINGBEAT",
         "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FALSE_SWIPE",
-        "MOVE_FINAL_GAMBIT",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HYPER_BEAM",
-        "MOVE_LEECH_LIFE",
-        "MOVE_NIGHT_SLASH",
-        "MOVE_PROTECT",
-        "MOVE_REST",
-        "MOVE_ROUND",
-        "MOVE_SANDSTORM",
-        "MOVE_SCREECH",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SKITTER_SMACK",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNORE",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
         "MOVE_SWIFT",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_THIEF",
         "MOVE_U_TURN",
         "MOVE_UPROAR",
-        "MOVE_X_SCISSOR"
+        "MOVE_FINAL_GAMBIT",
+        "MOVE_SHADOW_BALL",
+        "MOVE_NIGHT_SLASH",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_FALSE_SWIPE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SANDSTORM",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_AIR_SLASH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_SLEEP_TALK",
+        "MOVE_PROTECT",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_BUG_BUZZ",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_LEECH_LIFE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_DUAL_WINGBEAT"
     ],
     "CompetitiveSets": [
         {
@@ -186,8 +181,8 @@
             "Moves": [
                 "MOVE_SWORDS_DANCE",
                 "MOVE_LEECH_LIFE",
-                "MOVE_DIG",
-                "MOVE_AERIAL_ACE"
+                "MOVE_DUAL_WINGBEAT",
+                "MOVE_DRILL_RUN"
             ],
             "Ability": "ABILITY_SPEED_BOOST",
             "Item": "ITEM_GROUNDIUM_Z",
@@ -218,12 +213,12 @@
         },
         {
             "Moves": [
-                "MOVE_LEECH_LIFE",
+                "MOVE_FIRST_IMPRESSION",
                 "MOVE_U_TURN",
-                "MOVE_AERIAL_ACE",
+                "MOVE_DUAL_WINGBEAT",
                 "MOVE_NIGHT_SLASH"
             ],
-            "Ability": "ABILITY_SPEED_BOOST",
+            "Ability": "ABILITY_INFILTRATOR",
             "Item": "ITEM_CHOICE_BAND",
             "Nature": "NATURE_ADAMANT",
             "HiddenPower": null,
@@ -237,8 +232,8 @@
             "Moves": [
                 "MOVE_SWORDS_DANCE",
                 "MOVE_LEECH_LIFE",
-                "MOVE_AERIAL_ACE",
-                "MOVE_DIG"
+                "MOVE_DUAL_WINGBEAT",
+                "MOVE_DRILL_RUN"
             ],
             "Ability": "ABILITY_SPEED_BOOST",
             "Item": "ITEM_GROUNDIUM_Z",
@@ -304,7 +299,7 @@
         {
             "Moves": [
                 "MOVE_SWORDS_DANCE",
-                "MOVE_PROTECT",
+                "MOVE_EXTREME_SPEED",
                 "MOVE_U_TURN",
                 "MOVE_DUAL_WINGBEAT"
             ],
@@ -351,6 +346,23 @@
             "SourceTiers": [
                 "GEN8ANYTHINGGOES"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_ACROBATICS",
+                "MOVE_DRILL_RUN",
+                "MOVE_PROTECT",
+                "MOVE_SWORDS_DANCE"
+            ],
+            "Item": "ITEM_FLYING_GEM",
+            "Ability": "ABILITY_SPEED_BOOST",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NU"
+            ],
+            "Name": "Swords Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

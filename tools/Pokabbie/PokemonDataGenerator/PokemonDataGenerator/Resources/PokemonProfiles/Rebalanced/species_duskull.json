@@ -1,0 +1,199 @@
+{
+    "Species": "SPECIES_DUSKULL",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_LEER",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_ASTONISH",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_DISABLE",
+            "Level": 4
+        },
+        {
+            "Move": "MOVE_SHADOW_SNEAK",
+            "Level": 8
+        },
+        {
+            "Move": "MOVE_CONFUSE_RAY",
+            "Level": 12
+        },
+        {
+            "Move": "MOVE_NIGHT_SHADE",
+            "Level": 16
+        },
+        {
+            "Move": "MOVE_PAYBACK",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_WILL_O_WISP",
+            "Level": 24
+        },
+        {
+            "Move": "MOVE_MEAN_LOOK",
+            "Level": 28
+        },
+        {
+            "Move": "MOVE_HEX",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_CURSE",
+            "Level": 36
+        },
+        {
+            "Move": "MOVE_SHADOW_BALL",
+            "Level": 40
+        },
+        {
+            "Move": "MOVE_FUTURE_SIGHT",
+            "Level": 44
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_ENDURE",
+        "MOVE_HELPING_HAND",
+        "MOVE_MEMENTO",
+        "MOVE_TAUNT",
+        "MOVE_TRICK",
+        "MOVE_GRAVITY",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_SKILL_SWAP",
+        "MOVE_PHANTOM_FORCE",
+        "MOVE_CALM_MIND",
+        "MOVE_POLTERGEIST",
+        "MOVE_DARK_PULSE",
+        "MOVE_FLING",
+        "MOVE_SPITE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_REST",
+        "MOVE_HAZE",
+        "MOVE_ICE_BEAM",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_PSYCH_UP",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_LEECH_LIFE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_IMPRISON",
+        "MOVE_BLIZZARD",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_SUCKER_PUNCH"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_PAIN_SPLIT",
+                "MOVE_WILL_O_WISP",
+                "MOVE_SUBSTITUTE",
+                "MOVE_SHADOW_SNEAK"
+            ],
+            "Ability": "ABILITY_LEVITATE",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_CAREFUL",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Utility",
+            "SourceTiers": [
+                "GEN6LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_PAIN_SPLIT",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_HEX"
+            ],
+            "Ability": "ABILITY_LEVITATE",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_CAREFUL",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN6LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_PAIN_SPLIT",
+                "MOVE_WILL_O_WISP",
+                "MOVE_SUBSTITUTE",
+                "MOVE_SHADOW_SNEAK"
+            ],
+            "Ability": "ABILITY_LEVITATE",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_RELAXED",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Bulky Utility",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_PAIN_SPLIT",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_HEX"
+            ],
+            "Ability": "ABILITY_LEVITATE",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_RELAXED",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_PAIN_SPLIT",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "Ability": "ABILITY_LEVITATE",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN8LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WILL_O_WISP",
+                "MOVE_PAIN_SPLIT",
+                "MOVE_POLTERGEIST",
+                "MOVE_MEMENTO"
+            ],
+            "Ability": "ABILITY_LEVITATE",
+            "Item": "ITEM_EVIOLITE",
+            "Nature": "NATURE_IMPISH",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Showdown Usage",
+            "SourceTiers": [
+                "GEN9LC"
+            ]
+        }
+    ]
+}

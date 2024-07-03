@@ -3,119 +3,134 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_CRUNCH",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_SAND_ATTACK",
-            "Level": 1
+            "Move": "MOVE_CRUNCH",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_DUAL_CHOP",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_FIRE_FANG",
+            "Level": "1"
         },
         {
             "Move": "MOVE_TACKLE",
-            "Level": 1
+            "Level": "1"
         },
         {
-            "Move": "MOVE_DRAGON_BREATH",
-            "Level": 1
+            "Move": "MOVE_SAND_ATTACK",
+            "Level": "1"
         },
         {
-            "Move": "MOVE_SAND_TOMB",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_BULLDOZE",
-            "Level": 18
-        },
-        {
-            "Move": "MOVE_BITE",
-            "Level": 27
-        },
-        {
-            "Move": "MOVE_SLASH",
-            "Level": 34
-        },
-        {
-            "Move": "MOVE_DRAGON_CLAW",
-            "Level": 42
-        },
-        {
-            "Move": "MOVE_DIG",
-            "Level": 52
+            "Move": "MOVE_DRAGON_RAGE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_SANDSTORM",
-            "Level": 62
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SAND_ATTACK",
+            "Level": "3"
+        },
+        {
+            "Move": "MOVE_DRAGON_RAGE",
+            "Level": "7"
+        },
+        {
+            "Move": "MOVE_SANDSTORM",
+            "Level": "13"
         },
         {
             "Move": "MOVE_TAKE_DOWN",
-            "Level": 72
+            "Level": "15"
+        },
+        {
+            "Move": "MOVE_SAND_TOMB",
+            "Level": "19"
+        },
+        {
+            "Move": "MOVE_SLASH",
+            "Level": "28"
+        },
+        {
+            "Move": "MOVE_DRAGON_CLAW",
+            "Level": "33"
+        },
+        {
+            "Move": "MOVE_DIG",
+            "Level": "40"
         },
         {
             "Move": "MOVE_DRAGON_RUSH",
-            "Level": 82
+            "Level": "55"
+        },
+        {
+            "Move": "MOVE_EARTHQUAKE",
+            "Level": "62"
+        },
+        {
+            "Move": "MOVE_EXTREME_SPEED",
+            "Level": "71"
         }
     ],
     "TutorMoves": [
-        "MOVE_SCORCHING_SANDS",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_SPIKES",
-        "MOVE_SCALE_SHOT",
-        "MOVE_BREAKING_SWIPE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_ROCK_SLIDE",
-        "MOVE_DIG",
-        "MOVE_SURF",
+        "MOVE_FLY",
+        "MOVE_ROAR",
+        "MOVE_STONE_EDGE",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_HELPING_HAND",
+        "MOVE_BULLDOZE",
+        "MOVE_DRAGON_PULSE",
         "MOVE_DRAGON_TAIL",
         "MOVE_ROCK_TOMB",
+        "MOVE_BRICK_BREAK",
+        "MOVE_POISON_JAB",
+        "MOVE_METAL_CLAW",
+        "MOVE_OUTRAGE",
         "MOVE_EARTH_POWER",
-        "MOVE_MUD_SHOT",
-        "MOVE_DRAGON_CHEER",
-        "MOVE_CRUNCH",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_DRACO_METEOR",
-        "MOVE_IRON_HEAD",
-        "MOVE_LIQUIDATION",
-        "MOVE_BULLDOZE",
-        "MOVE_TERA_BLAST",
-        "MOVE_FLY",
-        "MOVE_SWORDS_DANCE",
+        "MOVE_THUNDER_FANG",
         "MOVE_FLING",
-        "MOVE_RAIN_DANCE",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_FALSE_SWIPE",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_LIQUIDATION",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SURF",
+        "MOVE_HYPER_BEAM",
+        "MOVE_BREAKING_SWIPE",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
         "MOVE_SHADOW_CLAW",
         "MOVE_AERIAL_ACE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_SUBSTITUTE",
-        "MOVE_EARTHQUAKE",
-        "MOVE_ROAR",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_THUNDER_FANG",
-        "MOVE_BRICK_BREAK",
-        "MOVE_METAL_CLAW",
-        "MOVE_SCARY_FACE",
-        "MOVE_STOMPING_TANTRUM",
-        "MOVE_BODY_SLAM",
-        "MOVE_DUAL_CHOP",
-        "MOVE_SWIFT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_FALSE_SWIPE",
-        "MOVE_FIRE_FANG",
-        "MOVE_HYPER_BEAM",
-        "MOVE_OUTRAGE",
-        "MOVE_POWER_GEM",
-        "MOVE_TAKE_DOWN",
-        "MOVE_AQUA_TAIL",
-        "MOVE_SANDSTORM",
-        "MOVE_FACADE",
-        "MOVE_POISON_JAB",
-        "MOVE_ENDURE",
-        "MOVE_REST",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_FLAMETHROWER",
         "MOVE_STEALTH_ROCK",
-        "MOVE_SAND_TOMB",
-        "MOVE_STONE_EDGE",
-        "MOVE_DRAGON_CLAW"
+        "MOVE_SUNNY_DAY",
+        "MOVE_DRACO_METEOR",
+        "MOVE_SCORCHING_SANDS",
+        "MOVE_AQUA_TAIL",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_SCARY_FACE",
+        "MOVE_IRON_HEAD",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_MUD_SHOT",
+        "MOVE_SPIKES",
+        "MOVE_SCALE_SHOT",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_POWER_GEM",
+        "MOVE_FLAMETHROWER",
+        "MOVE_DRAGON_CHEER",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": [
         {
@@ -250,40 +265,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Choice Scarf",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SWORDS_DANCE",
-                "MOVE_EARTHQUAKE",
-                "MOVE_DRAGON_CLAW",
-                "MOVE_FIRE_BLAST"
-            ],
-            "Ability": "ABILITY_SAND_FORCE",
-            "Item": "ITEM_GARCHOMPITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Mega Swords Dance",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_SWORDS_DANCE",
-                "MOVE_STONE_EDGE",
-                "MOVE_FIRE_BLAST"
-            ],
-            "Ability": "ABILITY_SAND_FORCE",
-            "Item": "ITEM_GARCHOMPITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6OU"
             ]
@@ -478,40 +459,6 @@
         {
             "Moves": [
                 "MOVE_EARTHQUAKE",
-                "MOVE_ROCK_TOMB",
-                "MOVE_SWORDS_DANCE",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_SAND_FORCE",
-            "Item": "ITEM_GARCHOMPITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Standard Mega",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_OUTRAGE",
-                "MOVE_DRAGON_CLAW",
-                "MOVE_DRACO_METEOR"
-            ],
-            "Ability": "ABILITY_SAND_FORCE",
-            "Item": "ITEM_GARCHOMPITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_EARTHQUAKE",
                 "MOVE_OUTRAGE",
                 "MOVE_STONE_EDGE",
                 "MOVE_POISON_JAB"
@@ -665,57 +612,6 @@
         {
             "Moves": [
                 "MOVE_EARTHQUAKE",
-                "MOVE_DRACO_METEOR",
-                "MOVE_FIRE_BLAST",
-                "MOVE_STEALTH_ROCK"
-            ],
-            "Ability": "ABILITY_SAND_FORCE",
-            "Item": "ITEM_GARCHOMPITE",
-            "Nature": "NATURE_MILD",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Mixed",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SWORDS_DANCE",
-                "MOVE_EARTHQUAKE",
-                "MOVE_STONE_EDGE",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_SAND_FORCE",
-            "Item": "ITEM_GARCHOMPITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Mega Swords Dance",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_SWORDS_DANCE",
-                "MOVE_DRACO_METEOR",
-                "MOVE_FIRE_BLAST"
-            ],
-            "Ability": "ABILITY_SAND_FORCE",
-            "Item": "ITEM_GARCHOMPITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_EARTHQUAKE",
                 "MOVE_STEALTH_ROCK",
                 "MOVE_SWORDS_DANCE",
                 "MOVE_STONE_EDGE"
@@ -796,23 +692,6 @@
             "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_EARTHQUAKE",
-                "MOVE_ROCK_SLIDE",
-                "MOVE_PROTECT",
-                "MOVE_SWORDS_DANCE"
-            ],
-            "Ability": "ABILITY_SAND_FORCE",
-            "Item": "ITEM_GARCHOMPITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTDOUBLES"
             ]
         },
         {
@@ -1057,7 +936,7 @@
             "Moves": [
                 "MOVE_SWORDS_DANCE",
                 "MOVE_EARTHQUAKE",
-                "MOVE_SCALE_SHOT",
+                "MOVE_EXTREME_SPEED",
                 "MOVE_STONE_EDGE"
             ],
             "Ability": "ABILITY_ROUGH_SKIN",
@@ -1093,7 +972,7 @@
                 "MOVE_SWORDS_DANCE",
                 "MOVE_EARTHQUAKE",
                 "MOVE_SCALE_SHOT",
-                "MOVE_AQUA_TAIL"
+                "MOVE_EXTREME_SPEED"
             ],
             "Ability": "ABILITY_ROUGH_SKIN",
             "Item": "ITEM_LEFTOVERS",

@@ -59,51 +59,48 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_CHARM",
-        "MOVE_FAKE_TEARS",
-        "MOVE_MUD_SLAP",
-        "MOVE_PROTECT",
-        "MOVE_WATER_PULSE",
-        "MOVE_PSYBEAM",
-        "MOVE_DISARMING_VOICE",
-        "MOVE_CHILLING_WATER",
-        "MOVE_FACADE",
-        "MOVE_SWIFT",
-        "MOVE_ICY_WIND",
-        "MOVE_STORED_POWER",
-        "MOVE_FLING",
         "MOVE_ENDURE",
-        "MOVE_RAIN_DANCE",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_U_TURN",
-        "MOVE_SLEEP_TALK",
-        "MOVE_REFLECT",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_WATERFALL",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_GRASS_KNOT",
-        "MOVE_REST",
-        "MOVE_SKILL_SWAP",
-        "MOVE_SUBSTITUTE",
-        "MOVE_LIQUIDATION",
-        "MOVE_SHADOW_BALL",
-        "MOVE_ENERGY_BALL",
-        "MOVE_PSYCHIC",
-        "MOVE_SURF",
-        "MOVE_CALM_MIND",
+        "MOVE_SWIFT",
         "MOVE_HELPING_HAND",
         "MOVE_BATON_PASS",
-        "MOVE_ICE_BEAM",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_BLIZZARD",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HYPER_BEAM",
-        "MOVE_TERA_BLAST",
-        "MOVE_HAZE",
-        "MOVE_KNOCK_OFF",
-        "MOVE_SCALD",
         "MOVE_WEATHER_BALL",
-        "MOVE_FLIP_TURN"
+        "MOVE_U_TURN",
+        "MOVE_FAKE_TEARS",
+        "MOVE_SKILL_SWAP",
+        "MOVE_KNOCK_OFF",
+        "MOVE_MUD_SLAP",
+        "MOVE_SHADOW_BALL",
+        "MOVE_REFLECT",
+        "MOVE_CHILLING_WATER",
+        "MOVE_CALM_MIND",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_FLING",
+        "MOVE_FLIP_TURN",
+        "MOVE_SUBSTITUTE",
+        "MOVE_LIQUIDATION",
+        "MOVE_SURF",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_HAZE",
+        "MOVE_ICE_BEAM",
+        "MOVE_SCALD",
+        "MOVE_SLEEP_TALK",
+        "MOVE_WATERFALL",
+        "MOVE_STORED_POWER",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_PSYBEAM",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_PSYCHIC",
+        "MOVE_SIGNAL_BEAM",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_DISARMING_VOICE",
+        "MOVE_ICY_WIND",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_BLIZZARD",
+        "MOVE_ENERGY_BALL"
     ],
     "CompetitiveSets": [
         {
@@ -117,6 +114,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_MODEST",
             "HiddenPower": null,
+            "Name": "Tail Glow + 3 Attacks",
             "SourceTiers": [
                 "GEN6OU"
             ]
@@ -132,6 +130,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_MODEST",
             "HiddenPower": null,
+            "Name": "Tail Glow + Rain Dance",
             "SourceTiers": [
                 "GEN6OU"
             ]
@@ -147,6 +146,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_MODEST",
             "HiddenPower": null,
+            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6OU"
             ]
@@ -162,6 +162,7 @@
             "Item": "ITEM_SAFETY_GOGGLES",
             "Nature": "NATURE_MODEST",
             "HiddenPower": null,
+            "Name": "Tail Glow",
             "SourceTiers": [
                 "GEN6DOUBLESOU"
             ]
@@ -177,6 +178,7 @@
             "Item": "ITEM_SITRUS_BERRY",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Fast Stall",
             "SourceTiers": [
                 "GEN61V1"
             ]
@@ -192,6 +194,7 @@
             "Item": "ITEM_CUSTAP_BERRY",
             "Nature": "NATURE_MODEST",
             "HiddenPower": null,
+            "Name": "Bold Stall",
             "SourceTiers": [
                 "GEN61V1"
             ]
@@ -207,6 +210,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6MONOTYPE",
                 "GEN9MONOTYPE"
@@ -223,6 +227,7 @@
             "Item": "ITEM_WATERIUM_Z",
             "Nature": "NATURE_MODEST",
             "HiddenPower": null,
+            "Name": "2 Attacks + Rest",
             "SourceTiers": [
                 "GEN7OU"
             ]
@@ -238,6 +243,7 @@
             "Item": "ITEM_WATERIUM_Z",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Three Attacks",
             "SourceTiers": [
                 "GEN7OU"
             ]
@@ -253,6 +259,7 @@
             "Item": "ITEM_WATERIUM_Z",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7OU"
             ]
@@ -260,7 +267,7 @@
         {
             "Moves": [
                 "MOVE_TAIL_GLOW",
-                "MOVE_SURF",
+                "MOVE_HYDRO_PUMP",
                 "MOVE_ICY_WIND",
                 "MOVE_ENERGY_BALL"
             ],
@@ -268,6 +275,7 @@
             "Item": "ITEM_WATERIUM_Z",
             "Nature": "NATURE_MODEST",
             "HiddenPower": null,
+            "Name": "Tail Glow + 3 Attacks",
             "SourceTiers": [
                 "GEN71V1"
             ]
@@ -276,13 +284,14 @@
             "Moves": [
                 "MOVE_TAIL_GLOW",
                 "MOVE_RAIN_DANCE",
-                "MOVE_SURF",
+                "MOVE_HYDRO_PUMP",
                 "MOVE_PSYCHIC"
             ],
             "Ability": "ABILITY_HYDRATION",
             "Item": "ITEM_WATERIUM_Z",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Waterium Z",
             "SourceTiers": [
                 "GEN7MONOTYPE"
             ]
@@ -298,6 +307,7 @@
             "Item": "ITEM_WATERIUM_Z",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7MONOTYPE"
             ]
@@ -313,6 +323,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Tail Glow",
             "SourceTiers": [
                 "GEN9OU"
             ]
@@ -328,6 +339,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_BOLD",
             "HiddenPower": null,
+            "Name": "Double Dance",
             "SourceTiers": [
                 "GEN9OU"
             ]
@@ -343,6 +355,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN9OU"
             ]
@@ -358,6 +371,7 @@
             "Item": "ITEM_WATERIUM_Z",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Rain Wallbreaker",
             "SourceTiers": [
                 "GEN9NATIONALDEX"
             ]
@@ -373,6 +387,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Tail Glow",
             "SourceTiers": [
                 "GEN9NATIONALDEX"
             ]
@@ -388,6 +403,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Tank",
             "SourceTiers": [
                 "GEN9NATIONALDEX"
             ]
@@ -403,6 +419,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN9NATIONALDEX"
             ]
@@ -418,6 +435,7 @@
             "Item": "ITEM_CUSTAP_BERRY",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN91V1"
             ]
@@ -433,9 +451,27 @@
             "Item": "ITEM_HEAVY_DUTY_BOOTS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
+            "Name": "Offensive Setup Sweeper",
             "SourceTiers": [
                 "GEN9MONOTYPE"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_TAIL_GLOW",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_ENERGY_BALL",
+                "MOVE_REST"
+            ],
+            "Item": "ITEM_WATERIUM_Z",
+            "Ability": "ABILITY_HYDRATION",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEX"
+            ],
+            "Name": "Stallbreaker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

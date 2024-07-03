@@ -75,49 +75,41 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ACROBATICS",
-        "MOVE_AGILITY",
-        "MOVE_AIR_SLASH",
-        "MOVE_ASTONISH",
-        "MOVE_ATTRACT",
-        "MOVE_BATON_PASS",
         "MOVE_CHARM",
-        "MOVE_COVET",
-        "MOVE_DEFOG",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_EERIE_IMPULSE",
-        "MOVE_ELECTRO_BALL",
-        "MOVE_ELECTROWEB",
-        "MOVE_ENCORE",
         "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_FACADE",
-        "MOVE_FLING",
-        "MOVE_HELPING_HAND",
-        "MOVE_IRON_TAIL",
-        "MOVE_KNOCK_OFF",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_PROTECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_RISING_VOLTAGE",
-        "MOVE_ROOST",
-        "MOVE_ROUND",
-        "MOVE_SHOCK_WAVE",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNORE",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SPEED_SWAP",
-        "MOVE_SUBSTITUTE",
         "MOVE_SWIFT",
-        "MOVE_TAUNT",
         "MOVE_THUNDER",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_THUNDERBOLT",
-        "MOVE_TICKLE",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_TAUNT",
         "MOVE_U_TURN",
-        "MOVE_VOLT_SWITCH",
-        "MOVE_WILD_CHARGE"
+        "MOVE_ATTRACT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_IRON_TAIL",
+        "MOVE_RISING_VOLTAGE",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_SPEED_SWAP",
+        "MOVE_SNORE",
+        "MOVE_ROUND",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_TICKLE",
+        "MOVE_FLING",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_ELECTROWEB",
+        "MOVE_REST",
+        "MOVE_AIR_SLASH",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_PROTECT",
+        "MOVE_ASTONISH",
+        "MOVE_COVET",
+        "MOVE_ROOST",
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_ENERGY_BALL"
     ],
     "CompetitiveSets": [
         {
@@ -255,6 +247,40 @@
             "SourceTiers": [
                 "GEN8ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_ACROBATICS",
+                "MOVE_WILD_CHARGE",
+                "MOVE_U_TURN",
+                "MOVE_NUZZLE"
+            ],
+            "Item": "ITEM_FLYING_GEM",
+            "Ability": "ABILITY_MOTOR_DRIVE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Flying Gem + Acrobatics",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_ACROBATICS",
+                "MOVE_KNOCK_OFF",
+                "MOVE_U_TURN",
+                "MOVE_ROOST"
+            ],
+            "Item": "ITEM_FLYING_GEM",
+            "Ability": "ABILITY_MOTOR_DRIVE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8ZU"
+            ],
+            "Name": "Offensive Utility",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

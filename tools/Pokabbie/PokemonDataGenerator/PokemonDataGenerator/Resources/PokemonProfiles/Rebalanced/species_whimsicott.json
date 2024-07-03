@@ -48,51 +48,50 @@
     ],
     "TutorMoves": [
         "MOVE_BEAT_UP",
-        "MOVE_CHARM",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_DEFOG",
         "MOVE_ENCORE",
-        "MOVE_ENDEAVOR",
-        "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_FACADE",
-        "MOVE_FAKE_TEARS",
-        "MOVE_FLING",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_GRASS_KNOT",
-        "MOVE_GRASSY_GLIDE",
+        "MOVE_CHARM",
         "MOVE_GRASSY_TERRAIN",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HURRICANE",
-        "MOVE_HYPER_BEAM",
-        "MOVE_KNOCK_OFF",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_MEMENTO",
-        "MOVE_MISTY_TERRAIN",
-        "MOVE_NATURE_POWER",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
         "MOVE_PLAY_ROUGH",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHIC",
+        "MOVE_HELPING_HAND",
+        "MOVE_MEMENTO",
+        "MOVE_TAUNT",
+        "MOVE_U_TURN",
+        "MOVE_FAKE_TEARS",
+        "MOVE_MISTY_TERRAIN",
+        "MOVE_ENDEAVOR",
+        "MOVE_KNOCK_OFF",
+        "MOVE_NATURE_POWER",
+        "MOVE_SHADOW_BALL",
+        "MOVE_WORRY_SEED",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_TICKLE",
+        "MOVE_FLING",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_DEFOG",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
         "MOVE_REST",
         "MOVE_SAFEGUARD",
-        "MOVE_SEED_BOMB",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SUBSTITUTE",
         "MOVE_SUNNY_DAY",
-        "MOVE_SWIFT",
-        "MOVE_SWITCHEROO",
-        "MOVE_TAILWIND",
-        "MOVE_TAUNT",
+        "MOVE_SEED_BOMB",
+        "MOVE_SLEEP_TALK",
+        "MOVE_GRASS_WHISTLE",
         "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_GIGA_DRAIN",
         "MOVE_THIEF",
-        "MOVE_TICKLE",
-        "MOVE_TRICK_ROOM",
-        "MOVE_U_TURN",
-        "MOVE_WORRY_SEED"
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_SWITCHEROO",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_ENERGY_BALL"
     ],
     "CompetitiveSets": [
         {
@@ -544,7 +543,7 @@
                 "MOVE_ENCORE",
                 "MOVE_MOONBLAST",
                 "MOVE_U_TURN",
-                "MOVE_STUN_SPORE"
+                "MOVE_SLEEP_POWDER"
             ],
             "Ability": "ABILITY_PRANKSTER",
             "Item": "ITEM_LEFTOVERS",
@@ -830,7 +829,7 @@
         },
         {
             "Moves": [
-                "MOVE_STUN_SPORE",
+                "MOVE_GRASS_WHISTLE",
                 "MOVE_ENCORE",
                 "MOVE_KNOCK_OFF",
                 "MOVE_MOONBLAST"
@@ -882,7 +881,7 @@
         {
             "Moves": [
                 "MOVE_ENCORE",
-                "MOVE_STUN_SPORE",
+                "MOVE_SLEEP_POWDER",
                 "MOVE_MOONBLAST",
                 "MOVE_U_TURN"
             ],
@@ -1065,6 +1064,23 @@
             "SourceTiers": [
                 "GEN9NATIONALDEXMONOTYPE"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_TAILWIND",
+                "MOVE_HELPING_HAND",
+                "MOVE_PROTECT"
+            ],
+            "Item": "ITEM_FOCUS_SASH",
+            "Ability": "ABILITY_PRANKSTER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8VGC2022"
+            ],
+            "Name": "Prankster Support",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

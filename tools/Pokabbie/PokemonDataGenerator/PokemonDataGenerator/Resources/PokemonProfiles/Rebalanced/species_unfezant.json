@@ -87,36 +87,33 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_AIR_SLASH",
-        "MOVE_ATTRACT",
-        "MOVE_BRAVE_BIRD",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_ENDURE",
-        "MOVE_FACADE",
+        "MOVE_RETURN",
         "MOVE_FLY",
-        "MOVE_FOCUS_ENERGY",
-        "MOVE_GIGA_IMPACT",
+        "MOVE_ENDURE",
+        "MOVE_WORK_UP",
         "MOVE_HEAT_WAVE",
-        "MOVE_HURRICANE",
-        "MOVE_HYPER_BEAM",
+        "MOVE_U_TURN",
+        "MOVE_ATTRACT",
+        "MOVE_UPROAR",
         "MOVE_HYPNOSIS",
         "MOVE_NIGHT_SLASH",
-        "MOVE_PROTECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_RETURN",
-        "MOVE_ROUND",
-        "MOVE_SLEEP_TALK",
         "MOVE_SNORE",
-        "MOVE_STEEL_WING",
+        "MOVE_ROUND",
         "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
         "MOVE_SUNNY_DAY",
-        "MOVE_SWIFT",
-        "MOVE_TAUNT",
-        "MOVE_U_TURN",
-        "MOVE_UPROAR",
-        "MOVE_WORK_UP"
+        "MOVE_FOCUS_ENERGY",
+        "MOVE_AGILITY",
+        "MOVE_SLEEP_TALK",
+        "MOVE_HURRICANE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_PROTECT",
+        "MOVE_STEEL_WING",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_TOXIC"
     ],
     "CompetitiveSets": [
         {
@@ -158,7 +155,7 @@
                 "MOVE_TAILWIND",
                 "MOVE_HYPNOSIS",
                 "MOVE_U_TURN",
-                "MOVE_RETURN"
+                "MOVE_BOOMBURST"
             ],
             "Ability": "ABILITY_SUPER_LUCK",
             "Item": "ITEM_SCOPE_LENS",
@@ -223,10 +220,10 @@
         },
         {
             "Moves": [
-                "MOVE_BRAVE_BIRD",
+                "MOVE_HURRICANE",
                 "MOVE_U_TURN",
-                "MOVE_FACADE",
-                "MOVE_NIGHT_SLASH"
+                "MOVE_BOOMBURST",
+                "MOVE_HEAT_WAVE"
             ],
             "Ability": "ABILITY_SUPER_LUCK",
             "Item": "ITEM_CHOICE_SCARF",
@@ -254,6 +251,57 @@
             "SourceTiers": [
                 "GEN8ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_DEFOG",
+                "MOVE_ROOST",
+                "MOVE_AIR_SLASH",
+                "MOVE_U_TURN"
+            ],
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Ability": "ABILITY_SUPER_LUCK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8PU"
+            ],
+            "Name": "Defog",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_HURRICANE",
+                "MOVE_U_TURN",
+                "MOVE_TOXIC",
+                "MOVE_DEFOG"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_SUPER_LUCK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8PU"
+            ],
+            "Name": "Choice Scarf",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_AIR_SLASH",
+                "MOVE_U_TURN",
+                "MOVE_BOOMBURST",
+                "MOVE_HEAT_WAVE"
+            ],
+            "Item": "ITEM_CHOICE_SPECS",
+            "Ability": "ABILITY_UNAWARE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8ZU"
+            ],
+            "Name": "Choice Band",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

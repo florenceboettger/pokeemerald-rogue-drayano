@@ -2,102 +2,148 @@
     "Species": "SPECIES_ZEBSTRIKA",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_TAIL_WHIP",
-            "Level": 1
+            "Move": "MOVE_SMART_STRIKE",
+            "Level": "0"
         },
         {
-            "Move": "MOVE_THUNDER_WAVE",
-            "Level": 1
+            "Move": "MOVE_SMART_STRIKE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ION_DELUGE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_QUICK_ATTACK",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": "1"
         },
         {
             "Move": "MOVE_CHARGE",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_THUNDER_WAVE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_CHARGE",
+            "Level": "5"
         },
         {
             "Move": "MOVE_SHOCK_WAVE",
-            "Level": 11
+            "Level": "8"
+        },
+        {
+            "Move": "MOVE_THUNDER_WAVE",
+            "Level": "12"
         },
         {
             "Move": "MOVE_FLAME_CHARGE",
-            "Level": 18
+            "Level": "15"
+        },
+        {
+            "Move": "MOVE_PURSUIT",
+            "Level": "17"
         },
         {
             "Move": "MOVE_SPARK",
-            "Level": 25
+            "Level": "20"
         },
         {
             "Move": "MOVE_STOMP",
-            "Level": 31
+            "Level": "23"
+        },
+        {
+            "Move": "MOVE_NUZZLE",
+            "Level": "26"
+        },
+        {
+            "Move": "MOVE_FLAME_WHEEL",
+            "Level": "30"
         },
         {
             "Move": "MOVE_DISCHARGE",
-            "Level": 36
+            "Level": "35"
+        },
+        {
+            "Move": "MOVE_BOUNCE",
+            "Level": "39"
         },
         {
             "Move": "MOVE_AGILITY",
-            "Level": 42
+            "Level": "44"
         },
         {
             "Move": "MOVE_WILD_CHARGE",
-            "Level": 47
+            "Level": "48"
+        },
+        {
+            "Move": "MOVE_HIGH_HORSEPOWER",
+            "Level": "53"
         },
         {
             "Move": "MOVE_THRASH",
-            "Level": 53
+            "Level": "57"
+        },
+        {
+            "Move": "MOVE_LUNGE",
+            "Level": "62"
+        },
+        {
+            "Move": "MOVE_FLARE_BLITZ",
+            "Level": "66"
+        },
+        {
+            "Move": "MOVE_ZIPPY_ZAP",
+            "Level": "70"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_TAUNT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_CHARGE_BEAM",
-        "MOVE_HIGH_HORSEPOWER",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_SCREECH",
-        "MOVE_BULLDOZE",
-        "MOVE_TERA_BLAST",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_RAIN_DANCE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_ELECTRO_BALL",
-        "MOVE_ELECTROWEB",
-        "MOVE_ROAR",
-        "MOVE_SMART_STRIKE",
         "MOVE_ELECTRIC_TERRAIN",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_UPROAR",
-        "MOVE_VOLT_SWITCH",
-        "MOVE_SLEEP_TALK",
         "MOVE_DOUBLE_KICK",
-        "MOVE_FLAME_CHARGE",
-        "MOVE_BODY_SLAM",
-        "MOVE_EERIE_IMPULSE",
-        "MOVE_SWIFT",
-        "MOVE_FEINT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_ENDEAVOR",
-        "MOVE_BATON_PASS",
-        "MOVE_HYPER_BEAM",
-        "MOVE_SAND_ATTACK",
-        "MOVE_TAKE_DOWN",
-        "MOVE_THUNDER",
-        "MOVE_SUPERCELL_SLAM",
-        "MOVE_THUNDERBOLT",
-        "MOVE_CHARGE",
-        "MOVE_FACADE",
+        "MOVE_ROAR",
         "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_THUNDER",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_TAUNT",
+        "MOVE_BULLDOZE",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_TAKE_DOWN",
+        "MOVE_UPROAR",
+        "MOVE_ENDEAVOR",
         "MOVE_LOW_KICK",
+        "MOVE_SUPERCELL_SLAM",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_DOUBLE_EDGE",
         "MOVE_OVERHEAT",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ELECTROWEB",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HYPER_BEAM",
         "MOVE_REST",
+        "MOVE_ELECTRO_BALL",
+        "MOVE_SAND_ATTACK",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_SCREECH",
+        "MOVE_FEINT",
+        "MOVE_BODY_SLAM",
         "MOVE_TRAILBLAZE",
-        "MOVE_WILD_CHARGE",
+        "MOVE_LOW_SWEEP",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
         "MOVE_FLAMETHROWER"
     ],
     "CompetitiveSets": [
@@ -185,6 +231,23 @@
             "SourceTiers": [
                 "GEN7ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_ZIPPY_ZAP",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLARE_BLITZ",
+                "MOVE_HIGH_HORSEPOWER"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_SAP_SIPPER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Physical Attacker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

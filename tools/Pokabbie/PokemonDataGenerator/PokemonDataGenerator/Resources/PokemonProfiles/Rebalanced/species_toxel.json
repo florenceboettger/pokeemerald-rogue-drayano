@@ -27,21 +27,21 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_TERA_BLAST",
-        "MOVE_PROTECT",
-        "MOVE_HIDDEN_POWER",
+        "MOVE_ENDEAVOR",
+        "MOVE_ENCORE",
         "MOVE_RETURN",
-        "MOVE_FACADE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_PROTECT",
+        "MOVE_CHARM",
+        "MOVE_REST",
         "MOVE_FRUSTRATION",
         "MOVE_ENDURE",
-        "MOVE_REST",
-        "MOVE_SUBSTITUTE",
-        "MOVE_ENCORE",
-        "MOVE_METAL_SOUND",
-        "MOVE_CHARM",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
         "MOVE_SLEEP_TALK",
         "MOVE_TOXIC",
-        "MOVE_ENDEAVOR"
+        "MOVE_METAL_SOUND",
+        "MOVE_TERA_BLAST"
     ],
     "CompetitiveSets": []
 }

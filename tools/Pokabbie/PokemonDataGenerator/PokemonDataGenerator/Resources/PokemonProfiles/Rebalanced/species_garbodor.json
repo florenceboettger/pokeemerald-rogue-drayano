@@ -3,123 +3,126 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_POUND",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_TAKE_DOWN",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_POISON_GAS",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_METAL_CLAW",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_RECYCLE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_ACID_SPRAY",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_AMNESIA",
-            "Level": 9
-        },
-        {
-            "Move": "MOVE_CLEAR_SMOG",
-            "Level": 12
+            "Level": "1"
         },
         {
             "Move": "MOVE_TOXIC_SPIKES",
-            "Level": 15
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_RECYCLE",
+            "Level": "3"
+        },
+        {
+            "Move": "MOVE_TOXIC_SPIKES",
+            "Level": "7"
+        },
+        {
+            "Move": "MOVE_ACID_SPRAY",
+            "Level": "12"
+        },
+        {
+            "Move": "MOVE_DOUBLE_SLAP",
+            "Level": "14"
         },
         {
             "Move": "MOVE_SLUDGE",
-            "Level": 18
+            "Level": "18"
         },
         {
             "Move": "MOVE_STOCKPILE",
-            "Level": 21
+            "Level": "23"
         },
         {
             "Move": "MOVE_SWALLOW",
-            "Level": 21
+            "Level": "23"
         },
         {
             "Move": "MOVE_BODY_SLAM",
-            "Level": 24
+            "Level": "25"
         },
         {
             "Move": "MOVE_SLUDGE_BOMB",
-            "Level": 27
+            "Level": "28"
+        },
+        {
+            "Move": "MOVE_CLEAR_SMOG",
+            "Level": "32"
+        },
+        {
+            "Move": "MOVE_CROSS_POISON",
+            "Level": "36"
         },
         {
             "Move": "MOVE_TOXIC",
-            "Level": 30
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_AMNESIA",
+            "Level": "44"
         },
         {
             "Move": "MOVE_BELCH",
-            "Level": 33
-        },
-        {
-            "Move": "MOVE_PAIN_SPLIT",
-            "Level": 39
+            "Level": "49"
         },
         {
             "Move": "MOVE_GUNK_SHOT",
-            "Level": 43
+            "Level": "54"
         },
         {
             "Move": "MOVE_EXPLOSION",
-            "Level": 48
+            "Level": "59"
         }
     ],
     "TutorMoves": [
-        "MOVE_GIGA_IMPACT",
-        "MOVE_SPIKES",
-        "MOVE_CROSS_POISON",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_VENOM_DRENCH",
-        "MOVE_ROUND",
-        "MOVE_DARK_PULSE",
-        "MOVE_PAYBACK",
-        "MOVE_SCREECH",
-        "MOVE_FLING",
-        "MOVE_RAIN_DANCE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_AMNESIA",
-        "MOVE_EARTHQUAKE",
-        "MOVE_PSYCHIC",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_ROCK_BLAST",
-        "MOVE_THIEF",
-        "MOVE_TOXIC_SPIKES",
-        "MOVE_STOMPING_TANTRUM",
-        "MOVE_ATTRACT",
-        "MOVE_BODY_SLAM",
-        "MOVE_VENOSHOCK",
-        "MOVE_GUNK_SHOT",
-        "MOVE_SLUDGE_BOMB",
-        "MOVE_SUNNY_DAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_HYPER_BEAM",
-        "MOVE_THUNDERBOLT",
-        "MOVE_BODY_PRESS",
-        "MOVE_SEED_BOMB",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
-        "MOVE_REST",
-        "MOVE_SLUDGE_WAVE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_PAYBACK",
+        "MOVE_ATTRACT",
+        "MOVE_ROCK_BLAST",
+        "MOVE_BODY_PRESS",
         "MOVE_SELF_DESTRUCT",
-        "MOVE_CORROSIVE_GAS",
         "MOVE_FOCUS_BLAST",
-        "MOVE_SNORE"
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_DARK_PULSE",
+        "MOVE_VENOSHOCK",
+        "MOVE_CORROSIVE_GAS",
+        "MOVE_FLING",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_EARTHQUAKE",
+        "MOVE_ICE_PUNCH",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_SEED_BOMB",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_PROTECT",
+        "MOVE_SPIKES",
+        "MOVE_PSYCHIC",
+        "MOVE_SCREECH",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_SUPERPOWER",
+        "MOVE_VENOM_DRENCH"
     ],
     "CompetitiveSets": [
         {
@@ -211,10 +214,10 @@
             "Moves": [
                 "MOVE_GUNK_SHOT",
                 "MOVE_SPIKES",
-                "MOVE_STOMPING_TANTRUM",
+                "MOVE_EARTHQUAKE",
                 "MOVE_EXPLOSION"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_GOOEY",
             "Item": "ITEM_TOXIC_PLATE",
             "Nature": "NATURE_ADAMANT",
             "HiddenPower": null,
@@ -246,7 +249,7 @@
             "Moves": [
                 "MOVE_GUNK_SHOT",
                 "MOVE_SPIKES",
-                "MOVE_STOMPING_TANTRUM",
+                "MOVE_EARTHQUAKE",
                 "MOVE_PAIN_SPLIT"
             ],
             "Ability": "ABILITY_AFTERMATH",
@@ -263,11 +266,11 @@
         {
             "Moves": [
                 "MOVE_SPIKES",
-                "MOVE_GUNK_SHOT",
-                "MOVE_PAIN_SPLIT",
-                "MOVE_STOMPING_TANTRUM"
+                "MOVE_CROSS_POISON",
+                "MOVE_EARTHQUAKE",
+                "MOVE_PAIN_SPLIT"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_GOOEY",
             "Item": "ITEM_ROCKY_HELMET",
             "Nature": "NATURE_IMPISH",
             "HiddenPower": null,

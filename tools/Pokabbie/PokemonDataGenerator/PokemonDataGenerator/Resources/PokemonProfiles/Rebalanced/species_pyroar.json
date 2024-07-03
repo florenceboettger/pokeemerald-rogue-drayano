@@ -75,51 +75,44 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ACROBATICS",
-        "MOVE_BODY_SLAM",
-        "MOVE_BULLDOZE",
-        "MOVE_BURNING_JEALOUSY",
-        "MOVE_CRUNCH",
-        "MOVE_DARK_PULSE",
+        "MOVE_RETURN",
         "MOVE_DIG",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_ENDEAVOR",
-        "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_FIRE_FANG",
-        "MOVE_FIRE_SPIN",
-        "MOVE_FLAME_CHARGE",
-        "MOVE_FLAMETHROWER",
-        "MOVE_FLARE_BLITZ",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HEAT_WAVE",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_HYPER_VOICE",
-        "MOVE_MUD_SLAP",
-        "MOVE_OVERHEAT",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHIC_FANGS",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
         "MOVE_ROAR",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNARL",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
+        "MOVE_ENDURE",
         "MOVE_SWIFT",
-        "MOVE_TAKE_DOWN",
+        "MOVE_HELPING_HAND",
         "MOVE_TAUNT",
+        "MOVE_BULLDOZE",
+        "MOVE_HEAT_WAVE",
+        "MOVE_SNARL",
+        "MOVE_IRON_TAIL",
+        "MOVE_MUD_SLAP",
+        "MOVE_WILL_O_WISP",
+        "MOVE_DARK_PULSE",
         "MOVE_TEMPER_FLARE",
-        "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
         "MOVE_THUNDER_FANG",
-        "MOVE_TRAILBLAZE",
+        "MOVE_FIRE_SPIN",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
         "MOVE_WILD_CHARGE",
-        "MOVE_WILL_O_WISP"
+        "MOVE_TRAILBLAZE",
+        "MOVE_BODY_SLAM",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_BURNING_JEALOUSY",
+        "MOVE_FLAME_CHARGE",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": [
         {
@@ -240,6 +233,40 @@
             "SourceTiers": [
                 "GEN9ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_RETURN",
+                "MOVE_WILD_CHARGE",
+                "MOVE_PSYCHIC_FANGS"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_MOXIE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Choice Scarf",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_RETURN",
+                "MOVE_WILD_CHARGE",
+                "MOVE_FLAME_CHARGE"
+            ],
+            "Item": "ITEM_ASSAULT_VEST",
+            "Ability": "ABILITY_MOXIE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Assault Vest",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

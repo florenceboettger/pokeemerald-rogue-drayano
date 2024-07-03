@@ -55,49 +55,41 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_CALM_MIND",
-        "MOVE_PSYSHOCK",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
+        "MOVE_METRONOME",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_TRICK",
+        "MOVE_GRAVITY",
+        "MOVE_FAKE_OUT",
+        "MOVE_TAKE_DOWN",
+        "MOVE_SKILL_SWAP",
         "MOVE_SHADOW_BALL",
-        "MOVE_DISARMING_VOICE",
+        "MOVE_EXPANDING_FORCE",
         "MOVE_MYSTICAL_FIRE",
-        "MOVE_PSYCHIC_TERRAIN",
+        "MOVE_EXTRASENSORY",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_REST",
+        "MOVE_DRAINING_KISS",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_SLEEP_TALK",
+        "MOVE_HYPER_VOICE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_PSYCH_UP",
+        "MOVE_FRUSTRATION",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
         "MOVE_IMPRISON",
+        "MOVE_PSYSHOCK",
         "MOVE_DAZZLING_GLEAM",
         "MOVE_TOXIC",
-        "MOVE_TERA_BLAST",
-        "MOVE_TRICK",
-        "MOVE_FRUSTRATION",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FAKE_OUT",
-        "MOVE_METRONOME",
-        "MOVE_HELPING_HAND",
-        "MOVE_PSYCHIC",
-        "MOVE_PROTECT",
-        "MOVE_DRAINING_KISS",
-        "MOVE_SLEEP_TALK",
-        "MOVE_EXPANDING_FORCE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_BODY_SLAM",
-        "MOVE_TRICK_ROOM",
-        "MOVE_SWIFT",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_GRAVITY",
-        "MOVE_PSYCH_UP",
-        "MOVE_TAKE_DOWN",
-        "MOVE_FACADE",
-        "MOVE_ENDURE",
-        "MOVE_REST",
-        "MOVE_SKILL_SWAP",
-        "MOVE_ENCORE",
-        "MOVE_EXTRASENSORY",
-        "MOVE_PSYBEAM",
-        "MOVE_STORED_POWER",
-        "MOVE_HYPER_VOICE"
+        "MOVE_ENERGY_BALL"
     ],
     "CompetitiveSets": [
         {
@@ -286,40 +278,6 @@
             "Name": "Terrain Setter",
             "SourceTiers": [
                 "GEN9UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DAZZLING_GLEAM",
-                "MOVE_PSYCHIC",
-                "MOVE_HEALING_WISH",
-                "MOVE_ENCORE"
-            ],
-            "Ability": "ABILITY_PSYCHIC_SURGE",
-            "Item": "ITEM_TERRAIN_EXTENDER",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN9RU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_HEALING_WISH",
-                "MOVE_TRICK",
-                "MOVE_DAZZLING_GLEAM"
-            ],
-            "Ability": "ABILITY_PSYCHIC_SURGE",
-            "Item": "ITEM_CHOICE_SCARF",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN9NU"
             ]
         },
         {

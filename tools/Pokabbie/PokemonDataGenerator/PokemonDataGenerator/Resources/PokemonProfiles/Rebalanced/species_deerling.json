@@ -3,97 +3,115 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_TACKLE",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_CAMOUFLAGE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_GROWL",
-            "Level": 4
+            "Level": "4"
         },
         {
             "Move": "MOVE_SAND_ATTACK",
-            "Level": 7
+            "Level": "7"
         },
         {
             "Move": "MOVE_DOUBLE_KICK",
-            "Level": 10
+            "Level": "10"
         },
         {
             "Move": "MOVE_LEECH_SEED",
-            "Level": 13
+            "Level": "13"
         },
         {
-            "Move": "MOVE_BULLET_SEED",
-            "Level": 16
+            "Move": "MOVE_FEINT_ATTACK",
+            "Level": "16"
         },
         {
             "Move": "MOVE_TAKE_DOWN",
-            "Level": 20
+            "Level": "20"
         },
         {
-            "Move": "MOVE_ZEN_HEADBUTT",
-            "Level": 24
+            "Move": "MOVE_JUMP_KICK",
+            "Level": "24"
+        },
+        {
+            "Move": "MOVE_AROMATHERAPY",
+            "Level": "28"
         },
         {
             "Move": "MOVE_ENERGY_BALL",
-            "Level": 28
+            "Level": "32"
         },
         {
             "Move": "MOVE_CHARM",
-            "Level": 32
+            "Level": "36"
+        },
+        {
+            "Move": "MOVE_LUNGE",
+            "Level": "39"
+        },
+        {
+            "Move": "MOVE_NATURE_POWER",
+            "Level": "41"
+        },
+        {
+            "Move": "MOVE_HIGH_HORSEPOWER",
+            "Level": "44"
         },
         {
             "Move": "MOVE_DOUBLE_EDGE",
-            "Level": 37
+            "Level": "46"
+        },
+        {
+            "Move": "MOVE_CAPTIVATE",
+            "Level": "49"
         },
         {
             "Move": "MOVE_SOLAR_BEAM",
-            "Level": 42
+            "Level": "51"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
-        "MOVE_THUNDER_WAVE",
         "MOVE_DIG",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SYNTHESIS",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_TERA_BLAST",
+        "MOVE_GRASSY_TERRAIN",
+        "MOVE_ENDURE",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_HEADBUTT",
         "MOVE_BULLDOZE",
+        "MOVE_FAKE_TEARS",
+        "MOVE_ENDEAVOR",
+        "MOVE_SYNTHESIS",
+        "MOVE_SHADOW_BALL",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_WORRY_SEED",
+        "MOVE_BULLET_SEED",
         "MOVE_LIGHT_SCREEN",
-        "MOVE_RAIN_DANCE",
+        "MOVE_LEAF_STORM",
         "MOVE_GRASSY_GLIDE",
         "MOVE_SUBSTITUTE",
-        "MOVE_GRASS_KNOT",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_CHARM",
-        "MOVE_SLEEP_TALK",
-        "MOVE_LEAF_STORM",
-        "MOVE_HEADBUTT",
-        "MOVE_BULLET_SEED",
-        "MOVE_ENERGY_BALL",
-        "MOVE_BODY_SLAM",
-        "MOVE_FAKE_TEARS",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_SUNNY_DAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GRASSY_TERRAIN",
-        "MOVE_ENDEAVOR",
-        "MOVE_BATON_PASS",
-        "MOVE_TAKE_DOWN",
-        "MOVE_SEED_BOMB",
-        "MOVE_FACADE",
-        "MOVE_ENDURE",
         "MOVE_REST",
-        "MOVE_JUMP_KICK",
+        "MOVE_SUNNY_DAY",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_AGILITY",
+        "MOVE_SEED_BOMB",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
         "MOVE_WILD_CHARGE",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_BODY_SLAM",
         "MOVE_TRAILBLAZE",
-        "MOVE_WORRY_SEED"
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER"
     ],
     "CompetitiveSets": [
         {

@@ -2,117 +2,149 @@
     "Species": "SPECIES_BANETTE",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_KNOCK_OFF",
-            "Level": 0
+            "Move": "MOVE_SLASH",
+            "Level": "0"
         },
         {
-            "Move": "MOVE_NIGHT_SHADE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_SCREECH",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_SPITE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_WILL_O_WISP",
-            "Level": 16
-        },
-        {
-            "Move": "MOVE_SHADOW_SNEAK",
-            "Level": 19
-        },
-        {
-            "Move": "MOVE_HEX",
-            "Level": 22
-        },
-        {
-            "Move": "MOVE_CURSE",
-            "Level": 26
-        },
-        {
-            "Move": "MOVE_SHADOW_BALL",
-            "Level": 30
-        },
-        {
-            "Move": "MOVE_ROLE_PLAY",
-            "Level": 34
-        },
-        {
-            "Move": "MOVE_SUCKER_PUNCH",
-            "Level": 40
-        },
-        {
-            "Move": "MOVE_TRICK",
-            "Level": 46
+            "Move": "MOVE_SLASH",
+            "Level": "1"
         },
         {
             "Move": "MOVE_PHANTOM_FORCE",
-            "Level": 53
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_KNOCK_OFF",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SCREECH",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_NIGHT_SHADE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SPITE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SCREECH",
+            "Level": "4"
+        },
+        {
+            "Move": "MOVE_NIGHT_SHADE",
+            "Level": "7"
+        },
+        {
+            "Move": "MOVE_SPITE",
+            "Level": "10"
+        },
+        {
+            "Move": "MOVE_SHADOW_SNEAK",
+            "Level": "13"
+        },
+        {
+            "Move": "MOVE_WILL_O_WISP",
+            "Level": "16"
+        },
+        {
+            "Move": "MOVE_FEINT_ATTACK",
+            "Level": "19"
+        },
+        {
+            "Move": "MOVE_HEX",
+            "Level": "22"
+        },
+        {
+            "Move": "MOVE_CURSE",
+            "Level": "26"
+        },
+        {
+            "Move": "MOVE_SHADOW_BALL",
+            "Level": "30"
+        },
+        {
+            "Move": "MOVE_EMBARGO",
+            "Level": "34"
+        },
+        {
+            "Move": "MOVE_SUCKER_PUNCH",
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_SNATCH",
+            "Level": "46"
+        },
+        {
+            "Move": "MOVE_GRUDGE",
+            "Level": "52"
+        },
+        {
+            "Move": "MOVE_TRICK",
+            "Level": "58"
+        },
+        {
+            "Move": "MOVE_PHANTOM_FORCE",
+            "Level": "64"
+        },
+        {
+            "Move": "MOVE_CRUSH_CLAW",
+            "Level": "70"
         }
     ],
     "TutorMoves": [
-        "MOVE_CALM_MIND",
-        "MOVE_PHANTOM_FORCE",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_POUNCE",
-        "MOVE_TAUNT",
-        "MOVE_PAIN_SPLIT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_CHARGE_BEAM",
-        "MOVE_SHADOW_BALL",
-        "MOVE_FOUL_PLAY",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_IMPRISON",
-        "MOVE_SKITTER_SMACK",
-        "MOVE_LASH_OUT",
-        "MOVE_DARK_PULSE",
-        "MOVE_TERA_BLAST",
-        "MOVE_HEX",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_FLING",
-        "MOVE_RAIN_DANCE",
-        "MOVE_TRICK",
-        "MOVE_SHADOW_CLAW",
-        "MOVE_THROAT_CHOP",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SPITE",
-        "MOVE_METRONOME",
-        "MOVE_HELPING_HAND",
-        "MOVE_ICY_WIND",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHIC",
-        "MOVE_SLEEP_TALK",
-        "MOVE_CUT",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_SCARY_FACE",
-        "MOVE_POLTERGEIST",
-        "MOVE_NASTY_PLOT",
-        "MOVE_TRICK_ROOM",
-        "MOVE_DESTINY_BOND",
-        "MOVE_GUNK_SHOT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_PSYCH_UP",
-        "MOVE_HYPER_BEAM",
-        "MOVE_THUNDERBOLT",
-        "MOVE_THUNDER",
-        "MOVE_KNOCK_OFF",
-        "MOVE_BURNING_JEALOUSY",
-        "MOVE_FACADE",
-        "MOVE_WILL_O_WISP",
-        "MOVE_ENDURE",
-        "MOVE_REST",
-        "MOVE_CURSE",
-        "MOVE_SKILL_SWAP",
-        "MOVE_TRAILBLAZE",
+        "MOVE_RETURN",
         "MOVE_ENCORE",
+        "MOVE_METRONOME",
+        "MOVE_POUNCE",
+        "MOVE_ENDURE",
+        "MOVE_THUNDER",
+        "MOVE_HELPING_HAND",
+        "MOVE_TAUNT",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_NASTY_PLOT",
+        "MOVE_SKILL_SWAP",
+        "MOVE_GUNK_SHOT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_CALM_MIND",
+        "MOVE_FOUL_PLAY",
+        "MOVE_POLTERGEIST",
+        "MOVE_DARK_PULSE",
+        "MOVE_DESTINY_BOND",
+        "MOVE_FLING",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_SHADOW_CLAW",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THROAT_CHOP",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_SLEEP_TALK",
+        "MOVE_LASH_OUT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_THUNDERBOLT",
+        "MOVE_SCARY_FACE",
+        "MOVE_TERA_BLAST",
+        "MOVE_CUT",
+        "MOVE_PROTECT",
         "MOVE_PSYBEAM",
-        "MOVE_THIEF"
+        "MOVE_PSYCHIC",
+        "MOVE_PSYCH_UP",
+        "MOVE_TRAILBLAZE",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_IMPRISON",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_CONFUSE_RAY",
+        "MOVE_BURNING_JEALOUSY"
     ],
     "CompetitiveSets": [
         {
@@ -134,40 +166,6 @@
         },
         {
             "Moves": [
-                "MOVE_TAUNT",
-                "MOVE_WILL_O_WISP",
-                "MOVE_SHADOW_CLAW",
-                "MOVE_DESTINY_BOND"
-            ],
-            "Ability": "ABILITY_PRANKSTER",
-            "Item": "ITEM_BANETTITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Prankster",
-            "SourceTiers": [
-                "GEN6UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_GUNK_SHOT",
-                "MOVE_PAIN_SPLIT",
-                "MOVE_THUNDER_WAVE",
-                "MOVE_PHANTOM_FORCE"
-            ],
-            "Ability": "ABILITY_PRANKSTER",
-            "Item": "ITEM_BANETTITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6UU"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_KNOCK_OFF",
                 "MOVE_WILL_O_WISP",
                 "MOVE_SHADOW_CLAW",
@@ -179,40 +177,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Offensive",
-            "SourceTiers": [
-                "GEN6RU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_KNOCK_OFF",
-                "MOVE_WILL_O_WISP",
-                "MOVE_SHADOW_CLAW",
-                "MOVE_SHADOW_SNEAK"
-            ],
-            "Ability": "ABILITY_PRANKSTER",
-            "Item": "ITEM_BANETTITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive",
-            "SourceTiers": [
-                "GEN6RU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_WILL_O_WISP",
-                "MOVE_DESTINY_BOND",
-                "MOVE_KNOCK_OFF",
-                "MOVE_SHADOW_CLAW"
-            ],
-            "Ability": "ABILITY_PRANKSTER",
-            "Item": "ITEM_BANETTITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6RU"
             ]
@@ -289,40 +253,6 @@
             "Moves": [
                 "MOVE_DESTINY_BOND",
                 "MOVE_SHADOW_CLAW",
-                "MOVE_WILL_O_WISP",
-                "MOVE_SUCKER_PUNCH"
-            ],
-            "Ability": "ABILITY_PRANKSTER",
-            "Item": "ITEM_BANETTITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6MONOTYPE"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DESTINY_BOND",
-                "MOVE_KNOCK_OFF",
-                "MOVE_WILL_O_WISP",
-                "MOVE_SHADOW_SNEAK"
-            ],
-            "Ability": "ABILITY_PRANKSTER",
-            "Item": "ITEM_BANETTITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DESTINY_BOND",
-                "MOVE_SHADOW_CLAW",
                 "MOVE_GUNK_SHOT",
                 "MOVE_TAUNT"
             ],
@@ -332,40 +262,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Offensive",
-            "SourceTiers": [
-                "GEN7RU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DESTINY_BOND",
-                "MOVE_SHADOW_CLAW",
-                "MOVE_GUNK_SHOT",
-                "MOVE_TAUNT"
-            ],
-            "Ability": "ABILITY_PRANKSTER",
-            "Item": "ITEM_BANETTITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive",
-            "SourceTiers": [
-                "GEN7RU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DESTINY_BOND",
-                "MOVE_SHADOW_CLAW",
-                "MOVE_SHADOW_SNEAK",
-                "MOVE_GUNK_SHOT"
-            ],
-            "Ability": "ABILITY_PRANKSTER",
-            "Item": "ITEM_BANETTITE",
-            "Nature": "NATURE_ADAMANT",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7RU"
             ]
@@ -437,6 +333,40 @@
             "SourceTiers": [
                 "GEN9NATIONALDEX"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_POLTERGEIST",
+                "MOVE_RETURN",
+                "MOVE_DESTINY_BOND",
+                "MOVE_KNOCK_OFF"
+            ],
+            "Item": "ITEM_BANETTITE",
+            "Ability": "ABILITY_FRISK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7RU"
+            ],
+            "Name": "Mega Return",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_POLTERGEIST",
+                "MOVE_RETURN",
+                "MOVE_WILL_O_WISP",
+                "MOVE_SHADOW_SNEAK"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_INSOMNIA",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Poltergeist + Return",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

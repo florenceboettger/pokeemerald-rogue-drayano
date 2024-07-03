@@ -87,61 +87,57 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AVALANCHE",
-        "MOVE_BLIZZARD",
-        "MOVE_BODY_SLAM",
-        "MOVE_BREAKING_SWIPE",
-        "MOVE_BULLDOZE",
-        "MOVE_CHILLING_WATER",
-        "MOVE_CONFIDE",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_DISARMING_VOICE",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_DRAGON_BREATH",
-        "MOVE_DRAGON_CHEER",
-        "MOVE_DRAGON_DANCE",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_DRAGON_TAIL",
-        "MOVE_DRAINING_KISS",
-        "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FLIP_TURN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HAZE",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_HYPER_BEAM",
-        "MOVE_HYPNOSIS",
-        "MOVE_ICE_BEAM",
-        "MOVE_ICY_WIND",
-        "MOVE_IMPRISON",
-        "MOVE_IRON_HEAD",
-        "MOVE_LIGHT_SCREEN",
         "MOVE_MIRROR_COAT",
-        "MOVE_MIST",
-        "MOVE_MUD_SHOT",
         "MOVE_MUDDY_WATER",
-        "MOVE_PROTECT",
-        "MOVE_PSYCH_UP",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REFRESH",
-        "MOVE_REST",
-        "MOVE_SCALD",
-        "MOVE_SCALE_SHOT",
-        "MOVE_SKITTER_SMACK",
-        "MOVE_SLEEP_TALK",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_HELPING_HAND",
+        "MOVE_BULLDOZE",
+        "MOVE_WEATHER_BALL",
+        "MOVE_DRAGON_BREATH",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_TAKE_DOWN",
+        "MOVE_HYPNOSIS",
+        "MOVE_WHIRLPOOL",
+        "MOVE_CHILLING_WATER",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_TICKLE",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_CONFIDE",
+        "MOVE_FLIP_TURN",
         "MOVE_SUBSTITUTE",
         "MOVE_SURF",
-        "MOVE_SWIFT",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TERA_BLAST",
-        "MOVE_TICKLE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_DRAINING_KISS",
+        "MOVE_BREAKING_SWIPE",
+        "MOVE_AVALANCHE",
+        "MOVE_HAZE",
+        "MOVE_ICE_BEAM",
+        "MOVE_SCALD",
+        "MOVE_DRAGON_DANCE",
         "MOVE_TRIPLE_AXEL",
-        "MOVE_WATER_PULSE",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_SLEEP_TALK",
         "MOVE_WATERFALL",
-        "MOVE_WEATHER_BALL",
-        "MOVE_WHIRLPOOL"
+        "MOVE_TERA_BLAST",
+        "MOVE_IRON_HEAD",
+        "MOVE_MIST",
+        "MOVE_PROTECT",
+        "MOVE_MUD_SHOT",
+        "MOVE_TOXIC",
+        "MOVE_PSYCH_UP",
+        "MOVE_SCALE_SHOT",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_IMPRISON",
+        "MOVE_BLIZZARD",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_CONFUSE_RAY",
+        "MOVE_DRAGON_CHEER"
     ],
     "CompetitiveSets": [
         {
@@ -303,8 +299,8 @@
             "Moves": [
                 "MOVE_SCALD",
                 "MOVE_RECOVER",
-                "MOVE_HYPNOSIS",
-                "MOVE_REFRESH"
+                "MOVE_TOXIC",
+                "MOVE_MOONBLAST"
             ],
             "Ability": "ABILITY_MARVEL_SCALE",
             "Item": "ITEM_LEFTOVERS",
@@ -337,7 +333,7 @@
         {
             "Moves": [
                 "MOVE_SCALD",
-                "MOVE_ICY_WIND",
+                "MOVE_DAZZLING_GLEAM",
                 "MOVE_RECOVER",
                 "MOVE_PROTECT"
             ],
@@ -457,7 +453,7 @@
             "Moves": [
                 "MOVE_SCALD",
                 "MOVE_RECOVER",
-                "MOVE_CONFIDE",
+                "MOVE_MOONBLAST",
                 "MOVE_HYPER_BEAM"
             ],
             "Ability": "ABILITY_COMPETITIVE",
@@ -656,6 +652,40 @@
             "SourceTiers": [
                 "GEN9PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SCALD",
+                "MOVE_ICE_BEAM",
+                "MOVE_MOONBLAST",
+                "MOVE_RECOVER"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_MARVEL_SCALE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8BDSPOU"
+            ],
+            "Name": "Physically Defensive",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_RECOVER",
+                "MOVE_MUDDY_WATER",
+                "MOVE_HYPNOSIS",
+                "MOVE_MOONBLAST"
+            ],
+            "Item": "ITEM_FLAME_ORB",
+            "Ability": "ABILITY_COMPETITIVE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8VGC2020"
+            ],
+            "Name": "Moonblast Set",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

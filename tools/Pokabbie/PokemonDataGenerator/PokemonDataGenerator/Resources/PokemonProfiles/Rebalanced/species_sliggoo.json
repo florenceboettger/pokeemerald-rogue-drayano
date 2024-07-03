@@ -2,96 +2,91 @@
     "Species": "SPECIES_SLIGGOO",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_ACID_SPRAY",
-            "Level": 0
-        },
-        {
             "Move": "MOVE_TACKLE",
-            "Level": 1
+            "Level": "1"
         },
         {
-            "Move": "MOVE_WATER_GUN",
-            "Level": 1
+            "Move": "MOVE_BUBBLE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_ABSORB",
-            "Level": 1
+            "Level": "1"
         },
         {
-            "Move": "MOVE_ACID_ARMOR",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_DRAGON_BREATH",
-            "Level": 1
+            "Move": "MOVE_ABSORB",
+            "Level": "5"
         },
         {
             "Move": "MOVE_PROTECT",
-            "Level": 15
+            "Level": "9"
         },
         {
-            "Move": "MOVE_FLAIL",
-            "Level": 20
+            "Move": "MOVE_BIDE",
+            "Level": "13"
         },
         {
-            "Move": "MOVE_WATER_PULSE",
-            "Level": 25
+            "Move": "MOVE_DRAGON_BREATH",
+            "Level": "18"
         },
         {
             "Move": "MOVE_RAIN_DANCE",
-            "Level": 30
+            "Level": "25"
         },
         {
-            "Move": "MOVE_DRAGON_PULSE",
-            "Level": 35
-        },
-        {
-            "Move": "MOVE_CURSE",
-            "Level": 43
+            "Move": "MOVE_FLAIL",
+            "Level": "28"
         },
         {
             "Move": "MOVE_BODY_SLAM",
-            "Level": 49
+            "Level": "32"
         },
         {
             "Move": "MOVE_MUDDY_WATER",
-            "Level": 56
+            "Level": "37"
+        },
+        {
+            "Move": "MOVE_RECOVER",
+            "Level": "42"
+        },
+        {
+            "Move": "MOVE_DRAGON_PULSE",
+            "Level": "47"
+        },
+        {
+            "Move": "MOVE_HYDRO_PUMP",
+            "Level": "52"
         }
     ],
     "TutorMoves": [
-        "MOVE_WATER_PULSE",
-        "MOVE_BLIZZARD",
-        "MOVE_ICE_BEAM",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_ROCK_SLIDE",
-        "MOVE_BODY_SLAM",
-        "MOVE_ACID_SPRAY",
-        "MOVE_SURF",
-        "MOVE_SLUDGE_BOMB",
-        "MOVE_SUNNY_DAY",
-        "MOVE_MUD_SHOT",
-        "MOVE_SKITTER_SMACK",
-        "MOVE_TOXIC",
-        "MOVE_OUTRAGE",
-        "MOVE_DRACO_METEOR",
-        "MOVE_THUNDERBOLT",
-        "MOVE_THUNDER",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TERA_BLAST",
-        "MOVE_CHILLING_WATER",
-        "MOVE_RAIN_DANCE",
-        "MOVE_FACADE",
-        "MOVE_ENDURE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_REST",
-        "MOVE_CURSE",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_SLUDGE_WAVE",
-        "MOVE_PROTECT",
         "MOVE_CHARM",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_CURSE",
+        "MOVE_ENDURE",
+        "MOVE_THUNDER",
+        "MOVE_WATER_PULSE",
+        "MOVE_TAKE_DOWN",
+        "MOVE_OUTRAGE",
+        "MOVE_CHILLING_WATER",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SURF",
+        "MOVE_REST",
+        "MOVE_ICE_BEAM",
+        "MOVE_ACID_SPRAY",
+        "MOVE_SUNNY_DAY",
+        "MOVE_DRACO_METEOR",
+        "MOVE_SKITTER_SMACK",
         "MOVE_SLEEP_TALK",
         "MOVE_WATERFALL",
-        "MOVE_MUDDY_WATER"
+        "MOVE_THUNDERBOLT",
+        "MOVE_TERA_BLAST",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_MUD_SHOT",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_BLIZZARD",
+        "MOVE_TOXIC"
     ],
     "CompetitiveSets": [
         {

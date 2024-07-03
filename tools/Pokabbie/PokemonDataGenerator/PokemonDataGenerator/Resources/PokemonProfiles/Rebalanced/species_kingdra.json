@@ -79,52 +79,48 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_AURORA_BEAM",
-        "MOVE_BLIZZARD",
-        "MOVE_BODY_SLAM",
-        "MOVE_BREAKING_SWIPE",
-        "MOVE_CHILLING_WATER",
-        "MOVE_CLEAR_SMOG",
-        "MOVE_DISABLE",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_DRACO_METEOR",
-        "MOVE_DRAGON_DANCE",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FLAIL",
-        "MOVE_FLASH_CANNON",
-        "MOVE_FLIP_TURN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HURRICANE",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_HYPER_BEAM",
-        "MOVE_ICE_BEAM",
-        "MOVE_ICY_WIND",
-        "MOVE_IRON_HEAD",
-        "MOVE_LIQUIDATION",
-        "MOVE_MUDDY_WATER",
-        "MOVE_OUTRAGE",
-        "MOVE_PROTECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_SCALD",
-        "MOVE_SCALE_SHOT",
-        "MOVE_SCARY_FACE",
-        "MOVE_SLEEP_TALK",
         "MOVE_SNOWSCAPE",
         "MOVE_SPLASH",
+        "MOVE_FLASH_CANNON",
+        "MOVE_MUDDY_WATER",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_WEATHER_BALL",
+        "MOVE_TAKE_DOWN",
+        "MOVE_WATER_PULSE",
+        "MOVE_AURORA_BEAM",
+        "MOVE_WHIRLPOOL",
+        "MOVE_OUTRAGE",
+        "MOVE_CHILLING_WATER",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_FLAIL",
+        "MOVE_FLIP_TURN",
+        "MOVE_LIQUIDATION",
         "MOVE_SUBSTITUTE",
         "MOVE_SURF",
-        "MOVE_SWIFT",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TERA_BLAST",
-        "MOVE_WATER_PULSE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_CLEAR_SMOG",
+        "MOVE_ICE_BEAM",
+        "MOVE_DISABLE",
+        "MOVE_SCALD",
+        "MOVE_DRACO_METEOR",
+        "MOVE_SLEEP_TALK",
         "MOVE_WATERFALL",
-        "MOVE_WEATHER_BALL",
-        "MOVE_WHIRLPOOL"
+        "MOVE_HURRICANE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_SCARY_FACE",
+        "MOVE_IRON_HEAD",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_SCALE_SHOT",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_BLIZZARD",
+        "MOVE_BREAKING_SWIPE"
     ],
     "CompetitiveSets": [
         {
@@ -369,7 +365,7 @@
         {
             "Moves": [
                 "MOVE_HYDRO_PUMP",
-                "MOVE_SURF",
+                "MOVE_SNIPE_SHOT",
                 "MOVE_DRACO_METEOR",
                 "MOVE_ICE_BEAM"
             ],
@@ -405,7 +401,7 @@
             "Moves": [
                 "MOVE_FOCUS_ENERGY",
                 "MOVE_DRACO_METEOR",
-                "MOVE_HYDRO_PUMP",
+                "MOVE_SNIPE_SHOT",
                 "MOVE_SUBSTITUTE"
             ],
             "Ability": "ABILITY_SNIPER",
@@ -472,7 +468,7 @@
         {
             "Moves": [
                 "MOVE_HYDRO_PUMP",
-                "MOVE_SURF",
+                "MOVE_SNIPE_SHOT",
                 "MOVE_DRACO_METEOR",
                 "MOVE_ICE_BEAM"
             ],
@@ -525,7 +521,7 @@
                 "MOVE_HYDRO_PUMP",
                 "MOVE_DRACO_METEOR",
                 "MOVE_ICE_BEAM",
-                "MOVE_SURF"
+                "MOVE_SCALD"
             ],
             "Ability": "ABILITY_SWIFT_SWIM",
             "Item": "ITEM_CHOICE_SPECS",
@@ -558,7 +554,7 @@
             "Moves": [
                 "MOVE_HYDRO_PUMP",
                 "MOVE_DRACO_METEOR",
-                "MOVE_SURF",
+                "MOVE_SNIPE_SHOT",
                 "MOVE_FLIP_TURN"
             ],
             "Ability": "ABILITY_SWIFT_SWIM",
@@ -592,8 +588,8 @@
             "Moves": [
                 "MOVE_HYDRO_PUMP",
                 "MOVE_DRACO_METEOR",
-                "MOVE_HURRICANE",
-                "MOVE_SURF"
+                "MOVE_SNIPE_SHOT",
+                "MOVE_HURRICANE"
             ],
             "Ability": "ABILITY_SWIFT_SWIM",
             "Item": "ITEM_CHOICE_SPECS",
@@ -624,7 +620,7 @@
         },
         {
             "Moves": [
-                "MOVE_SURF",
+                "MOVE_SNIPE_SHOT",
                 "MOVE_DRACO_METEOR",
                 "MOVE_HURRICANE",
                 "MOVE_HYDRO_PUMP"
@@ -660,7 +656,7 @@
             "Moves": [
                 "MOVE_FOCUS_ENERGY",
                 "MOVE_DRACO_METEOR",
-                "MOVE_SURF",
+                "MOVE_SNIPE_SHOT",
                 "MOVE_AGILITY"
             ],
             "Ability": "ABILITY_SNIPER",
@@ -760,10 +756,10 @@
         },
         {
             "Moves": [
-                "MOVE_SURF",
+                "MOVE_SNIPE_SHOT",
                 "MOVE_DRACO_METEOR",
                 "MOVE_DRAGON_PULSE",
-                "MOVE_HYDRO_PUMP"
+                "MOVE_HURRICANE"
             ],
             "Ability": "ABILITY_SWIFT_SWIM",
             "Item": "ITEM_CHOICE_SPECS",
@@ -858,6 +854,91 @@
             "Name": "Rain Sweeper",
             "SourceTiers": [
                 "GEN9NU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_FOCUS_ENERGY",
+                "MOVE_DRACO_METEOR",
+                "MOVE_SURF",
+                "MOVE_SUBSTITUTE"
+            ],
+            "Ability": "ABILITY_SNIPER",
+            "Item": "ITEM_SCOPE_LENS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": "TYPE_STEEL",
+            "Name": "CritDra",
+            "SourceTiers": [
+                "GEN9ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_DRAGON_DANCE",
+                "MOVE_WAVE_CRASH",
+                "MOVE_OUTRAGE",
+                "MOVE_IRON_HEAD"
+            ],
+            "Ability": "ABILITY_DAMP",
+            "Item": "ITEM_LUM_BERRY",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": "TYPE_STEEL",
+            "Name": "Dragon Dance",
+            "SourceTiers": [
+                "GEN9ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_DRACO_METEOR",
+                "MOVE_SCALD",
+                "MOVE_FLIP_TURN"
+            ],
+            "Ability": "ABILITY_DAMP",
+            "Item": "ITEM_CHOICE_SPECS",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": "TYPE_WATER",
+            "Name": "Choice Specs",
+            "SourceTiers": [
+                "GEN9ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_WAVE_CRASH",
+                "MOVE_OUTRAGE",
+                "MOVE_FLIP_TURN",
+                "MOVE_LIQUIDATION"
+            ],
+            "Ability": "ABILITY_DAMP",
+            "Item": "ITEM_CHOICE_BAND",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": "TYPE_WATER",
+            "Name": "Choice Band",
+            "SourceTiers": [
+                "GEN9ZU"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_DRACO_METEOR",
+                "MOVE_FLIP_TURN",
+                "MOVE_SCALD"
+            ],
+            "Ability": "ABILITY_DAMP",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": null,
+            "TeraType": "TYPE_WATER",
+            "Name": "Choice Scarf",
+            "SourceTiers": [
+                "GEN9ZU"
             ]
         },
         {

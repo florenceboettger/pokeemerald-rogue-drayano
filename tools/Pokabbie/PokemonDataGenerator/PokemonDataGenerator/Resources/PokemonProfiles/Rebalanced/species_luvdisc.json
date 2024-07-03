@@ -79,37 +79,32 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
         "MOVE_AQUA_JET",
-        "MOVE_BLIZZARD",
-        "MOVE_CHARM",
-        "MOVE_DRAINING_KISS",
-        "MOVE_ENDEAVOR",
-        "MOVE_ENDURE",
-        "MOVE_ENTRAINMENT",
-        "MOVE_FACADE",
-        "MOVE_FLIP_TURN",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_ICE_BEAM",
-        "MOVE_ICY_WIND",
-        "MOVE_LIQUIDATION",
-        "MOVE_PROTECT",
-        "MOVE_PSYCH_UP",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_SCALE_SHOT",
-        "MOVE_SLEEP_TALK",
         "MOVE_SNOWSCAPE",
         "MOVE_SPLASH",
-        "MOVE_SUBSTITUTE",
+        "MOVE_ENDURE",
+        "MOVE_ENDEAVOR",
+        "MOVE_WHIRLPOOL",
         "MOVE_SUPERSONIC",
+        "MOVE_FLIP_TURN",
+        "MOVE_LIQUIDATION",
+        "MOVE_SUBSTITUTE",
         "MOVE_SURF",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TERA_BLAST",
-        "MOVE_WATER_PULSE",
+        "MOVE_REST",
+        "MOVE_ICE_BEAM",
+        "MOVE_SCALD",
+        "MOVE_ENTRAINMENT",
+        "MOVE_SLEEP_TALK",
         "MOVE_WATERFALL",
-        "MOVE_WHIRLPOOL"
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_PSYCH_UP",
+        "MOVE_SCALE_SHOT",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_BLIZZARD"
     ],
     "CompetitiveSets": [
         {
@@ -133,18 +128,52 @@
             "Moves": [
                 "MOVE_HYDRO_PUMP",
                 "MOVE_ICE_BEAM",
-                "MOVE_HIDDEN_POWER",
-                "MOVE_RAIN_DANCE"
+                "MOVE_MOONBLAST",
+                "MOVE_LOVELY_KISS"
             ],
             "Ability": "ABILITY_SWIFT_SWIM",
             "Item": "ITEM_LIFE_ORB",
             "Nature": "NATURE_MODEST",
-            "HiddenPower": "TYPE_GRASS",
+            "HiddenPower": null,
             "TeraType": null,
             "Name": "Rain Sweeper",
             "SourceTiers": [
                 "GEN7PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_MOONBLAST",
+                "MOVE_ICE_BEAM",
+                "MOVE_DRAINING_KISS"
+            ],
+            "Item": "ITEM_CHOICE_SPECS",
+            "Ability": "ABILITY_SOUL_HEART",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7RU"
+            ],
+            "Name": "Specs",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_MOONBLAST",
+                "MOVE_ICE_BEAM",
+                "MOVE_DRAINING_KISS"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_SOUL_HEART",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7RU"
+            ],
+            "Name": "Scarf",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

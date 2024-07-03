@@ -87,72 +87,68 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_CALM_MIND",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_HEAT_WAVE",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_ROUND",
+        "MOVE_ENCORE",
         "MOVE_FLY",
-        "MOVE_FLING",
-        "MOVE_RAIN_DANCE",
-        "MOVE_TRICK",
-        "MOVE_FIRE_BLAST",
-        "MOVE_GRASS_KNOT",
-        "MOVE_SMART_STRIKE",
-        "MOVE_METRONOME",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_PLAY_ROUGH",
         "MOVE_HELPING_HAND",
-        "MOVE_PSYCHIC",
-        "MOVE_PROTECT",
-        "MOVE_CHARM",
-        "MOVE_MEGA_KICK",
+        "MOVE_WORK_UP",
+        "MOVE_TRICK",
+        "MOVE_HEAT_WAVE",
+        "MOVE_ALLY_SWITCH",
+        "MOVE_MOONBLAST",
         "MOVE_ATTRACT",
         "MOVE_NASTY_PLOT",
-        "MOVE_SWIFT",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_SUNNY_DAY",
-        "MOVE_WORK_UP",
-        "MOVE_ROOST",
-        "MOVE_FACADE",
-        "MOVE_REST",
-        "MOVE_ENCORE",
-        "MOVE_STEEL_WING",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_AIR_SLASH",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_SHADOW_BALL",
-        "MOVE_MYSTICAL_FIRE",
-        "MOVE_FUTURE_SIGHT",
-        "MOVE_IMPRISON",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_TAILWIND",
-        "MOVE_HEAL_BELL",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_MEGA_PUNCH",
-        "MOVE_REFLECT",
-        "MOVE_SUBSTITUTE",
-        "MOVE_AMNESIA",
         "MOVE_UPROAR",
-        "MOVE_ALLY_SWITCH",
-        "MOVE_DRAINING_KISS",
-        "MOVE_SLEEP_TALK",
-        "MOVE_BRICK_BREAK",
-        "MOVE_BODY_SLAM",
-        "MOVE_DEFOG",
+        "MOVE_SHADOW_BALL",
+        "MOVE_SMART_STRIKE",
+        "MOVE_REFLECT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_SOFT_BOILED",
+        "MOVE_MYSTICAL_FIRE",
         "MOVE_RETALIATE",
-        "MOVE_TRI_ATTACK",
-        "MOVE_HYPER_VOICE",
-        "MOVE_HYPER_BEAM",
-        "MOVE_BATON_PASS",
-        "MOVE_SAFEGUARD",
-        "MOVE_ENDURE",
-        "MOVE_AURA_SPHERE",
-        "MOVE_FLAMETHROWER",
+        "MOVE_CALM_MIND",
+        "MOVE_LIGHT_SCREEN",
         "MOVE_SNORE",
+        "MOVE_ROUND",
+        "MOVE_FLING",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_MEGA_KICK",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_DRAINING_KISS",
+        "MOVE_FUTURE_SIGHT",
+        "MOVE_SUNNY_DAY",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_AMNESIA",
+        "MOVE_HYPER_VOICE",
         "MOVE_STORED_POWER",
-        "MOVE_PSYSHOCK"
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_PSYCHIC",
+        "MOVE_HEAL_BELL",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_ROOST",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_STEEL_WING",
+        "MOVE_IMPRISON",
+        "MOVE_PSYSHOCK",
+        "MOVE_MEGA_PUNCH",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_FLAMETHROWER",
+        "MOVE_BRICK_BREAK",
+        "MOVE_TAILWIND",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": [
         {
@@ -518,7 +514,7 @@
                 "MOVE_AIR_SLASH",
                 "MOVE_THUNDER_WAVE",
                 "MOVE_TRICK",
-                "MOVE_ROOST"
+                "MOVE_MOONBLAST"
             ],
             "Ability": "ABILITY_SERENE_GRACE",
             "Item": "ITEM_CHOICE_SCARF",
@@ -637,7 +633,7 @@
                 "MOVE_AIR_SLASH",
                 "MOVE_FIRE_BLAST",
                 "MOVE_TRICK",
-                "MOVE_DAZZLING_GLEAM"
+                "MOVE_MOONBLAST"
             ],
             "Ability": "ABILITY_SERENE_GRACE",
             "Item": "ITEM_CHOICE_SCARF",
@@ -720,7 +716,7 @@
         {
             "Moves": [
                 "MOVE_AIR_SLASH",
-                "MOVE_DAZZLING_GLEAM",
+                "MOVE_MOONBLAST",
                 "MOVE_TRICK",
                 "MOVE_AURA_SPHERE"
             ],
@@ -1039,6 +1035,91 @@
             "SourceTiers": [
                 "GEN8NATIONALDEXMONOTYPE"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_AIR_SLASH",
+                "MOVE_MOONBLAST",
+                "MOVE_ROOST"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_SERENE_GRACE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7UU"
+            ],
+            "Name": "Calm Mind + Roost",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_AIR_SLASH",
+                "MOVE_MOONBLAST",
+                "MOVE_FLAMETHROWER"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_SERENE_GRACE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7UU"
+            ],
+            "Name": "Calm Mind + 3 Attacks",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_HURRICANE",
+                "MOVE_MOONBLAST",
+                "MOVE_FOLLOW_ME",
+                "MOVE_HEAT_WAVE"
+            ],
+            "Item": "ITEM_SCOPE_LENS",
+            "Ability": "ABILITY_SUPER_LUCK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8VGC2020"
+            ],
+            "Name": "Scope Lens",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_FOLLOW_ME",
+                "MOVE_YAWN",
+                "MOVE_HELPING_HAND"
+            ],
+            "Item": "ITEM_SAFETY_GOGGLES",
+            "Ability": "ABILITY_SERENE_GRACE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8VGC2020"
+            ],
+            "Name": "Utility",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_AIR_SLASH",
+                "MOVE_FLAMETHROWER",
+                "MOVE_MOONBLAST",
+                "MOVE_AURA_SPHERE"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_SERENE_GRACE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8BDSPOU"
+            ],
+            "Name": "Choice Scarf",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

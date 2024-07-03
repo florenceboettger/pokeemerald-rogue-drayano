@@ -107,79 +107,76 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ABSORB",
-        "MOVE_ACROBATICS",
-        "MOVE_AERIAL_ACE",
-        "MOVE_AGILITY",
-        "MOVE_BODY_SLAM",
-        "MOVE_BREAKING_SWIPE",
-        "MOVE_BRICK_BREAK",
-        "MOVE_BULLDOZE",
-        "MOVE_BULLET_SEED",
-        "MOVE_CRUNCH",
+        "MOVE_ROCK_CLIMB",
         "MOVE_DIG",
-        "MOVE_DOUBLE_EDGE",
         "MOVE_DOUBLE_KICK",
-        "MOVE_DRAGON_BREATH",
-        "MOVE_DRAGON_CHEER",
+        "MOVE_ROAR",
         "MOVE_DRAGON_CLAW",
-        "MOVE_DRAGON_DANCE",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_DRAGON_TAIL",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_EARTHQUAKE",
-        "MOVE_ENDEAVOR",
+        "MOVE_VACUUM_WAVE",
+        "MOVE_LEECH_SEED",
+        "MOVE_GRASSY_TERRAIN",
         "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_FACADE",
-        "MOVE_FALSE_SWIPE",
-        "MOVE_FLING",
+        "MOVE_SWIFT",
+        "MOVE_HELPING_HAND",
+        "MOVE_WORK_UP",
+        "MOVE_BULLDOZE",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_DRAGON_BREATH",
+        "MOVE_DRAGON_TAIL",
+        "MOVE_SHED_TAIL",
+        "MOVE_TAKE_DOWN",
+        "MOVE_ROCK_TOMB",
+        "MOVE_LOW_KICK",
+        "MOVE_SYNTHESIS",
+        "MOVE_BRICK_BREAK",
+        "MOVE_IRON_TAIL",
+        "MOVE_DRAGON_CHEER",
+        "MOVE_OUTRAGE",
+        "MOVE_WORRY_SEED",
+        "MOVE_BULLET_SEED",
+        "MOVE_SOLAR_BLADE",
         "MOVE_FOCUS_BLAST",
+        "MOVE_CROSS_POISON",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_BRUTAL_SWING",
+        "MOVE_FLING",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_SUBSTITUTE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_CRUNCH",
+        "MOVE_REST",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_AERIAL_ACE",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THROAT_CHOP",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_DRACO_METEOR",
+        "MOVE_ACROBATICS",
+        "MOVE_SEED_BOMB",
+        "MOVE_SLEEP_TALK",
+        "MOVE_GRASS_WHISTLE",
+        "MOVE_TERA_BLAST",
+        "MOVE_DYNAMIC_PUNCH",
+        "MOVE_ASSURANCE",
+        "MOVE_PROTECT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SCALE_SHOT",
+        "MOVE_BODY_SLAM",
+        "MOVE_TRAILBLAZE",
+        "MOVE_LOW_SWEEP",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SOLAR_BEAM",
         "MOVE_FOCUS_PUNCH",
         "MOVE_FRENZY_PLANT",
-        "MOVE_FURY_CUTTER",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_GRASS_KNOT",
-        "MOVE_GRASS_PLEDGE",
-        "MOVE_GRASSY_GLIDE",
-        "MOVE_GRASSY_TERRAIN",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_LEAF_STORM",
-        "MOVE_LEECH_SEED",
-        "MOVE_LOW_KICK",
-        "MOVE_LOW_SWEEP",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_NIGHT_SLASH",
-        "MOVE_OUTRAGE",
-        "MOVE_PROTECT",
-        "MOVE_REST",
-        "MOVE_ROAR",
-        "MOVE_ROCK_SLIDE",
-        "MOVE_ROCK_TOMB",
-        "MOVE_SCALE_SHOT",
-        "MOVE_SEED_BOMB",
-        "MOVE_SHED_TAIL",
-        "MOVE_SLASH",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SOLAR_BLADE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWIFT",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_SYNTHESIS",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
-        "MOVE_THROAT_CHOP",
-        "MOVE_THUNDER_PUNCH",
-        "MOVE_TRAILBLAZE",
-        "MOVE_VACUUM_WAVE",
-        "MOVE_WORRY_SEED",
-        "MOVE_X_SCISSOR"
+        "MOVE_BREAKING_SWIPE",
+        "MOVE_GRASS_PLEDGE"
     ],
     "CompetitiveSets": [
         {
@@ -218,57 +215,6 @@
         },
         {
             "Moves": [
-                "MOVE_LEAF_STORM",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_EARTHQUAKE",
-                "MOVE_HIDDEN_POWER"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_NAIVE",
-            "HiddenPower": "TYPE_FIRE",
-            "TeraType": null,
-            "Name": "All-Out Attacker",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Substitute",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_HIDDEN_POWER",
-                "MOVE_EARTHQUAKE"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_FIRE",
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_GIGA_DRAIN",
                 "MOVE_LEAF_STORM",
                 "MOVE_DRAGON_PULSE",
@@ -314,74 +260,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Swords Dance",
-            "SourceTiers": [
-                "GEN6UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_GIGA_DRAIN",
-                "MOVE_LEAF_STORM",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "All-Out Offensive",
-            "SourceTiers": [
-                "GEN6UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SUBSTITUTE",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Substitute Attacker",
-            "SourceTiers": [
-                "GEN6UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SWORDS_DANCE",
-                "MOVE_LEAF_BLADE",
-                "MOVE_DRAGON_CLAW",
-                "MOVE_EARTHQUAKE"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Swords Dance",
-            "SourceTiers": [
-                "GEN6UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_LEAF_STORM",
-                "MOVE_GIGA_DRAIN"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6UU"
             ]
@@ -422,23 +300,6 @@
         },
         {
             "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_ENERGY_BALL"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6DOUBLESOU"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_LEAF_STORM",
                 "MOVE_DRAGON_PULSE",
                 "MOVE_FOCUS_BLAST",
@@ -450,40 +311,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "All-Out Attacker",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_LEAF_STORM",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "All-Out Attacker",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_LEAF_STORM",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_GIGA_DRAIN"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6BATTLESPOTSINGLES"
             ]
@@ -508,167 +335,48 @@
         {
             "Moves": [
                 "MOVE_LEAF_STORM",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_QUICK_GUARD",
-                "MOVE_DETECT"
+                "MOVE_DRACO_METEOR",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_HIDDEN_POWER"
             ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
+            "Ability": "ABILITY_OVERGROW",
             "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_MODEST",
-            "HiddenPower": null,
+            "Nature": "NATURE_TIMID",
+            "HiddenPower": "TYPEFIRE",
             "TeraType": null,
-            "Name": "Special Attacker",
+            "Name": "All-out Attacker",
             "SourceTiers": [
-                "GEN6BATTLESPOTDOUBLES"
+                "GEN7UU"
             ]
         },
         {
             "Moves": [
+                "MOVE_LEAF_STORM",
                 "MOVE_DRAGON_PULSE",
                 "MOVE_PROTECT",
-                "MOVE_GRASS_KNOT",
-                "MOVE_QUICK_GUARD"
+                "MOVE_LEECH_SEED"
             ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
+            "Ability": "ABILITY_OVERGROW",
             "Item": "ITEM_SCEPTILITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
             "TeraType": null,
-            "Name": "Showdown Usage",
+            "Name": "Leech Seed + Protect",
             "SourceTiers": [
-                "GEN6VGC2016"
+                "GEN7RU"
             ]
         },
         {
             "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_LEAF_STORM",
                 "MOVE_LEAF_BLADE",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_LEAF_STORM",
-                "MOVE_DRAGON_PULSE",
                 "MOVE_EARTHQUAKE",
-                "MOVE_HIDDEN_POWER"
+                "MOVE_CROSS_POISON",
+                "MOVE_SCALE_SHOT"
             ],
-            "Ability": "ABILITY_OVERGROW",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_FIRE",
-            "TeraType": null,
-            "Name": "All-out Attacker",
-            "SourceTiers": [
-                "GEN7UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_LEAF_STORM",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_EARTHQUAKE",
-                "MOVE_HIDDEN_POWER"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_FIRE",
-            "TeraType": null,
-            "Name": "All-out Attacker",
-            "SourceTiers": [
-                "GEN7UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_LEAF_STORM",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7UU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_LEAF_STORM",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_PROTECT",
-                "MOVE_LEECH_SEED"
-            ],
-            "Ability": "ABILITY_OVERGROW",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Leech Seed + Protect",
-            "SourceTiers": [
-                "GEN7RU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_LEAF_STORM",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_PROTECT",
-                "MOVE_LEECH_SEED"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Leech Seed + Protect",
-            "SourceTiers": [
-                "GEN7RU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_LEAF_STORM",
-                "MOVE_LEECH_SEED",
-                "MOVE_GIGA_DRAIN"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7RU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_LEAF_STORM",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_HIDDEN_POWER"
-            ],
-            "Ability": "ABILITY_OVERGROW",
+            "Ability": "ABILITY_HYPER_CUTTER",
             "Item": "ITEM_LIFE_ORB",
             "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_ICE",
+            "HiddenPower": null,
             "TeraType": null,
             "Name": "All-out Attacker",
             "SourceTiers": [
@@ -694,59 +402,8 @@
         },
         {
             "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_PROTECT",
-                "MOVE_HIDDEN_POWER"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_FIRE",
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7DOUBLESOU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_ENERGY_BALL"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_MODEST",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTDOUBLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_PROTECT",
-                "MOVE_ENERGY_BALL",
-                "MOVE_HIDDEN_POWER"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_FIRE",
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7VGC2018"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_FRENZY_PLANT",
-                "MOVE_DRAGON_PULSE",
+                "MOVE_GRASS_WHISTLE",
                 "MOVE_SUBSTITUTE",
                 "MOVE_LEECH_SEED"
             ],
@@ -773,40 +430,6 @@
             "HiddenPower": "TYPE_FIRE",
             "TeraType": null,
             "Name": "Substitute + Overgrow",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FRENZY_PLANT",
-                "MOVE_DRAGON_PULSE",
-                "MOVE_SUBSTITUTE",
-                "MOVE_LEECH_SEED"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DRAGON_PULSE",
-                "MOVE_FRENZY_PLANT",
-                "MOVE_SUBSTITUTE",
-                "MOVE_LEECH_SEED"
-            ],
-            "Ability": "ABILITY_LIGHTNING_ROD",
-            "Item": "ITEM_SCEPTILITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN71V1"
             ]
@@ -878,6 +501,57 @@
             "SourceTiers": [
                 "GEN9PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_DRAGON_DANCE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_LEAF_BLADE",
+                "MOVE_CROSS_POISON"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_OVERGROW",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Dragon Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_GRASSY_GLIDE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_CROSS_POISON",
+                "MOVE_OUTRAGE"
+            ],
+            "Item": "ITEM_GRASSY_SEED",
+            "Ability": "ABILITY_UNBURDEN",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Unburden + Grassy Seed",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_LEAF_BLADE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_ACROBATICS",
+                "MOVE_OUTRAGE"
+            ],
+            "Item": "ITEM_FLYING_GEM",
+            "Ability": "ABILITY_UNBURDEN",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Flying Gem + Acrobatics",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

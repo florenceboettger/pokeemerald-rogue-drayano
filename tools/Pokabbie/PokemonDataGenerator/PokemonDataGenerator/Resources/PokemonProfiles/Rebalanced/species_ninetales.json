@@ -2,80 +2,97 @@
     "Species": "SPECIES_NINETALES",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_TAIL_WHIP",
-            "Level": 1
+            "Move": "MOVE_DAZZLING_GLEAM",
+            "Level": "0"
+        },
+        {
+            "Move": "MOVE_DAZZLING_GLEAM",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_IMPRISON",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_NASTY_PLOT",
+            "Level": "1"
         },
         {
             "Move": "MOVE_FLAMETHROWER",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_QUICK_ATTACK",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_CONFUSE_RAY",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SAFEGUARD",
+            "Level": "1"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_CALM_MIND",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_SCORCHING_SANDS",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_PAIN_SPLIT",
-        "MOVE_HEAT_WAVE",
-        "MOVE_HIDDEN_POWER",
+        "MOVE_ENCORE",
         "MOVE_DIG",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SHADOW_BALL",
-        "MOVE_MYSTICAL_FIRE",
-        "MOVE_FOUL_PLAY",
-        "MOVE_IMPRISON",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_SNARL",
-        "MOVE_DARK_PULSE",
-        "MOVE_TERA_BLAST",
-        "MOVE_HEX",
+        "MOVE_CHARM",
+        "MOVE_ROAR",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
         "MOVE_MEMENTO",
-        "MOVE_FIRE_BLAST",
+        "MOVE_HEX",
+        "MOVE_HEAT_WAVE",
+        "MOVE_WEATHER_BALL",
+        "MOVE_HEALING_WISH",
+        "MOVE_MOONBLAST",
+        "MOVE_FAKE_TEARS",
+        "MOVE_SNARL",
+        "MOVE_TAKE_DOWN",
+        "MOVE_HYPNOSIS",
+        "MOVE_SHADOW_BALL",
+        "MOVE_CALM_MIND",
+        "MOVE_FOUL_PLAY",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_EXTRASENSORY",
+        "MOVE_DARK_PULSE",
+        "MOVE_FIRE_SPIN",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_FLAIL",
+        "MOVE_OVERHEAT",
         "MOVE_SPITE",
         "MOVE_SUBSTITUTE",
-        "MOVE_HOWL",
-        "MOVE_ROAR",
-        "MOVE_HELPING_HAND",
-        "MOVE_PSYCHIC",
-        "MOVE_PROTECT",
-        "MOVE_CHARM",
-        "MOVE_SLEEP_TALK",
-        "MOVE_FLAME_CHARGE",
-        "MOVE_FLAIL",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_NASTY_PLOT",
-        "MOVE_BODY_SLAM",
-        "MOVE_FAKE_TEARS",
-        "MOVE_SWIFT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_PSYCH_UP",
         "MOVE_HYPER_BEAM",
-        "MOVE_BATON_PASS",
-        "MOVE_TAKE_DOWN",
-        "MOVE_WEATHER_BALL",
-        "MOVE_BABY_DOLL_EYES",
-        "MOVE_BURNING_JEALOUSY",
-        "MOVE_FACADE",
-        "MOVE_FIRE_SPIN",
-        "MOVE_ENDURE",
-        "MOVE_OVERHEAT",
+        "MOVE_GIGA_IMPACT",
         "MOVE_REST",
-        "MOVE_FLAMETHROWER",
-        "MOVE_WILL_O_WISP",
-        "MOVE_ENCORE",
-        "MOVE_EXTRASENSORY",
-        "MOVE_FLARE_BLITZ",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_BABY_DOLL_EYES",
+        "MOVE_AGILITY",
+        "MOVE_SCORCHING_SANDS",
+        "MOVE_SLEEP_TALK",
         "MOVE_STORED_POWER",
-        "MOVE_HYPNOSIS",
+        "MOVE_HOWL",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_PSYCHIC",
+        "MOVE_PSYCH_UP",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_PAIN_SPLIT",
         "MOVE_PSYSHOCK",
-        "MOVE_HEALING_WISH"
+        "MOVE_BURNING_JEALOUSY",
+        "MOVE_ENERGY_BALL",
+        "MOVE_FLAME_CHARGE",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": [
         {
@@ -185,12 +202,12 @@
                 "MOVE_NASTY_PLOT",
                 "MOVE_FIRE_BLAST",
                 "MOVE_SOLAR_BEAM",
-                "MOVE_HIDDEN_POWER"
+                "MOVE_MOONBLAST"
             ],
             "Ability": "ABILITY_DROUGHT",
             "Item": "ITEM_FIRIUM_Z",
             "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_ICE",
+            "HiddenPower": null,
             "TeraType": null,
             "Name": "Nasty Plot Wallbreaker",
             "SourceTiers": [
@@ -202,12 +219,12 @@
                 "MOVE_OVERHEAT",
                 "MOVE_FIRE_BLAST",
                 "MOVE_SOLAR_BEAM",
-                "MOVE_HIDDEN_POWER"
+                "MOVE_MOONBLAST"
             ],
             "Ability": "ABILITY_DROUGHT",
             "Item": "ITEM_CHOICE_SPECS",
             "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_ICE",
+            "HiddenPower": null,
             "TeraType": null,
             "Name": "Choice Specs",
             "SourceTiers": [
@@ -236,7 +253,7 @@
                 "MOVE_SOLAR_BEAM",
                 "MOVE_HEAT_WAVE",
                 "MOVE_PROTECT",
-                "MOVE_FLAMETHROWER"
+                "MOVE_MOONBLAST"
             ],
             "Ability": "ABILITY_DROUGHT",
             "Item": "ITEM_HEAT_ROCK",
@@ -422,7 +439,7 @@
             "Moves": [
                 "MOVE_NASTY_PLOT",
                 "MOVE_FIRE_BLAST",
-                "MOVE_EXTRASENSORY",
+                "MOVE_PSYCHIC",
                 "MOVE_SOLAR_BEAM"
             ],
             "Ability": "ABILITY_DROUGHT",

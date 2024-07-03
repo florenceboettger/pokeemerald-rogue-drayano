@@ -2,116 +2,120 @@
     "Species": "SPECIES_SIRFETCHD",
     "LevelUpMoves": [
         {
+            "Move": "MOVE_SACRED_SWORD",
+            "Level": "0"
+        },
+        {
+            "Move": "MOVE_SACRED_SWORD",
+            "Level": "1"
+        },
+        {
             "Move": "MOVE_IRON_DEFENSE",
-            "Level": 0
-        },
-        {
-            "Move": "MOVE_SAND_ATTACK",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_LEER",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_PECK",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_FURY_CUTTER",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_FIRST_IMPRESSION",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_PECK",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SAND_ATTACK",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_LEER",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_FURY_CUTTER",
+            "Level": "1"
         },
         {
             "Move": "MOVE_ROCK_SMASH",
-            "Level": 15
+            "Level": "15"
         },
         {
             "Move": "MOVE_BRUTAL_SWING",
-            "Level": 20
+            "Level": "20"
         },
         {
             "Move": "MOVE_DETECT",
-            "Level": 25
+            "Level": "25"
         },
         {
             "Move": "MOVE_KNOCK_OFF",
-            "Level": 30
+            "Level": "30"
         },
         {
             "Move": "MOVE_DEFOG",
-            "Level": 35
+            "Level": "35"
         },
         {
             "Move": "MOVE_BRICK_BREAK",
-            "Level": 40
+            "Level": "40"
         },
         {
             "Move": "MOVE_SWORDS_DANCE",
-            "Level": 45
+            "Level": "45"
         },
         {
             "Move": "MOVE_SLAM",
-            "Level": 50
+            "Level": "50"
         },
         {
             "Move": "MOVE_LEAF_BLADE",
-            "Level": 55
+            "Level": "55"
         },
         {
             "Move": "MOVE_FINAL_GAMBIT",
-            "Level": 60
+            "Level": "60"
         },
         {
             "Move": "MOVE_BRAVE_BIRD",
-            "Level": 65
+            "Level": "65"
         },
         {
             "Move": "MOVE_METEOR_ASSAULT",
-            "Level": 70
+            "Level": "70"
         }
     ],
     "TutorMoves": [
-        "MOVE_CLOSE_COMBAT",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_LEAF_BLADE",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
-        "MOVE_ROUND",
-        "MOVE_COACHING",
-        "MOVE_TOXIC",
-        "MOVE_IRON_DEFENSE",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_THROAT_CHOP",
-        "MOVE_GRASSY_GLIDE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FRUSTRATION",
-        "MOVE_SOLAR_BLADE",
+        "MOVE_ENDURE",
         "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_FOCUS_ENERGY",
-        "MOVE_SLEEP_TALK",
-        "MOVE_BRAVE_BIRD",
-        "MOVE_BRICK_BREAK",
-        "MOVE_CUT",
+        "MOVE_WORK_UP",
         "MOVE_REVENGE",
         "MOVE_ATTRACT",
-        "MOVE_BODY_SLAM",
-        "MOVE_SUNNY_DAY",
-        "MOVE_WORK_UP",
-        "MOVE_RETALIATE",
-        "MOVE_SUPERPOWER",
-        "MOVE_FACADE",
-        "MOVE_ASSURANCE",
-        "MOVE_ENDURE",
         "MOVE_POISON_JAB",
-        "MOVE_REST",
-        "MOVE_STEEL_WING",
+        "MOVE_RETALIATE",
+        "MOVE_SOLAR_BLADE",
         "MOVE_SNORE",
-        "MOVE_BRUTAL_SWING"
+        "MOVE_ROUND",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_DRILL_RUN",
+        "MOVE_SUBSTITUTE",
+        "MOVE_REST",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THROAT_CHOP",
+        "MOVE_FOCUS_ENERGY",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_ASSURANCE",
+        "MOVE_CUT",
+        "MOVE_PROTECT",
+        "MOVE_ROOST",
+        "MOVE_FRUSTRATION",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_STEEL_WING",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_COACHING",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_SUPERPOWER",
+        "MOVE_TOXIC"
     ],
     "CompetitiveSets": [
         {
@@ -148,6 +152,23 @@
             "SourceTiers": [
                 "GEN8BATTLESTADIUMSINGLES"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_SACRED_SWORD",
+                "MOVE_LEAF_BLADE",
+                "MOVE_DRILL_RUN"
+            ],
+            "Item": "ITEM_LEEK",
+            "Ability": "ABILITY_SCRAPPY",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8RU"
+            ],
+            "Name": "Swords Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

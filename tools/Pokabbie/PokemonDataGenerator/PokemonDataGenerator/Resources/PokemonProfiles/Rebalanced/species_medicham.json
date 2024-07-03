@@ -107,69 +107,61 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AERIAL_ACE",
-        "MOVE_AURA_SPHERE",
-        "MOVE_BATON_PASS",
-        "MOVE_BODY_SLAM",
-        "MOVE_BRICK_BREAK",
-        "MOVE_BULK_UP",
-        "MOVE_BULLET_PUNCH",
-        "MOVE_CALM_MIND",
-        "MOVE_CLOSE_COMBAT",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_EXPANDING_FORCE",
-        "MOVE_FACADE",
-        "MOVE_FAKE_OUT",
-        "MOVE_FIRE_PUNCH",
-        "MOVE_FLING",
-        "MOVE_FOCUS_BLAST",
-        "MOVE_FOCUS_PUNCH",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_GRASS_KNOT",
-        "MOVE_GRAVITY",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_ICE_PUNCH",
-        "MOVE_IMPRISON",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_LOW_KICK",
-        "MOVE_LOW_SWEEP",
         "MOVE_METRONOME",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_PAIN_SPLIT",
+        "MOVE_VACUUM_WAVE",
+        "MOVE_SWIFT",
+        "MOVE_HELPING_HAND",
+        "MOVE_BATON_PASS",
+        "MOVE_TAUNT",
+        "MOVE_TRICK",
+        "MOVE_GRAVITY",
+        "MOVE_FAKE_OUT",
+        "MOVE_TAKE_DOWN",
+        "MOVE_SKILL_SWAP",
+        "MOVE_ROCK_TOMB",
+        "MOVE_LOW_KICK",
         "MOVE_POISON_JAB",
+        "MOVE_SHADOW_BALL",
+        "MOVE_REFLECT",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PSYCHIC_TERRAIN",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_BULK_UP",
+        "MOVE_FLING",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_BULLET_PUNCH",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_STORED_POWER",
+        "MOVE_TERA_BLAST",
         "MOVE_PROTECT",
         "MOVE_PSYBEAM",
-        "MOVE_PSYCH_UP",
         "MOVE_PSYCHIC",
-        "MOVE_PSYCHIC_TERRAIN",
-        "MOVE_PSYSHOCK",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REFLECT",
-        "MOVE_REST",
-        "MOVE_REVERSAL",
         "MOVE_ROCK_SLIDE",
-        "MOVE_ROCK_TOMB",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SKILL_SWAP",
-        "MOVE_SLEEP_TALK",
-        "MOVE_STORED_POWER",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWIFT",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TAUNT",
-        "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
-        "MOVE_THUNDER_PUNCH",
+        "MOVE_PSYCHO_CUT",
         "MOVE_TRAILBLAZE",
-        "MOVE_TRICK",
-        "MOVE_TRICK_ROOM",
-        "MOVE_VACUUM_WAVE",
-        "MOVE_ZEN_HEADBUTT"
+        "MOVE_BODY_SLAM",
+        "MOVE_LOW_SWEEP",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_IMPRISON",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_PSYSHOCK",
+        "MOVE_AURA_SPHERE",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_BRICK_BREAK",
+        "MOVE_ENERGY_BALL"
     ],
     "CompetitiveSets": [
         {
@@ -185,24 +177,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "All-Out Attacker",
-            "SourceTiers": [
-                "GEN6OU",
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_FAKE_OUT",
-                "MOVE_ICE_PUNCH",
-                "MOVE_BULLET_PUNCH"
-            ],
-            "Ability": "ABILITY_PURE_POWER",
-            "Item": "ITEM_MEDICHAMITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6OU"
             ]
@@ -261,23 +235,6 @@
         },
         {
             "Moves": [
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_FAKE_OUT",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_PURE_POWER",
-            "Item": "ITEM_MEDICHAMITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_FAKE_OUT",
                 "MOVE_HIGH_JUMP_KICK",
                 "MOVE_ZEN_HEADBUTT",
@@ -291,9 +248,6 @@
             "Name": "Jolly",
             "SourceTiers": [
                 "GEN61V1",
-                "GEN61V1",
-                "GEN71V1",
-                "GEN71V1",
                 "GEN71V1"
             ]
         },
@@ -311,7 +265,6 @@
             "TeraType": null,
             "Name": "Adamant",
             "SourceTiers": [
-                "GEN61V1",
                 "GEN61V1"
             ]
         },
@@ -329,31 +282,13 @@
             "TeraType": null,
             "Name": "Counter",
             "SourceTiers": [
-                "GEN61V1",
                 "GEN61V1"
             ]
         },
         {
             "Moves": [
                 "MOVE_FAKE_OUT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_ICE_PUNCH",
-                "MOVE_BULLET_PUNCH"
-            ],
-            "Ability": "ABILITY_PURE_POWER",
-            "Item": "ITEM_MEDICHAMITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_HIGH_JUMP_KICK",
+                "MOVE_CLOSE_COMBAT",
                 "MOVE_ICE_PUNCH",
                 "MOVE_ZEN_HEADBUTT"
             ],
@@ -363,40 +298,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "All-out Attacker",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_FAKE_OUT",
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_ICE_PUNCH",
-                "MOVE_ZEN_HEADBUTT"
-            ],
-            "Ability": "ABILITY_PURE_POWER",
-            "Item": "ITEM_MEDICHAMITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "All-out Attacker",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HIGH_JUMP_KICK",
-                "MOVE_FAKE_OUT",
-                "MOVE_ICE_PUNCH",
-                "MOVE_ZEN_HEADBUTT"
-            ],
-            "Ability": "ABILITY_PURE_POWER",
-            "Item": "ITEM_MEDICHAMITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7OU"
             ]
@@ -520,6 +421,91 @@
             "SourceTiers": [
                 "GEN9NATIONALDEX"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_PSYCHO_CUT",
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_BULLET_PUNCH"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_PURE_POWER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Wallbreaker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_BULLET_PUNCH"
+            ],
+            "Item": "ITEM_MEDICHAMITE",
+            "Ability": "ABILITY_TELEPATHY",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7VGC2019"
+            ],
+            "Name": "All-out Attacker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_HIGH_JUMP_KICK",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_POISON_JAB"
+            ],
+            "Item": "ITEM_MEDICHAMITE",
+            "Ability": "ABILITY_TELEPATHY",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN71V1"
+            ],
+            "Name": "Offensive",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_ICE_PUNCH"
+            ],
+            "Item": "ITEM_MEDICHAMITE",
+            "Ability": "ABILITY_TELEPATHY",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEX"
+            ],
+            "Name": "Wallbreaker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_ICE_PUNCH",
+                "MOVE_BULLET_PUNCH",
+                "MOVE_ZEN_HEADBUTT"
+            ],
+            "Item": "ITEM_CHOICE_BAND",
+            "Ability": "ABILITY_PURE_POWER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEXRU"
+            ],
+            "Name": "All-Out Attacker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

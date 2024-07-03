@@ -87,55 +87,45 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_BATON_PASS",
-        "MOVE_BODY_SLAM",
-        "MOVE_CALM_MIND",
-        "MOVE_CHARM",
-        "MOVE_CURSE",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_DETECT",
         "MOVE_DIG",
-        "MOVE_DISARMING_VOICE",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_DRAINING_KISS",
-        "MOVE_ECHOED_VOICE",
-        "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FAKE_TEARS",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HEAL_BELL",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_HYPER_VOICE",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_MISTY_EXPLOSION",
-        "MOVE_MISTY_TERRAIN",
-        "MOVE_MYSTICAL_FIRE",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_PROTECT",
-        "MOVE_PSYCH_UP",
-        "MOVE_PSYCHIC",
-        "MOVE_PSYSHOCK",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REFLECT",
-        "MOVE_REST",
+        "MOVE_CHARM",
         "MOVE_ROAR",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SKILL_SWAP",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNORE",
-        "MOVE_STORED_POWER",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWIFT",
-        "MOVE_TAKE_DOWN",
-        "MOVE_TERA_BLAST",
-        "MOVE_TRAILBLAZE",
+        "MOVE_CURSE",
+        "MOVE_ENDURE",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_BATON_PASS",
         "MOVE_WEATHER_BALL",
+        "MOVE_FAKE_TEARS",
+        "MOVE_TAKE_DOWN",
+        "MOVE_SHADOW_BALL",
+        "MOVE_REFLECT",
+        "MOVE_CALM_MIND",
+        "MOVE_SNORE",
+        "MOVE_DOUBLE_EDGE",
         "MOVE_WISH",
-        "MOVE_YAWN"
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_SUNNY_DAY",
+        "MOVE_YAWN",
+        "MOVE_DETECT",
+        "MOVE_ECHOED_VOICE",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_STORED_POWER",
+        "MOVE_TERA_BLAST",
+        "MOVE_HEAL_BELL",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_MISTY_EXPLOSION",
+        "MOVE_TRAILBLAZE",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_PSYSHOCK",
+        "MOVE_DAZZLING_GLEAM"
     ],
     "CompetitiveSets": [
         {
@@ -433,7 +423,7 @@
                 "MOVE_HYPER_VOICE",
                 "MOVE_WISH",
                 "MOVE_PROTECT",
-                "MOVE_HEAL_BELL"
+                "MOVE_SPARKLY_SWIRL"
             ],
             "Ability": "ABILITY_PIXILATE",
             "Item": "ITEM_LEFTOVERS",
@@ -500,14 +490,14 @@
         {
             "Moves": [
                 "MOVE_HYPER_VOICE",
-                "MOVE_HIDDEN_POWER",
+                "MOVE_MYSTICAL_FIRE",
                 "MOVE_PSYSHOCK",
                 "MOVE_SHADOW_BALL"
             ],
             "Ability": "ABILITY_PIXILATE",
             "Item": "ITEM_CHOICE_SPECS",
             "Nature": "NATURE_MODEST",
-            "HiddenPower": "TYPE_FIRE",
+            "HiddenPower": null,
             "TeraType": null,
             "Name": "Choice Specs",
             "SourceTiers": [
@@ -821,6 +811,57 @@
             "SourceTiers": [
                 "GEN91V1"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_WISH",
+                "MOVE_PROTECT",
+                "MOVE_SPARKLY_SWIRL"
+            ],
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Ability": "ABILITY_PIXILATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8UU"
+            ],
+            "Name": "Utility",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_PSYSHOCK",
+                "MOVE_SPARKLY_SWIRL"
+            ],
+            "Item": "ITEM_CHOICE_SPECS",
+            "Ability": "ABILITY_PIXILATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8UU"
+            ],
+            "Name": "Choice Specs",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_WISH",
+                "MOVE_PROTECT",
+                "MOVE_HYPER_VOICE",
+                "MOVE_SPARKLY_SWIRL"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_PIXILATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEXRU"
+            ],
+            "Name": "Cleric",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

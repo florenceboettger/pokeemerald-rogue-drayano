@@ -3,132 +3,140 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_DRAGON_DARTS",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_BITE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_QUICK_ATTACK",
-            "Level": 1
+            "Move": "MOVE_DRAGON_DARTS",
+            "Level": "1"
         },
         {
             "Move": "MOVE_DRAGON_BREATH",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SUCKER_PUNCH",
+            "Level": "1"
         },
         {
             "Move": "MOVE_ASTONISH",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_INFESTATION",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_BITE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_LOCK_ON",
-            "Level": 6
+            "Level": "6"
         },
         {
             "Move": "MOVE_ASSURANCE",
-            "Level": 12
+            "Level": "11"
         },
         {
             "Move": "MOVE_HEX",
-            "Level": 18
+            "Level": "16"
         },
         {
             "Move": "MOVE_AGILITY",
-            "Level": 24
+            "Level": "21"
+        },
+        {
+            "Move": "MOVE_SHADOW_SNEAK",
+            "Level": "26"
         },
         {
             "Move": "MOVE_DOUBLE_HIT",
-            "Level": 30
+            "Level": "31"
         },
         {
             "Move": "MOVE_U_TURN",
-            "Level": 36
+            "Level": "36"
         },
         {
             "Move": "MOVE_DRAGON_DANCE",
-            "Level": 42
+            "Level": "41"
         },
         {
             "Move": "MOVE_PHANTOM_FORCE",
-            "Level": 48
+            "Level": "46"
         },
         {
             "Move": "MOVE_TAKE_DOWN",
-            "Level": 54
+            "Level": "51"
+        },
+        {
+            "Move": "MOVE_SHADOW_CLAW",
+            "Level": "56"
         },
         {
             "Move": "MOVE_DRAGON_RUSH",
-            "Level": 63
+            "Level": "62"
         },
         {
             "Move": "MOVE_DOUBLE_EDGE",
-            "Level": 70
+            "Level": "69"
         },
         {
             "Move": "MOVE_LAST_RESORT",
-            "Level": 78
+            "Level": "76"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_PHANTOM_FORCE",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_POUNCE",
-        "MOVE_BREAKING_SWIPE",
-        "MOVE_U_TURN",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SURF",
+        "MOVE_FLY",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_POUNCE",
+        "MOVE_CURSE",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_THUNDER",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_DRAGON_PULSE",
         "MOVE_DRAGON_TAIL",
         "MOVE_SHADOW_BALL",
-        "MOVE_DRAGON_CHEER",
-        "MOVE_PSYCHIC_FANGS",
-        "MOVE_TOXIC",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_DRACO_METEOR",
-        "MOVE_ACROBATICS",
-        "MOVE_FLY",
-        "MOVE_HEX",
-        "MOVE_TERA_BLAST",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_REFLECT",
-        "MOVE_DISABLE",
-        "MOVE_FRUSTRATION",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_DRAGON_DANCE",
-        "MOVE_SLEEP_TALK",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_BODY_SLAM",
-        "MOVE_SWIFT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SUCKER_PUNCH",
-        "MOVE_HYPER_BEAM",
-        "MOVE_BATON_PASS",
         "MOVE_OUTRAGE",
-        "MOVE_THUNDER",
-        "MOVE_TAKE_DOWN",
-        "MOVE_THUNDERBOLT",
-        "MOVE_FACADE",
+        "MOVE_REFLECT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_DRAGON_CHEER",
         "MOVE_WILL_O_WISP",
-        "MOVE_ENDURE",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SURF",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
         "MOVE_REST",
-        "MOVE_CURSE",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_FLAMETHROWER",
-        "MOVE_STEEL_WING",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_DISABLE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_DRACO_METEOR",
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_TOXIC",
+        "MOVE_FRUSTRATION",
+        "MOVE_BODY_SLAM",
         "MOVE_THIEF",
-        "MOVE_DRAGON_CLAW"
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_STEEL_WING",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_FLAMETHROWER",
+        "MOVE_BREAKING_SWIPE",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": [
         {
@@ -169,7 +177,7 @@
             "Moves": [
                 "MOVE_DRAGON_DANCE",
                 "MOVE_DRAGON_DARTS",
-                "MOVE_PHANTOM_FORCE",
+                "MOVE_SHADOW_CLAW",
                 "MOVE_FIRE_BLAST"
             ],
             "Ability": "ABILITY_CLEAR_BODY",
@@ -219,7 +227,7 @@
         {
             "Moves": [
                 "MOVE_DRAGON_DARTS",
-                "MOVE_PHANTOM_FORCE",
+                "MOVE_SHADOW_CLAW",
                 "MOVE_DRAGON_DANCE",
                 "MOVE_PROTECT"
             ],
@@ -304,7 +312,7 @@
         {
             "Moves": [
                 "MOVE_DRAGON_DARTS",
-                "MOVE_PHANTOM_FORCE",
+                "MOVE_SHADOW_CLAW",
                 "MOVE_STEEL_WING",
                 "MOVE_DRAGON_DANCE"
             ],
@@ -371,10 +379,10 @@
         },
         {
             "Moves": [
+                "MOVE_DRAGON_DARTS",
                 "MOVE_PHANTOM_FORCE",
                 "MOVE_OUTRAGE",
-                "MOVE_DRAGON_DARTS",
-                "MOVE_FIRE_BLAST"
+                "MOVE_SHADOW_SNEAK"
             ],
             "Ability": "ABILITY_CLEAR_BODY",
             "Item": "ITEM_CHOICE_BAND",
@@ -475,7 +483,7 @@
             "Moves": [
                 "MOVE_DRAGON_DANCE",
                 "MOVE_DRAGON_DARTS",
-                "MOVE_PHANTOM_FORCE",
+                "MOVE_SHADOW_CLAW",
                 "MOVE_SUBSTITUTE"
             ],
             "Ability": "ABILITY_INFILTRATOR",
@@ -491,9 +499,9 @@
         {
             "Moves": [
                 "MOVE_DRAGON_DARTS",
-                "MOVE_SHADOW_BALL",
+                "MOVE_SHADOW_CLAW",
                 "MOVE_U_TURN",
-                "MOVE_THUNDER_WAVE"
+                "MOVE_FIRE_BLAST"
             ],
             "Ability": "ABILITY_INFILTRATOR",
             "Item": "ITEM_CHOICE_SCARF",
@@ -577,8 +585,8 @@
             "Moves": [
                 "MOVE_DRAGON_DANCE",
                 "MOVE_DRAGON_DARTS",
-                "MOVE_PHANTOM_FORCE",
-                "MOVE_SUBSTITUTE"
+                "MOVE_SHADOW_CLAW",
+                "MOVE_SHADOW_SNEAK"
             ],
             "Ability": "ABILITY_INFILTRATOR",
             "Item": "ITEM_DRAGON_FANG",
@@ -929,6 +937,57 @@
             "SourceTiers": [
                 "GEN9MONOTYPE"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_DRAGON_DARTS",
+                "MOVE_SHADOW_CLAW",
+                "MOVE_U_TURN",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "Item": "ITEM_FOCUS_SASH",
+            "Ability": "ABILITY_INFILTRATOR",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8BATTLESTADIUMSINGLES"
+            ],
+            "Name": "Physical Attacker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SHADOW_CLAW",
+                "MOVE_FLY",
+                "MOVE_DRAGON_DARTS",
+                "MOVE_DRAGON_DANCE"
+            ],
+            "Item": "ITEM_LUM_BERRY",
+            "Ability": "ABILITY_CLEAR_BODY",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8VGC2021"
+            ],
+            "Name": "Offensive",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_DRAGON_DARTS",
+                "MOVE_SHADOW_CLAW",
+                "MOVE_FLY",
+                "MOVE_PROTECT"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_CLEAR_BODY",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8VGC2020"
+            ],
+            "Name": "Offensive",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

@@ -63,58 +63,56 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ACID_SPRAY",
-        "MOVE_AFTER_YOU",
-        "MOVE_BATON_PASS",
-        "MOVE_BULLET_SEED",
-        "MOVE_CHARM",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_ENCORE",
-        "MOVE_ENDEAVOR",
-        "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_FACADE",
-        "MOVE_FLAIL",
-        "MOVE_FLING",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_GRASS_KNOT",
-        "MOVE_GRASSY_GLIDE",
-        "MOVE_GRASSY_TERRAIN",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_INGRAIN",
-        "MOVE_LEAF_STORM",
-        "MOVE_LEECH_SEED",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_PETAL_BLIZZARD",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_POLLEN_PUFF",
-        "MOVE_PROTECT",
         "MOVE_RAZOR_LEAF",
-        "MOVE_REST",
-        "MOVE_SAFEGUARD",
-        "MOVE_SEED_BOMB",
-        "MOVE_SLEEP_TALK",
+        "MOVE_ENCORE",
+        "MOVE_CHARM",
+        "MOVE_LEECH_SEED",
         "MOVE_SLUDGE_BOMB",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SOLAR_BLADE",
+        "MOVE_GRASSY_TERRAIN",
+        "MOVE_ENDURE",
+        "MOVE_APPLE_ACID",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
         "MOVE_STRENGTH_SAP",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWORDS_DANCE",
+        "MOVE_POLLEN_PUFF",
+        "MOVE_WEATHER_BALL",
+        "MOVE_MOONBLAST",
+        "MOVE_UPROAR",
+        "MOVE_ENDEAVOR",
         "MOVE_SYNTHESIS",
         "MOVE_TEETER_DANCE",
-        "MOVE_TERA_BLAST",
-        "MOVE_TICKLE",
-        "MOVE_TOXIC",
-        "MOVE_TRAILBLAZE",
-        "MOVE_TRIPLE_AXEL",
-        "MOVE_UPROAR",
+        "MOVE_BULLET_SEED",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_AFTER_YOU",
+        "MOVE_INGRAIN",
+        "MOVE_GRASSY_GLIDE",
         "MOVE_VENOSHOCK",
-        "MOVE_WEATHER_BALL"
+        "MOVE_TICKLE",
+        "MOVE_FLING",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_FLAIL",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_SAFEGUARD",
+        "MOVE_ACID_SPRAY",
+        "MOVE_SEED_BOMB",
+        "MOVE_TRIPLE_AXEL",
+        "MOVE_SLEEP_TALK",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_TRAILBLAZE",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_TOXIC",
+        "MOVE_ENERGY_BALL"
     ],
     "CompetitiveSets": [
         {
@@ -188,9 +186,9 @@
         {
             "Moves": [
                 "MOVE_QUIVER_DANCE",
-                "MOVE_GIGA_DRAIN",
+                "MOVE_APPLE_ACID",
                 "MOVE_STRENGTH_SAP",
-                "MOVE_SAFEGUARD"
+                "MOVE_DRAINING_KISS"
             ],
             "Ability": "ABILITY_CHLOROPHYLL",
             "Item": "ITEM_GRASSIUM_Z",
@@ -286,6 +284,40 @@
             "SourceTiers": [
                 "GEN9ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_FIERY_DANCE",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_MOONBLAST"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_CHLOROPHYLL",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Bulky Quiver Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_QUIVER_DANCE",
+                "MOVE_STRENGTH_SAP",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_DRAINING_KISS"
+            ],
+            "Item": "ITEM_KEE_BERRY",
+            "Ability": "ABILITY_CHLOROPHYLL",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8ZU"
+            ],
+            "Name": "Quiver Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

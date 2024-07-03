@@ -3,123 +3,138 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_GROWL",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_CONFUSION",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_DOUBLE_TEAM",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_DISARMING_VOICE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_HYPNOSIS",
-            "Level": 9
-        },
-        {
-            "Move": "MOVE_DRAINING_KISS",
-            "Level": 12
+            "Level": "1"
         },
         {
             "Move": "MOVE_TELEPORT",
-            "Level": 15
+            "Level": "1"
         },
         {
-            "Move": "MOVE_PSYBEAM",
-            "Level": 18
+            "Move": "MOVE_CONFUSION",
+            "Level": "4"
         },
         {
-            "Move": "MOVE_LIFE_DEW",
-            "Level": 23
+            "Move": "MOVE_DOUBLE_TEAM",
+            "Level": "6"
         },
         {
-            "Move": "MOVE_CHARM",
-            "Level": 28
+            "Move": "MOVE_TELEPORT",
+            "Level": "9"
         },
         {
-            "Move": "MOVE_CALM_MIND",
-            "Level": 33
+            "Move": "MOVE_DISARMING_VOICE",
+            "Level": "11"
         },
         {
-            "Move": "MOVE_PSYCHIC",
-            "Level": 38
+            "Move": "MOVE_LUCKY_CHANT",
+            "Level": "14"
+        },
+        {
+            "Move": "MOVE_MAGICAL_LEAF",
+            "Level": "17"
         },
         {
             "Move": "MOVE_HEAL_PULSE",
-            "Level": 43
+            "Level": "19"
         },
         {
-            "Move": "MOVE_DREAM_EATER",
-            "Level": 48
+            "Move": "MOVE_DRAINING_KISS",
+            "Level": "23"
+        },
+        {
+            "Move": "MOVE_CALM_MIND",
+            "Level": "26"
+        },
+        {
+            "Move": "MOVE_PSYCHIC",
+            "Level": "30"
+        },
+        {
+            "Move": "MOVE_IMPRISON",
+            "Level": "33"
         },
         {
             "Move": "MOVE_FUTURE_SIGHT",
-            "Level": 53
+            "Level": "37"
+        },
+        {
+            "Move": "MOVE_CHARM",
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_HYPNOSIS",
+            "Level": "44"
+        },
+        {
+            "Move": "MOVE_RECOVER",
+            "Level": "47"
+        },
+        {
+            "Move": "MOVE_DREAM_EATER",
+            "Level": "51"
+        },
+        {
+            "Move": "MOVE_STORED_POWER",
+            "Level": "55"
         }
     ],
     "TutorMoves": [
-        "MOVE_THUNDER_PUNCH",
-        "MOVE_CALM_MIND",
-        "MOVE_PSYSHOCK",
-        "MOVE_TAUNT",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_ICE_BEAM",
-        "MOVE_PAIN_SPLIT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_CHARGE_BEAM",
-        "MOVE_FIRE_PUNCH",
-        "MOVE_DISARMING_VOICE",
-        "MOVE_FUTURE_SIGHT",
-        "MOVE_ICE_PUNCH",
-        "MOVE_PSYCHIC_TERRAIN",
-        "MOVE_IMPRISON",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_SHADOW_BALL",
-        "MOVE_TERA_BLAST",
-        "MOVE_TRIPLE_AXEL",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_FLING",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REFLECT",
-        "MOVE_TRICK",
-        "MOVE_SUBSTITUTE",
-        "MOVE_GRASS_KNOT",
-        "MOVE_METRONOME",
-        "MOVE_HELPING_HAND",
-        "MOVE_ICY_WIND",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHIC",
-        "MOVE_CHARM",
-        "MOVE_DRAINING_KISS",
-        "MOVE_SLEEP_TALK",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_EXPANDING_FORCE",
-        "MOVE_BODY_SLAM",
-        "MOVE_TRICK_ROOM",
-        "MOVE_SWIFT",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_SUNNY_DAY",
-        "MOVE_PSYCH_UP",
-        "MOVE_HYPER_BEAM",
-        "MOVE_THUNDERBOLT",
-        "MOVE_KNOCK_OFF",
-        "MOVE_FACADE",
-        "MOVE_WILL_O_WISP",
-        "MOVE_ENDURE",
-        "MOVE_MISTY_TERRAIN",
-        "MOVE_REST",
-        "MOVE_SKILL_SWAP",
         "MOVE_ENCORE",
+        "MOVE_METRONOME",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_HELPING_HAND",
+        "MOVE_TAUNT",
+        "MOVE_TRICK",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_MISTY_TERRAIN",
+        "MOVE_SKILL_SWAP",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SHADOW_BALL",
+        "MOVE_REFLECT",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PSYCHIC_TERRAIN",
+        "MOVE_FLING",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_HYPER_BEAM",
+        "MOVE_REST",
+        "MOVE_ICE_PUNCH",
+        "MOVE_ICE_BEAM",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_TRIPLE_AXEL",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_HYPER_VOICE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
         "MOVE_PSYBEAM",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_PSYCH_UP",
+        "MOVE_BODY_SLAM",
         "MOVE_THIEF",
-        "MOVE_STORED_POWER",
-        "MOVE_HYPER_VOICE"
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_PSYSHOCK",
+        "MOVE_CONFUSE_RAY"
     ],
     "CompetitiveSets": []
 }

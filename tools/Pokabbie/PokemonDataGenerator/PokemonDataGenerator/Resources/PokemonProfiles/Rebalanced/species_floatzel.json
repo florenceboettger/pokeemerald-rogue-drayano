@@ -2,125 +2,145 @@
     "Species": "SPECIES_FLOATZEL",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_GROWL",
-            "Level": 1
+            "Move": "MOVE_FAKE_OUT",
+            "Level": "0"
         },
         {
-            "Move": "MOVE_QUICK_ATTACK",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_CRUNCH",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_ICE_FANG",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_SOAK",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_WATER_GUN",
-            "Level": 15
+            "Move": "MOVE_FAKE_OUT",
+            "Level": "1"
         },
         {
             "Move": "MOVE_BITE",
-            "Level": 18
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ICE_FANG",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_CRUNCH",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SONIC_BOOM",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_WATER_SPORT",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": "4"
+        },
+        {
+            "Move": "MOVE_WATER_SPORT",
+            "Level": "7"
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": "11"
+        },
+        {
+            "Move": "MOVE_WATER_GUN",
+            "Level": "15"
+        },
+        {
+            "Move": "MOVE_PURSUIT",
+            "Level": "18"
         },
         {
             "Move": "MOVE_SWIFT",
-            "Level": 21
+            "Level": "21"
         },
         {
             "Move": "MOVE_AQUA_JET",
-            "Level": 24
+            "Level": "24"
         },
         {
             "Move": "MOVE_DOUBLE_HIT",
-            "Level": 29
+            "Level": "29"
         },
         {
             "Move": "MOVE_WHIRLPOOL",
-            "Level": 35
+            "Level": "35"
         },
         {
-            "Move": "MOVE_LIQUIDATION",
-            "Level": 41
+            "Move": "MOVE_RAZOR_WIND",
+            "Level": "41"
         },
         {
             "Move": "MOVE_AQUA_TAIL",
-            "Level": 46
+            "Level": "46"
         },
         {
             "Move": "MOVE_AGILITY",
-            "Level": 51
+            "Level": "51"
         },
         {
             "Move": "MOVE_HYDRO_PUMP",
-            "Level": 57
-        },
-        {
-            "Move": "MOVE_WAVE_CRASH",
-            "Level": 62
+            "Level": "57"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_TAUNT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_ICE_BEAM",
-        "MOVE_FOCUS_PUNCH",
-        "MOVE_WATER_PULSE",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
+        "MOVE_ICE_SPINNER",
         "MOVE_DIG",
-        "MOVE_PURSUIT",
-        "MOVE_SURF",
-        "MOVE_FLIP_TURN",
-        "MOVE_ROCK_TOMB",
-        "MOVE_ICE_PUNCH",
-        "MOVE_CRUNCH",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_SNARL",
-        "MOVE_LIQUIDATION",
-        "MOVE_TERA_BLAST",
-        "MOVE_FLING",
-        "MOVE_RAIN_DANCE",
-        "MOVE_SUBSTITUTE",
         "MOVE_METRONOME",
         "MOVE_ROAR",
-        "MOVE_HELPING_HAND",
-        "MOVE_ICY_WIND",
-        "MOVE_PROTECT",
-        "MOVE_SWITCHEROO",
-        "MOVE_SLEEP_TALK",
         "MOVE_MUDDY_WATER",
-        "MOVE_BRICK_BREAK",
-        "MOVE_CUT",
-        "MOVE_BLIZZARD",
-        "MOVE_SCARY_FACE",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_ICE_FANG",
-        "MOVE_BODY_SLAM",
-        "MOVE_BULK_UP",
-        "MOVE_SWIFT",
-        "MOVE_HYPER_BEAM",
-        "MOVE_BATON_PASS",
-        "MOVE_TAKE_DOWN",
-        "MOVE_ICE_SPINNER",
-        "MOVE_MUD_SLAP",
-        "MOVE_CHILLING_WATER",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_TAUNT",
+        "MOVE_SNARL",
+        "MOVE_WATER_PULSE",
+        "MOVE_TAKE_DOWN",
+        "MOVE_ROCK_TOMB",
         "MOVE_LOW_KICK",
-        "MOVE_REST",
-        "MOVE_WHIRLPOOL",
+        "MOVE_MUD_SLAP",
+        "MOVE_POWER_UP_PUNCH",
+        "MOVE_CHILLING_WATER",
         "MOVE_FOCUS_BLAST",
-        "MOVE_THIEF",
+        "MOVE_BULK_UP",
+        "MOVE_FLING",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_FLIP_TURN",
+        "MOVE_LIQUIDATION",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SURF",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_ICE_PUNCH",
+        "MOVE_ICE_BEAM",
+        "MOVE_TAIL_SLAP",
+        "MOVE_SLEEP_TALK",
         "MOVE_WATERFALL",
-        "MOVE_LOW_SWEEP"
+        "MOVE_RAIN_DANCE",
+        "MOVE_SCARY_FACE",
+        "MOVE_TERA_BLAST",
+        "MOVE_CUT",
+        "MOVE_PROTECT",
+        "MOVE_LUNGE",
+        "MOVE_BODY_SLAM",
+        "MOVE_LOW_SWEEP",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_SWITCHEROO",
+        "MOVE_BLIZZARD",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_BRICK_BREAK"
     ],
     "CompetitiveSets": [
         {
@@ -227,12 +247,12 @@
         },
         {
             "Moves": [
-                "MOVE_LIQUIDATION",
+                "MOVE_POWER_UP_PUNCH",
                 "MOVE_ICE_PUNCH",
                 "MOVE_PURSUIT",
                 "MOVE_AQUA_JET"
             ],
-            "Ability": "ABILITY_WATER_VEIL",
+            "Ability": "ABILITY_TECHNICIAN",
             "Item": "ITEM_CHOICE_BAND",
             "Nature": "NATURE_JOLLY",
             "HiddenPower": null,
@@ -266,10 +286,10 @@
                 "MOVE_HIDDEN_POWER",
                 "MOVE_AQUA_JET"
             ],
-            "Ability": "ABILITY_SWIFT_SWIM",
+            "Ability": "ABILITY_TECHNICIAN",
             "Item": "ITEM_LIFE_ORB",
             "Nature": "NATURE_NAIVE",
-            "HiddenPower": "TYPE_ELECTRIC",
+            "HiddenPower": "TYPEELECTRIC",
             "TeraType": null,
             "Name": "Mixed Attacker",
             "SourceTiers": [

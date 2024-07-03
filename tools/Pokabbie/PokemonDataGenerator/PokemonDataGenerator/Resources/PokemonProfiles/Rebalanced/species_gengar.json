@@ -79,73 +79,66 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ACID_SPRAY",
-        "MOVE_BODY_SLAM",
-        "MOVE_BRICK_BREAK",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_COUNTER",
-        "MOVE_CURSE",
-        "MOVE_DARK_PULSE",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_DISABLE",
-        "MOVE_DRAIN_PUNCH",
         "MOVE_ENCORE",
+        "MOVE_METRONOME",
+        "MOVE_SLUDGE_BOMB",
         "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_FACADE",
-        "MOVE_FIRE_PUNCH",
-        "MOVE_FLING",
-        "MOVE_FOCUS_BLAST",
-        "MOVE_FOCUS_PUNCH",
-        "MOVE_FOUL_PLAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GIGA_IMPACT",
+        "MOVE_THUNDER",
+        "MOVE_TAUNT",
+        "MOVE_TRICK",
+        "MOVE_TOXIC_SPIKES",
+        "MOVE_NASTY_PLOT",
+        "MOVE_SKILL_SWAP",
+        "MOVE_KNOCK_OFF",
+        "MOVE_BRICK_BREAK",
+        "MOVE_POISON_JAB",
+        "MOVE_PHANTOM_FORCE",
         "MOVE_GUNK_SHOT",
-        "MOVE_HAZE",
-        "MOVE_HEX",
-        "MOVE_HIDDEN_POWER",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_FOUL_PLAY",
+        "MOVE_WILL_O_WISP",
+        "MOVE_POLTERGEIST",
+        "MOVE_COUNTER",
+        "MOVE_SELF_DESTRUCT",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_VENOSHOCK",
+        "MOVE_FLING",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_SHADOW_CLAW",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
         "MOVE_HYPER_BEAM",
         "MOVE_ICE_PUNCH",
-        "MOVE_ICY_WIND",
-        "MOVE_IMPRISON",
-        "MOVE_KNOCK_OFF",
-        "MOVE_METRONOME",
-        "MOVE_NASTY_PLOT",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_PAIN_SPLIT",
-        "MOVE_PHANTOM_FORCE",
-        "MOVE_POISON_JAB",
-        "MOVE_POLTERGEIST",
-        "MOVE_PROTECT",
-        "MOVE_PSYCH_UP",
-        "MOVE_PSYCHIC",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
-        "MOVE_SCARY_FACE",
-        "MOVE_SELF_DESTRUCT",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SHADOW_CLAW",
-        "MOVE_SKILL_SWAP",
+        "MOVE_HAZE",
+        "MOVE_ACID_SPRAY",
+        "MOVE_DISABLE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_FIRE_PUNCH",
         "MOVE_SKITTER_SMACK",
         "MOVE_SLEEP_TALK",
-        "MOVE_SLUDGE_BOMB",
-        "MOVE_SLUDGE_WAVE",
-        "MOVE_SPITE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_TAUNT",
-        "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
-        "MOVE_THUNDER",
-        "MOVE_THUNDER_PUNCH",
-        "MOVE_THUNDER_WAVE",
         "MOVE_THUNDERBOLT",
+        "MOVE_RAIN_DANCE",
+        "MOVE_SCARY_FACE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_PSYCH_UP",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_BODY_SLAM",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_IMPRISON",
+        "MOVE_DAZZLING_GLEAM",
         "MOVE_TOXIC",
-        "MOVE_TOXIC_SPIKES",
-        "MOVE_TRICK",
-        "MOVE_TRICK_ROOM",
-        "MOVE_VENOSHOCK",
-        "MOVE_WILL_O_WISP"
+        "MOVE_ENERGY_BALL"
     ],
     "CompetitiveSets": [
         {
@@ -198,75 +191,6 @@
             "SourceTiers": [
                 "GEN6UBERS",
                 "GEN6ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HEX",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_PROTECT",
-                "MOVE_WILL_O_WISP"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Hex Trapper",
-            "SourceTiers": [
-                "GEN6UBERS"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DESTINY_BOND",
-                "MOVE_SLUDGE_WAVE",
-                "MOVE_SHADOW_BALL",
-                "MOVE_TAUNT"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive Trapper",
-            "SourceTiers": [
-                "GEN6UBERS"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PERISH_SONG",
-                "MOVE_PROTECT",
-                "MOVE_TAUNT",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Perish Trapper (Rick Gastly)",
-            "SourceTiers": [
-                "GEN6UBERS",
-                "GEN6ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_DESTINY_BOND",
-                "MOVE_SLUDGE_WAVE",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6UBERS"
             ]
         },
         {
@@ -368,40 +292,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Offensive Support",
-            "SourceTiers": [
-                "GEN6DOUBLESOU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_SHADOW_BALL",
-                "MOVE_WILL_O_WISP",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Special Attacker",
-            "SourceTiers": [
-                "GEN6DOUBLESOU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_PROTECT",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_DISABLE"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6DOUBLESOU"
             ]
@@ -527,92 +417,6 @@
         },
         {
             "Moves": [
-                "MOVE_DESTINY_BOND",
-                "MOVE_WILL_O_WISP",
-                "MOVE_SHADOW_BALL",
-                "MOVE_SLUDGE_BOMB"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Bulky Trapper",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DESTINY_BOND",
-                "MOVE_SHADOW_BALL",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_TAUNT"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive Trapper",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PERISH_SONG",
-                "MOVE_PROTECT",
-                "MOVE_SUBSTITUTE",
-                "MOVE_SHADOW_BALL"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Perish Trapper",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES",
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HYPNOSIS",
-                "MOVE_HEX",
-                "MOVE_DESTINY_BOND",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "CasinoGar",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DESTINY_BOND",
-                "MOVE_SHADOW_BALL",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_HEX"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_DESTINY_BOND",
@@ -681,57 +485,6 @@
         },
         {
             "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_WILL_O_WISP",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Mega Utility",
-            "SourceTiers": [
-                "GEN6BATTLESPOTDOUBLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_PERISH_SONG",
-                "MOVE_SUBSTITUTE",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Perish Trap",
-            "SourceTiers": [
-                "GEN6BATTLESPOTDOUBLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_PROTECT",
-                "MOVE_WILL_O_WISP",
-                "MOVE_SHADOW_BALL"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6VGC2016"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_SHADOW_BALL",
                 "MOVE_WILL_O_WISP",
@@ -761,7 +514,6 @@
             "TeraType": null,
             "Name": "Standard",
             "SourceTiers": [
-                "GEN61V1",
                 "GEN61V1"
             ]
         },
@@ -779,7 +531,6 @@
             "TeraType": null,
             "Name": "Counter",
             "SourceTiers": [
-                "GEN61V1",
                 "GEN61V1"
             ]
         },
@@ -836,40 +587,6 @@
         },
         {
             "Moves": [
-                "MOVE_SLUDGE_WAVE",
-                "MOVE_SHADOW_BALL",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive Trapper",
-            "SourceTiers": [
-                "GEN6ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_DESTINY_BOND",
-                "MOVE_TAUNT",
-                "MOVE_SLUDGE_WAVE"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_DESTINY_BOND",
@@ -892,7 +609,7 @@
                 "MOVE_ICY_WIND",
                 "MOVE_THUNDER"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_GENGARITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -909,7 +626,7 @@
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_SUBSTITUTE"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_GENGARITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -926,7 +643,7 @@
                 "MOVE_SLUDGE_WAVE",
                 "MOVE_SHADOW_BALL"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_GENGARITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -940,78 +657,10 @@
             "Moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_WAVE",
-                "MOVE_ICY_WIND",
-                "MOVE_THUNDER"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive Trapper",
-            "SourceTiers": [
-                "GEN7UBERS"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HEX",
-                "MOVE_WILL_O_WISP",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Hex",
-            "SourceTiers": [
-                "GEN7UBERS"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_TAUNT",
-                "MOVE_DESTINY_BOND",
-                "MOVE_SLUDGE_WAVE",
-                "MOVE_SHADOW_BALL"
+                "MOVE_AURA_SPHERE"
             ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Utility Trapper",
-            "SourceTiers": [
-                "GEN7UBERS"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_SLUDGE_WAVE",
-                "MOVE_DESTINY_BOND",
-                "MOVE_SLUDGE_BOMB"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7UBERS"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_SLUDGE_WAVE",
-                "MOVE_TAUNT",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_LIFE_ORB",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1025,10 +674,10 @@
             "Moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_WAVE",
-                "MOVE_FOCUS_BLAST",
+                "MOVE_AURA_SPHERE",
                 "MOVE_TRICK"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_CHOICE_SPECS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1097,7 +746,7 @@
                 "MOVE_DESTINY_BOND",
                 "MOVE_ICY_WIND"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_GENGARITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1129,9 +778,9 @@
                 "MOVE_HYPNOSIS",
                 "MOVE_SUBSTITUTE",
                 "MOVE_HEX",
-                "MOVE_FOCUS_BLAST"
+                "MOVE_AURA_SPHERE"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_GENGARITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1139,91 +788,6 @@
             "Name": "Casinogar (Sleep Trapper)",
             "SourceTiers": [
                 "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_WILL_O_WISP",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_HEX",
-                "MOVE_DESTINY_BOND"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Bulky Trapper",
-            "SourceTiers": [
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_DESTINY_BOND",
-                "MOVE_ICY_WIND"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive Trapper",
-            "SourceTiers": [
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HYPNOSIS",
-                "MOVE_SUBSTITUTE",
-                "MOVE_HEX",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Casinogar (Sleep Trapper)",
-            "SourceTiers": [
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_HEX",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_PROTECT",
-                "MOVE_SHADOW_BALL",
-                "MOVE_HYPNOSIS"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTDOUBLES"
             ]
         },
         {
@@ -1280,23 +844,6 @@
         {
             "Moves": [
                 "MOVE_SHADOW_BALL",
-                "MOVE_PROTECT",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_PERISH_SONG"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7VGC2018"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_DESTINY_BOND",
                 "MOVE_ICY_WIND"
@@ -1318,7 +865,7 @@
                 "MOVE_TAUNT",
                 "MOVE_SUBSTITUTE"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_GENGARITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1335,7 +882,7 @@
                 "MOVE_WILL_O_WISP",
                 "MOVE_TAUNT"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_GENGARITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1358,74 +905,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Perish Trapper",
-            "SourceTiers": [
-                "GEN7ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_SLUDGE_WAVE",
-                "MOVE_TAUNT",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Offensive Trapper",
-            "SourceTiers": [
-                "GEN7ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_HEX",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_WILL_O_WISP",
-                "MOVE_TAUNT"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Status Inducer",
-            "SourceTiers": [
-                "GEN7ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_PERISH_SONG",
-                "MOVE_SUBSTITUTE",
-                "MOVE_DISABLE"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Perish Trapper",
-            "SourceTiers": [
-                "GEN7ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SHADOW_BALL",
-                "MOVE_DESTINY_BOND",
-                "MOVE_SLUDGE_BOMB",
-                "MOVE_SLUDGE_WAVE"
-            ],
-            "Ability": "ABILITY_SHADOW_TAG",
-            "Item": "ITEM_GENGARITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7ANYTHINGGOES"
             ]
@@ -1469,10 +948,10 @@
             "Moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_WAVE",
-                "MOVE_FOCUS_BLAST",
+                "MOVE_AURA_SPHERE",
                 "MOVE_TRICK"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_CHOICE_SCARF",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1487,10 +966,10 @@
             "Moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_WAVE",
-                "MOVE_FOCUS_BLAST",
+                "MOVE_AURA_SPHERE",
                 "MOVE_TAUNT"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_LIFE_ORB",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1522,9 +1001,9 @@
                 "MOVE_SUBSTITUTE",
                 "MOVE_NASTY_PLOT",
                 "MOVE_SHADOW_BALL",
-                "MOVE_FOCUS_BLAST"
+                "MOVE_AURA_SPHERE"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_BLACK_SLUDGE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1555,10 +1034,10 @@
             "Moves": [
                 "MOVE_NASTY_PLOT",
                 "MOVE_SHADOW_BALL",
-                "MOVE_FOCUS_BLAST",
+                "MOVE_AURA_SPHERE",
                 "MOVE_SUBSTITUTE"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_GHOSTIUM_Z",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1626,7 +1105,7 @@
                 "MOVE_HEX",
                 "MOVE_SLUDGE_WAVE"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_LIFE_ORB",
             "Nature": "NATURE_MODEST",
             "HiddenPower": null,
@@ -1692,10 +1171,10 @@
             "Moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_BOMB",
-                "MOVE_FOCUS_BLAST",
+                "MOVE_AURA_SPHERE",
                 "MOVE_DAZZLING_GLEAM"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_CHOICE_SCARF",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1709,10 +1188,10 @@
             "Moves": [
                 "MOVE_SLUDGE_WAVE",
                 "MOVE_SHADOW_BALL",
-                "MOVE_FOCUS_BLAST",
+                "MOVE_AURA_SPHERE",
                 "MOVE_THUNDERBOLT"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_CHOICE_SPECS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1729,7 +1208,7 @@
                 "MOVE_FOCUS_BLAST",
                 "MOVE_DAZZLING_GLEAM"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_CHOICE_SCARF",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1762,10 +1241,10 @@
             "Moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_SLUDGE_WAVE",
-                "MOVE_FOCUS_BLAST",
+                "MOVE_AURA_SPHERE",
                 "MOVE_DAZZLING_GLEAM"
             ],
-            "Ability": "ABILITY_CURSED_BODY",
+            "Ability": "ABILITY_LEVITATE",
             "Item": "ITEM_CHOICE_SPECS",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -1997,6 +1476,125 @@
             "SourceTiers": [
                 "GEN9NATIONALDEXMONOTYPE"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SHADOW_BALL",
+                "MOVE_SLUDGE_WAVE",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_TRICK"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_LEVITATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7MONOTYPE"
+            ],
+            "Name": "Choice Scarf Attacker (Poison)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_SHADOW_BALL",
+                "MOVE_SUBSTITUTE",
+                "MOVE_PROTECT"
+            ],
+            "Item": "ITEM_GENGARITE",
+            "Ability": "ABILITY_LEVITATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7VGC2019"
+            ],
+            "Name": "Shadow Tag Utilizer",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SHADOW_BALL",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_SELF_DESTRUCT"
+            ],
+            "Item": "ITEM_SITRUS_BERRY",
+            "Ability": "ABILITY_LEVITATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7LETSGOOU"
+            ],
+            "Name": "Wallbreaker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SHADOW_BALL",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_THUNDERBOLT",
+                "MOVE_WILL_O_WISP"
+            ],
+            "Item": "ITEM_FOCUS_SASH",
+            "Ability": "ABILITY_LEVITATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7LETSGOOU"
+            ],
+            "Name": "Special Attacker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_SHADOW_BALL",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_SLUDGE_WAVE"
+            ],
+            "Item": "ITEM_FIGHTINIUM_Z",
+            "Ability": "ABILITY_LEVITATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEXMONOTYPE"
+            ],
+            "Name": "Nasty Plot (Ghost)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SHADOW_BALL",
+                "MOVE_SLUDGE_WAVE",
+                "MOVE_AURA_SPHERE",
+                "MOVE_DAZZLING_GLEAM"
+            ],
+            "Item": "ITEM_CHOICE_SPECS",
+            "Ability": "ABILITY_LEVITATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEXMONOTYPE"
+            ],
+            "Name": "Choice Specs (Poison)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_SHADOW_BALL",
+                "MOVE_AURA_SPHERE",
+                "MOVE_SLUDGE_WAVE"
+            ],
+            "Item": "ITEM_GHOSTIUM_Z",
+            "Ability": "ABILITY_CURSED_BODY",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEXMONOTYPE"
+            ],
+            "Name": "Nasty Plot (Poison)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

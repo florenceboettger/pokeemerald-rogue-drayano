@@ -2,91 +2,117 @@
     "Species": "SPECIES_CLOBBOPUS",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_LEER",
-            "Level": 1
+            "Move": "MOVE_ROCK_SMASH",
+            "Level": "1"
         },
         {
-            "Move": "MOVE_ROCK_SMASH",
-            "Level": 1
+            "Move": "MOVE_LEER",
+            "Level": "1"
         },
         {
             "Move": "MOVE_FEINT",
-            "Level": 5
+            "Level": "4"
+        },
+        {
+            "Move": "MOVE_BUBBLE",
+            "Level": "8"
         },
         {
             "Move": "MOVE_BIND",
-            "Level": 10
+            "Level": "12"
         },
         {
             "Move": "MOVE_DETECT",
-            "Level": 15
+            "Level": "15"
         },
         {
             "Move": "MOVE_BRICK_BREAK",
-            "Level": 20
+            "Level": "20"
         },
         {
             "Move": "MOVE_BULK_UP",
-            "Level": 25
+            "Level": "24"
+        },
+        {
+            "Move": "MOVE_AQUA_JET",
+            "Level": "28"
         },
         {
             "Move": "MOVE_SUBMISSION",
-            "Level": 30
+            "Level": "32"
         },
         {
             "Move": "MOVE_TAUNT",
-            "Level": 35
+            "Level": "35"
         },
         {
             "Move": "MOVE_REVERSAL",
-            "Level": 40
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_MACH_PUNCH",
+            "Level": "44"
         },
         {
             "Move": "MOVE_SUPERPOWER",
-            "Level": 45
+            "Level": "48"
         }
     ],
     "TutorMoves": [
-        "MOVE_CLOSE_COMBAT",
-        "MOVE_TAUNT",
-        "MOVE_PAIN_SPLIT",
-        "MOVE_SEISMIC_TOSS",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
-        "MOVE_CIRCLE_THROW",
-        "MOVE_ROUND",
-        "MOVE_COACHING",
-        "MOVE_ICE_PUNCH",
-        "MOVE_MUD_SHOT",
-        "MOVE_TOXIC",
         "MOVE_SOAK",
-        "MOVE_PAYBACK",
-        "MOVE_LIQUIDATION",
-        "MOVE_MEGA_PUNCH",
-        "MOVE_BRINE",
-        "MOVE_FRUSTRATION",
-        "MOVE_SUBSTITUTE",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
         "MOVE_MUDDY_WATER",
-        "MOVE_BRICK_BREAK",
-        "MOVE_REVENGE",
-        "MOVE_REVERSAL",
-        "MOVE_ATTRACT",
-        "MOVE_BODY_SLAM",
-        "MOVE_BULK_UP",
-        "MOVE_WORK_UP",
-        "MOVE_SUCKER_PUNCH",
-        "MOVE_RETALIATE",
-        "MOVE_SUPERPOWER",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
+        "MOVE_PAYBACK",
+        "MOVE_WORK_UP",
+        "MOVE_REVENGE",
+        "MOVE_CIRCLE_THROW",
+        "MOVE_ATTRACT",
+        "MOVE_POWER_UP_PUNCH",
+        "MOVE_RETALIATE",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_FLIP_TURN",
+        "MOVE_LIQUIDATION",
+        "MOVE_SUBSTITUTE",
         "MOVE_REST",
         "MOVE_DIVE",
-        "MOVE_POWER_UP_PUNCH",
-        "MOVE_FOCUS_BLAST",
-        "MOVE_SNORE",
-        "MOVE_WATERFALL"
+        "MOVE_BRINE",
+        "MOVE_ICE_PUNCH",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_WATERFALL",
+        "MOVE_SEISMIC_TOSS",
+        "MOVE_PROTECT",
+        "MOVE_MUD_SHOT",
+        "MOVE_FRUSTRATION",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_COACHING",
+        "MOVE_MEGA_PUNCH",
+        "MOVE_TOXIC",
+        "MOVE_SUCKER_PUNCH"
     ],
-    "CompetitiveSets": []
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_AQUA_JET",
+                "MOVE_MACH_PUNCH",
+                "MOVE_FLIP_TURN",
+                "MOVE_ICE_PUNCH"
+            ],
+            "Item": "ITEM_EVIOLITE",
+            "Ability": "ABILITY_TECHNICIAN",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8LC"
+            ],
+            "Name": "Technician Pivot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        }
+    ]
 }

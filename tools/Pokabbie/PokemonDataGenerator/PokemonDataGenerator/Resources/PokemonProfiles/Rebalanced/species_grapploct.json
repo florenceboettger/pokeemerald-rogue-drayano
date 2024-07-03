@@ -3,109 +3,131 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_OCTOLOCK",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_BIND",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_LEER",
-            "Level": 1
+            "Move": "MOVE_OCTOLOCK",
+            "Level": "1"
         },
         {
             "Move": "MOVE_OCTAZOOKA",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_ROCK_SMASH",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_LEER",
+            "Level": "1"
         },
         {
             "Move": "MOVE_FEINT",
-            "Level": 1
+            "Level": "4"
+        },
+        {
+            "Move": "MOVE_BUBBLE",
+            "Level": "8"
+        },
+        {
+            "Move": "MOVE_BIND",
+            "Level": "12"
         },
         {
             "Move": "MOVE_DETECT",
-            "Level": 15
+            "Level": "16"
         },
         {
             "Move": "MOVE_BRICK_BREAK",
-            "Level": 20
+            "Level": "20"
         },
         {
             "Move": "MOVE_BULK_UP",
-            "Level": 25
+            "Level": "24"
+        },
+        {
+            "Move": "MOVE_AQUA_JET",
+            "Level": "28"
         },
         {
             "Move": "MOVE_SUBMISSION",
-            "Level": 30
+            "Level": "32"
         },
         {
             "Move": "MOVE_TAUNT",
-            "Level": 35
+            "Level": "36"
         },
         {
             "Move": "MOVE_REVERSAL",
-            "Level": 40
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_MACH_PUNCH",
+            "Level": "44"
         },
         {
             "Move": "MOVE_SUPERPOWER",
-            "Level": 45
+            "Level": "48"
         },
         {
             "Move": "MOVE_TOPSY_TURVY",
-            "Level": 50
+            "Level": "52"
+        },
+        {
+            "Move": "MOVE_BRUTAL_SWING",
+            "Level": "56"
+        },
+        {
+            "Move": "MOVE_LIQUIDATION",
+            "Level": "60"
+        },
+        {
+            "Move": "MOVE_ARM_THRUST",
+            "Level": "64"
         }
     ],
     "TutorMoves": [
-        "MOVE_CLOSE_COMBAT",
-        "MOVE_TAUNT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_DRAIN_PUNCH",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
         "MOVE_DIG",
-        "MOVE_SURF",
-        "MOVE_ROUND",
-        "MOVE_COACHING",
-        "MOVE_ICE_PUNCH",
-        "MOVE_MUD_SHOT",
-        "MOVE_SKITTER_SMACK",
-        "MOVE_TOXIC",
-        "MOVE_PAYBACK",
-        "MOVE_LIQUIDATION",
-        "MOVE_MEGA_PUNCH",
-        "MOVE_BRINE",
-        "MOVE_FRUSTRATION",
-        "MOVE_SUBSTITUTE",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
         "MOVE_MUDDY_WATER",
-        "MOVE_BRICK_BREAK",
-        "MOVE_REVENGE",
-        "MOVE_REVERSAL",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_SCARY_FACE",
-        "MOVE_ATTRACT",
-        "MOVE_STOMPING_TANTRUM",
-        "MOVE_BODY_SLAM",
-        "MOVE_BULK_UP",
-        "MOVE_WORK_UP",
-        "MOVE_SUCKER_PUNCH",
-        "MOVE_RETALIATE",
-        "MOVE_HYPER_BEAM",
-        "MOVE_SUPERPOWER",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_PAYBACK",
+        "MOVE_WORK_UP",
+        "MOVE_REVENGE",
+        "MOVE_ATTRACT",
+        "MOVE_WHIRLPOOL",
+        "MOVE_POWER_UP_PUNCH",
+        "MOVE_RETALIATE",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_FLIP_TURN",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SURF",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
         "MOVE_REST",
         "MOVE_DIVE",
-        "MOVE_POWER_UP_PUNCH",
-        "MOVE_WHIRLPOOL",
-        "MOVE_FOCUS_BLAST",
-        "MOVE_SNORE",
-        "MOVE_BRUTAL_SWING",
-        "MOVE_WATERFALL"
+        "MOVE_BRINE",
+        "MOVE_ICE_PUNCH",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SLEEP_TALK",
+        "MOVE_WATERFALL",
+        "MOVE_SCARY_FACE",
+        "MOVE_PROTECT",
+        "MOVE_MUD_SHOT",
+        "MOVE_FRUSTRATION",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_COACHING",
+        "MOVE_MEGA_PUNCH",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_TOXIC",
+        "MOVE_SUCKER_PUNCH"
     ],
     "CompetitiveSets": [
         {
@@ -141,6 +163,23 @@
             "SourceTiers": [
                 "GEN8ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_AQUA_JET",
+                "MOVE_MACH_PUNCH",
+                "MOVE_FLIP_TURN",
+                "MOVE_ICE_PUNCH"
+            ],
+            "Item": "ITEM_ASSAULT_VEST",
+            "Ability": "ABILITY_TECHNICIAN",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8UU"
+            ],
+            "Name": "Technician Pivot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

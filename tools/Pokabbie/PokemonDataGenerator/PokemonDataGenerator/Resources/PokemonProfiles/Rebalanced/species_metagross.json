@@ -63,73 +63,64 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_THUNDER_PUNCH",
-        "MOVE_AGILITY",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_ROCK_SLIDE",
-        "MOVE_PURSUIT",
-        "MOVE_COSMIC_POWER",
-        "MOVE_ROCK_TOMB",
-        "MOVE_METEOR_BEAM",
-        "MOVE_STEEL_BEAM",
-        "MOVE_PSYCHIC_FANGS",
-        "MOVE_TERA_BLAST",
+        "MOVE_STEEL_ROLLER",
         "MOVE_FLY",
-        "MOVE_RAIN_DANCE",
-        "MOVE_TRICK",
-        "MOVE_HARD_PRESS",
-        "MOVE_ROCK_POLISH",
-        "MOVE_GRASS_KNOT",
-        "MOVE_EARTHQUAKE",
-        "MOVE_ICY_WIND",
-        "MOVE_PSYCHIC",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHO_CUT",
-        "MOVE_FLASH_CANNON",
-        "MOVE_SCARY_FACE",
-        "MOVE_SWIFT",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ENDURE",
+        "MOVE_BULLDOZE",
         "MOVE_GRAVITY",
-        "MOVE_SUNNY_DAY",
-        "MOVE_PSYCH_UP",
-        "MOVE_MUD_SLAP",
-        "MOVE_FACADE",
+        "MOVE_EXPLOSION",
+        "MOVE_GYRO_BALL",
+        "MOVE_ROCK_POLISH",
+        "MOVE_ROCK_TOMB",
+        "MOVE_BODY_PRESS",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SANDSTORM",
+        "MOVE_SHADOW_CLAW",
+        "MOVE_GIGA_IMPACT",
         "MOVE_REST",
         "MOVE_STEALTH_ROCK",
-        "MOVE_STONE_EDGE",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_FOCUS_PUNCH",
-        "MOVE_STEEL_ROLLER",
-        "MOVE_SHADOW_BALL",
-        "MOVE_ICE_PUNCH",
-        "MOVE_FUTURE_SIGHT",
-        "MOVE_GYRO_BALL",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_IRON_HEAD",
-        "MOVE_HEAVY_SLAM",
-        "MOVE_BULLDOZE",
-        "MOVE_IRON_DEFENSE",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_REFLECT",
-        "MOVE_SHADOW_CLAW",
         "MOVE_AERIAL_ACE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_HONE_CLAWS",
-        "MOVE_SLEEP_TALK",
+        "MOVE_FUTURE_SIGHT",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_RAIN_DANCE",
+        "MOVE_PROTECT",
+        "MOVE_STEEL_BEAM",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_FOCUS_PUNCH",
         "MOVE_BRICK_BREAK",
-        "MOVE_METAL_CLAW",
-        "MOVE_EXPANDING_FORCE",
-        "MOVE_EXPLOSION",
+        "MOVE_PURSUIT",
+        "MOVE_STONE_EDGE",
+        "MOVE_SWIFT",
         "MOVE_STOMPING_TANTRUM",
-        "MOVE_BODY_SLAM",
-        "MOVE_SLUDGE_BOMB",
-        "MOVE_HYPER_BEAM",
-        "MOVE_BODY_PRESS",
-        "MOVE_TAKE_DOWN",
+        "MOVE_TRICK",
         "MOVE_KNOCK_OFF",
-        "MOVE_SANDSTORM",
-        "MOVE_ENDURE",
+        "MOVE_MUD_SLAP",
+        "MOVE_SHADOW_BALL",
+        "MOVE_REFLECT",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_COSMIC_POWER",
+        "MOVE_HARD_PRESS",
+        "MOVE_EARTHQUAKE",
+        "MOVE_ICE_PUNCH",
+        "MOVE_METEOR_BEAM",
+        "MOVE_SLEEP_TALK",
+        "MOVE_IRON_HEAD",
+        "MOVE_TERA_BLAST",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_HEAVY_SLAM",
+        "MOVE_HONE_CLAWS",
+        "MOVE_PSYCH_UP",
+        "MOVE_PSYCHO_CUT",
         "MOVE_TRAILBLAZE",
+        "MOVE_BODY_SLAM",
         "MOVE_PSYSHOCK"
     ],
     "CompetitiveSets": [
@@ -180,57 +171,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Assault Vest",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_METEOR_MASH",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_HAMMER_ARM",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "All-Out Attacker",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_ROCK_POLISH",
-                "MOVE_METEOR_MASH",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Rock Polish",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_METEOR_MASH",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_ICE_PUNCH",
-                "MOVE_BULLET_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN6OU"
             ]
@@ -324,40 +264,6 @@
         {
             "Moves": [
                 "MOVE_ZEN_HEADBUTT",
-                "MOVE_METEOR_MASH",
-                "MOVE_HAMMER_ARM",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Mega Physical Attacker",
-            "SourceTiers": [
-                "GEN6DOUBLESOU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_METEOR_MASH",
-                "MOVE_BULLET_PUNCH",
-                "MOVE_EARTHQUAKE"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6DOUBLESOU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_ZEN_HEADBUTT",
                 "MOVE_BULLET_PUNCH",
                 "MOVE_EARTHQUAKE",
                 "MOVE_ICE_PUNCH"
@@ -409,59 +315,6 @@
         },
         {
             "Moves": [
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_BULLET_PUNCH",
-                "MOVE_ICE_PUNCH",
-                "MOVE_EARTHQUAKE"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "All-out Attacker",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_SUBSTITUTE",
-                "MOVE_HONE_CLAWS",
-                "MOVE_EARTHQUAKE",
-                "MOVE_ZEN_HEADBUTT"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Substitute + Hone Claws",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES",
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_BULLET_PUNCH",
-                "MOVE_EARTHQUAKE",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES",
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_EARTHQUAKE",
                 "MOVE_METEOR_MASH",
                 "MOVE_ZEN_HEADBUTT",
@@ -497,23 +350,6 @@
         },
         {
             "Moves": [
-                "MOVE_IRON_HEAD",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_SUBSTITUTE",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Mega Attacker",
-            "SourceTiers": [
-                "GEN6BATTLESPOTDOUBLES"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_METEOR_MASH",
                 "MOVE_BULLET_PUNCH",
                 "MOVE_THUNDER_PUNCH",
@@ -526,7 +362,6 @@
             "TeraType": null,
             "Name": "Standard",
             "SourceTiers": [
-                "GEN61V1",
                 "GEN61V1"
             ]
         },
@@ -544,7 +379,6 @@
             "TeraType": null,
             "Name": "Defensive",
             "SourceTiers": [
-                "GEN61V1",
                 "GEN61V1"
             ]
         },
@@ -562,7 +396,6 @@
             "TeraType": null,
             "Name": "Fast",
             "SourceTiers": [
-                "GEN61V1",
                 "GEN61V1"
             ]
         },
@@ -580,24 +413,6 @@
             "TeraType": null,
             "Name": "Bulky",
             "SourceTiers": [
-                "GEN61V1",
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_METEOR_MASH",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_EARTHQUAKE",
-                "MOVE_BULLET_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
                 "GEN61V1"
             ]
         },
@@ -614,40 +429,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Physical Attacker",
-            "SourceTiers": [
-                "GEN7UBERS"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_METEOR_MASH",
-                "MOVE_ICE_PUNCH",
-                "MOVE_ROCK_SLIDE",
-                "MOVE_BULLET_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Physical Attacker",
-            "SourceTiers": [
-                "GEN7UBERS"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_METEOR_MASH",
-                "MOVE_EARTHQUAKE",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_BULLET_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN7UBERS"
             ]
@@ -808,40 +589,6 @@
         },
         {
             "Moves": [
-                "MOVE_IRON_HEAD",
-                "MOVE_ICE_PUNCH",
-                "MOVE_STOMPING_TANTRUM",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Mega Attacker",
-            "SourceTiers": [
-                "GEN7DOUBLESOU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_STOMPING_TANTRUM",
-                "MOVE_IRON_HEAD",
-                "MOVE_PROTECT",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7DOUBLESOU"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_ZEN_HEADBUTT",
                 "MOVE_BULLET_PUNCH",
                 "MOVE_EARTHQUAKE",
@@ -855,40 +602,6 @@
             "Name": "All Out Attacker",
             "SourceTiers": [
                 "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_BULLET_PUNCH",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_IRON_HEAD",
-                "MOVE_EARTHQUAKE"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PROTECT",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_IRON_HEAD",
-                "MOVE_ICE_PUNCH"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTDOUBLES"
             ]
         },
         {
@@ -978,40 +691,6 @@
         },
         {
             "Moves": [
-                "MOVE_IRON_HEAD",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_ICE_PUNCH",
-                "MOVE_PROTECT"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "All-out Attacker",
-            "SourceTiers": [
-                "GEN7VGC2018"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PROTECT",
-                "MOVE_IRON_HEAD",
-                "MOVE_ZEN_HEADBUTT",
-                "MOVE_STOMPING_TANTRUM"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7VGC2018"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_THUNDER_PUNCH",
                 "MOVE_EARTHQUAKE",
                 "MOVE_IRON_HEAD",
@@ -1029,63 +708,12 @@
         },
         {
             "Moves": [
-                "MOVE_THUNDER_PUNCH",
-                "MOVE_EARTHQUAKE",
-                "MOVE_IRON_HEAD",
-                "MOVE_SUBSTITUTE"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_IMPISH",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Bulky Offense",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_METEOR_MASH",
-                "MOVE_ICE_PUNCH",
-                "MOVE_BULLET_PUNCH",
-                "MOVE_EARTHQUAKE"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_IMPISH",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_METEOR_MASH",
-                "MOVE_EARTHQUAKE",
-                "MOVE_BULLET_PUNCH",
-                "MOVE_ZEN_HEADBUTT"
-            ],
-            "Ability": "ABILITY_TOUGH_CLAWS",
-            "Item": "ITEM_METAGROSSITE",
-            "Nature": "NATURE_JOLLY",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7ANYTHINGGOES"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_BULLET_PUNCH",
                 "MOVE_METEOR_MASH",
                 "MOVE_THUNDER_PUNCH",
-                "MOVE_PURSUIT"
+                "MOVE_ICE_PUNCH"
             ],
-            "Ability": "ABILITY_CLEAR_BODY",
+            "Ability": "ABILITY_IRON_FIST",
             "Item": "ITEM_CHOICE_BAND",
             "Nature": "NATURE_ADAMANT",
             "HiddenPower": null,

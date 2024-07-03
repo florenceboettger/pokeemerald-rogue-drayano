@@ -91,49 +91,41 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
+        "MOVE_CHARM",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_BATON_PASS",
+        "MOVE_HEAT_WAVE",
         "MOVE_ALLY_SWITCH",
         "MOVE_ATTRACT",
-        "MOVE_BATON_PASS",
-        "MOVE_BODY_SLAM",
-        "MOVE_BOUNCE",
-        "MOVE_CHARM",
-        "MOVE_DRILL_RUN",
-        "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_FIRE_SPIN",
-        "MOVE_FLAMETHROWER",
-        "MOVE_FLARE_BLITZ",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HEAT_WAVE",
-        "MOVE_HIGH_HORSEPOWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_IRON_TAIL",
         "MOVE_LOW_KICK",
-        "MOVE_MEGAHORN",
-        "MOVE_MORNING_SUN",
+        "MOVE_IRON_TAIL",
+        "MOVE_SMART_STRIKE",
         "MOVE_MYSTICAL_FIRE",
-        "MOVE_OVERHEAT",
-        "MOVE_PAY_DAY",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_POISON_JAB",
-        "MOVE_PROTECT",
-        "MOVE_REST",
+        "MOVE_WILL_O_WISP",
+        "MOVE_SOLAR_BLADE",
         "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_DRILL_RUN",
+        "MOVE_PAY_DAY",
+        "MOVE_OVERHEAT",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THROAT_CHOP",
         "MOVE_SCORCHING_SANDS",
         "MOVE_SLEEP_TALK",
-        "MOVE_SMART_STRIKE",
-        "MOVE_SNORE",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SOLAR_BLADE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWIFT",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_THROAT_CHOP",
+        "MOVE_PROTECT",
         "MOVE_WILD_CHARGE",
-        "MOVE_WILL_O_WISP"
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_MORNING_SUN",
+        "MOVE_FLAMETHROWER",
+        "MOVE_HIGH_HORSEPOWER"
     ],
     "CompetitiveSets": [
         {
@@ -190,8 +182,8 @@
         {
             "Moves": [
                 "MOVE_FLARE_BLITZ",
-                "MOVE_WILD_CHARGE",
-                "MOVE_HIGH_HORSEPOWER",
+                "MOVE_PLAY_ROUGH",
+                "MOVE_WILL_O_WISP",
                 "MOVE_MORNING_SUN"
             ],
             "Ability": "ABILITY_FLASH_FIRE",
@@ -225,9 +217,9 @@
         {
             "Moves": [
                 "MOVE_FLARE_BLITZ",
-                "MOVE_WILD_CHARGE",
+                "MOVE_PLAY_ROUGH",
                 "MOVE_HIGH_HORSEPOWER",
-                "MOVE_WILL_O_WISP"
+                "MOVE_WILD_CHARGE"
             ],
             "Ability": "ABILITY_FLASH_FIRE",
             "Item": "ITEM_CHOICE_SCARF",
@@ -329,7 +321,7 @@
                 "MOVE_SWORDS_DANCE",
                 "MOVE_FLARE_BLITZ",
                 "MOVE_SOLAR_BLADE",
-                "MOVE_HIGH_HORSEPOWER"
+                "MOVE_PLAY_ROUGH"
             ],
             "Ability": "ABILITY_FLASH_FIRE",
             "Item": "ITEM_HEAVY_DUTY_BOOTS",
@@ -357,6 +349,40 @@
             "SourceTiers": [
                 "GEN8ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_PLAY_ROUGH",
+                "MOVE_HIGH_HORSEPOWER",
+                "MOVE_MORNING_SUN"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_FLASH_FIRE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7ZU"
+            ],
+            "Name": "Offensive",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_FLARE_BLITZ",
+                "MOVE_WILD_CHARGE",
+                "MOVE_PLAY_ROUGH"
+            ],
+            "Item": "ITEM_HEAVY_DUTY_BOOTS",
+            "Ability": "ABILITY_FLASH_FIRE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8PU"
+            ],
+            "Name": "Swords Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

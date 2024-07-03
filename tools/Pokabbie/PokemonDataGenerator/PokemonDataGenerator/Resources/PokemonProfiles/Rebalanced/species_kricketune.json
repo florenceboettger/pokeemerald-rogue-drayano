@@ -3,103 +3,109 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_FURY_CUTTER",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_TACKLE",
-            "Level": 1
+            "Move": "MOVE_FURY_CUTTER",
+            "Level": "1"
         },
         {
             "Move": "MOVE_GROWL",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_BIDE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_ABSORB",
-            "Level": 14
+            "Level": "10"
         },
         {
             "Move": "MOVE_SING",
-            "Level": 18
+            "Level": "14"
         },
         {
             "Move": "MOVE_FOCUS_ENERGY",
-            "Level": 22
+            "Level": "18"
+        },
+        {
+            "Move": "MOVE_PIN_MISSILE",
+            "Level": "22"
         },
         {
             "Move": "MOVE_SLASH",
-            "Level": 26
+            "Level": "26"
         },
         {
             "Move": "MOVE_X_SCISSOR",
-            "Level": 30
+            "Level": "30"
         },
         {
             "Move": "MOVE_SCREECH",
-            "Level": 34
+            "Level": "34"
         },
         {
             "Move": "MOVE_FELL_STINGER",
-            "Level": 36
+            "Level": "36"
         },
         {
             "Move": "MOVE_TAUNT",
-            "Level": 38
+            "Level": "38"
         },
         {
             "Move": "MOVE_NIGHT_SLASH",
-            "Level": 42
+            "Level": "42"
         },
         {
             "Move": "MOVE_STICKY_WEB",
-            "Level": 44
+            "Level": "44"
         },
         {
             "Move": "MOVE_BUG_BUZZ",
-            "Level": 46
+            "Level": "46"
         },
         {
             "Move": "MOVE_PERISH_SONG",
-            "Level": 50
+            "Level": "50"
         }
     ],
     "TutorMoves": [
         "MOVE_POUNCE",
-        "MOVE_TAUNT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_STRUGGLE_BUG",
-        "MOVE_ROCK_TOMB",
-        "MOVE_SKITTER_SMACK",
-        "MOVE_TERA_BLAST",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_RAIN_DANCE",
-        "MOVE_THROAT_CHOP",
-        "MOVE_AERIAL_ACE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_UPROAR",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_BRICK_BREAK",
-        "MOVE_LUNGE",
-        "MOVE_BULLET_SEED",
-        "MOVE_BUG_BUZZ",
-        "MOVE_SUNNY_DAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_BUG_BITE",
-        "MOVE_FALSE_SWIPE",
-        "MOVE_HYPER_BEAM",
-        "MOVE_ENDEAVOR",
-        "MOVE_BATON_PASS",
-        "MOVE_TAKE_DOWN",
-        "MOVE_KNOCK_OFF",
-        "MOVE_X_SCISSOR",
-        "MOVE_LEECH_LIFE",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_BULLDOZE",
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_TAKE_DOWN",
+        "MOVE_UPROAR",
+        "MOVE_ENDEAVOR",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ROCK_TOMB",
+        "MOVE_BULLET_SEED",
+        "MOVE_FALSE_SWIPE",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
         "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THROAT_CHOP",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_SLEEP_TALK",
+        "MOVE_HYPER_VOICE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_LUNGE",
+        "MOVE_GIGA_DRAIN",
         "MOVE_TRAILBLAZE",
-        "MOVE_HYPER_VOICE"
+        "MOVE_FACADE",
+        "MOVE_LEECH_LIFE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_BUG_BITE",
+        "MOVE_BRICK_BREAK"
     ],
     "CompetitiveSets": [
         {
@@ -141,9 +147,9 @@
                 "MOVE_STICKY_WEB",
                 "MOVE_ENDEAVOR",
                 "MOVE_TAUNT",
-                "MOVE_BUG_BITE"
+                "MOVE_X_SCISSOR"
             ],
-            "Ability": "ABILITY_TECHNICIAN",
+            "Ability": "ABILITY_SOUNDPROOF",
             "Item": "ITEM_FOCUS_SASH",
             "Nature": "NATURE_JOLLY",
             "HiddenPower": null,
@@ -169,6 +175,40 @@
             "SourceTiers": [
                 "GEN9ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_PIN_MISSILE",
+                "MOVE_BULLDOZE",
+                "MOVE_ROCK_TOMB"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_TECHNICIAN",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Swords Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FELL_STINGER",
+                "MOVE_BULLDOZE",
+                "MOVE_ROCK_TOMB",
+                "MOVE_BULLET_SEED"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_TECHNICIAN",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Choice Scarf",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

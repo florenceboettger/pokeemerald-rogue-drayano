@@ -3,112 +3,144 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_HORN_LEECH",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_SAND_ATTACK",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_TACKLE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_GROWL",
-            "Level": 1
+            "Move": "MOVE_HORN_LEECH",
+            "Level": "1"
         },
         {
             "Move": "MOVE_MEGAHORN",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_TACKLE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_CAMOUFLAGE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SAND_ATTACK",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": "4"
+        },
+        {
+            "Move": "MOVE_SAND_ATTACK",
+            "Level": "7"
         },
         {
             "Move": "MOVE_DOUBLE_KICK",
-            "Level": 10
+            "Level": "10"
         },
         {
             "Move": "MOVE_LEECH_SEED",
-            "Level": 13
+            "Level": "13"
         },
         {
-            "Move": "MOVE_BULLET_SEED",
-            "Level": 16
+            "Move": "MOVE_FEINT_ATTACK",
+            "Level": "16"
         },
         {
             "Move": "MOVE_TAKE_DOWN",
-            "Level": 20
+            "Level": "20"
         },
         {
-            "Move": "MOVE_ZEN_HEADBUTT",
-            "Level": 24
+            "Move": "MOVE_JUMP_KICK",
+            "Level": "24"
+        },
+        {
+            "Move": "MOVE_AROMATHERAPY",
+            "Level": "28"
         },
         {
             "Move": "MOVE_ENERGY_BALL",
-            "Level": 28
+            "Level": "32"
         },
         {
             "Move": "MOVE_CHARM",
-            "Level": 36
+            "Level": "36"
+        },
+        {
+            "Move": "MOVE_LUNGE",
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_NATURE_POWER",
+            "Level": "44"
+        },
+        {
+            "Move": "MOVE_HIGH_HORSEPOWER",
+            "Level": "48"
         },
         {
             "Move": "MOVE_DOUBLE_EDGE",
-            "Level": 44
+            "Level": "52"
+        },
+        {
+            "Move": "MOVE_CAPTIVATE",
+            "Level": "56"
         },
         {
             "Move": "MOVE_SOLAR_BEAM",
-            "Level": 52
+            "Level": "60"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_PLAY_ROUGH",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_THUNDER_WAVE",
+        "MOVE_ROCK_CLIMB",
         "MOVE_DIG",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SHADOW_BALL",
-        "MOVE_HIGH_HORSEPOWER",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_TERA_BLAST",
-        "MOVE_BULLDOZE",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_RAIN_DANCE",
-        "MOVE_STRENGTH",
-        "MOVE_THROAT_CHOP",
-        "MOVE_GRASSY_GLIDE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_AERIAL_ACE",
-        "MOVE_GRASS_KNOT",
-        "MOVE_SMART_STRIKE",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_CHARM",
-        "MOVE_SLEEP_TALK",
-        "MOVE_LEAF_STORM",
-        "MOVE_HEADBUTT",
-        "MOVE_BULLET_SEED",
-        "MOVE_ENERGY_BALL",
-        "MOVE_STOMPING_TANTRUM",
-        "MOVE_BODY_SLAM",
-        "MOVE_FAKE_TEARS",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_SUNNY_DAY",
-        "MOVE_GIGA_DRAIN",
         "MOVE_GRASSY_TERRAIN",
-        "MOVE_ENDEAVOR",
-        "MOVE_BATON_PASS",
-        "MOVE_HYPER_BEAM",
-        "MOVE_TAKE_DOWN",
-        "MOVE_SEED_BOMB",
-        "MOVE_FACADE",
-        "MOVE_ENDURE",
-        "MOVE_REST",
         "MOVE_CURSE",
-        "MOVE_JUMP_KICK",
-        "MOVE_TRAILBLAZE",
+        "MOVE_ENDURE",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
+        "MOVE_HEADBUTT",
+        "MOVE_BULLDOZE",
+        "MOVE_STRENGTH",
+        "MOVE_FAKE_TEARS",
+        "MOVE_LAST_RESORT",
+        "MOVE_ENDEAVOR",
+        "MOVE_SHADOW_BALL",
+        "MOVE_SMART_STRIKE",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_BULLET_SEED",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_LEAF_STORM",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THROAT_CHOP",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_AGILITY",
+        "MOVE_SEED_BOMB",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
         "MOVE_WILD_CHARGE",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_BODY_SLAM",
+        "MOVE_TRAILBLAZE",
+        "MOVE_LOW_SWEEP",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
         "MOVE_PETAL_BLIZZARD"
     ],
     "CompetitiveSets": [
@@ -316,6 +348,23 @@
             "SourceTiers": [
                 "GEN9PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_HORN_LEECH",
+                "MOVE_HIGH_HORSEPOWER",
+                "MOVE_ROCK_CLIMB"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_SAP_SIPPER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Swords Dance (new moves)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

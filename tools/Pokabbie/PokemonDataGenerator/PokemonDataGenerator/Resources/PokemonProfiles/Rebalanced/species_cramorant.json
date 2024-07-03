@@ -2,103 +2,109 @@
     "Species": "SPECIES_CRAMORANT",
     "LevelUpMoves": [
         {
+            "Move": "MOVE_BELCH",
+            "Level": "1"
+        },
+        {
             "Move": "MOVE_PECK",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_STOCKPILE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_SPIT_UP",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_SWALLOW",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SPIT_UP",
+            "Level": "1"
         },
         {
             "Move": "MOVE_WATER_GUN",
-            "Level": 7
+            "Level": "7"
         },
         {
             "Move": "MOVE_FURY_ATTACK",
-            "Level": 14
+            "Level": "14"
         },
         {
             "Move": "MOVE_PLUCK",
-            "Level": 21
+            "Level": "21"
         },
         {
             "Move": "MOVE_DIVE",
-            "Level": 28
+            "Level": "28"
         },
         {
             "Move": "MOVE_DRILL_PECK",
-            "Level": 35
+            "Level": "35"
         },
         {
             "Move": "MOVE_AMNESIA",
-            "Level": 42
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_SURF",
+            "Level": "45"
         },
         {
             "Move": "MOVE_THRASH",
-            "Level": 49
+            "Level": "50"
         },
         {
             "Move": "MOVE_HYDRO_PUMP",
-            "Level": 56
+            "Level": "56"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_HURRICANE",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_ICE_BEAM",
-        "MOVE_POUNCE",
-        "MOVE_WATER_PULSE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_AIR_SLASH",
         "MOVE_RETURN",
-        "MOVE_BELCH",
-        "MOVE_SURF",
-        "MOVE_TOXIC",
-        "MOVE_ACROBATICS",
         "MOVE_FLY",
-        "MOVE_LIQUIDATION",
-        "MOVE_TERA_BLAST",
-        "MOVE_TAILWIND",
-        "MOVE_RAIN_DANCE",
-        "MOVE_THROAT_CHOP",
-        "MOVE_FRUSTRATION",
-        "MOVE_AERIAL_ACE",
-        "MOVE_AMNESIA",
-        "MOVE_SUBSTITUTE",
-        "MOVE_UPROAR",
-        "MOVE_ICY_WIND",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_BRAVE_BIRD",
-        "MOVE_AQUA_CUTTER",
-        "MOVE_BLIZZARD",
-        "MOVE_THIEF",
-        "MOVE_REVERSAL",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_AIR_CUTTER",
-        "MOVE_DEFOG",
-        "MOVE_ENDEAVOR",
-        "MOVE_HYPER_BEAM",
-        "MOVE_TAKE_DOWN",
-        "MOVE_WEATHER_BALL",
-        "MOVE_CHILLING_WATER",
-        "MOVE_ROOST",
-        "MOVE_FACADE",
+        "MOVE_POUNCE",
         "MOVE_ENDURE",
-        "MOVE_REST",
+        "MOVE_AQUA_RING",
+        "MOVE_WEATHER_BALL",
+        "MOVE_WATER_PULSE",
+        "MOVE_TAKE_DOWN",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_UPROAR",
+        "MOVE_ENDEAVOR",
         "MOVE_WHIRLPOOL",
+        "MOVE_AQUA_CUTTER",
+        "MOVE_CHILLING_WATER",
+        "MOVE_REVERSAL",
+        "MOVE_LIQUIDATION",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
         "MOVE_FEATHER_DANCE",
-        "MOVE_AQUA_RING"
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HYPER_BEAM",
+        "MOVE_REST",
+        "MOVE_AIR_SLASH",
+        "MOVE_AERIAL_ACE",
+        "MOVE_ICE_BEAM",
+        "MOVE_SCALD",
+        "MOVE_THROAT_CHOP",
+        "MOVE_ACROBATICS",
+        "MOVE_AGILITY",
+        "MOVE_SLEEP_TALK",
+        "MOVE_HURRICANE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_AIR_CUTTER",
+        "MOVE_PROTECT",
+        "MOVE_ROOST",
+        "MOVE_FRUSTRATION",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_BLIZZARD",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_SUPERPOWER",
+        "MOVE_TOXIC",
+        "MOVE_TAILWIND"
     ],
     "CompetitiveSets": [
         {

@@ -51,54 +51,53 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ACID_SPRAY",
-        "MOVE_AFTER_YOU",
-        "MOVE_BODY_SLAM",
-        "MOVE_BULLET_SEED",
-        "MOVE_CHARM",
-        "MOVE_CORROSIVE_GAS",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_FACADE",
-        "MOVE_FLAIL",
-        "MOVE_FLING",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_GRASS_KNOT",
-        "MOVE_GRASSY_GLIDE",
-        "MOVE_GRASSY_TERRAIN",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_INFESTATION",
-        "MOVE_INGRAIN",
-        "MOVE_LEAF_STORM",
-        "MOVE_LEECH_SEED",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_PETAL_BLIZZARD",
-        "MOVE_POLLEN_PUFF",
-        "MOVE_PROTECT",
         "MOVE_RAZOR_LEAF",
-        "MOVE_REST",
-        "MOVE_SEED_BOMB",
-        "MOVE_SLEEP_TALK",
+        "MOVE_CHARM",
+        "MOVE_LEECH_SEED",
         "MOVE_SLUDGE_BOMB",
-        "MOVE_SLUDGE_WAVE",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SOLAR_BLADE",
+        "MOVE_GRASSY_TERRAIN",
+        "MOVE_ENDURE",
+        "MOVE_HELPING_HAND",
         "MOVE_STRENGTH_SAP",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWORDS_DANCE",
+        "MOVE_POLLEN_PUFF",
+        "MOVE_WEATHER_BALL",
+        "MOVE_MOONBLAST",
         "MOVE_SYNTHESIS",
         "MOVE_TEETER_DANCE",
-        "MOVE_TERA_BLAST",
-        "MOVE_TICKLE",
-        "MOVE_TOXIC",
-        "MOVE_TRAILBLAZE",
+        "MOVE_BULLET_SEED",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_AFTER_YOU",
+        "MOVE_LEAF_STORM",
+        "MOVE_INGRAIN",
+        "MOVE_GRASSY_GLIDE",
         "MOVE_VENOSHOCK",
-        "MOVE_WEATHER_BALL"
+        "MOVE_CORROSIVE_GAS",
+        "MOVE_TICKLE",
+        "MOVE_FLING",
+        "MOVE_FLAIL",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_ACID_SPRAY",
+        "MOVE_SUNNY_DAY",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_SEED_BOMB",
+        "MOVE_SLEEP_TALK",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_BODY_SLAM",
+        "MOVE_TRAILBLAZE",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_TOXIC",
+        "MOVE_ENERGY_BALL",
+        "MOVE_INFESTATION"
     ],
     "CompetitiveSets": [
         {
@@ -188,12 +187,12 @@
         },
         {
             "Moves": [
-                "MOVE_GIGA_DRAIN",
+                "MOVE_APPLE_ACID",
                 "MOVE_SLUDGE_BOMB",
                 "MOVE_STRENGTH_SAP",
-                "MOVE_CORROSIVE_GAS"
+                "MOVE_SLEEP_POWDER"
             ],
-            "Ability": "ABILITY_EFFECT_SPORE",
+            "Ability": "ABILITY_THICK_FAT",
             "Item": "ITEM_BLACK_SLUDGE",
             "Nature": "NATURE_BOLD",
             "HiddenPower": null,
@@ -271,6 +270,74 @@
             "SourceTiers": [
                 "GEN9NU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_MOONBLAST",
+                "MOVE_EARTH_POWER",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_STRENGTH_SAP"
+            ],
+            "Item": "ITEM_BLACK_SLUDGE",
+            "Ability": "ABILITY_THICK_FAT",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7RU"
+            ],
+            "Name": "Defensive Earth Power",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_APPLE_ACID",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_SLEEP_POWDER",
+                "MOVE_EARTH_POWER"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_CHLOROPHYLL",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7RU"
+            ],
+            "Name": "Offensive Chlorophyll",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_APPLE_ACID",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_STRENGTH_SAP",
+                "MOVE_SLEEP_POWDER"
+            ],
+            "Item": "ITEM_BLACK_SLUDGE",
+            "Ability": "ABILITY_THICK_FAT",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NU"
+            ],
+            "Name": "Defensive",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_STRENGTH_SAP",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_SLEEP_POWDER"
+            ],
+            "Item": "ITEM_ROCKY_HELMET",
+            "Ability": "ABILITY_EFFECT_SPORE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEXRU"
+            ],
+            "Name": "Physically Defensive",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

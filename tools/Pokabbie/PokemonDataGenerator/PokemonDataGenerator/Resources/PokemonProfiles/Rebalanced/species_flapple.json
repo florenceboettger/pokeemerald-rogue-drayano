@@ -71,49 +71,44 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_POUNCE",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_U_TURN",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_AIR_SLASH",
         "MOVE_RETURN",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_ACID_SPRAY",
-        "MOVE_TOXIC",
-        "MOVE_DRACO_METEOR",
-        "MOVE_ACROBATICS",
-        "MOVE_HEAVY_SLAM",
-        "MOVE_FLY",
-        "MOVE_TERA_BLAST",
-        "MOVE_IRON_DEFENSE",
-        "MOVE_FRUSTRATION",
-        "MOVE_GRASSY_GLIDE",
-        "MOVE_AERIAL_ACE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_GRASS_KNOT",
-        "MOVE_PROTECT",
-        "MOVE_DRAGON_DANCE",
-        "MOVE_SLEEP_TALK",
-        "MOVE_LEAF_STORM",
-        "MOVE_BULLET_SEED",
-        "MOVE_SCARY_FACE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_SUNNY_DAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_SUCKER_PUNCH",
+        "MOVE_POUNCE",
         "MOVE_GRASSY_TERRAIN",
-        "MOVE_ENDEAVOR",
-        "MOVE_HYPER_BEAM",
-        "MOVE_OUTRAGE",
-        "MOVE_TAKE_DOWN",
-        "MOVE_SEED_BOMB",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
+        "MOVE_U_TURN",
+        "MOVE_TAKE_DOWN",
+        "MOVE_ENDEAVOR",
+        "MOVE_OUTRAGE",
+        "MOVE_BULLET_SEED",
+        "MOVE_LEAF_STORM",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
         "MOVE_REST",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_TRAILBLAZE"
+        "MOVE_AIR_SLASH",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_MAGICAL_LEAF",
+        "MOVE_DRACO_METEOR",
+        "MOVE_SEED_BOMB",
+        "MOVE_SLEEP_TALK",
+        "MOVE_SCARY_FACE",
+        "MOVE_TERA_BLAST",
+        "MOVE_HEAVY_SLAM",
+        "MOVE_ROOST",
+        "MOVE_FRUSTRATION",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_TRAILBLAZE",
+        "MOVE_SCALE_SHOT",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_TOXIC",
+        "MOVE_ENERGY_BALL",
+        "MOVE_SUCKER_PUNCH"
     ],
     "CompetitiveSets": [
         {
@@ -136,7 +131,7 @@
         {
             "Moves": [
                 "MOVE_GRAV_APPLE",
-                "MOVE_DRACO_METEOR",
+                "MOVE_OUTRAGE",
                 "MOVE_SUCKER_PUNCH",
                 "MOVE_U_TURN"
             ],
@@ -200,6 +195,23 @@
             "SourceTiers": [
                 "GEN9PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_DRAGON_DANCE",
+                "MOVE_GRAV_APPLE",
+                "MOVE_ACROBATICS",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "Item": "ITEM_FLYING_GEM",
+            "Ability": "ABILITY_HUSTLE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8ZU"
+            ],
+            "Name": "Dragon Dance",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

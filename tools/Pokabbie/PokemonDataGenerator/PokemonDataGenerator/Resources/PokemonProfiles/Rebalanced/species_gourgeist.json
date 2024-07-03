@@ -2,121 +2,143 @@
     "Species": "SPECIES_GOURGEIST",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_CONFUSE_RAY",
-            "Level": 1
+            "Move": "MOVE_SHADOW_PUNCH",
+            "Level": "0"
+        },
+        {
+            "Move": "MOVE_SHADOW_PUNCH",
+            "Level": "1"
         },
         {
             "Move": "MOVE_EXPLOSION",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_ASTONISH",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_SHADOW_SNEAK",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_TRICK_OR_TREAT",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_MOONBLAST",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_RAZOR_LEAF",
-            "Level": 12
-        },
-        {
-            "Move": "MOVE_LEECH_SEED",
-            "Level": 16
-        },
-        {
-            "Move": "MOVE_BULLET_SEED",
-            "Level": 20
-        },
-        {
-            "Move": "MOVE_SCARY_FACE",
-            "Level": 24
-        },
-        {
-            "Move": "MOVE_WORRY_SEED",
-            "Level": 28
-        },
-        {
-            "Move": "MOVE_SEED_BOMB",
-            "Level": 32
-        },
-        {
-            "Move": "MOVE_SHADOW_BALL",
-            "Level": 36
-        },
-        {
-            "Move": "MOVE_TRICK",
-            "Level": 40
-        },
-        {
-            "Move": "MOVE_PAIN_SPLIT",
-            "Level": 44
+            "Level": "1"
         },
         {
             "Move": "MOVE_PHANTOM_FORCE",
-            "Level": 48
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_TRICK",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ASTONISH",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_CONFUSE_RAY",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SCARY_FACE",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_SCARY_FACE",
+            "Level": "4"
+        },
+        {
+            "Move": "MOVE_TRICK_OR_TREAT",
+            "Level": "6"
+        },
+        {
+            "Move": "MOVE_WORRY_SEED",
+            "Level": "11"
+        },
+        {
+            "Move": "MOVE_RAZOR_LEAF",
+            "Level": "16"
+        },
+        {
+            "Move": "MOVE_LEECH_SEED",
+            "Level": "20"
+        },
+        {
+            "Move": "MOVE_TRICK_OR_TREAT",
+            "Level": "23"
+        },
+        {
+            "Move": "MOVE_BULLET_SEED",
+            "Level": "26"
+        },
+        {
+            "Move": "MOVE_SHADOW_SNEAK",
+            "Level": "30"
+        },
+        {
+            "Move": "MOVE_SHADOW_BALL",
+            "Level": "36"
+        },
+        {
+            "Move": "MOVE_TRICK_OR_TREAT",
+            "Level": "40"
+        },
+        {
+            "Move": "MOVE_PAIN_SPLIT",
+            "Level": "42"
+        },
+        {
+            "Move": "MOVE_SEED_BOMB",
+            "Level": "48"
+        },
+        {
+            "Move": "MOVE_PHANTOM_FORCE",
+            "Level": "57"
+        },
+        {
+            "Move": "MOVE_TRICK_OR_TREAT",
+            "Level": "63"
+        },
+        {
+            "Move": "MOVE_EXPLOSION",
+            "Level": "70"
         }
     ],
     "TutorMoves": [
-        "MOVE_PHANTOM_FORCE",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_ROCK_SLIDE",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_ROUND",
-        "MOVE_SHADOW_BALL",
-        "MOVE_MYSTICAL_FIRE",
-        "MOVE_FIRE_PUNCH",
-        "MOVE_GYRO_BALL",
-        "MOVE_FOUL_PLAY",
-        "MOVE_IMPRISON",
-        "MOVE_SKITTER_SMACK",
-        "MOVE_DARK_PULSE",
-        "MOVE_HEX",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_TRICK",
-        "MOVE_GRASSY_GLIDE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_GRASS_KNOT",
-        "MOVE_ALLY_SWITCH",
-        "MOVE_PSYCHIC",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_FLAME_CHARGE",
-        "MOVE_BULLET_SEED",
-        "MOVE_THIEF",
-        "MOVE_SCARY_FACE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_POLTERGEIST",
-        "MOVE_ATTRACT",
-        "MOVE_NASTY_PLOT",
-        "MOVE_TRICK_ROOM",
-        "MOVE_DESTINY_BOND",
         "MOVE_SLUDGE_BOMB",
-        "MOVE_SUNNY_DAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_POWER_WHIP",
-        "MOVE_HYPER_BEAM",
-        "MOVE_SAFEGUARD",
-        "MOVE_SEED_BOMB",
-        "MOVE_FACADE",
-        "MOVE_WILL_O_WISP",
         "MOVE_ENDURE",
-        "MOVE_REST",
+        "MOVE_POWER_WHIP",
+        "MOVE_HEX",
+        "MOVE_ALLY_SWITCH",
+        "MOVE_ATTRACT",
+        "MOVE_GYRO_BALL",
+        "MOVE_NASTY_PLOT",
         "MOVE_SKILL_SWAP",
-        "MOVE_FLAMETHROWER",
+        "MOVE_FOUL_PLAY",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_POLTERGEIST",
+        "MOVE_WILL_O_WISP",
         "MOVE_FOCUS_BLAST",
+        "MOVE_ROUND",
+        "MOVE_DARK_PULSE",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_DESTINY_BOND",
+        "MOVE_BRUTAL_SWING",
         "MOVE_SNORE",
-        "MOVE_BRUTAL_SWING"
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_SAFEGUARD",
+        "MOVE_SUNNY_DAY",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_SLEEP_TALK",
+        "MOVE_PROTECT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PSYCHIC",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_IMPRISON",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_FLAMETHROWER",
+        "MOVE_ENERGY_BALL",
+        "MOVE_FLAME_CHARGE",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": [
         {
@@ -140,10 +162,10 @@
             "Moves": [
                 "MOVE_TRICK_OR_TREAT",
                 "MOVE_SEED_BOMB",
-                "MOVE_PHANTOM_FORCE",
+                "MOVE_SHADOW_PUNCH",
                 "MOVE_SHADOW_SNEAK"
             ],
-            "Ability": "ABILITY_FRISK",
+            "Ability": "ABILITY_FLASH_FIRE",
             "Item": "ITEM_GHOSTIUM_Z",
             "Nature": "NATURE_ADAMANT",
             "HiddenPower": null,

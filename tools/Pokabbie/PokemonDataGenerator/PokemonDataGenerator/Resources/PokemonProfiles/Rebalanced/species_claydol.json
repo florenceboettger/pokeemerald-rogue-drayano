@@ -3,139 +3,150 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_HYPER_BEAM",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_CONFUSION",
-            "Level": 1
+            "Move": "MOVE_HYPER_BEAM",
+            "Level": "1"
         },
         {
             "Move": "MOVE_TELEPORT",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_HARDEN",
-            "Level": 1
+            "Level": "1"
         },
         {
-            "Move": "MOVE_MUD_SLAP",
-            "Level": 1
+            "Move": "MOVE_CONFUSION",
+            "Level": "1"
         },
         {
             "Move": "MOVE_RAPID_SPIN",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_RAPID_SPIN",
+            "Level": "4"
+        },
+        {
+            "Move": "MOVE_MUD_SLAP",
+            "Level": "7"
+        },
+        {
+            "Move": "MOVE_HEAL_BLOCK",
+            "Level": "10"
         },
         {
             "Move": "MOVE_ROCK_TOMB",
-            "Level": 9
-        },
-        {
-            "Move": "MOVE_POWER_TRICK",
-            "Level": 12
+            "Level": "13"
         },
         {
             "Move": "MOVE_PSYBEAM",
-            "Level": 15
+            "Level": "16"
         },
         {
             "Move": "MOVE_ANCIENT_POWER",
-            "Level": 18
-        },
-        {
-            "Move": "MOVE_IMPRISON",
-            "Level": 21
+            "Level": "19"
         },
         {
             "Move": "MOVE_COSMIC_POWER",
-            "Level": 24
+            "Level": "22"
         },
         {
-            "Move": "MOVE_EXTRASENSORY",
-            "Level": 27
-        },
-        {
-            "Move": "MOVE_EARTH_POWER",
-            "Level": 30
+            "Move": "MOVE_POWER_TRICK",
+            "Level": "25"
         },
         {
             "Move": "MOVE_SELF_DESTRUCT",
-            "Level": 33
+            "Level": "28"
+        },
+        {
+            "Move": "MOVE_EXTRASENSORY",
+            "Level": "31"
         },
         {
             "Move": "MOVE_GUARD_SPLIT",
-            "Level": 38
+            "Level": "34"
         },
         {
             "Move": "MOVE_POWER_SPLIT",
-            "Level": 38
+            "Level": "34"
+        },
+        {
+            "Move": "MOVE_RECOVER",
+            "Level": "38"
+        },
+        {
+            "Move": "MOVE_EARTH_POWER",
+            "Level": "42"
         },
         {
             "Move": "MOVE_SANDSTORM",
-            "Level": 43
+            "Level": "46"
+        },
+        {
+            "Move": "MOVE_IMPRISON",
+            "Level": "52"
         },
         {
             "Move": "MOVE_EXPLOSION",
-            "Level": 48
+            "Level": "58"
         }
     ],
     "TutorMoves": [
-        "MOVE_CALM_MIND",
-        "MOVE_SCORCHING_SANDS",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_ICE_BEAM",
-        "MOVE_ZEN_HEADBUTT",
-        "MOVE_ROCK_SLIDE",
         "MOVE_DIG",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_GUARD_SWAP",
-        "MOVE_COSMIC_POWER",
-        "MOVE_ROCK_TOMB",
-        "MOVE_ROUND",
-        "MOVE_SHADOW_BALL",
-        "MOVE_EARTH_POWER",
-        "MOVE_FUTURE_SIGHT",
-        "MOVE_PSYCHIC_TERRAIN",
-        "MOVE_GYRO_BALL",
-        "MOVE_IMPRISON",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_WONDER_ROOM",
-        "MOVE_BULLDOZE",
-        "MOVE_HEX",
-        "MOVE_IRON_DEFENSE",
         "MOVE_FLY",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_REFLECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_TRICK",
-        "MOVE_SUBSTITUTE",
-        "MOVE_GRASS_KNOT",
-        "MOVE_EARTHQUAKE",
-        "MOVE_ALLY_SWITCH",
-        "MOVE_PSYCHIC",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_DRILL_RUN",
-        "MOVE_EXPANDING_FORCE",
-        "MOVE_NASTY_PLOT",
-        "MOVE_TRICK_ROOM",
-        "MOVE_EERIE_IMPULSE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_HYPER_BEAM",
-        "MOVE_BODY_PRESS",
-        "MOVE_SAFEGUARD",
-        "MOVE_SANDSTORM",
-        "MOVE_POWER_SWAP",
-        "MOVE_FACADE",
-        "MOVE_ENDURE",
-        "MOVE_REST",
-        "MOVE_SKILL_SWAP",
-        "MOVE_STEALTH_ROCK",
-        "MOVE_SELF_DESTRUCT",
         "MOVE_SAND_TOMB",
-        "MOVE_SNORE",
-        "MOVE_STORED_POWER",
         "MOVE_STONE_EDGE",
-        "MOVE_PSYSHOCK"
+        "MOVE_ENDURE",
+        "MOVE_TRICK",
+        "MOVE_HEX",
+        "MOVE_BULLDOZE",
+        "MOVE_ALLY_SWITCH",
+        "MOVE_POWER_SWAP",
+        "MOVE_GYRO_BALL",
+        "MOVE_NASTY_PLOT",
+        "MOVE_SKILL_SWAP",
+        "MOVE_BODY_PRESS",
+        "MOVE_SHADOW_BALL",
+        "MOVE_REFLECT",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_CALM_MIND",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PSYCHIC_TERRAIN",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_DRILL_RUN",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_EARTHQUAKE",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_STEALTH_ROCK",
+        "MOVE_ICE_BEAM",
+        "MOVE_FUTURE_SIGHT",
+        "MOVE_SAFEGUARD",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SCORCHING_SANDS",
+        "MOVE_GUARD_SWAP",
+        "MOVE_SLEEP_TALK",
+        "MOVE_TRI_ATTACK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_STORED_POWER",
+        "MOVE_WONDER_ROOM",
+        "MOVE_PROTECT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PSYCHIC",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_PSYSHOCK",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_POWER_GEM"
     ],
     "CompetitiveSets": [
         {
@@ -274,6 +285,40 @@
             "SourceTiers": [
                 "GEN8PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_RECOVER",
+                "MOVE_EARTH_POWER",
+                "MOVE_PSYCHIC"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_LEVITATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Calm Mind + Recover",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_TELEPORT",
+                "MOVE_SCORCHING_SANDS",
+                "MOVE_RECOVER",
+                "MOVE_POWER_GEM"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_LEVITATE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Scorching Sands Pivot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

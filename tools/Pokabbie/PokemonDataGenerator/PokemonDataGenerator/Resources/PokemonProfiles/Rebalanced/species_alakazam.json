@@ -75,67 +75,61 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ALLY_SWITCH",
-        "MOVE_ATTRACT",
-        "MOVE_BODY_SLAM",
-        "MOVE_CALM_MIND",
-        "MOVE_COUNTER",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_DRAIN_PUNCH",
         "MOVE_ENCORE",
-        "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_EXPANDING_FORCE",
-        "MOVE_FACADE",
-        "MOVE_FIRE_PUNCH",
-        "MOVE_FLING",
-        "MOVE_FOCUS_BLAST",
-        "MOVE_FOUL_PLAY",
-        "MOVE_FUTURE_SIGHT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_GRASS_KNOT",
-        "MOVE_GUARD_SWAP",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_ICE_PUNCH",
-        "MOVE_IMPRISON",
-        "MOVE_IRON_TAIL",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_MAGIC_ROOM",
-        "MOVE_MEGA_KICK",
-        "MOVE_MEGA_PUNCH",
         "MOVE_METRONOME",
-        "MOVE_NASTY_PLOT",
-        "MOVE_POWER_SWAP",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHIC",
-        "MOVE_PSYCHIC_TERRAIN",
-        "MOVE_PSYCHO_CUT",
-        "MOVE_PSYSHOCK",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REFLECT",
-        "MOVE_REST",
-        "MOVE_ROUND",
-        "MOVE_SAFEGUARD",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SKILL_SWAP",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNORE",
-        "MOVE_SPEED_SWAP",
-        "MOVE_STORED_POWER",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
+        "MOVE_ENDURE",
         "MOVE_SWIFT",
         "MOVE_TAUNT",
-        "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
-        "MOVE_THUNDER_PUNCH",
+        "MOVE_CHARGE_BEAM",
+        "MOVE_ATTRACT",
+        "MOVE_POWER_SWAP",
+        "MOVE_NASTY_PLOT",
+        "MOVE_SKILL_SWAP",
+        "MOVE_IRON_TAIL",
+        "MOVE_SHADOW_BALL",
         "MOVE_THUNDER_WAVE",
-        "MOVE_TRI_ATTACK",
-        "MOVE_TRICK",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_FOUL_PLAY",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PSYCHIC_TERRAIN",
+        "MOVE_SPEED_SWAP",
+        "MOVE_COUNTER",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_FLING",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_MEGA_KICK",
+        "MOVE_SUBSTITUTE",
         "MOVE_TRICK_ROOM",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_MAGIC_ROOM",
+        "MOVE_ICE_PUNCH",
+        "MOVE_SAFEGUARD",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_SUNNY_DAY",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_TRI_ATTACK",
+        "MOVE_GUARD_SWAP",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_STORED_POWER",
+        "MOVE_TERA_BLAST",
         "MOVE_WONDER_ROOM",
-        "MOVE_ZEN_HEADBUTT"
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_BODY_SLAM",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_IMPRISON",
+        "MOVE_PSYSHOCK",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_MEGA_PUNCH",
+        "MOVE_ENERGY_BALL"
     ],
     "CompetitiveSets": [
         {
@@ -146,23 +140,6 @@
                 "MOVE_HIDDEN_POWER"
             ],
             "Ability": "ABILITY_MAGIC_GUARD",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_ICE",
-            "TeraType": null,
-            "Name": "Mega Alakazam",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_SHADOW_BALL",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_HIDDEN_POWER"
-            ],
-            "Ability": "ABILITY_TRACE",
             "Item": "ITEM_ALAKAZITE",
             "Nature": "NATURE_TIMID",
             "HiddenPower": "TYPE_ICE",
@@ -192,23 +169,6 @@
         {
             "Moves": [
                 "MOVE_PSYCHIC",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_SHADOW_BALL",
-                "MOVE_CALM_MIND"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
                 "MOVE_SHADOW_BALL",
                 "MOVE_DAZZLING_GLEAM",
                 "MOVE_ENERGY_BALL"
@@ -225,23 +185,6 @@
         },
         {
             "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_PROTECT",
-                "MOVE_ENCORE"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN6BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_PROTECT",
                 "MOVE_PSYCHIC",
                 "MOVE_ENCORE",
@@ -253,40 +196,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "Encore + Disable",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PROTECT",
-                "MOVE_PSYCHIC",
-                "MOVE_ENCORE",
-                "MOVE_DISABLE"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Encore + Disable",
-            "SourceTiers": [
-                "GEN61V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_ENCORE",
-                "MOVE_PROTECT",
-                "MOVE_DISABLE"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN61V1"
             ]
@@ -346,40 +255,6 @@
             "Moves": [
                 "MOVE_PSYCHIC",
                 "MOVE_FOCUS_BLAST",
-                "MOVE_RECOVER",
-                "MOVE_SHADOW_BALL"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Late-Game Cleaner",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_SHADOW_BALL",
-                "MOVE_RECOVER"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7OU"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_FOCUS_BLAST",
                 "MOVE_SHADOW_BALL",
                 "MOVE_HIDDEN_POWER"
             ],
@@ -391,57 +266,6 @@
             "Name": "Psychic Terrain Sweeper",
             "SourceTiers": [
                 "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_SHADOW_BALL",
-                "MOVE_HIDDEN_POWER"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": "TYPE_ICE",
-            "TeraType": null,
-            "Name": "Psychic Terrain Sweeper",
-            "SourceTiers": [
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_SHADOW_BALL",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_CALM_MIND"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_MODEST",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTSINGLES"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_PROTECT",
-                "MOVE_DAZZLING_GLEAM",
-                "MOVE_SHADOW_BALL"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7BATTLESPOTDOUBLES"
             ]
         },
         {
@@ -491,57 +315,6 @@
             "HiddenPower": null,
             "TeraType": null,
             "Name": "BIG ZAM (Psychium-Z)",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_DISABLE",
-                "MOVE_ENCORE",
-                "MOVE_SUBSTITUTE",
-                "MOVE_RECOVER"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Encore + Disable",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_COUNTER",
-                "MOVE_TAUNT",
-                "MOVE_FOCUS_BLAST",
-                "MOVE_PSYCHIC"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Counter Lure",
-            "SourceTiers": [
-                "GEN71V1"
-            ]
-        },
-        {
-            "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_DAZZLING_GLEAM",
-                "MOVE_SHADOW_BALL",
-                "MOVE_ENERGY_BALL"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN71V1"
             ]
@@ -599,23 +372,6 @@
         },
         {
             "Moves": [
-                "MOVE_PSYCHIC",
-                "MOVE_SHADOW_BALL",
-                "MOVE_DAZZLING_GLEAM",
-                "MOVE_FOCUS_BLAST"
-            ],
-            "Ability": "ABILITY_TRACE",
-            "Item": "ITEM_ALAKAZITE",
-            "Nature": "NATURE_TIMID",
-            "HiddenPower": null,
-            "TeraType": null,
-            "Name": "Showdown Usage",
-            "SourceTiers": [
-                "GEN7MONOTYPE"
-            ]
-        },
-        {
-            "Moves": [
                 "MOVE_FOCUS_BLAST",
                 "MOVE_SHADOW_BALL",
                 "MOVE_PSYCHIC",
@@ -634,8 +390,8 @@
         {
             "Moves": [
                 "MOVE_NASTY_PLOT",
-                "MOVE_PSYCHIC",
-                "MOVE_FOCUS_BLAST",
+                "MOVE_PSYSHOCK",
+                "MOVE_AURA_SPHERE",
                 "MOVE_SHADOW_BALL"
             ],
             "Ability": "ABILITY_MAGIC_GUARD",
@@ -698,6 +454,40 @@
             "SourceTiers": [
                 "GEN8MONOTYPE"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_PSYSHOCK",
+                "MOVE_AURA_SPHERE",
+                "MOVE_SHADOW_BALL"
+            ],
+            "Item": "ITEM_ALAKAZITE",
+            "Ability": "ABILITY_MAGIC_GUARD",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8NATIONALDEX"
+            ],
+            "Name": "Nasty Plot (Mega)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_NASTY_PLOT",
+                "MOVE_PSYCHIC",
+                "MOVE_AURA_SPHERE",
+                "MOVE_SHADOW_BALL"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_MAGIC_GUARD",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8BDSPOU"
+            ],
+            "Name": "Nasty Plot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

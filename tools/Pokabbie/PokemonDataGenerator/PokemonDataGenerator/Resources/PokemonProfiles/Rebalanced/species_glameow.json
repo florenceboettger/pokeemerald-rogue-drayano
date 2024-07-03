@@ -1,0 +1,148 @@
+{
+    "Species": "SPECIES_GLAMEOW",
+    "LevelUpMoves": [
+        {
+            "Move": "MOVE_FAKE_OUT",
+            "Level": 1
+        },
+        {
+            "Move": "MOVE_SCRATCH",
+            "Level": 5
+        },
+        {
+            "Move": "MOVE_GROWL",
+            "Level": 8
+        },
+        {
+            "Move": "MOVE_HYPNOSIS",
+            "Level": 13
+        },
+        {
+            "Move": "MOVE_FEINT_ATTACK",
+            "Level": 17
+        },
+        {
+            "Move": "MOVE_FURY_SWIPES",
+            "Level": 20
+        },
+        {
+            "Move": "MOVE_CHARM",
+            "Level": 25
+        },
+        {
+            "Move": "MOVE_ASSIST",
+            "Level": 29
+        },
+        {
+            "Move": "MOVE_CAPTIVATE",
+            "Level": 32
+        },
+        {
+            "Move": "MOVE_SLASH",
+            "Level": 37
+        },
+        {
+            "Move": "MOVE_SUCKER_PUNCH",
+            "Level": 41
+        },
+        {
+            "Move": "MOVE_ATTRACT",
+            "Level": 44
+        },
+        {
+            "Move": "MOVE_HONE_CLAWS",
+            "Level": 48
+        },
+        {
+            "Move": "MOVE_PLAY_ROUGH",
+            "Level": 50
+        }
+    ],
+    "TutorMoves": [
+        "MOVE_RETURN",
+        "MOVE_DOUBLE_TEAM",
+        "MOVE_BITE",
+        "MOVE_SUPER_FANG",
+        "MOVE_THUNDER",
+        "MOVE_PAYBACK",
+        "MOVE_WORK_UP",
+        "MOVE_TAUNT",
+        "MOVE_U_TURN",
+        "MOVE_FAKE_TEARS",
+        "MOVE_WATER_PULSE",
+        "MOVE_LAST_RESORT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_TORMENT",
+        "MOVE_DREAM_EATER",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_IRON_TAIL",
+        "MOVE_SHADOW_BALL",
+        "MOVE_FOUL_PLAY",
+        "MOVE_SHOCK_WAVE",
+        "MOVE_SWAGGER",
+        "MOVE_ROUND",
+        "MOVE_SNORE",
+        "MOVE_CONFIDE",
+        "MOVE_FLAIL",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SHADOW_CLAW",
+        "MOVE_CRUNCH",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_SAND_ATTACK",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ECHOED_VOICE",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_HYPER_VOICE",
+        "MOVE_RAIN_DANCE",
+        "MOVE_ASSURANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_WAKE_UP_SLAP",
+        "MOVE_SNATCH",
+        "MOVE_TAIL_WHIP",
+        "MOVE_COVET",
+        "MOVE_FRUSTRATION",
+        "MOVE_PSYCH_UP",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER"
+    ],
+    "CompetitiveSets": [
+        {
+            "Moves": [
+                "MOVE_RETURN",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_FAKE_OUT",
+                "MOVE_PLAY_ROUGH"
+            ],
+            "Ability": "ABILITY_LIMBER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Life Orb Attacker",
+            "SourceTiers": [
+                "GEN6LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_RETURN",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_PLAY_ROUGH",
+                "MOVE_FAKE_OUT"
+            ],
+            "Ability": "ABILITY_LIMBER",
+            "Item": "ITEM_LIFE_ORB",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Life Orb",
+            "SourceTiers": [
+                "GEN7LC"
+            ]
+        }
+    ]
+}

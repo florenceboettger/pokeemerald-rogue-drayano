@@ -2,154 +2,138 @@
     "Species": "SPECIES_LEAFEON",
     "LevelUpMoves": [
         {
-            "Move": "MOVE_RAZOR_LEAF",
-            "Level": 0
+            "Move": "MOVE_VINE_WHIP",
+            "Level": "0"
         },
         {
-            "Move": "MOVE_TACKLE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_TAKE_DOWN",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_DOUBLE_EDGE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_TAIL_WHIP",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_BITE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_GROWL",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_SWIFT",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_CHARM",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_BATON_PASS",
-            "Level": 1
+            "Move": "MOVE_VINE_WHIP",
+            "Level": "1"
         },
         {
             "Move": "MOVE_HELPING_HAND",
-            "Level": 1
+            "Level": "1"
         },
         {
-            "Move": "MOVE_COVET",
-            "Level": 1
+            "Move": "MOVE_TACKLE",
+            "Level": "1"
         },
         {
-            "Move": "MOVE_COPYCAT",
-            "Level": 1
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": "1"
         },
         {
             "Move": "MOVE_SAND_ATTACK",
-            "Level": 5
-        },
-        {
-            "Move": "MOVE_QUICK_ATTACK",
-            "Level": 10
+            "Level": "5"
         },
         {
             "Move": "MOVE_BABY_DOLL_EYES",
-            "Level": 15
+            "Level": "9"
         },
         {
-            "Move": "MOVE_LEECH_SEED",
-            "Level": 20
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": "13"
+        },
+        {
+            "Move": "MOVE_GRASS_WHISTLE",
+            "Level": "17"
+        },
+        {
+            "Move": "MOVE_RAZOR_LEAF",
+            "Level": "20"
         },
         {
             "Move": "MOVE_MAGICAL_LEAF",
-            "Level": 25
+            "Level": "23"
         },
         {
-            "Move": "MOVE_SYNTHESIS",
-            "Level": 30
-        },
-        {
-            "Move": "MOVE_SUNNY_DAY",
-            "Level": 35
-        },
-        {
-            "Move": "MOVE_GIGA_DRAIN",
-            "Level": 40
+            "Move": "MOVE_NIGHT_SLASH",
+            "Level": "26"
         },
         {
             "Move": "MOVE_SWORDS_DANCE",
-            "Level": 45
+            "Level": "29"
+        },
+        {
+            "Move": "MOVE_SYNTHESIS",
+            "Level": "33"
+        },
+        {
+            "Move": "MOVE_SUNNY_DAY",
+            "Level": "37"
         },
         {
             "Move": "MOVE_LEAF_BLADE",
-            "Level": 50
+            "Level": "41"
         },
         {
             "Move": "MOVE_LAST_RESORT",
-            "Level": 55
+            "Level": "45"
+        },
+        {
+            "Move": "MOVE_PSYCHO_CUT",
+            "Level": "50"
+        },
+        {
+            "Move": "MOVE_POWER_WHIP",
+            "Level": "55"
+        },
+        {
+            "Move": "MOVE_SAPPY_SEED",
+            "Level": "60"
         }
     ],
     "TutorMoves": [
-        "MOVE_CALM_MIND",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
         "MOVE_DIG",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SHADOW_BALL",
-        "MOVE_MUD_SHOT",
-        "MOVE_NATURAL_GIFT",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_TERA_BLAST",
-        "MOVE_CELEBRATE",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_RAIN_DANCE",
-        "MOVE_GRASSY_GLIDE",
-        "MOVE_AERIAL_ACE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_GRASS_KNOT",
-        "MOVE_ROAR",
-        "MOVE_SOLAR_BLADE",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
         "MOVE_CHARM",
-        "MOVE_SLEEP_TALK",
-        "MOVE_LEAF_STORM",
-        "MOVE_CUT",
-        "MOVE_FLAIL",
-        "MOVE_BULLET_SEED",
-        "MOVE_ENERGY_BALL",
-        "MOVE_BODY_SLAM",
-        "MOVE_FAKE_TEARS",
+        "MOVE_ROAR",
+        "MOVE_CURSE",
+        "MOVE_ENDURE",
         "MOVE_SWIFT",
-        "MOVE_MAGICAL_LEAF",
-        "MOVE_SUNNY_DAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_HYPER_BEAM",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_STOMPING_TANTRUM",
         "MOVE_BATON_PASS",
-        "MOVE_TAKE_DOWN",
         "MOVE_WEATHER_BALL",
+        "MOVE_TAKE_DOWN",
+        "MOVE_FAKE_TEARS",
         "MOVE_KNOCK_OFF",
         "MOVE_MUD_SLAP",
-        "MOVE_SEED_BOMB",
-        "MOVE_X_SCISSOR",
-        "MOVE_FACADE",
-        "MOVE_ENDURE",
-        "MOVE_REST",
-        "MOVE_CURSE",
-        "MOVE_TRAILBLAZE",
+        "MOVE_SHADOW_BALL",
+        "MOVE_BULLET_SEED",
+        "MOVE_CALM_MIND",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_LEAF_STORM",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_FLAIL",
         "MOVE_WISH",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_CELEBRATE",
+        "MOVE_NATURAL_GIFT",
+        "MOVE_SEED_BOMB",
+        "MOVE_SLEEP_TALK",
+        "MOVE_HYPER_VOICE",
+        "MOVE_RAIN_DANCE",
         "MOVE_STORED_POWER",
-        "MOVE_HYPER_VOICE"
+        "MOVE_TERA_BLAST",
+        "MOVE_X_SCISSOR",
+        "MOVE_PROTECT",
+        "MOVE_CUT",
+        "MOVE_MUD_SHOT",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_BODY_SLAM",
+        "MOVE_TRAILBLAZE",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_TOXIC",
+        "MOVE_ENERGY_BALL",
+        "MOVE_JUMP_KICK"
     ],
     "CompetitiveSets": [
         {
@@ -274,11 +258,11 @@
         {
             "Moves": [
                 "MOVE_CELEBRATE",
-                "MOVE_LEAF_BLADE",
+                "MOVE_POWER_WHIP",
                 "MOVE_KNOCK_OFF",
                 "MOVE_SYNTHESIS"
             ],
-            "Ability": "ABILITY_LEAF_GUARD",
+            "Ability": "ABILITY_SUPER_LUCK",
             "Item": "ITEM_NORMALIUM_Z",
             "Nature": "NATURE_JOLLY",
             "HiddenPower": null,
@@ -329,7 +313,7 @@
                 "MOVE_LEAF_BLADE",
                 "MOVE_KNOCK_OFF"
             ],
-            "Ability": "ABILITY_LEAF_GUARD",
+            "Ability": "ABILITY_SUPER_LUCK",
             "Item": "ITEM_NORMALIUM_Z",
             "Nature": "NATURE_JOLLY",
             "HiddenPower": null,
@@ -395,7 +379,7 @@
                 "MOVE_SWORDS_DANCE",
                 "MOVE_SOLAR_BLADE",
                 "MOVE_KNOCK_OFF",
-                "MOVE_DOUBLE_EDGE"
+                "MOVE_STOMPING_TANTRUM"
             ],
             "Ability": "ABILITY_CHLOROPHYLL",
             "Item": "ITEM_LIFE_ORB",
@@ -474,6 +458,57 @@
             "SourceTiers": [
                 "GEN9ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_LEAF_BLADE",
+                "MOVE_PSYCHO_CUT",
+                "MOVE_X_SCISSOR"
+            ],
+            "Item": "ITEM_SCOPE_LENS",
+            "Ability": "ABILITY_SUPER_LUCK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Scope Lens",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_GRASS_WHISTLE",
+                "MOVE_SAPPY_SEED",
+                "MOVE_KNOCK_OFF"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_CHLOROPHYLL",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Grass Whistle",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SAPPY_SEED",
+                "MOVE_TOXIC",
+                "MOVE_KNOCK_OFF",
+                "MOVE_SYNTHESIS"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_SUPER_LUCK",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Tank",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

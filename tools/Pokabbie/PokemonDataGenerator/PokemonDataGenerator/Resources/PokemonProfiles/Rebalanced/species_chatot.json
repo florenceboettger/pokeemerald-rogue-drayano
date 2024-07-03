@@ -79,47 +79,39 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_AERIAL_ACE",
-        "MOVE_AGILITY",
-        "MOVE_AIR_CUTTER",
-        "MOVE_ATTRACT",
-        "MOVE_BOOMBURST",
-        "MOVE_CONFIDE",
-        "MOVE_DEFOG",
-        "MOVE_DOUBLE_TEAM",
-        "MOVE_ECHOED_VOICE",
-        "MOVE_ENCORE",
-        "MOVE_FACADE",
-        "MOVE_FLY",
-        "MOVE_FRUSTRATION",
-        "MOVE_HEAT_WAVE",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_VOICE",
-        "MOVE_NASTY_PLOT",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_PROTECT",
-        "MOVE_RAIN_DANCE",
-        "MOVE_REST",
         "MOVE_RETURN",
-        "MOVE_ROLE_PLAY",
-        "MOVE_ROOST",
-        "MOVE_ROUND",
-        "MOVE_SKY_ATTACK",
-        "MOVE_SLEEP_TALK",
-        "MOVE_SNORE",
-        "MOVE_STEEL_WING",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SUPERSONIC",
-        "MOVE_SWAGGER",
-        "MOVE_TAILWIND",
-        "MOVE_TAUNT",
-        "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
-        "MOVE_TORMENT",
+        "MOVE_ENCORE",
+        "MOVE_FLY",
+        "MOVE_DOUBLE_TEAM",
+        "MOVE_WORK_UP",
+        "MOVE_HEAT_WAVE",
         "MOVE_U_TURN",
-        "MOVE_UPROAR",
-        "MOVE_WORK_UP"
+        "MOVE_ATTRACT",
+        "MOVE_NASTY_PLOT",
+        "MOVE_TORMENT",
+        "MOVE_SWAGGER",
+        "MOVE_SUPERSONIC",
+        "MOVE_SNORE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_DEFOG",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_AGILITY",
+        "MOVE_SLEEP_TALK",
+        "MOVE_RAIN_DANCE",
+        "MOVE_TERA_BLAST",
+        "MOVE_AIR_CUTTER",
+        "MOVE_PROTECT",
+        "MOVE_FRUSTRATION",
+        "MOVE_BUG_BUZZ",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_STEEL_WING",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_TAILWIND",
+        "MOVE_SKY_ATTACK"
     ],
     "CompetitiveSets": [
         {
@@ -248,7 +240,7 @@
                 "MOVE_HEAT_WAVE",
                 "MOVE_U_TURN"
             ],
-            "Ability": "ABILITY_TANGLED_FEET",
+            "Ability": "ABILITY_PUNK_ROCK",
             "Item": "ITEM_CHOICE_SCARF",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -265,7 +257,7 @@
                 "MOVE_ENCORE",
                 "MOVE_HEAT_WAVE"
             ],
-            "Ability": "ABILITY_TANGLED_FEET",
+            "Ability": "ABILITY_PUNK_ROCK",
             "Item": "ITEM_NORMALIUM_Z",
             "Nature": "NATURE_TIMID",
             "HiddenPower": null,
@@ -291,6 +283,23 @@
             "SourceTiers": [
                 "GEN7ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_BOOMBURST",
+                "MOVE_HEAT_WAVE",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_U_TURN"
+            ],
+            "Item": "ITEM_CHOICE_SPECS",
+            "Ability": "ABILITY_PUNK_ROCK",
+            "HiddenPower": "TYPEFIGHTING",
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Choice Attacker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

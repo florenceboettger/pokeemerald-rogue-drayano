@@ -51,38 +51,34 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_CHARM",
-        "MOVE_PROTECT",
-        "MOVE_WATER_PULSE",
-        "MOVE_DISARMING_VOICE",
-        "MOVE_CHILLING_WATER",
-        "MOVE_FACADE",
-        "MOVE_SWIFT",
-        "MOVE_ICY_WIND",
-        "MOVE_FLING",
         "MOVE_ENDURE",
-        "MOVE_RAIN_DANCE",
-        "MOVE_ZEN_HEADBUTT",
+        "MOVE_SWIFT",
+        "MOVE_HELPING_HAND",
+        "MOVE_BATON_PASS",
+        "MOVE_WEATHER_BALL",
         "MOVE_U_TURN",
-        "MOVE_SLEEP_TALK",
-        "MOVE_WATERFALL",
-        "MOVE_DAZZLING_GLEAM",
-        "MOVE_GRASS_KNOT",
-        "MOVE_REST",
+        "MOVE_KNOCK_OFF",
+        "MOVE_CHILLING_WATER",
+        "MOVE_FLING",
+        "MOVE_FLIP_TURN",
         "MOVE_SUBSTITUTE",
         "MOVE_LIQUIDATION",
         "MOVE_SURF",
-        "MOVE_HELPING_HAND",
-        "MOVE_BATON_PASS",
-        "MOVE_ICE_BEAM",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_BLIZZARD",
-        "MOVE_TERA_BLAST",
+        "MOVE_REST",
         "MOVE_HAZE",
-        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_BEAM",
         "MOVE_SCALD",
-        "MOVE_WEATHER_BALL",
-        "MOVE_FLIP_TURN"
+        "MOVE_SLEEP_TALK",
+        "MOVE_WATERFALL",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_DISARMING_VOICE",
+        "MOVE_ICY_WIND",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_BLIZZARD"
     ],
     "CompetitiveSets": [
         {
@@ -96,6 +92,7 @@
             "Item": "ITEM_DAMP_ROCK",
             "Nature": "NATURE_RELAXED",
             "HiddenPower": null,
+            "Name": "Rain Support",
             "SourceTiers": [
                 "GEN6PU"
             ]
@@ -111,6 +108,7 @@
             "Item": "ITEM_DAMP_ROCK",
             "Nature": "NATURE_RELAXED",
             "HiddenPower": null,
+            "Name": "Rain Dance",
             "SourceTiers": [
                 "GEN7PU"
             ]
@@ -126,6 +124,7 @@
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_BOLD",
             "HiddenPower": null,
+            "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN9PU"
             ]

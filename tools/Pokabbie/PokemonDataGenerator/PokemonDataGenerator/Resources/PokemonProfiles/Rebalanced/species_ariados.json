@@ -107,54 +107,50 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ACID_SPRAY",
-        "MOVE_AGILITY",
-        "MOVE_BATON_PASS",
-        "MOVE_BUG_BITE",
-        "MOVE_BUG_BUZZ",
+        "MOVE_PURSUIT",
         "MOVE_DIG",
-        "MOVE_DISABLE",
-        "MOVE_ELECTROWEB",
-        "MOVE_ENDURE",
-        "MOVE_FACADE",
-        "MOVE_FOUL_PLAY",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HEX",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_KNOCK_OFF",
-        "MOVE_LEECH_LIFE",
-        "MOVE_LUNGE",
-        "MOVE_MEGAHORN",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_NIGHT_SLASH",
-        "MOVE_POISON_JAB",
         "MOVE_POUNCE",
-        "MOVE_PROTECT",
-        "MOVE_PSYCHIC",
-        "MOVE_RAGE_POWDER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ENDURE",
+        "MOVE_BATON_PASS",
+        "MOVE_HEX",
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_TOXIC_SPIKES",
+        "MOVE_TWINEEDLE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_MEGAHORN",
+        "MOVE_SMART_STRIKE",
+        "MOVE_NIGHT_SLASH",
+        "MOVE_FOUL_PLAY",
+        "MOVE_VENOSHOCK",
+        "MOVE_SPITE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_ELECTROWEB",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HYPER_BEAM",
         "MOVE_REST",
-        "MOVE_SCARY_FACE",
+        "MOVE_ACID_SPRAY",
+        "MOVE_DISABLE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_THROAT_CHOP",
         "MOVE_SKITTER_SMACK",
         "MOVE_SLEEP_TALK",
-        "MOVE_SLUDGE_BOMB",
-        "MOVE_SLUDGE_WAVE",
-        "MOVE_SMART_STRIKE",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SPITE",
-        "MOVE_STRUGGLE_BUG",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWORDS_DANCE",
         "MOVE_TERA_BLAST",
-        "MOVE_THIEF",
-        "MOVE_THROAT_CHOP",
-        "MOVE_TOXIC",
-        "MOVE_TOXIC_SPIKES",
+        "MOVE_X_SCISSOR",
+        "MOVE_PROTECT",
+        "MOVE_PSYBEAM",
+        "MOVE_LUNGE",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_RAGE_POWDER",
+        "MOVE_BUG_BUZZ",
         "MOVE_TRAILBLAZE",
-        "MOVE_VENOSHOCK",
-        "MOVE_X_SCISSOR"
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_LEECH_LIFE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_TOXIC"
     ],
     "CompetitiveSets": [
         {
@@ -259,6 +255,40 @@
             "SourceTiers": [
                 "GEN9PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_STICKY_WEB",
+                "MOVE_POISON_FANG",
+                "MOVE_TOXIC_SPIKES",
+                "MOVE_MEGAHORN"
+            ],
+            "Item": "ITEM_FOCUS_SASH",
+            "Ability": "ABILITY_SWARM",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7LC"
+            ],
+            "Name": "Hazard Setter",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_CROSS_POISON",
+                "MOVE_X_SCISSOR",
+                "MOVE_NIGHT_SLASH"
+            ],
+            "Item": "ITEM_SCOPE_LENS",
+            "Ability": "ABILITY_SNIPER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7LC"
+            ],
+            "Name": "Swords Dance Sniper",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

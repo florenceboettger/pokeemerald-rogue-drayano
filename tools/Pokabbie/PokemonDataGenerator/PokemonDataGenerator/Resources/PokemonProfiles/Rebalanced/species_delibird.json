@@ -3,78 +3,104 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_PRESENT",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ICY_WIND",
+            "Level": "5"
+        },
+        {
+            "Move": "MOVE_SWIFT",
+            "Level": "15"
         },
         {
             "Move": "MOVE_DRILL_PECK",
-            "Level": 25
+            "Level": "25"
+        },
+        {
+            "Move": "MOVE_AIR_CUTTER",
+            "Level": "35"
+        },
+        {
+            "Move": "MOVE_BRAVE_BIRD",
+            "Level": "45"
+        },
+        {
+            "Move": "MOVE_AIR_SLASH",
+            "Level": "55"
+        },
+        {
+            "Move": "MOVE_BLIZZARD",
+            "Level": "65"
+        },
+        {
+            "Move": "MOVE_HURRICANE",
+            "Level": "75"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_WATER_PULSE",
-        "MOVE_DUAL_WINGBEAT",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_FOCUS_PUNCH",
-        "MOVE_ICE_BEAM",
-        "MOVE_SPIKES",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_AIR_SLASH",
-        "MOVE_ICE_PUNCH",
-        "MOVE_FOUL_PLAY",
-        "MOVE_ACROBATICS",
         "MOVE_FLY",
         "MOVE_AURORA_VEIL",
-        "MOVE_AURORA_BEAM",
-        "MOVE_SNOWSCAPE",
-        "MOVE_TAILWIND",
-        "MOVE_COUNTER",
-        "MOVE_FLING",
-        "MOVE_RAIN_DANCE",
-        "MOVE_TERA_BLAST",
-        "MOVE_TRIPLE_AXEL",
-        "MOVE_STRENGTH",
-        "MOVE_AERIAL_ACE",
-        "MOVE_MEMENTO",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FAKE_OUT",
-        "MOVE_HELPING_HAND",
-        "MOVE_ICY_WIND",
-        "MOVE_PROTECT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_BRAVE_BIRD",
-        "MOVE_ICE_SHARD",
-        "MOVE_DRILL_RUN",
-        "MOVE_BRICK_BREAK",
         "MOVE_RAPID_SPIN",
-        "MOVE_BLIZZARD",
-        "MOVE_CUT",
-        "MOVE_THIEF",
-        "MOVE_QUICK_ATTACK",
-        "MOVE_REVERSAL",
-        "MOVE_AIR_CUTTER",
-        "MOVE_BODY_SLAM",
-        "MOVE_SWIFT",
-        "MOVE_DESTINY_BOND",
-        "MOVE_GUNK_SHOT",
-        "MOVE_ENDEAVOR",
-        "MOVE_BATON_PASS",
-        "MOVE_HYPER_BEAM",
-        "MOVE_TAKE_DOWN",
-        "MOVE_WEATHER_BALL",
-        "MOVE_ICE_SPINNER",
-        "MOVE_AVALANCHE",
-        "MOVE_SPLASH",
-        "MOVE_CHILLING_WATER",
-        "MOVE_SEED_BOMB",
-        "MOVE_FACADE",
         "MOVE_ENDURE",
-        "MOVE_REST",
-        "MOVE_TRAILBLAZE",
-        "MOVE_HAZE",
-        "MOVE_ICICLE_SPEAR",
+        "MOVE_HELPING_HAND",
+        "MOVE_WORK_UP",
+        "MOVE_WEATHER_BALL",
+        "MOVE_U_TURN",
+        "MOVE_FAKE_OUT",
+        "MOVE_STRENGTH",
+        "MOVE_NASTY_PLOT",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_AURORA_BEAM",
+        "MOVE_ICE_SHARD",
+        "MOVE_GUNK_SHOT",
+        "MOVE_COUNTER",
+        "MOVE_DRILL_RUN",
+        "MOVE_DESTINY_BOND",
+        "MOVE_REVERSAL",
+        "MOVE_FLING",
+        "MOVE_SUBSTITUTE",
         "MOVE_FEATHER_DANCE",
-        "MOVE_FREEZE_DRY"
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_AERIAL_ACE",
+        "MOVE_AVALANCHE",
+        "MOVE_HAZE",
+        "MOVE_ICE_BEAM",
+        "MOVE_AGILITY",
+        "MOVE_RAIN_DANCE",
+        "MOVE_FREEZE_DRY",
+        "MOVE_PROTECT",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_DUAL_WINGBEAT",
+        "MOVE_BRICK_BREAK",
+        "MOVE_TAILWIND",
+        "MOVE_ICE_SPINNER",
+        "MOVE_SNOWSCAPE",
+        "MOVE_SPLASH",
+        "MOVE_BATON_PASS",
+        "MOVE_MEMENTO",
+        "MOVE_WATER_PULSE",
+        "MOVE_TAKE_DOWN",
+        "MOVE_ENDEAVOR",
+        "MOVE_CHILLING_WATER",
+        "MOVE_FOUL_PLAY",
+        "MOVE_HYPER_BEAM",
+        "MOVE_ICICLE_SPEAR",
+        "MOVE_ICE_PUNCH",
+        "MOVE_ACROBATICS",
+        "MOVE_SEED_BOMB",
+        "MOVE_TRIPLE_AXEL",
+        "MOVE_SLEEP_TALK",
+        "MOVE_TERA_BLAST",
+        "MOVE_CUT",
+        "MOVE_SPIKES",
+        "MOVE_HONE_CLAWS",
+        "MOVE_TRAILBLAZE",
+        "MOVE_BODY_SLAM"
     ],
     "CompetitiveSets": [
         {
@@ -128,6 +154,57 @@
             "SourceTiers": [
                 "GEN9ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_RAPID_SPIN",
+                "MOVE_ICY_WIND",
+                "MOVE_DESTINY_BOND"
+            ],
+            "Item": "ITEM_FOCUS_SASH",
+            "Ability": "ABILITY_TECHNICIAN",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Lead",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_BLIZZARD",
+                "MOVE_HURRICANE",
+                "MOVE_U_TURN",
+                "MOVE_WATER_PULSE"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_SHEER_FORCE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Choice Scarf",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_ICE_BEAM",
+                "MOVE_AIR_SLASH",
+                "MOVE_NASTY_PLOT",
+                "MOVE_WATER_PULSE"
+            ],
+            "Item": "ITEM_LIFE_ORB",
+            "Ability": "ABILITY_SHEER_FORCE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Nasty Plot",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

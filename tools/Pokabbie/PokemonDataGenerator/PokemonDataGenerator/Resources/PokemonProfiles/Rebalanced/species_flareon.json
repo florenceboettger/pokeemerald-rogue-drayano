@@ -3,146 +3,132 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_EMBER",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_TACKLE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_TAKE_DOWN",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_DOUBLE_EDGE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_TAIL_WHIP",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_GROWL",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_SWIFT",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_CHARM",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_BATON_PASS",
-            "Level": 1
+            "Move": "MOVE_EMBER",
+            "Level": "1"
         },
         {
             "Move": "MOVE_HELPING_HAND",
-            "Level": 1
+            "Level": "1"
         },
         {
-            "Move": "MOVE_COVET",
-            "Level": 1
+            "Move": "MOVE_TACKLE",
+            "Level": "1"
         },
         {
-            "Move": "MOVE_COPYCAT",
-            "Level": 1
+            "Move": "MOVE_TAIL_WHIP",
+            "Level": "1"
         },
         {
             "Move": "MOVE_SAND_ATTACK",
-            "Level": 5
-        },
-        {
-            "Move": "MOVE_QUICK_ATTACK",
-            "Level": 10
+            "Level": "5"
         },
         {
             "Move": "MOVE_BABY_DOLL_EYES",
-            "Level": 15
+            "Level": "9"
         },
         {
-            "Move": "MOVE_SMOG",
-            "Level": 20
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": "13"
         },
         {
             "Move": "MOVE_BITE",
-            "Level": 25
+            "Level": "17"
         },
         {
             "Move": "MOVE_FIRE_FANG",
-            "Level": 30
+            "Level": "20"
         },
         {
             "Move": "MOVE_FIRE_SPIN",
-            "Level": 35
+            "Level": "23"
         },
         {
-            "Move": "MOVE_LAVA_PLUME",
-            "Level": 40
+            "Move": "MOVE_FLAME_WHEEL",
+            "Level": "26"
         },
         {
             "Move": "MOVE_SCARY_FACE",
-            "Level": 45
+            "Level": "29"
         },
         {
-            "Move": "MOVE_FLARE_BLITZ",
-            "Level": 50
+            "Move": "MOVE_PLAY_ROUGH",
+            "Level": "33"
+        },
+        {
+            "Move": "MOVE_SMOG",
+            "Level": "37"
+        },
+        {
+            "Move": "MOVE_LAVA_PLUME",
+            "Level": "41"
         },
         {
             "Move": "MOVE_LAST_RESORT",
-            "Level": 55
+            "Level": "45"
+        },
+        {
+            "Move": "MOVE_CLOSE_COMBAT",
+            "Level": "50"
+        },
+        {
+            "Move": "MOVE_FLARE_BLITZ",
+            "Level": "55"
+        },
+        {
+            "Move": "MOVE_SIZZLY_SLIDE",
+            "Level": "60"
         }
     ],
     "TutorMoves": [
-        "MOVE_CALM_MIND",
-        "MOVE_SCORCHING_SANDS",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_HEAT_WAVE",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
-        "MOVE_ROCK_SLIDE",
         "MOVE_DIG",
-        "MOVE_SHADOW_BALL",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_TERA_BLAST",
-        "MOVE_RAIN_DANCE",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_ROAR",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
         "MOVE_CHARM",
-        "MOVE_SLEEP_TALK",
-        "MOVE_FLAME_CHARGE",
-        "MOVE_SCARY_FACE",
-        "MOVE_BODY_SLAM",
-        "MOVE_FAKE_TEARS",
-        "MOVE_SWIFT",
-        "MOVE_SUNNY_DAY",
-        "MOVE_TEMPER_FLARE",
-        "MOVE_FIRE_FANG",
-        "MOVE_ENDEAVOR",
-        "MOVE_BATON_PASS",
-        "MOVE_HYPER_BEAM",
-        "MOVE_SUPERPOWER",
-        "MOVE_TAKE_DOWN",
-        "MOVE_WEATHER_BALL",
-        "MOVE_MUD_SLAP",
-        "MOVE_BURNING_JEALOUSY",
-        "MOVE_FACADE",
-        "MOVE_FIRE_SPIN",
-        "MOVE_ENDURE",
-        "MOVE_OVERHEAT",
+        "MOVE_ROAR",
         "MOVE_CURSE",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_BATON_PASS",
+        "MOVE_BLAZE_KICK",
+        "MOVE_HEAT_WAVE",
+        "MOVE_WEATHER_BALL",
+        "MOVE_TAKE_DOWN",
+        "MOVE_FAKE_TEARS",
+        "MOVE_ENDEAVOR",
         "MOVE_FLAMETHROWER",
-        "MOVE_REST",
-        "MOVE_FLARE_BLITZ",
-        "MOVE_TRAILBLAZE",
+        "MOVE_MUD_SLAP",
+        "MOVE_SHADOW_BALL",
+        "MOVE_CALM_MIND",
         "MOVE_WILL_O_WISP",
+        "MOVE_TEMPER_FLARE",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_OVERHEAT",
         "MOVE_WISH",
+        "MOVE_SUBSTITUTE",
+        "MOVE_HYPER_BEAM",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_REST",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SCORCHING_SANDS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_HYPER_VOICE",
+        "MOVE_RAIN_DANCE",
         "MOVE_STORED_POWER",
-        "MOVE_HYPER_VOICE"
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_WILD_CHARGE",
+        "MOVE_TRAILBLAZE",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_BURNING_JEALOUSY",
+        "MOVE_SUPERPOWER",
+        "MOVE_FLAME_CHARGE",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": [
         {
@@ -203,8 +189,8 @@
         {
             "Moves": [
                 "MOVE_FLARE_BLITZ",
-                "MOVE_SUPERPOWER",
-                "MOVE_RETURN",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_SIZZLY_SLIDE",
                 "MOVE_QUICK_ATTACK"
             ],
             "Ability": "ABILITY_FLASH_FIRE",
@@ -267,6 +253,125 @@
             "SourceTiers": [
                 "GEN9ZU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_SIZZLY_SLIDE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WILD_CHARGE",
+                "MOVE_ROCK_SLIDE"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_FLASH_FIRE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8UU"
+            ],
+            "Name": "Choice Scarf (Rock Slide)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WILD_CHARGE",
+                "MOVE_PLAY_ROUGH"
+            ],
+            "Item": "ITEM_CHOICE_SCARF",
+            "Ability": "ABILITY_FLASH_FIRE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8UU"
+            ],
+            "Name": "Choice Scarf (Play Rough)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WILD_CHARGE",
+                "MOVE_ROCK_SLIDE"
+            ],
+            "Item": "ITEM_CHOICE_BAND",
+            "Ability": "ABILITY_FLASH_FIRE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8UU"
+            ],
+            "Name": "Choice Band (Rock Slide)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SIZZLY_SLIDE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WILD_CHARGE",
+                "MOVE_PLAY_ROUGH"
+            ],
+            "Item": "ITEM_CHOICE_BAND",
+            "Ability": "ABILITY_FLASH_FIRE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8UU"
+            ],
+            "Name": "Choice Band (Play Rough)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SIZZLY_SLIDE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WILD_CHARGE",
+                "MOVE_ROCK_SLIDE"
+            ],
+            "Item": "ITEM_TOXIC_ORB",
+            "Ability": "ABILITY_GUTS",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7UU"
+            ],
+            "Name": "Guts Wallbreaker (Rock Slide)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WILD_CHARGE",
+                "MOVE_PLAY_ROUGH"
+            ],
+            "Item": "ITEM_TOXIC_ORB",
+            "Ability": "ABILITY_GUTS",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7UU"
+            ],
+            "Name": "Guts Wallbreaker (Play Rough)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SIZZLY_SLIDE",
+                "MOVE_FACADE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WILD_CHARGE"
+            ],
+            "Item": "ITEM_TOXIC_ORB",
+            "Ability": "ABILITY_GUTS",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7ZU"
+            ],
+            "Name": "Wallbreaker",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

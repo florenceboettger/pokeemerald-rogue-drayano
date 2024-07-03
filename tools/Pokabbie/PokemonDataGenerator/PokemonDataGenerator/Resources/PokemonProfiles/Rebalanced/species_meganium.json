@@ -95,61 +95,57 @@
         }
     ],
     "TutorMoves": [
-        "MOVE_ANCIENT_POWER",
-        "MOVE_AROMATHERAPY",
-        "MOVE_BODY_PRESS",
-        "MOVE_BODY_SLAM",
-        "MOVE_BULLDOZE",
-        "MOVE_BULLET_SEED",
-        "MOVE_CHARM",
-        "MOVE_COUNTER",
-        "MOVE_CURSE",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_DRAGON_TAIL",
-        "MOVE_EARTHQUAKE",
         "MOVE_ENCORE",
-        "MOVE_ENDEAVOR",
-        "MOVE_ENDURE",
-        "MOVE_ENERGY_BALL",
-        "MOVE_FACADE",
-        "MOVE_FAKE_TEARS",
-        "MOVE_FLAIL",
-        "MOVE_FRENZY_PLANT",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_GIGA_IMPACT",
-        "MOVE_GRASS_KNOT",
-        "MOVE_GRASS_PLEDGE",
-        "MOVE_GRASSY_GLIDE",
+        "MOVE_ROCK_CLIMB",
+        "MOVE_CHARM",
         "MOVE_GRASSY_TERRAIN",
-        "MOVE_HEAL_PULSE",
+        "MOVE_CURSE",
+        "MOVE_ENDURE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_PLAY_ROUGH",
         "MOVE_HELPING_HAND",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_HYPER_BEAM",
-        "MOVE_INGRAIN",
+        "MOVE_BULLDOZE",
+        "MOVE_WEATHER_BALL",
+        "MOVE_DRAGON_TAIL",
+        "MOVE_FAKE_TEARS",
+        "MOVE_TAKE_DOWN",
+        "MOVE_ENDEAVOR",
         "MOVE_KNOCK_OFF",
-        "MOVE_LEAF_STORM",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_MAGICAL_LEAF",
+        "MOVE_BODY_PRESS",
+        "MOVE_HEAL_PULSE",
         "MOVE_MUD_SLAP",
         "MOVE_OUTRAGE",
-        "MOVE_PETAL_BLIZZARD",
-        "MOVE_PROTECT",
-        "MOVE_REFLECT",
+        "MOVE_BULLET_SEED",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_LEAF_STORM",
+        "MOVE_COUNTER",
+        "MOVE_INGRAIN",
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_VINE_WHIP",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_FLAIL",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUBSTITUTE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_GIGA_IMPACT",
+        "MOVE_HYPER_BEAM",
         "MOVE_REST",
+        "MOVE_SUNNY_DAY",
         "MOVE_SEED_BOMB",
         "MOVE_SLEEP_TALK",
-        "MOVE_SOLAR_BEAM",
-        "MOVE_SOLAR_BLADE",
-        "MOVE_STOMPING_TANTRUM",
-        "MOVE_SUBSTITUTE",
-        "MOVE_SUNNY_DAY",
-        "MOVE_SWORDS_DANCE",
-        "MOVE_TAKE_DOWN",
+        "MOVE_ANCIENT_POWER",
         "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_GIGA_DRAIN",
         "MOVE_TRAILBLAZE",
-        "MOVE_VINE_WHIP",
-        "MOVE_WEATHER_BALL",
-        "MOVE_ZEN_HEADBUTT"
+        "MOVE_FACADE",
+        "MOVE_GRASS_KNOT",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_FRENZY_PLANT",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_ENERGY_BALL",
+        "MOVE_GRASS_PLEDGE"
     ],
     "CompetitiveSets": [
         {
@@ -228,7 +224,7 @@
                 "MOVE_SYNTHESIS",
                 "MOVE_DRAGON_TAIL"
             ],
-            "Ability": "ABILITY_OVERGROW",
+            "Ability": "ABILITY_FILTER",
             "Item": "ITEM_LEFTOVERS",
             "Nature": "NATURE_CALM",
             "HiddenPower": null,
@@ -254,6 +250,74 @@
             "SourceTiers": [
                 "GEN7PU"
             ]
+        },
+        {
+            "Moves": [
+                "MOVE_AROMATHERAPY",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_SYNTHESIS",
+                "MOVE_MOONBLAST"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_FILTER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7PU"
+            ],
+            "Name": "Cleric (Moonblast)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_GIGA_DRAIN",
+                "MOVE_DRAINING_KISS",
+                "MOVE_AROMATHERAPY",
+                "MOVE_SYNTHESIS"
+            ],
+            "Item": "ITEM_LEFTOVERS",
+            "Ability": "ABILITY_TRIAGE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Triage (Leftovers)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_GIGA_DRAIN",
+                "MOVE_DRAINING_KISS",
+                "MOVE_MOONBLAST",
+                "MOVE_EARTH_POWER"
+            ],
+            "Item": "ITEM_ASSAULT_VEST",
+            "Ability": "ABILITY_TRIAGE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Triage (Assault Vest)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_GIGA_DRAIN",
+                "MOVE_DRAINING_KISS",
+                "MOVE_REFLECT",
+                "MOVE_LIGHT_SCREEN"
+            ],
+            "Item": "ITEM_LIGHT_CLAY",
+            "Ability": "ABILITY_TRIAGE",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN7NU"
+            ],
+            "Name": "Triage (Dual Screens)",
+            "Nature": "NATURE_HARDY",
+            "TeraType": null
         }
     ]
 }

@@ -21,7 +21,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_IRON_BARBS, ABILITY_BULLETPROOF},
+    #else
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Chespin"),
         .cryId = CRY_CHESPIN,
@@ -69,7 +73,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_IRON_BARBS, ABILITY_BULLETPROOF},
+    #else
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Quilladin"),
         .cryId = CRY_QUILLADIN,
@@ -102,7 +110,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
     [SPECIES_CHESNAUGHT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 93,
+    #else
         .baseHP        = 88,
+    #endif
         .baseAttack    = 107,
         .baseDefense   = 122,
         .baseSpeed     = 64,
@@ -117,7 +129,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_OVERGROW, ABILITY_IRON_BARBS, ABILITY_BULLETPROOF},
+    #else
+        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_BULLETPROOF},
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Chesnaught"),
         .cryId = CRY_CHESNAUGHT,
@@ -166,7 +182,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_MAGICIAN, ABILITY_MAGIC_GUARD},
+    #else
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Fennekin"),
         .cryId = CRY_FENNEKIN,
@@ -214,7 +234,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_MAGICIAN, ABILITY_MAGIC_GUARD},
+    #else
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Braixen"),
         .cryId = CRY_BRAIXEN,
@@ -251,7 +275,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseAttack    = 69,
         .baseDefense   = 72,
         .baseSpeed     = 104,
+    #ifdef ROGUE_DRAYANO
+        .baseSpAttack  = 115,
+    #else
         .baseSpAttack  = 114,
+    #endif
         .baseSpDefense = 100,
         .types = { TYPE_FIRE, TYPE_PSYCHIC },
         .catchRate = 45,
@@ -262,7 +290,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
-        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_BLAZE, ABILITY_MAGICIAN, ABILITY_MAGIC_GUARD},
+    #else
+        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_MAGICIAN},
+    #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Delphox"),
         .cryId = CRY_DELPHOX,
@@ -311,7 +343,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_WATER_1 },
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+    #else
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Froakie"),
         .cryId = CRY_FROAKIE,
@@ -359,7 +395,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_WATER_1 },
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+    #else
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Frogadier"),
         .cryId = CRY_FROGADIER,
@@ -390,6 +430,24 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GRENINJA}),
     },
 
+#ifdef ROGUE_DRAYANO
+#define GRENINJA_NORMAL_MISC_INFO           \
+        .baseHP        = 72,                \
+        .baseAttack    = 100,               \
+        .baseDefense   = 67,                \
+        .baseSpeed     = 122,               \
+        .baseSpAttack  = 103,               \
+        .baseSpDefense = 71,                \
+        .expYield = 239,                    \
+        .description = gGreninjaPokedexText,\
+        FRONT_PIC(Greninja, 64, 56),        \
+        .frontPicYOffset = 7,               \
+        .frontAnimFrames = sAnims_Greninja, \
+        BACK_PIC(Greninja, 64, 48),         \
+        .backPicYOffset = 11,               \
+        PALETTES(Greninja),                 \
+        ICON(Greninja, 0)
+#else
 #define GRENINJA_NORMAL_MISC_INFO           \
         .baseHP        = 72,                \
         .baseAttack    = 95,                \
@@ -406,6 +464,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .backPicYOffset = 11,               \
         PALETTES(Greninja),                 \
         ICON(Greninja, 0)
+#endif
 
 #define GRENINJA_MISC_INFO                              \
         .types = { TYPE_WATER, TYPE_DARK },             \
@@ -436,7 +495,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         GRENINJA_NORMAL_MISC_INFO,
         .genderRatio = PERCENT_FEMALE(12.5),
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_WATER_1 },
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_TORRENT, ABILITY_INFILTRATOR, ABILITY_PROTEAN},
+    #else
+        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_PROTEAN},
+    #endif
         .frontAnimId = ANIM_V_STRETCH,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
     },
@@ -487,12 +550,21 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #if P_FAMILY_BUNNELBY
     [SPECIES_BUNNELBY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 45,
+        .baseAttack    = 38,
+        .baseDefense   = 40,
+        .baseSpeed     = 57,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 40,
+    #else
         .baseHP        = 38,
         .baseAttack    = 36,
         .baseDefense   = 38,
         .baseSpeed     = 57,
         .baseSpAttack  = 32,
         .baseSpDefense = 36,
+    #endif
         .types = { TYPE_NORMAL, TYPE_NORMAL },
         .catchRate = 255,
         .expYield = 47,
@@ -535,12 +607,21 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
     [SPECIES_DIGGERSBY] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 101,
+        .baseAttack    = 61,
+        .baseDefense   = 80,
+        .baseSpeed     = 78,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 85,
         .baseAttack    = 56,
         .baseDefense   = 77,
         .baseSpeed     = 78,
         .baseSpAttack  = 50,
         .baseSpDefense = 77,
+    #endif
         .types = { TYPE_NORMAL, TYPE_GROUND },
         .catchRate = 127,
         .expYield = 148,
@@ -682,7 +763,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     [SPECIES_TALONFLAME] =
     {
         .baseHP        = 78,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 91,
+    #else
         .baseAttack    = 81,
+    #endif
         .baseDefense   = 71,
         .baseSpeed     = 126,
         .baseSpAttack  = 74,
@@ -825,6 +910,51 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .evolutions = EVOLUTION({EVO_LEVEL, 12, SPECIES_VIVILLON_ICY_SNOW}),
     },
 
+#ifdef ROGUE_DRAYANO
+#define VIVILLON_MISC_INFO(form, color, iconPal)                                            \
+        .baseHP        = 90,                                                                \
+        .baseAttack    = 50,                                                                \
+        .baseDefense   = 55,                                                                \
+        .baseSpeed     = 110,                                                               \
+        .baseSpAttack  = 115,                                                               \
+        .baseSpDefense = 55,                                                                \
+        .types = { TYPE_BUG, TYPE_FLYING },                                                 \
+        .catchRate = 45,                                                                    \
+        .expYield = 185,                                                                    \
+        .evYield_HP = 1,                                                                    \
+        .evYield_Speed = 1,                                                                 \
+        .evYield_SpAttack = 1,                                                              \
+        .genderRatio = PERCENT_FEMALE(50),                                                  \
+        .eggCycles = 15,                                                                    \
+        .friendship = STANDARD_FRIENDSHIP,                                                  \
+        .growthRate = GROWTH_MEDIUM_FAST,                                                   \
+        .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG },                                      \
+        .abilities = { ABILITY_SHIELD_DUST, ABILITY_COMPOUND_EYES, ABILITY_FRIEND_GUARD },  \
+        .bodyColor = color,                                                                 \
+        .speciesName = _("Vivillon"),                                                       \
+        .cryId = CRY_VIVILLON,                                                              \
+        .natDexNum = NATIONAL_DEX_VIVILLON,                                                 \
+        .categoryName = _("Scale"),                                                         \
+        .height = 12,                                                                       \
+        .weight = 170,                                                                      \
+        .pokemonScale = 282,                                                                \
+        .pokemonOffset = 4,                                                                 \
+        .trainerScale = 256,                                                                \
+        .trainerOffset = 0,                                                                 \
+        FRONT_PIC(Vivillon ##form, 64, 64),                                                 \
+        .frontPicYOffset = 0,                                                               \
+        .frontAnimFrames = sAnims_Vivillon,                                                 \
+        .frontAnimId = ANIM_ZIGZAG_SLOW,                                                    \
+        .enemyMonElevation = 9,                                                             \
+        BACK_PIC(Vivillon ##form, 64, 64),                                                  \
+        .backPicYOffset = 0,                                                                \
+        .backAnimId = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,                                    \
+        PALETTES(Vivillon ##form),                                                           \
+        ICON(Vivillon ##form, iconPal),                                                     \
+        .footprint = gMonFootprint_Vivillon,                                                \
+        LEARNSETS(Vivillon),                                                                \
+        .formSpeciesIdTable = sVivillonFormSpeciesIdTable
+#else
 #define VIVILLON_MISC_INFO(form, color, iconPal)                                            \
         .baseHP        = 80,                                                                \
         .baseAttack    = 52,                                                                \
@@ -868,6 +998,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .footprint = gMonFootprint_Vivillon,                                                \
         LEARNSETS(Vivillon),                                                                \
         .formSpeciesIdTable = sVivillonFormSpeciesIdTable
+#endif
 
     [SPECIES_VIVILLON_ICY_SNOW] =
     {
@@ -1055,7 +1186,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     [SPECIES_LITLEO] =
     {
         .baseHP        = 62,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 70,
+    #else
         .baseAttack    = 50,
+    #endif
         .baseDefense   = 58,
         .baseSpeed     = 72,
         .baseSpAttack  = 73,
@@ -1103,7 +1238,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     [SPECIES_PYROAR] =
     {
         .baseHP        = 86,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 103,
+    #else
         .baseAttack    = 68,
+    #endif
         .baseDefense   = 72,
         .baseSpeed     = 106,
         .baseSpAttack  = 109,
@@ -1152,6 +1291,51 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #endif //P_FAMILY_LITLEO
 
 #if P_FAMILY_FLABEBE
+#ifdef ROGUE_DRAYANO
+
+#define FLABEBE_MISC_INFO(Form, FORM, iconPal)                                  \
+        .baseHP        = 44,                                                    \
+        .baseAttack    = 38,                                                    \
+        .baseDefense   = 39,                                                    \
+        .baseSpeed     = 42,                                                    \
+        .baseSpAttack  = 61,                                                    \
+        .baseSpDefense = 79,                                                    \
+        .types = { TYPE_FAIRY, TYPE_FAIRY },                                    \
+        .catchRate = 225,                                                       \
+        .expYield = 61,                                                         \
+        .evYield_SpDefense = 1,                                                 \
+        .genderRatio = MON_FEMALE,                                              \
+        .eggCycles = 20,                                                        \
+        .friendship = STANDARD_FRIENDSHIP,                                      \
+        .growthRate = GROWTH_MEDIUM_FAST,                                       \
+        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_FAIRY },                      \
+        .abilities = { ABILITY_FLOWER_VEIL, ABILITY_NATURAL_CURE, ABILITY_SYMBIOSIS },  \
+        .bodyColor = BODY_COLOR_WHITE,                                          \
+        .speciesName = _("Flabébé"),                                            \
+        .cryId = CRY_FLABEBE,                                                   \
+        .natDexNum = NATIONAL_DEX_FLABEBE,                                      \
+        .categoryName = _("Single Bloom"),                                      \
+        .height = 1,                                                            \
+        .weight = 1,                                                            \
+        .pokemonScale = 682,                                                    \
+        .pokemonOffset = 24,                                                    \
+        .trainerScale = 256,                                                    \
+        .trainerOffset = 0,                                                     \
+        FRONT_PIC(Flabebe, 48, 56),                                             \
+        .frontPicYOffset = 6,                                                   \
+        .frontAnimFrames = sAnims_Flabebe,                                      \
+        .frontAnimId = ANIM_H_SLIDE_SLOW,                                       \
+        .enemyMonElevation = 6,                                                 \
+        BACK_PIC(Flabebe, 64, 40),                                              \
+        .backPicYOffset = 12,                                                   \
+        .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,                              \
+        PALETTES(Flabebe##Form##Flower),                                         \
+        ICON(Flabebe##Form##Flower, iconPal),                                   \
+        .footprint = gMonFootprint_Flabebe,                                     \
+        LEARNSETS(Flabebe),                                                     \
+        .formSpeciesIdTable = sFlabebeFormSpeciesIdTable,                       \
+        .evolutions = EVOLUTION({EVO_LEVEL, 19, SPECIES_FLOETTE_ ##FORM##_FLOWER})
+#else
 #define FLABEBE_MISC_INFO(Form, FORM, iconPal)                                  \
         .baseHP        = 44,                                                    \
         .baseAttack    = 38,                                                    \
@@ -1194,6 +1378,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         LEARNSETS(Flabebe),                                                     \
         .formSpeciesIdTable = sFlabebeFormSpeciesIdTable,                       \
         .evolutions = EVOLUTION({EVO_LEVEL, 19, SPECIES_FLOETTE_ ##FORM##_FLOWER})
+#endif
 
     [SPECIES_FLABEBE_RED_FLOWER] =
     {
@@ -1241,6 +1426,34 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "then it goes to sleep."),
     },
 
+#ifdef ROGUE_DRAYANO
+#define FLOETTE_MISC_INFO(form, FORM, iconPal)                                  \
+        .types = { TYPE_FAIRY, TYPE_FAIRY },                                    \
+        .catchRate = 120,                                                       \
+        .evYield_SpDefense = 2,                                                 \
+        .genderRatio = MON_FEMALE,                                              \
+        .eggCycles = 20,                                                        \
+        .friendship = STANDARD_FRIENDSHIP,                                      \
+        .growthRate = GROWTH_MEDIUM_FAST,                                       \
+        .abilities = { ABILITY_FLOWER_VEIL, ABILITY_NATURAL_CURE, ABILITY_SYMBIOSIS },  \
+        .bodyColor = BODY_COLOR_WHITE,                                          \
+        .speciesName = _("Floette"),                                            \
+        .natDexNum = NATIONAL_DEX_FLOETTE,                                      \
+        .categoryName = _("Single Bloom"),                                      \
+        .height = 2,                                                            \
+        .weight = 9,                                                            \
+        .pokemonScale = 682,                                                    \
+        .pokemonOffset = 24,                                                    \
+        .trainerScale = 256,                                                    \
+        .trainerOffset = 0,                                                     \
+        .frontAnimFrames = sAnims_Floette,                                      \
+        .frontAnimId = ANIM_V_SLIDE_WOBBLE,                                     \
+        .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,                              \
+        PALETTES(Floette ##form##Flower),                                        \
+        ICON(Floette##form##Flower, iconPal),                                   \
+        .footprint = gMonFootprint_Floette,                                     \
+        .formSpeciesIdTable = sFloetteFormSpeciesIdTable
+#else
 #define FLOETTE_MISC_INFO(form, FORM, iconPal)                                  \
         .types = { TYPE_FAIRY, TYPE_FAIRY },                                    \
         .catchRate = 120,                                                       \
@@ -1267,6 +1480,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         ICON(Floette##form##Flower, iconPal),                                   \
         .footprint = gMonFootprint_Floette,                                     \
         .formSpeciesIdTable = sFloetteFormSpeciesIdTable
+#endif
 
 #define FLOETTE_NORMAL_INFO(form, FORM, iconPal)                                                \
         .baseHP        = 54,                                                                    \
@@ -1357,6 +1571,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         LEARNSETS(FloetteEternalFlower),
     },
 
+#ifdef ROGUE_DRAYANO
 #define FLORGES_MISC_INFO(Form, iconPal)                                        \
         .baseHP        = 78,                                                    \
         .baseAttack    = 65,                                                    \
@@ -1397,6 +1612,48 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .footprint = gMonFootprint_Florges,                                     \
         LEARNSETS(Florges),                                                     \
         .formSpeciesIdTable = sFlorgesFormSpeciesIdTable
+#else
+#define FLORGES_MISC_INFO(Form, iconPal)                                        \
+        .baseHP        = 78,                                                    \
+        .baseAttack    = 65,                                                    \
+        .baseDefense   = 68,                                                    \
+        .baseSpeed     = 75,                                                    \
+        .baseSpAttack  = 112,                                                   \
+        .baseSpDefense = 154,                                                   \
+        .types = { TYPE_FAIRY, TYPE_FAIRY },                                    \
+        .catchRate = 45,                                                        \
+        .expYield = 248,                                                        \
+        .evYield_SpDefense = 3,                                                 \
+        .genderRatio = MON_FEMALE,                                              \
+        .eggCycles = 20,                                                        \
+        .friendship = STANDARD_FRIENDSHIP,                                      \
+        .growthRate = GROWTH_MEDIUM_FAST,                                       \
+        .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_FAIRY },                      \
+        .abilities = { ABILITY_FLOWER_VEIL, ABILITY_NATURAL_CURE, ABILITY_SYMBIOSIS },  \
+        .bodyColor = BODY_COLOR_WHITE,                                          \
+        .speciesName = _("Florges"),                                            \
+        .cryId = CRY_FLORGES,                                                   \
+        .natDexNum = NATIONAL_DEX_FLORGES,                                      \
+        .categoryName = _("Garden"),                                            \
+        .height = 11,                                                           \
+        .weight = 100,                                                          \
+        .pokemonScale = 320,                                                    \
+        .pokemonOffset = 7,                                                     \
+        .trainerScale = 256,                                                    \
+        .trainerOffset = 0,                                                     \
+        FRONT_PIC(Florges, 64, 64),                                             \
+        .frontPicYOffset = 0,                                                   \
+        .frontAnimFrames = sAnims_Florges,                                      \
+        .frontAnimId = ANIM_V_SLIDE_SLOW,                                       \
+        BACK_PIC(Florges, 64, 48),                                              \
+        .backPicYOffset = 9,                                                    \
+        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,                            \
+        PALETTES(Florges##Form##Flower),                                         \
+        ICON(Florges##Form##Flower, iconPal),                                   \
+        .footprint = gMonFootprint_Florges,                                     \
+        LEARNSETS(Florges),                                                     \
+        .formSpeciesIdTable = sFlorgesFormSpeciesIdTable
+#endif
 
     [SPECIES_FLORGES_RED_FLOWER] =
     {
@@ -1453,7 +1710,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 52,
         .baseSpAttack  = 62,
         .baseSpDefense = 57,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_GRASS, TYPE_NORMAL },
+    #else
         .types = { TYPE_GRASS, TYPE_GRASS },
+    #endif
         .catchRate = 200,
         .expYield = 70,
         .evYield_HP = 1,
@@ -1495,6 +1756,15 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
     [SPECIES_GOGOAT] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 123,
+        .baseAttack    = 108,
+        .baseDefense   = 72,
+        .baseSpeed     = 74,
+        .baseSpAttack  = 67,
+        .baseSpDefense = 87,
+        .types = { TYPE_GRASS, TYPE_NORMAL },
+    #else
         .baseHP        = 123,
         .baseAttack    = 100,
         .baseDefense   = 62,
@@ -1502,6 +1772,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpAttack  = 97,
         .baseSpDefense = 81,
         .types = { TYPE_GRASS, TYPE_GRASS },
+    #endif
         .catchRate = 45,
         .expYield = 186,
         .evYield_HP = 2,
@@ -1641,6 +1912,43 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #endif //P_FAMILY_PANCHAM
 
 #if P_FAMILY_FURFROU
+#ifdef ROGUE_DRAYANO
+#define FURFROU_MISC_INFO                                   \
+        .baseHP        = 75,                                \
+        .baseAttack    = 90,                                \
+        .baseDefense   = 60,                                \
+        .baseSpeed     = 102,                               \
+        .baseSpAttack  = 65,                                \
+        .baseSpDefense = 100,                               \
+        .types = { TYPE_NORMAL, TYPE_NORMAL },              \
+        .catchRate = 160,                                   \
+        .expYield = 165,                                    \
+        .evYield_Speed = 1,                                 \
+        .genderRatio = PERCENT_FEMALE(50),                  \
+        .eggCycles = 20,                                    \
+        .friendship = STANDARD_FRIENDSHIP,                  \
+        .growthRate = GROWTH_MEDIUM_FAST,                   \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },  \
+        .abilities = { ABILITY_FUR_COAT, ABILITY_NONE },    \
+        .bodyColor = BODY_COLOR_WHITE,                      \
+        .speciesName = _("Furfrou"),                        \
+        .cryId = CRY_FURFROU,                               \
+        .natDexNum = NATIONAL_DEX_FURFROU,                  \
+        .categoryName = _("Poodle"),                        \
+        .height = 12,                                       \
+        .weight = 280,                                      \
+        .description = gFurfrouPokedexText,                 \
+        .pokemonScale = 282,                                \
+        .pokemonOffset = 4,                                 \
+        .trainerScale = 256,                                \
+        .trainerOffset = 0,                                 \
+        .frontAnimFrames = sAnims_Furfrou,                  \
+        .frontAnimId = ANIM_H_SLIDE,                        \
+        .backAnimId = BACK_ANIM_V_STRETCH,                  \
+        .footprint = gMonFootprint_Furfrou,                 \
+        LEARNSETS(Furfrou),                                 \
+        .formSpeciesIdTable = sFurfrouFormSpeciesIdTable
+#else
 #define FURFROU_MISC_INFO                                   \
         .baseHP        = 75,                                \
         .baseAttack    = 80,                                \
@@ -1676,6 +1984,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .footprint = gMonFootprint_Furfrou,                 \
         LEARNSETS(Furfrou),                                 \
         .formSpeciesIdTable = sFurfrouFormSpeciesIdTable
+#endif
 
     [SPECIES_FURFROU_NATURAL] =
     {
@@ -1830,6 +2139,39 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
                                 {EVO_LEVEL_FEMALE, 25, SPECIES_MEOWSTIC_FEMALE}),
     },
 
+#ifdef ROGUE_DRAYANO
+#define MEOWSTIC_MISC_INFO                                  \
+        .baseHP        = 74,                                \
+        .baseAttack    = 48,                                \
+        .baseDefense   = 76,                                \
+        .baseSpeed     = 104,                               \
+        .baseSpAttack  = 93,                                \
+        .baseSpDefense = 81,                                \
+        .types = { TYPE_PSYCHIC, TYPE_PSYCHIC },            \
+        .catchRate = 75,                                    \
+        .expYield = 163,                                    \
+        .evYield_Speed = 2,                                 \
+        .eggCycles = 20,                                    \
+        .friendship = STANDARD_FRIENDSHIP,                  \
+        .growthRate = GROWTH_MEDIUM_FAST,                   \
+        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },  \
+        .speciesName = _("Meowstic"),                       \
+        .cryId = CRY_MEOWSTIC,                              \
+        .natDexNum = NATIONAL_DEX_MEOWSTIC,                 \
+        .categoryName = _("Constraint"),                    \
+        .height = 6,                                        \
+        .weight = 85,                                       \
+        .pokemonScale = 422,                                \
+        .pokemonOffset = 12,                                \
+        .trainerScale = 256,                                \
+        .trainerOffset = 0,                                 \
+        .frontAnimFrames = sAnims_Meowstic,                 \
+        .frontAnimId = ANIM_GROW_VIBRATE,                   \
+        .backPicYOffset = 9,                                \
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,          \
+        .footprint = gMonFootprint_Meowstic,                \
+        .formSpeciesIdTable = sMeowsticFormSpeciesIdTable
+#else
 #define MEOWSTIC_MISC_INFO                                  \
         .baseHP        = 74,                                \
         .baseAttack    = 48,                                \
@@ -1861,6 +2203,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,          \
         .footprint = gMonFootprint_Meowstic,                \
         .formSpeciesIdTable = sMeowsticFormSpeciesIdTable
+#endif
 
     [SPECIES_MEOWSTIC_MALE] =
     {
@@ -2138,12 +2481,21 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 
     [SPECIES_AROMATISSE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 101,
+        .baseAttack    = 72,
+        .baseDefense   = 80,
+        .baseSpeed     = 29,
+        .baseSpAttack  = 109,
+        .baseSpDefense = 99,
+    #else
         .baseHP        = 101,
         .baseAttack    = 72,
         .baseDefense   = 72,
         .baseSpeed     = 29,
         .baseSpAttack  = 99,
         .baseSpDefense = 89,
+    #endif
         .types = { TYPE_FAIRY, TYPE_FAIRY },
         .catchRate = 140,
         .expYield = 162,
@@ -2237,7 +2589,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     [SPECIES_SLURPUFF] =
     {
         .baseHP        = 82,
+    #ifdef ROGUE_DRAYANO
+        .baseAttack    = 90,
+    #else
         .baseAttack    = 80,
+    #endif
         .baseDefense   = 86,
         .baseSpeed     = 72,
         .baseSpAttack  = 85,
@@ -3023,12 +3379,21 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #if P_FAMILY_DEDENNE
     [SPECIES_DEDENNE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 67,
+        .baseAttack    = 58,
+        .baseDefense   = 67,
+        .baseSpeed     = 101,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 67,
+    #else
         .baseHP        = 67,
         .baseAttack    = 58,
         .baseDefense   = 57,
         .baseSpeed     = 101,
         .baseSpAttack  = 81,
         .baseSpDefense = 67,
+    #endif
         .types = { TYPE_ELECTRIC, TYPE_FAIRY },
         .catchRate = 180,
         .expYield = 151,
@@ -3038,7 +3403,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FAIRY },
-        .abilities = { ABILITY_CHEEK_POUCH, ABILITY_PICKUP, ABILITY_PLUS },
+    #ifdef ROGUE_DRAYANO
+        .abilities = {ABILITY_CHEEK_POUCH, ABILITY_PICKUP, ABILITY_ELECTRIC_SURGE},
+    #else
+        .abilities = {ABILITY_CHEEK_POUCH, ABILITY_PICKUP, ABILITY_PLUS},
+    #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Dedenne"),
         .cryId = CRY_DEDENNE,
@@ -3129,7 +3498,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 55,
         .baseSpDefense = 75,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_DRAGON, TYPE_WATER },
+    #else
         .types = { TYPE_DRAGON, TYPE_DRAGON },
+    #endif
         .catchRate = 45,
         .expYield = 60,
         .evYield_SpDefense = 1,
@@ -3197,7 +3570,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 60,
         .baseSpAttack  = 83,
         .baseSpDefense = 113,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_DRAGON, TYPE_WATER },
+    #else
         .types = { TYPE_DRAGON, TYPE_DRAGON },
+    #endif
         .abilities = { ABILITY_SAP_SIPPER, ABILITY_HYDRATION, ABILITY_GOOEY },
         .categoryName = _("Soft Tissue"),
         .height = 8,
@@ -3250,7 +3627,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 110,
         .baseSpDefense = 150,
+    #ifdef ROGUE_DRAYANO
+        .types = { TYPE_DRAGON, TYPE_WATER },
+    #else
         .types = { TYPE_DRAGON, TYPE_DRAGON },
+    #endif
         .abilities = { ABILITY_SAP_SIPPER, ABILITY_HYDRATION, ABILITY_GOOEY },
         .categoryName = _("Dragon"),
         .height = 20,
@@ -3504,6 +3885,31 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
 #endif //P_FAMILY_PHANTUMP
 
 #if P_FAMILY_PUMPKABOO
+#ifdef ROGUE_DRAYANO
+#define PUMPKABOO_MISC_INFO                                                 \
+        .types = { TYPE_GHOST, TYPE_GRASS },                                \
+        .catchRate = 120,                                                   \
+        .expYield = 67,                                                     \
+        .evYield_Defense = 1,                                               \
+        .genderRatio = PERCENT_FEMALE(50),                                  \
+        .eggCycles = 20,                                                    \
+        .friendship = STANDARD_FRIENDSHIP,                                  \
+        .growthRate = GROWTH_MEDIUM_FAST,                                   \
+        .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS },          \
+        .abilities = { ABILITY_PICKUP, ABILITY_FRISK, ABILITY_FLASH_FIRE },   \
+        .bodyColor = BODY_COLOR_BROWN,                                      \
+        .speciesName = _("Pumpkaboo"),                                      \
+        .natDexNum = NATIONAL_DEX_PUMPKABOO,                                \
+        .categoryName = _("Pumpkin"),                                       \
+        .frontAnimFrames = sAnims_Pumpkaboo,                                \
+        .frontAnimId = ANIM_V_SLIDE_WOBBLE,                                 \
+        .backAnimId = BACK_ANIM_TRIANGLE_DOWN,                              \
+        PALETTES(Pumpkaboo),                                                \
+        ICON(Pumpkaboo, 2),                                                 \
+        .footprint = gMonFootprint_Pumpkaboo,                               \
+        LEARNSETS(Pumpkaboo),                                               \
+        .formSpeciesIdTable = sPumpkabooFormSpeciesIdTable
+#else
 #define PUMPKABOO_MISC_INFO                                                 \
         .types = { TYPE_GHOST, TYPE_GRASS },                                \
         .catchRate = 120,                                                   \
@@ -3527,6 +3933,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .footprint = gMonFootprint_Pumpkaboo,                               \
         LEARNSETS(Pumpkaboo),                                               \
         .formSpeciesIdTable = sPumpkabooFormSpeciesIdTable
+#endif
 
     [SPECIES_PUMPKABOO_AVERAGE] =
     {
@@ -3643,6 +4050,31 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
                                 {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GOURGEIST_SUPER}),
     },
 
+#ifdef ROGUE_DRAYANO
+#define GOURGEIST_MISC_INFO                                                 \
+        .types = { TYPE_GHOST, TYPE_GRASS },                                \
+        .catchRate = 60,                                                    \
+        .expYield = 173,                                                    \
+        .evYield_Defense = 2,                                               \
+        .genderRatio = PERCENT_FEMALE(50),                                  \
+        .eggCycles = 20,                                                    \
+        .friendship = STANDARD_FRIENDSHIP,                                  \
+        .growthRate = GROWTH_MEDIUM_FAST,                                   \
+        .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS },          \
+        .abilities = { ABILITY_PICKUP, ABILITY_FRISK, ABILITY_FLASH_FIRE },   \
+        .bodyColor = BODY_COLOR_BROWN,                                      \
+        .speciesName = _("Gourgeist"),                                      \
+        .natDexNum = NATIONAL_DEX_GOURGEIST,                                \
+        .categoryName = _("Pumpkin"),                                       \
+        .frontAnimFrames = sAnims_Gourgeist,                                \
+        .frontAnimId = ANIM_SHRINK_GROW,                                    \
+        .backAnimId = BACK_ANIM_V_STRETCH,                                  \
+        PALETTES(Gourgeist),                                                \
+        ICON(Gourgeist, 2),                                                 \
+        .footprint = gMonFootprint_Gourgeist,                               \
+        LEARNSETS(Gourgeist),                                               \
+        .formSpeciesIdTable = sGourgeistFormSpeciesIdTable
+#else
 #define GOURGEIST_MISC_INFO                                                 \
         .types = { TYPE_GHOST, TYPE_GRASS },                                \
         .catchRate = 60,                                                    \
@@ -3666,6 +4098,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .footprint = gMonFootprint_Gourgeist,                               \
         LEARNSETS(Gourgeist),                                               \
         .formSpeciesIdTable = sGourgeistFormSpeciesIdTable
+#endif
 
     [SPECIES_GOURGEIST_AVERAGE] =
     {

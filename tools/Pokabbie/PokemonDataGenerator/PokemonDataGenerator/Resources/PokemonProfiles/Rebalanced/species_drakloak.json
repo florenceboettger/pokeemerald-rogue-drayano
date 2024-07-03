@@ -3,119 +3,123 @@
     "LevelUpMoves": [
         {
             "Move": "MOVE_DRAGON_PULSE",
-            "Level": 0
+            "Level": "0"
         },
         {
-            "Move": "MOVE_BITE",
-            "Level": 1
-        },
-        {
-            "Move": "MOVE_QUICK_ATTACK",
-            "Level": 1
+            "Move": "MOVE_DRAGON_PULSE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_ASTONISH",
-            "Level": 1
+            "Level": "1"
         },
         {
             "Move": "MOVE_INFESTATION",
-            "Level": 1
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_QUICK_ATTACK",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_BITE",
+            "Level": "1"
         },
         {
             "Move": "MOVE_LOCK_ON",
-            "Level": 6
+            "Level": "6"
         },
         {
             "Move": "MOVE_ASSURANCE",
-            "Level": 12
+            "Level": "11"
         },
         {
             "Move": "MOVE_HEX",
-            "Level": 18
+            "Level": "16"
         },
         {
             "Move": "MOVE_AGILITY",
-            "Level": 24
+            "Level": "21"
+        },
+        {
+            "Move": "MOVE_SHADOW_SNEAK",
+            "Level": "26"
         },
         {
             "Move": "MOVE_DOUBLE_HIT",
-            "Level": 30
+            "Level": "31"
         },
         {
             "Move": "MOVE_U_TURN",
-            "Level": 36
+            "Level": "36"
         },
         {
             "Move": "MOVE_DRAGON_DANCE",
-            "Level": 42
+            "Level": "41"
         },
         {
             "Move": "MOVE_PHANTOM_FORCE",
-            "Level": 48
+            "Level": "46"
         },
         {
             "Move": "MOVE_TAKE_DOWN",
-            "Level": 54
+            "Level": "51"
+        },
+        {
+            "Move": "MOVE_SHADOW_CLAW",
+            "Level": "56"
         },
         {
             "Move": "MOVE_DRAGON_RUSH",
-            "Level": 61
+            "Level": "61"
         },
         {
             "Move": "MOVE_DOUBLE_EDGE",
-            "Level": 66
+            "Level": "66"
         },
         {
             "Move": "MOVE_LAST_RESORT",
-            "Level": 72
+            "Level": "72"
         }
     ],
     "TutorMoves": [
-        "MOVE_AGILITY",
-        "MOVE_PHANTOM_FORCE",
-        "MOVE_POUNCE",
-        "MOVE_BREAKING_SWIPE",
-        "MOVE_U_TURN",
-        "MOVE_HIDDEN_POWER",
         "MOVE_RETURN",
-        "MOVE_THUNDER_WAVE",
-        "MOVE_SURF",
+        "MOVE_POUNCE",
+        "MOVE_CURSE",
+        "MOVE_ENDURE",
+        "MOVE_SWIFT",
+        "MOVE_THUNDER",
+        "MOVE_BATON_PASS",
+        "MOVE_HELPING_HAND",
         "MOVE_DRAGON_TAIL",
         "MOVE_SHADOW_BALL",
-        "MOVE_DRAGON_CHEER",
-        "MOVE_PSYCHIC_FANGS",
-        "MOVE_TOXIC",
-        "MOVE_DOUBLE_EDGE",
-        "MOVE_DRACO_METEOR",
-        "MOVE_ACROBATICS",
-        "MOVE_TERA_BLAST",
-        "MOVE_HEX",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_REFLECT",
-        "MOVE_FRUSTRATION",
-        "MOVE_SUBSTITUTE",
-        "MOVE_FIRE_BLAST",
-        "MOVE_HELPING_HAND",
-        "MOVE_PROTECT",
-        "MOVE_DRAGON_DANCE",
-        "MOVE_SLEEP_TALK",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_SWIFT",
-        "MOVE_SUNNY_DAY",
         "MOVE_OUTRAGE",
-        "MOVE_BATON_PASS",
-        "MOVE_THUNDERBOLT",
-        "MOVE_THUNDER",
-        "MOVE_TAKE_DOWN",
-        "MOVE_FACADE",
+        "MOVE_REFLECT",
+        "MOVE_THUNDER_WAVE",
         "MOVE_WILL_O_WISP",
-        "MOVE_ENDURE",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SURF",
+        "MOVE_BREAKING_SWIPE",
         "MOVE_REST",
-        "MOVE_CURSE",
-        "MOVE_DRAGON_PULSE",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_ACROBATICS",
+        "MOVE_DRACO_METEOR",
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_SLEEP_TALK",
+        "MOVE_THUNDERBOLT",
+        "MOVE_TERA_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_TOXIC",
+        "MOVE_FRUSTRATION",
+        "MOVE_THIEF",
+        "MOVE_FACADE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_HYDRO_PUMP",
         "MOVE_FLAMETHROWER",
-        "MOVE_THIEF"
+        "MOVE_DRAGON_CHEER",
+        "MOVE_FIRE_BLAST"
     ],
     "CompetitiveSets": []
 }
