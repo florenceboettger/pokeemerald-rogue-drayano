@@ -1303,7 +1303,6 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
     #endif
     },
 
-#ifdef ROGUE_DRAYANO
 #define LYCANROC_MISC_INFO                                  \
         .catchRate = 90,                                    \
         .expYield = 170,                                    \
@@ -1324,29 +1323,6 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         BACK_PIC(LycanrocMidday, 64, 56),                   \
         .footprint = gMonFootprint_Lycanroc,                \
         .formSpeciesIdTable = sLycanrocFormSpeciesIdTable
-#else
-#define LYCANROC_MISC_INFO                                  \
-        .types = { TYPE_ROCK, TYPE_ROCK },                  \
-        .catchRate = 90,                                    \
-        .expYield = 170,                                    \
-        .evYield_Attack = 2,                                \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 15,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_MEDIUM_FAST,                   \
-        .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },  \
-        .speciesName = _("Lycanroc"),                       \
-        .natDexNum = NATIONAL_DEX_LYCANROC,                 \
-        .categoryName = _("Wolf"),                          \
-        .weight = 250,                                      \
-        .pokemonScale = 366,                                \
-        .pokemonOffset = 7,                                 \
-        .trainerScale = 257,                                \
-        .trainerOffset = 0,                                 \
-        BACK_PIC(LycanrocMidday, 64, 56),                   \
-        .footprint = gMonFootprint_Lycanroc,                \
-        .formSpeciesIdTable = sLycanrocFormSpeciesIdTable
-#endif
 
     [SPECIES_LYCANROC_MIDDAY] =
     {
@@ -1359,7 +1335,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .baseSpDefense = 65,
     #ifdef ROGUE_DRAYANO
         .types = { TYPE_ROCK, TYPE_GROUND },
-        .abilities = {ABILITY_SUPER_LUCK, ABILITY_SAND_RUSH, ABILITY_STEADFAST},
+        .abilities = { ABILITY_SUPER_LUCK, ABILITY_SAND_RUSH, ABILITY_STEADFAST },
     #else
         .types = { TYPE_ROCK, TYPE_ROCK }, 
         .abilities = { ABILITY_KEEN_EYE, ABILITY_SAND_RUSH, ABILITY_STEADFAST },
@@ -1394,7 +1370,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .baseSpDefense = 75,
     #ifdef ROGUE_DRAYANO
         .types = { TYPE_ROCK, TYPE_FIGHTING },
-        .abilities = {ABILITY_RECKLESS, ABILITY_VITAL_SPIRIT, ABILITY_NO_GUARD},
+        .abilities = { ABILITY_RECKLESS, ABILITY_VITAL_SPIRIT, ABILITY_NO_GUARD },
     #else
         .types = { TYPE_ROCK, TYPE_ROCK }, 
         .abilities = { ABILITY_KEEN_EYE, ABILITY_VITAL_SPIRIT, ABILITY_NO_GUARD },
@@ -1427,10 +1403,11 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .baseSpeed     = 110,
         .baseSpAttack  = 55,
         .baseSpDefense = 65,
+        .types = { TYPE_ROCK, TYPE_ROCK },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TOUGH_CLAWS, ABILITY_OWN_TEMPO, ABILITY_STAKEOUT},
+        .abilities = { ABILITY_TOUGH_CLAWS, ABILITY_OWN_TEMPO, ABILITY_STAKEOUT },
     #else
-        .abilities = {ABILITY_TOUGH_CLAWS, ABILITY_NONE},
+        .abilities = { ABILITY_TOUGH_CLAWS, ABILITY_NONE },
     #endif
         .bodyColor = BODY_COLOR_BROWN,
         .cryId = CRY_LYCANROC_DUSK,
@@ -3192,9 +3169,9 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_DRAGON },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SHELL_ARMOR, ABILITY_NONE, ABILITY_MAGMA_ARMOR},
+        .abilities = { ABILITY_SHELL_ARMOR, ABILITY_ANGER_SHELL, ABILITY_MAGMA_ARMOR },
     #else
-        .abilities = {ABILITY_SHELL_ARMOR, ABILITY_NONE},
+        .abilities = { ABILITY_SHELL_ARMOR, ABILITY_NONE },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Turtonator"),

@@ -277,9 +277,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_DRAGON },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_BLAZE, ABILITY_DEFIANT, ABILITY_SOLAR_POWER},
+        .abilities = { ABILITY_BLAZE, ABILITY_DEFIANT, ABILITY_SOLAR_POWER },
     #else
-        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER},
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Charmander"),
@@ -330,9 +330,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_DRAGON },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_BLAZE, ABILITY_DEFIANT, ABILITY_SOLAR_POWER},
+        .abilities = { ABILITY_BLAZE, ABILITY_DEFIANT, ABILITY_SOLAR_POWER },
     #else
-        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER},
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Charmeleon"),
@@ -396,9 +396,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .types = { TYPE_FIRE, TYPE_FLYING },
         .expYield = 240,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_BLAZE, ABILITY_DEFIANT, ABILITY_SOLAR_POWER},
+        .abilities = { ABILITY_BLAZE, ABILITY_DEFIANT, ABILITY_SOLAR_POWER },
     #else
-        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER},
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .cryId = CRY_CHARIZARD,
@@ -524,9 +524,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .types = { TYPE_FIRE, TYPE_FLYING },
         .expYield = 240,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_BLAZE, ABILITY_DEFIANT, ABILITY_SOLAR_POWER},
+        .abilities = { ABILITY_BLAZE, ABILITY_DEFIANT, ABILITY_SOLAR_POWER },
     #else
-        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER},
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .cryId = CRY_CHARIZARD,
@@ -574,9 +574,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_WATER_1 },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR},
+        .abilities = { ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR },
     #else
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH},
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Squirtle"),
@@ -627,9 +627,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_WATER_1 },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR},
+        .abilities = { ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR },
     #else
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH},
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Wartortle"),
@@ -694,9 +694,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 105,
         .expYield = 239,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR},
+        .abilities = { ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR },
     #else
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH},
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH },
     #endif
         .cryId = CRY_BLASTOISE,
         .height = 16,
@@ -779,9 +779,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 105,
         .expYield = 239,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR},
+        .abilities = { ABILITY_TORRENT, ABILITY_RAIN_DISH, ABILITY_SHELL_ARMOR },
     #else
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH},
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH },
     #endif
         .cryId = CRY_BLASTOISE,
         .height = 250,
@@ -907,42 +907,26 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     },
 
 #ifdef ROGUE_DRAYANO
-#define BUTTERFREE_MISC_INFO                                                        \
-        .baseHP        = 65,                                                        \
-        .baseAttack    = 45,                                                        \
-        .baseDefense   = 60,                                                        \
-        .baseSpeed     = 90,                                                        \
-        .baseSpAttack  = 100,                                                       \
-        .baseSpDefense = 90,                                                        \
-        .types = { TYPE_BUG, TYPE_FLYING },                                         \
-        .catchRate = 45,                                                            \
-        .expYield = 178,                                                            \
-        .evYield_SpAttack = 2,                                                      \
-        .evYield_SpDefense = 1,                                                     \
-        .itemRare = ITEM_SILVER_POWDER,                                             \
-        .genderRatio = PERCENT_FEMALE(50),                                          \
-        .eggCycles = 15,                                                            \
-        .friendship = STANDARD_FRIENDSHIP,                                          \
-        .growthRate = GROWTH_MEDIUM_FAST,                                           \
-        .eggGroups = { EGG_GROUP_BUG, EGG_GROUP_BUG },                              \
-        .abilities = { ABILITY_COMPOUND_EYES, ABILITY_NONE, ABILITY_TINTED_LENS },  \
-        .bodyColor = BODY_COLOR_WHITE,                                              \
-        .speciesName = _("Butterfree"),                                             \
-        .cryId = CRY_BUTTERFREE,                                                    \
-        .natDexNum = NATIONAL_DEX_BUTTERFREE,                                       \
-        .categoryName = _("Butterfly"),                                             \
-        .footprint = gMonFootprint_Butterfree,                                      \
-        LEARNSETS(Butterfree),                                                      \
-        .formSpeciesIdTable = sButterfreeFormSpeciesIdTable,                        \
-        .formChangeTable = sButterfreeFormChangeTable
+    #define BUTTERFREE_HP 65
+    #define BUTTERFREE_DEFENSE 60
+    #define BUTTERFREE_SPEED 90
+    #define BUTTERFREE_SPATTACK 100
+    #define BUTTERFREE_SPDEFENSE 90
 #else
+    #define BUTTERFREE_HP 60
+    #define BUTTERFREE_DEFENSE 50
+    #define BUTTERFREE_SPEED 70
+    #define BUTTERFREE_SPATTACK P_UPDATED_STATS >= GEN_6 ? 90 : 80
+    #define BUTTERFREE_SPDEFENSE 80
+#endif
+
 #define BUTTERFREE_MISC_INFO                                                        \
-        .baseHP        = 60,                                                        \
+        .baseHP        = BUTTERFREE_HP,                                             \
         .baseAttack    = 45,                                                        \
-        .baseDefense   = 50,                                                        \
-        .baseSpeed     = 70,                                                        \
-        .baseSpDefense = 80,                                                        \
-        .baseSpAttack  = P_UPDATED_STATS >= GEN_6 ? 90 : 80,                        \
+        .baseDefense   = BUTTERFREE_DEFENSE,                                        \
+        .baseSpeed     = BUTTERFREE_SPEED,                                          \
+        .baseSpAttack  = BUTTERFREE_SPATTACK,                                       \
+        .baseSpDefense = BUTTERFREE_SPDEFENSE,                                      \
         .types = { TYPE_BUG, TYPE_FLYING },                                         \
         .catchRate = 45,                                                            \
         .expYield = 178,                                                            \
@@ -964,7 +948,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Butterfree),                                                      \
         .formSpeciesIdTable = sButterfreeFormSpeciesIdTable,                        \
         .formChangeTable = sButterfreeFormChangeTable
-#endif
 
     [SPECIES_BUTTERFREE] =
     {
@@ -1682,9 +1665,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_KEEN_EYE, ABILITY_SNIPER, ABILITY_INTIMIDATE},
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_SNIPER, ABILITY_INTIMIDATE },
     #else
-        .abilities = {ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_SNIPER},
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_SNIPER },
     #endif
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Spearow"),
@@ -1739,9 +1722,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_KEEN_EYE, ABILITY_SNIPER, ABILITY_INTIMIDATE},
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_SNIPER, ABILITY_INTIMIDATE },
     #else
-        .abilities = {ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_SNIPER},
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_SNIPER },
     #endif
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Fearow"),
@@ -2455,9 +2438,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 30,
         .types = { TYPE_GROUND, TYPE_GROUND },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SAND_VEIL, ABILITY_ROUGH_SKIN, ABILITY_SAND_RUSH},
+        .abilities = { ABILITY_SAND_VEIL, ABILITY_ROUGH_SKIN, ABILITY_SAND_RUSH },
     #else
-        .abilities = {ABILITY_SAND_VEIL, ABILITY_NONE, ABILITY_SAND_RUSH},
+        .abilities = { ABILITY_SAND_VEIL, ABILITY_NONE, ABILITY_SAND_RUSH },
     #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .height = 6,
@@ -2504,9 +2487,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     #endif
         .types = { TYPE_GROUND, TYPE_GROUND },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SAND_VEIL, ABILITY_ROUGH_SKIN, ABILITY_SAND_RUSH},
+        .abilities = { ABILITY_SAND_VEIL, ABILITY_ROUGH_SKIN, ABILITY_SAND_RUSH },
     #else
-        .abilities = {ABILITY_SAND_VEIL, ABILITY_NONE, ABILITY_SAND_RUSH},
+        .abilities = { ABILITY_SAND_VEIL, ABILITY_NONE, ABILITY_SAND_RUSH },
     #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .height = 10,
@@ -2544,9 +2527,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 35,
         .types = { TYPE_ICE, TYPE_STEEL },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_ICE_BODY, ABILITY_SLUSH_RUSH},
+        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_ICE_BODY, ABILITY_SLUSH_RUSH },
     #else
-        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_NONE, ABILITY_SLUSH_RUSH},
+        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_NONE, ABILITY_SLUSH_RUSH },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .height = 7,
@@ -2585,9 +2568,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 65,
         .types = { TYPE_ICE, TYPE_STEEL },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_IRON_BARBS, ABILITY_SLUSH_RUSH},
+        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_IRON_BARBS, ABILITY_SLUSH_RUSH },
     #else
-        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_NONE, ABILITY_SLUSH_RUSH},
+        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_NONE, ABILITY_SLUSH_RUSH },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .height = 12,
@@ -3267,9 +3250,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_FAST,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER},
+        .abilities = { ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER },
     #else
-        .abilities = {ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRIEND_GUARD},
+        .abilities = { ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRIEND_GUARD },
     #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
@@ -3331,9 +3314,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_FAST,
         .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_FAIRY },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER},
+        .abilities = { ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER },
     #else
-        .abilities = {ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRIEND_GUARD},
+        .abilities = { ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRIEND_GUARD },
     #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
@@ -3394,9 +3377,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_FAST,
         .eggGroups = { EGG_GROUP_FAIRY, EGG_GROUP_FAIRY },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER},
+        .abilities = { ABILITY_FRIEND_GUARD, ABILITY_COMPETITIVE, ABILITY_HUGE_POWER },
     #else
-        .abilities = {ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRISK},
+        .abilities = { ABILITY_CUTE_CHARM, ABILITY_COMPETITIVE, ABILITY_FRISK },
     #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
@@ -3452,9 +3435,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR},
+        .abilities = { ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR },
     #else
-        .abilities = {ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR},
+        .abilities = { ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR },
     #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Zubat"),
@@ -3511,9 +3494,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR},
+        .abilities = { ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR },
     #else
-        .abilities = {ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR},
+        .abilities = { ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR },
     #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Golbat"),
@@ -3571,9 +3554,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FLYING },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR},
+        .abilities = { ABILITY_INNER_FOCUS, ABILITY_SNIPER, ABILITY_INFILTRATOR },
     #else
-        .abilities = {ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR},
+        .abilities = { ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_INFILTRATOR },
     #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Crobat"),
@@ -3627,9 +3610,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_RUN_AWAY},
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_RUN_AWAY },
     #else
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_RUN_AWAY},
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_RUN_AWAY },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Oddish"),
@@ -3680,9 +3663,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_STENCH},
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_LEAF_GUARD, ABILITY_STENCH },
     #else
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_STENCH},
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_STENCH },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Gloom"),
@@ -3736,9 +3719,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_EFFECT_SPORE, ABILITY_THICK_FAT},
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_EFFECT_SPORE, ABILITY_THICK_FAT },
     #else
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_EFFECT_SPORE},
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_EFFECT_SPORE },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Vileplume"),
@@ -3795,9 +3778,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_CLOUD_NINE, ABILITY_HEALER},
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_CLOUD_NINE, ABILITY_HEALER },
     #else
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_HEALER},
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_HEALER },
     #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Bellossom"),
@@ -4717,9 +4700,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_VITAL_SPIRIT },
     #else
-        .abilities = {ABILITY_VITAL_SPIRIT, ABILITY_ANGER_POINT, ABILITY_DEFIANT},
+        .abilities = { ABILITY_VITAL_SPIRIT, ABILITY_ANGER_POINT, ABILITY_DEFIANT },
     #endif
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Mankey"),
@@ -4770,9 +4753,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_GORILLA_TACTICS},
+        .abilities = { ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_GORILLA_TACTICS },
     #else
-        .abilities = {ABILITY_VITAL_SPIRIT, ABILITY_ANGER_POINT, ABILITY_DEFIANT},
+        .abilities = { ABILITY_VITAL_SPIRIT, ABILITY_ANGER_POINT, ABILITY_DEFIANT },
     #endif
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Primeape"),
@@ -4823,9 +4806,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_VITAL_SPIRIT },
     #else
-        .abilities = {ABILITY_VITAL_SPIRIT, ABILITY_ANGER_POINT, ABILITY_DEFIANT},
+        .abilities = { ABILITY_VITAL_SPIRIT, ABILITY_ANGER_POINT, ABILITY_DEFIANT },
     #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Annihilape"),
@@ -6819,9 +6802,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     #endif
         .itemRare = ITEM_LEEK,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SUPER_LUCK, ABILITY_SHARPNESS, ABILITY_DEFIANT},
+        .abilities = { ABILITY_SUPER_LUCK, ABILITY_SHARPNESS, ABILITY_DEFIANT },
     #else
-        .abilities = {ABILITY_KEEN_EYE, ABILITY_INNER_FOCUS, ABILITY_DEFIANT},
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_INNER_FOCUS, ABILITY_DEFIANT },
     #endif
         .height = 8,
         .weight = 150,
@@ -6868,7 +6851,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .types = { TYPE_FIGHTING, TYPE_FIGHTING },
         .itemCommon = ITEM_LEEK,
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_STEADFAST, ABILITY_SHARPNESS, ABILITY_SCRAPPY},
+        .abilities = { ABILITY_STEADFAST, ABILITY_SHARPNESS, ABILITY_SCRAPPY },
     #else
         .abilities = { ABILITY_STEADFAST, ABILITY_NONE, ABILITY_SCRAPPY },
     #endif
@@ -6925,7 +6908,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FLYING, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_STEADFAST, ABILITY_SHARPNESS, ABILITY_SCRAPPY},
+        .abilities = { ABILITY_STEADFAST, ABILITY_SHARPNESS, ABILITY_SCRAPPY },
     #else
         .abilities = { ABILITY_STEADFAST, ABILITY_NONE, ABILITY_SCRAPPY },
     #endif
@@ -7082,9 +7065,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_SCALES},
+        .abilities = { ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_SCALES },
     #else
-        .abilities = {ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_BODY},
+        .abilities = { ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_BODY },
     #endif
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Seel"),
@@ -7143,9 +7126,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_SCALES},
+        .abilities = { ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_SCALES },
     #else
-        .abilities = {ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_BODY},
+        .abilities = { ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_BODY },
     #endif
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Dewgong"),
@@ -7477,9 +7460,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CURSED_BODY, ABILITY_NONE, ABILITY_LEVITATE},
+        .abilities = { ABILITY_CURSED_BODY, ABILITY_NONE, ABILITY_LEVITATE },
     #else
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
     #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Gastly"),
@@ -7530,9 +7513,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_AMORPHOUS, EGG_GROUP_AMORPHOUS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_CURSED_BODY, ABILITY_NONE, ABILITY_LEVITATE},
+        .abilities = { ABILITY_CURSED_BODY, ABILITY_NONE, ABILITY_LEVITATE },
     #else
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        .abilities = { ABILITY_LEVITATE, ABILITY_NONE },
     #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Haunter"),
@@ -8767,9 +8750,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_UNAWARE, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE},
+        .abilities = { ABILITY_UNAWARE, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE },
     #else
-        .abilities = {ABILITY_OWN_TEMPO, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE},
+        .abilities = { ABILITY_OWN_TEMPO, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE },
     #endif
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Lickitung"),
@@ -8830,9 +8813,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_UNAWARE, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE},
+        .abilities = { ABILITY_UNAWARE, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE },
     #else
-        .abilities = {ABILITY_OWN_TEMPO, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE},
+        .abilities = { ABILITY_OWN_TEMPO, ABILITY_OBLIVIOUS, ABILITY_CLOUD_NINE },
     #endif
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Lickilicky"),
@@ -10449,9 +10432,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_VOLT_ABSORB, ABILITY_STATIC, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_VOLT_ABSORB, ABILITY_STATIC, ABILITY_VITAL_SPIRIT },
     #else
-        .abilities = {ABILITY_STATIC, ABILITY_NONE, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
     #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = TRUE,
@@ -10504,9 +10487,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_VOLT_ABSORB, ABILITY_STATIC, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_VOLT_ABSORB, ABILITY_STATIC, ABILITY_VITAL_SPIRIT },
     #else
-        .abilities = {ABILITY_STATIC, ABILITY_NONE, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
     #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = TRUE,
@@ -10564,9 +10547,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_MOTOR_DRIVE, ABILITY_IRON_FIST, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_MOTOR_DRIVE, ABILITY_IRON_FIST, ABILITY_VITAL_SPIRIT },
     #else
-        .abilities = {ABILITY_MOTOR_DRIVE, ABILITY_NONE, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_MOTOR_DRIVE, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
     #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Electivire"),
@@ -10620,9 +10603,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_FLAME_BODY, ABILITY_MAGMA_ARMOR, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_FLAME_BODY, ABILITY_MAGMA_ARMOR, ABILITY_VITAL_SPIRIT },
     #else
-        .abilities = {ABILITY_FLAME_BODY, ABILITY_NONE, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_FLAME_BODY, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
@@ -10675,9 +10658,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_FLAME_BODY, ABILITY_MAGMA_ARMOR, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_FLAME_BODY, ABILITY_MAGMA_ARMOR, ABILITY_VITAL_SPIRIT },
     #else
-        .abilities = {ABILITY_FLAME_BODY, ABILITY_NONE, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_FLAME_BODY, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Magmar"),
@@ -10730,9 +10713,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_HUMAN_LIKE, EGG_GROUP_HUMAN_LIKE },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_FLASH_FIRE, ABILITY_QUICK_DRAW, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_FLASH_FIRE, ABILITY_QUICK_DRAW, ABILITY_VITAL_SPIRIT },
     #else
-        .abilities = {ABILITY_FLAME_BODY, ABILITY_NONE, ABILITY_VITAL_SPIRIT},
+        .abilities = { ABILITY_FLAME_BODY, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
     #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
@@ -11584,9 +11567,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SYNCHRONIZE, ABILITY_SYNCHRONIZE, ABILITY_POISON_TOUCH},
+        .abilities = { ABILITY_SYNCHRONIZE, ABILITY_SYNCHRONIZE, ABILITY_POISON_TOUCH },
     #else
-        .abilities = {ABILITY_SYNCHRONIZE, ABILITY_SYNCHRONIZE, ABILITY_INNER_FOCUS},
+        .abilities = { ABILITY_SYNCHRONIZE, ABILITY_SYNCHRONIZE, ABILITY_INNER_FOCUS },
     #endif
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("Umbreon"),
@@ -11637,9 +11620,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SUPER_LUCK, ABILITY_SUPER_LUCK, ABILITY_CHLOROPHYLL},
+        .abilities = { ABILITY_SUPER_LUCK, ABILITY_SUPER_LUCK, ABILITY_CHLOROPHYLL },
     #else
-        .abilities = {ABILITY_LEAF_GUARD, ABILITY_LEAF_GUARD, ABILITY_CHLOROPHYLL},
+        .abilities = { ABILITY_LEAF_GUARD, ABILITY_LEAF_GUARD, ABILITY_CHLOROPHYLL },
     #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Leafeon"),
@@ -11697,9 +11680,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_SNOW_CLOAK, ABILITY_SERENE_GRACE},
+        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_SNOW_CLOAK, ABILITY_SERENE_GRACE },
     #else
-        .abilities = {ABILITY_SNOW_CLOAK, ABILITY_SNOW_CLOAK, ABILITY_ICE_BODY},
+        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_SNOW_CLOAK, ABILITY_ICE_BODY },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Glaceon"),

@@ -22,9 +22,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_OVERGROW, ABILITY_SOUNDPROOF, ABILITY_GRASSY_SURGE},
+        .abilities = { ABILITY_OVERGROW, ABILITY_SOUNDPROOF, ABILITY_GRASSY_SURGE },
     #else
-        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_GRASSY_SURGE},
+        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_GRASSY_SURGE },
     #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Grookey"),
@@ -74,9 +74,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_OVERGROW, ABILITY_SOUNDPROOF, ABILITY_GRASSY_SURGE},
+        .abilities = { ABILITY_OVERGROW, ABILITY_SOUNDPROOF, ABILITY_GRASSY_SURGE },
     #else
-        .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_GRASSY_SURGE},
+        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_GRASSY_SURGE },
     #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Thwackey"),
@@ -213,9 +213,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_HUMAN_LIKE },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_BLAZE, ABILITY_RECEIVER, ABILITY_LIBERO},
+        .abilities = { ABILITY_BLAZE, ABILITY_RECEIVER, ABILITY_LIBERO },
     #else
-        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_LIBERO},
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_LIBERO },
     #endif
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Scorbunny"),
@@ -265,9 +265,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_HUMAN_LIKE },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_BLAZE, ABILITY_RECEIVER, ABILITY_LIBERO},
+        .abilities = { ABILITY_BLAZE, ABILITY_RECEIVER, ABILITY_LIBERO },
     #else
-        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_LIBERO},
+        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_LIBERO },
     #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Raboot"),
@@ -407,9 +407,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_SHED_SKIN, ABILITY_SNIPER},
+        .abilities = { ABILITY_TORRENT, ABILITY_SHED_SKIN, ABILITY_SNIPER },
     #else
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_SNIPER},
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SNIPER },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Sobble"),
@@ -459,9 +459,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_TORRENT, ABILITY_SHED_SKIN, ABILITY_SNIPER},
+        .abilities = { ABILITY_TORRENT, ABILITY_SHED_SKIN, ABILITY_SNIPER },
     #else
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_SNIPER},
+        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SNIPER },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Drizzile"),
@@ -2241,45 +2241,21 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 
 #if P_FAMILY_CRAMORANT
 #ifdef ROGUE_DRAYANO
-#define CRAMORANT_MISC_INFO                                     \
-        .baseHP        = 70,                                    \
-        .baseAttack    = 85,                                    \
-        .baseDefense   = 65,                                    \
-        .baseSpeed     = 105,                                   \
-        .baseSpAttack  = 100,                                   \
-        .baseSpDefense = 95,                                    \
-        .types = { TYPE_FLYING, TYPE_WATER },                   \
-        .catchRate = 45,                                        \
-        .expYield = 166,                                        \
-        .evYield_SpDefense = 2,                                 \
-        .genderRatio = PERCENT_FEMALE(50),                      \
-        .eggCycles = 20,                                        \
-        .friendship = STANDARD_FRIENDSHIP,                      \
-        .growthRate = GROWTH_MEDIUM_FAST,                       \
-        .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_FLYING },   \
-        .abilities = { ABILITY_GULP_MISSILE, ABILITY_NONE },    \
-        .bodyColor = BODY_COLOR_BLUE,                           \
-        .speciesName = _("Cramorant"),                          \
-        .cryId = CRY_CRAMORANT,                                 \
-        .natDexNum = NATIONAL_DEX_CRAMORANT,                    \
-        .categoryName = _("Gulp"),                              \
-        .height = 8,                                            \
-        .weight = 180,                                          \
-        .pokemonScale = 366,                                    \
-        .pokemonOffset = 7,                                     \
-        .trainerScale = 257,                                    \
-        .trainerOffset = 0,                                     \
-        .footprint = gMonFootprint_Cramorant,                   \
-        LEARNSETS(Cramorant),                                   \
-        .formSpeciesIdTable = sCramorantFormSpeciesIdTable,     \
-        .formChangeTable = sCramorantFormChangeTable
+    #define CRAMORANT_DEFENSE 65
+    #define CRAMORANT_SPEED 105
+    #define CRAMORANT_SPATTACK 100
 #else
+    #define CRAMORANT_DEFENSE 55
+    #define CRAMORANT_SPEED 85
+    #define CRAMORANT_SPATTACK 85
+#endif
+
 #define CRAMORANT_MISC_INFO                                     \
         .baseHP        = 70,                                    \
         .baseAttack    = 85,                                    \
-        .baseDefense   = 55,                                    \
-        .baseSpeed     = 85,                                    \
-        .baseSpAttack  = 85,                                    \
+        .baseDefense   = CRAMORANT_DEFENSE,                     \
+        .baseSpeed     = CRAMORANT_SPEED,                       \
+        .baseSpAttack  = CRAMORANT_SPATTACK,                    \
         .baseSpDefense = 95,                                    \
         .types = { TYPE_FLYING, TYPE_WATER },                   \
         .catchRate = 45,                                        \
@@ -2306,7 +2282,6 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         LEARNSETS(Cramorant),                                   \
         .formSpeciesIdTable = sCramorantFormSpeciesIdTable,     \
         .formChangeTable = sCramorantFormChangeTable
-#endif
 
     [SPECIES_CRAMORANT] =
     {
@@ -2819,9 +2794,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_HUMAN_LIKE },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_LIMBER, ABILITY_STICKY_HOLD, ABILITY_TECHNICIAN},
+        .abilities = { ABILITY_LIMBER, ABILITY_STICKY_HOLD, ABILITY_TECHNICIAN },
     #else
-        .abilities = {ABILITY_LIMBER, ABILITY_NONE, ABILITY_TECHNICIAN},
+        .abilities = { ABILITY_LIMBER, ABILITY_NONE, ABILITY_TECHNICIAN },
     #endif
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Clobbopus"),
@@ -2875,9 +2850,9 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_WATER_1, EGG_GROUP_HUMAN_LIKE },
     #ifdef ROGUE_DRAYANO
-        .abilities = {ABILITY_LIMBER, ABILITY_STICKY_HOLD, ABILITY_TECHNICIAN},
+        .abilities = { ABILITY_LIMBER, ABILITY_STICKY_HOLD, ABILITY_TECHNICIAN },
     #else
-        .abilities = {ABILITY_LIMBER, ABILITY_NONE, ABILITY_TECHNICIAN},
+        .abilities = { ABILITY_LIMBER, ABILITY_NONE, ABILITY_TECHNICIAN },
     #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Grapploct"),
