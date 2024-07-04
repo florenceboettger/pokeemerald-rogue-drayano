@@ -875,6 +875,8 @@ gBattleAnims_Moves::
 	.4byte Move_PSYCHIC_NOISE
 	.4byte Move_UPPER_HAND
 	.4byte Move_MALIGNANT_CHAIN
+@@@@ EXTRA MOVES
+	.4byte Move_SWIRLING_BLADE
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -27430,6 +27432,11 @@ WeatherBallIce:
 	call IceCrystalEffectShort
 	waitforvisualfinish
 	end
+
+@@@ EXTRA MOVES
+
+Move_SWIRLING_BLADE:
+	goto Move_SACRED_SWORD
 
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT

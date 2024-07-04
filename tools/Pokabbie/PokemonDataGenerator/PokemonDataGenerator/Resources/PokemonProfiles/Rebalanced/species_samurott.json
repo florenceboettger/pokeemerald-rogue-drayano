@@ -158,7 +158,8 @@
         "MOVE_DETECT",
         "MOVE_AERIAL_ACE",
         "MOVE_TAUNT",
-        "MOVE_BODY_SLAM"
+        "MOVE_BODY_SLAM",
+        "MOVE_SWIRLING_BLADE"
     ],
     "CompetitiveSets": [
         {

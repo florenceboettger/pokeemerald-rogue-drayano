@@ -213,7 +213,24 @@
                 "GEN8ZU"
             ],
             "Name": "Specially Defensive",
-            "Nature": "NATURE_HARDY",
+            "Nature": "NATURE_CAREFUL",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SPIKES",
+                "MOVE_SYNTHESIS",
+                "MOVE_GRASSY_GLIDE",
+                "MOVE_KNOCK_OFF"
+            ],
+            "Item": "ITEM_GRASSY_SEED",
+            "Ability": "ABILITY_SEED_SOWER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN9VGC2023REGULATIONE"
+            ],
+            "Name": "Physically Defensive",
+            "Nature": "NATURE_CAREFUL",
             "TeraType": null
         }
     ]

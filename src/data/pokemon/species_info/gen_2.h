@@ -2331,7 +2331,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_SOLAR_POWER, ABILITY_SEED_SOWER },
+    #else
         .abilities = { ABILITY_CHLOROPHYLL, ABILITY_SOLAR_POWER, ABILITY_EARLY_BIRD },
+    #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Sunkern"),
         .cryId = CRY_SUNKERN,
@@ -2390,7 +2394,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_SOLAR_POWER, ABILITY_DROUGHT },
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_SOLAR_POWER, ABILITY_SEED_SOWER },
     #else
         .abilities = { ABILITY_CHLOROPHYLL, ABILITY_SOLAR_POWER, ABILITY_EARLY_BIRD },
     #endif
@@ -4528,7 +4532,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
-        .abilities = { ABILITY_PICKUP, ABILITY_SUPERSWEET_SYRUP, ABILITY_HONEY_GATHER },
+        .abilities = { ABILITY_QUICK_FEET, ABILITY_SUPERSWEET_SYRUP, ABILITY_HONEY_GATHER },
     #else    
         .abilities = { ABILITY_PICKUP, ABILITY_QUICK_FEET, ABILITY_HONEY_GATHER },
     #endif
@@ -4586,7 +4590,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .eggGroups = { EGG_GROUP_FIELD, EGG_GROUP_FIELD },
     #ifdef ROGUE_DRAYANO
         .abilities = { ABILITY_GUTS, ABILITY_SUPERSWEET_SYRUP, ABILITY_UNNERVE },
-    #else    
+    #else
         .abilities = { ABILITY_GUTS, ABILITY_QUICK_FEET, ABILITY_UNNERVE },
     #endif
         .bodyColor = BODY_COLOR_BROWN,
@@ -6127,7 +6131,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_GUTS, ABILITY_EARTH_EATER, ABILITY_SAND_VEIL },
+    #else
         .abilities = { ABILITY_GUTS, ABILITY_NONE, ABILITY_SAND_VEIL },
+    #endif
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Larvitar"),
         .cryId = CRY_LARVITAR,
@@ -6234,7 +6242,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .baseSpAttack  = 95,
         .baseSpDefense = 100,
         .expYield = 270,
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_SAND_STREAM, ABILITY_EARTH_EATER, ABILITY_UNNERVE },
+    #else
         .abilities = { ABILITY_SAND_STREAM, ABILITY_NONE, ABILITY_UNNERVE },
+    #endif
         .cryId = CRY_TYRANITAR,
         .height = 20,
         .weight = 2020,

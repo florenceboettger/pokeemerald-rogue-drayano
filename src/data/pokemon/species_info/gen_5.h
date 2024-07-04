@@ -3707,7 +3707,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_GRASS, EGG_GROUP_GRASS },
     #ifdef ROGUE_DRAYANO
-        .abilities = { ABILITY_SEED_SOWER, ABILITY_CHLOROPHYLL, ABILITY_STORM_DRAIN },
+        .abilities = { ABILITY_WATER_ABSORB, ABILITY_CHLOROPHYLL, ABILITY_SEED_SOWER },
     #else
         .abilities = { ABILITY_WATER_ABSORB, ABILITY_CHLOROPHYLL, ABILITY_STORM_DRAIN },
     #endif
@@ -4472,38 +4472,15 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     },
 
 #ifdef ROGUE_DRAYANO
-#define GARBODOR_MISC_INFO                                                      \
-        .baseHP        = 100,                                                   \
-        .baseAttack    = 95,                                                    \
-        .baseDefense   = 82,                                                    \
-        .baseSpeed     = 75,                                                    \
-        .baseSpAttack  = 60,                                                    \
-        .baseSpDefense = 82,                                                    \
-        .types = { TYPE_POISON, TYPE_POISON },                                  \
-        .catchRate = 60,                                                        \
-        .expYield = 166,                                                        \
-        .evYield_Attack = 2,                                                    \
-        .itemCommon = ITEM_SILK_SCARF,                                          \
-        .itemRare = ITEM_BLACK_SLUDGE,                                          \
-        .genderRatio = PERCENT_FEMALE(50),                                      \
-        .eggCycles = 20,                                                        \
-        .friendship = STANDARD_FRIENDSHIP,                                      \
-        .growthRate = GROWTH_MEDIUM_FAST,                                       \
-        .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },                  \
-        .abilities = {ABILITY_STENCH, ABILITY_TOXIC_DEBRIS, ABILITY_AFTERMATH}, \
-        .bodyColor = BODY_COLOR_GREEN,                                          \
-        .noFlip = TRUE,                                                         \
-        .speciesName = _("Garbodor"),                                           \
-        .cryId = CRY_GARBODOR,                                                  \
-        .natDexNum = NATIONAL_DEX_GARBODOR,                                     \
-        .categoryName = _("Trash Heap"),                                        \
-        .footprint = gMonFootprint_Garbodor,                                    \
-        LEARNSETS(Garbodor),                                                    \
-        .formSpeciesIdTable = sGarbodorFormSpeciesIdTable,                      \
-        .formChangeTable = sGarbodorFormChangeTable
+    #define GARBODOR_HP 100
+    #define GARBODOR_ABILITIES { ABILITY_STENCH, ABILITY_TOXIC_DEBRIS, ABILITY_AFTERMATH }
 #else
+    #define GARBODOR_HP 80
+    #define GARBODOR_ABILITIES { ABILITY_STENCH, ABILITY_WEAK_ARMOR, ABILITY_AFTERMATH }
+#endif
+
 #define GARBODOR_MISC_INFO                                                      \
-        .baseHP        = 80,                                                    \
+        .baseHP        = GARBODOR_HP,                                           \
         .baseAttack    = 95,                                                    \
         .baseDefense   = 82,                                                    \
         .baseSpeed     = 75,                                                    \
@@ -4520,7 +4497,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,                                      \
         .growthRate = GROWTH_MEDIUM_FAST,                                       \
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },                  \
-        .abilities = { ABILITY_STENCH, ABILITY_WEAK_ARMOR, ABILITY_AFTERMATH }, \
+        .abilities = GARBODOR_ABILITIES,                                        \
         .bodyColor = BODY_COLOR_GREEN,                                          \
         .noFlip = TRUE,                                                         \
         .speciesName = _("Garbodor"),                                           \
@@ -4531,7 +4508,6 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         LEARNSETS(Garbodor),                                                    \
         .formSpeciesIdTable = sGarbodorFormSpeciesIdTable,                      \
         .formChangeTable = sGarbodorFormChangeTable
-#endif
 
     [SPECIES_GARBODOR] =
     {

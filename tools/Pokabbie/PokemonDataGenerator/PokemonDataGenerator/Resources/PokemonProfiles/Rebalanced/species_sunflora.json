@@ -128,7 +128,8 @@
         "MOVE_FLAMETHROWER",
         "MOVE_FIRE_BLAST",
         "MOVE_WEATHER_BALL",
-        "MOVE_REST"
+        "MOVE_REST",
+        "MOVE_HEAT_WAVE"
     ],
     "CompetitiveSets": [
         {
@@ -196,7 +197,24 @@
                 "GEN7PU"
             ],
             "Name": "Chlorophyll",
-            "Nature": "NATURE_HARDY",
+            "Nature": "NATURE_MODEST",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_PROTECT",
+                "MOVE_HEAT_WAVE",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_HELPING_HAND"
+            ],
+            "Item": "ITEM_GRASSY_SEED",
+            "Ability": "ABILITY_SEED_SOWER",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN9DOUBLESOU"
+            ],
+            "Name": "Seed Sower Support",
+            "Nature": "NATURE_CALM",
             "TeraType": null
         }
     ]

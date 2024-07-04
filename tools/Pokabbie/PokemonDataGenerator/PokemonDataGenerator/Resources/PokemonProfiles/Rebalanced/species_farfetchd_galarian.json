@@ -104,7 +104,9 @@
         "MOVE_RETALIATE",
         "MOVE_NIGHT_SLASH",
         "MOVE_CUT",
-        "MOVE_REST"
+        "MOVE_REST",
+        "MOVE_SACRED_SWORD",
+        "MOVE_SWIRLING_BLADE"
     ],
     "CompetitiveSets": [
         {
@@ -156,6 +158,23 @@
             "Name": "Showdown Usage",
             "SourceTiers": [
                 "GEN8LC"
+            ]
+        },
+        {
+            "Moves": [
+                "MOVE_SACRED_SWORD",
+                "MOVE_NIGHT_SLASH",
+                "MOVE_AERIAL_ACE",
+                "MOVE_LEAF_BLADE"
+            ],
+            "Ability": "ABILITY_SHARPNESS",
+            "Item": "ITEM_CHOICE_SCARF",
+            "Nature": "NATURE_JOLLY",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Sharpness 4 Attacks",
+            "SourceTiers": [
+                "GEN9LC"
             ]
         }
     ]

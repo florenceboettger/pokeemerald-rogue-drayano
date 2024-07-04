@@ -115,7 +115,8 @@
         "MOVE_SNORE",
         "MOVE_RETALIATE",
         "MOVE_CUT",
-        "MOVE_BODY_SLAM"
+        "MOVE_BODY_SLAM",
+        "MOVE_SWIRLING_BLADE"
     ],
     "CompetitiveSets": [
         {
@@ -167,8 +168,25 @@
                 "GEN8RU"
             ],
             "Name": "Swords Dance",
-            "Nature": "NATURE_HARDY",
+            "Nature": "NATURE_ADAMANT",
             "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SACRED_SWORD",
+                "MOVE_LEAF_BLADE",
+                "MOVE_AERIAL_ACE",
+                "MOVE_KNOCK_OFF"
+            ],
+            "Ability": "ABILITY_SHARPNESS",
+            "Item": "ITEM_LEEK",
+            "Nature": "NATURE_ADAMANT",
+            "HiddenPower": null,
+            "TeraType": null,
+            "Name": "Sharpness",
+            "SourceTiers": [
+                "GEN8BATTLESTADIUMSINGLES"
+            ]
         }
     ]
 }

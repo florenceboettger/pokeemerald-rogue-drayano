@@ -99,7 +99,8 @@
         "MOVE_POISON_JAB",
         "MOVE_ICE_FANG",
         "MOVE_BODY_SLAM",
-        "MOVE_FLASH_CANNON"
+        "MOVE_FLASH_CANNON",
+        "MOVE_SWIRLING_BLADE"
     ],
     "CompetitiveSets": [
         {

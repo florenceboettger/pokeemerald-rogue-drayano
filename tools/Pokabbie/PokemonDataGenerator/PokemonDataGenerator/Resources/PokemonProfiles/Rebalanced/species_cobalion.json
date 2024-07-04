@@ -108,7 +108,8 @@
         "MOVE_TAUNT",
         "MOVE_BODY_PRESS",
         "MOVE_BODY_SLAM",
-        "MOVE_FLASH_CANNON"
+        "MOVE_FLASH_CANNON",
+        "MOVE_SWIRLING_BLADE"
     ],
     "CompetitiveSets": [
         {

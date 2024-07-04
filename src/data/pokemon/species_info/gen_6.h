@@ -2262,7 +2262,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_NO_GUARD, ABILITY_NONE, ABILITY_SHARPNESS },
+    #else
         .abilities = { ABILITY_NO_GUARD, ABILITY_NONE },
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Honedge"),
         .cryId = CRY_HONEDGE,
@@ -2311,7 +2315,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_NO_GUARD, ABILITY_NONE, ABILITY_SHARPNESS },
+    #else
         .abilities = { ABILITY_NO_GUARD, ABILITY_NONE },
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Doublade"),
         .cryId = CRY_DOUBLADE,
@@ -4906,7 +4914,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .friendship = 100,
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_NO_EGGS_DISCOVERED, EGG_GROUP_NO_EGGS_DISCOVERED },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_WATER_ABSORB, ABILITY_NONE, ABILITY_THERMAL_EXCHANGE },
+    #else
         .abilities = { ABILITY_WATER_ABSORB, ABILITY_NONE },
+    #endif
         .bodyColor = BODY_COLOR_BROWN,
         .isMythical = TRUE,
         .speciesName = _("Volcanion"),

@@ -108,7 +108,8 @@
         "MOVE_PSYCH_UP",
         "MOVE_AERIAL_ACE",
         "MOVE_TAUNT",
-        "MOVE_REST"
+        "MOVE_REST",
+        "MOVE_SWIRLING_BLADE"
     ],
     "CompetitiveSets": [
         {

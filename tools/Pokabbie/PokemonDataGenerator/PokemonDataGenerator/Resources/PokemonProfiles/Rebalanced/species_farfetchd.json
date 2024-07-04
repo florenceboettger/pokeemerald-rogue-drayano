@@ -130,7 +130,8 @@
         "MOVE_SNORE",
         "MOVE_RETALIATE",
         "MOVE_U_TURN",
-        "MOVE_REST"
+        "MOVE_REST",
+        "MOVE_SWIRLING_BLADE"
     ],
     "CompetitiveSets": [
         {
@@ -198,7 +199,7 @@
                 "GEN7PU"
             ],
             "Name": "All-Out Attacker",
-            "Nature": "NATURE_HARDY",
+            "Nature": "NATURE_ADAMANT",
             "TeraType": null
         },
         {
@@ -215,7 +216,24 @@
                 "GEN8PU"
             ],
             "Name": "Swords Dance",
-            "Nature": "NATURE_HARDY",
+            "Nature": "NATURE_ADAMANT",
+            "TeraType": null
+        },
+        {
+            "Moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_SACRED_SWORD",
+                "MOVE_AERIAL_ACE",
+                "MOVE_LEAF_BLADE"
+            ],
+            "Item": "ITEM_LEEK",
+            "Ability": "ABILITY_SHARPNESS",
+            "HiddenPower": null,
+            "SourceTiers": [
+                "GEN8PU"
+            ],
+            "Name": "Sharpness 4 Attacks",
+            "Nature": "NATURE_ADAMANT",
             "TeraType": null
         }
     ]

@@ -12668,7 +12668,9 @@ static void Cmd_metronome(void)
 {
     CMD_ARGS();
 
-#if B_METRONOME_MOVES >= GEN_9
+#ifdef ROGUE_DRAYANO
+    u32 moveCount = MOVES_COUNT_EXTRAS;
+#elif B_METRONOME_MOVES >= GEN_9
     u32 moveCount = MOVES_COUNT_GEN9;
 #elif B_METRONOME_MOVES >= GEN_8
     u32 moveCount = MOVES_COUNT_GEN8;

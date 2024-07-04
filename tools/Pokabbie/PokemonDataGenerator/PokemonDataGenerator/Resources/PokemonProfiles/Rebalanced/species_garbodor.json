@@ -128,11 +128,11 @@
         {
             "Moves": [
                 "MOVE_SPIKES",
-                "MOVE_TOXIC_SPIKES",
+                "MOVE_FIRE_PUNCH",
                 "MOVE_GUNK_SHOT",
                 "MOVE_TOXIC"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_ROCKY_HELMET",
             "Nature": "NATURE_IMPISH",
             "HiddenPower": null,
@@ -145,11 +145,11 @@
         {
             "Moves": [
                 "MOVE_SPIKES",
-                "MOVE_TOXIC_SPIKES",
+                "MOVE_FIRE_PUNCH",
                 "MOVE_GUNK_SHOT",
                 "MOVE_SEED_BOMB"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_ROCKY_HELMET",
             "Nature": "NATURE_IMPISH",
             "HiddenPower": null,
@@ -166,7 +166,7 @@
                 "MOVE_DRAIN_PUNCH",
                 "MOVE_SEED_BOMB"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_ROCKY_HELMET",
             "Nature": "NATURE_JOLLY",
             "HiddenPower": null,
@@ -180,10 +180,10 @@
             "Moves": [
                 "MOVE_GUNK_SHOT",
                 "MOVE_SPIKES",
-                "MOVE_TOXIC_SPIKES",
+                "MOVE_FIRE_PUNCH",
                 "MOVE_DRAIN_PUNCH"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_ROCKY_HELMET",
             "Nature": "NATURE_IMPISH",
             "HiddenPower": null,
@@ -200,7 +200,7 @@
                 "MOVE_SPIKES",
                 "MOVE_PAIN_SPLIT"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_ROCKY_HELMET",
             "Nature": "NATURE_IMPISH",
             "HiddenPower": null,
@@ -217,7 +217,7 @@
                 "MOVE_EARTHQUAKE",
                 "MOVE_EXPLOSION"
             ],
-            "Ability": "ABILITY_GOOEY",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_TOXIC_PLATE",
             "Nature": "NATURE_ADAMANT",
             "HiddenPower": null,
@@ -231,10 +231,10 @@
             "Moves": [
                 "MOVE_GUNK_SHOT",
                 "MOVE_SPIKES",
-                "MOVE_TOXIC_SPIKES",
+                "MOVE_DRAIN_PUNCH",
                 "MOVE_PAIN_SPLIT"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_BLACK_SLUDGE",
             "Nature": "NATURE_CAREFUL",
             "HiddenPower": null,
@@ -252,7 +252,7 @@
                 "MOVE_EARTHQUAKE",
                 "MOVE_PAIN_SPLIT"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_ROCKY_HELMET",
             "Nature": "NATURE_IMPISH",
             "HiddenPower": null,
@@ -270,7 +270,7 @@
                 "MOVE_EARTHQUAKE",
                 "MOVE_PAIN_SPLIT"
             ],
-            "Ability": "ABILITY_GOOEY",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_ROCKY_HELMET",
             "Nature": "NATURE_IMPISH",
             "HiddenPower": null,
@@ -284,10 +284,10 @@
             "Moves": [
                 "MOVE_GUNK_SHOT",
                 "MOVE_SPIKES",
-                "MOVE_TOXIC_SPIKES",
+                "MOVE_FIRE_PUNCH",
                 "MOVE_STOMPING_TANTRUM"
             ],
-            "Ability": "ABILITY_AFTERMATH",
+            "Ability": "ABILITY_TOXIC_DEBRIS",
             "Item": "ITEM_BLACK_SLUDGE",
             "Nature": "NATURE_IMPISH",
             "HiddenPower": null,
