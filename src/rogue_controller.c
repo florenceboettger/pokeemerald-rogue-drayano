@@ -3209,11 +3209,19 @@ extern const u8 Rogue_Ridemon_PlayerIsTrapped[];
 
 void Rogue_NotifySaveVersionUpdated(u16 fromNumber, u16 toNumber)
 {
+    u32 i;
+
     if(Rogue_IsRunActive())
         gRogueLocal.hasSaveWarningPending = TRUE;
     else
         gRogueLocal.hasVersionUpdateMsgPending = TRUE;
 
+    // Clear saved adventures
+    for(i = 0; i < ARRAY_COUNT(gRogueSaveBlock->adventureReplay); ++i)
+        gRogueSaveBlock->adventureReplay[i].isValid = FALSE;
+
+    FlagClear(FLAG_ROGUE_ADVENTURE_REPLAY_ACTIVE);
+    
     // TODO - Hook up warnings here??
     //if(IsPreReleaseCompatVersion(gSaveBlock1Ptr->rogueCompatVersion))
     //    FlagSet(FLAG_ROGUE_PRE_RELEASE_COMPAT_WARNING);
@@ -3760,19 +3768,25 @@ u16 Rogue_PostRunRewardLvls()
 
             for(i = 0; i < maxSlots; ++i)
             {
-                struct BoxPokemon* mon = Rogue_GetDaycareBoxMon(i);
+                struct BoxPokemon* boxMon = Rogue_GetDaycareBoxMon(i);
+                struct Pokemon* tempMon = &gEnemyParty[PARTY_SIZE - 1];
+
+                BoxMonToMon(boxMon, tempMon);
 
                 // Award levels
                 for(j = 0; j < daycareLvls; ++j)
                 {
-                    if(GetBoxMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && GetBoxMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
+                    if(GetMonData(tempMon, MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(tempMon, MON_DATA_LEVEL) != MAX_LEVEL)
                     {
-                        exp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[GetBoxMonData(mon, MON_DATA_SPECIES, NULL)].growthRate, GetBoxMonData(mon, MON_DATA_LEVEL, NULL) + 1);
-                        SetBoxMonData(mon, MON_DATA_EXP, &exp);
+                        exp = Rogue_ModifyExperienceTables(gRogueSpeciesInfo[GetMonData(tempMon, MON_DATA_SPECIES, NULL)].growthRate, GetMonData(tempMon, MON_DATA_LEVEL, NULL) + 1);
+                        SetMonData(tempMon, MON_DATA_EXP, &exp);
+                        CalculateMonStats(tempMon);
                     }
                     
                     // don't give friendship for daycare mons
                 }
+
+                CopyMon(boxMon, &tempMon->box, sizeof(struct BoxPokemon));
             }
         }
     }
@@ -4826,6 +4840,12 @@ static u8 UNUSED RandomMonType(u16 seedFlag)
 
 static u8 WildDenEncounter_CalculateWeight(u16 index, u16 species, void* data)
 {
+    if(RoguePokedex_IsSpeciesParadox(species))
+    {
+        if(Rogue_GetCurrentDifficulty() < ROGUE_GYM_START_DIFFICULTY + 2)
+            return 0;
+    }
+
     if(IsRareWeightedSpecies(species))
     {
         // Rare species become more common into late game
@@ -7969,7 +7989,7 @@ void Rogue_ModifyWildMon(struct Pokemon* mon)
             u16 presetIndex;
             u16 presetCount = gRoguePokemonProfiles[species].competitiveSetCount;
             u16 statA = (Random() % 6);
-            u16 statB = (statA + 1 + (Random() % 5)) % 6;
+            //u16 statB = (statA + 1 + (Random() % 5)) % 6;
             u16 temp = 31;
 
             if(presetCount != 0)
@@ -7986,8 +8006,9 @@ void Rogue_ModifyWildMon(struct Pokemon* mon)
             SetMonData(mon, MON_DATA_FRIENDSHIP, &temp);
 
             // Bump 2 of the IVs to max
+            temp = 31;
             SetMonData(mon, MON_DATA_HP_IV + statA, &temp);
-            SetMonData(mon, MON_DATA_HP_IV + statB, &temp);
+            //SetMonData(mon, MON_DATA_HP_IV + statB, &temp);
 
             // Clear held item
             temp = 0;
@@ -8802,7 +8823,7 @@ void Rogue_CorrectBoxMonDetails(struct BoxPokemon* mon)
 
 static bool8 IsRareWeightedSpecies(u16 species)
 {
-    if(RoguePokedex_GetSpeciesBST(species) >= 500)
+    if(RoguePokedex_GetSpeciesBST(species) >= 570)
     {
         if(Rogue_GetMaxEvolutionCount(species) == 0)
             return TRUE;
@@ -8870,6 +8891,12 @@ static u8 RandomiseWildEncounters_CalculateWeight(u16 index, u16 species, void* 
     }
 
 #endif
+
+    if(RoguePokedex_IsSpeciesParadox(species))
+    {
+        if(Rogue_GetCurrentDifficulty() < ROGUE_GYM_MID_DIFFICULTY)
+            return 0;
+    }
 
     if(IsRareWeightedSpecies(species))
     {
