@@ -16293,7 +16293,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     [MOVE_SWIRLING_BLADE] =
     {
         .effect = EFFECT_HIT,
-        .power = 80,
+        .power = 70,
         .type = TYPE_STEEL,
         .accuracy = 100,
         .pp = 15,
