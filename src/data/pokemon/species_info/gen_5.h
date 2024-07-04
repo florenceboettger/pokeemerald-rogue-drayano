@@ -4107,9 +4107,9 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .baseSpDefense = 65,
         .types = { TYPE_GROUND, TYPE_GHOST },
     #ifdef ROGUE_DRAYANO
-        .abilities = { ABILITY_MUMMY, ABILITY_NONE, ABILITY_CURSED_BODY },
+        .abilities = { ABILITY_WANDERING_SPIRIT, ABILITY_NONE, ABILITY_CURSED_BODY },
     #else
-        .abilities = { ABILITY_MUMMY, ABILITY_NONE },
+        .abilities = { ABILITY_WANDERING_SPIRIT, ABILITY_NONE },
     #endif
         .description = POKEDEX_DESC_STRING(
             "A clay slab with cursed engravings\n"
