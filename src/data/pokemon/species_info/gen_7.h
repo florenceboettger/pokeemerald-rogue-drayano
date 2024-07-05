@@ -1320,7 +1320,6 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .pokemonOffset = 7,                                 \
         .trainerScale = 257,                                \
         .trainerOffset = 0,                                 \
-        BACK_PIC(LycanrocMidday, 64, 56),                   \
         .footprint = gMonFootprint_Lycanroc,                \
         .formSpeciesIdTable = sLycanrocFormSpeciesIdTable
 
@@ -1349,6 +1348,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             "then slices them with the rocks in\n"
             "its mane."),
         FRONT_PIC(LycanrocMidday, 57, 53),
+        BACK_PIC(LycanrocMidday, 64, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_LycanrocMidday,
         .frontAnimId = ANIM_V_SHAKE,
@@ -1384,6 +1384,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             "even disobey its Trainer if it dislikes\n"
             "the orders it was given."),
         FRONT_PIC(LycanrocMidnight, 56, 61),
+        BACK_PIC(LycanrocMidnight, 64, 56),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_LycanrocMidnight,
         .frontAnimId = ANIM_SHRINK_GROW_VIBRATE_SLOW,
@@ -1418,6 +1419,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             "this form of Lycanroc is the most\n"
             "troublesome to raise."),
         FRONT_PIC(LycanrocDusk, 57, 58),
+        BACK_PIC(LycanrocDusk, 64, 56),
         .frontPicYOffset = 6,
         .frontAnimFrames = sAnims_LycanrocDusk,
         .frontAnimId = ANIM_V_SHAKE,
