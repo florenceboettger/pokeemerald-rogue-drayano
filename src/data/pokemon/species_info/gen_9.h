@@ -622,12 +622,21 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
     [SPECIES_SPIDOPS] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 85,
+        .baseAttack    = 94,
+        .baseDefense   = 92,
+        .baseSpeed     = 41,
+        .baseSpAttack  = 52,
+        .baseSpDefense = 86,
+    #else
         .baseHP        = 60,
         .baseAttack    = 79,
         .baseDefense   = 92,
         .baseSpeed     = 35,
         .baseSpAttack  = 52,
         .baseSpDefense = 86,
+    #endif
         .types = { TYPE_BUG, TYPE_BUG },
         .catchRate = 120,
         .expYield = 141,
@@ -2974,7 +2983,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .baseAttack    = 145,
         .baseDefense   = 87,
         .baseSpeed     = 100,
-        .baseSpAttack  = 86,
+        .baseSpAttack  = 86 ,
         .baseSpDefense = 82,
     #else
         .baseHP        = 100,
