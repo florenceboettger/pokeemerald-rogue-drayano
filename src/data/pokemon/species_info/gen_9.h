@@ -2969,12 +2969,21 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
     [SPECIES_PALAFIN_HERO] =
     {
         PALAFIN_MISC_INFO,
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 100,
+        .baseAttack    = 145,
+        .baseDefense   = 87,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 86,
+        .baseSpDefense = 82,
+    #else
         .baseHP        = 100,
         .baseAttack    = 160,
         .baseDefense   = 97,
         .baseSpeed     = 100,
         .baseSpAttack  = 106,
         .baseSpDefense = 87,
+    #endif
         .expYield = 228,
         .cryId = CRY_PALAFIN_HERO,
         .categoryName = _("Hero"),
