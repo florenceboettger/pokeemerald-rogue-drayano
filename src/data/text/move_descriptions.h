@@ -2929,8 +2929,13 @@ static const u8 sExpandingForceDescription[] = _(
     "all foes on Psychic Terrain.");
 
 static const u8 sSteelRollerDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Rampages to hit the foe and\n"
+    "destroy any terrain.");
+#else
     "Destroys terrain. Fails if\n"
     "ground isn't terrain.");
+#endif
 
 static const u8 sScaleShotDescription[] = _(
     "Shoots scales 2 to 5 times.\n"
@@ -3079,8 +3084,13 @@ static const u8 sSpringtideStormDescription[] = _(
     "Varies with the user's form.");
 
 static const u8 sMysticalPowerDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A mysterious power strikes.\n"
+    "May raise user's Sp. Atk.");
+#else
     "A mysterious power strikes,\n"
     "raising the user's Sp. Atk.");
+#endif
 
 static const u8 sRagingFuryDescription[] = _(
     "A rampage of 2 to 3 turns\n"
@@ -3128,12 +3138,22 @@ static const u8 sShelterDescription[] = _(
     "sharply raising its Defense.");
 
 static const u8 sTripleArrowsDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Shoots three arrows in a row\n"
+    "with rising intensity.");
+#else
     "High critical hit ratio.\n"
     "May lower Defense or flinch.");
+#endif
 
 static const u8 sInfernalParadeDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Attacks with ghostly balls\n"
+    "of fire. May leave a burn.");
+#else
     "Hurts a foe harder if it has\n"
     "an ailment. May leave a burn.");
+#endif
 
 static const u8 sCeaselessEdgeDescription[] = _(
 #ifdef ROGUE_DRAYANO
@@ -3181,8 +3201,13 @@ static const u8 sLastRespectsDescription[] = _(
     "for each defeated ally.");
 
 static const u8 sLuminaCrashDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A mind-affecting light that\n"
+    "lowers target's Sp. Def.");
+#else
     "A mind-affecting light\n"
     "harshly lowers Sp. Def.");
+#endif
 
 static const u8 sOrderUpDescription[] = _(
     "Boosts a user's stats\n"
@@ -3221,8 +3246,13 @@ static const u8 sSaltCureDescription[] = _(
     "damage to Steel and Water.");
 
 static const u8 sTripleDiveDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Splashes the foe three times\n"
+    "with rising intensity.");
+#else
     "Hits target with splashes\n"
     "of water 3 times in a row.");
+#endif
 
 static const u8 sMortalSpinDescription[] = _(
     "Erases trap moves and Leech\n"
@@ -3245,8 +3275,13 @@ static const u8 sFlowerTrickDescription[] = _(
     "a critical hit, never missing.");
 
 static const u8 sTorchSongDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A scorching song that may\n"
+    "raise the user's Sp. Atk.");
+#else
     "Flames scorch the target.\n"
     "Boosts the user's Sp. Atk.");
+#endif
 
 static const u8 sAquaStepDescription[] = _(
     "Hits with light, fluid dance\n"
@@ -3257,8 +3292,13 @@ static const u8 sRagingBullDescription[] = _(
     "User's form determines type.");
 
 static const u8 sMakeItRainDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Harshly lowers user's Sp. Atk\n"
+    "and scatters coins on field.");
+#else
     "Lowers the user's Sp. Atk.\n"
     "Money is recovered after.");
+#endif
 
 static const u8 sRuinationDescription[] = _(
     "Summons a ruinous disaster\n"

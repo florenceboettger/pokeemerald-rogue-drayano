@@ -65,6 +65,9 @@ SINGLE_BATTLE_TEST("King's Shield, Silk Trap and Obstruct protect from damaging 
         {MOVE_KINGS_SHIELD, STAT_ATK,   1},
         {MOVE_SILK_TRAP,    STAT_SPEED, 1},
         {MOVE_OBSTRUCT,     STAT_DEF,   2},
+    #ifdef ROGUE_DRAYANO
+        {MOVE_SHELTER,      STAT_ATK,   1},
+    #endif
     };
     u16 protectMove = MOVE_NONE;
     u16 usedMove = MOVE_NONE;
