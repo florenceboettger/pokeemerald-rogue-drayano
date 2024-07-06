@@ -1279,12 +1279,21 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
 #if P_FAMILY_SQUAWKABILLY
 #define SQUAWKABILLY_MISC_INFO                                  \
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 82,                                    \
+        .baseAttack    = 99,                                    \
+        .baseDefense   = 61,                                    \
+        .baseSpeed     = 102,                                    \
+        .baseSpAttack  = 45,                                    \
+        .baseSpDefense = 61,                                    \
+    #else
         .baseHP        = 82,                                    \
         .baseAttack    = 96,                                    \
         .baseDefense   = 51,                                    \
         .baseSpeed     = 92,                                    \
         .baseSpAttack  = 45,                                    \
         .baseSpDefense = 51,                                    \
+    #endif
         .types = { TYPE_NORMAL, TYPE_FLYING },                  \
         .catchRate = 190,                                       \
         .expYield = 146,                                        \
