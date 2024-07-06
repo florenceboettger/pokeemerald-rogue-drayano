@@ -158,7 +158,11 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+    #ifdef ROGUE_DRAYANO
+        PLAYER(SPECIES_CHARIZARD) { Ability(abilityDef); }
+    #else
         PLAYER(SPECIES_TYPHLOSION) { Ability(abilityDef); }
+    #endif
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_NIDOQUEEN) { Moves(move1, move2, move3, move4); Ability(abilityAtk); }
     } WHEN {
@@ -175,7 +179,11 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
                 break;
             }
     } SCENE {
+    #ifdef ROGUE_DRAYANO
+        MESSAGE("Charizard fainted!");
+    #else
         MESSAGE("Typhlosion fainted!");
+    #endif
     }
 }
 
