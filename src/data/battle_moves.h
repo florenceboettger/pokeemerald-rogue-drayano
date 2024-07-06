@@ -13898,19 +13898,42 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SHELTER] =
     {
+    #ifdef ROGUE_DRAYANO
+        .effect = EFFECT_PROTECT,
+    #else
         .effect = EFFECT_DEFENSE_UP_2,
+    #endif
         .power = 0,
         .type = TYPE_STEEL,
         .accuracy = 0,
         .pp = 10,
+    #ifdef ROGUE_DRAYANO
+        .secondaryEffectChance = 0,
+    #else
         .secondaryEffectChance = 100,
+    #endif
         .target = MOVE_TARGET_USER,
+    #ifdef ROGUE_DRAYANO
+        .priority = 4,
+    #else
         .priority = 0,
+    #endif
         .split = SPLIT_STATUS,
+    #ifdef ROGUE_DRAYANO
+        .zMoveEffect = Z_EFFECT_RESET_STATS,
+        .protectionMove = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .metronomeBanned = TRUE,
+        .copycatBanned = TRUE,
+        .instructBanned = TRUE,
+        .assistBanned = TRUE,
+    #else
         .zMoveEffect = Z_EFFECT_NONE,
         .snatchAffected = TRUE,
         .ignoresProtect = TRUE,
         .mirrorMoveBanned = TRUE,
+    #endif
     },
 
     [MOVE_TRIPLE_ARROWS] =

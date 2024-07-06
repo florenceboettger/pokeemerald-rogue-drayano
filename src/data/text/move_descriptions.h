@@ -3134,8 +3134,13 @@ static const u8 sBitterMaliceDescription[] = _(
 #endif
 
 static const u8 sShelterDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Evades damage, and raises\n"
+    "user's Defense when struck.");
+#else
     "The user hardens their skin,\n"
     "sharply raising its Defense.");
+#endif
 
 static const u8 sTripleArrowsDescription[] = _(
 #ifdef ROGUE_DRAYANO

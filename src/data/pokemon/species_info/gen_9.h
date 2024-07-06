@@ -1277,23 +1277,26 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
     },
 #endif //P_FAMILY_SMOLIV
 
+#ifdef ROGUE_DRAYANO
+    #define SQUAWKABILLY_ATTACK 99
+    #define SQUAWKABILLY_DEFENSE 61
+    #define SQUAWKABILLY_SPEED 102
+    #define SQUAWKABILLY_SPDEFENSE 61
+#else
+    #define SQUAWKABILLY_ATTACK 96
+    #define SQUAWKABILLY_DEFENSE 51
+    #define SQUAWKABILLY_SPEED 92
+    #define SQUAWKABILLY_SPDEFENSE 51
+#endif
+
 #if P_FAMILY_SQUAWKABILLY
 #define SQUAWKABILLY_MISC_INFO                                  \
-    #ifdef ROGUE_DRAYANO
         .baseHP        = 82,                                    \
-        .baseAttack    = 99,                                    \
-        .baseDefense   = 61,                                    \
-        .baseSpeed     = 102,                                    \
+        .baseAttack    = SQUAWKABILLY_ATTACK,                   \
+        .baseDefense   = SQUAWKABILLY_DEFENSE,                  \
+        .baseSpeed     = SQUAWKABILLY_SPEED,                    \
         .baseSpAttack  = 45,                                    \
-        .baseSpDefense = 61,                                    \
-    #else
-        .baseHP        = 82,                                    \
-        .baseAttack    = 96,                                    \
-        .baseDefense   = 51,                                    \
-        .baseSpeed     = 92,                                    \
-        .baseSpAttack  = 45,                                    \
-        .baseSpDefense = 51,                                    \
-    #endif
+        .baseSpDefense = SQUAWKABILLY_SPDEFENSE,                \
         .types = { TYPE_NORMAL, TYPE_FLYING },                  \
         .catchRate = 190,                                       \
         .expYield = 146,                                        \

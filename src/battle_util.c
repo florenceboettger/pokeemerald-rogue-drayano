@@ -8624,6 +8624,10 @@ bool32 IsBattlerProtected(u32 battler, u32 move)
     else if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_MAT_BLOCK
       && !IS_MOVE_STATUS(move))
         return TRUE;
+#ifdef ROGUE_DRAYANO
+    else if (gProtectStructs[battler].sheltered && gBattleMoves[move].power != 0)
+        return TRUE;
+#endif
     else
         return FALSE;
 }
