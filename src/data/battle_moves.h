@@ -1073,7 +1073,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         #endif
         .type = TYPE_ICE,
         .accuracy = 100,
+    #ifdef ROGUE_DRAYANO
+        .pp = 15,
+    #else
         .pp = 10,
+    #endif
         .secondaryEffectChance = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -1096,7 +1100,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         #endif
         .type = TYPE_ICE,
         .accuracy = 70,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 5,
+    #endif
         .secondaryEffectChance = 10,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
@@ -1924,6 +1932,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_RECOVER] =
     {
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .pp = 5,
         #elif B_UPDATED_MOVE_DATA >= GEN_4
@@ -1931,6 +1942,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         #else
             .pp = 20,
         #endif
+    #endif
         .effect = EFFECT_RESTORE_HP,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -2472,11 +2484,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SOFT_BOILED] =
     {
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .pp = 5,
         #else
             .pp = 10,
         #endif
+    #endif
         .effect = EFFECT_SOFTBOILED,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -3880,11 +3896,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_MILK_DRINK] =
     {
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .pp = 5,
         #else
             .pp = 10,
         #endif
+    #endif
         .effect = EFFECT_SOFTBOILED,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -4324,7 +4344,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 5,
+    #endif
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -4342,7 +4366,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 0,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 5,
+    #endif
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -4364,7 +4392,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .effect = EFFECT_MOONLIGHT,
         .power = 0,
         .accuracy = 0,
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         .pp = 5,
+    #endif
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -5597,11 +5629,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SLACK_OFF] =
     {
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .pp = 5,
         #else
             .pp = 10,
         #endif
+    #endif
         .effect = EFFECT_RESTORE_HP,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -6551,11 +6587,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_ROOST] =
     {
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .pp = 5,
         #else
             .pp = 10,
         #endif
+    #endif
         .effect = EFFECT_ROOST,
         .power = 0,
         .type = TYPE_FLYING,
@@ -11170,11 +11210,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SHORE_UP] =
     {
+    #ifdef ROGUE_DRAYANO
+        .pp = 10,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .pp = 5,
         #else
             .pp = 10,
         #endif
+    #endif
         .effect = EFFECT_SHORE_UP,
         .power = 0,
         .type = TYPE_GROUND,
@@ -13496,15 +13540,26 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         #else
             .power = 60,
         #endif
+    #ifdef ROGUE_DRAYANO
+        .effect = EFFECT_PARALYZE_HIT,
+    #else
         .effect = EFFECT_DIRE_CLAW,
+    #endif
         .type = TYPE_POISON,
         .accuracy = 100,
         .pp = 15,
+    #ifdef ROGUE_DRAYANO
+        .secondaryEffectChance = 30,
+    #else
         .secondaryEffectChance = 50,
+    #endif
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
+    #ifdef ROGUE_DRAYANO
+        .highCritRatio = TRUE,
+    #endif
         .makesContact = TRUE,
         .sheerForceBoost = TRUE,
     },
@@ -13545,6 +13600,21 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_STONE_AXE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 90,
+        .effect = EFFECT_HIT,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_PHYSICAL,
+        .zMoveEffect = Z_EFFECT_NONE,
+        .makesContact = TRUE,
+        .highCritRatio = TRUE,
+        .slicingMove = TRUE,
+    #else
         .effect = EFFECT_HIT_SET_ENTRY_HAZARD,
         .power = 65,
         .type = TYPE_ROCK,
@@ -13559,6 +13629,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .argument = MOVE_EFFECT_STEALTH_ROCK,
         .sheerForceBoost = TRUE,
         .slicingMove = TRUE,
+    #endif
     },
 
     [MOVE_SPRINGTIDE_STORM] =
@@ -13728,6 +13799,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_ESPER_WING] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 50,
+        .accuracy = 100,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .power = 80,
             .accuracy = 100,
@@ -13735,9 +13810,14 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
             .power = 75,
             .accuracy = 90,
         #endif
+    #endif
         .effect = EFFECT_SPEED_UP_HIT,
         .type = TYPE_PSYCHIC,
+    #ifdef ROGUE_DRAYANO
+        .pp = 20,
+    #else
         .pp = 10,
+    #endif
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -13749,6 +13829,23 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_BITTER_MALICE] =
     {
+    #ifdef ROGUE_DRAYANO
+        #if B_USE_FROSTBITE == TRUE
+            .effect = EFFECT_FROSTBITE_HIT,
+        #else
+            .effect = EFFECT_FREEZE_HIT,
+        #endif
+        .power = 70,
+        .type = TYPE_GHOST,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+        .zMoveEffect = Z_EFFECT_NONE,
+        .sheerForceBoost = TRUE,
+    #else
         #if B_UPDATED_MOVE_DATA >= GEN_9
             .power = 75,
         #else
@@ -13764,6 +13861,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .split = SPLIT_SPECIAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .sheerForceBoost = TRUE,
+    #endif
     },
 
     [MOVE_SHELTER] =
@@ -13821,6 +13919,21 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_CEASELESS_EDGE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .power = 90,
+        .effect = EFFECT_HIT,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .split = SPLIT_PHYSICAL,
+        .zMoveEffect = Z_EFFECT_NONE,
+        .makesContact = TRUE,
+        .highCritRatio = TRUE,
+        .slicingMove = TRUE,
+    #else
         .effect = EFFECT_HIT_SET_ENTRY_HAZARD,
         .power = 65,
         .type = TYPE_DARK,
@@ -13835,6 +13948,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .argument = MOVE_EFFECT_SPIKES,
         .sheerForceBoost = TRUE,
         .slicingMove = TRUE,
+    #endif
     },
 
     [MOVE_BLEAKWIND_STORM] =
@@ -14035,7 +14149,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     [MOVE_JET_PUNCH] =
     {
         .effect = EFFECT_HIT,
+    #ifdef ROGUE_DRAYANO
+        .power = 45,
+    #else
         .power = 60,
+    #endif
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 15,
