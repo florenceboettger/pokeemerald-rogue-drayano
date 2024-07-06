@@ -2682,12 +2682,21 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 
     [SPECIES_CLODSIRE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 130,
+        .baseAttack    = 85,
+        .baseDefense   = 60,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 100,
+    #else
         .baseHP        = 130,
         .baseAttack    = 75,
         .baseDefense   = 60,
         .baseSpeed     = 20,
         .baseSpAttack  = 45,
         .baseSpDefense = 100,
+    #endif
         .types = { TYPE_POISON, TYPE_GROUND },
         .catchRate = 90,
         .expYield = 151,
