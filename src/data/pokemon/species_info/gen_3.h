@@ -7526,7 +7526,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .footprint = gMonFootprint_Spheal,
         LEARNSETS(Spheal),
     #ifdef ROGUE_DRAYANO
-        .evolutions = EVOLUTION({EVO_LEVEL, 226, SPECIES_SEALEO}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 26, SPECIES_SEALEO}),
     #else
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_SEALEO}),
     #endif
