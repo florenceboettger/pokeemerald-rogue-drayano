@@ -52,6 +52,9 @@
             },
             "command": "debuggerReady",
             "problemMatcher": {
+                "pattern": {
+                    "regexp": ""
+                },
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "^.*debuggerReady.*$",
@@ -74,6 +77,9 @@
             },
             "command": "debuggerReady",
             "problemMatcher": {
+                "pattern": {
+                    "regexp": ""
+                },
                 "background": {
                     "activeOnStart": true,
                     "beginsPattern": "^.*debuggerReady.*$",
