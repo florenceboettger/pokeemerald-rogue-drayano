@@ -968,8 +968,13 @@ static const u8 sPursuitDescription[] = _(
     "on a foe switching out.");
 
 static const u8 sRapidSpinDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Spins to remove hazards\n"
+    "and raise user's Speed.");
+#else
     "Spins the body at high\n"
     "speed to strike the foe.");
+#endif
 
 static const u8 sSweetScentDescription[] = _(
     "Allures the foe to reduce\n"
