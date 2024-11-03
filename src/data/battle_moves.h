@@ -212,6 +212,22 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     [MOVE_RAZOR_WIND] =
     {
         .effect = EFFECT_TWO_TURNS_ATTACK,
+    #ifdef ROGUE_DRAYANO
+        .power = 130,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .split = SPLIT_SPECIAL,
+        .zMoveEffect = Z_EFFECT_NONE,
+        .highCritRatio = TRUE,
+        .twoTurnMove = TRUE,
+        .sleepTalkBanned = TRUE,
+        .instructBanned = TRUE,
+        .windMove = B_EXTRAPOLATED_MOVE_FLAGS,
+    #else
         .power = 80,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -226,6 +242,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .sleepTalkBanned = TRUE,
         .instructBanned = TRUE,
         .windMove = B_EXTRAPOLATED_MOVE_FLAGS,
+    #endif
     },
 
     [MOVE_SWORDS_DANCE] =

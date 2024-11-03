@@ -61,8 +61,13 @@ static const u8 sGuillotineDescription[] = _(
     "that may cause fainting.");
 
 static const u8 sRazorWindDescription[] = _(
+#ifdef
+    "Charges up to unleash wind\n"
+    "with a high critical hit rate.");
+#else
     "A 2-turn move that strikes\n"
     "the foe on the 2nd turn.");
+#endif
 
 static const u8 sSwordsDanceDescription[] = _(
     "A fighting dance that\n"
@@ -120,7 +125,6 @@ static const u8 sMegaKickDescription[] = _(
 static const u8 sJumpKickDescription[] = _(
     "A strong jumping kick. May\n"
     "miss and hurt the kicker.");
-
 
 static const u8 sRollingKickDescription[] = _(
 #ifdef ROGUE_DRAYANO
@@ -1074,8 +1078,13 @@ static const u8 sBeatUpDescription[] = _(
     "join in the attack.");
 
 static const u8 sFakeOutDescription[] = _(
+#ifdef
+    "Strikes 1st to cause flinch.\n"
+    "Must be used immediately.");
+#else
     "A 1st-turn, 1st-strike move\n"
     "that causes flinching.");
+#endif
 
 static const u8 sUproarDescription[] = _(
 #if B_UPROAR_TURNS >= GEN_5
@@ -1162,8 +1171,13 @@ static const u8 sRolePlayDescription[] = _(
     "copies its special ability.");
 
 static const u8 sWishDescription[] = _(
+#ifdef
+    "Restores half user's HP\n"
+    "to party member in turn.");
+#else
     "A wish that restores HP.\n"
     "It takes time to work.");
+#endif
 
 static const u8 sAssistDescription[] = _(
     "Attacks randomly with one\n"
@@ -1174,8 +1188,13 @@ static const u8 sIngrainDescription[] = _(
     "The user can't switch out.");
 
 static const u8 sSuperpowerDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Attacks with super strength\n"
+    "but lowers physical stats.");
+#else
     "Boosts strength sharply,\n"
     "but lowers abilities.");
+#endif
 
 static const u8 sMagicCoatDescription[] = _(
     "Reflects special effects\n"
