@@ -61,7 +61,7 @@ static const u8 sGuillotineDescription[] = _(
     "that may cause fainting.");
 
 static const u8 sRazorWindDescription[] = _(
-#ifdef
+#ifdef ROGUE_DRAYANO
     "Charges up to unleash wind\n"
     "with a high critical hit rate.");
 #else
@@ -1078,7 +1078,7 @@ static const u8 sBeatUpDescription[] = _(
     "join in the attack.");
 
 static const u8 sFakeOutDescription[] = _(
-#ifdef
+#ifdef ROGUE_DRAYANO
     "Strikes 1st to cause flinch.\n"
     "Must be used immediately.");
 #else
@@ -1171,7 +1171,7 @@ static const u8 sRolePlayDescription[] = _(
     "copies its special ability.");
 
 static const u8 sWishDescription[] = _(
-#ifdef
+#ifdef ROGUE_DRAYANO
     "Restores half user's HP\n"
     "to party member in turn.");
 #else
