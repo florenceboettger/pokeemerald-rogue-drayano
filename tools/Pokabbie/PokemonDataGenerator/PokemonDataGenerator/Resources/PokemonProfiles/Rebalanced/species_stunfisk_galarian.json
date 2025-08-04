@@ -113,7 +113,8 @@
         "MOVE_CRUNCH",
         "MOVE_TERRAIN_PULSE",
         "MOVE_REST",
-        "MOVE_FLASH_CANNON"
+        "MOVE_FLASH_CANNON",
+        "MOVE_SPIKES"
     ],
     "CompetitiveSets": [
         {
