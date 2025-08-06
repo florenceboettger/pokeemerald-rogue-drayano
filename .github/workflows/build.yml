@@ -51,7 +51,7 @@ jobs:
           TEST: 1
         run: |
           make -j${nproc} -O pokeemerald-test.elf
-          make check -j{nproc} TESTS="Print data" | grep -oPz '(?s)\[\n(.|\n)*?\]\n' | tr -d '\0' > ./tools/Rebalanced/DocGen/data/pokemon.json
+          make check -j${nproc} TESTS="Print data" | grep -oPz '(?s)\[\n(.|\n)*?\]\n' | tr -d '\0' > ./tools/Rebalanced/DocGen/data/pokemon.json
 
       - name: Push
         uses: s0/git-publish-subdir-action@develop
