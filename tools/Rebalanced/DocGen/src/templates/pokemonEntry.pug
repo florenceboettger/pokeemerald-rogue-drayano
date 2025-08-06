@@ -12,14 +12,14 @@ html(language="en")
             .column 
                 table
                     tr
-                        th Type:
-                        th
+                        td Type:
+                        td
                             each type, i in data.pokemon.types
                                 | #{type}
                                 if i < data.pokemon.types.length - 1
                                     | ,&nbsp;
                     tr
-                        th 
+                        td 
                             if data.pokemon.abilities.length == 1
                                 | Ability:
                             else 
@@ -30,25 +30,25 @@ html(language="en")
                                     li #{type}
                     if data.pokemon.hiddenAbility
                         tr 
-                            th Hidden Ability: 
-                            th #{data.pokemon.hiddenAbility}
+                            td Hidden Ability: 
+                            td #{data.pokemon.hiddenAbility}
             .column 
                 table 
                     tr
-                        th HP: 
-                        th #{data.pokemon.stats.hp}
+                        td HP: 
+                        td #{data.pokemon.stats.hp}
                     tr
-                        th Attack: 
-                        th #{data.pokemon.stats.attack}
+                        td Attack: 
+                        td #{data.pokemon.stats.attack}
                     tr
-                        th Defense: 
-                        th #{data.pokemon.stats.defense}
+                        td Defense: 
+                        td #{data.pokemon.stats.defense}
                     tr
-                        th Sp. Atk.: 
-                        th #{data.pokemon.stats.spAttack}
+                        td Sp. Atk.: 
+                        td #{data.pokemon.stats.spAttack}
                     tr
-                        th Sp. Def.: 
-                        th #{data.pokemon.stats.spDefense}
+                        td Sp. Def.: 
+                        td #{data.pokemon.stats.spDefense}
                     tr
-                        th Speed: 
-                        th #{data.pokemon.stats.speed}
+                        td Speed: 
+                        td #{data.pokemon.stats.speed}

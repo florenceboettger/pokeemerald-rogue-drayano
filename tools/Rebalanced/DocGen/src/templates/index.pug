@@ -6,6 +6,7 @@ html(language="en")
     head
         title="Emerald Rogue Rebalanced Documentation"
     body
-        h1 Hello World!
+        h1 List of Pokemon
         each p in data.pokemonList
-            a(href=`pokemon/${p.internalId}`) p.speciesName
+            div 
+                a(href=`pokemon/${p.internalId}.html`) #{p.speciesName}
