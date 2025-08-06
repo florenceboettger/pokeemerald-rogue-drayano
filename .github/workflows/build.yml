@@ -1,13 +1,10 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - vanilla
-      - vanilla-dev
-      - expansion
-      - expansion-dev
-  pull_request:
+#on:
+#  push:
+#    branches:
+#      - expansion-drayano
+#  pull_request:
 
 jobs:
   build:
@@ -17,7 +14,7 @@ jobs:
       GAME_VERSION: EMERALD
       GAME_REVISION: 0
       GAME_LANGUAGE: ENGLISH
-      MODERN: 0
+      MODERN: 1
       COMPARE: 0
       UNUSED_ERROR: 0
     steps:
@@ -48,36 +45,54 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
+      - name: Build Docs
+        env:
+          MODERN: 1
+          TEST: 1
+        run: |
+          make -j${nproc} -O pokeemerald-test.elf
+          make check -j{nproc} TESTS="Print data" | grep -oPz '(?s)\[\n(.|\n)*?\]\n' | tr -d '\0' > ./tools/Rebalanced/DocGen/data/pokemon.json
+
+      - name: Push
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: tools/Rebalanced/DocGen
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Update docs"
+
+
       #- name: Agbcc
       #  env:
       #    MODERN: 0
       #    COMPARE: 0
       #  run: make -j${nproc} -O all
 
-      - name: Build Debug
-        env:
-          MODERN: 1
-          COMPARE: 0
-          RELEASE: 0
-        run: make -j${nproc} -O all
+      #- name: Build Debug
+      #  env:
+      #    MODERN: 1
+      #    COMPARE: 0
+      #    RELEASE: 0
+      #  run: make -j${nproc} -O all
+#
+      #- name: Build Release
+      #  env:
+      #    MODERN: 1
+      #    COMPARE: 0
+      #    RELEASE: 1
+      #  run: make -j${nproc} -O all
 
-      - name: Build Release
-        env:
-          MODERN: 1
-          COMPARE: 0
-          RELEASE: 1
-        run: make -j${nproc} -O all
-
-      - name: Update Memory Stats
-        uses: actions/upload-artifact@v3
-        with:
-          name: Memory Stats
-          path: pokeemerald_memorystats.csv
-
-      - name: Test
-        env:
-          MODERN: 1
-          TEST: 1
-        run: |
-          make -j${nproc} -O pokeemerald-test.elf
-          make -j${nproc} check
+      #- name: Update Memory Stats
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: Memory Stats
+      #    path: pokeemerald_memorystats.csv
+#
+      #- name: Test
+      #  env:
+      #    MODERN: 1
+      #    TEST: 1
+      #  run: |
+      #    make -j${nproc} -O pokeemerald-test.elf
+      #    make -j${nproc} check
