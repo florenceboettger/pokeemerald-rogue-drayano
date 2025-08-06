@@ -54,9 +54,7 @@ jobs:
           make check -j${nproc} TESTS="Print data" | grep -oPz '(?s)\[\n(.|\n)*?\]\n' | tr -d '\0' > ./tools/Rebalanced/DocGen/data/pokemon.json
 
       - name: Setup Node
-        uses:
-          actions/checkout@v4
-          actions/setup-node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: 22
 
