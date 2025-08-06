@@ -19,10 +19,10 @@ jobs:
       UNUSED_ERROR: 0
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Checkout agbcc
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: agbcc
           repository: pret/agbcc
@@ -45,7 +45,7 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
-      - name: Build Docs
+      - name: Build JSON
         env:
           MODERN: 1
           TEST: 1
@@ -53,14 +53,24 @@ jobs:
           make -j${nproc} -O pokeemerald-test.elf
           make check -j${nproc} TESTS="Print data" | grep -oPz '(?s)\[\n(.|\n)*?\]\n' | tr -d '\0' > ./tools/Rebalanced/DocGen/data/pokemon.json
 
-      - name: Push
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: gh-pages
-          FOLDER: tools/Rebalanced/DocGen
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: "Update docs"
+      - name: Setup Node
+        uses:
+          actions/checkout@v4
+          actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build Docs
+        run: |
+          npm ci
+          npm run build
+        working-directory: tools/Rebalanced/DocGen
+
+      - name: Publish Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: tools/Rebalanced/DocGen/build
 
 
       #- name: Agbcc

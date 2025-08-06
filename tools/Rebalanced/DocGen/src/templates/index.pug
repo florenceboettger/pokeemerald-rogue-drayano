@@ -1,0 +1,11 @@
+include partials/vars
+
+doctype html
+
+html(language="en")
+    head
+        title="Emerald Rogue Rebalanced Documentation"
+    body
+        h1 Hello World!
+        each p in data.pokemonList
+            a(href=`pokemon/${p.internalId}`) p.speciesName
