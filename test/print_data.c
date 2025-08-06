@@ -38,7 +38,7 @@ TEST("Print data")
         DebugPrintf("\t\t\t\"defense\": %u,", currSpecies->baseDefense);
         DebugPrintf("\t\t\t\"spAttack\": %u,", currSpecies->baseSpAttack);
         DebugPrintf("\t\t\t\"spDefense\": %u,", currSpecies->baseSpDefense);
-        DebugPrintf("\t\t\t\"speed\": %u", currSpecies->baseHP);
+        DebugPrintf("\t\t\t\"speed\": %u", currSpecies->baseSpeed);
         DebugPrint("\t\t},");
 
         //  Print abilities
