@@ -1,0 +1,54 @@
+include partials/vars
+
+doctype html
+
+html(language="en")
+    head 
+        title=data.pokemon.speciesName
+    body
+        h1 #{data.pokemon.speciesName}
+        .row 
+            .column (Image here)
+            .column 
+                table
+                    tr
+                        td Type:
+                        td
+                            each type, i in data.pokemon.types
+                                | #{type}
+                                if i < data.pokemon.types.length - 1
+                                    | ,&nbsp;
+                    tr
+                        td 
+                            if data.pokemon.abilities.length == 1
+                                | Ability:
+                            else 
+                                | Abilities:
+                        td
+                            ul
+                                each type, i in data.pokemon.abilities
+                                    li #{type}
+                    if data.pokemon.hiddenAbility
+                        tr 
+                            td Hidden Ability: 
+                            td #{data.pokemon.hiddenAbility}
+            .column 
+                table 
+                    tr
+                        td HP: 
+                        td #{data.pokemon.stats.hp}
+                    tr
+                        td Attack: 
+                        td #{data.pokemon.stats.attack}
+                    tr
+                        td Defense: 
+                        td #{data.pokemon.stats.defense}
+                    tr
+                        td Sp. Atk.: 
+                        td #{data.pokemon.stats.spAttack}
+                    tr
+                        td Sp. Def.: 
+                        td #{data.pokemon.stats.spDefense}
+                    tr
+                        td Speed: 
+                        td #{data.pokemon.stats.speed}

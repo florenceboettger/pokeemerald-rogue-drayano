@@ -281,7 +281,7 @@
             {
                 "name": "Post Game?",
                 "display_group": "starter_quests",
-                "description": "Meet ??? in ??? and then meet ??? to active all post game content.",
+                "description": "Meet ??? in ??? and then meet ??? to activate all post game content.",
                 "flags": 
                 [
                     "MAIN_QUEST_DEFAULT",

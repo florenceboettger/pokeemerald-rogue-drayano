@@ -61,7 +61,7 @@ static const u8 sGuillotineDescription[] = _(
     "that may cause fainting.");
 
 static const u8 sRazorWindDescription[] = _(
-#ifdef
+#ifdef ROGUE_DRAYANO
     "Charges up to unleash wind\n"
     "with a high critical hit rate.");
 #else

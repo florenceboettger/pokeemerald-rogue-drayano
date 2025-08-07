@@ -82,7 +82,7 @@ namespace PokemonDataGenerator.Pokedex
 				}
 			}
 
-			public void RemoveInvalidMoves(SourcePokemonProfile source)
+			public void RemoveInvalidMoves(SourcePokemonProfile source, bool isRebalanced)
 			{
 				// Find out which game we're going to base the level up moveset off
 				int levelUpIndex = int.MaxValue;
@@ -120,7 +120,7 @@ namespace PokemonDataGenerator.Pokedex
 				});
 
 				// Carry forward toxic & scald nerf from gen8
-				if(!GameDataHelpers.IsVanillaVersion)
+				if(!GameDataHelpers.IsVanillaVersion && !isRebalanced)
 				{
 					if (moveGroupName != "ultra-sun-ultra-moon")
 					{
@@ -251,12 +251,12 @@ namespace PokemonDataGenerator.Pokedex
 					Abilities[i] = "none";
 			}
 
-			public void CollapseMovesets()
+			public void CollapseMovesets(bool isRebalanced)
 			{
 				//Moves.RemoveAll((m) => PokemonMoveHelpers.IsMoveUnsupported(m.moveName));
 
 				var movesetPreferences = (GameDataHelpers.IsVanillaVersion ? MovesetSettings.VanillaSettings : MovesetSettings.ExSettings);
-				movesetPreferences.RemoveInvalidMoves(this);
+				movesetPreferences.RemoveInvalidMoves(this, isRebalanced);
 
 				// Simplify the definitions now and then we'll remove any duplicates
 				List<SourceMoveInfo> newMoves = new List<SourceMoveInfo>();
@@ -1159,7 +1159,7 @@ namespace PokemonDataGenerator.Pokedex
 					}
 				}
 
-				sourceProfile.CollapseMovesets();
+				sourceProfile.CollapseMovesets(isRebalanced);
 
 				outputProfile = PokemonProfile.FromSource(sourceProfile);
 				outputProfile.FormatDataForGame(); // collapse initially so we can easily inspect the cache file

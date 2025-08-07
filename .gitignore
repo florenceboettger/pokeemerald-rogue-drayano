@@ -3,6 +3,7 @@
 *.i
 *.elf
 *.gba
+*.asm
 !data/*.gba
 *.sgm
 *.sa1
@@ -38,6 +39,7 @@ prefabs.json
 *.diff
 *.sym
 *.js
+!webpack.config.js
 src/data/map_group_count.h
 *.ups
 !scripts/*
@@ -47,3 +49,4 @@ tools/poryscript/*
 tools/ups/*
 !tools/Pokabbie/Build
 pokeemerald-*.png
+tools/Rebalanced/DocGen/node_modules

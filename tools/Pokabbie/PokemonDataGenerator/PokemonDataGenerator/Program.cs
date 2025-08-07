@@ -32,6 +32,7 @@ namespace PokemonDataGenerator
 			Console.WriteLine("4 - OW Sprites Palette Generator");
 			Console.WriteLine("5 - Generate Pokedex Lists");
 			Console.WriteLine("6 - Convert NPC sprites");
+			Console.WriteLine("7 - Generate Documentation");
 			int action = ReadOption(1, 6);
 
 			switch(action)
@@ -76,6 +77,10 @@ namespace PokemonDataGenerator
 				case 6:
 					Console.WriteLine("==Generating NPC sprites==");
 					NpcSpriteSplitter.ExportDirectory(Path.GetFullPath("npc_in"), Path.GetFullPath("npc_out"));
+					break;
+
+				case 7:
+					Console.WriteLine("==Generating Documentation==");
 					break;
 			}
 
