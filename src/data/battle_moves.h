@@ -14841,19 +14841,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     [MOVE_RAGE_FIST] =
     {
     #ifdef ROGUE_DRAYANO
-        .effect = EFFECT_STOMPING_TANTRUM,
-        .power = 75,
+        .effect = EFFECT_RAMPAGE,
+        .power = 120,
         .type = TYPE_GHOST,
         .accuracy = 100,
-        .pp = 10,
+        .pp = 15,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
+        .target = MOVE_TARGET_RANDOM,
         .priority = 0,
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = Z_EFFECT_NONE,
         .makesContact = TRUE,
         .punchingMove = TRUE,
         .metronomeBanned = TRUE,
+        .instructBanned = TRUE,
     #else
         .effect = EFFECT_RAGE_FIST,
         .power = 50,

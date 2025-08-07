@@ -10,7 +10,15 @@
             "Level": "1"
         },
         {
-            "Move": "MOVE_OUTRAGE",
+            "Move": "MOVE_ACID_SPRAY",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_ACID_ARMOR",
+            "Level": "1"
+        },
+        {
+            "Move": "MOVE_POISON_TAIL",
             "Level": "1"
         },
         {
@@ -26,11 +34,11 @@
             "Level": "1"
         },
         {
-            "Move": "MOVE_ABSORB",
+            "Move": "MOVE_TEARFUL_LOOK",
             "Level": "1"
         },
         {
-            "Move": "MOVE_PROTECT",
+            "Move": "MOVE_ABSORB",
             "Level": "1"
         },
         {
@@ -50,40 +58,52 @@
             "Level": "18"
         },
         {
+            "Move": "MOVE_WATER_PULSE",
+            "Level": "22"
+        },
+        {
             "Move": "MOVE_RAIN_DANCE",
-            "Level": "25"
+            "Level": "27"
         },
         {
             "Move": "MOVE_FLAIL",
-            "Level": "28"
+            "Level": "31"
         },
         {
             "Move": "MOVE_BODY_SLAM",
-            "Level": "32"
+            "Level": "35"
         },
         {
             "Move": "MOVE_MUDDY_WATER",
-            "Level": "37"
+            "Level": "40"
         },
         {
             "Move": "MOVE_RECOVER",
-            "Level": "42"
+            "Level": "44"
         },
         {
             "Move": "MOVE_DRAGON_PULSE",
-            "Level": "47"
+            "Level": "49"
         },
         {
-            "Move": "MOVE_POWER_WHIP",
-            "Level": "50"
+            "Move": "MOVE_CURSE",
+            "Level": "53"
         },
         {
             "Move": "MOVE_HYDRO_PUMP",
-            "Level": "52"
+            "Level": "58"
+        },
+        {
+            "Move": "MOVE_SLUDGE_WAVE",
+            "Level": "63"
+        },
+        {
+            "Move": "MOVE_POWER_WHIP",
+            "Level": "68"
         },
         {
             "Move": "MOVE_OUTRAGE",
-            "Level": "55"
+            "Level": "73"
         }
     ],
     "TutorMoves": [

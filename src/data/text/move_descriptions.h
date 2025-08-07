@@ -3419,8 +3419,8 @@ static const u8 sTwinBeamDescription[] = _(
 
 static const u8 sRageFistDescription[] = _(
 #ifdef ROGUE_DRAYANO
-    "A rage-fueled punch that is\n"
-    "stronger after a failure.");
+    "A rampage of 2 to 3 turns\n"
+    "that confuses the user.");
 #else
     "The more the user has been\n"
     "hit, the stronger the move.");
