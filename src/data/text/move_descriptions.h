@@ -1078,7 +1078,7 @@ static const u8 sBeatUpDescription[] = _(
     "join in the attack.");
 
 static const u8 sFakeOutDescription[] = _(
-#ifdef
+#ifdef ROGUE_DRAYANO
     "Strikes 1st to cause flinch.\n"
     "Must be used immediately.");
 #else
@@ -1171,7 +1171,7 @@ static const u8 sRolePlayDescription[] = _(
     "copies its special ability.");
 
 static const u8 sWishDescription[] = _(
-#ifdef
+#ifdef ROGUE_DRAYANO
     "Restores half user's HP\n"
     "to party member in turn.");
 #else
@@ -1265,8 +1265,13 @@ static const u8 sCamouflageDescription[] = _(
     "depending on the location.");
 
 static const u8 sTailGlowDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Flashes a light that raises\n"
+    "Sp. Atk drastically.");
+#else
     "Flashes a light that sharply\n"
     "raises Sp. Atk.");
+#endif
 
 static const u8 sLusterPurgeDescription[] = _(
     "Attacks with a burst of\n"
@@ -1617,8 +1622,13 @@ static const u8 sLuckyChantDescription[] = _(
     "landing critical hits.");
 
 static const u8 sMeFirstDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Copies and strengthens foe's\n"
+    "move, if user moves first.");
+#else
     "Executes the foe's attack\n"
     "with greater power.");
+#endif
 
 static const u8 sCopycatDescription[] = _(
     "The user mimics the last\n"

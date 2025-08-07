@@ -6268,7 +6268,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
     [MOVE_DRAGON_CLAW] =
     {
         .effect = EFFECT_HIT,
+    #ifdef ROGUE_DRAYANO
+        .power = 90,
+    #else
         .power = 80,
+    #endif
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .pp = 15,
