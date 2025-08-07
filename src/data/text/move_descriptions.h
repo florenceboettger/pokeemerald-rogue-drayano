@@ -1912,12 +1912,22 @@ static const u8 sDoubleHitDescription[] = _(
     "etc. Strikes twice.");
 
 static const u8 sRoarOfTimeDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Warps the fabric of time\n"
+    "to always strike first.");
+#else
     "Powerful, but leaves the\n"
     "user immobile the next turn.");
+#endif
 
 static const u8 sSpacialRendDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Tears space to always hit.\n"
+    "High critical-hit ratio.");
+#else
     "Tears the foe, and space.\n"
     "High critical-hit ratio.");
+#endif
 
 static const u8 sMagmaStormDescription[] = _(
     "Traps the foe in a vortex\n"
@@ -2133,8 +2143,13 @@ static const u8 sReflectTypeDescription[] = _(
     "type, copying it.");
 
 static const u8 sRetaliateDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Deals double damage if\n"
+    "an ally fainted last turn.");
+#else
     "An attack that does more\n"
     "damage if an ally fainted.");
+#endif
 
 static const u8 sFinalGambitDescription[] = _(
     "The user faints to damage\n"
@@ -3155,8 +3170,13 @@ static const u8 sBarbBarrageDescription[] = _(
     "up against poisoned foes.");
 
 static const u8 sEsperWingDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "High critical hit ratio.\n"
+    "May raise the user's speed.");
+#else
     "High critical hit ratio.\n"
     "Ups the user's Speed.");
+#endif
 
 static const u8 sBitterMaliceDescription[] = _(
 #ifdef ROGUE_DRAYANO
@@ -3236,8 +3256,13 @@ static const u8 sAxeKickDescription[] = _(
     "May cause confusion.");
 
 static const u8 sLastRespectsDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "Deals double damage if\n"
+    "an ally fainted last turn.");
+#else
     "This move deals more damage\n"
     "for each defeated ally.");
+#endif
 
 static const u8 sLuminaCrashDescription[] = _(
 #ifdef ROGUE_DRAYANO
@@ -3323,8 +3348,13 @@ static const u8 sTorchSongDescription[] = _(
 #endif
 
 static const u8 sAquaStepDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A light, fluid dance that\n"
+    "may raise the user's Speed.");
+#else
     "Hits with light, fluid dance\n"
     "steps. Ups the user's Speed.");
+#endif
 
 static const u8 sRagingBullDescription[] = _(
     "Tackle that breaks barriers.\n"
@@ -3388,8 +3418,13 @@ static const u8 sTwinBeamDescription[] = _(
     "the target twice in a row.");
 
 static const u8 sRageFistDescription[] = _(
+#ifdef ROGUE_DRAYANO
+    "A rage-fueled punch that is\n"
+    "stronger after a failure.");
+#else
     "The more the user has been\n"
     "hit, the stronger the move.");
+#endif
 
 static const u8 sArmorCannonDescription[] = _(
     "A strong attack but lowers\n"
