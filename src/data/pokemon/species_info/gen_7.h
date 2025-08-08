@@ -161,12 +161,21 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
     [SPECIES_DECIDUEYE_HISUIAN] =
     {
         DECIDUEYE_MISC_INFO,
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 88,
+        .baseAttack    = 112,
+        .baseDefense   = 85,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 95,
+    #else
         .baseHP        = 88,
         .baseAttack    = 112,
         .baseDefense   = 80,
         .baseSpeed     = 60,
         .baseSpAttack  = 95,
         .baseSpDefense = 95,
+    #endif
         .types = { TYPE_GRASS, TYPE_FIGHTING },
         .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_SCRAPPY },
         .weight = 370,

@@ -590,12 +590,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     [SPECIES_SAMUROTT_HISUIAN] =
     {
         SAMUROTT_MISC_INFO,
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 90,
+        .baseAttack    = 110,
+        .baseDefense   = 80,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 90,
         .baseAttack    = 108,
         .baseDefense   = 80,
         .baseSpeed     = 85,
         .baseSpAttack  = 100,
         .baseSpDefense = 65,
+    #endif
         .types = { TYPE_WATER, TYPE_DARK },
         .evYield_Attack = 3,
         .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHARPNESS },

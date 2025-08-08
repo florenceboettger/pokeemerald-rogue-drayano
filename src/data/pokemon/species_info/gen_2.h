@@ -351,12 +351,21 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
     [SPECIES_TYPHLOSION_HISUIAN] =
     {
         TYPHLOSION_MISC_INFO,
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 73,
+        .baseAttack    = 84,
+        .baseDefense   = 73,
+        .baseSpeed     = 96,
+        .baseSpAttack  = 129,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 73,
         .baseAttack    = 84,
         .baseDefense   = 78,
         .baseSpeed     = 95,
         .baseSpAttack  = 119,
         .baseSpDefense = 85,
+    #endif
         .types = { TYPE_FIRE, TYPE_GHOST },
     #ifdef ROGUE_DRAYANO
         .abilities = { ABILITY_BLAZE, ABILITY_FLASH_FIRE, ABILITY_FRISK },
