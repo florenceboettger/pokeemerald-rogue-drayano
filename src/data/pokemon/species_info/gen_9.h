@@ -2309,12 +2309,21 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 #if P_FAMILY_CAPSAKID
     [SPECIES_CAPSAKID] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 50,
+        .baseAttack    = 62,
+        .baseDefense   = 40,
+        .baseSpeed     = 62,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 40,
+    #else
         .baseHP        = 50,
         .baseAttack    = 62,
         .baseDefense   = 40,
         .baseSpeed     = 50,
         .baseSpAttack  = 62,
         .baseSpDefense = 40,
+    #endif
         .types = { TYPE_GRASS, TYPE_GRASS },
         .catchRate = 190,
         .expYield = 61,
@@ -2357,12 +2366,21 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
 
     [SPECIES_SCOVILLAIN] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 65,
+        .baseAttack    = 108,
+        .baseDefense   = 65,
+        .baseSpeed     = 108,
+        .baseSpAttack  = 75,
+        .baseSpDefense = 65,
+    #else
         .baseHP        = 65,
         .baseAttack    = 108,
         .baseDefense   = 65,
         .baseSpeed     = 75,
         .baseSpAttack  = 108,
         .baseSpDefense = 65,
+    #endif
         .types = { TYPE_GRASS, TYPE_FIRE },
         .catchRate = 75,
         .expYield = 170,

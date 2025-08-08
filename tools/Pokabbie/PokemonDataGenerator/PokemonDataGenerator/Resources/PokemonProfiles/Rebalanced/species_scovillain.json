@@ -1,0 +1,207 @@
+{
+  "Species": "SPECIES_SCOVILLAIN",
+  "LevelUpMoves": [
+    {
+      "Move": "MOVE_FIRE_FANG",
+      "Level": 0
+    },
+    {
+      "Move": "MOVE_FIRE_FANG",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_FLAMETHROWER",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_LEER",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_LEAFAGE",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_BITE",
+      "Level": 4
+    },
+    {
+      "Move": "MOVE_GROWTH",
+      "Level": 10
+    },
+    {
+      "Move": "MOVE_RAZOR_LEAF",
+      "Level": 13
+    },
+    {
+      "Move": "MOVE_SUNNY_DAY",
+      "Level": 17
+    },
+    {
+      "Move": "MOVE_BULLET_SEED",
+      "Level": 21
+    },
+    {
+      "Move": "MOVE_HEADBUTT",
+      "Level": 24
+    },
+    {
+      "Move": "MOVE_ZEN_HEADBUTT",
+      "Level": 28
+    },
+    {
+      "Move": "MOVE_WORRY_SEED",
+      "Level": 33
+    },
+    {
+      "Move": "MOVE_CRUNCH",
+      "Level": 38
+    },
+    {
+      "Move": "MOVE_SEED_BOMB",
+      "Level": 43
+    },
+    {
+      "Move": "MOVE_TEMPER_FLARE",
+      "Level": 47
+    },
+    {
+      "Move": "MOVE_SOLAR_BLADE",
+      "Level": 51
+    },
+    {
+      "Move": "MOVE_RAGING_FURY",
+      "Level": 55
+    }
+  ],
+  "TutorMoves": [
+    "MOVE_BULLET_SEED",
+    "MOVE_BURNING_JEALOUSY",
+    "MOVE_CRUNCH",
+    "MOVE_DRAGON_DANCE",
+    "MOVE_ENDEAVOR",
+    "MOVE_ENDURE",
+    "MOVE_ENERGY_BALL",
+    "MOVE_FACADE",
+    "MOVE_FIRE_BLAST",
+    "MOVE_FIRE_FANG",
+    "MOVE_FLAMETHROWER",
+    "MOVE_GIGA_DRAIN",
+    "MOVE_GIGA_IMPACT",
+    "MOVE_GRASS_KNOT",
+    "MOVE_GRASSY_GLIDE",
+    "MOVE_GRASSY_TERRAIN",
+    "MOVE_HELPING_HAND",
+    "MOVE_HIDDEN_POWER",
+    "MOVE_HYPER_BEAM",
+    "MOVE_LASH_OUT",
+    "MOVE_LEAF_STORM",
+    "MOVE_MAGICAL_LEAF",
+    "MOVE_OVERHEAT",
+    "MOVE_PROTECT",
+    "MOVE_REST",
+    "MOVE_SANDSTORM",
+    "MOVE_SCARY_FACE",
+    "MOVE_SEED_BOMB",
+    "MOVE_SLEEP_TALK",
+    "MOVE_SOLAR_BEAM",
+    "MOVE_STOMPING_TANTRUM",
+    "MOVE_SUBSTITUTE",
+    "MOVE_SUNNY_DAY",
+    "MOVE_SUPER_FANG",
+    "MOVE_TAKE_DOWN",
+    "MOVE_TEMPER_FLARE",
+    "MOVE_TERA_BLAST",
+    "MOVE_THIEF",
+    "MOVE_TRAILBLAZE",
+    "MOVE_WILL_O_WISP",
+    "MOVE_ZEN_HEADBUTT"
+  ],
+  "CompetitiveSets": [
+    {
+      "Moves": [
+        "MOVE_RAGING_FURY",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_DRAGON_DANCE"
+      ],
+      "Ability": "ABILITY_CHLOROPHYLL",
+      "Item": "ITEM_HEAVY_DUTY_BOOTS",
+      "Nature": "NATURE_ADAMANT",
+      "HiddenPower": null,
+      "TeraType": null,
+      "Name": "Showdown Usage",
+      "SourceTiers": [
+        "GEN9PU"
+      ]
+    },
+    {
+      "Moves": [
+        "MOVE_RAGING_FURY",
+        "MOVE_TEMPER_FLARE",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_SEED_BOMB"
+      ],
+      "Ability": "ABILITY_CHLOROPHYLL",
+      "Item": "ITEM_CHOICE_BAND",
+      "Nature": "NATURE_ADAMANT",
+      "HiddenPower": null,
+      "TeraType": "TYPE_FIRE",
+      "Name": "Choice Specs",
+      "SourceTiers": [
+        "GEN9ZU"
+      ]
+    },
+    {
+      "Moves": [
+        "MOVE_RAGING_FURY",
+        "MOVE_CRUNCH",
+        "MOVE_SEED_BOMB",
+        "MOVE_TEMPER_FLARE"
+      ],
+      "Ability": "ABILITY_CHLOROPHYLL",
+      "Item": "ITEM_CHOICE_SCARF",
+      "Nature": "NATURE_JOLLY",
+      "HiddenPower": null,
+      "TeraType": null,
+      "Name": "Showdown Usage",
+      "SourceTiers": [
+        "GEN9ZU"
+      ]
+    },
+    {
+      "Moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_BULLET_SEED",
+        "MOVE_RAGING_FURY",
+        "MOVE_STOMPING_TANTRUM"
+      ],
+      "Ability": "ABILITY_CHLOROPHYLL",
+      "Item": "ITEM_LIFE_ORB",
+      "Nature": "NATURE_JOLLY",
+      "HiddenPower": null,
+      "TeraType": null,
+      "Name": "Sun Sweeper (Fire)",
+      "SourceTiers": [
+        "GEN9MONOTYPE"
+      ]
+    },
+    {
+      "Moves": [
+        "MOVE_RAGING_FURY",
+        "MOVE_SOLAR_BLADE",
+        "MOVE_TEMPER_FLARE",
+        "MOVE_BULLET_SEED"
+      ],
+      "Ability": "ABILITY_CHLOROPHYLL",
+      "Item": "ITEM_CHOICE_BAND",
+      "Nature": "NATURE_JOLLY",
+      "HiddenPower": null,
+      "TeraType": null,
+      "Name": "Choice Specs (Fire)",
+      "SourceTiers": [
+        "GEN9MONOTYPE"
+      ]
+    }
+  ]
+}
