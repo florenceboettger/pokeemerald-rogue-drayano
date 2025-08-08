@@ -1707,12 +1707,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_BOLDORE] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 70,
+        .baseAttack    = 50,
+        .baseDefense   = 105,
+        .baseSpeed     = 20,
+        .baseSpAttack  = 105,
+        .baseSpDefense = 40,
+    #else
         .baseHP        = 70,
         .baseAttack    = 105,
         .baseDefense   = 105,
         .baseSpeed     = 20,
         .baseSpAttack  = 50,
         .baseSpDefense = 40,
+    #endif
         .types = { TYPE_ROCK, TYPE_ROCK },
         .catchRate = 120,
         .expYield = 137,
@@ -1725,7 +1734,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_STURDY, ABILITY_WEAK_ARMOR, ABILITY_SOLAR_POWER },
+    #else
         .abilities = { ABILITY_STURDY, ABILITY_WEAK_ARMOR, ABILITY_SAND_FORCE },
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Boldore"),
         .cryId = CRY_BOLDORE,
@@ -1759,12 +1772,21 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 
     [SPECIES_GIGALITH] =
     {
+    #ifdef ROGUE_DRAYANO
+        .baseHP        = 85,
+        .baseAttack    = 60,
+        .baseDefense   = 130,
+        .baseSpeed     = 25,
+        .baseSpAttack  = 135,
+        .baseSpDefense = 80,
+    #else
         .baseHP        = 85,
         .baseAttack    = 135,
         .baseDefense   = 130,
         .baseSpeed     = 25,
         .baseSpAttack  = 60,
         .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 80 : 70,
+    #endif
         .types = { TYPE_ROCK, TYPE_ROCK },
         .catchRate = 45,
         .expYield = 232,
@@ -1776,7 +1798,11 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = { EGG_GROUP_MINERAL, EGG_GROUP_MINERAL },
-        .abilities = { ABILITY_STURDY, ABILITY_SAND_STREAM, ABILITY_SAND_FORCE },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_STURDY, ABILITY_WEAK_ARMOR, ABILITY_SOLAR_POWER },
+    #else
+        .abilities = { ABILITY_STURDY, ABILITY_WEAK_ARMOR, ABILITY_SAND_FORCE },
+    #endif
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Gigalith"),
         .cryId = CRY_GIGALITH,
