@@ -3438,7 +3438,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_EARTH_EATER },
+    #else
         .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_HEAVY_METAL },
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Aron"),
         .cryId = CRY_ARON,
@@ -3491,7 +3495,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
         .eggGroups = { EGG_GROUP_MONSTER, EGG_GROUP_MONSTER },
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_EARTH_EATER },
+    #else
         .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_HEAVY_METAL },
+    #endif
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Lairon"),
         .cryId = CRY_LAIRON,
@@ -3559,7 +3567,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     #endif
         .types = { TYPE_STEEL, TYPE_ROCK },
         .expYield = 239,
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_EARTH_EATER },
+    #else
         .abilities = { ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_HEAVY_METAL },
+    #endif
         .cryId = CRY_AGGRON,
         .height = 21,
         .weight = 3600,
