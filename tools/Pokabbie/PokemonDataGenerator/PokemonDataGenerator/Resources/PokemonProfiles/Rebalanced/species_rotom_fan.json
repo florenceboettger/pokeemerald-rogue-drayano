@@ -1,113 +1,116 @@
 {
     "Species": "SPECIES_ROTOM_FAN",
     "LevelUpMoves": [
-        {
-            "Move": "MOVE_DISCHARGE",
-            "Level": "1"
-        },
-        {
-            "Move": "MOVE_CHARGE",
-            "Level": "1"
-        },
-        {
-            "Move": "MOVE_TRICK",
-            "Level": "1"
-        },
-        {
-            "Move": "MOVE_ASTONISH",
-            "Level": "1"
-        },
-        {
-            "Move": "MOVE_THUNDER_WAVE",
-            "Level": "1"
-        },
-        {
-            "Move": "MOVE_HURRICANE",
-            "Level": "1"
-        },
-        {
-            "Move": "MOVE_CONFUSE_RAY",
-            "Level": "1"
-        },
-        {
-            "Move": "MOVE_UPROAR",
-            "Level": "8"
-        },
-        {
-            "Move": "MOVE_DOUBLE_TEAM",
-            "Level": "15"
-        },
-        {
-            "Move": "MOVE_SHOCK_WAVE",
-            "Level": "22"
-        },
-        {
-            "Move": "MOVE_OMINOUS_WIND",
-            "Level": "29"
-        },
-        {
-            "Move": "MOVE_SUBSTITUTE",
-            "Level": "36"
-        },
-        {
-            "Move": "MOVE_ELECTRO_BALL",
-            "Level": "43"
-        },
-        {
-            "Move": "MOVE_HEX",
-            "Level": "50"
-        },
-        {
-            "Move": "MOVE_CHARGE",
-            "Level": "57"
-        },
-        {
-            "Move": "MOVE_DISCHARGE",
-            "Level": "64"
-        }
+    {
+        "Move": "MOVE_DOUBLE_TEAM",
+        "Level": 1
+    },   
+    {
+        "Move": "MOVE_THUNDER_SHOCK",
+        "Level": 1
+    }, 
+    {
+        "Move": "MOVE_ASTONISH",
+        "Level": 5
+    },
+    {
+        "Move": "MOVE_CHARGE",
+        "Level": 9
+    },
+    {
+        "Move": "MOVE_CONFUSE_RAY",
+        "Level": 13
+    },
+    {
+        "Move": "MOVE_ELECTRO_BALL",
+        "Level": 17
+    },
+    {
+        "Move": "MOVE_THUNDER_WAVE",
+        "Level": 21
+    },
+    {
+        "Move": "MOVE_OMINOUS_WIND",
+        "Level": 25
+    },
+    {
+        "Move": "MOVE_TRICK",
+        "Level": 29
+    },
+    {
+        "Move": "MOVE_SHOCK_WAVE",
+        "Level": 33
+    },
+    {
+        "Move": "MOVE_SUBSTITUTE",
+        "Level": 37
+    },
+    {
+        "Move": "MOVE_UPROAR",
+        "Level": 41
+    },
+    {
+        "Move": "MOVE_HURRICANE",
+        "Level": 45
+    },
+    {
+        "Move": "MOVE_DISCHARGE",
+        "Level": 50
+    },
+    {
+        "Move": "MOVE_HEX",
+        "Level": 55
+    }
     ],
     "TutorMoves": [
-        "MOVE_PAIN_SPLIT",
-        "MOVE_HELPING_HAND",
-        "MOVE_DARK_PULSE",
-        "MOVE_REFLECT",
-        "MOVE_EERIE_IMPULSE",
-        "MOVE_TOXIC",
-        "MOVE_LIGHT_SCREEN",
-        "MOVE_HIDDEN_POWER",
-        "MOVE_POLTERGEIST",
-        "MOVE_WILL_O_WISP",
-        "MOVE_PROTECT",
-        "MOVE_THIEF",
-        "MOVE_DEFOG",
-        "MOVE_SUNNY_DAY",
-        "MOVE_FACADE",
-        "MOVE_AIR_SLASH",
-        "MOVE_SHADOW_BALL",
-        "MOVE_SWIFT",
-        "MOVE_SLEEP_TALK",
-        "MOVE_STORED_POWER",
-        "MOVE_THUNDERBOLT",
-        "MOVE_HYPER_VOICE",
-        "MOVE_NASTY_PLOT",
-        "MOVE_ELECTRIC_TERRAIN",
+        "MOVE_CHARGE",
         "MOVE_CHARGE_BEAM",
+        "MOVE_CONFUSE_RAY",
+        "MOVE_DARK_PULSE",
+        "MOVE_DEFOG",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_ELECTRIC_TERRAIN",
+        "MOVE_ELECTRO_BALL",
         "MOVE_ELECTROWEB",
         "MOVE_ENDURE",
-        "MOVE_SPITE",
-        "MOVE_TERA_BLAST",
-        "MOVE_NIGHT_SHADE",
-        "MOVE_THUNDER",
+        "MOVE_FACADE",
         "MOVE_FOUL_PLAY",
-        "MOVE_VOLT_SWITCH",
+        "MOVE_HELPING_HAND",
+        "MOVE_HEX",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_HURRICANE",
+        "MOVE_HYPER_VOICE",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_NASTY_PLOT",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_POLTERGEIST",
+        "MOVE_PROTECT",
         "MOVE_RAIN_DANCE",
-        "MOVE_REST"
+        "MOVE_REFLECT",
+        "MOVE_REST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_SLEEP_TALK",
+        "MOVE_SPITE",
+        "MOVE_STORED_POWER",
+        "MOVE_SUBSTITUTE",
+        "MOVE_SUNNY_DAY",
+        "MOVE_SWIFT",
+        "MOVE_TERA_BLAST",
+        "MOVE_THIEF",
+        "MOVE_THUNDER",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_THUNDERBOLT",
+        "MOVE_TRICK",
+        "MOVE_UPROAR",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_WILL_O_WISP"
     ],
     "CompetitiveSets": [
         {
             "Moves": [
                 "MOVE_VOLT_SWITCH",
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_HIDDEN_POWER",
                 "MOVE_WILL_O_WISP"
             ],
@@ -142,7 +145,7 @@
         {
             "Moves": [
                 "MOVE_THUNDERBOLT",
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_HIDDEN_POWER",
                 "MOVE_WILL_O_WISP"
             ],
@@ -158,7 +161,7 @@
         },
         {
             "Moves": [
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_VOLT_SWITCH",
                 "MOVE_WILL_O_WISP",
                 "MOVE_THUNDERBOLT"
@@ -192,7 +195,7 @@
         },
         {
             "Moves": [
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_VOLT_SWITCH",
                 "MOVE_DEFOG",
                 "MOVE_THUNDERBOLT"
@@ -226,7 +229,7 @@
         },
         {
             "Moves": [
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_VOLT_SWITCH",
                 "MOVE_WILL_O_WISP",
                 "MOVE_DEFOG"
@@ -277,7 +280,7 @@
         },
         {
             "Moves": [
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_VOLT_SWITCH",
                 "MOVE_DEFOG",
                 "MOVE_THUNDERBOLT"
@@ -294,7 +297,7 @@
         },
         {
             "Moves": [
-                "MOVE_AIR_SLASH",
+                "MOVE_HURRICANE",
                 "MOVE_THUNDERBOLT",
                 "MOVE_VOLT_SWITCH",
                 "MOVE_NASTY_PLOT"
