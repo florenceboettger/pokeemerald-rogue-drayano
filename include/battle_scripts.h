@@ -408,6 +408,7 @@ extern const u8 BattleScript_NotAffectedAbilityPopUp[];
 extern const u8 BattleScript_BattlerShookOffTaunt[];
 extern const u8 BattleScript_BattlerGotOverItsInfatuation[];
 extern const u8 BattleScript_Pickpocket[];
+extern const u8 BattleScript_EffectMakeItRain[];
 extern const u8 BattleScript_StickyBarbTransfer[];
 extern const u8 BattleScript_AttackerItemStatRaise[];
 extern const u8 BattleScript_RedCardActivates[];
@@ -506,6 +507,7 @@ extern const u8 BattleScript_HurtByTheSeaOfFire[];
 extern const u8 BattleScript_TheSeaOfFireDisappeared[];
 extern const u8 BattleScript_TheSwampDisappeared[];
 extern const u8 BattleScript_ItemRestoreHP_Party[];
+extern const u8 BattleScript_BoosterEnergyEnd2[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

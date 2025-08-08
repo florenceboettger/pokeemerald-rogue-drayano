@@ -49,6 +49,7 @@
 #include "rogue_quest.h"
 #include "rogue_questmenu.h"
 #include "rogue_settings.h"
+#include "rogue_potionbrewing.h" 
 
 void DoSpecialTrainerBattle(void);
 
@@ -89,6 +90,7 @@ static const u8 sStatNamesTable[NUM_STATS][13] = // a;t versopm pf gStatNamesTab
 
 static u8 const sText_The[] = _(" the ");
 static u8 const sText_TheShiny[] = _(" the shiny ");
+static u8 const sText_TheShinyNoNick[] = _("the shiny ");
 
 bool8 Rogue_CheckPartyHasRoomForMon(void)
 {
@@ -174,6 +176,7 @@ void Rogue_RandomisePartyMon(void)
                 IncrementGameStat(GAME_STAT_RANDO_TRADE_TOTAL_PKMN);
 
                 targetlevel = Calc_RandomTradeLevel(&gPlayerParty[i]);
+                targetlevel = min(max(1, targetlevel), MAX_LEVEL);
                 temp = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
                 species = RogueWeightQuery_SelectRandomFromWeightsWithUpdate(Random(), 1);
@@ -197,6 +200,7 @@ void Rogue_RandomisePartyMon(void)
             IncrementGameStat(GAME_STAT_RANDO_TRADE_TOTAL_PKMN);
 
             targetlevel = Calc_RandomTradeLevel(&gPlayerParty[monIdx]);
+            targetlevel = min(max(1, targetlevel), MAX_LEVEL);
             temp = GetMonData(&gPlayerParty[monIdx], MON_DATA_HELD_ITEM);
 
             species = RogueWeightQuery_SelectRandomFromWeightsWithUpdate(Random(), 1);
@@ -780,6 +784,24 @@ void Rogue_BufferLabMonName(void)
     Rogue_CopyLabEncounterMonNickname(index, gStringVar1);
 }
 
+void IsLegendarySpecies(void)
+{
+    u16 species = gSpecialVar_0x8001;
+    gSpecialVar_0x8003 = RoguePokedex_IsSpeciesLegendary(species);
+}
+
+u8 IsCursed(void)
+{
+    u8 RogueDiff = Rogue_GetCurrentDifficulty();
+    u8 buffer[6];
+
+    if (RogueDiff >= 12 || (RogueDiff * 8 >= Random() % 100))
+        return TRUE;
+    else
+        return FALSE;
+}
+    
+
 void Rogue_GiveLabMon(void)
 {
     u16 index = gSpecialVar_0x8002;
@@ -1166,6 +1188,26 @@ void Rogue_RegisterRideMon()
 {
     u16 gfxId = FollowMon_GetMonGraphics(&gPlayerParty[0]);
     VarSet(VAR_ROGUE_REGISTERED_RIDE_MON, gfxId);
+}
+
+void Mocha_FollowMonRideCheck()
+{
+    if(CheckBagHasItem(ITEM_BASIC_RIDING_WHISTLE, 1) == TRUE && Overworld_IsBikingAllowed() == TRUE)
+    {   
+        u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG);
+        gSpecialVar_Result = Rogue_IsValidRideSpecies(species);
+    }
+    else
+    {
+       gSpecialVar_Result = FALSE; 
+    }
+}
+
+void Mocha_FollowMonRide()
+{
+    u8 whistleType = RIDE_WHISTLE_BASIC;
+    Mocha_SetInitialRideSpecies(0);
+    Rogue_GetOnOffRideMon(whistleType, FALSE);
 }
 
 void Rogue_RunRewardLvls()
@@ -1973,13 +2015,18 @@ void Rogue_BufferSafariMonInfo()
 
     StringCopy_Nickname(gStringVar1, gRogueSaveBlock->safariMons[safariIndex].nickname);
 
-    if(gRogueSaveBlock->safariMons[safariIndex].shinyFlag || StringCompareN(gStringVar1, speciesName, POKEMON_NAME_LENGTH) != 0)
+    if((gRogueSaveBlock->safariMons[safariIndex].shinyFlag && StringCompareN(gStringVar1, speciesName, POKEMON_NAME_LENGTH) != 0) || StringCompareN(gStringVar1, speciesName, POKEMON_NAME_LENGTH) != 0)
     {
         if(gRogueSaveBlock->safariMons[safariIndex].shinyFlag)
             StringAppend(gStringVar1, sText_TheShiny);
         else
             StringAppend(gStringVar1, sText_The);
 
+        StringAppend(gStringVar1, speciesName);
+    }
+    else if(gRogueSaveBlock->safariMons[safariIndex].shinyFlag && StringCompareN(gStringVar1, speciesName, POKEMON_NAME_LENGTH) == 0) 
+    {
+        StringCopy(gStringVar1, sText_TheShinyNoNick);
         StringAppend(gStringVar1, speciesName);
     }
 }
@@ -2362,5 +2409,19 @@ void Rogue_CanActivatePikinEasterEgg()
         {
             gSpecialVar_Result = TRUE;
         }
+    }
+}
+
+void PotionBrewInput()
+{
+    StartBrewInput();
+}
+
+void Mocha_SkipBagCheck()
+{
+    gSpecialVar_Result = FALSE;
+    if (gSaveBlock2Ptr->optionsIgnoreBag == OPTIONS_IGNOREBAG_ON)
+    {
+        gSpecialVar_Result = TRUE;
     }
 }

@@ -50,3 +50,5 @@ tools/ups/*
 !tools/Pokabbie/Build
 pokeemerald-*.png
 tools/Rebalanced/DocGen/node_modules
+data/scripts/Rogue/Strings/command_config.json
+/scripts

@@ -171,6 +171,7 @@ const struct RogueDifficultyPreset gRogueDifficultyPresets[DIFFICULTY_PRESET_COU
     }
 };
 
+
 static struct RogueDifficultyConfig* GetWritableDifficultyConfig()
 {
     return &gRogueSaveBlock->difficultyConfig;
@@ -475,6 +476,134 @@ static void Rogue_SetDifficultyPresetInternal(u8 preset)
     gRogueDifficultyLocal.areLevelsValid = TRUE;
 }
 
+static const u16 sStaticCurseEffects[] = {
+    EFFECT_SNAG_TRAINER_MON,
+    EFFECT_SNOWBALL_CURSES,
+    EFFECT_RANDOMAN_ALWAYS_SPAWN,
+    EFFECT_RANDOMAN_ROUTE_SPAWN,
+    EFFECT_ONE_HIT,
+    EFFECT_EVERSTONE_EVOS,
+    EFFECT_TORMENT_STATUS,
+    EFFECT_ITEM_SHUFFLE,
+    EFFECT_BATTLE_ITEM_BAN,
+    EFFECT_SPECIES_CLAUSE,
+    EFFECT_UNAWARE_STATUS,
+    EFFECT_ENDURE_CHANCE,
+    EFFECT_PRESSURE_STATUS,
+    EFFECT_WILD_EGG_SPECIES,
+};
+
+static const u16 sStackableCurseEffects[] = {
+    EFFECT_PARTY_SIZE,
+    EFFECT_WILD_ENCOUNTER_COUNT,
+    EFFECT_WILD_IV_RATE,
+    EFFECT_ADAPTABILITY_RATE,
+    EFFECT_CATCH_RATE,
+    EFFECT_CRIT_CHANCE,
+    EFFECT_SHOP_PRICE,
+    EFFECT_SERENE_GRACE_CHANCE,
+    EFFECT_ADAPTABILITY_RATE,
+    EFFECT_MOVE_PRIORITY_CHANCE,
+    EFFECT_SHED_SKIN_CHANCE,
+};
+
+float Rogue_CalculateRewardMultiplier()
+{
+    float multiplier = 10; // Base multiplier
+
+    // Trainer multiplier
+    u8 trainerDifficulty = Rogue_GetConfigRange(CONFIG_RANGE_TRAINER);
+
+    switch(trainerDifficulty)
+    {
+        case DIFFICULTY_LEVEL_EASY:
+            multiplier += 0;
+            break;
+        case DIFFICULTY_LEVEL_AVERAGE:
+            multiplier += 2;
+            break;
+        case DIFFICULTY_LEVEL_HARD:
+            multiplier += 4;
+            break;
+        case DIFFICULTY_LEVEL_BRUTAL:
+            multiplier += 8;
+            break;
+    }
+
+    // Toggles checker. It's messy rn but it works
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_RELEASE_MONS) == TRUE)
+    {
+      multiplier += 3;   // Permadeath multiplier     
+    }
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_AFFECTION) == FALSE)
+    {
+       multiplier += 1;   // No affection multiplier
+    }
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_SWITCH_MODE) == FALSE)
+    {
+        multiplier += 2;   // Set mode multiplier
+    }
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_OVER_LVL) == FALSE)
+    {
+        multiplier += 3;  // No overleveling multiplier
+    }
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_EV_GAIN) == FALSE)
+    {
+        multiplier += 2;  // No EVs multiplier
+    }
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_DIVERSE_TRAINERS) == TRUE)
+    {
+        multiplier += 4;   // Diverse mons multiplier
+    }
+
+    if(Rogue_GetConfigToggle(CONFIG_TOGGLE_BAG_WIPE) == TRUE)
+    {
+        multiplier += 5;   // Fresh start multiplier
+    }
+
+    // Curses
+    
+    //Unstackable curses
+    
+    u8 i;
+    for(i = 0; i < ARRAY_COUNT(sStaticCurseEffects); i++)
+    {
+        if(IsCurseActive(sStaticCurseEffects[i]))
+        {
+            multiplier += 2;
+        }
+    }
+
+    //Stackable curses
+    for(i = 0; i < ARRAY_COUNT(sStackableCurseEffects); i++)
+    {
+        if(IsCurseActive(sStackableCurseEffects[i]))
+        {
+            u8 curseAmount = GetCurseValue(sStackableCurseEffects[i]);
+            if(curseAmount == 1)
+            {
+                multiplier += 1;
+            }
+            else if(curseAmount == 2)
+            {
+                multiplier += 2;
+            }
+            else if(curseAmount >= 3)
+            {
+                multiplier += 3;
+            }
+        }
+    }
+    
+    return multiplier;
+}
+
+
 static u8 Rogue_CalcRewardDifficultyPreset()
 {
     u8 i, j, isValid;
@@ -524,7 +653,32 @@ static u8 Rogue_CalcRewardDifficultyPreset()
         if(!isValid)
             break;
 
-        rewardLevel = i;
+        //if multiplier mode is on
+        if(gSaveBlock2Ptr->optionsDifficultyRewardMode == OPTIONS_DIFFICULTY_REWARD_MODE_MULTIPLIER)
+        {
+            u8 multiplier = Rogue_CalculateRewardMultiplier();
+
+            if(multiplier <= 15)
+            {
+                rewardLevel = DIFFICULTY_LEVEL_EASY;
+            }
+            else if(multiplier >= 15 && multiplier < 25)
+            {
+                rewardLevel = DIFFICULTY_LEVEL_AVERAGE;
+            }
+            else if(multiplier >= 25 && multiplier < 35)
+            {
+                rewardLevel = DIFFICULTY_LEVEL_HARD;
+            }
+            else if(multiplier >= 35)
+            {
+                rewardLevel = DIFFICULTY_LEVEL_BRUTAL;
+            }
+        }
+        else
+        {
+            rewardLevel = i;
+        }
     }
 
     return rewardLevel;

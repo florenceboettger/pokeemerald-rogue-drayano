@@ -37,6 +37,7 @@ extern const u8 gText_DifficultyArrowRight[];
 
 extern const u8 gText_DifficultyDoesntAffectReward[];
 extern const u8 gText_DifficultyRewardLevel[];
+extern const u8 gText_DifficultyRewardMultiplier[];
 
 extern const u8 gText_DifficultyPreset[];
 extern const u8 gText_DifficultyPresetEasy[];
@@ -44,6 +45,7 @@ extern const u8 gText_DifficultyPresetMedium[];
 extern const u8 gText_DifficultyPresetHard[];
 extern const u8 gText_DifficultyPresetBrutal[];
 extern const u8 gText_DifficultyPresetCustom[];
+extern const u8 gText_DifficultyMultiplier[];
 
 extern const u8 gText_DifficultyEnabled[];
 extern const u8 gText_DifficultyDisabled[];
@@ -1950,6 +1952,13 @@ static void Empty_DrawChoices(u8 menuOffset, u8 selection)
 
 }
 
+// There's probably a more ideal way to do this... But if it works, it works
+static u8 const sText_IndicatorEasy[] = _("{COLOR LIGHT_BLUE}{SHADOW BLUE}");
+static u8 const sText_IndicatorAverage[] = _("{COLOR LIGHT_BLUE}{SHADOW LIGHT_GREEN}");
+static u8 const sText_IndicatorHard[] = _("{COLOR LIGHT_RED}{SHADOW LIGHT_GREEN}");
+static u8 const sText_IndicatorBrutal[] = _("{COLOR LIGHT_RED}{SHADOW RED}");
+static u8 const sText_Multiplier[] = _("{STR_VAR_1}{STR_VAR_2}.{STR_VAR_3}x");
+
 static void DrawDescriptionOptionMenuText(u8 submenu, u8 selection)
 {
     u8 text[64];
@@ -1988,29 +1997,67 @@ static void DrawDescriptionOptionMenuText(u8 submenu, u8 selection)
         // Place current reward level
         str = StringCopy(text, gText_DifficultyRewardLevel);
         
-        switch (Rogue_GetDifficultyRewardLevel())
+        if(gSaveBlock2Ptr->optionsDifficultyRewardMode == OPTIONS_DIFFICULTY_REWARD_MODE_MULTIPLIER)
         {
-        case DIFFICULTY_LEVEL_EASY:
-            str = StringAppend(str, gText_DifficultyPresetEasy);
-            break;
+            //Get multiplier
+            u16 multiplier = Rogue_CalculateRewardMultiplier();
 
-        case DIFFICULTY_LEVEL_AVERAGE:
-            str = StringAppend(str, gText_DifficultyPresetMedium);
-            break;
+            int wholeNum = multiplier / 10;
+            int fraction = (multiplier % 10);
 
-        case DIFFICULTY_LEVEL_HARD:
-            str = StringAppend(str, gText_DifficultyPresetHard);
-            break;
+            ConvertIntToDecimalStringN(gStringVar2, wholeNum, STR_CONV_MODE_LEFT_ALIGN, 2);
+            ConvertIntToDecimalStringN(gStringVar3, fraction, STR_CONV_MODE_LEFT_ALIGN, 2);
 
-        case DIFFICULTY_LEVEL_BRUTAL:
-            str = StringAppend(str, gText_DifficultyPresetBrutal);
-            break;
-        
-        default:
-            // This should never be reached
-            str = StringAppend(str, gText_DifficultyPresetCustom);
-            break;
+            //I could've just used the switch method, but for some reason it won't update correctly when I change the toggles
+            const u8* rewardIndicator = sText_IndicatorEasy;
+            if(multiplier <= 15)
+            {
+                rewardIndicator = sText_IndicatorEasy;
+            }
+            else if(multiplier >= 15 && multiplier < 25)
+            {
+                rewardIndicator = sText_IndicatorAverage;
+            }
+            else if(multiplier >=  25 && multiplier < 35)
+            {
+                rewardIndicator = sText_IndicatorHard;
+            }
+            else if(multiplier >=  35)
+            {
+                rewardIndicator = sText_IndicatorBrutal;
+            }
+            StringExpandPlaceholders(gStringVar1, rewardIndicator);
+            StringExpandPlaceholders(gStringVar4, sText_Multiplier);
+            str = StringAppend(str, gStringVar4);
+
         }
+        else
+        {
+            switch (Rogue_GetDifficultyRewardLevel())
+            {
+            case DIFFICULTY_LEVEL_EASY:
+                str = StringAppend(str, gText_DifficultyPresetEasy);
+                break;
+
+            case DIFFICULTY_LEVEL_AVERAGE:
+                str = StringAppend(str, gText_DifficultyPresetMedium);
+                break;
+
+            case DIFFICULTY_LEVEL_HARD:
+                str = StringAppend(str, gText_DifficultyPresetHard);
+                break;
+
+            case DIFFICULTY_LEVEL_BRUTAL:
+                str = StringAppend(str, gText_DifficultyPresetBrutal);
+                break;
+            
+            default:
+                // This should never be reached
+                str = StringAppend(str, gText_DifficultyPresetCustom);
+                break;
+            }
+        }
+
 
         AddTextPrinterParameterized(WIN_TEXT_OPTION, FONT_NORMAL, text, 120, 0, TEXT_SKIP_DRAW, NULL);
 

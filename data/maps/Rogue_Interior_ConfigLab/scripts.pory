@@ -1,6 +1,9 @@
 const FLAG_CAN_GIVE_C_GEAR = FLAG_TEMP_10
+const FLAG_CAN_GIVE_POCKET_PC = FLAG_TEMP_11
 
 const VAR_TRIGGER_POKABBIE_MEET = VAR_TEMP_0
+
+const VAR_GIVE_ITEM = VAR_TEMP_1
 
 // Reused vars
 const VAR_SHAKE_VERTICAL_PAN = VAR_0x8004
@@ -30,6 +33,16 @@ script Rogue_Interior_ConfigLab_OnLoad
     else
     {
         clearflag(FLAG_CAN_GIVE_C_GEAR)
+    }
+
+    hubupgradeunlocked(HUB_UPGRADE_LAB_POCKET_PC)
+    if(var(VAR_RESULT) == TRUE)
+    {
+        setflag(FLAG_CAN_GIVE_POCKET_PC)
+    }
+    else
+    {
+        clearflag(FLAG_CAN_GIVE_POCKET_PC)
     }
 
     if(!flag(FLAG_ROGUE_MET_POKABBIE))
@@ -97,6 +110,7 @@ script Rogue_Interior_ConfigLab_TalkFennel
     }
     else
     {
+        setvar(VAR_GIVE_ITEM, FALSE)
         checkitem(ITEM_C_GEAR)
 
         if(var(VAR_RESULT) == FALSE && flag(FLAG_CAN_GIVE_C_GEAR))
@@ -104,11 +118,42 @@ script Rogue_Interior_ConfigLab_TalkFennel
             msgbox(format("Just the Trainer I wanted to see!\pI have something for you!"), MSGBOX_DEFAULT)
 
             giveitem(ITEM_C_GEAR)
+            setvar(VAR_GIVE_ITEM, TRUE)
 
             bufferitemname(STR_VAR_1, ITEM_C_GEAR)
-            msgbox(format("I repurposed that {STR_VAR_1} so you can view and edit Config Lab settings remotely!\pYou can even use it whilst you're Adventuring to double check your settings!\pNow…\nDid you want to adjust your Adventure settings?"), MSGBOX_DEFAULT)
+            msgbox(format("I repurposed that {STR_VAR_1} so you can view and edit Config Lab settings remotely!\pYou can even use it whilst you're Adventuring to double check your settings!"), MSGBOX_DEFAULT)
+
+            //I think it'd be neat if you can claim 2 things at once instead of reentering the room to claim the other
+            checkitem(ITEM_POCKET_PC)
+            if(var(VAR_RESULT) == FALSE && flag(FLAG_CAN_GIVE_POCKET_PC))
+            {
+                msgbox(format("Oh, I have something else for you!"))
+
+                giveitem(ITEM_POCKET_PC)
+
+                bufferitemname(STR_VAR_1, ITEM_POCKET_PC)
+                msgbox(format("This {STR_VAR_1} lets you access your Pokémon storage and organize your team from here in the hub!\pIt won't work during Adventures just yet, but it should make your hub preparations much smoother!"), MSGBOX_DEFAULT)
+            }
+            
+            msgbox(format("Now…\nDid you want to adjust your Adventure settings?"))
+
         }
-        else
+
+        checkitem(ITEM_POCKET_PC)
+
+        if(var(VAR_RESULT) == FALSE && flag(FLAG_CAN_GIVE_POCKET_PC) && var(VAR_GIVE_ITEM) == FALSE) // So that it wont show up after the c-gear check
+        {
+            msgbox(format("Just the Trainer I wanted to see!\pI have something for you!"), MSGBOX_DEFAULT)
+            
+            giveitem(ITEM_POCKET_PC)
+            setvar(VAR_GIVE_ITEM, TRUE)
+
+            bufferitemname(STR_VAR_1, ITEM_POCKET_PC)
+            msgbox(format("This {STR_VAR_1} lets you access your Pokémon storage and organize your team from here in the hub!\pIt won't work during Adventures just yet, but it should make your hub preparations much smoother!\pNow…\nDid you want to adjust your Adventure settings?"), MSGBOX_DEFAULT)
+        }  
+    
+
+        if(!var(VAR_GIVE_ITEM))
         {
             msgbox(format("Did you want to adjust your Adventure settings?"), MSGBOX_DEFAULT)
         }
@@ -186,7 +231,7 @@ script Rogue_Interior_ConfigLab_TriggerMeetPokabbie
     applymovement(OBJ_EVENT_POKABBIE, Rogue_Interior_ConfigLab_Pokabbie2)
     waitmovement(0)
 
-    msgbox(format("POKABBIE: Phew…\nAll done!\pI've got a few upgrades for you!\pFirstly, your Pokédex can now change it's mode to different Regions.\pHere, take a look."))
+    msgbox(format("POKABBIE: Phew…\nAll done!\pI've got a few upgrades for you!\pFirstly, your Pokédex can now change its mode to different Regions.\pHere, take a look."))
 
     waitse
     special(Special_ViewRoguePokedex)
@@ -215,7 +260,7 @@ script Rogue_Interior_ConfigLab_TriggerMeetPokabbie
 
     if(var(VAR_ROGUE_INTRO_STATE) <= ROGUE_INTRO_STATE_LEARN_TO_BUILD)
     {
-        msgbox(format("Oh, shoot!\nYou haven't even learnt about upgrades yet?\pYou spoke to me so fast, that you hadn't even finished the Tutorial yet!\pNo matter.\nYou'll learn about it, as soon as you return from your first Adventure."))
+        msgbox(format("Oh, shoot!\nYou haven't even learnt about upgrades yet?\pYou spoke to me so fast that you hadn't even finished the Tutorial yet!\pNo matter.\nYou'll learn about it as soon as you return from your first Adventure."))
     }
 
     msgbox(format("I won't spoil it for you, but in the Challenge Area there is a lot of stuff that I'm sure you'll find super fun!\pNow, you get going and complete yourself some Adventures!"))
@@ -248,7 +293,7 @@ script Rogue_Interior_ConfigLab_TalkPokabbie
             }
             ROGUE_VERSION_EXPANSION
             {
-                msgbox(format("You know I once made a challenge hack for a friend of mine where I gave Pikin it's very own Mega!\pA Mega Mareep!\pIt was a bit insane in that ROM hack though…\pOh I forgot, doh!\pYou can Mega Evolve Pikin in Emerald Rogue too!\pYou need to teach it Hurricane and then it will be able to Mega Evolve.\p… … …\pYes… like Mega Rayquaza…\pLook… I love Mareep alright!\pThere!\pYou should be able to teach Pikin Hurricane now from the Learn Moves menu.\pWhy not give Mega Mareep a try for yourself!\pJust be careful not to evolve it, otherwise you're going to have to hunt down yet another Pikin…\pTo be fair…\nThere are many Pikins…\pI hope you show Pikin some exciting Adventures!"))
+                msgbox(format("You know I once made a challenge hack for a friend of mine where I gave Pikin its very own Mega!\pA Mega Mareep!\pIt was a bit insane in that ROM hack though…\pOh I forgot, doh!\pYou can Mega Evolve Pikin in Emerald Rogue too!\pYou need to teach it Hurricane and then it will be able to Mega Evolve.\p… … …\pYes… like Mega Rayquaza…\pLook… I love Mareep alright!\pThere!\pYou should be able to teach Pikin Hurricane now from the Learn Moves menu.\pWhy not give Mega Mareep a try for yourself!\pJust be careful not to evolve it, otherwise you're going to have to hunt down yet another Pikin…\pTo be fair…\nThere are many Pikins…\pI hope you show Pikin some exciting Adventures!"))
             }
         }
     }

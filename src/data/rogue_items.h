@@ -11,6 +11,7 @@ extern const u8 gItemDesc_BuildingSupplies[];
 extern const u8 gItemDesc_SmallCoinCase[];
 extern const u8 gItemDesc_LargeCoinCase[];
 extern const u8 gItemDesc_GoldenSeed[];
+extern const u8 gItemDesc_PocketPC[];
 
 extern const u8 gItemDesc_NormalPokeblock[];
 extern const u8 gItemDesc_FightingPokeblock[];
@@ -305,6 +306,24 @@ const struct RogueItem gRogueItems[ITEM_ROGUE_ITEM_COUNT] =
         .iconPalette = gItemIconPalette_GoldenSeed,
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_GoldenSeed,
+    },
+
+
+    [ITEM_POCKET_PC - ITEM_ROGUE_ITEM_FIRST] =
+    {
+#ifdef ROGUE_EXPANSION
+        .name = _("Pocket PC"),
+#else
+        .name = _("POCKET PC"),
+#endif
+        .itemId = ITEM_POCKET_PC,
+        .price = 0,
+        .description = gItemDesc_PocketPC,
+        .pocket = POCKET_KEY_ITEMS,
+        .iconImage = gItemIcon_PocketPC,
+        .iconPalette = gItemIconPalette_PocketPC,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_PocketPC,
     },
 
     // Pokeblock
@@ -1016,7 +1035,7 @@ const struct RogueItem gRogueItems[ITEM_ROGUE_ITEM_COUNT] =
 #else
         .name = _("RETRY CHARM"),
 #endif
-        .itemId = ITEM_ADAPTABILITY_CHARM,
+        .itemId = ITEM_INFINITE_EXTRA_LIFE_CHARM,
         .price = 0,
         .description = gItemDesc_ExtraLifeCharm,
         .pocket = POCKET_KEY_ITEMS,
@@ -1034,7 +1053,7 @@ const struct RogueItem gRogueItems[ITEM_ROGUE_ITEM_COUNT] =
 #else
         .name = _("SAVE CHARM"),
 #endif
-        .itemId = ITEM_ADAPTABILITY_CHARM,
+        .itemId = ITEM_ALLOW_SAVE_SCUM_CHARM,
         .price = 0,
         .description = gItemDesc_AllowSaveScumCharm,
         .pocket = POCKET_KEY_ITEMS,

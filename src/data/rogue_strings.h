@@ -4,7 +4,7 @@
 // -bump ROGUE_SAVE_VERSION in rogue_save.c
 // -update SAVE_VER_ID_X_Y_Z enum in rogue_save.h
 // -update RogueSave_GetVersionIdFor()
-const u8 gText_RogueVersion[] = _("v2.0.1a");
+const u8 gText_RogueVersion[] = _("v2.0.2");
 
 #if defined(ROGUE_DRAYANO)
 const u8 gText_RogueVersionPrefix[] = _("Rebalanced");
@@ -31,6 +31,8 @@ const u8 gText_StatusBadges[] = _("Badges: {STR_VAR_1}\n");
 const u8 gText_StatusScore[] = _("Score: {STR_VAR_1}\n");
 const u8 gText_StatusTimer[] = _("Timer: {STR_VAR_1}:{STR_VAR_2}\n");
 const u8 gText_StatusClock[] = _("{STR_VAR_1}:{STR_VAR_2}\n");
+const u8 gText_Status_SpawnsCountdown[] = _("{PKMN}s left: {STR_VAR_1}\n");
+const u8 gText_Status_Money[] = _("¥{STR_VAR_1}\n");
 const u8 gText_StatusSeasonSpring[] = _("·Spring·");
 const u8 gText_StatusSeasonSummer[] = _("·Summer·");
 const u8 gText_StatusSeasonAutumn[] = _("·Autumn·");
