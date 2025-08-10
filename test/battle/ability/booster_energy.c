@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItemsInfo[ITEM_BOOSTER_ENERGY].holdEffect == HOLD_EFFECT_BOOSTER_ENERGY);
+    ASSUME(gItems[ITEM_BOOSTER_ENERGY].holdEffect == HOLD_EFFECT_BOOSTER_ENERGY);
 }
 
 SINGLE_BATTLE_TEST("Booster Energy will activate Quark Drive after Electric Terrain ends")
@@ -143,7 +143,7 @@ SINGLE_BATTLE_TEST("Booster Energy increases special attack by 30% if it is the 
     PARAMETRIZE { species = SPECIES_IRON_MOTH; ability = ABILITY_QUARK_DRIVE; item = ITEM_BOOSTER_ENERGY; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ROUND].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_ROUND].split == SPLIT_SPECIAL);
         PLAYER(species) { Attack(100); Defense(100); Speed(100); SpAttack(110); SpDefense(100); Ability(ability); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); };
     } WHEN {
@@ -169,7 +169,7 @@ SINGLE_BATTLE_TEST("Booster Energy increases special defense by 30% if it is the
     PARAMETRIZE { species = SPECIES_IRON_MOTH; ability = ABILITY_QUARK_DRIVE; item = ITEM_BOOSTER_ENERGY; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ROUND].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_ROUND].split == SPLIT_SPECIAL);
         PLAYER(species) { Attack(100); Defense(100); Speed(100); SpAttack(100); SpDefense(110); Ability(ability); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); };
     } WHEN {

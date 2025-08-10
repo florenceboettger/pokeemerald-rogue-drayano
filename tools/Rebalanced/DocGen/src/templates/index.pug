@@ -7,6 +7,6 @@ html(language="en")
         title="Emerald Rogue Rebalanced Documentation"
     body
         h1 List of Pokemon
-        each p in data.pokemonList
+        each d in data.dexNums
             div 
-                a(href=`pokemon/${p.internalId}.html`) #{p.speciesName}
+                a(href=`pokemon/${data.pokemonList[d].modifiedDexNum}.html`) #{data.pokemonList[d].speciesName}

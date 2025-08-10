@@ -7,6 +7,7 @@
 #include "test/test.h"
 #include "constants/abilities.h"
 #include "rogue.h"
+#include "rogue_baked.h"
 
 TEST("Print data")
 {
@@ -55,16 +56,55 @@ TEST("Print data")
         DebugPrintf("\t\t\"eggCycles\": %u,", currSpecies->eggCycles);
         DebugPrintf("\t\t\"monCategory\": \"%S\",", currSpecies->categoryName);
         DebugPrintf("\t\t\"natDexNum\": %u,", currSpecies->natDexNum);
-        if (currSpecies->isMegaEvolution || currSpecies->isGigantamax)
-            DebugPrintf("\t\t\"internalId\": %u,", i);
-        else
-            DebugPrintf("\t\t\"internalId\": %u", i);
+        if (currSpecies->formSpeciesIdTable != NULL) {
+            DebugPrint("\t\t\"forms\": [");
+            for (u32 j = 0; currSpecies->formSpeciesIdTable[j] != FORM_SPECIES_END; j++) {
+                if (currSpecies->formSpeciesIdTable[j + 1] != FORM_SPECIES_END)
+                    DebugPrintf("\t\t\t%u,", currSpecies->formSpeciesIdTable[j]);
+                else
+                    DebugPrintf("\t\t\t%u", currSpecies->formSpeciesIdTable[j]);
+            }
+            DebugPrint("\t\t],");
+        }
+        if (currSpecies->formChangeTable != NULL) {
+            struct FormChange formChange;
+            Rogue_ModifyFormChange(i, 0, &formChange);
+            DebugPrint("\t\t\"formChanges\": [");
+            for (u32 j = 0; TRUE; j++) {
+                if (formChange.method == FORM_CHANGE_TERMINATOR)
+                    break;
+
+                u16 targetSpecies = formChange.targetSpecies;
+                Rogue_ModifyFormChange(i, j + 1, &formChange);
+                if (formChange.method != FORM_CHANGE_TERMINATOR)
+                    DebugPrintf("\t\t\t%u,", targetSpecies);
+                else
+                    DebugPrintf("\t\t\t%u", targetSpecies);
+            }
+            DebugPrint("\t\t],");
+        }
 
         //  Print forms
         if (currSpecies->isMegaEvolution)
-            DebugPrint("\t\t\"form\": \"mega\"");
+            DebugPrint("\t\t\"form\": \"mega\",");
+        else if (currSpecies->isPrimalReversion)
+            DebugPrint("\t\t\"form\": \"primalReversion\",");
+        else if (currSpecies->isUltraBeast)
+            DebugPrint("\t\t\"form\": \"ultraBurst\",");
         else if (currSpecies->isGigantamax)
-            DebugPrint("\t\t\"form\": \"gigantamax\"");
+            DebugPrint("\t\t\"form\": \"gigantamax\",");
+        else if (currSpecies->isTeraForm)
+            DebugPrint("\t\t\"form\": \"tera\",");
+        else if (currSpecies->isAlolanForm)
+            DebugPrint("\t\t\"form\": \"alola\",");
+        else if (currSpecies->isGalarianForm)
+            DebugPrint("\t\t\"form\": \"galar\",");
+        else if (currSpecies->isHisuianForm)
+            DebugPrint("\t\t\"form\": \"hisui\",");
+        else if (currSpecies->isPaldeanForm)
+            DebugPrint("\t\t\"form\": \"paldea\",");
+
+        DebugPrintf("\t\t\"internalId\": %u", i);
 
         if (i == endVal - 1)
             DebugPrint("\t}");
