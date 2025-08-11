@@ -158,6 +158,7 @@ void Rogue_ResetAdventurePathBuffers();
 u8 Rogue_SelectRouteRoom(u8 difficulty);
 u8 Rogue_GetCurrentLegendaryEncounterId(void);
 u16 Rogue_GetLegendaryRoomForSpecies(u16 species);
+u16 SelectLegendarySpecies(u8 legendId);
 u8 Rogue_GetCurrentTeamHideoutEncounterId(void);
 bool8 Rogue_IsBattleAlphaMon(u16 species);
 bool8 Rogue_IsBattleRoamerMon(u16 species);
@@ -224,5 +225,7 @@ void Rogue_ModifyTutorMoves(struct Pokemon* mon, u8 tutorType, u8* count, u8* hi
 
 void Rogue_CorrectMonDetails(struct Pokemon* party, u8 count);
 void Rogue_CorrectBoxMonDetails(struct BoxPokemon* mon);
+
+u16 GetEncounterChainShinyOdds(u8 count);
 
 #endif

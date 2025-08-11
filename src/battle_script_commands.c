@@ -6027,19 +6027,20 @@ static void Cmd_moveend(void)
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
             && !(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
             && gMultiHitCounter
-            && !(gCurrentMove == MOVE_PRESENT && gBattleStruct->presentBasePower == 0)) // Silly edge case
+            && !(gBattleMoves[gCurrentMove].effect == EFFECT_PRESENT && gBattleStruct->presentBasePower == 0)) // Silly edge case
             {
+                gMultiHitCounter--;
+
                 gBattleScripting.multihitString[4]++;
-                if (--gMultiHitCounter == 0)
+                if (gMultiHitCounter == 0 || !gBattleMons[gBattlerTarget].hp)
                 {
+                    BattleScriptPushCursor();
                     if (gBattleMoves[gCurrentMove].argument == MOVE_EFFECT_SCALE_SHOT && !NoAliveMonsForEitherParty())
                     {
-                        BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_DefDownSpeedUp;
                     }
-
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
+                    else
+                        gBattlescriptCurrInstr = BattleScript_MultiHitPrintStrings;
                     effect = TRUE;
                 }
                 else
@@ -6183,6 +6184,18 @@ static void Cmd_moveend(void)
         case MOVEEND_LIFEORB_SHELLBELL:
             if (ItemBattleEffects(ITEMEFFECT_LIFEORB_SHELLBELL, 0, FALSE))
                 effect = TRUE;
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_SPREAD_MOVE_WITH_EFFECT:
+            if (IsBattlerAlive(gBattlerAttacker)
+                && gBattleMoves[gCurrentMove].target == MOVE_TARGET_BOTH
+                && gCurrentMove == MOVE_MAKE_IT_RAIN
+                && gSpecialStatuses[gBattlerAttacker].damagedMons)
+                {
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_EffectMakeItRain;
+                    effect = TRUE;
+                }
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_PICKPOCKET:
@@ -12614,9 +12627,14 @@ static void Cmd_setsubstitute(void)
     CMD_ARGS();
 
     u32 factor = gBattleMoves[gCurrentMove].effect == EFFECT_SHED_TAIL ? 2 : 4;
-    u32 hp = GetNonDynamaxMaxHP(gBattlerAttacker) / factor;
+    u32 hp;
 
-    if (GetNonDynamaxMaxHP(gBattlerAttacker) / factor == 0)
+    if (factor == 2)
+        hp = (GetNonDynamaxMaxHP(gBattlerAttacker)+1) / factor; // shed tail rounds up
+    else
+        hp = GetNonDynamaxMaxHP(gBattlerAttacker) / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games // kleen what about dyna chansey?
+
+    if (hp == 0)
         hp = 1;
 
     if (gBattleMons[gBattlerAttacker].hp <= hp)
@@ -12626,7 +12644,8 @@ static void Cmd_setsubstitute(void)
     }
     else
     {
-        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games)
+        gBattleMoveDamage = hp;
+
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
@@ -14780,6 +14799,8 @@ static void Cmd_pickup(void)
                     if (rand < percentTotal)
                     {
                         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupTable[j].itemId);
+                        StringCopy(gStringVar1, ItemId_GetName(sPickupTable[j].itemId));
+                        Rogue_PushPopup_MonPickUp(i);
                         break;
                     }
                 }
@@ -14793,6 +14814,8 @@ static void Cmd_pickup(void)
                 {
                     heldItem = ITEM_HONEY;
                     SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+                    StringCopy(gStringVar1, ItemId_GetName(heldItem));
+                    Rogue_PushPopup_MonGatheredHoney(i);
                 }
             }
             #if P_SHUCKLE_BERRY_JUICE == GEN_2
@@ -14802,6 +14825,8 @@ static void Cmd_pickup(void)
             {
                 heldItem = ITEM_BERRY_JUICE;
                 SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+                StringCopy(gStringVar1, ItemId_GetName(heldItem));
+                Rogue_PushPopup_MonProducedBerryJuice(i);
             }
             #endif
         }

@@ -68,6 +68,11 @@ text gItemDesc_GoldenSeed
     format("todo - golden seed")
 }
 
+text gItemDesc_PocketPC
+{
+    format("A gadget which can remotely access the PC.")
+}
+
 text gItemDesc_NormalPokeblock
 {
     format("Can be used on Routes to attract Normal type {PKMN}.")
@@ -473,6 +478,15 @@ text gHubUpgradeDesc_Lab_UniqueMonRarity3
     format("Allows Legendary Unique {PKMN} to be tracked.")
 }
 
+text gHubUpgradeDesc_Lab_PocketPC
+{
+    format("Remotely access the PC (Hub only)")
+}
+
+text gHubUpgradeDesc_Lab_PocketPCTracker
+{
+    format("Allows tracking of unique {PKMN} via Pocket PC. Available both in and out of Adventures.")
+}
 
 text gHubUpgradeDesc_AdventureEntrance_RandomStarter
 {

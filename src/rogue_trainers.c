@@ -1627,6 +1627,16 @@ static void ConfigurePartyScratchSettings(u16 trainerNum, struct TrainerPartyScr
         }
         break;
     }
+
+    if(FlagGet(FLAG_ROGUE_TRAINERS_STRONG_LEGENDARIES))
+    {
+        scratch->allowStrongLegends = TRUE;
+        scratch->allowWeakLegends = TRUE;
+    }
+    else if(FlagGet(FLAG_ROGUE_TRAINERS_WEAK_LEGENDARIES))
+    {
+        scratch->allowWeakLegends = TRUE;
+    }
 }
 
 static u8 CalculateMonFixedIV(u16 trainerNum)
@@ -2088,7 +2098,22 @@ static u8 CreateTrainerPartyInternal(u16 trainerNum, struct Pokemon* party, u8 m
             scratch.forceLegends = FALSE;
             scratch.allowStrongLegends = FALSE;
             scratch.allowWeakLegends = FALSE;
-            indexToRestoreSettings = 3;
+
+            // Reapply legend clause
+            if(FlagGet(FLAG_ROGUE_TRAINERS_STRONG_LEGENDARIES))
+            {
+                scratch.allowStrongLegends = TRUE;
+                scratch.allowWeakLegends = TRUE;
+            }
+            else if(FlagGet(FLAG_ROGUE_TRAINERS_WEAK_LEGENDARIES))
+            {
+                scratch.allowWeakLegends = TRUE;
+            }
+
+            if(Rogue_GetConfigRange(CONFIG_RANGE_TRAINER) == DIFFICULTY_LEVEL_BRUTAL)
+                indexToRestoreSettings = monCount - 2;
+            else
+                indexToRestoreSettings = PARTY_SIZE - 1; // only final slot
         }
 
         RogueMonQuery_Begin();
@@ -2152,11 +2177,11 @@ static u8 CreateRivalPartyInternal(u16 trainerNum, struct Pokemon* party, u8 mon
 {
     u8 level;
     u8 monCount;
-    u8 fixedIV;
+    u8 fixedIV, teamFixedIV;
     struct TrainerPartyScratch scratch;
 
     level = GetTrainerLevel(trainerNum);
-    fixedIV = CalculateMonFixedIV(trainerNum);
+    teamFixedIV = CalculateMonFixedIV(trainerNum);
     monCount = CalculatePartyMonCount(trainerNum, monCapacity, level);
 
     Rogue_GenerateRivalBaseTeamIfNeeded();
@@ -2269,6 +2294,15 @@ static u8 CreateRivalPartyInternal(u16 trainerNum, struct Pokemon* party, u8 mon
                 }
             }
             RogueMonQuery_End();
+
+            fixedIV = teamFixedIV;
+
+            if(Rogue_GetCurrentDifficulty() <= ROGUE_GYM_START_DIFFICULTY + 2)
+            {
+                // Reduce legends effectiveness on rival first fight
+                if(RoguePokedex_IsSpeciesLegendary(species))
+                    fixedIV = 0;
+            }
 
             CreateMon(&party[i], species, level, fixedIV, FALSE, 0, OT_ID_RANDOM_NO_SHINY, 0);
 
@@ -3157,6 +3191,16 @@ static bool8 HasDamagingMove(struct RoguePokemonCompetitiveSet const* preset)
     return FALSE;
 }
 
+static bool8 ShouldBoostBattleGimickItems(struct TrainerPartyScratch* scratch)
+{
+    if(Rogue_GetConfigRange(CONFIG_RANGE_TRAINER) == DIFFICULTY_LEVEL_BRUTAL)
+        return TRUE;
+    else if(Rogue_IsKeyTrainer(scratch->trainerNum))
+        return TRUE;
+    else
+        return FALSE;
+}
+
 static bool8 SelectNextPreset(struct TrainerPartyScratch* scratch, u16 species, u8 monIdx, struct RoguePokemonCompetitiveSet* outPreset)
 {
     u8 i;
@@ -3253,7 +3297,7 @@ static bool8 SelectNextPreset(struct TrainerPartyScratch* scratch, u16 species, 
                     if(IsMegaEvolutionEnabled())
                     {
                         if(!scratch->heldItems.hasMegaStone)
-                            currentScore *= 32;
+                            currentScore *= ShouldBoostBattleGimickItems(scratch) ? 32 : 4;
                         else
                             currentScore /= 4;
                     }
@@ -3268,7 +3312,7 @@ static bool8 SelectNextPreset(struct TrainerPartyScratch* scratch, u16 species, 
                     if(IsZMovesEnabled())
                     {
                         if(!scratch->heldItems.hasZCrystal)
-                            currentScore *= 8;
+                            currentScore *= ShouldBoostBattleGimickItems(scratch) ? 16 : 4;
                         else
                             currentScore /= 4;
                     }

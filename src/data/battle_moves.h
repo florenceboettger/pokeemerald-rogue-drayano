@@ -14625,7 +14625,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_DYNAMAX] =
         .split = SPLIT_SPECIAL,
         .zMoveEffect = Z_EFFECT_NONE,
     #else
-        .effect = EFFECT_MAKE_IT_RAIN,
+        .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_STEEL,
         .accuracy = 100,

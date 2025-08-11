@@ -200,7 +200,7 @@ static u16 CalcValueInternal(u8 effectType, u16 itemCount, bool8 isCurse)
             return itemCount * (isCurse ? 40 : 200);
 
         case EFFECT_SERENE_GRACE_CHANCE:
-            return min(itemCount * (isCurse ? 50 : 75), 90);
+            return min(itemCount * (isCurse ? 50 : 75), 150);
 
         case EFFECT_WILD_ENCOUNTER_COUNT:
             return itemCount * (isCurse ? 1 : 2);
@@ -290,7 +290,7 @@ u16 GetCharmValue(u8 effectType)
 
 u16 GetCurseValue(u8 effectType)
 {
-    if(!Rogue_IsRunActive())
+    if(!Rogue_IsRunActive() && gSaveBlock2Ptr->optionsDifficultyRewardMode == OPTIONS_DIFFICULTY_REWARD_MODE_VANILLA)
         return 0;
 
     return CalcValueInternal(effectType, gCharmItemCounts[effectType].curseItems, TRUE);

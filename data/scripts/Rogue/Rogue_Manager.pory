@@ -256,6 +256,20 @@ script Rogue_RetireFromRun
     releaseall
 }
 
+script Rogue_TPtoSpawn
+{
+    lockall
+    msgbox(format("Are you sure you'd like to teleport to this route's spawnpoint?"), MSGBOX_YESNO)
+
+    if(var(VAR_RESULT) == YES)
+    {
+        warptospawn
+        waitstate
+    }
+
+    releaseall
+}
+
 script Rogue_ReturnToHub
 {
     warprespawn
@@ -654,6 +668,31 @@ script Rogue_EventScript_UseGoldenSeedItem
     release
 }
 
+script Rogue_EventScript_UsePocketPC
+{
+    lock
+
+    if(flag(FLAG_ROGUE_RUN_ACTIVE) == FALSE)
+    {
+        setflag(FLAG_POCKET_PC_IS_USED)//So we know if we're using it or not. Tracker is exclusive to pocket PC
+        call(EventScript_PC)
+    }
+    else
+    {
+        hubupgradeunlocked(HUB_UPGRADE_LAB_POCKET_PC_TRACKER)
+        if(var(VAR_RESULT) == TRUE)
+        {
+            call(Rogue_Interior_BillsLab_TalkPC)
+        }
+        else
+        {
+            msgbox(format("The Pocket PC's storage system can't be accessed during adventures."), MSGBOX_DEFAULT)
+        }
+    }
+
+    release
+}
+
 script Rogue_EventScript_AttemptSnagBattle
 {
     lock
@@ -878,7 +917,7 @@ script Rogue_Shop_Curses
 
     rogue_dynamicpokemart(ROGUE_SHOP_CURSES)
 
-    msgbox(format("Good luck child, {PLAYER}!"), MSGBOX_DEFAULT)
+    msgbox(format("Good luck, {PLAYER}!"), MSGBOX_DEFAULT)
 
     release
 }
@@ -995,7 +1034,7 @@ script Rogue_Tutor_TutorMoveLearn
     special(TeachMoveSetContextTutorMove)
     lock
     faceplayer
-    msgbox(format("HYAH!\p I'm a Move Tutor!\p I can teach Pokémon moves some radical moves!\pSo, what do you want me to teach?"), MSGBOX_DEFAULT)
+    msgbox(format("HYAH!\p I'm a Move Tutor!\p I can teach Pokémon some radical moves!\pSo, what do you want me to teach?"), MSGBOX_DEFAULT)
 
     setvar(VAR_0x8004, 0)
     special(TeachMoveFromContext)
@@ -1080,9 +1119,9 @@ script Rogue_SpeakDaycareLady_TrySwapMon
     if(var(VAR_RESULT) == YES)
     {
         setvar(VAR_RESULT, NO)
-        specialvar(VAR_TEMP_0, CalculatePlayerPartyCount)
+        specialvar(VAR_0x8008, CalculatePlayerPartyCount)
 
-        if(var(VAR_TEMP_0) == 1)
+        if(var(VAR_0x8008) == 1)
         {
             msgbox(format("I'm afraid you can't leave any more Pokémon with me at the moment.\pIf you did, you'd be left with no Pokémon in your party!"), MSGBOX_DEFAULT)
         }
@@ -1115,10 +1154,10 @@ script Rogue_SpeakDaycareLady_TrySwapMon
     {
         setvar(VAR_RESULT, NO)
 
-        specialvar(VAR_TEMP_0, CalculatePlayerPartyCount)
-        specialvar(VAR_TEMP_1, Rogue_CalcMaxPartySize)
+        specialvar(VAR_0x8008, CalculatePlayerPartyCount)
+        specialvar(VAR_0x8009, Rogue_CalcMaxPartySize)
         
-        if(var(VAR_TEMP_0) >= VAR_TEMP_1)
+        if(var(VAR_0x8008) >= VAR_0x8009)
         {
             msgbox(format("So you would like to withdraw your Pokémon?\pIt looks like your party is full!\pYou'll need to leave a member of your party with me, in order to withdraw any Pokémon."))
             fadescreen(FADE_TO_BLACK)
