@@ -7720,9 +7720,9 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .footprint = gMonFootprint_Pawniard,
         LEARNSETS(Pawniard),
     #ifdef ROGUE_DRAYANO
-        .evolutions = EVOLUTION({EVO_LEVEL, 52, SPECIES_BISHARP}),
-    #else
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_BISHARP}),
+    #else
+        .evolutions = EVOLUTION({EVO_LEVEL, 52, SPECIES_BISHARP}),
     #endif
     },
 

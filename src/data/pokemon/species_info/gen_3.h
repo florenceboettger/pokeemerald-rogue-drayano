@@ -2084,11 +2084,15 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpDefense = 115,
     #endif
         .expYield = 233,
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_INNER_FOCUS, ABILITY_SHARPNESS, ABILITY_JUSTIFIED },
+    #else
         #if P_UPDATED_ABILITIES >= GEN_9
             .abilities = { ABILITY_STEADFAST, ABILITY_SHARPNESS, ABILITY_JUSTIFIED },
         #else
             .abilities = { ABILITY_STEADFAST, ABILITY_NONE, ABILITY_JUSTIFIED },
         #endif
+    #endif
         .cryId = CRY_GALLADE,
         .weight = 520,
         .description = POKEDEX_DESC_STRING(
@@ -2127,7 +2131,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .baseSpDefense = 115,
     #endif
         .expYield = 278,
+    #ifdef ROGUE_DRAYANO
+        .abilities = { ABILITY_SHARPNESS, ABILITY_SHARPNESS, ABILITY_SHARPNESS},
+    #else
         .abilities = { ABILITY_INNER_FOCUS, ABILITY_INNER_FOCUS, ABILITY_INNER_FOCUS },
+    #endif
         .cryId = CRY_GALLADE_MEGA,
         .weight = 564,
         .description = POKEDEX_DESC_STRING(
