@@ -407,6 +407,15 @@ namespace PokemonDataGenerator.Pokedex
 				return false;
 			}
 
+			public void MergeOtherProfile(PokemonProfile otherProfile)
+			{
+				foreach(string tutorMove in otherProfile.TutorMoves)
+				{
+                    if (!TutorMoves.Contains(tutorMove))
+                        TutorMoves.Add(tutorMove);
+                }
+			}
+
 			public void FormatDataForGame()
 			{
 				// Now we've added the sets, add any moves that we can't currently learn as tutor moves
@@ -1053,20 +1062,13 @@ namespace PokemonDataGenerator.Pokedex
 			string manualPath = ContentCache.GetWriteableCachePath($"res://PokemonProfiles//{ (isRebalanced ? "Rebalanced" : (GameDataHelpers.IsVanillaVersion ? "Vanilla" : "EX")) }/{speciesName}.json");
 			string cachePath = ContentCache.GetWriteableCachePath($"pokemon_profiles/{(GameDataHelpers.IsVanillaVersion ? "Vanilla" : "EX")}/{speciesName}.json");
 			PokemonProfile outputProfile;
-
-			if (File.Exists(manualPath))
-			{
-				Console.WriteLine($"Found '{speciesName}' profile manual override");
-
-				string jsonProfile = File.ReadAllText(manualPath);
-				outputProfile = JsonConvert.DeserializeObject<PokemonProfile>(jsonProfile, c_JsonSettings);
-			}
-			else if (File.Exists(cachePath))
+			
+			if (File.Exists(cachePath))
 			{
 				Console.WriteLine($"Found '{speciesName}' profile in cache");
 
 				string jsonProfile = File.ReadAllText(cachePath);
-				outputProfile = JsonConvert.DeserializeObject<PokemonProfile>(jsonProfile, c_JsonSettings);
+                outputProfile = JsonConvert.DeserializeObject<PokemonProfile>(jsonProfile, c_JsonSettings);
 			}
 			else
 			{
@@ -1161,18 +1163,28 @@ namespace PokemonDataGenerator.Pokedex
 
 				sourceProfile.CollapseMovesets(isRebalanced);
 
-				outputProfile = PokemonProfile.FromSource(sourceProfile);
-				outputProfile.FormatDataForGame(); // collapse initially so we can easily inspect the cache file
+                outputProfile = PokemonProfile.FromSource(sourceProfile);
+                outputProfile.FormatDataForGame(); // collapse initially so we can easily inspect the cache file
 
 				string cacheDir = Path.GetDirectoryName(cachePath);
 				Directory.CreateDirectory(cacheDir);
 
 				string profileJson = JsonConvert.SerializeObject(outputProfile, c_JsonSettings);
 				File.WriteAllText(cachePath, profileJson);
-			}
+            }
 
-			outputProfile.FormatDataForGame();
-			outputProfile.ValidateContents();
+            if (File.Exists(manualPath))
+            {
+                Console.WriteLine($"Found '{speciesName}' profile manual override");
+
+                string jsonProfile = File.ReadAllText(manualPath);
+                PokemonProfile manualProfile = JsonConvert.DeserializeObject<PokemonProfile>(jsonProfile, c_JsonSettings);
+                manualProfile.MergeOtherProfile(outputProfile);
+                outputProfile = manualProfile;
+            }
+
+            outputProfile.FormatDataForGame();
+            outputProfile.ValidateContents();
 
 			return outputProfile;
 		}
