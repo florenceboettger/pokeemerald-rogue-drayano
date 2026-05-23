@@ -57,6 +57,7 @@ struct PokemonProfile
 	std::vector<CompetitiveSet> m_CompetitiveSets;
 	std::vector<Evolution> m_Evolutions;
 	std::unordered_map<std::string, SpeciesProfile> m_PerSpeciesProfile;
+	std::string m_GenderRatio;
 
 	bool m_UseFallback_LevelUpMoves = false;
 	bool m_UseFallback_TutorMoves = false;
@@ -241,6 +242,11 @@ void ParseProfile(std::string const& filePath, PokemonProfile& outProfile, Pokem
 	{
 		CompetitiveSet outSet;
 
+		if (compSet["Moves"].size() < 4)
+		{
+			fprintf(stderr, "Not enough moves for comp set %s for mon %s \n", compSet["SourceTiers"][0].get<std::string>().c_str(), outProfile.m_Species[0].c_str());
+		}
+
 		for (json move : compSet["Moves"])
 		{
 			outSet.m_Moves.push_back(move.get<std::string>());
@@ -269,6 +275,20 @@ void ParseProfile(std::string const& filePath, PokemonProfile& outProfile, Pokem
 			evo.m_Species = GetAsString(evoData["Species"]);
 
 			outProfile.m_Evolutions.push_back(evo);
+		}
+	}
+
+	outProfile.m_GenderRatio = "-1";
+	if (data.contains("PercentFemale"))
+	{
+		float percentFemale = data["PercentFemale"].get<float>();
+		if (percentFemale < 0)
+		{
+			outProfile.m_GenderRatio = 255;
+		}
+		else
+		{
+			outProfile.m_GenderRatio = std::to_string(std::min(254, static_cast<int>((percentFemale * 255.) / 100.)));
 		}
 	}
 
@@ -663,6 +683,8 @@ void ExportPokemonProfileData_C(std::ofstream& fileStream, std::string const& da
 			lowerBlock << "\t\t.evolutionCount = 0,\n";
 		}
 		lowerBlock << "\t\t.monFlags = MON_FLAGS_" << profile.m_Species[0] << competitiveSetsSuffix << ",\n";
+
+		lowerBlock << "\t\t.genderRatio = " << profile.m_GenderRatio << ",\n";
 
 		lowerBlock << "\t\t.baseStats = \n\t\t{\n";
 

@@ -676,6 +676,7 @@ struct RoguePokemonProfile
     u16 monFlags;
     u16 competitiveSetCount;
     u8 evolutionCount;
+    s16 genderRatio;
 };
 
 struct RogueRideMonState
