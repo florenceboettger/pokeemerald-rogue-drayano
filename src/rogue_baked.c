@@ -2268,6 +2268,16 @@ bool8 Rogue_DoesEvolveInto(u16 fromSpecies, u16 toSpecies)
     return FALSE;
 }
 
+u8 Rogue_GetGenderRatio(u16 species)
+{
+    struct RoguePokemonProfile const* pokemonProfile = Rogue_GetPokemonProfile(species);
+    if (pokemonProfile->genderRatio < 0)
+    {
+        return gRogueSpeciesInfo[species].genderRatio;
+    }
+    return (u8)pokemonProfile->genderRatio;
+}
+
 void Rogue_AppendSpeciesTypeFlags(u16 species, u32* outFlags)
 {
 #ifdef ROGUE_BAKING
