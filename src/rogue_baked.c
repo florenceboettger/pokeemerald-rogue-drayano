@@ -43,8 +43,11 @@ extern const struct SpeciesInfo gSpeciesInfo[];
 #else
 #define EVOLUTIONS_END 0
 
+#ifndef ROGUE_BAKING
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 extern const struct BaseStats gBaseStats[];
+#endif
+
 #endif
 
 #include "rogue_baked.h"
@@ -91,6 +94,10 @@ extern const u16 gRogueBake_EvoItems[];
 extern const u16 gRogueBake_EvoItems_Count;
 extern const u16 gRogueBake_FormItems[];
 extern const u16 gRogueBake_FormItems_Count;
+
+#ifdef ROGUE_EXPANSION
+extern const u16 gRogueBake_MegaItemToSpecies[];
+#endif
 
 extern const u16 gRogueBake_FinalEvoSpecies[];
 extern const u16 gRogueBake_FinalEvoSpecies_Count;
@@ -150,6 +157,107 @@ u16 SelectIndexFromWeights(u16* weights, u16 count, u16 rngValue)
     }
 
     AGB_ASSERT(FALSE);
+    return 0;
+}
+
+u8 SpeciesToGen(u16 species)
+{
+    if(species >= SPECIES_BULBASAUR && species <= SPECIES_MEW)
+        return 1;
+    if(species >= SPECIES_CHIKORITA && species <= SPECIES_CELEBI)
+        return 2;
+    if(species >= SPECIES_TREECKO && species <= SPECIES_DEOXYS)
+        return 3;
+#ifdef ROGUE_EXPANSION
+    if(species >= SPECIES_TURTWIG && species <= SPECIES_ARCEUS)
+        return 4;
+    if(species >= SPECIES_VICTINI && species <= SPECIES_GENESECT)
+        return 5;
+    if(species >= SPECIES_CHESPIN && species <= SPECIES_VOLCANION)
+        return 6;
+    if(species >= SPECIES_ROWLET && species <= SPECIES_MELMETAL)
+        return 7;
+    if(species >= SPECIES_GROOKEY && species <= SPECIES_CALYREX)
+        return 8;
+    // Hisui is classes as gen8
+    if(species >= SPECIES_WYRDEER && species <= SPECIES_ENAMORUS)
+        return 8;
+
+    if(species >= SPECIES_SPRIGATITO && species <= SPECIES_PECHARUNT)
+        return 9;
+
+    if(species >= SPECIES_RATTATA_ALOLAN && species <= SPECIES_MAROWAK_ALOLAN)
+        return 7;
+    if(species >= SPECIES_MEOWTH_GALARIAN && species <= SPECIES_STUNFISK_GALARIAN)
+        return 8;
+
+    // Hisui is classes as gen8
+    if(species >= SPECIES_GROWLITHE_HISUIAN && species <= SPECIES_DECIDUEYE_HISUIAN)
+        return 8;
+
+    if(species >= SPECIES_BURMY_SANDY_CLOAK && species <= SPECIES_ARCEUS_FAIRY)
+        return 4;
+
+    // Just treat megas as gen 1 as they are controlled by a different mechanism
+    if(species >= SPECIES_VENUSAUR_MEGA && species <= SPECIES_GROUDON_PRIMAL)
+        return 1;
+    if(species >= SPECIES_CLEFABLE_MEGA && species <= SPECIES_GLIMMORA_MEGA)
+        return 1;
+    if(species >= SPECIES_VENUSAUR_GIGANTAMAX && species <= SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX)
+        return 1;
+    
+    switch(species)
+    {
+        case SPECIES_GIRATINA_ORIGIN:
+            return 4;
+
+        case SPECIES_PALKIA_ORIGIN:
+        case SPECIES_DIALGA_ORIGIN:
+            return 8;
+
+        case SPECIES_KYUREM_WHITE:
+        case SPECIES_KYUREM_BLACK:
+            return 5;
+        
+        //case SPECIES_ZYGARDE_COMPLETE:
+        //    return 6;
+
+        case SPECIES_NECROZMA_DUSK_MANE:
+        case SPECIES_NECROZMA_DAWN_WINGS:
+        case SPECIES_NECROZMA_ULTRA:
+            return 7;
+
+        case SPECIES_ZACIAN_CROWNED_SWORD:
+        case SPECIES_ZAMAZENTA_CROWNED_SHIELD:
+        case SPECIES_ETERNATUS_ETERNAMAX:
+        case SPECIES_URSHIFU_RAPID_STRIKE_STYLE:
+        case SPECIES_ZARUDE_DADA:
+        case SPECIES_CALYREX_ICE_RIDER:
+        case SPECIES_CALYREX_SHADOW_RIDER:
+        case SPECIES_ENAMORUS_THERIAN:
+            return 8;
+
+        case SPECIES_FLOETTE_ETERNAL_FLOWER:
+            return 9;
+
+        // Alternate forms
+        case SPECIES_MEOWSTIC_FEMALE:
+            return 7;
+
+        case SPECIES_INDEEDEE_FEMALE:
+            return 8;
+    }
+
+    if(species >= SPECIES_LYCANROC_MIDNIGHT && species <= SPECIES_LYCANROC_DUSK)
+        return 7;
+
+    if(species >= SPECIES_TOXTRICITY_LOW_KEY && species <= SPECIES_ALCREMIE_STRAWBERRY_RAINBOW_SWIRL)
+        return 8;
+
+    if(species >= SPECIES_ALCREMIE_BERRY_VANILLA_CREAM && species <= SPECIES_ALCREMIE_RIBBON_RAINBOW_SWIRL)
+        return 8;
+#endif
+    
     return 0;
 }
 
@@ -993,7 +1101,7 @@ void Rogue_ModifyItem(u16 itemId, struct Item* outItem)
 {
 }
 
-u32 Rogue_CalculateMovePrice(u16 move)
+u32 Rogue_CalculateMovePrice(u16 move, u16 forItemId)
 {
     return 0;
 }
@@ -1173,7 +1281,7 @@ u16 Rogue_GetPrice(u16 itemId)
     if(itemId >= ITEM_TR01 && itemId <= ITEM_TR50)
     {
         u16 move = ItemIdToBattleMoveId(itemId);
-        price = Rogue_CalculateMovePrice(move);
+        price = Rogue_CalculateMovePrice(move, itemId);
     }
 
     if(itemId >= ITEM_TM01 && itemId <= ITEM_HM08)
@@ -1181,7 +1289,7 @@ u16 Rogue_GetPrice(u16 itemId)
         u16 move = ItemIdToBattleMoveId(itemId);
 
         // increase as these are re-usable
-        price = Rogue_CalculateMovePrice(move) * 4;
+        price = Rogue_CalculateMovePrice(move, itemId);
         applyDefaultHubIncrease = TRUE;
     }
 
@@ -1229,6 +1337,12 @@ u16 Rogue_GetPrice(u16 itemId)
     }
 
     if(itemId >= ITEM_RED_ORB && itemId <= ITEM_DIANCITE)
+    {
+        // Expect price from above
+        price = HELD_ITEM_HIGH_PRICE;
+        applyDefaultHubIncrease = TRUE;
+    }
+    if(itemId >= ITEM_CLEFABLITE && itemId <= ITEM_GLIMMORANITE)
     {
         // Expect price from above
         price = HELD_ITEM_HIGH_PRICE;
@@ -1459,6 +1573,7 @@ void Rogue_ModifyItem(u16 itemId, struct Item* outItem)
             outItem->fieldUseFunc = rogueItem->fieldUseFunc;
             outItem->battleUsage = rogueItem->battleUsage;
             outItem->secondaryId = rogueItem->secondaryId;
+            outItem->importance = 0;
 
             if(IsCharmItem(itemId))
             {
@@ -1537,7 +1652,7 @@ void Rogue_ModifyItem(u16 itemId, struct Item* outItem)
     }
 
 #ifdef ROGUE_EXPANSION
-    if(itemId >= ITEM_VENUSAURITE && itemId <= ITEM_DIANCITE)
+    if(IS_MEGA_STONE(itemId))
     {
         outItem->pocket = POCKET_STONES;
     }
@@ -1658,7 +1773,7 @@ void Rogue_ModifyItem(u16 itemId, struct Item* outItem)
     }
 }
 
-u32 Rogue_CalculateMovePrice(u16 move)
+u32 Rogue_CalculateMovePrice(u16 move, u16 itemId)
 {
     // Move cost takes into account high level stats and then modifies based on usage
     u32 cost = 0;
@@ -1744,8 +1859,24 @@ u32 Rogue_CalculateMovePrice(u16 move)
     else if(usageCount >= 100)
         cost += 500;
 
+    cost /= 2; // price experiment
+
     if(cost < 100)
         cost = 100;
+
+    // tutor moves
+    if(itemId == ITEM_NONE)
+    {
+        if(Rogue_IsRunActive())
+            cost *= 2; // price experiment (keep same cost in hub)
+    }
+    else if(itemId >= ITEM_TM01 && itemId <= ITEM_HM08)
+    {
+        if(Rogue_IsRunActive())
+            cost *= (4 * 6) / 5;
+        else
+            cost *= 4 * 2; // *2 price experiment
+    }
 
     return cost;
 }
@@ -1821,6 +1952,29 @@ static u16 BinarySearchForItem(u16 item, u16 const* data, u16 count)
     // Failed to find
     return count;
 }
+
+bool8 Rogue_IsTreasureItem(u16 itemId)
+{
+#ifndef ROGUE_BAKING
+    if(ItemId_GetPocket(itemId) == POCKET_ITEMS)
+    {
+        if(ItemId_GetFieldFunc(itemId) != ItemUseOutOfBattle_CannotUse)
+            return FALSE;
+
+#ifdef ROGUE_EXPANSION
+        if(ItemId_GetBattleUsage(itemId) != 0)
+            return FALSE;
+#else
+        if(ItemId_GetBattleFunc(itemId) != NULL)
+            return FALSE;
+#endif
+
+        return TRUE;
+    }
+#endif
+    return FALSE;
+}
+
 
 bool8 Rogue_IsEvolutionItem(u16 itemId)
 {
@@ -1901,6 +2055,16 @@ u16 Rogue_GetFormItemIndex(u16 itemId)
 #endif
 }
 
+u16 Rogue_GetSpeciesForMegaItem(u16 itemId)
+{
+#ifdef ROGUE_BAKE_VALID
+    if(IS_MEGA_STONE(itemId))
+        return gRogueBake_MegaItemToSpecies[itemId - ITEM_VENUSAURITE];
+#endif
+
+    return SPECIES_NONE;
+}
+
 #else
 
 bool8 Rogue_IsFormItem(u16 itemId)
@@ -1911,6 +2075,11 @@ bool8 Rogue_IsFormItem(u16 itemId)
 u16 Rogue_GetFormItemIndex(u16 itemId)
 {
     return 0;
+}
+
+u16 Rogue_GetSpeciesForMegaItem(u16 itemId)
+{
+    return SPECIES_NONE;
 }
 
 #endif
@@ -1925,6 +2094,18 @@ u32 Rogue_ModifyExperienceTables(u8 growthRate, u8 level)
 struct RoguePokemonProfile const* Rogue_GetPokemonProfile(u32 species)
 {
     if(Rogue_GetRevisionModeActive())
+    {
+        return &gRoguePokemonProfiles_Revised[species];
+    }
+    else
+    {
+        return &gRoguePokemonProfiles[species];
+    }
+}
+
+struct RoguePokemonProfile const* Rogue_GetPokemonProfileFor(u32 species, bool8 isRevised)
+{
+    if(isRevised)
     {
         return &gRoguePokemonProfiles_Revised[species];
     }
@@ -1985,6 +2166,175 @@ void Rogue_GetPokemonBaseStatsFor(u32 species, struct RoguePokemonBaseStats* out
     }
 }
 
+static bool8 AreLevelUpMovesSame(struct LevelUpMove const* movesA, struct LevelUpMove const* movesB)
+{
+    u32 i;
+
+    if (movesA == movesB)
+        return TRUE;
+    if (movesA == NULL || movesB == NULL)
+        return FALSE;
+
+
+    for (i = 0; TRUE; i++)
+    {
+        if (movesA[i].move == MOVE_NONE && movesB[i].move == MOVE_NONE)
+        {
+            break;
+        }
+
+        if (movesA[i].move == MOVE_NONE || movesB[i].move == MOVE_NONE)
+        {
+            return FALSE;
+        }
+
+        if (memcmp(&movesA[i], &movesB[i], sizeof(struct LevelUpMove)) != 0)
+        {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+static bool8 AreTutorMovesSame(u16 const* movesA, u16 const* movesB)
+{
+    u32 i;
+
+    if (movesA == movesB)
+        return TRUE;
+    if (movesA == NULL || movesB == NULL)
+        return FALSE;
+
+
+    for (i = 0; TRUE; i++)
+    {
+        if (movesA[i] == MOVE_NONE && movesB[i] == MOVE_NONE)
+        {
+            break;
+        }
+
+        if (movesA[i] == MOVE_NONE || movesB[i] == MOVE_NONE)
+        {
+            return FALSE;
+        }
+
+        if (movesA[i] != movesB[i])
+        {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+static bool8 AreEvolutionsSame(struct Evolution const* evosA, struct Evolution const* evosB)
+{
+    u32 i;
+
+    if (evosA == evosB)
+        return TRUE;
+    if (evosA == NULL || evosB == NULL)
+        return FALSE;
+
+
+    for (i = 0; TRUE; i++)
+    {
+        if (evosA[i].method == EVOLUTIONS_END && evosB[i].method == EVOLUTIONS_END)
+        {
+            break;
+        }
+
+        if (evosA[i].method == EVOLUTIONS_END || evosB[i].method == EVOLUTIONS_END)
+        {
+            return FALSE;
+        }
+
+        if (memcmp(&evosA[i], &evosB[i], sizeof(struct Evolution)) != 0)
+        {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+static bool8 AreCompetitiveSetsSame(struct RoguePokemonCompetitiveSet const* setsA, struct RoguePokemonCompetitiveSet const* setsB, u32 count)
+{
+    if (setsA == setsB)
+        return TRUE;
+    if (setsA == NULL || setsB == NULL)
+        return FALSE;
+
+    return memcmp(setsA, setsB, sizeof(struct RoguePokemonCompetitiveSet) * count) == 0;
+}
+
+
+bool8 Rogue_HasSpeciesBeenRevised(u16 species, u32 checkFlags)
+{
+#ifndef ROGUE_BAKING
+    if (Rogue_GetRevisionModeActive())
+#endif
+    {
+        struct RoguePokemonBaseStats ogBaseStats;
+        struct RoguePokemonBaseStats revisedBaseStats;
+        struct RoguePokemonProfile const* ogProfile = Rogue_GetPokemonProfileFor(species, FALSE);
+        struct RoguePokemonProfile const* revisedProfile = Rogue_GetPokemonProfileFor(species, TRUE);
+
+        Rogue_GetPokemonBaseStatsFor(species, &ogBaseStats, FALSE);
+        Rogue_GetPokemonBaseStatsFor(species, &revisedBaseStats, TRUE);
+
+        if(checkFlags & REVISION_FLAG_STATS)
+        {
+            if (
+                ogBaseStats.baseHP != revisedBaseStats.baseHP ||
+                ogBaseStats.baseAttack != revisedBaseStats.baseAttack ||
+                ogBaseStats.baseDefense != revisedBaseStats.baseDefense ||
+                ogBaseStats.baseSpeed != revisedBaseStats.baseSpeed ||
+                ogBaseStats.baseSpAttack != revisedBaseStats.baseSpAttack ||
+                ogBaseStats.baseSpDefense != revisedBaseStats.baseSpDefense
+            )
+                return TRUE;
+        }     
+        if(checkFlags & REVISION_FLAG_TYPING)
+        {
+            if (memcmp(ogBaseStats.types, revisedBaseStats.types, sizeof(ogBaseStats.types)) != 0)
+                return TRUE;
+        }
+        if(checkFlags & REVISION_FLAG_ABILITY)
+        {
+            if (memcmp(ogBaseStats.abilities, revisedBaseStats.abilities, sizeof(ogBaseStats.abilities)) != 0)
+                return TRUE;
+        }
+
+        if(checkFlags & REVISION_FLAG_EVOLUTIONS)
+        {
+            if (ogProfile->evolutionCount != revisedProfile->evolutionCount || !AreEvolutionsSame(ogProfile->evolutions, revisedProfile->evolutions))
+                return TRUE;
+        }
+
+        if(checkFlags & REVISION_FLAG_LEARN_MOVES)
+        {
+            if (!AreLevelUpMovesSame(ogProfile->levelUpMoves, revisedProfile->levelUpMoves))
+                return TRUE;
+        }
+
+        if(checkFlags & REVISION_FLAG_TUTOR_MOVES)
+        {
+            if (!AreTutorMovesSame(ogProfile->tutorMoves, revisedProfile->tutorMoves))
+                return TRUE;
+        }
+
+        if(checkFlags & REVISION_FLAG_COMP_SETS)
+        {
+            if (ogProfile->competitiveSetCount != revisedProfile->competitiveSetCount || !AreCompetitiveSetsSame(ogProfile->competitiveSets, revisedProfile->competitiveSets, ogProfile->competitiveSetCount))
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
 u16 Rogue_GetPokemonHeldItemUsage(u16 item)
 {
     if(Rogue_GetRevisionModeActive())
@@ -2025,10 +2375,10 @@ bool8 Rogue_HasMoveBeenRevised(u16 move)
 {
 #ifndef ROGUE_BAKING
     if(Rogue_GetRevisionModeActive())
+#endif
     {
         return memcmp(&gBattleMoves_Mainline[move], &gBattleMoves_Revised[move], sizeof(struct BattleMove)) != 0;
     }
-#endif
 
     return FALSE;
 }

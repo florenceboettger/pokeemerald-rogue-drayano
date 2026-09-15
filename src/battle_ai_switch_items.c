@@ -336,7 +336,8 @@ static bool8 FindMonThatAbsorbsOpponentsMove(u32 battler)
     {
         absorbingTypeAbilities[0] = ABILITY_FLASH_FIRE;
         absorbingTypeAbilities[1] = ABILITY_WELL_BAKED_BODY;
-        numAbsorbingAbilities = 2;
+        absorbingTypeAbilities[2] = ABILITY_THERMAL_EXCHANGE;
+        numAbsorbingAbilities = 3;
     }
     else if (gBattleMoves[gLastLandedMoves[battler]].type == TYPE_WATER)
     {
@@ -585,6 +586,17 @@ static bool8 ShouldSwitchIfGameStatePrompt(u32 battler)
     }
 }
 
+static bool8 ShouldPreventFirstTurnSwitching(u32 battler)
+{
+    if(gBattleMons[battler].ability == ABILITY_ZERO_TO_HERO && gBattleMons[battler].species == SPECIES_PALAFIN)
+        return FALSE;
+
+    if(gBattleResults.battleTurnCounter != 0 && gDisableStructs[battler].isFirstTurn && !(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        return TRUE;
+
+    return FALSE;
+}
+
 static bool8 ShouldSwitchIfAbilityBenefit(u32 battler)
 {
     s32 moduloChance = 4; //25% Chance Default
@@ -624,6 +636,14 @@ static bool8 ShouldSwitchIfAbilityBenefit(u32 battler)
                  && Random() % (moduloChance*chanceReducer) == 0)
                 break;
 
+            return FALSE;
+
+        case ABILITY_ZERO_TO_HERO:
+            if (gBattleMons[battler].species == SPECIES_PALAFIN_ZERO && 
+                AI_DATA->mostSuitableMonId[battler] != PARTY_SIZE)
+            {
+                break;
+            }
             return FALSE;
 
         default:
@@ -745,6 +765,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u32 battler, u16 flags, u8 modulo
     for (i = firstId; i < lastId; i++)
     {
         u16 species, monAbility;
+        u32 otId;
 
         if (!IsValidForBattle(&party[i]))
             continue;
@@ -760,8 +781,9 @@ static bool8 FindMonWithFlagsAndSuperEffective(u32 battler, u16 flags, u8 modulo
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG);
+        otId = GetMonData(&party[i], MON_DATA_OT_ID);
         monAbility = GetMonAbility(&party[i]);
-        CalcPartyMonTypeEffectivenessMultiplier(gLastLandedMoves[battler], species, monAbility);
+        CalcPartyMonTypeEffectivenessMultiplier(gLastLandedMoves[battler], species, monAbility, otId);
         if (gMoveResultFlags & flags)
         {
             battlerIn1 = gLastHitBy[battler];
@@ -1002,6 +1024,10 @@ bool32 ShouldSwitch(u32 battler)
         else
             return FALSE;
     }
+
+    // Unless this is the very first turn switch, if this is the first turn this mon has been in the field, don't swap it out in singles
+    if(ShouldPreventFirstTurnSwitching(battler))
+        return FALSE;
 
     //NOTE: The sequence of the below functions matter! Do not change unless you have carefully considered the outcome.
     //Since the order is sequencial, and some of these functions prompt switch to specific party members.
@@ -1245,7 +1271,7 @@ static u32 GetBestMonDmg(struct Pokemon *party, int firstId, int lastId, u8 inva
 static bool32 IsMonGrounded(u16 heldItemEffect, u32 ability, u8 type1, u8 type2)
 {
     // List that makes mon not grounded
-    if (type1 == TYPE_FLYING || type2 == TYPE_FLYING || ability == ABILITY_LEVITATE
+    if (type1 == TYPE_FLYING || type2 == TYPE_FLYING || ability == ABILITY_LEVITATE || ability == ABILITY_EELEVATE
          || (heldItemEffect == HOLD_EFFECT_AIR_BALLOON && ability != ABILITY_KLUTZ))
     {
         // List that overrides being off the ground

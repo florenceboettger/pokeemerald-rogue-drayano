@@ -169,20 +169,25 @@ u16 GetBagReservedTotalSlots()
 
 void RemoveEmptyBagItems(void)
 {
-    u16 i;
-    u16 j;
+    u16 read = 0;
+    u16 write = 0;
 
-    for (i = 0; i < BAG_ITEM_CAPACITY - 1; i++)
+    for (read = 0; read < BAG_ITEM_CAPACITY; read++)
     {
-        for (j = i + 1; j < BAG_ITEM_CAPACITY; j++)
+        if(gSaveBlock1Ptr->bagPockets[read].itemId != ITEM_NONE)
         {
-            if (gSaveBlock1Ptr->bagPockets[i].itemId == 0)
+            if(read != write)
             {
-                struct ItemSlot temp = gSaveBlock1Ptr->bagPockets[i];
-                gSaveBlock1Ptr->bagPockets[i] = gSaveBlock1Ptr->bagPockets[j];
-                gSaveBlock1Ptr->bagPockets[j] = temp;
+                gSaveBlock1Ptr->bagPockets[write] = gSaveBlock1Ptr->bagPockets[read];
             }
+
+            write++;
         }
+    }
+
+    for (; write < BAG_ITEM_CAPACITY; write++)
+    {
+        gSaveBlock1Ptr->bagPockets[write].itemId = ITEM_NONE;
     }
 
     UpdateBagItemsPointers();
@@ -243,6 +248,8 @@ void CopyItemName(u16 itemId, u8 *dst)
     CopyItemNameN(itemId, dst, ITEM_NAME_LENGTH);
 }
 
+static const u8 sText_Revised[] = _("{REVISED_EDIT}");
+
 void CopyItemNameN(u16 itemId, u8 *dst, u16 length)
 {
     if((itemId >= ITEM_TM01 && itemId <= ITEM_HM08) || (itemId >= ITEM_TR01 && itemId <= ITEM_TR50))
@@ -261,6 +268,11 @@ void CopyItemNameN(u16 itemId, u8 *dst, u16 length)
         else
         {
             StringCopyN(dst, gText_TMPrefix, length);
+        }
+
+        if(Rogue_HasMoveBeenRevised(moveId))
+        {
+            StringAppendN(dst, sText_Revised, length);
         }
 
         StringAppendN(dst, gMoveNames[moveId], length);
@@ -310,6 +322,9 @@ void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity)
         berryString = gText_Berry;
     else
         berryString = gText_Berries;
+
+    ConvertUIntToDecimalStringN(dst, quantity, STR_CONV_MODE_LEFT_ALIGN, BAG_ITEM_CAPACITY_DIGITS);
+    dst = StringAppend(dst, gText_Space);
 
     txtPtr = StringCopy(dst, berryName);
     *txtPtr = CHAR_SPACE;
