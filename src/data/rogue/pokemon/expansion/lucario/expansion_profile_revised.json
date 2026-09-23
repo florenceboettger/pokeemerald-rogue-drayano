@@ -83,23 +83,27 @@
     },
     {
       "Move": "MOVE_CALM_MIND",
-      "Level": 47
+      "Level": 46
     },
     {
       "Move": "MOVE_HEAL_PULSE",
-      "Level": 51
+      "Level": 50
     },
     {
-      "Move": "MOVE_CLOSE_COMBAT",
-      "Level": 55
+      "Move": "MOVE_METEOR_MASH",
+      "Level": 54
     },
     {
       "Move": "MOVE_DRAGON_PULSE",
-      "Level": 60
+      "Level": 58
     },
     {
       "Move": "MOVE_EXTREME_SPEED",
-      "Level": 65
+      "Level": 62
+    },
+    {
+      "Move": "MOVE_CLOSE_COMBAT",
+      "Level": 66
     }
   ],
   "CompetitiveSets": [
