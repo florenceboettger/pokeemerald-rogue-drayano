@@ -17,11 +17,11 @@
     "SPECIES_BEEDRILL_MEGA": {
       "BaseStats": {
         "HP": 65,
-        "Attack": 175,
-        "Defense": 55,
-        "Speed": 170,
-        "SpAttack": 30,
-        "SpDefense": 110
+        "Attack": 160,
+        "Defense": 50,
+        "Speed": 145,
+        "SpAttack": 25,
+        "SpDefense": 95
       }
     }
   },
