@@ -19,6 +19,16 @@
         "SpAttack": 74,
         "SpDefense": 75
       }
+    },
+    "SPECIES_CHESNAUGHT_MEGA": {
+      "BaseStats": {
+        "HP": 93,
+        "Attack": 137,
+        "Defense": 172,
+        "Speed": 44,
+        "SpAttack": 74,
+        "SpDefense": 115
+      }
     }
   },
   "LevelUpMoves": [

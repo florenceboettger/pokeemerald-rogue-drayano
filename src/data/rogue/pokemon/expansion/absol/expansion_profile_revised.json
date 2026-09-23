@@ -13,7 +13,7 @@
         "SpDefense": 60
       }
     },
-    "SPECIES_MEGA_ABSOL": {
+    "SPECIES_ABSOL_MEGA": {
       "Types": [
         "TYPE_DARK",
         "TYPE_FAIRY"
@@ -27,7 +27,7 @@
         "SpDefense": 65
       }
     },
-    "SPECIES_MEGA_ABSOL_Z": {
+    "SPECIES_ABSOL_MEGA_Z": {
       "BaseStats": {
         "HP": 65,
         "Attack": 154,

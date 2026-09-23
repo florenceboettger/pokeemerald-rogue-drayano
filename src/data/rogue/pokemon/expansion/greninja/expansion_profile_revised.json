@@ -14,6 +14,16 @@
         "SpAttack": 103,
         "SpDefense": 71
       }
+    },
+    "SPECIES_GRENINJA_MEGA": {
+      "BaseStats": {
+        "HP": 72,
+        "Attack": 130,
+        "Defense": 77,
+        "Speed": 142,
+        "SpAttack": 133,
+        "SpDefense": 81
+      }
     }
   }
 }

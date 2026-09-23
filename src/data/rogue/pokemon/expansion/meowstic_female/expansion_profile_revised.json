@@ -12,6 +12,16 @@
         "SpAttack": 93,
         "SpDefense": 81
       }
+    },
+    "SPECIES_MEOWSTIC_FEMALE_MEGA": {
+      "BaseStats": {
+        "HP": 74,
+        "Attack": 48,
+        "Defense": 78,
+        "Speed": 124,
+        "SpAttack": 144,
+        "SpDefense": 103
+      }
     }
   },
   "TutorMoves": [

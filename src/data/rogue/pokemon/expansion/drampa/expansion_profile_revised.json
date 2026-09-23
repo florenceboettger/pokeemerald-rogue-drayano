@@ -9,6 +9,16 @@
         "SpAttack": 135,
         "SpDefense": 91
       }
+    },
+    "SPECIES_DRAMPA_MEGA": {
+      "BaseStats": {
+        "HP": 103,
+        "Attack": 70,
+        "Defense": 110,
+        "Speed": 36,
+        "SpAttack": 160,
+        "SpDefense": 116
+      }
     }
   }
 }

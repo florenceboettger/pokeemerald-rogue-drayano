@@ -13,7 +13,7 @@
       "Abilities": [
         "ABILITY_BLAZE",
         "ABILITY_RECKLESS",
-        "ABILITY_MOLD_BREAKER"
+        "ABILITY_THICK_FAT"
       ],
       "BaseStats": {
         "HP": 115,
@@ -22,6 +22,16 @@
         "Speed": 65,
         "SpAttack": 70,
         "SpDefense": 80
+      }
+    },
+    "SPECIES_EMBOAR_MEGA": {
+      "BaseStats": {
+        "HP": 115,
+        "Attack": 148,
+        "Defense": 91,
+        "Speed": 75,
+        "SpAttack": 81,
+        "SpDefense": 125
       }
     }
   },
@@ -139,7 +149,7 @@
         "MOVE_CROSS_CHOP",
         "MOVE_EARTHQUAKE"
       ],
-      "Ability": "ABILITY_MOLD_BREAKER",
+      "Ability": "ABILITY_THICK_FAT",
       "Item": "ITEM_CHOICE_SCARF",
       "Nature": "NATURE_JOLLY",
       "HiddenPower": null,

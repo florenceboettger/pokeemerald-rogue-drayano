@@ -18,6 +18,16 @@
         "SpAttack": 60,
         "SpDefense": 60
       }
+    },
+    "SPECIES_FALINKS_MEGA": {
+      "BaseStats": {
+        "HP": 75,
+        "Attack": 135,
+        "Defense": 135,
+        "Speed": 100,
+        "SpAttack": 60,
+        "SpDefense": 75
+      }
     }
   },
   "LevelUpMoves": [

@@ -14,6 +14,16 @@
         "SpAttack": 109,
         "SpDefense": 66
       }
+    },
+    "SPECIES_PYROAR_MEGA": {
+      "BaseStats": {
+        "HP": 86,
+        "Attack": 123,
+        "Defense": 92,
+        "Speed": 126,
+        "SpAttack": 129,
+        "SpDefense": 86
+      }
     }
   },
   "LevelUpMoves": [

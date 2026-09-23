@@ -23,6 +23,16 @@
         "SpAttack": 93,
         "SpDefense": 100
       }
+    },
+    "SPECIES_MEGANIUM_MEGA": {
+      "BaseStats": {
+        "HP": 80,
+        "Attack": 92,
+        "Defense": 120,
+        "Speed": 80,
+        "SpAttack": 143,
+        "SpDefense": 120
+      }
     }
   },
   "LevelUpMoves": [

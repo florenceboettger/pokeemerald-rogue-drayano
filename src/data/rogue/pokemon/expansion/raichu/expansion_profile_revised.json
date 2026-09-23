@@ -14,7 +14,7 @@
         "SpDefense": 80
       }
     },
-    "SPECIES_MEGA_RAICHU_X": {
+    "SPECIES_RAICHU_MEGA_X": {
       "BaseStats": {
         "HP": 60,
         "Attack": 135,
@@ -24,7 +24,7 @@
         "SpDefense": 95
       }
     },
-    "SPECIES_MEGA_RAICHU_Y": {
+    "SPECIES_RAICHU_MEGA_Y": {
       "BaseStats": {
         "HP": 60,
         "Attack": 105,

@@ -18,6 +18,16 @@
         "SpAttack": 110,
         "SpDefense": 70
       }
+    },
+    "SPECIES_FROSLASS_MEGA": {
+      "BaseStats": {
+        "HP": 70,
+        "Attack": 70,
+        "Defense": 80,
+        "Speed": 125,
+        "SpAttack": 145,
+        "SpDefense": 110
+      }
     }
   },
   "TutorMoves": [

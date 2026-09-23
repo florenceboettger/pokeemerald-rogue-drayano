@@ -18,6 +18,16 @@
         "SpAttack": 115,
         "SpDefense": 100
       }
+    },
+    "SPECIES_DELPHOX_MEGA": {
+      "BaseStats": {
+        "HP": 75,
+        "Attack": 69,
+        "Defense": 72,
+        "Speed": 134,
+        "SpAttack": 160,
+        "SpDefense": 125
+      }
     }
   },
   "TutorMoves": [

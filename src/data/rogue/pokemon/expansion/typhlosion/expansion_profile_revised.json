@@ -23,6 +23,16 @@
         "SpAttack": 124,
         "SpDefense": 80
       }
+    },
+    "SPECIES_TYPHLOSION_MEGA": {
+      "BaseStats": {
+        "HP": 65,
+        "Attack": 160,
+        "Defense": 50,
+        "Speed": 145,
+        "SpAttack": 25,
+        "SpDefense": 95
+      }
     }
   },
   "LevelUpMoves": [

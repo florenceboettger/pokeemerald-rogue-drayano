@@ -23,6 +23,16 @@
         "SpAttack": 69,
         "SpDefense": 83
       }
+    },
+    "SPECIES_FERALIGATR_MEGA": {
+      "BaseStats": {
+        "HP": 85,
+        "Attack": 160,
+        "Defense": 125,
+        "Speed": 88,
+        "SpAttack": 89,
+        "SpDefense": 93
+      }
     }
   },
   "LevelUpMoves": [
