@@ -13,6 +13,26 @@
         "SpAttack": 95,
         "SpDefense": 80
       }
+    },
+    "SPECIES_MEGA_RAICHU_X": {
+      "BaseStats": {
+        "HP": 60,
+        "Attack": 135,
+        "Defense": 95,
+        "Speed": 120,
+        "SpAttack": 90,
+        "SpDefense": 95
+      }
+    },
+    "SPECIES_MEGA_RAICHU_Y": {
+      "BaseStats": {
+        "HP": 60,
+        "Attack": 105,
+        "Defense": 60,
+        "Speed": 130,
+        "SpAttack": 160,
+        "SpDefense": 80
+      }
     }
   },
   "TutorMoves": [

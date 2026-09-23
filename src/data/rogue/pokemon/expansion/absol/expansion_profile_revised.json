@@ -12,6 +12,30 @@
         "SpAttack": 85,
         "SpDefense": 60
       }
+    },
+    "SPECIES_MEGA_ABSOL": {
+      "Types": [
+        "TYPE_DARK",
+        "TYPE_FAIRY"
+      ],
+      "BaseStats": {
+        "HP": 65,
+        "Attack": 150,
+        "Defense": 65,
+        "Speed": 125,
+        "SpAttack": 115,
+        "SpDefense": 65
+      }
+    },
+    "SPECIES_MEGA_ABSOL_Z": {
+      "BaseStats": {
+        "HP": 65,
+        "Attack": 154,
+        "Defense": 60,
+        "Speed": 151,
+        "SpAttack": 95,
+        "SpDefense": 60
+      }
     }
   },
   "TutorMoves": [
