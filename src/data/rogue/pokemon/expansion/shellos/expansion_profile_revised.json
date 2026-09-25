@@ -1,8 +1,69 @@
 {
   "BuildSettings": {
-    "TutorMoves": "MERGE"
+    "LevelUpMoves": "REPLACE",
+    "TutorMoves": "MERGE",
+    "CompetitiveSets": "MERGE"
   },
+  "Species": [
+    "SPECIES_SHELLOS",
+    "SPECIES_SHELLOS_EAST_SEA"
+  ],
+  "LevelUpMoves": [
+    {
+      "Move": "MOVE_WATER_GUN",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_MUD_SLAP",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_HARDEN",
+      "Level": 5
+    },
+    {
+      "Move": "MOVE_RECOVER",
+      "Level": 9
+    },
+    {
+      "Move": "MOVE_WATER_PULSE",
+      "Level": 13
+    },
+    {
+      "Move": "MOVE_MUD_BOMB",
+      "Level": 17
+    },
+    {
+      "Move": "MOVE_ANCIENT_POWER",
+      "Level": 21
+    },
+    {
+      "Move": "MOVE_BODY_SLAM",
+      "Level": 25
+    },
+    {
+      "Move": "MOVE_MUDDY_WATER",
+      "Level": 29
+    },
+    {
+      "Move": "MOVE_TOXIC",
+      "Level": 34
+    },
+    {
+      "Move": "MOVE_EARTH_POWER",
+      "Level": 39
+    },
+    {
+      "Move": "MOVE_RAIN_DANCE",
+      "Level": 44
+    },
+    {
+      "Move": "MOVE_MEMENTO",
+      "Level": 50
+    }
+  ],
   "TutorMoves": [
+    "MOVE_SCALD",
     "MOVE_SPIKES"
   ]
 }

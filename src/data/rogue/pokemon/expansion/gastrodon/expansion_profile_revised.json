@@ -1,7 +1,71 @@
 {
   "BuildSettings": {
+    "LevelUpMoves": "REPLACE",
+    "TutorMoves": "MERGE",
     "CompetitiveSets": "MERGE"
   },
+  "Species": [
+    "SPECIES_GASTRODON",
+    "SPECIES_GASTRODON_EAST_SEA"
+  ],
+  "LevelUpMoves": [
+    {
+      "Move": "MOVE_WATER_GUN",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_RECOVER",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_HARDEN",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_MUD_SLAP",
+      "Level": 1
+    },
+    {
+      "Move": "MOVE_WATER_PULSE",
+      "Level": 14
+    },
+    {
+      "Move": "MOVE_MUD_BOMB",
+      "Level": 18
+    },
+    {
+      "Move": "MOVE_ANCIENT_POWER",
+      "Level": 23
+    },
+    {
+      "Move": "MOVE_BODY_SLAM",
+      "Level": 27
+    },
+    {
+      "Move": "MOVE_MUDDY_WATER",
+      "Level": 32
+    },
+    {
+      "Move": "MOVE_TOXIC",
+      "Level": 37
+    },
+    {
+      "Move": "MOVE_EARTH_POWER",
+      "Level": 42
+    },
+    {
+      "Move": "MOVE_RAIN_DANCE",
+      "Level": 47
+    },
+    {
+      "Move": "MOVE_MEMENTO",
+      "Level": 52
+    }
+  ],
+  "TutorMoves": [
+    "MOVE_SCALD",
+    "MOVE_SPIKES"
+  ],
   "CompetitiveSets": [
     {
       "Moves": [
