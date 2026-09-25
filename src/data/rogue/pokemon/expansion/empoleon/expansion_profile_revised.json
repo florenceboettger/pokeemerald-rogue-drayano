@@ -23,8 +23,12 @@
   },
   "LevelUpMoves": [
     {
-      "Move": "MOVE_AQUA_JET",
+      "Move": "MOVE_FLASH_CANNON",
       "Level": 0
+    },
+    {
+      "Move": "MOVE_FLASH_CANNON",
+      "Level": 1
     },
     {
       "Move": "MOVE_AQUA_JET",
@@ -95,12 +99,8 @@
       "Level": 59
     },
     {
-      "Move": "MOVE_FLASH_CANNON",
-      "Level": 66
-    },
-    {
       "Move": "MOVE_BRAVE_BIRD",
-      "Level": 73
+      "Level": 65
     }
   ],
   "TutorMoves": [
