@@ -82,6 +82,22 @@
       "SourceTiers": [
         "DOUBLES_REVISED_MODE"
       ]
+    },
+    {
+      "Moves": [
+        "MOVE_SCALD",
+        "MOVE_EARTH_POWER",
+        "MOVE_TOXIC",
+        "MOVE_RECOVER"
+      ],
+      "Ability": "ABILITY_STORM_DRAIN",
+      "Item": "ITEM_LEFTOVERS",
+      "Nature": "NATURE_BOLD",
+      "HiddenPower": null,
+      "TeraType": "TYPE_FIRE",
+      "SourceTiers": [
+        "SINGLES_REVISED_MODE"
+      ]
     }
   ]
 }
